@@ -176,6 +176,7 @@
                 <exclude>examples/nuxt/.nuxt/**</exclude>
                 <exclude>examples/react-ssr/.next/**</exclude>
                 <exclude>**/ADDITIONAL-LICENSES.yml</exclude>
+                <exclude>node/**</exclude>
               </excludes>
             </configuration>
           </plugin>
