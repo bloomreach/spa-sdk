@@ -2441,6 +2441,7 @@ __metadata:
     "@types/react-dom": ^16.9
     "@types/react-router-dom": ^5.1
     axios: ^0.19
+    bootstrap: ^4.5
     eslint: ^7.9
     react: ^16.13
     react-dom: ^16.13
@@ -7310,6 +7311,16 @@ __metadata:
   version: 1.0.0
   resolution: "boolbase@npm:1.0.0"
   checksum: e827963c416fdb1dbcd57e066a43c40829518f4dcdc9f58ed04519daeebb610adacbb6cf102518bda9f08be593c5b1b49a83e36bf6b7d91b3403f7e35510eeae
+  languageName: node
+  linkType: hard
+
+"bootstrap@npm:^4.5":
+  version: 4.5.2
+  resolution: "bootstrap@npm:4.5.2"
+  peerDependencies:
+    jquery: 1.9.1 - 3
+    popper.js: ^1.16.1
+  checksum: 980e7e4ebd1ba50b605a8f22e2b80cb024db23b5fb7790ff54bc3cd9345496610f36028fa14c78a50a50e1026a977aeaa60245211144f4fbf9d3eb3cd6949760
   languageName: node
   linkType: hard
 
