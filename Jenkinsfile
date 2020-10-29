@@ -19,6 +19,7 @@ pipeline {
     docker {
       label 'docker'
       image 'node:12'
+      args '-v  /etc/passwd:/etc/passwd'
     }
   }
 
@@ -70,6 +71,28 @@ pipeline {
 
               dir('.git') { deleteDir() }
             }
+          }
+        }
+
+        stage('Publish on GitHub') {
+          environment {
+            GIT_SSH_COMMAND='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
+          }
+
+          steps {
+            sh 'git checkout -B github-master-$VERSION'
+            sh 'git filter-branch --force --prune-empty --subdirectory-filter community/spa-sdk/examples/saas github-master-$VERSION'
+            sh 'git tag --force github-tag-$VERSION'
+
+            sshagent (credentials: ['sample-spa-github']) {
+              sh 'git push git@github.com:bloomreach/brx-react-spa.git github-master-$VERSION:master'
+              sh 'git push git@github.com:bloomreach/brx-react-spa.git github-tag-$VERSION:$VERSION'
+            }
+
+            sh 'git checkout $TAG_NAME'
+            sh 'git tag -d github-tag-$VERSION'
+            sh 'git update-ref -d refs/original/refs/heads/github-master-$VERSION'
+            sh 'git branch -D github-master-$VERSION'
           }
         }
       }
