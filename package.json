@@ -24,6 +24,7 @@
     "build": "SKIP_PREFLIGHT_CHECK=true yarn workspaces foreach --parallel --topological run build",
     "bump": "yarn workspaces foreach version ${0}-saas",
     "docs": "yarn workspaces foreach --parallel run docs",
+    "heroku-postbuild": "cd ${PROJECT_PATH:-.} && yarn workspaces foreach --parallel --recursive --topological run build",
     "lint": "yarn workspaces foreach --parallel run lint",
     "release": "yarn workspaces foreach --include '@bloomreach/*-sdk' npm publish --access public --tag saas",
     "test": "yarn workspaces foreach --parallel run test"
