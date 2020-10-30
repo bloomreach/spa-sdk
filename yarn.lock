@@ -2282,7 +2282,7 @@ __metadata:
     "@angular/platform-browser-dynamic": ^9.1
     "@angular/platform-server": ^9.1
     "@angular/router": ^9.1
-    "@bloomreach/ng-sdk": ^14.3.0
+    "@bloomreach/ng-sdk": ^0.1.0-saas
     "@nguniversal/builders": ^9.1
     "@nguniversal/express-engine": ^9.1
     "@types/cookie": ^0.4
@@ -2308,8 +2308,8 @@ __metadata:
   resolution: "@bloomreach/example-nuxt@workspace:examples/nuxt"
   dependencies:
     "@babel/runtime-corejs3": ^7.12
-    "@bloomreach/spa-sdk": ^14.3.0
-    "@bloomreach/vue-sdk": ^14.3.0
+    "@bloomreach/spa-sdk": ^0.1.0-saas
+    "@bloomreach/vue-sdk": ^0.1.0-saas
     "@nuxt/types": ^2.14
     "@nuxt/typescript-build": ^2.0
     "@nuxtjs/axios": ^5.12
@@ -2336,7 +2336,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bloomreach/example-react-csr@workspace:examples/react-csr"
   dependencies:
-    "@bloomreach/react-sdk": ^14.3.0
+    "@bloomreach/react-sdk": ^0.1.0-saas
     "@types/react": ^16.9
     "@types/react-dom": ^16.9
     "@types/react-router-dom": ^5.1
@@ -2357,7 +2357,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bloomreach/example-react-ssr@workspace:examples/react-ssr"
   dependencies:
-    "@bloomreach/react-sdk": ^14.3.0
+    "@bloomreach/react-sdk": ^0.1.0-saas
     "@types/node": ^14.14
     "@types/react": ^16.9
     "@types/react-dom": ^16.9
@@ -2376,8 +2376,8 @@ __metadata:
   resolution: "@bloomreach/example-saas@workspace:examples/saas"
   dependencies:
     "@bloomreach/eslint-config": ^0.1
-    "@bloomreach/react-sdk": ^14.3.0
-    "@bloomreach/spa-sdk": ^14.3.0
+    "@bloomreach/react-sdk": ^0.1.0-saas
+    "@bloomreach/spa-sdk": ^0.1.0-saas
     "@fortawesome/fontawesome-svg-core": ^1.2
     "@fortawesome/free-solid-svg-icons": ^5.15
     "@fortawesome/react-fontawesome": ^0.1
@@ -2403,8 +2403,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bloomreach/example-vue@workspace:examples/vue"
   dependencies:
-    "@bloomreach/spa-sdk": ^14.3.0
-    "@bloomreach/vue-sdk": ^14.3.0
+    "@bloomreach/spa-sdk": ^0.1.0-saas
+    "@bloomreach/vue-sdk": ^0.1.0-saas
     "@types/jest": ^26.0
     "@typescript-eslint/eslint-plugin": ^4.6
     "@typescript-eslint/parser": ^4.6
@@ -2434,7 +2434,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@bloomreach/ng-sdk@^14.3.0, @bloomreach/ng-sdk@workspace:packages/ng-sdk":
+"@bloomreach/ng-sdk@^0.1.0-saas, @bloomreach/ng-sdk@workspace:packages/ng-sdk":
   version: 0.0.0-use.local
   resolution: "@bloomreach/ng-sdk@workspace:packages/ng-sdk"
   dependencies:
@@ -2449,7 +2449,7 @@ __metadata:
     "@angular/language-service": ^9.1
     "@angular/platform-browser": ^9.1
     "@angular/platform-browser-dynamic": ^9.1
-    "@bloomreach/spa-sdk": ^14.3.0
+    "@bloomreach/spa-sdk": ^0.1.0-saas
     "@types/jest": ^26.0
     codelyzer: ^6.0
     jest: ^26.6
@@ -2469,7 +2469,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@bloomreach/react-sdk@^14.3.0, @bloomreach/react-sdk@workspace:packages/react-sdk":
+"@bloomreach/react-sdk@^0.1.0-saas, @bloomreach/react-sdk@workspace:packages/react-sdk":
   version: 0.0.0-use.local
   resolution: "@bloomreach/react-sdk@workspace:packages/react-sdk"
   dependencies:
@@ -2477,7 +2477,7 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.12
     "@babel/preset-env": ^7.12
     "@babel/preset-react": ^7.12
-    "@bloomreach/spa-sdk": ^14.3.0
+    "@bloomreach/spa-sdk": ^0.1.0-saas
     "@rollup/plugin-babel": ^5.2
     "@types/enzyme": ^3.10
     "@types/jest": ^26.0
@@ -2505,7 +2505,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@bloomreach/spa-sdk@^14.3.0, @bloomreach/spa-sdk@workspace:packages/spa-sdk":
+"@bloomreach/spa-sdk@^0.1.0-saas, @bloomreach/spa-sdk@workspace:packages/spa-sdk":
   version: 0.0.0-use.local
   resolution: "@bloomreach/spa-sdk@workspace:packages/spa-sdk"
   dependencies:
@@ -2539,11 +2539,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@bloomreach/vue-sdk@^14.3.0, @bloomreach/vue-sdk@workspace:packages/vue-sdk":
+"@bloomreach/vue-sdk@^0.1.0-saas, @bloomreach/vue-sdk@workspace:packages/vue-sdk":
   version: 0.0.0-use.local
   resolution: "@bloomreach/vue-sdk@workspace:packages/vue-sdk"
   dependencies:
-    "@bloomreach/spa-sdk": ^14.3.0
+    "@bloomreach/spa-sdk": ^0.1.0-saas
     "@types/jest": ^26.0
     "@typescript-eslint/eslint-plugin": ^4.6
     "@typescript-eslint/parser": ^4.6
