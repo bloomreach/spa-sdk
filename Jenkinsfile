@@ -37,6 +37,35 @@ pipeline {
   }
 
   stages {
+    stage('SPA SDK') {
+      when {
+        tag 'spa-sdk-*'
+      }
+
+      stages {
+        stage('Build') {
+          steps {
+            dir('community/spa-sdk') {
+              sh 'HOME=$(pwd) yarn'
+              sh 'yarn build'
+              sh 'yarn lint'
+              sh 'yarn test'
+            }
+          }
+        }
+
+        stage('Publish on NPM') {
+          steps {
+            dir('community/spa-sdk') {
+              withCredentials([[$class: 'StringBinding', credentialsId: 'NPM_AUTH_TOKEN', variable: 'YARN_NPM_AUTH_TOKEN']]) {
+                sh 'yarn release'
+              }
+            }
+          }
+        }
+      }
+    }
+
     stage('Sample SPA') {
       when {
         tag 'sample-spa-*'
