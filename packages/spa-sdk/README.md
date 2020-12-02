@@ -103,6 +103,7 @@ Function | Description
 `isMenu(value): boolean` | Checks whether a value is a menu object.
 `isMeta(value): boolean` | Checks whether a value is a meta-data object.
 `isMetaComment(value): boolean` | Checks whether a value is a meta-data comment.
+`isPagination(value): boolean` | Checks whether a value is a pagination.
 `isLink(value): boolean` | Checks whether a value is a link.
 `isReference(value): boolean` | Checks whether a value is a content reference.
 
@@ -119,6 +120,8 @@ Constant | Description
 `TYPE_LINK_EXTERNAL` | Link to a page outside the current application.
 `TYPE_LINK_INTERNAL` | Link to a page inside the current application.
 `TYPE_LINK_RESOURCE` | Link to a CMS resource.
+`TYPE_MANAGE_MENU_BUTTON` | A manage menu button.
+`TYPE_MANAGE_CONTENT_BUTTON` | A manage content button.
 
 #### Objects
 ##### Page
@@ -126,12 +129,14 @@ The `Page` class represents the brXM page to render. This is the main entry poin
 
 Method | Description
 --- | ---
+`getButton(type: string, ...params: any[]): MetaCollection` | Generates a meta-data collection for the Experience Manager buttons.
+`getChannelParameters(): object` | Gets current channel parameters.
 <code>getComponent(...componentNames): Component &vert; undefined</code> | Gets a component in the page (e.g. `getComponent('main', 'right')`). If `componentNames` is omitted, then the page root component will be returned.
 <code>getContent<T>(reference: Reference &vert; string): Content &vert; T &vert; undefined</code> | Gets a content item used on the page.
 <code>getDocument<T>(): T &vert; undefined</code> | Gets the page root document. This option is available only along with the Experience Pages feature.
-`getMeta(meta): MetaCollection` | Generates a meta-data collection from the provided `meta` model.
+`getMeta(meta): MetaCollection` | Generates a meta-data collection from the provided `meta` model. The method is **deprecated** and will be removed in the next major release.
 <code>getTitle(): string &vert; undefined</code> | Gets the title of the page, or `undefined` if not configured.
-`getUrl(link?: Link): string` | Generates a URL for a link object.<br> - If the link object type is internal, then it will prepend `spaBaseUrl` or `baseUrl`. In case when the link starts with the same path as in `cmsBaseUrl`, this part will be removed.<br> - If the link parameter is omitted, then the link to the current page will be returned.<br> - In other cases, the link will be returned as-is.
+`getUrl(link?: Link): string` | Generates a URL for a link object.<br> - If the link object type is internal, then it will prepend `spaBaseUrl` or `baseUrl`. In case when the link starts with the same path as in `cmsBaseUrl`, this part will be removed.<br> - If the link object type is unknown, then it will return `undefined`.<br> - If the link parameter is omitted, then the link to the current page will be returned.<br> - In other cases, the link will be returned as-is.
 `getUrl(path: string): string` | Generates an SPA URL for the path.<br> - If it is a relative path and `cmsBaseUrl` is present, then it will prepend `spaBaseUrl`.<br> - If it is an absolute path and `cmsBaseUrl` is present, then the behavior will be similar to internal link generation.<br> - If it is a relative path and `endpoint` is present, then it will resolve this link relative to the current page URL.<br> - If it is an absolute path and `endpoint` is present, then it will resolve this link relative to the `baseUrl` option.
 <code> getVersion(): string &vert; undefined</code> | Returns the Page Model version.
 <code>getVisitor(): Visitor &vert; undefined</code> | Gets the current visitor information, or undefined if the [Relevance Module](https://documentation.bloomreach.com/library/enterprise/enterprise-features/targeting/targeting.html) is not enabled. The `Visitor` object consists of the following properties:<br> - `id: string` - the current visitor identifier;<br> - `header: string` - an HTTP-header using to pass the visitor identifier to the Page Model API.
@@ -255,7 +260,7 @@ Method | Description
 Method | Description
 --- | ---
 `clear(): void` | Clears previously rendered meta-data objects.
-`render(head: HTMLElement, tail: HTMLElement): void;` | Renders meta-data objects on the page.
+`render(head: HTMLElement, tail: HTMLElement): () => void;` | Renders meta-data objects on the page and returns the callback clearing rendered objects.
 
 ##### Meta
 The `Meta` objects are being used by the brXM to page and its components.
@@ -264,6 +269,31 @@ Method | Description
 --- | ---
 `getData(): string` | Returns the meta-data.
 `getPosition(): string` | Returns the meta-data position relative to the related element.
+
+##### Pagination
+The `Pagination` object holds the pagination data with all the pagination items.
+
+Method | Description
+--- | ---
+`getCurrent(): PaginationItem` | Returns the current page.
+`getFirst(): PaginationItem` | Returns the first page.
+`getItems(): Reference[]` | Returns the current page items.
+`getLast(): PaginationItem` | Returns the last page.
+<code>getNext(): PaginationItem &vert; undefined</code> | Returns the next page.
+`getOffset(): number` | Returns the number of items before the current page.
+`getPages(): PaginationItem[]` | Returns currently listed pages.
+<code>getPrevious(): PaginationItem &vert; undefined</code> | Returns the previous page.
+`getSize(): number` | Returns the number of items listed on the current page.
+`getTotal(): number` | Returns the total number of items.
+`isEnabled(): boolean` | Returns whether the pagination is enabled.
+
+##### PaginationItem
+The `PaginationItem` object holds a pagination item that is used by the `Pagination` object.
+
+Method | Description
+--- | ---
+`getNumber(): number` | Returns the page number.
+<code>getUrl(): string &vert; undefined</code> | Returns the page URL.
 
 ## Links
 - [SPA integration concept](https://documentation.bloomreach.com/library/concepts/spa-integration/introduction.html).

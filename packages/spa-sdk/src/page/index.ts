@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import { Typed } from 'emittery';
 import { isComponent as isComponent10, Component } from './component';
 import { isComponent as isComponent09 } from './component09';
 import { isContainer as isContainer10, Container } from './container';
@@ -62,6 +63,8 @@ export function isPage(value: any): value is Page {
  */
 export type PageModel = PageModel10 | PageModel09;
 
+export type EventBus = Typed<{ 'page.update': { page: PageModel } }>;
+
 /**
  * Menu content model.
  */
@@ -89,11 +92,13 @@ export {
 } from './container';
 export { Content, isContent } from './content09';
 export { Document, TYPE_DOCUMENT, isDocument } from './document';
+export { EventBusService } from './events';
 export { ImageSet, TYPE_IMAGE_SET, isImageSet } from './image-set';
 export { Image } from './image';
 export { Link, TYPE_LINK_EXTERNAL, TYPE_LINK_INTERNAL, TYPE_LINK_RESOURCE, isLink } from './link';
+export { ManageContentButton, TYPE_MANAGE_CONTENT_BUTTON } from './button-manage-content';
 export { MenuItem } from './menu-item';
-export { TYPE_MENU, isMenu } from './menu';
+export { TYPE_MANAGE_MENU_BUTTON, TYPE_MENU, isMenu } from './menu';
 export { MetaCollection } from './meta-collection';
 export { MetaComment, isMetaComment } from './meta-comment';
 export { Meta, META_POSITION_BEGIN, META_POSITION_END, isMeta } from './meta';
@@ -101,5 +106,7 @@ export { PageFactory } from './page-factory';
 export { PageModule } from './module';
 export { PageModule as PageModule09 } from './module09';
 export { Page } from './page';
+export { PaginationItem } from './pagination-item';
+export { Pagination, isPagination } from './pagination';
 export { Reference, isReference } from './reference';
 export { Visitor, Visit } from './relevance';

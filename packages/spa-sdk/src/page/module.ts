@@ -16,7 +16,9 @@
 
 import { ContainerModule } from 'inversify';
 import { DOMParser, XMLSerializer } from 'xmldom';
+import { Typed } from 'emittery';
 
+import { ButtonFactory } from './button-factory';
 import { ComponentFactory } from './component-factory';
 import {
   ComponentChildrenToken,
@@ -31,10 +33,11 @@ import { ContainerItemImpl } from './container-item';
 import { ContentFactory } from './content-factory';
 import { DocumentImpl, DocumentModelToken, TYPE_DOCUMENT } from './document';
 import { DomParserService, LinkRewriterImpl, LinkRewriterService, XmlSerializerService } from './link-rewriter';
+import { EventBusService } from './events';
 import { ImageFactory, ImageImpl, ImageModelToken, ImageModel } from './image';
 import { ImageSetImpl, ImageSetModelToken, TYPE_IMAGE_SET } from './image-set';
 import { LinkFactory } from './link-factory';
-import { MenuImpl, MenuModelToken, TYPE_MENU } from './menu';
+import { MenuImpl, MenuModelToken, Menu, TYPE_MANAGE_MENU_BUTTON, TYPE_MENU } from './menu';
 import { MenuItemFactory, MenuItemImpl, MenuItemModelToken, MenuItemModel } from './menu-item';
 import { MetaCollectionFactory } from './meta-collection-factory';
 import { MetaCollectionImpl, MetaCollectionModelToken, MetaCollectionModel } from './meta-collection';
@@ -42,15 +45,27 @@ import { MetaCommentImpl } from './meta-comment';
 import { MetaFactory } from './meta-factory';
 import { PageFactory } from './page-factory';
 import { PageImpl, PageModelToken, PageModel } from './page';
+import { PaginationImpl, PaginationModelToken, TYPE_PAGINATION } from './pagination';
+import { PaginationItemFactory, PaginationItemImpl, PaginationItemModelToken, PaginationItemModel } from './pagination-item';
 import { TYPE_LINK_INTERNAL } from './link';
+import { TYPE_MANAGE_CONTENT_BUTTON, createManageContentButton } from './button-manage-content';
 import { TYPE_META_COMMENT } from './meta';
 import { UrlBuilderService, UrlBuilder } from '../url';
 
 export function PageModule() {
   return new ContainerModule((bind) => {
+    bind(EventBusService)
+      .toDynamicValue(() => new Typed())
+      .inSingletonScope()
+      .when(() => typeof window !== 'undefined');
     bind(LinkRewriterService).to(LinkRewriterImpl).inSingletonScope();
     bind(DomParserService).toConstantValue(new DOMParser());
     bind(XmlSerializerService).toConstantValue(new XMLSerializer());
+
+    bind(ButtonFactory).toSelf().inSingletonScope().onActivation((context, factory) => factory
+      .register(TYPE_MANAGE_CONTENT_BUTTON, createManageContentButton)
+      .register(TYPE_MANAGE_MENU_BUTTON, (menu: Menu) => menu.getMeta()),
+    );
 
     bind(LinkFactory).toSelf().inSingletonScope().onActivation(({ container }, factory) => {
       const url = container.get<UrlBuilder>(UrlBuilderService);
@@ -86,6 +101,14 @@ export function PageModule() {
       return scope.get(ImageImpl);
     });
 
+    bind(PaginationItemFactory).toFactory(({ container }) => (model: PaginationItemModel) => {
+      const scope = container.createChild();
+      scope.bind(PaginationItemImpl).toSelf();
+      scope.bind(PaginationItemModelToken).toConstantValue(model);
+
+      return scope.get(PaginationItemImpl);
+    });
+
     bind(ContentFactory).toSelf().inSingletonScope().onActivation(({ container }, factory) => factory
       .register(TYPE_DOCUMENT, (model) => {
         const scope = container.createChild();
@@ -107,6 +130,13 @@ export function PageModule() {
         scope.bind(MenuModelToken).toConstantValue(model);
 
         return scope.get(MenuImpl);
+      })
+      .register(TYPE_PAGINATION, (model) => {
+        const scope = container.createChild();
+        scope.bind(PaginationImpl).toSelf();
+        scope.bind(PaginationModelToken).toConstantValue(model);
+
+        return scope.get(PaginationImpl);
       }),
     );
 

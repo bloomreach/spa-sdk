@@ -17,7 +17,7 @@
 import { DOMParser, XMLSerializer } from 'xmldom';
 import { injectable, inject } from 'inversify';
 import { LinkFactory } from './link-factory';
-import { LinkType, TYPE_LINK_RESOURCE } from './link';
+import { Link, TYPE_LINK_RESOURCE } from './link';
 
 export const DomParserService = Symbol.for('DomParserService');
 export const LinkRewriterService = Symbol.for('LinkRewriterService');
@@ -31,7 +31,7 @@ export interface LinkRewriter {
    * @param content The HTML content to rewrite links.
    * @param type The content type.
    */
-  rewrite(content: string, type?: SupportedType): string;
+  rewrite(content: string, type?: string): string;
 }
 
 @injectable()
@@ -42,7 +42,7 @@ export class LinkRewriterImpl implements LinkRewriter {
     @inject(XmlSerializerService) private xmlSerializer: XMLSerializer,
   ) {}
 
-  rewrite(content: string, type: SupportedType = 'text/html') {
+  rewrite(content: string, type = 'text/html') {
     const document = this.domParser.parseFromString(`<body>${content}</body>`, type);
 
     this.rewriteAnchors(document);
@@ -56,22 +56,30 @@ export class LinkRewriterImpl implements LinkRewriter {
   private rewriteAnchors(document: Document) {
     Array.from(document.getElementsByTagName('a'))
       .filter(element => element.hasAttribute('href') && element.hasAttribute('data-type'))
-      .forEach(
-        element => element.setAttribute('href', this.linkFactory.create({
-          href: element.getAttribute('href')!,
-          type: element.getAttribute('data-type') as LinkType,
-        })),
-      );
+      .forEach((element) => {
+        const url = this.linkFactory.create({
+          href: element.getAttribute('href') ?? undefined,
+          type: element.getAttribute('data-type'),
+        } as Link);
+
+        if (url) {
+          element.setAttribute('href', url);
+        }
+      });
   }
 
   private rewriteImages(document: Document) {
     Array.from(document.getElementsByTagName('img'))
       .filter(element => element.hasAttribute('src'))
-      .forEach(
-        element => element.setAttribute('src', this.linkFactory.create({
-          href: element.getAttribute('src')!,
+      .forEach((element) => {
+        const url = this.linkFactory.create({
+          href: element.getAttribute('src') ?? undefined,
           type: TYPE_LINK_RESOURCE,
-        })),
-      );
+        });
+
+        if (url) {
+          element.setAttribute('src', url);
+        }
+      });
   }
 }

@@ -15,11 +15,13 @@
  */
 
 import { Typed } from 'emittery';
+import { ButtonFactory } from './button-factory';
 import { Component } from './component';
 import { ComponentFactory } from './component-factory09';
 import { ContentFactory } from './content-factory09';
 import { ContentModel, Content } from './content09';
-import { EventBus, Events } from '../events';
+import { EventBus as CmsEventBus } from '../cms';
+import { EventBus } from './events09';
 import { LinkFactory } from './link-factory';
 import { LinkRewriter } from './link-rewriter';
 import { TYPE_COMPONENT } from './component09';
@@ -28,9 +30,11 @@ import { MetaCollectionFactory } from './meta-collection-factory';
 import { PageImpl, PageModel, isPage } from './page09';
 import { Page } from './page';
 
+let buttonFactory: jest.Mocked<ButtonFactory>;
 let componentFactory: jest.Mocked<ComponentFactory>;
 let content: Content;
 let contentFactory: jest.MockedFunction<ContentFactory>;
+let cmsEventBus: CmsEventBus;
 let eventBus: EventBus;
 let linkFactory: jest.Mocked<LinkFactory>;
 let linkRewriter: jest.Mocked<LinkRewriter>;
@@ -47,14 +51,26 @@ const model = {
 } as PageModel;
 
 function createPage(pageModel = model) {
-  return new PageImpl(pageModel, componentFactory, contentFactory, eventBus, linkFactory, linkRewriter, metaFactory);
+  return new PageImpl(
+    pageModel,
+    buttonFactory,
+    componentFactory,
+    contentFactory,
+    linkFactory,
+    linkRewriter,
+    metaFactory,
+    cmsEventBus,
+    eventBus,
+  );
 }
 
 beforeEach(() => {
+  buttonFactory = { create: jest.fn() } as unknown as typeof buttonFactory;
   componentFactory = { create: jest.fn(() => root) } as unknown as typeof componentFactory;
   content = {} as jest.Mocked<Content>;
   contentFactory = jest.fn(() => content) as unknown as typeof contentFactory;
-  eventBus = new Typed<Events>();
+  cmsEventBus = new Typed();
+  eventBus = new Typed();
   linkFactory = { create: jest.fn() } as unknown as typeof linkFactory;
   linkRewriter = { rewrite: jest.fn() } as unknown as jest.Mocked<LinkRewriter>;
   metaFactory = jest.fn();
@@ -62,6 +78,32 @@ beforeEach(() => {
 });
 
 describe('PageImpl', () => {
+  describe('getButton', () => {
+    it('should delegate to the ButtonFactory to create button', () => {
+      const page = createPage();
+      const model = {};
+
+      page.getButton('something', model);
+
+      expect(buttonFactory.create).toHaveBeenCalledWith('something', model);
+    });
+  });
+
+  describe('getChannelParameters', () => {
+    it('should return empty object if there is no channel', () => {
+      const page = createPage();
+
+      expect(page.getChannelParameters()).toStrictEqual({});
+    });
+
+    it('should return channel info parameters', () => {
+      const props = {};
+      const page = createPage({ ...model, channel: { info: { props } } });
+
+      expect(page.getChannelParameters()).toBe(props);
+    });
+  });
+
   describe('getComponent', () => {
     it('should forward a call to the root component', () => {
       const page = createPage();
@@ -269,12 +311,12 @@ describe('PageImpl', () => {
 
   describe('sync', () => {
     it('should emit page.ready event', () => {
-      spyOn(eventBus, 'emit');
+      spyOn(cmsEventBus, 'emit');
 
       const page = createPage();
       page.sync();
 
-      expect(eventBus.emit).toBeCalledWith('page.ready', {});
+      expect(cmsEventBus.emit).toBeCalledWith('page.ready', {});
     });
   });
 

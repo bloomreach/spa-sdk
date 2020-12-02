@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import { inject, injectable } from 'inversify';
+import { inject, injectable, optional } from 'inversify';
+import { ButtonFactory } from './button-factory';
 import { ComponentFactory } from './component-factory';
 import { ComponentMeta, ComponentModel, Component } from './component';
 import { ContainerItemModel } from './container-item';
@@ -22,10 +23,13 @@ import { ContainerModel } from './container';
 import { ContentFactory } from './content-factory';
 import { ContentModel } from './content';
 import { Content } from './content09';
-import { EventBusService, EventBus, PageUpdateEvent } from '../events';
+import { EventBusService as CmsEventBusService, EventBus as CmsEventBus } from '../cms';
+import { EventBusService, EventBus, PageUpdateEvent } from './events';
 import { LinkFactory } from './link-factory';
 import { LinkRewriter, LinkRewriterService } from './link-rewriter';
 import { Link, isLink } from './link';
+import { ManageContentButton, TYPE_MANAGE_CONTENT_BUTTON } from './button-manage-content';
+import { Menu, TYPE_MANAGE_MENU_BUTTON } from './menu';
 import { MetaCollectionFactory } from './meta-collection-factory';
 import { MetaCollectionModel, MetaCollection } from './meta-collection';
 import { Reference, isReference, resolve } from './reference';
@@ -34,7 +38,22 @@ import { isAbsoluteUrl, resolveUrl } from '../url';
 
 export const PageModelToken = Symbol.for('PageModelToken');
 
+type ChannelParameters = Record<string, any>;
 type PageLinks = 'self' | 'site';
+
+/**
+ * Current channel info.
+ */
+interface ChannelInfoModel {
+  props: ChannelParameters;
+}
+
+/**
+ * Current channel of a page.
+ */
+interface ChannelModel {
+  info: ChannelInfoModel;
+}
 
 /**
  * Meta-data of a page root component.
@@ -81,6 +100,7 @@ interface PageMeta {
  * Model of a page.
  */
 export interface PageModel {
+  channel: ChannelModel;
   document?: Reference;
   links: Record<PageLinks, Link>;
   meta: PageMeta;
@@ -92,6 +112,30 @@ export interface PageModel {
  * The current page to render.
  */
 export interface Page {
+  /**
+   * Generates a manage content button.
+   * @return The manage content button meta-data.
+   */
+  getButton(type: typeof TYPE_MANAGE_CONTENT_BUTTON, button: ManageContentButton): MetaCollection;
+
+  /**
+   * Generates a manage menu button.
+   * @return The menu button meta-data.
+   */
+  getButton(type: typeof TYPE_MANAGE_MENU_BUTTON, menu: Menu): MetaCollection;
+
+  /**
+   * Generates a meta-data collection for the Experience Manager buttons.
+   * @return The button meta-data.
+   */
+  getButton(type: string, ...params: any[]): MetaCollection;
+
+  /**
+   * Gets current channel parameters.
+   * @returns The channel parameters.
+   */
+  getChannelParameters<T extends ChannelParameters = ChannelParameters>(): T;
+
   /**
    * Gets a root component in the page.
    * @return The root component.
@@ -128,6 +172,7 @@ export interface Page {
   /**
    * Generates a meta-data collection from the provided meta-data model.
    * @param meta The meta-data collection model as returned by the page-model-api.
+   * @deprecated Use `getButton` method to create buttons.
    */
   getMeta(meta: MetaCollectionModel): MetaCollection;
 
@@ -143,11 +188,12 @@ export interface Page {
    *   For example, for link `/site/_cmsinternal/spa/about` with configuration options
    *   `cmsBaseUrl = "http://localhost:8080/site/_cmsinternal/spa"` and `spaBaseUrl = "http://example.com"`
    *   it will generate `http://example.com/about`.
+   * - If the link object type is unknown, then it will return `undefined`.
    * - If the link parameter is omitted, then the link to the current page will be returned.
    * - In other cases, the link will be returned as-is.
    * @param link The link object to generate URL.
    */
-  getUrl(link?: Link): string;
+  getUrl(link?: Link): string | undefined;
 
   /**
    * Generates an SPA URL for the path.
@@ -189,7 +235,7 @@ export interface Page {
    * @param content The HTML content to rewrite links.
    * @param type The content type.
    */
-  rewriteLinks(content: string, type?: SupportedType): string;
+  rewriteLinks(content: string, type?: string): string;
 
   /**
    * Synchronizes the CMS integration state.
@@ -210,20 +256,30 @@ export class PageImpl implements Page {
 
   constructor(
     @inject(PageModelToken) protected model: PageModel,
+    @inject(ButtonFactory) private buttonFactory: ButtonFactory,
     @inject(ComponentFactory) componentFactory: ComponentFactory,
     @inject(ContentFactory) private contentFactory: ContentFactory,
-    @inject(EventBusService) private eventBus: EventBus,
     @inject(LinkFactory) private linkFactory: LinkFactory,
     @inject(LinkRewriterService) private linkRewriter: LinkRewriter,
     @inject(MetaCollectionFactory) private metaFactory: MetaCollectionFactory,
+    @inject(CmsEventBusService) @optional() private cmsEventBus?: CmsEventBus,
+    @inject(EventBusService) @optional() eventBus?: EventBus,
   ) {
-    this.eventBus.on('page.update', this.onPageUpdate.bind(this));
+    eventBus?.on('page.update', this.onPageUpdate.bind(this));
 
     this.root = componentFactory.create(model);
   }
 
   protected onPageUpdate(event: PageUpdateEvent) {
     Object.assign(this.model.page, event.page.page);
+  }
+
+  getButton(type: string, ...params: unknown[]) {
+    return this.buttonFactory.create(type, ...params);
+  }
+
+  getChannelParameters<T>(): T {
+    return this.model.channel.info.props as T;
   }
 
   getComponent<T extends Component>(): T;
@@ -262,12 +318,14 @@ export class PageImpl implements Page {
     return resolve<PageRootModel>(this.model, this.model.root)?.meta?.pageTitle;
   }
 
+  getUrl(link?: Link): string | undefined;
+  getUrl(path: string): string;
   getUrl(link?: Link | string) {
-    if (!link || isLink(link) || isAbsoluteUrl(link)) {
-      return this.linkFactory.create(link as any || this.model.links.site || '');
+    if (typeof link === 'undefined' || isLink(link) || isAbsoluteUrl(link)) {
+      return this.linkFactory.create(link as Link ?? this.model.links.site ?? '');
     }
 
-    return resolveUrl(link, this.linkFactory.create(this.model.links.site) || '');
+    return resolveUrl(link, this.linkFactory.create(this.model.links.site) ?? '');
   }
 
   getVersion() {
@@ -286,12 +344,12 @@ export class PageImpl implements Page {
     return !!this.model.meta.preview;
   }
 
-  rewriteLinks(content: string, type: SupportedType = 'text/html') {
+  rewriteLinks(content: string, type = 'text/html') {
     return this.linkRewriter.rewrite(content, type);
   }
 
   sync() {
-    this.eventBus.emit('page.ready', {});
+    this.cmsEventBus?.emit('page.ready', {});
   }
 
   toJSON() {
