@@ -32,8 +32,8 @@
         <exclude>*/README.md</exclude>
         <exclude>*/build/**</exclude>
         <exclude>*/dist/**</exclude>
+        <exclude>next/.next/**</exclude>
         <exclude>nuxt/.nuxt/**</exclude>
-        <exclude>react-ssr/.next/**</exclude>
       </excludes>
     </fileSet>
     <fileSet>

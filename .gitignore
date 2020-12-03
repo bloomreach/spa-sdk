@@ -7,5 +7,5 @@ node_modules/
 /examples/*/.env
 /examples/*/build
 /examples/*/dist
+/examples/next/.next
 /examples/nuxt/.nuxt
-/examples/react-ssr/.next

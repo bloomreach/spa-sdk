@@ -138,7 +138,7 @@
                 <include>*/build/**</include>
                 <include>*/dist/**</include>
                 <include>nuxt/.nuxt/**</include>
-                <include>react-ssr/.next/**</include>
+                <include>next/.next/**</include>
               </includes>
             </fileset>
             <fileset>
@@ -181,12 +181,11 @@
                 <exclude>packages/*/.*</exclude>
                 <exclude>packages/spa-sdk/src/docs/*.md</exclude>
                 <exclude>examples/*/.*</exclude>
-                <exclude>examples/react-ssr/next-env.d.ts</exclude>
                 <exclude>examples/*/build/**</exclude>
                 <exclude>examples/**/robots.txt</exclude>
                 <exclude>examples/**/dist/**</exclude>
+                <exclude>examples/next/.next/**</exclude>
                 <exclude>examples/nuxt/.nuxt/**</exclude>
-                <exclude>examples/react-ssr/.next/**</exclude>
                 <exclude>**/ADDITIONAL-LICENSES.yml</exclude>
                 <exclude>node/**</exclude>
               </excludes>
