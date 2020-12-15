@@ -24,7 +24,7 @@ pipeline {
   }
 
   options {
-    gitLabConnection('https://code.onehippo.org/')
+    gitLabConnection('https://code.bloomreach.com/')
   }
 
   triggers {
@@ -97,8 +97,12 @@ pipeline {
               withCredentials([[$class: 'StringBinding', credentialsId: 'HEROKU_API_KEY', variable: 'HEROKU_API_KEY']]) {
                 sh 'git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/brxm-react-spa.git master'
               }
+            }
+          }
 
-              dir('.git') { deleteDir() }
+          post {
+            cleanup {
+              dir('community/spa-sdk/.git') { deleteDir() }
             }
           }
         }
@@ -117,11 +121,15 @@ pipeline {
               sh 'git push git@github.com:bloomreach/brx-react-spa.git github-master-$VERSION:master'
               sh 'git push git@github.com:bloomreach/brx-react-spa.git github-tag-$VERSION:$VERSION'
             }
+          }
 
-            sh 'git checkout $TAG_NAME'
-            sh 'git tag -d github-tag-$VERSION'
-            sh 'git update-ref -d refs/original/refs/heads/github-master-$VERSION'
-            sh 'git branch -D github-master-$VERSION'
+          post {
+            cleanup {
+              sh 'git checkout $TAG_NAME'
+              sh 'git tag -d github-tag-$VERSION'
+              sh 'git update-ref -d refs/original/refs/heads/github-master-$VERSION'
+              sh 'git branch -D github-master-$VERSION'
+            }
           }
         }
       }
