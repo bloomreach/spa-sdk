@@ -2102,6 +2102,8 @@ __metadata:
     "@fortawesome/fontawesome-svg-core": ^1.2
     "@fortawesome/free-solid-svg-icons": ^5.15
     "@fortawesome/react-fontawesome": ^0.1
+    "@types/googlemaps": ^3.43
+    "@types/markerclustererplus": ^2.1
     "@types/react": ^16.9
     "@types/react-dom": ^16.9
     "@types/react-router-dom": ^5.1
@@ -4144,6 +4146,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/google-maps@npm:*":
+  version: 3.2.2
+  resolution: "@types/google-maps@npm:3.2.2"
+  dependencies:
+    "@types/googlemaps": "*"
+  checksum: 8e3f7c3f0726880a8b89476eb6f243bf50ff3678404db1d080da84671f956a62843619d1794ca03396dda0c4d494500db8db883701e5e9817251c4b485ce8c6e
+  languageName: node
+  linkType: hard
+
+"@types/googlemaps@npm:*, @types/googlemaps@npm:^3.43":
+  version: 3.43.3
+  resolution: "@types/googlemaps@npm:3.43.3"
+  checksum: b729e3f4cc647d0e09136a99ca64186621ead8040451ea5d0b48b75ac22108d01412655279bb72439162732e763ddac9b8b9451f8afd20372d3efe9735c0e960
+  languageName: node
+  linkType: hard
+
 "@types/graceful-fs@npm:^4.1.2":
   version: 4.1.4
   resolution: "@types/graceful-fs@npm:4.1.4"
@@ -4286,6 +4304,15 @@ __metadata:
   version: 3.0.1
   resolution: "@types/less@npm:3.0.1"
   checksum: fe20f8881e541354a6971ec128b4958d264ca6c093fb2d3e5ed8e37c0b25d7162fb1d95014a8431aae494d73121ca35a16dc1308fce81752569a543d3e1b595d
+  languageName: node
+  linkType: hard
+
+"@types/markerclustererplus@npm:^2.1":
+  version: 2.1.33
+  resolution: "@types/markerclustererplus@npm:2.1.33"
+  dependencies:
+    "@types/google-maps": "*"
+  checksum: 8b26f62c0127afb94a4226db4400c5e004d9232c8290a8cb02451568e90446de803edd4eef0b52d135f85b69dfd4c0ab3bb3c3db6810c662952163eeef8aedbf
   languageName: node
   linkType: hard
 
