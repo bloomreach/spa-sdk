@@ -23,12 +23,12 @@ Bloomreach Experience Manager (brXM) is an open and flexible CMS designed for de
 ### Installation
 To get the SDK into your project with [NPM](https://docs.npmjs.com/cli/npm):
 ```bash
-npm install @bloomreach/vue-sdk
+npm install @bloomreach/vue-sdk@saas
 ```
 
 And with [Yarn](https://yarnpkg.com):
 ```bash
-yarn add @bloomreach/vue-sdk
+yarn add @bloomreach/vue-sdk@saas
 ```
 
 ### Usage

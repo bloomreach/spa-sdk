@@ -24,12 +24,12 @@ Bloomreach Experience Manager (brXM) is an open and flexible CMS designed for de
 ### Installation
 To get the SDK into your project with [NPM](https://docs.npmjs.com/cli/npm):
 ```bash
-npm install @bloomreach/react-sdk
+npm install @bloomreach/react-sdk@saas
 ```
 
 And with [Yarn](https://yarnpkg.com):
 ```bash
-yarn add @bloomreach/react-sdk
+yarn add @bloomreach/react-sdk@saas
 ```
 
 ### Usage
