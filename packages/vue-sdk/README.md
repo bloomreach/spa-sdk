@@ -23,12 +23,12 @@ Bloomreach Experience Manager (brXM) is an open and flexible CMS designed for de
 ### Installation
 To get the SDK into your project with [NPM](https://docs.npmjs.com/cli/npm):
 ```bash
-npm install @bloomreach/vue-sdk
+npm install @bloomreach/vue-sdk@saas
 ```
 
 And with [Yarn](https://yarnpkg.com):
 ```bash
-yarn add @bloomreach/vue-sdk
+yarn add @bloomreach/vue-sdk@saas
 ```
 
 ### Usage
@@ -184,6 +184,27 @@ It requires to pass the `mapping` property that maps the component type with its
       return {
         configuration: { /* ... */ },
         mapping: { menu: Menu },
+      };
+    },
+  };
+  </script>
+  ```
+
+- By default, container items that are not mapped will be rendered as a warning text. There is an option to override the fallback.
+  ```
+  <template>
+    <br-page :configuration="configuration" :mapping="mapping" />
+  </template>
+
+  <script>
+  import { TYPE_CONTAINER_ITEM_UNDEFINED } from '@bloomreach/spa-sdk';
+  import Fallback from './components/Fallback.vue';
+
+  export default {
+    data() {
+      return {
+        configuration: { /* ... */ },
+        mapping: { [TYPE_CONTAINER_ITEM_UNDEFINED]: Fallback },
       };
     },
   };

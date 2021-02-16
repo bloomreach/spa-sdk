@@ -20,12 +20,12 @@ Bloomreach Experience Manager (brXM) is an open and flexible CMS designed for de
 ### Installation
 To get the SDK into your project with [NPM](https://docs.npmjs.com/cli/npm):
 ```bash
-npm install @bloomreach/ng-sdk
+npm install @bloomreach/ng-sdk@saas
 ```
 
 And with [Yarn](https://yarnpkg.com):
 ```bash
-yarn add @bloomreach/ng-sdk
+yarn add @bloomreach/ng-sdk@saas
 ```
 
 ### Usage
@@ -178,6 +178,18 @@ It requires to pass the `mapping` property that maps the component type with its
   export class AppComponent {
     mapping = {
       menu: MenuComponent,
+    };
+  }
+  ```
+
+- By default, container items that are not mapped will be rendered as a warning text. There is an option to override the fallback.
+  ```typescript
+  import { TYPE_CONTAINER_ITEM_UNDEFINED } from '@bloomreach/spa-sdk';
+  import { FallbackComponent } from './fallback/fallback.component';
+
+  export class AppComponent {
+    mapping = {
+      [TYPE_CONTAINER_ITEM_UNDEFINED]: FallbackComponent,
     };
   }
   ```
