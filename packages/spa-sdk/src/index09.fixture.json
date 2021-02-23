@@ -148,7 +148,7 @@
       "endNodeSpan": [
         {
           "type": "comment",
-          "data": "<!-- { \"HST-Path-Info\":\"\", \"HST-Context-Path\":\"/site\", \"HST-Site-Id\":\"7b1539a1-18ad-4523-b7d5-878b0c03600c\", \"HST-Sitemap-Id\":\"381a7d3b-4f3c-4187-ba81-dcafb9bcf6fc\", \"HST-Mount-Id\":\"76e65e84-b0b2-4676-8ec0-9893273020de\", \"HST-Site-HasPreviewConfig\":\"true\", \"HST-Page-Id\":\"32c9afd2-fd32-4f8e-ae38-7e031c85f47c\", \"HST-SitemapItem-Id\":\"209551ae-27f2-4213-8196-14c8957a6d58\", \"HST-Type\":\"PAGE-META-DATA\", \"HST-Channel-Id\":\"my-spa-preview\", \"HST-Page-Editable\":\"true\", \"HST-Render-Variant\":\"hippo-default\"} -->"
+          "data": "<!-- { \"HST-Path-Info\":\"\", \"HST-Context-Path\":\"/site\", \"HST-Mount-Id\":\"76e65e84-b0b2-4676-8ec0-9893273020de\", \"HST-Site-HasPreviewConfig\":\"true\", \"HST-Page-Id\":\"32c9afd2-fd32-4f8e-ae38-7e031c85f47c\", \"HST-SitemapItem-Id\":\"209551ae-27f2-4213-8196-14c8957a6d58\", \"HST-Type\":\"PAGE-META-DATA\", \"HST-Channel-Id\":\"my-spa-preview\", \"HST-Page-Editable\":\"true\", \"HST-Render-Variant\":\"hippo-default\"} -->"
         },
         {
           "type": "comment",
