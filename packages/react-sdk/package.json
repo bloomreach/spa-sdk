@@ -1,6 +1,6 @@
 {
   "name": "@bloomreach/react-sdk",
-  "version": "0.2.0-saas",
+  "version": "0.3.0-saas",
   "description": "Bloomreach SPA SDK for React",
   "keywords": [
     "bloomreach",
@@ -38,7 +38,7 @@
     "last 1 edge version"
   ],
   "dependencies": {
-    "@bloomreach/spa-sdk": "^0.2.0-saas"
+    "@bloomreach/spa-sdk": "^0.3.0-saas"
   },
   "peerDependencies": {
     "react": "^16.14"
