@@ -2155,6 +2155,7 @@ __metadata:
     "@types/react-router-dom": ^5.1
     axios: ^0.21
     bootstrap: ^4.5
+    bootstrap-scss: 4.6.0
     eslint: ^7.12
     node-sass: ^4.14
     react: ^16.14
@@ -7215,6 +7216,13 @@ __metadata:
   version: 1.0.0
   resolution: "boolbase@npm:1.0.0"
   checksum: e827963c416fdb1dbcd57e066a43c40829518f4dcdc9f58ed04519daeebb610adacbb6cf102518bda9f08be593c5b1b49a83e36bf6b7d91b3403f7e35510eeae
+  languageName: node
+  linkType: hard
+
+"bootstrap-scss@npm:4.6.0":
+  version: 4.6.0
+  resolution: "bootstrap-scss@npm:4.6.0"
+  checksum: f72cf54bb89ff4b6aab873e6728eaa0e4f3dc81238cd5bdd1d1a0c6d853f2afa9fbfa519674eb9362efab177b3c16ac94d40f8716390d9aeca190b8a23e3637f
   languageName: node
   linkType: hard
 
