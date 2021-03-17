@@ -476,20 +476,20 @@ __metadata:
   linkType: hard
 
 "@apollo/client@npm:^3.2":
-  version: 3.3.8
-  resolution: "@apollo/client@npm:3.3.8"
+  version: 3.3.12
+  resolution: "@apollo/client@npm:3.3.12"
   dependencies:
     "@graphql-typed-document-node/core": ^3.0.0
     "@types/zen-observable": ^0.8.0
     "@wry/context": ^0.5.2
     "@wry/equality": ^0.3.0
     fast-json-stable-stringify: ^2.0.0
-    graphql-tag: ^2.11.0
+    graphql-tag: ^2.12.0
     hoist-non-react-statics: ^3.3.2
     optimism: ^0.14.0
     prop-types: ^15.7.2
     symbol-observable: ^2.0.0
-    ts-invariant: ^0.6.0
+    ts-invariant: ^0.6.2
     tslib: ^1.10.0
     zen-observable: ^0.8.14
   peerDependencies:
@@ -501,7 +501,7 @@ __metadata:
       optional: true
     subscriptions-transport-ws:
       optional: true
-  checksum: 316c325d042909440c5afe1354e9fc27ae69bd130e3290feea16929e9664219243736b09a092720df5a86c616f9518c2d28ed0304bb0fbbf694929757c0835d7
+  checksum: 18181dc9794b61b6ef314f15a07ffbebac9353bcd4715fc2ab2abd0a287bcc45c6a94aa6f23ddf2a2967b73435cfbcca721411e893a7874903eed07c308046e7
   languageName: node
   linkType: hard
 
@@ -1999,18 +1999,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@bloomreach/connector-components-react@npm:^0.2.0-saas":
-  version: 0.2.0-saas
-  resolution: "@bloomreach/connector-components-react@npm:0.2.0-saas"
+"@bloomreach/connector-components-react@npm:^0.3.0-saas":
+  version: 0.3.0-saas
+  resolution: "@bloomreach/connector-components-react@npm:0.3.0-saas"
   dependencies:
     "@apollo/client": ^3.2
     axios: ^0.19
     graphql: ^15.0
     query-string: ^6.10
   peerDependencies:
-    react: ^16.13
-    react-dom: ^16.13
-  checksum: 84a95b1c88b329e58564aa8ab56b54003db648648c9b1453a3252908af602be5ed319f5de90d6ec99b46baafe71540de9389de3dcc1b83df1060306f8871712b
+    react: ^16.14
+    react-dom: ^16.14
+  checksum: 69456e783fa2fa6a17c2cac6cc7b61e3412efcc85c1943b6f2e142e44481b0d668d518c0190ae327caf6f8b754ee43aa48baee310023da7cf5f164501ea78aff
   languageName: node
   linkType: hard
 
@@ -2141,7 +2141,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bloomreach/example-saas@workspace:examples/saas"
   dependencies:
-    "@bloomreach/connector-components-react": ^0.2.0-saas
+    "@bloomreach/connector-components-react": ^0.3.0-saas
     "@bloomreach/eslint-config": ^0.1
     "@bloomreach/react-sdk": ^0.3.0-saas
     "@bloomreach/spa-sdk": ^0.3.0-saas
@@ -2159,6 +2159,7 @@ __metadata:
     node-sass: ^4.14
     react: ^16.14
     react-bootstrap: ^1.4
+    react-cookie: ^4.0.3
     react-dom: ^16.14
     react-google-maps: ^9.4
     react-player: ^2.6
@@ -4109,6 +4110,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/cookie@npm:^0.3.3":
+  version: 0.3.3
+  resolution: "@types/cookie@npm:0.3.3"
+  checksum: 35d603d5e620ed8a0c4dedcf6b6e19e4981a4c44d40402de39e53f041ce74bf66b40272a355db37271b9557709fd3e6dfc8fe6ea4031f59b8b16cf0606ea3797
+  languageName: node
+  linkType: hard
+
 "@types/cookie@npm:^0.4":
   version: 0.4.0
   resolution: "@types/cookie@npm:0.4.0"
@@ -4230,6 +4238,16 @@ __metadata:
   version: 4.7.8
   resolution: "@types/history@npm:4.7.8"
   checksum: 54020371a412e949d0a329cc325253f16daf5b33e2e485135d39d3b30d3f9a8e323b00ce1162da82387c8ecf0397a8da49ad36ab309f06284326c064092879c7
+  languageName: node
+  linkType: hard
+
+"@types/hoist-non-react-statics@npm:^3.0.1":
+  version: 3.3.1
+  resolution: "@types/hoist-non-react-statics@npm:3.3.1"
+  dependencies:
+    "@types/react": "*"
+    hoist-non-react-statics: ^3.3.0
+  checksum: 16ab4c45d4920fa378c8be76554b10061247fc04d2c8af11bdb7d520b3967e9c06d7ad5efd9b0f1657fbc4d095f62c6e1325f03b9141eb1ef2c8095b96fd42f8
   languageName: node
   linkType: hard
 
@@ -5654,29 +5672,29 @@ __metadata:
   linkType: hard
 
 "@wry/context@npm:^0.5.2":
-  version: 0.5.3
-  resolution: "@wry/context@npm:0.5.3"
+  version: 0.5.4
+  resolution: "@wry/context@npm:0.5.4"
   dependencies:
     tslib: ^1.14.1
-  checksum: 7b800a48a986f7aaa3f40d3ffd6f231df4562a15d81a18b6b035783f93ea5837289e82534d255be056ba91fafa013a3661010c8c10c8a0fc5707c7bfc95eabed
+  checksum: 4894bf9db998a0d6591cdbbf97de6162ae38efac364d0633319906cccc293159bc8b98784b2969f9f75927096e335b1d1bb7a299fdb25eff7e1fc449919b4023
   languageName: node
   linkType: hard
 
 "@wry/equality@npm:^0.3.0":
-  version: 0.3.1
-  resolution: "@wry/equality@npm:0.3.1"
+  version: 0.3.4
+  resolution: "@wry/equality@npm:0.3.4"
   dependencies:
     tslib: ^1.14.1
-  checksum: 50b8ee5376de1fb81470d21080158d9ad6880d76ca9354735337b78ea93df6558bf859f56e9a4d3a2ab7d9f611716da79f50b85e64144e5095eaf78634892cdb
+  checksum: 6de84a1dcbbdc79f4b980b03e4111d97b1c3b8311e5db81c105d17109a258542a4aadef01294e21bf253e8e40702900913d25f55fc72dd76f5d7a844c706783e
   languageName: node
   linkType: hard
 
 "@wry/trie@npm:^0.2.1":
-  version: 0.2.1
-  resolution: "@wry/trie@npm:0.2.1"
+  version: 0.2.2
+  resolution: "@wry/trie@npm:0.2.2"
   dependencies:
     tslib: ^1.14.1
-  checksum: bca4e43a6eaa0edafe6f763d7e833d3fe478cb7723048d57843410102e8bf920f48d1646ea58f45cdac46e9b2884a1890bb5b9022959b2c16ca59814a18b9e66
+  checksum: 7e6a1570bfc04f9f50a8fb550b1cd458386e4e963334e700cc2a450ecb795dad1d06c4fbfbf9981c69a7faec4d2b98513fec803cfc30a4d3d5ac649a7f32e28f
   languageName: node
   linkType: hard
 
@@ -8727,7 +8745,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cookie@npm:^0.4":
+"cookie@npm:^0.4, cookie@npm:^0.4.0":
   version: 0.4.1
   resolution: "cookie@npm:0.4.1"
   checksum: b8e0928e3e7aba013087974b33a6eec730b0a68b7ec00fc3c089a56ba2883bcf671252fc2ed64775aa1ca64796b6e1f6fdddba25a66808aef77614d235fd3e06
@@ -12114,6 +12132,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"filter-obj@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "filter-obj@npm:1.1.0"
+  checksum: 1049ac0c306198edf2c090375f7a80545a01e798b4996dbde13398a263cd923b5eb8a240dfadb03260621249a404a686e1a55980c6e59af70ee3880323998703
+  languageName: node
+  linkType: hard
+
 "finalhandler@npm:1.1.0":
   version: 1.1.0
   resolution: "finalhandler@npm:1.1.0"
@@ -12978,14 +13003,14 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"graphql-tag@npm:^2.11.0":
-  version: 2.12.0
-  resolution: "graphql-tag@npm:2.12.0"
+"graphql-tag@npm:^2.12.0":
+  version: 2.12.1
+  resolution: "graphql-tag@npm:2.12.1"
   dependencies:
     tslib: ^1.14.1
   peerDependencies:
     graphql: ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0
-  checksum: 5589000ba86013023076842192bd569f579a647fbc3bfd86831e6ddc6c275cf430b532476717adba45c514ca90650fc5cb3329bc45e38a9b849f6fcb047444c9
+  checksum: 24598a32799130942d6a86346794798fd3b4533fbc9c2f76af3546ea099778803387ead881c8099db76c6607d3064c970b3e59607d057554d14f82627a536d22
   languageName: node
   linkType: hard
 
@@ -13308,7 +13333,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"hoist-non-react-statics@npm:^3.1.0, hoist-non-react-statics@npm:^3.3.2":
+"hoist-non-react-statics@npm:^3.0.0, hoist-non-react-statics@npm:^3.1.0, hoist-non-react-statics@npm:^3.3.0, hoist-non-react-statics@npm:^3.3.2":
   version: 3.3.2
   resolution: "hoist-non-react-statics@npm:3.3.2"
   dependencies:
@@ -18814,12 +18839,12 @@ fsevents@^1.2.7:
   linkType: hard
 
 "optimism@npm:^0.14.0":
-  version: 0.14.0
-  resolution: "optimism@npm:0.14.0"
+  version: 0.14.1
+  resolution: "optimism@npm:0.14.1"
   dependencies:
     "@wry/context": ^0.5.2
     "@wry/trie": ^0.2.1
-  checksum: 43223bb26e463829182a1d03abacf85939a91c06c33eb81884aaa74b2eb1e5ebe305c4ae0c079de06605d2d688665ceb2d245a421335786aa0f8414adbf52a91
+  checksum: 6fe9cf1d8ea72acee3d33d986b14b84ee610f1c934866827160cdead5a23b72f345f54288ec44a909021166fc9dd5ce47c3c7bae7798f78651c6d2c69bf176df
   languageName: node
   linkType: hard
 
@@ -21058,13 +21083,14 @@ fsevents@^1.2.7:
   linkType: hard
 
 "query-string@npm:^6.10":
-  version: 6.13.8
-  resolution: "query-string@npm:6.13.8"
+  version: 6.14.1
+  resolution: "query-string@npm:6.14.1"
   dependencies:
     decode-uri-component: ^0.2.0
+    filter-obj: ^1.1.0
     split-on-first: ^1.0.0
     strict-uri-encode: ^2.0.0
-  checksum: 5d52ccd5988d60bb17990b287f2fa03d7d4eb3358f6716da7fc32c865196acf957cbdaa9272a36d60de80f06be67cbc7985c21432fecd75ab0166bbf06d87ff9
+  checksum: 5d651ac420f5298baf00bb71228ffac32ed342c09836a7d2b1df3cdc7870313339cf6927827370c654cf73571bd639af497a0d9ef677a3a11b7396de2f761aa4
   languageName: node
   linkType: hard
 
@@ -21242,6 +21268,19 @@ fsevents@^1.2.7:
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
   checksum: 9ac160925e1ce1c8f81496ac037e3da8ea18221324977c7b0a0ee3815fcc808b69399cdcf2937c6433869c62ad76eede426a9c1e7685cfd83beaac1d575f86b5
+  languageName: node
+  linkType: hard
+
+"react-cookie@npm:^4.0.3":
+  version: 4.0.3
+  resolution: "react-cookie@npm:4.0.3"
+  dependencies:
+    "@types/hoist-non-react-statics": ^3.0.1
+    hoist-non-react-statics: ^3.0.0
+    universal-cookie: ^4.0.0
+  peerDependencies:
+    react: ">= 16.3.0"
+  checksum: 9b2086b7916b2c92980ef31ed4b5f70e1112d3f8de27bf839aa61f81b42270e028a91cb2237683566f4a77f6da42099cf7166fe650c74106958ae9a29bb7acf1
   languageName: node
   linkType: hard
 
@@ -24964,14 +25003,14 @@ resolve@1.18.1:
   languageName: node
   linkType: hard
 
-"ts-invariant@npm:^0.6.0":
-  version: 0.6.0
-  resolution: "ts-invariant@npm:0.6.0"
+"ts-invariant@npm:^0.6.2":
+  version: 0.6.2
+  resolution: "ts-invariant@npm:0.6.2"
   dependencies:
     "@types/ungap__global-this": ^0.3.1
     "@ungap/global-this": ^0.4.2
     tslib: ^1.9.3
-  checksum: 5dd4579516d6ae78e8ebb231e0e80c48cd44109a7d5161d99c80a85e678a1920b642b1de8ce22f6fb05d617347fcedf84893159fa23e2b2aa9f364891d4fe5c4
+  checksum: 64230c18f04ea17ca9b1222647372202c12be4a45e5c23cff308cace9ad45384f52faaa0cb93aec0b24d82e85e11e2dd77816bf626684ffa3a90d27c420a0727
   languageName: node
   linkType: hard
 
@@ -25630,6 +25669,16 @@ resolve@1.18.1:
     request: ^2.88.2
     uuid: ^3.0.0
   checksum: fd9cae3c6760317b251436a3299637749ea4c109f62719fa007de48f4211fa356e9152f7451103c7cb625e171684f68802bb362a5e3e27b69f8a912ad4b029f6
+  languageName: node
+  linkType: hard
+
+"universal-cookie@npm:^4.0.0":
+  version: 4.0.4
+  resolution: "universal-cookie@npm:4.0.4"
+  dependencies:
+    "@types/cookie": ^0.3.3
+    cookie: ^0.4.0
+  checksum: 182b97a2dd6a368f1940f8dd2d0ec3908f1add6f651a6bd30dac1a8083dd7f64c35e0a7fd4b3c923004f4fe85e838d2996bcd0057061a2f494782f65c2a105fc
   languageName: node
   linkType: hard
 
