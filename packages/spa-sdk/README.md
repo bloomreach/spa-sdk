@@ -36,7 +36,7 @@ import { initialize } from '@bloomreach/spa-sdk';
 async function showPage(path) {
   const page = await initialize({
     path,
-    endpoint: 'http://localhost:8080/site/resourceapi',
+    endpoint: 'http://localhost:8080/delivery/site/v1/channels/brxsaas/pages',
     httpClient: axios,
   });
 
@@ -53,19 +53,19 @@ Option | Required | Default | Description
 --- | :---: | --- | ---
 `apiVersion` | no | _none_ | Current API version. By default, the compatible with the current setup version will be chosen.
 `apiVersionHeader` | `"Accept-Version"` | _none_ | API version header.
-`apiBaseUrl` | no | `cmsBaseUrl` + `"/resourceapi"` | Base URL of the Page Model API (e.g. `http://localhost:8080/site/resourceapi` or `http://localhost:8080/site/channel/resourceapi`). This option will be ignored if `options` is present.
+`apiBaseUrl` | no | `cmsBaseUrl` + `"/resourceapi"` | Base URL of the Page Model API (e.g. `http://localhost:8080/delivery/site/v1/channels/brxsaas/pages` or `http://localhost:8080/site/channel/resourceapi`). This option will be ignored if `options` is present.
 `authorizationHeader` | no | `"Authorization"` | Authorization header for the Page Model API.
 `authorizationQueryParameter` | no | `"token"` | The query string parameter used to pass authorization header value.
 `authorizationToken` | no | _none_ | Authorization token for the Page Model API. By default, the SDK will try to extract the token from the request query string using `authorizationQueryParameter` option.
 `baseUrl` | no | `""` | Base URL of the SPA (e.g. `/account` or `//www.example.com`). This option can only be used if `endpoint` is present.
 `debug` | no | `false` | The option enabling debug mode.
-`endpoint` | _exclusive_ | _none_ | Base URL of the Page Model API (e.g. `http://localhost:8080/site/resourceapi` or `http://localhost:8080/site/channel/resourceapi`). This option is exclusive and should not be used together with `options` or `cmsBaseUrl`.
+`endpoint` | _exclusive_ | _none_ | Base URL of the Page Model API (e.g. `http://localhost:8080/delivery/site/v1/channels/brxsaas/pages` or `http://localhost:8080/site/channel/resourceapi`). This option is exclusive and should not be used together with `options` or `cmsBaseUrl`.
 `endpointQueryParameter` | no | _none_ | The query string parameter used as the brXM endpoint (`cmsBaseUrl`). The option will be ignored if the `cmsBaseUrl` option is not empty. In case when this option is used, the `apiBaseUrl` will be prepended with the value from the query parameter. This option should be used only for testing or debugging. By default, the option is disabled.
 `cmsBaseUrl` | _exclusive_ | _none_ | Base URL of the site (e.g. `http://localhost:8080/site` or `http://localhost:8080/site/channel`). This option is exclusive and should not be used together with `options` or `endpoint`.
 `httpClient` | yes | _none_ | The HTTP client that will be used to fetch the page model. Signature is similar to [Axios](https://github.com/axios/axios#axiosconfig) client.
 `options` | _exclusive_ | _none_ | The CMS URL options. This option is exclusive and should not be used together with `cmsBaseUrl` or `endpoint`. Use this property to enable the UrlRewriter-based setup. The option is **deprecated** and will be removed in the next major release.
 `options.live` | yes | _none_ | The CMS URL options for the live site.
-`options.live.apiBaseUrl` | no | `options.live.cmsBaseUrl` + `"/resourceapi"` | Base URL of the Page Model API for the live site (e.g. `http://localhost:8080/site/resourceapi` or `http://localhost:8080/site/channel/resourceapi`).
+`options.live.apiBaseUrl` | no | `options.live.cmsBaseUrl` + `"/resourceapi"` | Base URL of the Page Model API for the live site (e.g. `http://localhost:8080/delivery/site/v1/channels/brxsaas/pages` or `http://localhost:8080/site/channel/resourceapi`).
 `options.live.cmsBaseUrl` | yes | _none_ | Base URL of the live site (e.g. `http://localhost:8080/site` or `http://localhost:8080/site/channel`).
 `options.live.spaBaseUrl` | no | `""` | Base URL of the live SPA (e.g. `/account` or `//www.example.com`).
 `options.preview` | yes | _none_ | The CMS URL options for the preview site.

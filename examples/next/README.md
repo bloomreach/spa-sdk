@@ -11,7 +11,7 @@ docker run -p 8080:8080 bloomreach/xm-spa-example
 
 Then, copy `.env.dist` file to `.env` and specify the brXM instance to fetch the page model from:
 ```
-BRXM_ENDPOINT=http://localhost:8080/site/resourceapi
+BRXM_ENDPOINT=http://localhost:8080/delivery/site/v1/channels/brxsaas/pages
 ```
 
 Finally, build and run the Next.js app as followed:
