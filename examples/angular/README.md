@@ -14,7 +14,7 @@ First, change the application URL to `http://localhost:4200` in the [channel set
 Then, update `src/environments/environment.ts` and `src/environments/environment.prod.ts` files to specify the brXM instance to fetch the page model from:
 ```
 export const environment = {
-  endpoint: 'http://localhost:8080/site/resourceapi',
+  endpoint: 'http://localhost:8080/delivery/site/v1/channels/brxsaas/pages',
   // ...
 };
 ```
