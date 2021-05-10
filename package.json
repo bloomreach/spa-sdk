@@ -10,6 +10,10 @@
     "spa",
     "sdk"
   ],
+  "engines": {
+    "node": "12",
+    "npm": "6"
+  },
   "author": "Bloomreach B.V.",
   "license": "Apache-2.0",
   "repository": {

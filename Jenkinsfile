@@ -31,104 +31,21 @@ pipeline {
     gitlab(
       triggerOnPush: true,
       triggerOnMergeRequest: false,
-      includeBranchesSpec: 'release/saas',
-      pendingBuildName: 'Sample SPA'
+      includeBranchesSpec: 'main',
+      pendingBuildName: 'SPA SDK'
     )
   }
 
   stages {
     stage('SPA SDK') {
-      when {
-        tag 'spa-sdk-*'
-      }
-
       stages {
         stage('Build') {
           steps {
-            dir('community/spa-sdk') {
+            dir('.') {
               sh 'HOME=$(pwd) yarn'
               sh 'yarn build'
               sh 'yarn lint'
               sh 'yarn test'
-            }
-          }
-        }
-
-        stage('Publish on NPM') {
-          steps {
-            dir('community/spa-sdk') {
-              withCredentials([[$class: 'StringBinding', credentialsId: 'NPM_AUTH_TOKEN', variable: 'YARN_NPM_AUTH_TOKEN']]) {
-                sh 'yarn release'
-              }
-            }
-          }
-        }
-      }
-    }
-
-    stage('Sample SPA') {
-      when {
-        tag 'sample-spa-*'
-      }
-
-      environment {
-        VERSION = sh(script: 'echo $TAG_NAME | sed "s/^[^0-9]*\\([0-9].*\\)$/\\1/"', returnStdout: true).trim()
-      }
-
-      stages {
-        stage('Verify') {
-          steps {
-            dir('community/spa-sdk') {
-              sh 'HOME=$(pwd) yarn workspaces focus @bloomreach/example-saas'
-              sh 'yarn --cwd=examples/saas workspaces foreach --parallel --recursive --topological run build'
-              sh 'yarn workspace @bloomreach/example-saas lint'
-            }
-          }
-        }
-
-        stage('Deploy to Heroku') {
-          steps {
-            dir('community/spa-sdk') {
-              sh 'git init'
-              sh 'git config user.email "jenkins@onehippo.com"'
-              sh 'git config user.name "Jenkins"'
-              sh 'git add -A && git commit -m "Deploy $VERSION"'
-
-              withCredentials([[$class: 'StringBinding', credentialsId: 'HEROKU_API_KEY', variable: 'HEROKU_API_KEY']]) {
-                sh 'git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/brxm-react-spa.git master'
-              }
-            }
-          }
-
-          post {
-            cleanup {
-              dir('community/spa-sdk/.git') { deleteDir() }
-            }
-          }
-        }
-
-        stage('Publish on GitHub') {
-          environment {
-            GIT_SSH_COMMAND='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
-          }
-
-          steps {
-            sh 'git checkout -B github-master-$VERSION'
-            sh 'git filter-branch --force --prune-empty --subdirectory-filter community/spa-sdk/examples/saas github-master-$VERSION'
-            sh 'git tag --force github-tag-$VERSION'
-
-            sshagent (credentials: ['sample-spa-github']) {
-              sh 'git push git@github.com:bloomreach/brx-react-spa.git github-master-$VERSION:master'
-              sh 'git push git@github.com:bloomreach/brx-react-spa.git github-tag-$VERSION:$VERSION'
-            }
-          }
-
-          post {
-            cleanup {
-              sh 'git checkout $TAG_NAME'
-              sh 'git tag -d github-tag-$VERSION'
-              sh 'git update-ref -d refs/original/refs/heads/github-master-$VERSION'
-              sh 'git branch -D github-master-$VERSION'
             }
           }
         }
