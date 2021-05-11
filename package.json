@@ -11,8 +11,7 @@
     "sdk"
   ],
   "engines": {
-    "node": "12",
-    "npm": "6"
+    "node": "14"
   },
   "author": "Bloomreach B.V.",
   "license": "Apache-2.0",
