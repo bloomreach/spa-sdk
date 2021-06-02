@@ -277,6 +277,7 @@ export {
   PaginationItem,
   Pagination,
   Reference,
+  getContainerItemContent,
   isComponent,
   isContainerItem,
   isContainer,

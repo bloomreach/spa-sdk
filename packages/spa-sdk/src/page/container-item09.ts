@@ -86,6 +86,11 @@ export class ContainerItemImpl
   getParameters<T>(): T {
     return (this.model._meta.paramsInfo ?? {}) as T;
   }
+
+  // Not available in v0.9
+  getContentReference() {
+    return undefined;
+  }
 }
 
 /**

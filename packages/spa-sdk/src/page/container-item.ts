@@ -22,14 +22,15 @@ import {
   ComponentModelToken,
   Component,
   TYPE_COMPONENT_CONTAINER_ITEM,
+  TYPE_COMPONENT_CONTAINER_ITEM_CONTENT,
 } from './component';
 import { EmitterMixin, Emitter } from '../emitter';
 import { EventBusService, EventBus, PageUpdateEvent } from './events';
 import { LinkFactory } from './link-factory';
 import { Logger } from '../logger';
 import { MetaCollectionFactory } from './meta-collection-factory';
-import { PageModel } from './page';
-import { resolve } from './reference';
+import { Page, PageModel } from './page';
+import { Reference, resolve } from './reference';
 
 /**
  * A container item without mapping.
@@ -53,10 +54,19 @@ export interface ContainerItemMeta extends ComponentMeta {
  * Model of a container item.
  */
 export interface ContainerItemModel extends ComponentModel {
+  content?: Reference;
   ctype?: string;
   label?: string;
   meta: ContainerItemMeta;
   type: typeof TYPE_COMPONENT_CONTAINER_ITEM;
+}
+
+/**
+ * Content model of a container item
+ */
+export interface ContainerItemContent<T> {
+  type: string;
+  data: T;
 }
 
 /**
@@ -94,6 +104,12 @@ export interface ContainerItem extends Component, Emitter<ContainerItemEvents> {
    * @return Whether the component is hidden or not.
    */
   isHidden(): boolean;
+
+  /**
+   * Returns a [RFC-6901](https://tools.ietf.org/html/rfc6901) JSON Pointer
+   * to the content of this container item.
+   */
+  getContentReference(): Reference | undefined;
 }
 
 @injectable()
@@ -143,6 +159,10 @@ export class ContainerItemImpl
   getParameters<T>(): T {
     return (this.model.meta.paramsInfo ?? {}) as T;
   }
+
+  getContentReference() {
+    return this.model.content;
+  }
 }
 
 /**
@@ -151,4 +171,28 @@ export class ContainerItemImpl
  */
 export function isContainerItem(value: any): value is ContainerItem {
   return value instanceof ContainerItemImpl;
+}
+
+/**
+ * Returns the content of this component.
+ *
+ * @param component The component that references the content
+ * @param page The page that contains the content
+ */
+export function getContainerItemContent<T>(component: ContainerItem, page: Page): T | null {
+  const contentRef = component.getContentReference();
+  if (!contentRef) {
+    return null;
+  }
+
+  const componentContent = page.getContent<ContainerItemContent<T>>(contentRef);
+  if (!componentContent) {
+    return null;
+  }
+
+  if (componentContent?.type !== TYPE_COMPONENT_CONTAINER_ITEM_CONTENT) {
+    return null;
+  }
+
+  return componentContent.data;
 }

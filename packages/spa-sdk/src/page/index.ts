@@ -93,6 +93,7 @@ export {
 export { Content, isContent } from './content09';
 export { Document, TYPE_DOCUMENT, isDocument } from './document';
 export { EventBusService } from './events';
+export { getContainerItemContent } from './container-item';
 export { ImageSet, TYPE_IMAGE_SET, isImageSet } from './image-set';
 export { Image } from './image';
 export { Link, TYPE_LINK_EXTERNAL, TYPE_LINK_INTERNAL, TYPE_LINK_RESOURCE, isLink } from './link';
