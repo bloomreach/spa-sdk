@@ -179,6 +179,14 @@ describe('ContainerItemImpl', () => {
       expect(listener).toBeCalledWith({});
     });
   });
+
+  describe('getContentReference', () => {
+    it('should always return undefined', () => {
+      const containerItem = createContainerItem();
+
+      expect(containerItem.getContentReference()).toBeUndefined();
+    });
+  });
 });
 
 describe('isContainerItem', () => {

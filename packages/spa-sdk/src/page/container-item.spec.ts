@@ -15,13 +15,20 @@
  */
 
 import { Typed } from 'emittery';
-import { ComponentImpl, TYPE_COMPONENT_CONTAINER_ITEM } from './component';
-import { ContainerItemImpl, ContainerItemModel, ContainerItem, isContainerItem } from './container-item';
+import { ComponentImpl, TYPE_COMPONENT_CONTAINER_ITEM, TYPE_COMPONENT_CONTAINER_ITEM_CONTENT } from './component';
+import {
+  ContainerItemImpl,
+  ContainerItemModel,
+  ContainerItem,
+  ContainerItemContent,
+  getContainerItemContent,
+  isContainerItem,
+} from './container-item';
 import { EventBus, Events } from './events';
 import { LinkFactory } from './link-factory';
 import { MetaCollectionFactory } from './meta-collection-factory';
 import { MetaCollection } from './meta-collection';
-import { PageModel } from './page';
+import { Page, PageModel } from './page';
 
 let eventBus: EventBus;
 let linkFactory: jest.Mocked<LinkFactory>;
@@ -188,6 +195,15 @@ describe('ContainerItemImpl', () => {
       expect(listener).toBeCalledWith({});
     });
   });
+
+  describe('getContentReference', () => {
+    it('should return a content reference', () => {
+      const content = { $ref: 'content-reference' };
+      const containerItem = createContainerItem({ ...model, content });
+
+      expect(containerItem.getContentReference()).toBe(content);
+    });
+  });
 });
 
 describe('isContainerItem', () => {
@@ -203,4 +219,47 @@ describe('isContainerItem', () => {
     expect(isContainerItem(undefined)).toBe(false);
     expect(isContainerItem(component)).toBe(false);
   });
+});
+
+fdescribe('getContainerItemContent', () => {
+  const content = { $ref: 'content-reference' };
+  let page: jest.Mocked<Page>;
+
+  beforeEach(() => {
+    page = { getContent: jest.fn() } as unknown as typeof page;
+  });
+
+  it('should return null if the component has no content reference', () => {
+    const containerItem = createContainerItem();
+
+    expect(getContainerItemContent(containerItem, page)).toBeNull();
+    expect(page.getContent).not.toHaveBeenCalled();
+  });
+
+  it('should return null if the page has no content for the component reference', () => {
+    const containerItem = createContainerItem({ ...model, content });
+
+    expect(getContainerItemContent(containerItem, page)).toBeNull();
+    expect(page.getContent).toHaveBeenCalledWith(content);
+  });
+
+  it('should return null if the content is of the wrong type', () => {
+    const containerItem = createContainerItem({ ...model, content });
+    const containerItemContent = { type: 'wrong-type' } as ContainerItemContent<string>;
+    page.getContent.mockReturnValue(containerItemContent);
+
+    expect(getContainerItemContent(containerItem, page)).toBeNull();
+  });
+
+  it('should return the content of the container-item', () => {
+    const containerItem = createContainerItem({ ...model, content });
+    const containerItemContent = {
+      data: 'data',
+      type: TYPE_COMPONENT_CONTAINER_ITEM_CONTENT,
+    } as ContainerItemContent<string>;
+    page.getContent.mockReturnValue(containerItemContent);
+
+    expect(getContainerItemContent(containerItem, page)).toBe('data');
+  });
+
 });
