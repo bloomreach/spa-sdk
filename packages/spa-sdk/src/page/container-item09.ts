@@ -87,8 +87,8 @@ export class ContainerItemImpl
     return (this.model._meta.paramsInfo ?? {}) as T;
   }
 
-  // Not available in v0.9
   getContentReference() {
+    this.logger?.warn('The method "getContentReference" is not supported in PMA 0.9 and always returns "undefined".');
     return undefined;
   }
 }
