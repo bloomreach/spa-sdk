@@ -4,9 +4,9 @@ exports[`BrMetaDirective ngOnChanges when there is a template should surround th
 <div
   id="root3"
 >
+  <span />
+  <span />
   
-  <span />
-  <span />
 </div>
 `;
 

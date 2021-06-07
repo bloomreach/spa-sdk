@@ -4,7 +4,6 @@ exports[`BrComponentDirective ngOnChanges should rerender a component on change 
 <div
   id="root3"
 >
-  
   <span>
     Implicit: updated
   </span>
@@ -17,6 +16,7 @@ exports[`BrComponentDirective ngOnChanges should rerender a component on change 
   <span>
     Template: Some Template
   </span>
+  
 </div>
 `;
 
@@ -32,7 +32,6 @@ exports[`BrComponentDirective ngOnInit should render a component 1`] = `
 <div
   id="root7"
 >
-  
   <span>
     Implicit: something
   </span>
@@ -45,6 +44,7 @@ exports[`BrComponentDirective ngOnInit should render a component 1`] = `
   <span>
     Template: Some Template
   </span>
+  
 </div>
 `;
 
@@ -52,7 +52,6 @@ exports[`BrComponentDirective ngOnInit should render a component using path 1`] 
 <div
   id="root13"
 >
-  
   <span>
     Implicit: child
   </span>
@@ -65,6 +64,7 @@ exports[`BrComponentDirective ngOnInit should render a component using path 1`] 
   <span>
     Template: Some Template
   </span>
+  
 </div>
 `;
 
@@ -72,7 +72,6 @@ exports[`BrComponentDirective ngOnInit should render current node children if th
 <div
   id="root18"
 >
-  
   <span>
     Implicit: child1
   </span>
@@ -97,6 +96,7 @@ exports[`BrComponentDirective ngOnInit should render current node children if th
   <span>
     Template: Some Template
   </span>
+  
 </div>
 `;
 
@@ -128,7 +128,6 @@ exports[`BrComponentDirective ngOnInit should render root node children if the c
 <div
   id="root9"
 >
-  
   <span>
     Implicit: child1
   </span>
@@ -153,5 +152,6 @@ exports[`BrComponentDirective ngOnInit should render root node children if the c
   <span>
     Template: Some Template
   </span>
+  
 </div>
 `;
