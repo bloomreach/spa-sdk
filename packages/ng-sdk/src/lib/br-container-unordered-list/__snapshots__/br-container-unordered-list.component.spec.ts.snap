@@ -2,33 +2,34 @@
 
 exports[`BrContainerUnorderedListComponent isPreview should add "hst-container-*" classes in preview 1`] = `
 <div
-  class="hst-container"
+  class="br-container-unordered-list hst-container"
   id="root1"
 >
-  <li
-    class="hst-container-item"
-  >
-    
-  </li>
-  <li
-    class="hst-container-item"
-  >
-    
-  </li>
   
+  <li
+    class="hst-container-item"
+  >
+    
+  </li>
+  <li
+    class="hst-container-item"
+  >
+    
+  </li>
 </div>
 `;
 
 exports[`BrContainerUnorderedListComponent should render a container 1`] = `
 <div
+  class="br-container-unordered-list"
   id="root0"
 >
-  <li>
-    
-  </li>
-  <li>
-    
-  </li>
   
+  <li>
+    
+  </li>
+  <li>
+    
+  </li>
 </div>
 `;
