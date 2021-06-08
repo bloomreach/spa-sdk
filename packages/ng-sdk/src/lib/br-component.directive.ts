@@ -23,9 +23,9 @@ import {
   Optional,
   SimpleChanges,
   TemplateRef,
-  ViewContainerRef
+  ViewContainerRef,
 } from '@angular/core';
-import { Component, isComponent, Page } from '@bloomreach/spa-sdk';
+import { isComponent, Component, Page } from '@bloomreach/spa-sdk';
 import { BrNodeDirective } from './br-node.directive';
 import { BrPageComponent } from './br-page/br-page.component';
 
@@ -94,7 +94,7 @@ export class BrComponentDirective implements OnChanges, OnDestroy, OnInit {
       component,
       page,
       $implicit: component,
-      template: 'Some Template' as any,
+      template: this.template,
     }));
     // tslint:enable: no-non-null-assertion
   }
