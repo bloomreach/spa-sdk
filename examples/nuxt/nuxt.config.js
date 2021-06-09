@@ -53,6 +53,7 @@ module.exports = {
   typescript: {
     typeCheck: false,
   },
+  telemetry: false,
   build: {
     babel: {
       presets({ isServer }) {
