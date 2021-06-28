@@ -32,15 +32,16 @@ import {
   TemplateRef,
   Type,
   ViewChild,
+  EventEmitter
 } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { isPlatformBrowser, isPlatformServer } from '@angular/common';
-import { makeStateKey, StateKey, TransferState } from '@angular/platform-browser';
-import { from, of, BehaviorSubject, Subject } from 'rxjs';
-import { filter, map, mapTo, pairwise, pluck, switchMap, take } from 'rxjs/operators';
-import { destroy, initialize, isPage, Configuration, Page, PageModel } from '@bloomreach/spa-sdk';
-import { BrComponentContext } from '../br-component.directive';
-import { BrProps } from '../br-props.model';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {isPlatformBrowser, isPlatformServer} from '@angular/common';
+import {makeStateKey, StateKey, TransferState} from '@angular/platform-browser';
+import {from, of, BehaviorSubject, Subject} from 'rxjs';
+import {filter, map, mapTo, pairwise, pluck, switchMap, take} from 'rxjs/operators';
+import {destroy, initialize, isPage, Configuration, Page, PageModel} from '@bloomreach/spa-sdk';
+import {BrComponentContext} from '../br-component.directive';
+import {BrProps} from '../br-props.model';
 
 interface BrNodeContext extends BrComponentContext {
   template?: TemplateRef<BrComponentContext>;
@@ -84,9 +85,14 @@ export class BrPageComponent implements AfterContentChecked, OnChanges, OnDestro
    */
   @Output() state = new BehaviorSubject<Page | undefined>(undefined);
 
-  @ViewChild('brNode', { static: true }) node!: TemplateRef<BrNodeContext>;
+  /**
+   * Http error handling
+   */
+  @Output() httpError = new EventEmitter<HttpErrorResponse>();
 
-  @ContentChild(TemplateRef, { static: true }) private template?: TemplateRef<BrComponentContext>;
+  @ViewChild('brNode', {static: true}) node!: TemplateRef<BrNodeContext>;
+
+  @ContentChild(TemplateRef, {static: true}) private template?: TemplateRef<BrComponentContext>;
 
   private afterContentChecked$ = new Subject();
 
@@ -104,19 +110,19 @@ export class BrPageComponent implements AfterContentChecked, OnChanges, OnDestro
       pluck(0),
       filter(isPage),
     )
-    .subscribe(destroy);
+      .subscribe(destroy);
 
     this.state.pipe(
       filter(isPage),
       switchMap((page) => this.afterContentChecked$.pipe(take(1), mapTo(page))),
     )
-    .subscribe((page) => zone.runOutsideAngular(() => page.sync()));
+      .subscribe((page) => zone.runOutsideAngular(() => page.sync()));
 
     this.state.pipe(
       filter(() => isPlatformServer(this.platform)),
       filter(isPage),
     )
-    .subscribe((page) => this.stateKey && this.transferState?.set(this.stateKey, page.toJSON()));
+      .subscribe((page) => this.stateKey && this.transferState?.set(this.stateKey, page.toJSON()));
   }
 
   get context(): BrNodeContext | undefined {
@@ -168,7 +174,7 @@ export class BrPageComponent implements AfterContentChecked, OnChanges, OnDestro
       this.transferState?.remove(this.stateKey);
     }
 
-    const configuration = { httpClient: this.request, ...this.configuration } as Configuration;
+    const configuration = {httpClient: this.request, ...this.configuration} as Configuration;
     const observable = page
       ? of(initialize(configuration, page))
       : from(initialize(configuration));
@@ -179,7 +185,7 @@ export class BrPageComponent implements AfterContentChecked, OnChanges, OnDestro
     });
   }
 
-  private request(...[{ data: body, headers, method, url }]: Parameters<Configuration['httpClient']>) {
+  private request(...[{data: body, headers, method, url}]: Parameters<Configuration['httpClient']>) {
     return this.httpClient.request<PageModel>(
       method,
       url,
@@ -189,7 +195,8 @@ export class BrPageComponent implements AfterContentChecked, OnChanges, OnDestro
         responseType: 'json'
       },
     )
-    .pipe(map(data => ({data})))
-    .toPromise();
+      .pipe(map(data => ({data})))
+      .toPromise()
+      .catch(error => this.httpError.emit(error));
   }
 }

@@ -348,6 +348,30 @@ If you would like to disable the feature, just pass `false` into the `stateKey` 
 <br-page [stateKey]="false"></br-page>
 ```
 
+### Http error handling
+The event handler is triggered when an HTTP error occurs from fetching PMA.  
+```typescript
+import { Component } from '@angular/core';
+import { BrPageComponent } from '@bloomreach/ng-sdk';
+
+@Component({
+  selector: 'app-root',
+  template: `
+    <br-page [configuration]="configuration"             
+             (httpError)="onHttpError($event)">
+      ...
+    </br-page>
+  `,
+})
+export class AppComponent {
+  onHttpError(error: HttpErrorResponse): void {
+    // http error handler
+  }
+  
+  // ...
+}
+```
+
 ### Reference
 The Angular SDK is using [Bloomreach SPA SDK](https://www.npmjs.com/package/@bloomreach/spa-sdk#reference) to interact with the brXM.
 The complete reference of the exposed JavaScript objects can be found [here](https://javadoc.onehippo.org/14.2/bloomreach-spa-sdk/).
@@ -363,6 +387,7 @@ input | `mapping` | _yes_ | The brXM and Angular components [mapping](#mapping).
 input | `page` | _no_ | Preinitialized page instance or prefetched page model. Mostly that should be used to transfer state from the server-side to the client-side.
 input | `stateKey` | _no_ | The TransferState key is used to transfer the state from the server-side to the client-side. By default, it equals to `brPage`. If `false` is passed then the state transferring feature will be disabled.
 output | `state` | _no_ | The current state of the page component.
+output | `httpError` | _no_ | The event handler that processes HTTP error events from fetching PMA.
 
 This component also supports a template transclusion. `<ng-template>` from the component contents will be rendered in the root component context.
 
