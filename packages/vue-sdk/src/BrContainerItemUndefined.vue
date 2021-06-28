@@ -15,7 +15,7 @@
   -->
 
 <template>
-  <fragment>Component "{{ component.getType() }}" is not defined.</fragment>
+  <div>{{ `Component "${component.getType()}" is not defined.` }}</div>
 </template>
 
 <script lang="ts">
