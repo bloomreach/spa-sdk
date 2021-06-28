@@ -28,6 +28,6 @@ describe('BrContainerItemUndefined', () => {
   it('should render a message', () => {
     const wrapper = mount(<BrContainerItemUndefined {...props} />);
 
-    expect(wrapper.html()).toBe('Component "something" is not defined.');
+    expect(wrapper.html()).toBe('<div>Component "something" is not defined.</div>');
   });
 });
