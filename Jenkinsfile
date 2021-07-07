@@ -30,22 +30,40 @@ pipeline {
   triggers {
     gitlab(
       triggerOnPush: true,
-      triggerOnMergeRequest: false,
-      includeBranchesSpec: 'main',
       pendingBuildName: 'SPA SDK'
     )
   }
 
   stages {
-    stage('SPA SDK') {
+    stage('Build, Lint & Test') {
+      steps {
+        sh 'HOME=$(pwd) yarn'
+        sh 'yarn build'
+        sh 'yarn lint'
+        sh 'yarn test'
+      }
+    }
+
+    stage('Release') {
+      when {
+        branch 'main'
+        tag 'spa-sdk-*'
+      }
+
       stages {
-        stage('Build') {
+        stage('Publish to NPM') {
           steps {
-            dir('.') {
-              sh 'HOME=$(pwd) yarn'
-              sh 'yarn build'
-              sh 'yarn lint'
-              sh 'yarn test'
+            withCredentials([[$class: 'StringBinding', credentialsId: 'NPM_AUTH_TOKEN', variable: 'YARN_NPM_AUTH_TOKEN']]) {
+              sh 'yarn release'
+            }
+          }
+        }
+
+        stage('Publish to GitHub') {
+          steps {
+            sh 'git remote add github git@github.com:bloomreach/spa-sdk.git'
+            sshagent (credentials: ['spa-sdk-github']) {
+              sh 'git push github ${TAG_NAME}'
             }
           }
         }
