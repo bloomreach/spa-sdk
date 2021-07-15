@@ -122,4 +122,5 @@ The release process is a continuation of the above where a Jenkinspipeline would
 6. Set a tag `spa-sdk-someVersion` on the `main` branch
 7. Push the new tag to the Github mirror
 
-If this pipeline is successful a dev would then manually create a release on Gitlab and Github with release notes.
+If this pipeline is successful a dev would then manually create a release on
+Gitlab and Github with release notes.
