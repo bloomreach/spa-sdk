@@ -3,19 +3,21 @@
 ## Introduction
 
 This workspace contains the libraries that can be used to develop an SPA in
-combination with Bloomreach Content.
+combination with Bloomreach.
 
 The SDKs are located under the `packages` folder and example SPAs are located in
 the `examples` folder for each of the supported frameworks. See the READMEs of
 the respective packages for more detailed information.
 
 The SDKs:
+
 - [SPA SDK](./packages/spa-sdk/README.md)
 - [React SDK](./packages/react-sdk/README.md)
 - [Vue SDK](./packages/vue-sdk/README.md)
 - [Angular SDK](./packages/ng-sdk/README.md)
 
 The examples:
+
 - [React CSR example](./examples/react/README.md)
 - [Next.js example](./examples/next/README.md)
 - [Vue CSR example](./examples/vue/README.md)
@@ -25,12 +27,13 @@ The examples:
 ### Bloomreach support
 
 The latest SPA SDK versions support both the Paas and Saas backends from
-Bloomreach.  For more information please read [the latest developer](https://documentation.bloomreach.com/developers/content/tutorials/get-started.html)
+Bloomreach. For more information please read [the latest developer](https://documentation.bloomreach.com/developers/content/tutorials/get-started.html)
 guides on the documentation website.
 
 ### Framework support
 
 The supported frameworks are currently:
+
 - React and Next.js
 - Vue and Nuxt.js
 - Angular and Angular Universal
@@ -57,12 +60,14 @@ that is the case. The Framework SDKs use this Page object to derive what needs
 to be rendered on the page.
 
 In short the SPA SDK contains:
+
 - Page Model API Client
-- Page Model parser
 - Page Model Javascript implementation
+- URL Generator
 - Integration with Bloomreach Experience Manager Preview
 
 and the Framework SDK contains:
+
 - HTTP Client
 - Framework specific components that render the required DOM
 
@@ -77,7 +82,8 @@ Due to the correlated nature of the packages it was decided to choose
 This yarn workspace configuration is located in the root
 [package.json](./package.json). The workspace actually uses yarn 2 / berry and
 will locally install this yarn version upon running the`yarn` command. You would
-still have a yarn v1 global install to run the commands.
+still have a yarn v1 global install to run the commands but yarn will use v2
+when running commands inside the spa-sdk repository.
 
 #### Installation
 
@@ -105,6 +111,7 @@ There is also the `development` branch which should be used as the baseline for
 any other working branches.
 
 Generally speaking for any kind of development one would:
+
 1. branch the `development` branch to a new branch e.g. `mybranch`
 2. do work on `mybranch` until finished
 3. create an MR of `mybranch` to be merged into `development`
@@ -114,13 +121,15 @@ Generally speaking for any kind of development one would:
 ## Releasing
 
 The release process is a continuation of the above where a Jenkinspipeline would:
+
 1. Run the build pipeline and if successful
 2. Run `yarn bump someVersion` to update the versions in all package files
 3. Auto generate a changelog
 4. Commit these changes
 5. Attempt to publish the packages to the npm registry and if successful
 6. Set a tag `spa-sdk-someVersion` on the `main` branch
-7. Push the new tag to the Github mirror
+7. If any of the above failed discard all changes
+8. Push the new tag to the Github mirror
 
 If this pipeline is successful a dev would then manually create a release on
 Gitlab and Github with release notes.

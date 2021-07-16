@@ -1,29 +1,26 @@
 # Bloomreach SPA SDK
-[![NPM](https://img.shields.io/npm/v/@bloomreach/spa-sdk.svg)](https://www.npmjs.com/package/@bloomreach/spa-sdk)
-[![License](https://img.shields.io/npm/l/@bloomreach/spa-sdk.svg)](http://www.apache.org/licenses/LICENSE-2.0)
 
-Bloomreach SPA SDK provides simplified headless integration with [Bloomreach Experience Manager](https://www.bloomreach.com/en/products/experience-manager) for JavaScript-based applications.
-This library interacts with the [Page Model API](https://documentation.bloomreach.com/library/concepts/page-model-api/introduction.html) and exposes a simplified and framework-agnostic interface over the page model.
-
-## What is Bloomreach Experience Manager?
-Bloomreach Experience Manager (brXM) is an open and flexible CMS designed for developers and marketers. As the original headless CMS, brXM allows developers to build quickly and integrate with the systems. While it’s built for speed, it also provides top-notch personalization and channel management capabilities for marketers to drive results.
+Bloomreach SPA SDK provides simplified headless integration with [Bloomreach Experience Manager](https://www.bloomreach.com/en/products/experience-manager)
+for JavaScript-based applications.  This library interacts with the [Page Model API](https://documentation.bloomreach.com/library/concepts/page-model-api/introduction.html)
+and exposes a simplified and framework-agnostic interface over the page model.
 
 ## Features
-- [Page Model API](https://documentation.bloomreach.com/library/concepts/page-model-api/introduction.html) client;
-- Page Model parser;
-- URL generator;
-- brXM integration.
+- Page Model API Client
+- Page Model Javascript implementation
+- URL Generator
+- Integration with Bloomreach Experience Manager Preview
 
 ## Get Started
+
 ### Installation
 To get the SDK into your project with [NPM](https://docs.npmjs.com/cli/npm):
 ```bash
-npm install @bloomreach/spa-sdk@saas
+npm install @bloomreach/spa-sdk
 ```
 
 And with [Yarn](https://yarnpkg.com):
 ```bash
-yarn add @bloomreach/spa-sdk@saas
+yarn add @bloomreach/spa-sdk
 ```
 
 ### Usage
@@ -46,7 +43,32 @@ async function showPage(path) {
 showPage(`${window.location.pathname}${window.location.search}`);
 ```
 
-### Configuration
+### Relevance Integration (not applicable to Content Saas)
+The SDK provides basic [Express
+middleware](https://expressjs.com/en/guide/using-middleware.html) for seamless
+integration with [the Relevance Module](https://documentation.bloomreach.com/14/library/enterprise/enterprise-features/targeting/targeting.html).
+
+```javascript
+import express from 'express';
+import { relevance } from '@bloomreach/spa-sdk/lib/express';
+
+const app = express();
+
+app.use(relevance);
+```
+
+The middleware can be customized using the `withOptions` method.
+
+```javascript
+app.use(relevance.withOptions({ name: '_visitor', maxAge: 24 * 60 * 60 }));
+```
+
+## License
+Published under [Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0) license.
+
+## Reference
+
+#### Configuration
 The `initialize` function supports several options you may use to customize page initialization.
 
 Option | Required | Default | Description
@@ -88,27 +110,6 @@ Option | Required | Default | Description
 `visitor.id` | yes | _none_ | The current visitor identifier.
 `visitor.header` | yes | _none_ | An HTTP-header using to pass the visitor identifier to the Page Model API.
 `window` | no | `window` | A window object reference will be used to interact with brXM. It needs to be set when initialize is being called within an iframe or worker process.
-
-### Relevance Integration
-The SDK provides basic [Express middleware](https://expressjs.com/en/guide/using-middleware.html) for seamless integration with [the Relevance Module](https://documentation.bloomreach.com/14/library/enterprise/enterprise-features/targeting/targeting.html).
-
-```javascript
-import express from 'express';
-import { relevance } from '@bloomreach/spa-sdk/lib/express';
-
-const app = express();
-
-app.use(relevance);
-```
-
-The middleware can be customized using the `withOptions` method.
-
-```javascript
-app.use(relevance.withOptions({ name: '_visitor', maxAge: 24 * 60 * 60 }));
-```
-
-### Reference
-The complete API reference can be found [here](https://javadoc.onehippo.org/14.0/bloomreach-spa-sdk/).
 
 #### Functions
 Function | Description
@@ -320,14 +321,3 @@ Method | Description
 --- | ---
 `getNumber(): number` | Returns the page number.
 <code>getUrl(): string &vert; undefined</code> | Returns the page URL.
-
-## Links
-- [SPA integration concept](https://documentation.bloomreach.com/library/concepts/spa-integration/introduction.html).
-- [Page Model API introduction](https://documentation.bloomreach.com/library/concepts/page-model-api/introduction.html).
-
-## FAQ
-- Information about common problems and possible solutions can be found on [the troubleshooting page](https://documentation.bloomreach.com/library/concepts/spa-integration/troubleshooting.html).
-- Information about the recommended setup can be found on [the best practices page](https://documentation.bloomreach.com/library/concepts/spa-integration/best-practices.html).
-
-## License
-Published under [Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0) license.
