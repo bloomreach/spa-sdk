@@ -1,25 +1,37 @@
-# brXM + Next.js = ♥️
+# Next.js SSR SPA
 
-Example Next.js SPA using the Bloomreach Experience [React SDK](https://www.npmjs.com/package/@bloomreach/react-sdk).
-The app uses unversal framework [Next.js](https://github.com/zeit/next.js) for creating isomorphic React applications.
+Example Next.js SPA using the Bloomreach Experience [React SDK](https://www.npmjs.com/package/@bloomreach/react-sdk).  The app uses
+unversal framework [Next.js](https://github.com/zeit/next.js) for creating
+isomorphic React applications.
 
 ## Install and run
-Run [Docker](https://hub.docker.com/r/bloomreach/xm-spa-example) container with the configured brXM instance:
-```bash
-docker run -p 8080:8080 bloomreach/xm-spa-example
-```
-
-Then, copy `.env.dist` file to `.env` and specify the brXM instance to fetch the page model from:
-```
-BRXM_ENDPOINT=http://localhost:8080/delivery/site/v1/channels/brxsaas/pages
-```
-
-Finally, build and run the Next.js app as followed:
-
 ```bash
 yarn
 yarn dev
 ```
 
-The CMS should now be accessible at <http://localhost:8080/cms>, and it should render the Next.js app in preview mode in the Experience manager.
-The SPA itself can be accessed directly via <http://localhost:3000>.
+## Available scripts
+
+In the project directory, you can run:
+
+### `yarn dev`
+
+Runs the app in the development mode. Open <http://localhost:3000> to view
+it in the browser.
+
+The page will reload if you make edits. You will also see any lint errors in the
+console.
+
+### `yarn build`
+
+Builds the app for production to the `build` folder. It correctly bundles React
+in production mode and optimizes the build for the best performance.
+
+The build is minified and the filenames include the hashes. Your app is ready
+to be deployed!
+
+### `yarn start`
+
+Runs the app in the production mode. This will start an express server to serve
+the app from the `build` folder. This requires the app to have been build first
+by running `yarn build`.
