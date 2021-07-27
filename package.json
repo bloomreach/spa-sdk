@@ -25,11 +25,11 @@
   "homepage": "https://code.onehippo.org/cms-community/bloomreach-spa-sdk",
   "scripts": {
     "build": "yarn workspaces foreach --parallel --topological run build",
-    "bump": "yarn workspaces foreach version ${0}-saas",
+    "bump": "yarn workspaces foreach version ${0}",
     "docs": "yarn workspaces foreach --parallel run docs",
     "heroku-postbuild": "cd ${PROJECT_PATH:-.} && yarn workspaces foreach --parallel --recursive --topological run build",
     "lint": "yarn workspaces foreach --parallel run lint",
-    "release": "yarn workspaces foreach --include '@bloomreach/*-sdk' npm publish --access public --tag saas",
+    "release": "yarn workspaces foreach --include '@bloomreach/*-sdk' npm publish --access public",
     "test": "yarn workspaces foreach --parallel run test"
   },
   "resolutions": {
