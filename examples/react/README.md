@@ -7,14 +7,14 @@ using [create-react-app](https://github.com/facebook/create-react-app).
 
 ```bash
 yarn
-yarn dev
+yarn start
 ```
 
 ## Available scripts
 
 In the project directory, you can run:
 
-### `yarn dev`
+### `yarn start`
 
 Runs the app in the development mode. Open <http://localhost:3000> to view
 it in the browser.
