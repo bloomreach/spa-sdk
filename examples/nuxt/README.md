@@ -4,35 +4,35 @@ generated with [create-nuxt-app](https://nuxtjs.org/guide/installation/).
 
 ## Install and run
 ```bash
-npm install
-npm run dev
+yarn
+yarn dev
 ```
 ## Available scripts
 In the project directory, you can run:
 
 ### Development server
 ```bash
-npm run dev
+yarn dev
 ```
 
 ### Build
 ```bash
-npm run build
+yarn build
 ```
 
 ### Launch
 ```bash
-npm run start
+yarn start
 ```
 
 ### Generate static project
 ```bash
-npm run generate
+yarn generate
 ```
 
 ### Run linter
 ```bash
-npm run lint
+yarn lint
 ```
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
