@@ -21,7 +21,7 @@ import { BrManageContentButton, BrProps } from '@bloomreach/react-sdk';
 
 export function Banner(props: BrProps) {
   const { document: documentRef } = props.component.getModels();
-  const document = documentRef && props.page.getContent(documentRef);
+  const document = !!documentRef && props.page.getContent(documentRef);
 
   if (!document) {
     return null;
