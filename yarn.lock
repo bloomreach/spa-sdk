@@ -479,7 +479,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/core@npm:7.14.8, @babel/core@npm:^7.1.0, @babel/core@npm:^7.11.0, @babel/core@npm:^7.12.16, @babel/core@npm:^7.12.3, @babel/core@npm:^7.14.0, @babel/core@npm:^7.7.5, @babel/core@npm:^7.8.4, @babel/core@npm:^7.8.6, @babel/core@npm:^7.9.0":
+"@babel/core@npm:7.14.8, @babel/core@npm:^7.1.0, @babel/core@npm:^7.11.0, @babel/core@npm:^7.12.16, @babel/core@npm:^7.12.3, @babel/core@npm:^7.14.0, @babel/core@npm:^7.7.5, @babel/core@npm:^7.8.4, @babel/core@npm:^7.8.6":
   version: 7.14.8
   resolution: "@babel/core@npm:7.14.8"
   dependencies:
@@ -1619,7 +1619,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-transform-react-constant-elements@npm:^7.9.0":
+"@babel/plugin-transform-react-constant-elements@npm:^7.12.1":
   version: 7.14.5
   resolution: "@babel/plugin-transform-react-constant-elements@npm:7.14.5"
   dependencies:
@@ -2031,7 +2031,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/preset-env@npm:7.14.8, @babel/preset-env@npm:^7.11.0, @babel/preset-env@npm:^7.14.1, @babel/preset-env@npm:^7.8.4, @babel/preset-env@npm:^7.9.5":
+"@babel/preset-env@npm:7.14.8, @babel/preset-env@npm:^7.11.0, @babel/preset-env@npm:^7.12.1, @babel/preset-env@npm:^7.14.1, @babel/preset-env@npm:^7.8.4":
   version: 7.14.8
   resolution: "@babel/preset-env@npm:7.14.8"
   dependencies:
@@ -2146,7 +2146,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/preset-react@npm:7.14.5, @babel/preset-react@npm:^7.9.4":
+"@babel/preset-react@npm:7.14.5, @babel/preset-react@npm:^7.12.5":
   version: 7.14.5
   resolution: "@babel/preset-react@npm:7.14.5"
   dependencies:
@@ -2363,18 +2363,18 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bloomreach/example-react@workspace:examples/react"
   dependencies:
-    "@bloomreach/react-sdk": ^0.3.2-saas
-    "@types/react": ^16.9
-    "@types/react-dom": ^16.9
-    "@types/react-router-dom": ^5.1
-    axios: ^0.21
-    eslint: ^7.12
-    eslint-config-react-app: ^6.0
-    react: ^16.14
-    react-dom: ^16.14
-    react-router-dom: ^5.2
-    react-scripts: 4.0.0
-    typescript: ^4.0
+    "@bloomreach/react-sdk": ../../packages/react-sdk
+    "@types/react": 16.14.0
+    "@types/react-dom": 16.9.14
+    "@types/react-router-dom": 5.1.8
+    axios: 0.21.1
+    eslint: 7.32.0
+    eslint-config-react-app: 6.0.0
+    react: 16.14.0
+    react-dom: 16.14.0
+    react-router-dom: 5.2.0
+    react-scripts: 4.0.3
+    typescript: 4.1.6
   languageName: unknown
   linkType: soft
 
@@ -2499,6 +2499,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@bloomreach/react-sdk@file:../../packages/react-sdk::locator=%40bloomreach%2Fexample-react%40workspace%3Aexamples%2Freact":
+  version: 0.3.2-saas
+  resolution: "@bloomreach/react-sdk@file:../../packages/react-sdk#../../packages/react-sdk::hash=e28180&locator=%40bloomreach%2Fexample-react%40workspace%3Aexamples%2Freact"
+  dependencies:
+    "@bloomreach/spa-sdk": ../spa-sdk
+  peerDependencies:
+    react: ^16.14
+  checksum: a0835e28b6573ddf6903d04ed35625d3f837c3d5e4672eb83383d290633fd982f523c37fa9b96b0c941544de6e52bad89c1fd43904c7d4a3389b9f8019a8baef
+  languageName: node
+  linkType: hard
+
 "@bloomreach/spa-sdk@^0.3.2-saas, @bloomreach/spa-sdk@workspace:packages/spa-sdk":
   version: 0.0.0-use.local
   resolution: "@bloomreach/spa-sdk@workspace:packages/spa-sdk"
@@ -2552,6 +2563,19 @@ __metadata:
 "@bloomreach/spa-sdk@file:../spa-sdk::locator=%40bloomreach%2Fng-sdk%40workspace%3Apackages%2Fng-sdk":
   version: 0.3.2-saas
   resolution: "@bloomreach/spa-sdk@file:../spa-sdk#../spa-sdk::hash=5de3aa&locator=%40bloomreach%2Fng-sdk%40workspace%3Apackages%2Fng-sdk"
+  dependencies:
+    cookie: 0.4.1
+    emittery: 0.7.2
+    inversify: 5.1.1
+    reflect-metadata: 0.1.13
+    xmldom: 0.6.0
+  checksum: de7d6a1daa5e2252ceb4f5d90bd21e8e5ffa00523dc503626c178ed7f4cf7797e727515a7e2e8e8f67b4958d788bfc2fc58df6e3a8e425ba86f4103d6b51dc18
+  languageName: node
+  linkType: hard
+
+"@bloomreach/spa-sdk@file:../spa-sdk::locator=%40bloomreach%2Freact-sdk%40file%3A..%2F..%2Fpackages%2Freact-sdk%23..%2F..%2Fpackages%2Freact-sdk%3A%3Ahash%3De28180%26locator%3D%2540bloomreach%252Fexample-react%2540workspace%253Aexamples%252Freact":
+  version: 0.3.2-saas
+  resolution: "@bloomreach/spa-sdk@file:../spa-sdk#../spa-sdk::hash=5de3aa&locator=%40bloomreach%2Freact-sdk%40file%3A..%2F..%2Fpackages%2Freact-sdk%23..%2F..%2Fpackages%2Freact-sdk%3A%3Ahash%3De28180%26locator%3D%2540bloomreach%252Fexample-react%2540workspace%253Aexamples%252Freact"
   dependencies:
     cookie: 0.4.1
     emittery: 0.7.2
@@ -3930,9 +3954,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@pmmmwh/react-refresh-webpack-plugin@npm:0.4.2":
-  version: 0.4.2
-  resolution: "@pmmmwh/react-refresh-webpack-plugin@npm:0.4.2"
+"@pmmmwh/react-refresh-webpack-plugin@npm:0.4.3":
+  version: 0.4.3
+  resolution: "@pmmmwh/react-refresh-webpack-plugin@npm:0.4.3"
   dependencies:
     ansi-html: ^0.0.7
     error-stack-parser: ^2.0.6
@@ -3942,7 +3966,7 @@ __metadata:
     source-map: ^0.7.3
   peerDependencies:
     "@types/webpack": 4.x
-    react-refresh: ^0.8.3
+    react-refresh: ">=0.8.3 <0.10.0"
     sockjs-client: ^1.4.0
     type-fest: ^0.13.1
     webpack: ">=4.43.0 <6.0.0"
@@ -3962,7 +3986,7 @@ __metadata:
       optional: true
     webpack-plugin-serve:
       optional: true
-  checksum: b7f70926f64c996fb9a9dd0993a2b90f516fd01e5dab2841ff4f2a66cabf901cdb08c14698e3e1daf02cbcdd3170ab1736a6ad65fe7c1ffcfab2543b290a201d
+  checksum: 36a7b0c63f0aabde856a2b43f3f3bfa7919920afa67b4fbcf7d4980b286c7c11e34ada13654d81bf30c3d3e2c12a5b9eef6c15e21a200003b8030809d3ddd6c6
   languageName: node
   linkType: hard
 
@@ -4239,7 +4263,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@svgr/core@npm:^5.4.0":
+"@svgr/core@npm:^5.5.0":
   version: 5.5.0
   resolution: "@svgr/core@npm:5.5.0"
   dependencies:
@@ -4259,7 +4283,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@svgr/plugin-jsx@npm:^5.4.0, @svgr/plugin-jsx@npm:^5.5.0":
+"@svgr/plugin-jsx@npm:^5.5.0":
   version: 5.5.0
   resolution: "@svgr/plugin-jsx@npm:5.5.0"
   dependencies:
@@ -4271,7 +4295,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@svgr/plugin-svgo@npm:^5.4.0":
+"@svgr/plugin-svgo@npm:^5.5.0":
   version: 5.5.0
   resolution: "@svgr/plugin-svgo@npm:5.5.0"
   dependencies:
@@ -4282,19 +4306,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@svgr/webpack@npm:5.4.0":
-  version: 5.4.0
-  resolution: "@svgr/webpack@npm:5.4.0"
+"@svgr/webpack@npm:5.5.0":
+  version: 5.5.0
+  resolution: "@svgr/webpack@npm:5.5.0"
   dependencies:
-    "@babel/core": ^7.9.0
-    "@babel/plugin-transform-react-constant-elements": ^7.9.0
-    "@babel/preset-env": ^7.9.5
-    "@babel/preset-react": ^7.9.4
-    "@svgr/core": ^5.4.0
-    "@svgr/plugin-jsx": ^5.4.0
-    "@svgr/plugin-svgo": ^5.4.0
+    "@babel/core": ^7.12.3
+    "@babel/plugin-transform-react-constant-elements": ^7.12.1
+    "@babel/preset-env": ^7.12.1
+    "@babel/preset-react": ^7.12.5
+    "@svgr/core": ^5.5.0
+    "@svgr/plugin-jsx": ^5.5.0
+    "@svgr/plugin-svgo": ^5.5.0
     loader-utils: ^2.0.0
-  checksum: f814b0eb4106ce7e9f0df3ed07969f11d435e82a331d76a1bfde6de7614b78591d2e9dce4683e5c7a121d427c2ce9bade542d2256aee33a62aa14581e243f556
+  checksum: 540391bd63791625d26d6b5e0dd3c716ef51176bfba53bf0979a1ac4781afd2672f4bef2d76cf3d9cdc8e9ee61bda6863ed405a237b10406633ede4cd524f1cc
   languageName: node
   linkType: hard
 
@@ -4745,9 +4769,9 @@ __metadata:
   linkType: hard
 
 "@types/node@npm:*":
-  version: 16.4.7
-  resolution: "@types/node@npm:16.4.7"
-  checksum: a1e80deea93f10225d1ac0825bd5eff3355dbc37084a88b0138921c9c930eb54acebb008d090a332a96d31ff50de69f2f5fc1402571070ea745f023e9f874805
+  version: 16.4.8
+  resolution: "@types/node@npm:16.4.8"
+  checksum: 1d4a421b95ac4d7671de17c56969bf95943c252c410dbe33c380e97a8afdfa7c2e5dcda0063a5c24fcc5538f40ef33c2582ae37f004c3c666da3758d8c8eecfc
   languageName: node
   linkType: hard
 
@@ -4846,7 +4870,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-router-dom@npm:^5.1":
+"@types/react-router-dom@npm:5.1.8":
   version: 5.1.8
   resolution: "@types/react-router-dom@npm:5.1.8"
   dependencies:
@@ -10029,7 +10053,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"debug@npm:^3.1.1, debug@npm:^3.2.5, debug@npm:^3.2.6, debug@npm:^3.2.7":
+"debug@npm:^3.1.1, debug@npm:^3.2.6, debug@npm:^3.2.7":
   version: 3.2.7
   resolution: "debug@npm:3.2.7"
   dependencies:
@@ -10736,9 +10760,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.3.564, electron-to-chromium@npm:^1.3.723":
-  version: 1.3.791
-  resolution: "electron-to-chromium@npm:1.3.791"
-  checksum: 4b41d709deb4c360f700071e23e6347d080f13404f249155763a8cfef79e3d022e3e3e0fbd27936ef5c0b8919780882c0c8644c867b3f1dfba5d5ec1551960bc
+  version: 1.3.792
+  resolution: "electron-to-chromium@npm:1.3.792"
+  checksum: 6ad7885a7d2b7d92866dcc03640526ce3a7e9f16709c2a26b5302494aa3fa1c600b8134db84eaa64987f62057d84b1e61e358794aad7bd3bac1f9d52fcf27fd1
   languageName: node
   linkType: hard
 
@@ -11270,7 +11294,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-react-app@npm:^6.0, eslint-config-react-app@npm:^6.0.0":
+"eslint-config-react-app@npm:6.0.0, eslint-config-react-app@npm:^6.0.0":
   version: 6.0.0
   resolution: "eslint-config-react-app@npm:6.0.0"
   dependencies:
@@ -11682,7 +11706,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-webpack-plugin@npm:^2.1.0, eslint-webpack-plugin@npm:^2.4.1":
+"eslint-webpack-plugin@npm:^2.4.1, eslint-webpack-plugin@npm:^2.5.2":
   version: 2.5.4
   resolution: "eslint-webpack-plugin@npm:2.5.4"
   dependencies:
@@ -11699,7 +11723,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:7.31.0, eslint@npm:^7.11.0, eslint@npm:^7.12":
+"eslint@npm:7.31.0":
   version: 7.31.0
   resolution: "eslint@npm:7.31.0"
   dependencies:
@@ -11746,6 +11770,56 @@ __metadata:
   bin:
     eslint: bin/eslint.js
   checksum: fd73d07ce0b73e5ea950b295a6eaf8d45914b4e56cba4ef49e55a36dc7e965a4865f63f618c0a096a01d089752d9e44180b80ba8657039b8e631dd40e0af1663
+  languageName: node
+  linkType: hard
+
+"eslint@npm:7.32.0, eslint@npm:^7.11.0, eslint@npm:^7.12":
+  version: 7.32.0
+  resolution: "eslint@npm:7.32.0"
+  dependencies:
+    "@babel/code-frame": 7.12.11
+    "@eslint/eslintrc": ^0.4.3
+    "@humanwhocodes/config-array": ^0.5.0
+    ajv: ^6.10.0
+    chalk: ^4.0.0
+    cross-spawn: ^7.0.2
+    debug: ^4.0.1
+    doctrine: ^3.0.0
+    enquirer: ^2.3.5
+    escape-string-regexp: ^4.0.0
+    eslint-scope: ^5.1.1
+    eslint-utils: ^2.1.0
+    eslint-visitor-keys: ^2.0.0
+    espree: ^7.3.1
+    esquery: ^1.4.0
+    esutils: ^2.0.2
+    fast-deep-equal: ^3.1.3
+    file-entry-cache: ^6.0.1
+    functional-red-black-tree: ^1.0.1
+    glob-parent: ^5.1.2
+    globals: ^13.6.0
+    ignore: ^4.0.6
+    import-fresh: ^3.0.0
+    imurmurhash: ^0.1.4
+    is-glob: ^4.0.0
+    js-yaml: ^3.13.1
+    json-stable-stringify-without-jsonify: ^1.0.1
+    levn: ^0.4.1
+    lodash.merge: ^4.6.2
+    minimatch: ^3.0.4
+    natural-compare: ^1.4.0
+    optionator: ^0.9.1
+    progress: ^2.0.0
+    regexpp: ^3.1.0
+    semver: ^7.2.1
+    strip-ansi: ^6.0.0
+    strip-json-comments: ^3.1.0
+    table: ^6.0.9
+    text-table: ^0.2.0
+    v8-compile-cache: ^2.0.3
+  bin:
+    eslint: bin/eslint.js
+  checksum: cc85af9985a3a11085c011f3d27abe8111006d34cc274291b3c4d7bea51a4e2ff6135780249becd919ba7f6d6d1ecc38a6b73dacb6a7be08d38453b344dc8d37
   languageName: node
   linkType: hard
 
@@ -12250,16 +12324,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"faye-websocket@npm:^0.10.0":
-  version: 0.10.0
-  resolution: "faye-websocket@npm:0.10.0"
-  dependencies:
-    websocket-driver: ">=0.5.1"
-  checksum: 5a2989ec5effc832bd219e3af934966b5a2a2605dd83b995a04edae5d34207ef930635f5c8456b8b7b4209bfb8f7ea991e41594f150a04faa53fca1ee4eb31b6
-  languageName: node
-  linkType: hard
-
-"faye-websocket@npm:^0.11.3, faye-websocket@npm:~0.11.1":
+"faye-websocket@npm:^0.11.3":
   version: 0.11.4
   resolution: "faye-websocket@npm:0.11.4"
   dependencies:
@@ -16440,7 +16505,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"json3@npm:^3.3.2, json3@npm:^3.3.3":
+"json3@npm:^3.3.3":
   version: 3.3.3
   resolution: "json3@npm:3.3.3"
   checksum: 55eda204a4c70d11b7d5caa5cb64c76a3aa54d5df72d07bdf446b922fd7cb8657b0732f68e0c36790f55e195e0a429c299144ff05430bbe93bc2a7c81ad3472b
@@ -21627,7 +21692,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react-dev-utils@npm:^11.0.0":
+"react-dev-utils@npm:^11.0.3":
   version: 11.0.4
   resolution: "react-dev-utils@npm:11.0.4"
   dependencies:
@@ -21701,7 +21766,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react-router-dom@npm:^5.2":
+"react-router-dom@npm:5.2.0":
   version: 5.2.0
   resolution: "react-router-dom@npm:5.2.0"
   dependencies:
@@ -21738,13 +21803,13 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react-scripts@npm:4.0.0":
-  version: 4.0.0
-  resolution: "react-scripts@npm:4.0.0"
+"react-scripts@npm:4.0.3":
+  version: 4.0.3
+  resolution: "react-scripts@npm:4.0.3"
   dependencies:
     "@babel/core": 7.12.3
-    "@pmmmwh/react-refresh-webpack-plugin": 0.4.2
-    "@svgr/webpack": 5.4.0
+    "@pmmmwh/react-refresh-webpack-plugin": 0.4.3
+    "@svgr/webpack": 5.5.0
     "@typescript-eslint/eslint-plugin": ^4.5.0
     "@typescript-eslint/parser": ^4.5.0
     babel-eslint: ^10.1.0
@@ -21767,7 +21832,7 @@ fsevents@^1.2.7:
     eslint-plugin-react: ^7.21.5
     eslint-plugin-react-hooks: ^4.2.0
     eslint-plugin-testing-library: ^3.9.2
-    eslint-webpack-plugin: ^2.1.0
+    eslint-webpack-plugin: ^2.5.2
     file-loader: 6.1.1
     fs-extra: ^9.0.1
     fsevents: ^2.1.3
@@ -21785,23 +21850,25 @@ fsevents@^1.2.7:
     postcss-normalize: 8.0.1
     postcss-preset-env: 6.7.0
     postcss-safe-parser: 5.0.2
+    prompts: 2.4.0
     react-app-polyfill: ^2.0.0
-    react-dev-utils: ^11.0.0
+    react-dev-utils: ^11.0.3
     react-refresh: ^0.8.3
     resolve: 1.18.1
     resolve-url-loader: ^3.1.2
-    sass-loader: 8.0.2
+    sass-loader: ^10.0.5
     semver: 7.3.2
     style-loader: 1.3.0
     terser-webpack-plugin: 4.2.3
     ts-pnp: 1.2.0
     url-loader: 4.1.1
     webpack: 4.44.2
-    webpack-dev-server: 3.11.0
+    webpack-dev-server: 3.11.1
     webpack-manifest-plugin: 2.2.0
     workbox-webpack-plugin: 5.1.4
   peerDependencies:
-    typescript: ^3.2.1
+    react: ">= 16"
+    typescript: ^3.2.1 || ^4
   dependenciesMeta:
     fsevents:
       optional: true
@@ -21810,7 +21877,7 @@ fsevents@^1.2.7:
       optional: true
   bin:
     react-scripts: ./bin/react-scripts.js
-  checksum: 3885f792af89f06b8f5b2d74608ca5c6431ca895468e37ef5f2567c71c7cb726463acff1a0940da77ebb0c1544be8fa607ec4b3855daa5cc8434153baef4165a
+  checksum: a05a46ce3145b42ac8b57633d3b90b6689c24697c1449bccf219349996d718a3cd0796e4910f4ab6abb5b024982cafd62345e88c8e7b42a45efca3bef1a0eb87
   languageName: node
   linkType: hard
 
@@ -22927,18 +22994,18 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"sass-loader@npm:8.0.2":
-  version: 8.0.2
-  resolution: "sass-loader@npm:8.0.2"
+"sass-loader@npm:^10.0.5":
+  version: 10.2.0
+  resolution: "sass-loader@npm:10.2.0"
   dependencies:
-    clone-deep: ^4.0.1
-    loader-utils: ^1.2.3
-    neo-async: ^2.6.1
-    schema-utils: ^2.6.1
-    semver: ^6.3.0
+    klona: ^2.0.4
+    loader-utils: ^2.0.0
+    neo-async: ^2.6.2
+    schema-utils: ^3.0.0
+    semver: ^7.3.2
   peerDependencies:
     fibers: ">= 3.1.0"
-    node-sass: ^4.0.0
+    node-sass: ^4.0.0 || ^5.0.0 || ^6.0.0
     sass: ^1.3.0
     webpack: ^4.36.0 || ^5.0.0
   peerDependenciesMeta:
@@ -22948,7 +23015,7 @@ resolve@^2.0.0-next.3:
       optional: true
     sass:
       optional: true
-  checksum: 3e9ba97432fcf1092600a31501298f37a0a913f86086b841740f9f8371ee33de55b9740b31563b089524aeb9020fbc51126730fa51d18b2e724a4ada71e2ff81
+  checksum: d53212e5d199cdd221a67046ab4276c352d56b50ca64347115b36e8ebbb2c68ec396a14d6cf5a08853c830a6b0ec1fd2b016cdc53cbe90a0332a908f50ec2043
   languageName: node
   linkType: hard
 
@@ -22964,13 +23031,13 @@ resolve@^2.0.0-next.3:
   linkType: hard
 
 "sass@npm:^1.32.5":
-  version: 1.36.0
-  resolution: "sass@npm:1.36.0"
+  version: 1.37.0
+  resolution: "sass@npm:1.37.0"
   dependencies:
     chokidar: ">=3.0.0 <4.0.0"
   bin:
     sass: sass.js
-  checksum: fdb03deed1769f182900c1b5505bc22e50cf1d3ce4d5253fc907865f784c430236937bd391d91ef714e59995584f13ff31d3776d5283e730f5172ac227585754
+  checksum: 62b61b3304c94d86d9c20094a9854ef7c85ccf8762e875e09cb0dc420cadb015aa5195c8811e3d1896eafe2b83fdb69a0f1b4dea0cca6c0c8431547537298e12
   languageName: node
   linkType: hard
 
@@ -23031,7 +23098,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"schema-utils@npm:^2.0.0, schema-utils@npm:^2.5.0, schema-utils@npm:^2.6.1, schema-utils@npm:^2.6.5, schema-utils@npm:^2.7.0, schema-utils@npm:^2.7.1":
+"schema-utils@npm:^2.0.0, schema-utils@npm:^2.5.0, schema-utils@npm:^2.6.5, schema-utils@npm:^2.7.0, schema-utils@npm:^2.7.1":
   version: 2.7.1
   resolution: "schema-utils@npm:2.7.1"
   dependencies:
@@ -23067,7 +23134,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"selfsigned@npm:^1.10.7, selfsigned@npm:^1.10.8":
+"selfsigned@npm:^1.10.8":
   version: 1.10.11
   resolution: "selfsigned@npm:1.10.11"
   dependencies:
@@ -23594,20 +23661,6 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"sockjs-client@npm:1.4.0":
-  version: 1.4.0
-  resolution: "sockjs-client@npm:1.4.0"
-  dependencies:
-    debug: ^3.2.5
-    eventsource: ^1.0.7
-    faye-websocket: ~0.11.1
-    inherits: ^2.0.3
-    json3: ^3.3.2
-    url-parse: ^1.4.3
-  checksum: 42fabe709b5478ca50f483add67e058ab01c5aaae926d73e483e53f26c14edc0820cdbd420e3bbc4e090c1007bf21c054b800a7a1e275b171352f246df1300a3
-  languageName: node
-  linkType: hard
-
 "sockjs-client@npm:^1.5.0":
   version: 1.5.1
   resolution: "sockjs-client@npm:1.5.1"
@@ -23619,17 +23672,6 @@ resolve@^2.0.0-next.3:
     json3: ^3.3.3
     url-parse: ^1.5.1
   checksum: ae963d6fd24fb95e941c9c420626eb809ba6608b56b7c824f7ca14b8c6d63b5a71910542bef16eb6548cd8554fc3fda9e4cd32696764e96721a9c0b6d48e6fe5
-  languageName: node
-  linkType: hard
-
-"sockjs@npm:0.3.20":
-  version: 0.3.20
-  resolution: "sockjs@npm:0.3.20"
-  dependencies:
-    faye-websocket: ^0.10.0
-    uuid: ^3.4.0
-    websocket-driver: 0.6.5
-  checksum: dc0ac013ab57bae5b5b9e3ca809ce06b7f19ade8de47d48a5919e2b6889a864705bce300f9ad02a969d57fea0c911fdcbacdea5e66aec2bc2638b3c8b1c2ede8
   languageName: node
   linkType: hard
 
@@ -26655,9 +26697,9 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"webpack-dev-server@npm:3.11.0":
-  version: 3.11.0
-  resolution: "webpack-dev-server@npm:3.11.0"
+"webpack-dev-server@npm:3.11.1":
+  version: 3.11.1
+  resolution: "webpack-dev-server@npm:3.11.1"
   dependencies:
     ansi-html: 0.0.7
     bonjour: ^3.5.0
@@ -26679,11 +26721,11 @@ resolve@^2.0.0-next.3:
     p-retry: ^3.0.1
     portfinder: ^1.0.26
     schema-utils: ^1.0.0
-    selfsigned: ^1.10.7
+    selfsigned: ^1.10.8
     semver: ^6.3.0
     serve-index: ^1.9.1
-    sockjs: 0.3.20
-    sockjs-client: 1.4.0
+    sockjs: ^0.3.21
+    sockjs-client: ^1.5.0
     spdy: ^4.0.2
     strip-ansi: ^3.0.1
     supports-color: ^6.1.0
@@ -26699,7 +26741,7 @@ resolve@^2.0.0-next.3:
       optional: true
   bin:
     webpack-dev-server: bin/webpack-dev-server.js
-  checksum: d0f9519d53ef05c87030654b66455b984adc065ca29c1b7ca75d70dc6e7a818a643b2a8613ad014a916c9be52df54fe0dede4f0a7bc638b8c73088d7710e7e0a
+  checksum: 6c6e6b6c207c192585f9943fc9945058832a39a12bbf0368798d73a96264b813ab816cb14985c1ca3c90cc567f59fcad6f2fada8f30f2f0136904cfaf43eb87d
   languageName: node
   linkType: hard
 
@@ -26939,15 +26981,6 @@ resolve@^2.0.0-next.3:
   peerDependencies:
     webpack: ^3.0.0 || ^4.0.0
   checksum: c6a61e4a992c24874bfb4efdc156d70a683cb0d9967776cbc7b5899e04de961da40bee228cc501565a260dde66143f0eab4fefcc3b25c1ce63220572c0cbb07c
-  languageName: node
-  linkType: hard
-
-"websocket-driver@npm:0.6.5":
-  version: 0.6.5
-  resolution: "websocket-driver@npm:0.6.5"
-  dependencies:
-    websocket-extensions: ">=0.1.1"
-  checksum: f9feb459d9abea0bffce618c1c29b73fcddfaefdd2fc0d7348218628dd78eaf57b5c616364e0ec53917f48e33976a8bb6b604fa649b9b63210f265613e090271
   languageName: node
   linkType: hard
 
