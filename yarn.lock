@@ -2319,15 +2319,15 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bloomreach/example-next@workspace:examples/next"
   dependencies:
-    "@bloomreach/react-sdk": ^0.3.2-saas
+    "@bloomreach/react-sdk": ../../packages/react-sdk
     "@types/node": ^14.14
-    "@types/react": ^16.9
-    "@types/react-dom": ^16.9
-    axios: ^0.21
-    next: ^10.0
-    next-routes: ^1.4
-    react: ^16.14
-    react-dom: ^16.14
+    "@types/react": 16.14.0
+    "@types/react-dom": 16.9.14
+    axios: 0.21.1
+    next: 10.2.3
+    next-routes: 1.4.2
+    react: 16.14.0
+    react-dom: 16.14.0
   languageName: unknown
   linkType: soft
 
@@ -2415,7 +2415,7 @@ __metadata:
 
 "@bloomreach/ng-sdk@file:../../packages/ng-sdk::locator=%40bloomreach%2Fexample-angular%40workspace%3Aexamples%2Fangular":
   version: 0.3.2-saas
-  resolution: "@bloomreach/ng-sdk@file:../../packages/ng-sdk#../../packages/ng-sdk::hash=ea271c&locator=%40bloomreach%2Fexample-angular%40workspace%3Aexamples%2Fangular"
+  resolution: "@bloomreach/ng-sdk@file:../../packages/ng-sdk#../../packages/ng-sdk::hash=51e951&locator=%40bloomreach%2Fexample-angular%40workspace%3Aexamples%2Fangular"
   dependencies:
     "@bloomreach/spa-sdk": ../spa-sdk
     tslib: 2.3.0
@@ -2424,7 +2424,7 @@ __metadata:
     "@angular/core": 11.2.14
     "@angular/platform-browser": 11.2.14
     rxjs: 6.6.7
-  checksum: 6878de235d2eb02fec7df5e646a16281114bab54587e64a024a957b19b6fce85949494d004771a257d9e312cdb541931f2eaa28da35cee6c2f1afa5a5dcc6c7a
+  checksum: cd4a24dc2f4534c549d381724f0e355b90d57e5ed35311851f22459c9d499d24addc0fbe6112657117096414ef1ec5670ad2782343b972ad61d1221fee1f8905
   languageName: node
   linkType: hard
 
@@ -2462,7 +2462,29 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@bloomreach/react-sdk@^0.3.2-saas, @bloomreach/react-sdk@workspace:packages/react-sdk":
+"@bloomreach/react-sdk@file:../../packages/react-sdk::locator=%40bloomreach%2Fexample-next%40workspace%3Aexamples%2Fnext":
+  version: 0.3.2-saas
+  resolution: "@bloomreach/react-sdk@file:../../packages/react-sdk#../../packages/react-sdk::hash=210eee&locator=%40bloomreach%2Fexample-next%40workspace%3Aexamples%2Fnext"
+  dependencies:
+    "@bloomreach/spa-sdk": ../spa-sdk
+  peerDependencies:
+    react: ^16.14
+  checksum: 3b6025fa9e3535f9d7bdfa99ad9695889d3e6379958154f79cc4971b05b47fc5f3525bfb479a59e0a8877a38dd55a1df12abb194dae6291effa2b33b38faa21b
+  languageName: node
+  linkType: hard
+
+"@bloomreach/react-sdk@file:../../packages/react-sdk::locator=%40bloomreach%2Fexample-react%40workspace%3Aexamples%2Freact":
+  version: 0.3.2-saas
+  resolution: "@bloomreach/react-sdk@file:../../packages/react-sdk#../../packages/react-sdk::hash=210eee&locator=%40bloomreach%2Fexample-react%40workspace%3Aexamples%2Freact"
+  dependencies:
+    "@bloomreach/spa-sdk": ../spa-sdk
+  peerDependencies:
+    react: ^16.14
+  checksum: 3b6025fa9e3535f9d7bdfa99ad9695889d3e6379958154f79cc4971b05b47fc5f3525bfb479a59e0a8877a38dd55a1df12abb194dae6291effa2b33b38faa21b
+  languageName: node
+  linkType: hard
+
+"@bloomreach/react-sdk@workspace:packages/react-sdk":
   version: 0.0.0-use.local
   resolution: "@bloomreach/react-sdk@workspace:packages/react-sdk"
   dependencies:
@@ -2498,17 +2520,6 @@ __metadata:
     react: ^16.14
   languageName: unknown
   linkType: soft
-
-"@bloomreach/react-sdk@file:../../packages/react-sdk::locator=%40bloomreach%2Fexample-react%40workspace%3Aexamples%2Freact":
-  version: 0.3.2-saas
-  resolution: "@bloomreach/react-sdk@file:../../packages/react-sdk#../../packages/react-sdk::hash=e28180&locator=%40bloomreach%2Fexample-react%40workspace%3Aexamples%2Freact"
-  dependencies:
-    "@bloomreach/spa-sdk": ../spa-sdk
-  peerDependencies:
-    react: ^16.14
-  checksum: a0835e28b6573ddf6903d04ed35625d3f837c3d5e4672eb83383d290633fd982f523c37fa9b96b0c941544de6e52bad89c1fd43904c7d4a3389b9f8019a8baef
-  languageName: node
-  linkType: hard
 
 "@bloomreach/spa-sdk@^0.3.2-saas, @bloomreach/spa-sdk@workspace:packages/spa-sdk":
   version: 0.0.0-use.local
@@ -2547,68 +2558,81 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@bloomreach/spa-sdk@file:../spa-sdk::locator=%40bloomreach%2Fng-sdk%40file%3A..%2F..%2Fpackages%2Fng-sdk%23..%2F..%2Fpackages%2Fng-sdk%3A%3Ahash%3Dea271c%26locator%3D%2540bloomreach%252Fexample-angular%2540workspace%253Aexamples%252Fangular":
+"@bloomreach/spa-sdk@file:../spa-sdk::locator=%40bloomreach%2Fng-sdk%40file%3A..%2F..%2Fpackages%2Fng-sdk%23..%2F..%2Fpackages%2Fng-sdk%3A%3Ahash%3D51e951%26locator%3D%2540bloomreach%252Fexample-angular%2540workspace%253Aexamples%252Fangular":
   version: 0.3.2-saas
-  resolution: "@bloomreach/spa-sdk@file:../spa-sdk#../spa-sdk::hash=5de3aa&locator=%40bloomreach%2Fng-sdk%40file%3A..%2F..%2Fpackages%2Fng-sdk%23..%2F..%2Fpackages%2Fng-sdk%3A%3Ahash%3Dea271c%26locator%3D%2540bloomreach%252Fexample-angular%2540workspace%253Aexamples%252Fangular"
+  resolution: "@bloomreach/spa-sdk@file:../spa-sdk#../spa-sdk::hash=d0e23f&locator=%40bloomreach%2Fng-sdk%40file%3A..%2F..%2Fpackages%2Fng-sdk%23..%2F..%2Fpackages%2Fng-sdk%3A%3Ahash%3D51e951%26locator%3D%2540bloomreach%252Fexample-angular%2540workspace%253Aexamples%252Fangular"
   dependencies:
     cookie: 0.4.1
     emittery: 0.7.2
     inversify: 5.1.1
     reflect-metadata: 0.1.13
     xmldom: 0.6.0
-  checksum: de7d6a1daa5e2252ceb4f5d90bd21e8e5ffa00523dc503626c178ed7f4cf7797e727515a7e2e8e8f67b4958d788bfc2fc58df6e3a8e425ba86f4103d6b51dc18
+  checksum: d72196a549054e055ae6f2a69fa06f781c81dd08548103fe4b139812a39c593e7d3acbc4cd7a9f7f06c77a932379876239c91553f59c5fe966aeb4a099cb5349
   languageName: node
   linkType: hard
 
 "@bloomreach/spa-sdk@file:../spa-sdk::locator=%40bloomreach%2Fng-sdk%40workspace%3Apackages%2Fng-sdk":
   version: 0.3.2-saas
-  resolution: "@bloomreach/spa-sdk@file:../spa-sdk#../spa-sdk::hash=5de3aa&locator=%40bloomreach%2Fng-sdk%40workspace%3Apackages%2Fng-sdk"
+  resolution: "@bloomreach/spa-sdk@file:../spa-sdk#../spa-sdk::hash=d0e23f&locator=%40bloomreach%2Fng-sdk%40workspace%3Apackages%2Fng-sdk"
   dependencies:
     cookie: 0.4.1
     emittery: 0.7.2
     inversify: 5.1.1
     reflect-metadata: 0.1.13
     xmldom: 0.6.0
-  checksum: de7d6a1daa5e2252ceb4f5d90bd21e8e5ffa00523dc503626c178ed7f4cf7797e727515a7e2e8e8f67b4958d788bfc2fc58df6e3a8e425ba86f4103d6b51dc18
+  checksum: d72196a549054e055ae6f2a69fa06f781c81dd08548103fe4b139812a39c593e7d3acbc4cd7a9f7f06c77a932379876239c91553f59c5fe966aeb4a099cb5349
   languageName: node
   linkType: hard
 
-"@bloomreach/spa-sdk@file:../spa-sdk::locator=%40bloomreach%2Freact-sdk%40file%3A..%2F..%2Fpackages%2Freact-sdk%23..%2F..%2Fpackages%2Freact-sdk%3A%3Ahash%3De28180%26locator%3D%2540bloomreach%252Fexample-react%2540workspace%253Aexamples%252Freact":
+"@bloomreach/spa-sdk@file:../spa-sdk::locator=%40bloomreach%2Freact-sdk%40file%3A..%2F..%2Fpackages%2Freact-sdk%23..%2F..%2Fpackages%2Freact-sdk%3A%3Ahash%3D210eee%26locator%3D%2540bloomreach%252Fexample-next%2540workspace%253Aexamples%252Fnext":
   version: 0.3.2-saas
-  resolution: "@bloomreach/spa-sdk@file:../spa-sdk#../spa-sdk::hash=5de3aa&locator=%40bloomreach%2Freact-sdk%40file%3A..%2F..%2Fpackages%2Freact-sdk%23..%2F..%2Fpackages%2Freact-sdk%3A%3Ahash%3De28180%26locator%3D%2540bloomreach%252Fexample-react%2540workspace%253Aexamples%252Freact"
+  resolution: "@bloomreach/spa-sdk@file:../spa-sdk#../spa-sdk::hash=d0e23f&locator=%40bloomreach%2Freact-sdk%40file%3A..%2F..%2Fpackages%2Freact-sdk%23..%2F..%2Fpackages%2Freact-sdk%3A%3Ahash%3D210eee%26locator%3D%2540bloomreach%252Fexample-next%2540workspace%253Aexamples%252Fnext"
   dependencies:
     cookie: 0.4.1
     emittery: 0.7.2
     inversify: 5.1.1
     reflect-metadata: 0.1.13
     xmldom: 0.6.0
-  checksum: de7d6a1daa5e2252ceb4f5d90bd21e8e5ffa00523dc503626c178ed7f4cf7797e727515a7e2e8e8f67b4958d788bfc2fc58df6e3a8e425ba86f4103d6b51dc18
+  checksum: d72196a549054e055ae6f2a69fa06f781c81dd08548103fe4b139812a39c593e7d3acbc4cd7a9f7f06c77a932379876239c91553f59c5fe966aeb4a099cb5349
+  languageName: node
+  linkType: hard
+
+"@bloomreach/spa-sdk@file:../spa-sdk::locator=%40bloomreach%2Freact-sdk%40file%3A..%2F..%2Fpackages%2Freact-sdk%23..%2F..%2Fpackages%2Freact-sdk%3A%3Ahash%3D210eee%26locator%3D%2540bloomreach%252Fexample-react%2540workspace%253Aexamples%252Freact":
+  version: 0.3.2-saas
+  resolution: "@bloomreach/spa-sdk@file:../spa-sdk#../spa-sdk::hash=d0e23f&locator=%40bloomreach%2Freact-sdk%40file%3A..%2F..%2Fpackages%2Freact-sdk%23..%2F..%2Fpackages%2Freact-sdk%3A%3Ahash%3D210eee%26locator%3D%2540bloomreach%252Fexample-react%2540workspace%253Aexamples%252Freact"
+  dependencies:
+    cookie: 0.4.1
+    emittery: 0.7.2
+    inversify: 5.1.1
+    reflect-metadata: 0.1.13
+    xmldom: 0.6.0
+  checksum: d72196a549054e055ae6f2a69fa06f781c81dd08548103fe4b139812a39c593e7d3acbc4cd7a9f7f06c77a932379876239c91553f59c5fe966aeb4a099cb5349
   languageName: node
   linkType: hard
 
 "@bloomreach/spa-sdk@file:../spa-sdk::locator=%40bloomreach%2Freact-sdk%40workspace%3Apackages%2Freact-sdk":
   version: 0.3.2-saas
-  resolution: "@bloomreach/spa-sdk@file:../spa-sdk#../spa-sdk::hash=5de3aa&locator=%40bloomreach%2Freact-sdk%40workspace%3Apackages%2Freact-sdk"
+  resolution: "@bloomreach/spa-sdk@file:../spa-sdk#../spa-sdk::hash=d0e23f&locator=%40bloomreach%2Freact-sdk%40workspace%3Apackages%2Freact-sdk"
   dependencies:
     cookie: 0.4.1
     emittery: 0.7.2
     inversify: 5.1.1
     reflect-metadata: 0.1.13
     xmldom: 0.6.0
-  checksum: de7d6a1daa5e2252ceb4f5d90bd21e8e5ffa00523dc503626c178ed7f4cf7797e727515a7e2e8e8f67b4958d788bfc2fc58df6e3a8e425ba86f4103d6b51dc18
+  checksum: d72196a549054e055ae6f2a69fa06f781c81dd08548103fe4b139812a39c593e7d3acbc4cd7a9f7f06c77a932379876239c91553f59c5fe966aeb4a099cb5349
   languageName: node
   linkType: hard
 
 "@bloomreach/spa-sdk@file:../spa-sdk::locator=%40bloomreach%2Fvue-sdk%40workspace%3Apackages%2Fvue-sdk":
   version: 0.3.2-saas
-  resolution: "@bloomreach/spa-sdk@file:../spa-sdk#../spa-sdk::hash=5de3aa&locator=%40bloomreach%2Fvue-sdk%40workspace%3Apackages%2Fvue-sdk"
+  resolution: "@bloomreach/spa-sdk@file:../spa-sdk#../spa-sdk::hash=d0e23f&locator=%40bloomreach%2Fvue-sdk%40workspace%3Apackages%2Fvue-sdk"
   dependencies:
     cookie: 0.4.1
     emittery: 0.7.2
     inversify: 5.1.1
     reflect-metadata: 0.1.13
     xmldom: 0.6.0
-  checksum: de7d6a1daa5e2252ceb4f5d90bd21e8e5ffa00523dc503626c178ed7f4cf7797e727515a7e2e8e8f67b4958d788bfc2fc58df6e3a8e425ba86f4103d6b51dc18
+  checksum: d72196a549054e055ae6f2a69fa06f781c81dd08548103fe4b139812a39c593e7d3acbc4cd7a9f7f06c77a932379876239c91553f59c5fe966aeb4a099cb5349
   languageName: node
   linkType: hard
 
@@ -4861,7 +4885,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:16.9.14, @types/react-dom@npm:^16.9":
+"@types/react-dom@npm:16.9.14":
   version: 16.9.14
   resolution: "@types/react-dom@npm:16.9.14"
   dependencies:
@@ -4912,7 +4936,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:^16, @types/react@npm:^16.9":
+"@types/react@npm:^16":
   version: 16.14.11
   resolution: "@types/react@npm:16.14.11"
   dependencies:
@@ -18066,7 +18090,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"next-routes@npm:^1.4":
+"next-routes@npm:1.4.2":
   version: 1.4.2
   resolution: "next-routes@npm:1.4.2"
   dependencies:
@@ -18085,7 +18109,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"next@npm:^10.0":
+"next@npm:10.2.3":
   version: 10.2.3
   resolution: "next@npm:10.2.3"
   dependencies:
@@ -21724,7 +21748,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react-dom@npm:16.14.0, react-dom@npm:^16.14":
+"react-dom@npm:16.14.0":
   version: 16.14.0
   resolution: "react-dom@npm:16.14.0"
   dependencies:
@@ -21895,7 +21919,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react@npm:16.14.0, react@npm:^16.14":
+"react@npm:16.14.0":
   version: 16.14.0
   resolution: "react@npm:16.14.0"
   dependencies:
