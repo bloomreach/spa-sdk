@@ -4,7 +4,7 @@
   "version": "0.3.2-saas",
   "private": true,
   "dependencies": {
-    "@bloomreach/react-sdk": "../../packages/react-sdk",
+    "@bloomreach/react-sdk": "0.3.3-SPASDK-22-saas",
     "axios": "0.21.1",
     "react": "16.14.0",
     "react-dom": "16.14.0",

@@ -2379,7 +2379,7 @@ __metadata:
     "@angular/platform-browser-dynamic": 11.2.14
     "@angular/platform-server": 11.2.14
     "@angular/router": 11.2.14
-    "@bloomreach/ng-sdk": ../../packages/ng-sdk
+    "@bloomreach/ng-sdk": 0.3.3-SPASDK-22-saas
     "@nguniversal/builders": 11.2.1
     "@nguniversal/express-engine": 11.2.1
     "@types/cookie": 0.4.1
@@ -2402,7 +2402,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bloomreach/example-next@workspace:examples/next"
   dependencies:
-    "@bloomreach/react-sdk": ../../packages/react-sdk
+    "@bloomreach/react-sdk": 0.3.3-SPASDK-22-saas
     "@types/node": ^14.14
     "@types/react": 16.14.0
     "@types/react-dom": 16.9.14
@@ -2419,8 +2419,8 @@ __metadata:
   resolution: "@bloomreach/example-nuxt@workspace:examples/nuxt"
   dependencies:
     "@babel/runtime-corejs3": ^7.12
-    "@bloomreach/spa-sdk": ^0.3.2-saas
-    "@bloomreach/vue-sdk": ^0.3.2-saas
+    "@bloomreach/spa-sdk": 0.3.3-SPASDK-22-saas
+    "@bloomreach/vue-sdk": 0.3.3-SPASDK-22-saas
     "@nuxt/types": ^2.14
     "@nuxt/typescript-build": ^2.0
     "@nuxtjs/axios": ^5.12
@@ -2446,7 +2446,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bloomreach/example-react@workspace:examples/react"
   dependencies:
-    "@bloomreach/react-sdk": ../../packages/react-sdk
+    "@bloomreach/react-sdk": 0.3.3-SPASDK-22-saas
     "@types/react": 16.14.0
     "@types/react-dom": 16.9.14
     "@types/react-router-dom": 5.1.8
@@ -2465,8 +2465,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bloomreach/example-vue@workspace:examples/vue"
   dependencies:
-    "@bloomreach/spa-sdk": ../../packages/spa-sdk
-    "@bloomreach/vue-sdk": ../../packages/vue-sdk
+    "@bloomreach/spa-sdk": 0.3.3-SPASDK-22-saas
+    "@bloomreach/vue-sdk": 0.3.3-SPASDK-22-saas
     "@types/jest": 26.0.24
     "@typescript-eslint/eslint-plugin": 4.28.5
     "@typescript-eslint/parser": 4.28.5
@@ -2496,22 +2496,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@bloomreach/ng-sdk@file:../../packages/ng-sdk::locator=%40bloomreach%2Fexample-angular%40workspace%3Aexamples%2Fangular":
-  version: 0.3.3-SPASDK-22-saas
-  resolution: "@bloomreach/ng-sdk@file:../../packages/ng-sdk#../../packages/ng-sdk::hash=f89701&locator=%40bloomreach%2Fexample-angular%40workspace%3Aexamples%2Fangular"
-  dependencies:
-    "@bloomreach/spa-sdk": 0.3.3-SPASDK-22-saas
-    tslib: 2.3.0
-  peerDependencies:
-    "@angular/common": 11.2.14
-    "@angular/core": 11.2.14
-    "@angular/platform-browser": 11.2.14
-    rxjs: 6.6.7
-  checksum: 9b7dcd0e75aa8acd08e7c789ce160f69faf231380c70ceff27d68e0898b87ec916e1a680e2aef516c8a94962eb7295458df6388f21e9eb24d0745bcc0b0a4ba9
-  languageName: node
-  linkType: hard
-
-"@bloomreach/ng-sdk@workspace:packages/ng-sdk":
+"@bloomreach/ng-sdk@0.3.3-SPASDK-22-saas, @bloomreach/ng-sdk@workspace:packages/ng-sdk":
   version: 0.0.0-use.local
   resolution: "@bloomreach/ng-sdk@workspace:packages/ng-sdk"
   dependencies:
@@ -2545,29 +2530,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@bloomreach/react-sdk@file:../../packages/react-sdk::locator=%40bloomreach%2Fexample-next%40workspace%3Aexamples%2Fnext":
-  version: 0.3.3-SPASDK-22-saas
-  resolution: "@bloomreach/react-sdk@file:../../packages/react-sdk#../../packages/react-sdk::hash=d41202&locator=%40bloomreach%2Fexample-next%40workspace%3Aexamples%2Fnext"
-  dependencies:
-    "@bloomreach/spa-sdk": 0.3.3-SPASDK-22-saas
-  peerDependencies:
-    react: ^16.14
-  checksum: 61d378b5ef4e6dc0f1bb6a84257ee4ca3a4fdac0e7b1de921b6bcd00ef823e754e0c10e28a240292f94b50f047b2cf18ec1676d75f0b21cb71d2dd7c6c28891a
-  languageName: node
-  linkType: hard
-
-"@bloomreach/react-sdk@file:../../packages/react-sdk::locator=%40bloomreach%2Fexample-react%40workspace%3Aexamples%2Freact":
-  version: 0.3.3-SPASDK-22-saas
-  resolution: "@bloomreach/react-sdk@file:../../packages/react-sdk#../../packages/react-sdk::hash=d41202&locator=%40bloomreach%2Fexample-react%40workspace%3Aexamples%2Freact"
-  dependencies:
-    "@bloomreach/spa-sdk": 0.3.3-SPASDK-22-saas
-  peerDependencies:
-    react: ^16.14
-  checksum: 61d378b5ef4e6dc0f1bb6a84257ee4ca3a4fdac0e7b1de921b6bcd00ef823e754e0c10e28a240292f94b50f047b2cf18ec1676d75f0b21cb71d2dd7c6c28891a
-  languageName: node
-  linkType: hard
-
-"@bloomreach/react-sdk@workspace:packages/react-sdk":
+"@bloomreach/react-sdk@0.3.3-SPASDK-22-saas, @bloomreach/react-sdk@workspace:packages/react-sdk":
   version: 0.0.0-use.local
   resolution: "@bloomreach/react-sdk@workspace:packages/react-sdk"
   dependencies:
@@ -2641,61 +2604,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@bloomreach/spa-sdk@file:../../packages/spa-sdk::locator=%40bloomreach%2Fexample-vue%40workspace%3Aexamples%2Fvue":
-  version: 0.3.3-SPASDK-22-saas
-  resolution: "@bloomreach/spa-sdk@file:../../packages/spa-sdk#../../packages/spa-sdk::hash=c24113&locator=%40bloomreach%2Fexample-vue%40workspace%3Aexamples%2Fvue"
-  dependencies:
-    cookie: 0.4.1
-    emittery: 0.7.2
-    inversify: 5.1.1
-    reflect-metadata: 0.1.13
-    xmldom: 0.6.0
-  checksum: 21d73fc7534228f846660384490b65d676c74fff36f5fac3a72a4f8bf9fd00f6c7360a9a9dd6f6fa439d6c3d04e946cec7d5eb43d8acfb0312c2f1f5fbf57fd3
-  languageName: node
-  linkType: hard
-
-"@bloomreach/spa-sdk@npm:^0.3.2-saas":
-  version: 0.3.2-saas
-  resolution: "@bloomreach/spa-sdk@npm:0.3.2-saas"
-  dependencies:
-    cookie: ^0.4
-    emittery: ^0.7
-    inversify: ^5.0
-    reflect-metadata: ^0.1
-    xmldom: ^0.4
-  checksum: fcd939d1546ac54c139affbcc71fc68a2fc88ebd8476d5a325022e4d84140b150589a439d81be2a3390f5d742611a31a925ecb7f4ddbf087d242b3821dfeea4d
-  languageName: node
-  linkType: hard
-
-"@bloomreach/vue-sdk@file:../../packages/vue-sdk::locator=%40bloomreach%2Fexample-vue%40workspace%3Aexamples%2Fvue":
-  version: 0.3.3-SPASDK-22-saas
-  resolution: "@bloomreach/vue-sdk@file:../../packages/vue-sdk#../../packages/vue-sdk::hash=6aee3d&locator=%40bloomreach%2Fexample-vue%40workspace%3Aexamples%2Fvue"
-  dependencies:
-    "@bloomreach/spa-sdk": 0.3.3-SPASDK-22-saas
-    vue-class-component: 7.2.6
-    vue-fragment: 1.5.2
-    vue-property-decorator: 9.1.2
-  peerDependencies:
-    vue: ^2.6
-  checksum: 3a060b6e7d5b974cb440e9881036f12adce9033331466559e3a1a394fc18df38bd3ef8e1f4fbf5a454045983b6895530aacf17eb434e9980966bb4610515ef7b
-  languageName: node
-  linkType: hard
-
-"@bloomreach/vue-sdk@npm:^0.3.2-saas":
-  version: 0.3.2-saas
-  resolution: "@bloomreach/vue-sdk@npm:0.3.2-saas"
-  dependencies:
-    "@bloomreach/spa-sdk": ^0.3.2-saas
-    vue-class-component: ^7.2
-    vue-fragment: 1.5.1
-    vue-property-decorator: ^9.0
-  peerDependencies:
-    vue: ^2.6
-  checksum: c2b82da6d9246ec8f238a17d1aa6f93c27662b66a691308094dc94fdabfd1bb77bc102a870c67f1dc20e734922dd991e3562a93943b03ce536d0189dcfa756c6
-  languageName: node
-  linkType: hard
-
-"@bloomreach/vue-sdk@workspace:packages/vue-sdk":
+"@bloomreach/vue-sdk@0.3.3-SPASDK-22-saas, @bloomreach/vue-sdk@workspace:packages/vue-sdk":
   version: 0.0.0-use.local
   resolution: "@bloomreach/vue-sdk@workspace:packages/vue-sdk"
   dependencies:
@@ -9205,7 +9114,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cookie@npm:0.4.1, cookie@npm:^0.4, cookie@npm:~0.4.1":
+"cookie@npm:0.4.1, cookie@npm:~0.4.1":
   version: 0.4.1
   resolution: "cookie@npm:0.4.1"
   checksum: bd7c47f5d94ab70ccdfe8210cde7d725880d2fcda06d8e375afbdd82de0c8d3b73541996e9ce57d35f67f672c4ee6d60208adec06b3c5fc94cebb85196084cf8
@@ -10864,7 +10773,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"emittery@npm:0.7.2, emittery@npm:^0.7, emittery@npm:^0.7.1":
+"emittery@npm:0.7.2, emittery@npm:^0.7.1":
   version: 0.7.2
   resolution: "emittery@npm:0.7.2"
   checksum: 908cd933d48a9bcb58ddf39e9a7d4ba1e049de392ccbef010102539a636e03cea2b28218331b7ede41de8165d9ed7f148851c5112ebd2e943117c0f61eff5f10
@@ -14477,7 +14386,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"inversify@npm:5.1.1, inversify@npm:^5.0, inversify@npm:^5.0.0":
+"inversify@npm:5.1.1, inversify@npm:^5.0.0":
   version: 5.1.1
   resolution: "inversify@npm:5.1.1"
   checksum: 22d201647b572024333c58bed8ac929da4724a4c0c8a261ecc261a180afcb899359013fafb8d87ce4d606000149fb4590dc5c8278b9feb544a5f69a6159e4ffb
@@ -22154,7 +22063,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"reflect-metadata@npm:0.1.13, reflect-metadata@npm:^0.1, reflect-metadata@npm:^0.1.12, reflect-metadata@npm:^0.1.2":
+"reflect-metadata@npm:0.1.13, reflect-metadata@npm:^0.1.12, reflect-metadata@npm:^0.1.2":
   version: 0.1.13
   resolution: "reflect-metadata@npm:0.1.13"
   checksum: 798d379a7b6f6455501145419505c97dd11cbc23857a386add2b9ef15963ccf15a48d9d15507afe01d4cd74116df8a213247200bac00320bd7c11ddeaa5e8fb4
@@ -26346,7 +26255,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"vue-class-component@npm:7.2.6, vue-class-component@npm:^7.2, vue-class-component@npm:^7.2.6":
+"vue-class-component@npm:7.2.6, vue-class-component@npm:^7.2.6":
   version: 7.2.6
   resolution: "vue-class-component@npm:7.2.6"
   peerDependencies:
@@ -26376,15 +26285,6 @@ resolve@^2.0.0-next.3:
   peerDependencies:
     eslint: ">=5.0.0"
   checksum: 41866f79517ede12b818a66ad07201b8231101dbb40f632cd2bdf117715dd0441275b11025dae1794cf941f2fe9739e5db52ae4516e491c35b926c276ab29890
-  languageName: node
-  linkType: hard
-
-"vue-fragment@npm:1.5.1":
-  version: 1.5.1
-  resolution: "vue-fragment@npm:1.5.1"
-  peerDependencies:
-    vue: ^2.5.16
-  checksum: 5e4ff7b188f46976ce25791ae7aba4748398e6e74b79c4dec4ebe2d81b57dc0311739955a6c7576742c3cf4b0d43a78940ee269c66a906bcba04f4abb41cacec
   languageName: node
   linkType: hard
 
@@ -26481,7 +26381,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"vue-property-decorator@npm:9.1.2, vue-property-decorator@npm:^9.0, vue-property-decorator@npm:^9.0.0":
+"vue-property-decorator@npm:9.1.2, vue-property-decorator@npm:^9.0.0":
   version: 9.1.2
   resolution: "vue-property-decorator@npm:9.1.2"
   peerDependencies:
@@ -27637,13 +27537,6 @@ resolve@^2.0.0-next.3:
   version: 0.6.0
   resolution: "xmldom@npm:0.6.0"
   checksum: 710f64f5b2ba8ac1cbcf62c2e35b095a2f9ccbd596062efe037a5ca85d3ee077b691c4d74952ff476e4bab0dd82727604262899f25dddbb02f89ddeea4cca7f9
-  languageName: node
-  linkType: hard
-
-"xmldom@npm:^0.4":
-  version: 0.4.0
-  resolution: "xmldom@npm:0.4.0"
-  checksum: ea975a7bd87109542ce24b19a70e50a3d64d20c757affa1a6c8cf906cbb39f0071a1bea9016beb5532388bc61dcbefddb92f3db2197dceee2b4c46343348ab3c
   languageName: node
   linkType: hard
 

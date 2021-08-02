@@ -16,8 +16,8 @@
     "last 1 edge version"
   ],
   "dependencies": {
-    "@bloomreach/spa-sdk": "../../packages/spa-sdk",
-    "@bloomreach/vue-sdk": "../../packages/vue-sdk",
+    "@bloomreach/spa-sdk": "0.3.3-SPASDK-22-saas",
+    "@bloomreach/vue-sdk": "0.3.3-SPASDK-22-saas",
     "axios": "0.21.1",
     "core-js": "3.16.0",
     "vue": "2.6.14",

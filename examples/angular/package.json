@@ -23,7 +23,7 @@
     "@angular/platform-browser-dynamic": "11.2.14",
     "@angular/platform-server": "11.2.14",
     "@angular/router": "11.2.14",
-    "@bloomreach/ng-sdk": "../../packages/ng-sdk",
+    "@bloomreach/ng-sdk": "0.3.3-SPASDK-22-saas",
     "@nguniversal/express-engine": "11.2.1",
     "express": "4.17.1",
     "rxjs": "6.6.7",
