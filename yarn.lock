@@ -2633,7 +2633,7 @@ __metadata:
     typescript: 4.1.6
     vue: 2.6.14
     vue-class-component: 7.2.6
-    vue-fragment: 1.5.2
+    vue-fragment: 1.5.1
     vue-property-decorator: 9.1.2
     vue-template-compiler: 2.6.14
   peerDependencies:
@@ -26288,12 +26288,12 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"vue-fragment@npm:1.5.2":
-  version: 1.5.2
-  resolution: "vue-fragment@npm:1.5.2"
+"vue-fragment@npm:1.5.1":
+  version: 1.5.1
+  resolution: "vue-fragment@npm:1.5.1"
   peerDependencies:
     vue: ^2.5.16
-  checksum: 9bb05e48a88fd0eb45666ba996944254cab80cdd854d307a62ba4578d6a7c2a78f8568579880bb115435e208d0d44227572b4af352cfc5622d5d850b6d0419fa
+  checksum: 5e4ff7b188f46976ce25791ae7aba4748398e6e74b79c4dec4ebe2d81b57dc0311739955a6c7576742c3cf4b0d43a78940ee269c66a906bcba04f4abb41cacec
   languageName: node
   linkType: hard
 

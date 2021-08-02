@@ -40,7 +40,7 @@
   "dependencies": {
     "@bloomreach/spa-sdk": "0.3.3-SPASDK-22-saas",
     "vue-class-component": "7.2.6",
-    "vue-fragment": "1.5.2",
+    "vue-fragment": "1.5.1",
     "vue-property-decorator": "9.1.2"
   },
   "peerDependencies": {
