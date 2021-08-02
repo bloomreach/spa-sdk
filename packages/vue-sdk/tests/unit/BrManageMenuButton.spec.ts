@@ -37,10 +37,10 @@ describe('BrManageMenuButton', () => {
   let provide: () => unknown;
 
   beforeAll(() => {
-    page = ({
+    page = {
       getButton: jest.fn(() => meta),
       isPreview: jest.fn(),
-    } as unknown) as typeof page;
+    } as unknown as typeof page;
 
     const wrapper = shallowMount(BrPage, { propsData: { page } });
     provide = (wrapper.vm.$options.provide as typeof provide).bind(wrapper.vm);
