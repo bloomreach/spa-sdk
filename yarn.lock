@@ -2420,7 +2420,7 @@ __metadata:
   dependencies:
     "@babel/runtime-corejs3": ^7.12
     "@bloomreach/spa-sdk": 0.3.3-SPASDK-22-saas
-    "@bloomreach/vue-sdk": 0.3.3-SPASDK-22-saas
+    "@bloomreach/vue-sdk": 0.3.3-1-SPASDK-22-saas
     "@nuxt/types": ^2.14
     "@nuxt/typescript-build": ^2.0
     "@nuxtjs/axios": ^5.12
@@ -2466,7 +2466,7 @@ __metadata:
   resolution: "@bloomreach/example-vue@workspace:examples/vue"
   dependencies:
     "@bloomreach/spa-sdk": 0.3.3-SPASDK-22-saas
-    "@bloomreach/vue-sdk": 0.3.3-SPASDK-22-saas
+    "@bloomreach/vue-sdk": 0.3.3-1-SPASDK-22-saas
     "@types/jest": 26.0.24
     "@typescript-eslint/eslint-plugin": 4.28.5
     "@typescript-eslint/parser": 4.28.5
@@ -2604,7 +2604,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@bloomreach/vue-sdk@0.3.3-SPASDK-22-saas, @bloomreach/vue-sdk@workspace:packages/vue-sdk":
+"@bloomreach/vue-sdk@0.3.3-1-SPASDK-22-saas, @bloomreach/vue-sdk@workspace:packages/vue-sdk":
   version: 0.0.0-use.local
   resolution: "@bloomreach/vue-sdk@workspace:packages/vue-sdk"
   dependencies:
