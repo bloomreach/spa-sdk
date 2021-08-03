@@ -36,18 +36,20 @@ pipeline {
 
   environment {
     VERSION = sh(script: 'echo $TAG_NAME | sed "s/^[^0-9]*\\([0-9].*\\)$/\\1/"', returnStdout: true).trim()
+    //Heroku does not accept dots in the app name. So, we need to replace them with dashes
+    VERSION_FOR_HEROKU = VERSION.replace('.', '-')
     HEROKU = "/tmp/node_modules/.bin/heroku"
     HEROKU_TEAM = "bloomreach"
     HEROKU_PREFIX = "spa-sdk"
 
-    ANGULAR_SSR_APP_NAME = "${HEROKU_PREFIX}-ng-ssr-${VERSION}"
-    ANGULAR_CSR_APP_NAME = "${HEROKU_PREFIX}-ng-csr-${VERSION}"
+    ANGULAR_SSR_APP_NAME = "${HEROKU_PREFIX}-ng-ssr-${VERSION_FOR_HEROKU}"
+    ANGULAR_CSR_APP_NAME = "${HEROKU_PREFIX}-ng-csr-${VERSION_FOR_HEROKU}"
 
-    REACT_SSR_APP_NAME = "${HEROKU_PREFIX}-react-ssr-${VERSION}"
-    REACT_CSR_APP_NAME = "${HEROKU_PREFIX}-react-csr-${VERSION}"
+    REACT_SSR_APP_NAME = "${HEROKU_PREFIX}-react-ssr-${VERSION_FOR_HEROKU}"
+    REACT_CSR_APP_NAME = "${HEROKU_PREFIX}-react-csr-${VERSION_FOR_HEROKU}"
 
-    VUE_SSR_APP_NAME = "${HEROKU_PREFIX}-vue-ssr-${VERSION}"
-    VUE_CSR_APP_NAME = "${HEROKU_PREFIX}-vue-csr-${VERSION}"
+    VUE_SSR_APP_NAME = "${HEROKU_PREFIX}-vue-ssr-${VERSION_FOR_HEROKU}"
+    VUE_CSR_APP_NAME = "${HEROKU_PREFIX}-vue-csr-${VERSION_FOR_HEROKU}"
 
     //React Heroku SPA urls
     REACT_CSR_PUBLIC_URL = "https://${REACT_CSR_APP_NAME}.herokuapp.com"
