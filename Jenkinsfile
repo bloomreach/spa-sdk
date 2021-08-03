@@ -38,7 +38,7 @@ pipeline {
     VERSION = sh(script: 'echo $TAG_NAME | sed "s/^[^0-9]*\\([0-9].*\\)$/\\1/"', returnStdout: true).trim()
     HEROKU = "/tmp/node_modules/.bin/heroku"
     HEROKU_TEAM = "bloomreach"
-    HEROKU_PREFIX = "spa-sdk-example"
+    HEROKU_PREFIX = "spa-sdk"
 
     ANGULAR_SSR_APP_NAME = "${HEROKU_PREFIX}-ng-ssr-${VERSION}"
     ANGULAR_CSR_APP_NAME = "${HEROKU_PREFIX}-ng-csr-${VERSION}"
@@ -121,7 +121,7 @@ pipeline {
                           PROJECT_PATH=examples/angular
                       '''
 
-                      sh 'git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/$ANGULAR_CSR_APP_NAME.git master'
+                      sh 'git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/$ANGULAR_CSR_APP_NAME.git main'
                     }
                   },
 
@@ -136,7 +136,7 @@ pipeline {
                           PROCFILE=examples/angular/universal.Procfile
                       '''
 
-                      sh 'git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/$ANGULAR_SSR_APP_NAME.git master'
+                      sh 'git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/$ANGULAR_SSR_APP_NAME.git main'
                     }
                   },
 
@@ -151,7 +151,7 @@ pipeline {
                           PROJECT_PATH=examples/react
                       '''
 
-                      sh 'git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/$REACT_CSR_APP_NAME.git master'
+                      sh 'git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/$REACT_CSR_APP_NAME.git main'
                     }
                   },
 
@@ -166,7 +166,7 @@ pipeline {
                           PROCFILE=examples/next/Procfile
                       '''
 
-                      sh 'git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/$REACT_SSR_APP_NAME.git master'
+                      sh 'git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/$REACT_SSR_APP_NAME.git main'
                     }
                   },
 
@@ -181,7 +181,7 @@ pipeline {
                           PROJECT_PATH=examples/vue
                       '''
 
-                      sh 'git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/$VUE_CSR_APP_NAME.git master'
+                      sh 'git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/$VUE_CSR_APP_NAME.git main'
                     }
                   },
 
@@ -199,7 +199,7 @@ pipeline {
                           NODE_ENV=production
                       '''
 
-                      sh 'git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/$VUE_SSR_APP_NAME.git master'
+                      sh 'git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/$VUE_SSR_APP_NAME.git main'
                     }
                   }
                 )
