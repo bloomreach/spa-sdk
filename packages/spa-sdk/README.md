@@ -32,10 +32,10 @@ import { initialize } from '@bloomreach/spa-sdk';
 
 async function showPage(path) {
   const page = await initialize({
-    // The path to request from the Delivery API, should include query
+    // The path to request from the Page Model API, should include query
     // parameters if those are present in the url
     path,
-    // The location of the Delivery API of the brX channel
+    // The location of the Page Model API of the brX channel
     endpoint: 'http://localhost:8080/delivery/site/v1/channels/brxsaas/pages',
     // The httpClient used to make requests
     httpClient: axios,
