@@ -32,8 +32,12 @@ import { initialize } from '@bloomreach/spa-sdk';
 
 async function showPage(path) {
   const page = await initialize({
+    // The path to request from the Delivery API, should include query
+    // parameters if those are present in the url
     path,
+    // The location of the Delivery API of the brX channel
     endpoint: 'http://localhost:8080/delivery/site/v1/channels/brxsaas/pages',
+    // The httpClient used to make requests
     httpClient: axios,
   });
 
@@ -95,7 +99,7 @@ Option | Required | Default | Description
 `options.preview.cmsBaseUrl` | yes | _none_ | Base URL of the live site (e.g. `http://localhost:8080/site/_cmsinternal` or `http://localhost:8080/site/_cmsinternal/channel`).
 `options.preview.spaBaseUrl` | no | `""` | Base URL of the live SPA (e.g. `/site/_cmsinternal?bloomreach-preview=true` or `/site/_cmsinternal/channel?bloomreach-preview=true`). This path and query string parameters will be used to detect whether it is a preview mode or not.
 `origin` | no | _none_ | The brXM origin to verify an integration with the Experience Manager. This option should be used when the brXM is accessible from a host other than the Page Model API. By default, the origin from the `apiBaseUrl` or `endpoint` parameters is used.
-`path` | no | `/` | The path part of the URL, including a query string if present (e.g. `/path/to/page?foo=1`).
+`path` | no | `/` | The path part of the URL, **including a query string if present (e.g. `/path/to/page?foo=1`)**.
 `request` | yes | _none_ | Current user's request.
 `request.connection` | no | _none_ | Current request remote connection containing the remote address. This option is used in [the Relevance Module](https://documentation.bloomreach.com/14/library/enterprise/enterprise-features/targeting/targeting.html).
 `request.emit` | no | _none_ | Emits an event in the request scope. This option can be used in [Node.js integration](https://nodejs.org/api/stream.html#stream_readable_streams).
