@@ -201,6 +201,9 @@ export default function Menu() {
 
 ### Buttons
 
+It is recommended to add the css style `position: relative` to the Buttons
+so they will position correctly within their parent container component.
+
 Manage menu button can be placed inside a menu component using
 `BrManageMenuButton` component.
 
