@@ -39,9 +39,8 @@ The supported frameworks are currently:
 - Angular and Angular Universal
 
 The versions of these frameworks that the SDKs currently is verified to work
-with are indicated in the [release notes](http://todo/insert/link/here) and the
-minimum required versions are set in the `package.json` files of the respective
-packages.
+with are indicated in the release notes of each package and the minimum required
+versions are set in the `package.json` files of the respective packages.
 
 ## SPA SDK and Framework SDKs
 
@@ -116,11 +115,11 @@ Generally speaking for any kind of development one would:
 2. do work on `mybranch` until finished
 3. create an MR of `mybranch` to be merged into `development`
 4. get reviews & approval
-5. After the pipelines are green: merge the MR
+5. After the pipelines are green: merge the MR to `development`
 
 ## Releasing
 
-The release process is a continuation of the above where a Jenkinspipeline would:
+The release process is a continuation of the above where a Jenkins-pipeline would:
 
 1. Run the build pipeline and if successful
 2. Run `yarn bump someVersion` to update the versions in all package files
@@ -128,7 +127,7 @@ The release process is a continuation of the above where a Jenkinspipeline would
 4. Commit these changes
 5. Attempt to publish the packages to the npm registry and if successful
 6. Set a tag `spa-sdk-someVersion` on the `main` branch
-7. If any of the above failed discard all changes
+7. If any of the above failed discard all changes, otherwise push changes and tag to origin
 8. Push the new tag to the Github mirror
 
 If this pipeline is successful a dev would then manually create a release on
