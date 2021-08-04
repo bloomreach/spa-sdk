@@ -119,16 +119,12 @@ Generally speaking for any kind of development one would:
 
 ## Releasing
 
-The release process is a continuation of the above where a Jenkins-pipeline would:
+1. Check out `development` branch 
+2. Run `yarn bump [new version]` in the workspace root to update the versions in all package files
+3. Commit these changes and push to origin
+4. Create an MR to merge development into main if the build is successful (**do not check 'delete source branch after merge'**)
+5. After the merge is successful set a tag `spa-sdk-[new version]` on the `main` branch
+6. Push the tag to origin
+7. Jenkins should now detect the tag and run the release pipeline
+8. After the release is published create a Release on github and gitlab with release notes
 
-1. Run the build pipeline and if successful
-2. Run `yarn bump someVersion` to update the versions in all package files
-3. Auto generate a changelog
-4. Commit these changes
-5. Attempt to publish the packages to the npm registry and if successful
-6. Set a tag `spa-sdk-someVersion` on the `main` branch
-7. If any of the above failed discard all changes, otherwise push changes and tag to origin
-8. Push the new tag to the Github mirror
-
-If this pipeline is successful a dev would then manually create a release on
-Gitlab and Github with release notes.
