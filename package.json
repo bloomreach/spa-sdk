@@ -15,14 +15,14 @@
   },
   "author": "Bloomreach B.V.",
   "license": "Apache-2.0",
+  "homepage": "https://www.bloomreach.com",
   "repository": {
     "type": "git",
-    "url": "https://code.onehippo.org/cms-community/bloomreach-spa-sdk"
+    "url": "https://github.com/bloomreach/spa-sdk"
   },
   "bugs": {
-    "url": "https://issues.onehippo.com/projects/CMS/issues"
+    "url": "https://issues.onehippo.com/projects/SPASDK/issues"
   },
-  "homepage": "https://code.onehippo.org/cms-community/bloomreach-spa-sdk",
   "scripts": {
     "build": "yarn workspaces foreach --parallel --topological run build",
     "bump": "yarn workspaces foreach version ${0}",
