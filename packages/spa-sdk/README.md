@@ -52,7 +52,8 @@ async function showPage(path) {
 showPage(`${window.location.pathname}${window.location.search}`);
 ```
 
-### Relevance Integration 
+### Relevance Integration
+
 (not applicable to Content SaaS)
 
 The SDK provides basic [Express
@@ -83,16 +84,17 @@ Published under [Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0) license
 #### Configuration
 
 The `initialize` function supports several options you may use to customize page initialization.
-| Commonly used options
-| --------------------- |
-| **`debug`** <br> The option enabling debug mode. <br><br> Required: no <br> Default: `false` |
+
+| Commonly used options                                                                                                                                                                                                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`debug`** <br> The option enabling debug mode. <br><br> Required: no <br> Default: `false`                                                                                                                                                                                                                         |
 | **`endpoint`** <br> Base URL of the Page Model API (e.g. `http://localhost:8080/delivery/site/v1/channels/brxsaas/pages` or `http://localhost:8080/site/channel/resourceapi`). This option is exclusive and should not be used together with `options` or `cmsBaseUrl` <br><br> Required: yes <br> Default: . _none_ |
-| **`httpClient`** <br> The HTTP client that will be used to fetch the page model. Signature is similar to [Axios](https://github.com/axios/axios#axiosconfig) client. <br><br> Required: yes <br> Default: _none_ |
-| **`path`** <br> The path part of the URL, **including a query string if present (e.g. `/path/to/page?foo=1`** <br><br> Required: no <br> Default: ) `/` . |
-| **`origin`** <br> The brXM origin to verify an integration with the Experience Manager. This option should be used when the brXM is accessible from a host other than the Page Model API. By default, the origin from the `apiBaseUrl` or `endpoint` parameters is used. <br><br> Required: no <br> Default: _none_ |
-| **`baseUrl`** <br> Base URL of the SPA (e.g. `/account` or `//www.example.com`). This option can only be used if `endpoint` is present. <br><br> Required: no <br> Default: `""` |
-| **`apiBaseUrl`** <br> Base URL of the Page Model API (e.g. `http://localhost:8080/delivery/site/v1/channels/brxsaas/pages` or `http://localhost:8080/site/channel/resourceapi`). This option will be ignored if `options` is present. <br><br> Required: no <br> Default: `cmsBaseUrl` + `"/resourceapi"` |
-| **`spaBaseUrl`** <br> Base URL of the SPA (e.g. `/account` or `//www.example.com`). This option will be ignored if `options` is present. <br><br> Required: no <br> Default: `""` |
+| **`httpClient`** <br> The HTTP client that will be used to fetch the page model. Signature is similar to [Axios](https://github.com/axios/axios#axiosconfig) client. <br><br> Required: yes <br> Default: _none_                                                                                                     |
+| **`path`** <br> The path part of the URL, **including a query string if present (e.g. `/path/to/page?foo=1`** <br><br> Required: no <br> Default: ) `/` .                                                                                                                                                            |
+| **`origin`** <br> The brXM origin to verify an integration with the Experience Manager. This option should be used when the brXM is accessible from a host other than the Page Model API. By default, the origin from the `apiBaseUrl` or `endpoint` parameters is used. <br><br> Required: no <br> Default: _none_  |
+| **`baseUrl`** <br> Base URL of the SPA (e.g. `/account` or `//www.example.com`). This option can only be used if `endpoint` is present. <br><br> Required: no <br> Default: `""`                                                                                                                                     |
+| **`apiBaseUrl`** <br> Base URL of the Page Model API (e.g. `http://localhost:8080/delivery/site/v1/channels/brxsaas/pages` or `http://localhost:8080/site/channel/resourceapi`). This option will be ignored if `options` is present. <br><br> Required: no <br> Default: `cmsBaseUrl` + `"/resourceapi"`            |
+| **`spaBaseUrl`** <br> Base URL of the SPA (e.g. `/account` or `//www.example.com`). This option will be ignored if `options` is present. <br><br> Required: no <br> Default: `""`                                                                                                                                    |
 
 | Extra options
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -107,7 +109,7 @@ The `initialize` function supports several options you may use to customize page
 | **`serverIdQueryParameter`** <br> The query string parameter used to pass a cluster node identifier. <br><br> Required: no <br> Default: `"server-id"` |
 | **`window`** <br> A window object reference will be used to interact with brXM. It needs to be set when initialize is being called within an iframe or worker process. <br><br> Required: no <br> Default: `window` |
 
-| Relevance options (PaaS-only) 
+| Relevance options (PaaS-only)
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------- |
 | **`visitor`** <br> An object holding information about the current visitor. The option takes precedence over `request.visitor` <br><br> Required: no <br> Default: . _none_ |
 | **`visitor.id`** <br> The current visitor identifier. <br><br> Required: yes <br> Default: _none_ |
@@ -264,7 +266,7 @@ The `Document` object holds document data that is used by the page components.
 The `ImageSet` object holds images collection that is used by the page components.
 
 | Method                                                  | Description                         |
-| ------------------------------------------------------- | ----------------------------------- | ----------------------------- |
+| ------------------------------------------------------- | ----------------------------------- |
 | <code>getDescription(): string &vert; undefined;</code> | Returns the image set description.  |
 | `getDisplayName(): string`                              | Returns the image set display name. |
 | `getId(): string`                                       | Returns the document id.            |
