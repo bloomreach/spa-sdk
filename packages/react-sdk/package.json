@@ -9,13 +9,14 @@
   ],
   "author": "Bloomreach B.V.",
   "license": "Apache-2.0",
+  "homepage": "https://www.bloomreach.com",
   "repository": {
     "type": "git",
-    "url": "https://github.com/bloomreach/brxm.git",
-    "directory": "spa-sdk/packages/react-sdk"
+    "url": "https://github.com/bloomreach/spa-sdk",
+    "directory": "packages/react-sdk"
   },
   "bugs": {
-    "url": "https://issues.onehippo.com/projects/CMS/issues"
+    "url": "https://issues.onehippo.com/projects/SPASDK/issues"
   },
   "main": "dist/index.js",
   "browser": "dist/index.js",
