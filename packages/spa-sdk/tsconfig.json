@@ -28,6 +28,7 @@
     "hideGenerator": true,
     "ignoreCompilerErrors": true,
     "includeDeclarations": true,
+    "includeVersion": true,
     "inputFiles": ["lib/index.d.ts", "lib/express/index.d.ts"],
     "mode": "modules",
     "out": "docs"
