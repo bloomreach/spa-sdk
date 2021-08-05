@@ -6177,6 +6177,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"auto-changelog@npm:2.3.0":
+  version: 2.3.0
+  resolution: "auto-changelog@npm:2.3.0"
+  dependencies:
+    commander: ^5.0.0
+    handlebars: ^4.7.3
+    node-fetch: ^2.6.0
+    parse-github-url: ^1.0.2
+    semver: ^6.3.0
+  bin:
+    auto-changelog: src/index.js
+  checksum: be72ab29e68ced38e29ee668589533c6090b00745897bc18e3412be52c3f69f5ad98a5b0588789c872ad9f61777b0ca9903cf1437c809e749c8421eb6c31d39a
+  languageName: node
+  linkType: hard
+
 "autoprefixer@npm:9.8.6, autoprefixer@npm:^9.6.1, autoprefixer@npm:^9.6.5, autoprefixer@npm:^9.8.6":
   version: 9.8.6
   resolution: "autoprefixer@npm:9.8.6"
@@ -8081,6 +8096,13 @@ __metadata:
   version: 4.1.1
   resolution: "commander@npm:4.1.1"
   checksum: 448585071bf8fb4c0bf9dd52abaee43dea086f801334caec2c8e8c9f456f8abc224c1614ccbbdbf7da5ac2524d230f13cf1fc86c233cf8a041ebecea7df106e9
+  languageName: node
+  linkType: hard
+
+"commander@npm:^5.0.0":
+  version: 5.1.0
+  resolution: "commander@npm:5.1.0"
+  checksum: d16141ea7f580945156fb8a06de2834c4647c7d9d3732ebd4534ab8e0b7c64747db301e18f2b840f28ea8fef51f7a8d6178e674b45a21931f0b65ff1c7f476b3
   languageName: node
   linkType: hard
 
@@ -12491,6 +12513,24 @@ fsevents@^1.2.7:
   version: 2.0.1
   resolution: "handle-thing@npm:2.0.1"
   checksum: 7509fca9ebc8c119c8d36a7de19216dfcd120a2f9ac0a7f4e7836549561f728bfe4d86fbe604805c0f4d574c2eed756c54486b9ddc436d0387d8397c7c00a434
+  languageName: node
+  linkType: hard
+
+"handlebars@npm:^4.7.3":
+  version: 4.7.7
+  resolution: "handlebars@npm:4.7.7"
+  dependencies:
+    minimist: ^1.2.5
+    neo-async: ^2.6.0
+    source-map: ^0.6.1
+    uglify-js: ^3.1.4
+    wordwrap: ^1.0.0
+  dependenciesMeta:
+    uglify-js:
+      optional: true
+  bin:
+    handlebars: bin/handlebars
+  checksum: 2df9a6b422e2ccc0b7ca53f7a1f9915b47d19bf3fd372824a87e2a28b7952fa2cb3348cbe33a87ef49ee04f42d10359aab44819ca8d680ee3a5b53d48bd062a1
   languageName: node
   linkType: hard
 
@@ -18439,6 +18479,15 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"parse-github-url@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "parse-github-url@npm:1.0.2"
+  bin:
+    parse-github-url: ./cli.js
+  checksum: 60fa1f025ed38359885be81ec7b231a16942a4f5a86fa49285ce64663b921501200e9dfe6ce270ccd29e6dce32f56be676865773bd98cc01dca098d9c6ada978
+  languageName: node
+  linkType: hard
+
 "parse-json@npm:^2.2.0":
   version: 2.2.0
   resolution: "parse-json@npm:2.2.0"
@@ -21476,6 +21525,8 @@ resolve@1.18.1:
 "root-workspace-0b6124@workspace:.":
   version: 0.0.0-use.local
   resolution: "root-workspace-0b6124@workspace:."
+  dependencies:
+    auto-changelog: 2.3.0
   languageName: unknown
   linkType: soft
 
