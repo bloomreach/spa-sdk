@@ -97,6 +97,19 @@ pipeline {
           }
         }
 
+        stage('Publish SPA SDK TypeDoc') {
+          steps {
+            sh 'git clone -b gh-pages --single-branch git@github.com:bloomreach/spa-sdk.git packages/spa-sdk/docs'
+            sh 'cd packages/spa-sdk/docs'
+            sh 'git rm . -r'
+            sh 'yarn workspace @bloomreach/spa-sdk docs --disableOutputCheck'
+            sh 'git add --all'
+            sh 'git commit -m "Update SPA SDK TypeDocs for release ${TAG_NAME}"'
+            sshagent (credentials: ['spa-sdk-github']) {
+              sh 'git push'
+            }
+          }
+        }
 
         stage('Deploy SPAs on Heroku') {
           stages {
