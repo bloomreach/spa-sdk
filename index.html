@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>@bloomreach/spa-sdk</title>
-	<meta name="description" content="Documentation for @bloomreach/spa-sdk">
+	<title>@bloomreach/spa-sdk - v0.3.2-saas</title>
+	<meta name="description" content="Documentation for @bloomreach/spa-sdk - v0.3.2-saas">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
 </head>
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">@bloomreach/spa-sdk</a>
+					<a href="index.html" class="title">@bloomreach/spa-sdk - v0.3.2-saas</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -54,7 +54,7 @@
 					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1>@bloomreach/spa-sdk</h1>
+			<h1>@bloomreach/spa-sdk - v0.3.2-saas</h1>
 		</div>
 	</div>
 </header>
@@ -65,22 +65,17 @@
 				<a href="#bloomreach-spa-sdk" id="bloomreach-spa-sdk" style="color: inherit; text-decoration: none;">
 					<h1>Bloomreach SPA SDK</h1>
 				</a>
-				<p><a href="https://www.npmjs.com/package/@bloomreach/spa-sdk"><img src="https://img.shields.io/npm/v/@bloomreach/spa-sdk.svg" alt="NPM"></a>
-				<a href="http://www.apache.org/licenses/LICENSE-2.0"><img src="https://img.shields.io/npm/l/@bloomreach/spa-sdk.svg" alt="License"></a></p>
-				<p>Bloomreach SPA SDK provides simplified headless integration with <a href="https://www.bloomreach.com/en/products/experience-manager">Bloomreach Experience Manager</a> for JavaScript-based applications.
-				This library interacts with the <a href="https://documentation.bloomreach.com/library/concepts/page-model-api/introduction.html">Page Model API</a> and exposes a simplified and framework-agnostic interface over the page model.</p>
-				<a href="#what-is-bloomreach-experience-manager" id="what-is-bloomreach-experience-manager" style="color: inherit; text-decoration: none;">
-					<h2>What is Bloomreach Experience Manager?</h2>
-				</a>
-				<p>Bloomreach Experience Manager (brXM) is an open and flexible CMS designed for developers and marketers. As the original headless CMS, brXM allows developers to build quickly and integrate with the systems. While it’s built for speed, it also provides top-notch personalization and channel management capabilities for marketers to drive results.</p>
+				<p>Bloomreach SPA SDK provides simplified headless integration with <a href="https://www.bloomreach.com/en/products/experience-manager">Bloomreach Experience Manager</a>
+					for JavaScript-based applications. This library interacts with the <a href="https://documentation.bloomreach.com/library/concepts/page-model-api/introduction.html">Page Model API</a>
+				and exposes a simplified and framework-agnostic interface over the page model.</p>
 				<a href="#features" id="features" style="color: inherit; text-decoration: none;">
 					<h2>Features</h2>
 				</a>
 				<ul>
-					<li><a href="https://documentation.bloomreach.com/library/concepts/page-model-api/introduction.html">Page Model API</a> client;</li>
-					<li>Page Model parser;</li>
-					<li>URL generator;</li>
-					<li>brXM integration.</li>
+					<li>Page Model API Client</li>
+					<li>Page Model Javascript implementation</li>
+					<li>URL Generator</li>
+					<li>Integration with Bloomreach Experience Manager Preview</li>
 				</ul>
 				<a href="#get-started" id="get-started" style="color: inherit; text-decoration: none;">
 					<h2>Get Started</h2>
@@ -89,279 +84,148 @@
 					<h3>Installation</h3>
 				</a>
 				<p>To get the SDK into your project with <a href="https://docs.npmjs.com/cli/npm">NPM</a>:</p>
-				<pre><code class="language-bash">npm install @bloomreach/spa-sdk@saas</code></pre>
+				<pre><code class="language-bash">npm install @bloomreach/spa-sdk</code></pre>
 				<p>And with <a href="https://yarnpkg.com">Yarn</a>:</p>
-				<pre><code class="language-bash">yarn add @bloomreach/spa-sdk@saas</code></pre>
+				<pre><code class="language-bash">yarn add @bloomreach/spa-sdk</code></pre>
 				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
 					<h3>Usage</h3>
 				</a>
 				<p>The following code snippet requests a related page model and shows the page&#39;s title.</p>
-				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> axios <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;axios&#x27;</span>;
-<span class="hljs-keyword">import</span> { initialize } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@bloomreach/spa-sdk&#x27;</span>;
+				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> axios <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;axios&quot;</span>;
+<span class="hljs-keyword">import</span> { initialize } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@bloomreach/spa-sdk&quot;</span>;
 
 <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">showPage</span>(<span class="hljs-params">path</span>) </span>{
   <span class="hljs-keyword">const</span> page = <span class="hljs-keyword">await</span> initialize({
+    <span class="hljs-comment">// The path to request from the Page Model API, should include query</span>
+    <span class="hljs-comment">// parameters if those are present in the url</span>
     path,
-    <span class="hljs-attr">endpoint</span>: <span class="hljs-string">&#x27;http://localhost:8080/delivery/site/v1/channels/brxsaas/pages&#x27;</span>,
+    <span class="hljs-comment">// The location of the Page Model API of the brX channel</span>
+    <span class="hljs-attr">endpoint</span>: <span class="hljs-string">&quot;http://localhost:8080/delivery/site/v1/channels/brxsaas/pages&quot;</span>,
+    <span class="hljs-comment">// The httpClient used to make requests</span>
     <span class="hljs-attr">httpClient</span>: axios,
   });
 
-  <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;#title&#x27;</span>).innerText = page.getTitle();
+  <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&quot;#title&quot;</span>).innerText = page.getTitle();
 }
 
 showPage(<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-built_in">window</span>.location.pathname}</span><span class="hljs-subst">${<span class="hljs-built_in">window</span>.location.search}</span>`</span>);</code></pre>
-				<a href="#configuration" id="configuration" style="color: inherit; text-decoration: none;">
-					<h3>Configuration</h3>
-				</a>
-				<p>The <code>initialize</code> function supports several options you may use to customize page initialization.</p>
-				<table>
-					<thead>
-						<tr>
-							<th>Option</th>
-							<th align="center">Required</th>
-							<th>Default</th>
-							<th>Description</th>
-						</tr>
-					</thead>
-					<tbody><tr>
-							<td><code>apiVersion</code></td>
-							<td align="center">no</td>
-							<td><em>none</em></td>
-							<td>Current API version. By default, the compatible with the current setup version will be chosen.</td>
-						</tr>
-						<tr>
-							<td><code>apiVersionHeader</code></td>
-							<td align="center"><code>&quot;Accept-Version&quot;</code></td>
-							<td><em>none</em></td>
-							<td>API version header.</td>
-						</tr>
-						<tr>
-							<td><code>apiBaseUrl</code></td>
-							<td align="center">no</td>
-							<td><code>cmsBaseUrl</code> + <code>&quot;/resourceapi&quot;</code></td>
-							<td>Base URL of the Page Model API (e.g. <code>http://localhost:8080/delivery/site/v1/channels/brxsaas/pages</code> or <code>http://localhost:8080/site/channel/resourceapi</code>). This option will be ignored if <code>options</code> is present.</td>
-						</tr>
-						<tr>
-							<td><code>authorizationHeader</code></td>
-							<td align="center">no</td>
-							<td><code>&quot;Authorization&quot;</code></td>
-							<td>Authorization header for the Page Model API.</td>
-						</tr>
-						<tr>
-							<td><code>authorizationQueryParameter</code></td>
-							<td align="center">no</td>
-							<td><code>&quot;token&quot;</code></td>
-							<td>The query string parameter used to pass authorization header value.</td>
-						</tr>
-						<tr>
-							<td><code>authorizationToken</code></td>
-							<td align="center">no</td>
-							<td><em>none</em></td>
-							<td>Authorization token for the Page Model API. By default, the SDK will try to extract the token from the request query string using <code>authorizationQueryParameter</code> option.</td>
-						</tr>
-						<tr>
-							<td><code>baseUrl</code></td>
-							<td align="center">no</td>
-							<td><code>&quot;&quot;</code></td>
-							<td>Base URL of the SPA (e.g. <code>/account</code> or <code>//www.example.com</code>). This option can only be used if <code>endpoint</code> is present.</td>
-						</tr>
-						<tr>
-							<td><code>debug</code></td>
-							<td align="center">no</td>
-							<td><code>false</code></td>
-							<td>The option enabling debug mode.</td>
-						</tr>
-						<tr>
-							<td><code>endpoint</code></td>
-							<td align="center"><em>exclusive</em></td>
-							<td><em>none</em></td>
-							<td>Base URL of the Page Model API (e.g. <code>http://localhost:8080/delivery/site/v1/channels/brxsaas/pages</code> or <code>http://localhost:8080/site/channel/resourceapi</code>). This option is exclusive and should not be used together with <code>options</code> or <code>cmsBaseUrl</code>.</td>
-						</tr>
-						<tr>
-							<td><code>endpointQueryParameter</code></td>
-							<td align="center">no</td>
-							<td><em>none</em></td>
-							<td>The query string parameter used as the brXM endpoint (<code>cmsBaseUrl</code>). The option will be ignored if the <code>cmsBaseUrl</code> option is not empty. In case when this option is used, the <code>apiBaseUrl</code> will be prepended with the value from the query parameter. This option should be used only for testing or debugging. By default, the option is disabled.</td>
-						</tr>
-						<tr>
-							<td><code>cmsBaseUrl</code></td>
-							<td align="center"><em>exclusive</em></td>
-							<td><em>none</em></td>
-							<td>Base URL of the site (e.g. <code>http://localhost:8080/site</code> or <code>http://localhost:8080/site/channel</code>). This option is exclusive and should not be used together with <code>options</code> or <code>endpoint</code>.</td>
-						</tr>
-						<tr>
-							<td><code>httpClient</code></td>
-							<td align="center">yes</td>
-							<td><em>none</em></td>
-							<td>The HTTP client that will be used to fetch the page model. Signature is similar to <a href="https://github.com/axios/axios#axiosconfig">Axios</a> client.</td>
-						</tr>
-						<tr>
-							<td><code>options</code></td>
-							<td align="center"><em>exclusive</em></td>
-							<td><em>none</em></td>
-							<td>The CMS URL options. This option is exclusive and should not be used together with <code>cmsBaseUrl</code> or <code>endpoint</code>. Use this property to enable the UrlRewriter-based setup. The option is <strong>deprecated</strong> and will be removed in the next major release.</td>
-						</tr>
-						<tr>
-							<td><code>options.live</code></td>
-							<td align="center">yes</td>
-							<td><em>none</em></td>
-							<td>The CMS URL options for the live site.</td>
-						</tr>
-						<tr>
-							<td><code>options.live.apiBaseUrl</code></td>
-							<td align="center">no</td>
-							<td><code>options.live.cmsBaseUrl</code> + <code>&quot;/resourceapi&quot;</code></td>
-							<td>Base URL of the Page Model API for the live site (e.g. <code>http://localhost:8080/delivery/site/v1/channels/brxsaas/pages</code> or <code>http://localhost:8080/site/channel/resourceapi</code>).</td>
-						</tr>
-						<tr>
-							<td><code>options.live.cmsBaseUrl</code></td>
-							<td align="center">yes</td>
-							<td><em>none</em></td>
-							<td>Base URL of the live site (e.g. <code>http://localhost:8080/site</code> or <code>http://localhost:8080/site/channel</code>).</td>
-						</tr>
-						<tr>
-							<td><code>options.live.spaBaseUrl</code></td>
-							<td align="center">no</td>
-							<td><code>&quot;&quot;</code></td>
-							<td>Base URL of the live SPA (e.g. <code>/account</code> or <code>//www.example.com</code>).</td>
-						</tr>
-						<tr>
-							<td><code>options.preview</code></td>
-							<td align="center">yes</td>
-							<td><em>none</em></td>
-							<td>The CMS URL options for the preview site.</td>
-						</tr>
-						<tr>
-							<td><code>options.preview.apiBaseUrl</code></td>
-							<td align="center">no</td>
-							<td><code>options.preview.cmsBaseUrl</code> + <code>&quot;/resourceapi&quot;</code></td>
-							<td>Base URL of the Page Model API for the preview site (e.g. <code>http://localhost:8080/site/_cmsinternal/resourceapi</code> or <code>http://localhost:8080/site/_cmsinternal/channel/resourceapi</code>).</td>
-						</tr>
-						<tr>
-							<td><code>options.preview.cmsBaseUrl</code></td>
-							<td align="center">yes</td>
-							<td><em>none</em></td>
-							<td>Base URL of the live site (e.g. <code>http://localhost:8080/site/_cmsinternal</code> or <code>http://localhost:8080/site/_cmsinternal/channel</code>).</td>
-						</tr>
-						<tr>
-							<td><code>options.preview.spaBaseUrl</code></td>
-							<td align="center">no</td>
-							<td><code>&quot;&quot;</code></td>
-							<td>Base URL of the live SPA (e.g. <code>/site/_cmsinternal?bloomreach-preview=true</code> or <code>/site/_cmsinternal/channel?bloomreach-preview=true</code>). This path and query string parameters will be used to detect whether it is a preview mode or not.</td>
-						</tr>
-						<tr>
-							<td><code>origin</code></td>
-							<td align="center">no</td>
-							<td><em>none</em></td>
-							<td>The brXM origin to verify an integration with the Experience Manager. This option should be used when the brXM is accessible from a host other than the Page Model API. By default, the origin from the <code>apiBaseUrl</code> or <code>endpoint</code> parameters is used.</td>
-						</tr>
-						<tr>
-							<td><code>path</code></td>
-							<td align="center">no</td>
-							<td><code>/</code></td>
-							<td>The path part of the URL, including a query string if present (e.g. <code>/path/to/page?foo=1</code>).</td>
-						</tr>
-						<tr>
-							<td><code>request</code></td>
-							<td align="center">yes</td>
-							<td><em>none</em></td>
-							<td>Current user&#39;s request.</td>
-						</tr>
-						<tr>
-							<td><code>request.connection</code></td>
-							<td align="center">no</td>
-							<td><em>none</em></td>
-							<td>Current request remote connection containing the remote address. This option is used in <a href="https://documentation.bloomreach.com/14/library/enterprise/enterprise-features/targeting/targeting.html">the Relevance Module</a>.</td>
-						</tr>
-						<tr>
-							<td><code>request.emit</code></td>
-							<td align="center">no</td>
-							<td><em>none</em></td>
-							<td>Emits an event in the request scope. This option can be used in <a href="https://nodejs.org/api/stream.html#stream_readable_streams">Node.js integration</a>.</td>
-						</tr>
-						<tr>
-							<td><code>request.headers</code></td>
-							<td align="center">no</td>
-							<td><code>{}</code></td>
-							<td>An object holding request headers. It should contain a <code>Cookie</code> header if rendering is happening on the server-side in the UrlRewriter-based setup.</td>
-						</tr>
-						<tr>
-							<td><code>request.path</code></td>
-							<td align="center">no</td>
-							<td><code>/</code></td>
-							<td>The path part of the URL, including a query string if present (e.g. <code>/path/to/page?foo=1</code>). The option is <strong>deprecated</strong> in favor of <code>path</code>.</td>
-						</tr>
-						<tr>
-							<td><code>request.visitor</code></td>
-							<td align="center">no</td>
-							<td><em>none</em></td>
-							<td>An object holding information about the current visitor.</td>
-						</tr>
-						<tr>
-							<td><code>serverId</code></td>
-							<td align="center">no</td>
-							<td><em>none</em></td>
-							<td>Cluster node identifier. By default, the SDK will try to extract the value from the request query string using <code>serverIdQueryParameter</code> option.</td>
-						</tr>
-						<tr>
-							<td><code>serverIdHeader</code></td>
-							<td align="center">no</td>
-							<td><code>&quot;Server-Id&quot;</code></td>
-							<td>Header identifying the current cluster node.</td>
-						</tr>
-						<tr>
-							<td><code>serverIdQueryParameter</code></td>
-							<td align="center">no</td>
-							<td><code>&quot;server-id&quot;</code></td>
-							<td>The query string parameter used to pass a cluster node identifier.</td>
-						</tr>
-						<tr>
-							<td><code>spaBaseUrl</code></td>
-							<td align="center">no</td>
-							<td><code>&quot;&quot;</code></td>
-							<td>Base URL of the SPA (e.g. <code>/account</code> or <code>//www.example.com</code>). This option will be ignored if <code>options</code> is present.</td>
-						</tr>
-						<tr>
-							<td><code>visitor</code></td>
-							<td align="center">no</td>
-							<td><em>none</em></td>
-							<td>An object holding information about the current visitor. The option takes precedence over <code>request.visitor</code>.</td>
-						</tr>
-						<tr>
-							<td><code>visitor.id</code></td>
-							<td align="center">yes</td>
-							<td><em>none</em></td>
-							<td>The current visitor identifier.</td>
-						</tr>
-						<tr>
-							<td><code>visitor.header</code></td>
-							<td align="center">yes</td>
-							<td><em>none</em></td>
-							<td>An HTTP-header using to pass the visitor identifier to the Page Model API.</td>
-						</tr>
-						<tr>
-							<td><code>window</code></td>
-							<td align="center">no</td>
-							<td><code>window</code></td>
-							<td>A window object reference will be used to interact with brXM. It needs to be set when initialize is being called within an iframe or worker process.</td>
-						</tr>
-				</tbody></table>
 				<a href="#relevance-integration" id="relevance-integration" style="color: inherit; text-decoration: none;">
 					<h3>Relevance Integration</h3>
 				</a>
-				<p>The SDK provides basic <a href="https://expressjs.com/en/guide/using-middleware.html">Express middleware</a> for seamless integration with <a href="https://documentation.bloomreach.com/14/library/enterprise/enterprise-features/targeting/targeting.html">the Relevance Module</a>.</p>
-				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> express <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;express&#x27;</span>;
-<span class="hljs-keyword">import</span> { relevance } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@bloomreach/spa-sdk/lib/express&#x27;</span>;
+				<p>(not applicable to Content SaaS)</p>
+				<p>The SDK provides basic <a href="https://expressjs.com/en/guide/using-middleware.html">Express
+					middleware</a> for seamless
+				integration with <a href="https://documentation.bloomreach.com/14/library/enterprise/enterprise-features/targeting/targeting.html">the Relevance Module</a>.</p>
+				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> express <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;express&quot;</span>;
+<span class="hljs-keyword">import</span> { relevance } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@bloomreach/spa-sdk/lib/express&quot;</span>;
 
 <span class="hljs-keyword">const</span> app = express();
 
 app.use(relevance);</code></pre>
 				<p>The middleware can be customized using the <code>withOptions</code> method.</p>
-				<pre><code class="language-javascript">app.use(relevance.withOptions({ <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;_visitor&#x27;</span>, <span class="hljs-attr">maxAge</span>: <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span> }));</code></pre>
-				<a href="#reference" id="reference" style="color: inherit; text-decoration: none;">
-					<h3>Reference</h3>
+				<pre><code class="language-javascript">app.use(relevance.withOptions({ <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;_visitor&quot;</span>, <span class="hljs-attr">maxAge</span>: <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span> }));</code></pre>
+				<a href="#license" id="license" style="color: inherit; text-decoration: none;">
+					<h2>License</h2>
 				</a>
-				<p>The complete API reference can be found <a href="https://javadoc.onehippo.org/14.0/bloomreach-spa-sdk/">here</a>.</p>
+				<p>Published under <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</a> license.</p>
+				<a href="#reference" id="reference" style="color: inherit; text-decoration: none;">
+					<h2>Reference</h2>
+				</a>
+				<a href="#configuration" id="configuration" style="color: inherit; text-decoration: none;">
+					<h4>Configuration</h4>
+				</a>
+				<p>The <code>initialize</code> function supports several options you may use to customize page initialization.</p>
+				<table>
+					<thead>
+						<tr>
+							<th>Commonly used options</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td><strong><code>debug</code></strong> <br> The option enabling debug mode. <br><br> Required: no <br> Default: <code>false</code></td>
+						</tr>
+						<tr>
+							<td><strong><code>endpoint</code></strong> <br> Base URL of the Page Model API (e.g. <code>http://localhost:8080/delivery/site/v1/channels/brxsaas/pages</code> or <code>http://localhost:8080/site/channel/resourceapi</code>). This option is exclusive and should not be used together with <code>options</code> or <code>cmsBaseUrl</code> <br><br> Required: yes <br> Default: . <em>none</em></td>
+						</tr>
+						<tr>
+							<td><strong><code>httpClient</code></strong> <br> The HTTP client that will be used to fetch the page model. Signature is similar to <a href="https://github.com/axios/axios#axiosconfig">Axios</a> client. <br><br> Required: yes <br> Default: <em>none</em></td>
+						</tr>
+						<tr>
+							<td><strong><code>path</code></strong> <br> The path part of the URL, <strong>including a query string if present (e.g. <code>/path/to/page?foo=1</code></strong> <br><br> Required: no <br> Default: ) <code>/</code> .</td>
+						</tr>
+						<tr>
+							<td><strong><code>origin</code></strong> <br> The brXM origin to verify an integration with the Experience Manager. This option should be used when the brXM is accessible from a host other than the Page Model API. By default, the origin from the <code>apiBaseUrl</code> or <code>endpoint</code> parameters is used. <br><br> Required: no <br> Default: <em>none</em></td>
+						</tr>
+						<tr>
+							<td><strong><code>baseUrl</code></strong> <br> Base URL of the SPA (e.g. <code>/account</code> or <code>//www.example.com</code>). This option can only be used if <code>endpoint</code> is present. <br><br> Required: no <br> Default: <code>&quot;&quot;</code></td>
+						</tr>
+						<tr>
+							<td><strong><code>apiBaseUrl</code></strong> <br> Base URL of the Page Model API (e.g. <code>http://localhost:8080/delivery/site/v1/channels/brxsaas/pages</code> or <code>http://localhost:8080/site/channel/resourceapi</code>). This option will be ignored if <code>options</code> is present. <br><br> Required: no <br> Default: <code>cmsBaseUrl</code> + <code>&quot;/resourceapi&quot;</code></td>
+						</tr>
+						<tr>
+							<td><strong><code>spaBaseUrl</code></strong> <br> Base URL of the SPA (e.g. <code>/account</code> or <code>//www.example.com</code>). This option will be ignored if <code>options</code> is present. <br><br> Required: no <br> Default: <code>&quot;&quot;</code></td>
+						</tr>
+				</tbody></table>
+				<table>
+					<thead>
+						<tr>
+							<th>Extra options</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td><strong><code>apiVersion</code></strong> <br> Current API version. By default, the compatible with the current setup version will be chosen. <br><br> Required: no <br> Default: <em>none</em></td>
+						</tr>
+						<tr>
+							<td><strong><code>apiVersionHeader</code></strong> <br> API version header. <br><br> Required: <code>&quot;Accept-Version&quot;</code> <br> Default: <em>none</em></td>
+						</tr>
+						<tr>
+							<td><strong><code>authorizationHeader</code></strong> <br> Authorization header for the Page Model API. <br><br> Required: no <br> Default: <code>&quot;Authorization&quot;</code></td>
+						</tr>
+						<tr>
+							<td><strong><code>authorizationQueryParameter</code></strong> <br> The query string parameter used to pass authorization header value. <br><br> Required: no <br> Default: <code>&quot;token&quot;</code></td>
+						</tr>
+						<tr>
+							<td><strong><code>authorizationToken</code></strong> <br> Authorization token for the Page Model API. By default, the SDK will try to extract the token from the request query string using <code>authorizationQueryParameter</code> option. <br><br> Required: no <br> Default: <em>none</em></td>
+						</tr>
+						<tr>
+							<td><strong><code>endpointQueryParameter</code></strong> <br> The query string parameter used as the brXM endpoint (<code>cmsBaseUrl</code>). The option will be ignored if the <code>cmsBaseUrl</code> option is not empty. In case when this option is used, the <code>apiBaseUrl</code> will be prepended with the value from the query parameter. This option should be used only for testing or debugging. By default, the option is disabled. <br><br> Required: no <br> Default: <em>none</em></td>
+						</tr>
+						<tr>
+							<td><strong><code>serverId</code></strong> <br> Cluster node identifier. By default, the SDK will try to extract the value from the request query string using <code>serverIdQueryParameter</code> option. <br><br> Required: no <br> Default: <em>none</em></td>
+						</tr>
+						<tr>
+							<td><strong><code>serverIdHeader</code></strong> <br> Header identifying the current cluster node. <br><br> Required: no <br> Default: <code>&quot;Server-Id&quot;</code></td>
+						</tr>
+						<tr>
+							<td><strong><code>serverIdQueryParameter</code></strong> <br> The query string parameter used to pass a cluster node identifier. <br><br> Required: no <br> Default: <code>&quot;server-id&quot;</code></td>
+						</tr>
+						<tr>
+							<td><strong><code>window</code></strong> <br> A window object reference will be used to interact with brXM. It needs to be set when initialize is being called within an iframe or worker process. <br><br> Required: no <br> Default: <code>window</code></td>
+						</tr>
+				</tbody></table>
+				<p>| Relevance options (PaaS-only)
+					| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------- |
+					| <strong><code>visitor</code></strong> <br> An object holding information about the current visitor. The option takes precedence over <code>request.visitor</code> <br><br> Required: no <br> Default: . <em>none</em> |
+					| <strong><code>visitor.id</code></strong> <br> The current visitor identifier. <br><br> Required: yes <br> Default: <em>none</em> |
+					| <strong><code>visitor.header</code></strong> <br> An HTTP-header using to pass the visitor identifier to the Page Model API. <br><br> Required: yes <br> Default: <em>none</em> |
+					| <strong><code>request</code></strong> <br> Current user&#39;s request. <br><br> Required: yes <br> Default: <em>none</em> |
+					| <strong><code>request.connection</code></strong> <br> Current request remote connection containing the remote address. This option is used in <a href="https://documentation.bloomreach.com/14/library/enterprise/enterprise-features/targeting/targeting.html">the Relevance Module</a> <br><br> Required: no <br> Default: . <em>none</em> |
+					| <strong><code>request.emit</code></strong> <br> Emits an event in the request scope. This option can be used in <a href="https://nodejs.org/api/stream.html#stream_readable_streams">Node.js integration</a> <br><br> Required: no <br> Default: . <em>none</em> |
+					| <strong><code>request.headers</code></strong> <br> An object holding request headers. It should contain a <code>Cookie</code> header if rendering is happening on the server-side in the UrlRewriter-based setup. <br><br> Required: no <br> Default: <code>{}</code> |
+					| <strong><code>request.path</code></strong> <br> The path part of the URL, including a query string if present (e.g. <code>/path/to/page?foo=1</code>). The option is <strong>deprecated</strong> in favor of <code>path</code> <br><br> Required: no <br> Default: . <code>/</code> |
+				| <strong><code>request.visitor</code></strong> <br> An object holding information about the current visitor. <br><br> Required: no <br> Default: <em>none</em> |</p>
+				<p>| These options are deprecated and will be removed in the next major release
+					| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- | ----------------------------------------------- |
+					| <strong><code>cmsBaseUrl</code></strong> <br> Base URL of the site (e.g. <code>http://localhost:8080/site</code> or <code>http://localhost:8080/site/channel</code>). This option is exclusive and should not be used together with <code>options</code> or <code>endpoint</code> <br><br> Required: <em>exclusive</em> <br> Default: . <em>none</em> |
+					| <strong><code>options</code></strong> <br> The CMS URL options. This option is exclusive and should not be used together with <code>cmsBaseUrl</code> or <code>endpoint</code>. Use this property to enable the UrlRewriter-based setup. <br><br> Required: <em>exclusive</em> <br> Default: <em>none</em> |
+					| <strong><code>options.live</code></strong> <br> The CMS URL options for the live site. <br><br> Required: yes <br> Default: <em>none</em> |
+					| <strong><code>options.live.apiBaseUrl</code></strong> <br> Base URL of the Page Model API for the live site (e.g. <code>http://localhost:8080/delivery/site/v1/channels/brxsaas/pages</code> or <code>http://localhost:8080/site/channel/resourceapi</code> <br><br> Required: no <br> Default: ) <code>options.live.cmsBaseUrl</code> + <code>&quot;/resourceapi&quot;</code> . |
+					| <strong><code>options.live.cmsBaseUrl</code></strong> <br> Base URL of the live site (e.g. <code>http://localhost:8080/site</code> or <code>http://localhost:8080/site/channel</code> <br><br> Required: yes <br> Default: ) <em>none</em> . |
+					| <strong><code>options.live.spaBaseUrl</code></strong> <br> Base URL of the live SPA (e.g. <code>/account</code> or <code>//www.example.com</code> <br><br> Required: no <br> Default: ) <code>&quot;&quot;</code> . |
+					| <strong><code>options.preview</code></strong> <br> The CMS URL options for the preview site. <br><br> Required: yes <br> Default: <em>none</em> |
+					| <strong><code>options.preview.apiBaseUrl</code></strong> <br> Base URL of the Page Model API for the preview site (e.g. <code>http://localhost:8080/site/_cmsinternal/resourceapi</code> or <code>http://localhost:8080/site/_cmsinternal/channel/resourceapi</code> <br><br> Required: no <br> Default: ) <code>options</code><br><code>.preview.cmsBaseUrl</code> <br>+ <code>&quot;/resourceapi&quot;</code> . |
+					| <strong><code>options.preview.cmsBaseUrl</code></strong> <br> Base URL of the live site (e.g. <code>http://localhost:8080/site/_cmsinternal</code> or <code>http://localhost:8080/site/_cmsinternal/channel</code> <br><br> Required: yes <br> Default: ) <em>none</em> . |
+				| <strong><code>options.preview.spaBaseUrl</code></strong> <br> Base URL of the live SPA (e.g. <code>/site/_cmsinternal?bloomreach-preview=true</code> or <code>/site/_cmsinternal/channel?bloomreach-preview=true</code>). This path and query string parameters will be used to detect whether it is a preview mode or not. <br><br> Required: no <br> Default: <code>&quot;&quot;</code> |</p>
 				<a href="#functions" id="functions" style="color: inherit; text-decoration: none;">
 					<h4>Functions</h4>
 				</a>
@@ -1034,24 +898,6 @@ app.use(relevance);</code></pre>
 							<td>Returns the page URL.</td>
 						</tr>
 				</tbody></table>
-				<a href="#links" id="links" style="color: inherit; text-decoration: none;">
-					<h2>Links</h2>
-				</a>
-				<ul>
-					<li><a href="https://documentation.bloomreach.com/library/concepts/spa-integration/introduction.html">SPA integration concept</a>.</li>
-					<li><a href="https://documentation.bloomreach.com/library/concepts/page-model-api/introduction.html">Page Model API introduction</a>.</li>
-				</ul>
-				<a href="#faq" id="faq" style="color: inherit; text-decoration: none;">
-					<h2>FAQ</h2>
-				</a>
-				<ul>
-					<li>Information about common problems and possible solutions can be found on <a href="https://documentation.bloomreach.com/library/concepts/spa-integration/troubleshooting.html">the troubleshooting page</a>.</li>
-					<li>Information about the recommended setup can be found on <a href="https://documentation.bloomreach.com/library/concepts/spa-integration/best-practices.html">the best practices page</a>.</li>
-				</ul>
-				<a href="#license" id="license" style="color: inherit; text-decoration: none;">
-					<h2>License</h2>
-				</a>
-				<p>Published under <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</a> license.</p>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
