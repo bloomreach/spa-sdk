@@ -20,7 +20,6 @@
   },
   "typedocOptions": {
     "disableSources": true,
-    "excludeNotExported": true,
     "excludePrivate": true,
     "excludeProtected": true,
     "exclude": "!lib/**/*",
