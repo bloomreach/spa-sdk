@@ -2403,7 +2403,7 @@ __metadata:
   resolution: "@bloomreach/example-next@workspace:examples/next"
   dependencies:
     "@bloomreach/react-sdk": 0.3.2-saas
-    "@types/node": ^14.14
+    "@types/node": 14.17.3
     "@types/react": 16.14.0
     "@types/react-dom": 16.9.14
     axios: 0.21.1
@@ -4780,13 +4780,6 @@ __metadata:
   version: 14.17.3
   resolution: "@types/node@npm:14.17.3"
   checksum: c24c1f222b83a4cba584ae1bce2ab262d48d9d502346d82dd261236d29ce11ad63c5a5b1bfc74e50eaae032384893d443297d4da758e1eb540d9bf2495d7814e
-  languageName: node
-  linkType: hard
-
-"@types/node@npm:^14.14":
-  version: 14.17.7
-  resolution: "@types/node@npm:14.17.7"
-  checksum: e95f28361784106237380ebd4ed133bc9d6aa04694bd061bd913d9008ce88bd596b059464fa56cf534c0cb347a3a9753b8abdf7c85d24a77126bf0ad24c6fdf9
   languageName: node
   linkType: hard
 
