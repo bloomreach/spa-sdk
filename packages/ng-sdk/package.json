@@ -1,12 +1,8 @@
 {
   "name": "@bloomreach/ng-sdk",
-  "version": "15.0.0-1",
+  "version": "15.0.0-2",
   "description": "Bloomreach SPA SDK for Angular",
-  "keywords": [
-    "bloomreach",
-    "sdk",
-    "angular"
-  ],
+  "keywords": ["bloomreach", "sdk", "angular"],
   "author": "Bloomreach B.V.",
   "license": "Apache-2.0",
   "homepage": "https://www.bloomreach.com",
@@ -41,7 +37,7 @@
     "dist/bloomreach-ng-sdk.metadata.json"
   ],
   "dependencies": {
-    "@bloomreach/spa-sdk": "15.0.0-1",
+    "@bloomreach/spa-sdk": "15.0.0-2",
     "tslib": "2.3.0"
   },
   "peerDependencies": {
@@ -75,5 +71,6 @@
   "jest-junit": {
     "outputDirectory": "coverage",
     "outputName": "TEST-ng-sdk.xml"
-  }
+  },
+  "stableVersion": "15.0.0-2"
 }

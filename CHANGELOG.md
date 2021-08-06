@@ -1,13 +1,40 @@
-# Changelog
+### Changelog
 
-All notable changes to this project will be documented in this file.
+All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+#### [15.0.0-2](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.0.0-1...15.0.0-2)
 
-## [spa-sdk-15.0.0-1](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-0.3.0-saas...spa-sdk-15.0.0-1) - 2021-08-05
+- Resolve SPASDK-22 "Update and lock spa sdk dependencies" [`#10`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/10)
+- SPASDK-32 Add version to workspace so auto-changelog can detect it [`#SPASDK-32`](https://issues.onehippo.com/browse/SPASDK-32)
+- SPASDK-22 Set explicit version for node types in next example [`#SPASDK-22`](https://issues.onehippo.com/browse/SPASDK-22)
+- SPASDK-22 Return back initila version befor changes [`#SPASDK-22`](https://issues.onehippo.com/browse/SPASDK-22)
+- SPASDK-22 Return back range for angular in ng-sdk peer dependencies [`#SPASDK-22`](https://issues.onehippo.com/browse/SPASDK-22)
+- SPASDK-22 Retunr back `nuxt/recomended` setting removed by mistake [`#SPASDK-22`](https://issues.onehippo.com/browse/SPASDK-22)
+- SPASDK-22 Run prettier on vue-sdk [`#SPASDK-22`](https://issues.onehippo.com/browse/SPASDK-22)
+- SPASDK-22 Bump and pin dependencies in nuxt example project [`#SPASDK-22`](https://issues.onehippo.com/browse/SPASDK-22)
+- SPASDK-22 Update vue-sdk version in vue/nuxt example projects [`#SPASDK-22`](https://issues.onehippo.com/browse/SPASDK-22)
+- SPASDK-22 Bump vue-sdk version and publish [`#SPASDK-22`](https://issues.onehippo.com/browse/SPASDK-22)
+- SPASDK-22 Rollback `vue-fragment` to 1.5.1 [`#SPASDK-22`](https://issues.onehippo.com/browse/SPASDK-22)
+- SPASDK-22 Change SDK's versions in example projects [`#SPASDK-22`](https://issues.onehippo.com/browse/SPASDK-22)
+- SPASDK-22 Bump SDK's versions and publish [`#SPASDK-22`](https://issues.onehippo.com/browse/SPASDK-22)
+- SPASDK-22 Bump and pin dependencies in vue example project [`#SPASDK-22`](https://issues.onehippo.com/browse/SPASDK-22)
+- SPASDK-22 Adjust TS to the new version 4.1 [`#SPASDK-22`](https://issues.onehippo.com/browse/SPASDK-22)
+- SPASDK-22 Bump and pin dependincies in next example project [`#SPASDK-22`](https://issues.onehippo.com/browse/SPASDK-22)
+- SPASDK-22 Adjust TS to the new version 4.1 [`#SPASDK-22`](https://issues.onehippo.com/browse/SPASDK-22)
+- SPASDK-22 Bump and pin dependencies in react example project [`#SPASDK-22`](https://issues.onehippo.com/browse/SPASDK-22)
+- SPASDK-22 Bump and pin dependencies in angular example project [`#SPASDK-22`](https://issues.onehippo.com/browse/SPASDK-22)
+- SPASDK-22 Bump and pin dependencies in vue-sdk package [`#SPASDK-22`](https://issues.onehippo.com/browse/SPASDK-22)
+- SPASDK-22 Bump and pin dependencies in ng-sdk package [`#SPASDK-22`](https://issues.onehippo.com/browse/SPASDK-22)
+- SPASDK-22 Bump and pin dependencies in react-sdk package [`#SPASDK-22`](https://issues.onehippo.com/browse/SPASDK-22)
+- SPASDK-22 Bump and pin dev dependencies in the spa-sdk package [`#SPASDK-22`](https://issues.onehippo.com/browse/SPASDK-22)
+- SPASDK-22 Install yarn plugin for interactive upgrade [`#SPASDK-22`](https://issues.onehippo.com/browse/SPASDK-22)
+- SPASDK-22 Update local yarn to the latest version [`#SPASDK-22`](https://issues.onehippo.com/browse/SPASDK-22)
+- SPASDK-22 Update dependencies in spa-sdk [`#SPASDK-22`](https://issues.onehippo.com/browse/SPASDK-22)
+- SPASDK-32 Use auto-changelog to generate CHANGELOG.md [`#SPASDK-32`](https://issues.onehippo.com/browse/SPASDK-32)
 
-### Merged
+#### [spa-sdk-15.0.0-1](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-0.3.0-saas...spa-sdk-15.0.0-1)
+
+> 5 August 2021
 
 - SPASDK-31 Generate and host Typescript docs for SDKs [`#13`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/13)
 - SPASDK-25 Set up spa sdk pipelines [`#9`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/9)
@@ -17,9 +44,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - SPASDK-8 Bump version to 0.3.2-saas [`#6`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/6)
 - SPASDK-7 Add HandleHttpError [`#3`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/3)
 - SPASDK-2 Add exported function "getContainerItemContent" [`#1`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/1)
-
-### Fixed
-
 - SPASDK-32 Bump versions to 15.0.0-1 [`#SPASDK-32`](https://issues.onehippo.com/browse/SPASDK-32)
 - SPASDK-31 Include non exported interfaces as it gives complete documentation [`#SPASDK-31`](https://issues.onehippo.com/browse/SPASDK-31)
 - SPASDK-31 Add pipeline for publishing SPA SDK TypeDocs [`#SPASDK-31`](https://issues.onehippo.com/browse/SPASDK-31)
@@ -58,8 +82,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - SPASDK-1 Bump to use node 14 [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
 - SPASDK-1 Remove maven files and update Jenkinsfile [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
 - SPASDK-1 Initial move from brxm monorepo [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
-
-### Commits
-
-- TRIVIAL Skip telemetry check on nuxt startup [`15deb25`](https://github.com/bloomreach/spa-sdk/commit/15deb25b1edde3af3296d4dc34dba1483fe278f2)
 - TRIVIAL Set branch name to 'main' in changesetBaseRefs [`4dacdcd`](https://github.com/bloomreach/spa-sdk/commit/4dacdcd2fdb0712e40dcb33b9809ae12786f9ab1)
+- TRIVIAL Skip telemetry check on nuxt startup [`15deb25`](https://github.com/bloomreach/spa-sdk/commit/15deb25b1edde3af3296d4dc34dba1483fe278f2)
