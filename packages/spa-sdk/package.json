@@ -1,12 +1,8 @@
 {
   "name": "@bloomreach/spa-sdk",
-  "version": "0.3.2-saas",
+  "version": "15.0.0-2",
   "description": "Bloomreach SPA SDK",
-  "keywords": [
-    "bloomreach",
-    "spa",
-    "sdk"
-  ],
+  "keywords": ["bloomreach", "spa", "sdk"],
   "author": "Bloomreach B.V.",
   "license": "Apache-2.0",
   "homepage": "https://www.bloomreach.com",
@@ -23,9 +19,7 @@
   "module": "lib/index.mjs",
   "es2015": "lib/index.es6.js",
   "types": "lib/index.d.ts",
-  "files": [
-    "lib/"
-  ],
+  "files": ["lib/"],
   "scripts": {
     "build": "rollup -c rollup.config.js",
     "docs": "typedoc",
@@ -35,13 +29,8 @@
   },
   "jest": {
     "preset": "ts-jest",
-    "reporters": [
-      "default",
-      "jest-junit"
-    ],
-    "setupFiles": [
-      "reflect-metadata"
-    ],
+    "reporters": ["default", "jest-junit"],
+    "setupFiles": ["reflect-metadata"],
     "testEnvironment": "jsdom"
   },
   "jest-junit": {
@@ -87,5 +76,6 @@
     "inversify": "5.1.1",
     "reflect-metadata": "0.1.13",
     "xmldom": "0.6.0"
-  }
+  },
+  "stableVersion": "15.0.0-2"
 }

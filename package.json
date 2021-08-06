@@ -1,5 +1,6 @@
 {
   "private": true,
+  "version": "15.0.0-2",
   "workspaces": [
     "packages/*",
     "examples/*"
@@ -25,7 +26,8 @@
   },
   "scripts": {
     "build": "yarn workspaces foreach --parallel --topological run build",
-    "bump": "yarn workspaces foreach version ${0}",
+    "bump": "yarn workspaces foreach version ${0} && yarn changelog",
+    "changelog": "auto-changelog",
     "docs": "yarn workspaces foreach --parallel run docs",
     "heroku-postbuild": "cd ${PROJECT_PATH:-.} && yarn workspaces foreach --parallel --recursive --topological run build",
     "lint": "yarn workspaces foreach --parallel run lint",
@@ -34,5 +36,21 @@
   },
   "resolutions": {
     "typescript": "~4.1"
-  }
+  },
+  "devDependencies": {
+    "auto-changelog": "2.3.0"
+  },
+  "auto-changelog": {
+    "hideCredit": true,
+    "commitLimit": false,
+    "tagPrefix": "spa-sdk-",
+    "package": true,
+    "appendGitLog": "--since 2021-05-10",
+    "hideEmptyReleases": true,
+    "remote": "github",
+    "issueUrl": "https://issues.onehippo.com/browse/{id}",
+    "issuePattern": "^[A-Z]+-\\d+",
+    "mergeUrl": "https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/{id}"
+  },
+"stableVersion": "15.0.0-2"
 }

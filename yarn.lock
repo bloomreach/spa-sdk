@@ -2379,7 +2379,7 @@ __metadata:
     "@angular/platform-browser-dynamic": 11.2.14
     "@angular/platform-server": 11.2.14
     "@angular/router": 11.2.14
-    "@bloomreach/ng-sdk": 0.3.2-saas
+    "@bloomreach/ng-sdk": 15.0.0-2
     "@nguniversal/builders": 11.2.1
     "@nguniversal/express-engine": 11.2.1
     "@types/cookie": 0.4.1
@@ -2402,7 +2402,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bloomreach/example-next@workspace:examples/next"
   dependencies:
-    "@bloomreach/react-sdk": 0.3.2-saas
+    "@bloomreach/react-sdk": 15.0.0-2
     "@types/node": 14.17.3
     "@types/react": 16.14.0
     "@types/react-dom": 16.9.14
@@ -2419,8 +2419,8 @@ __metadata:
   resolution: "@bloomreach/example-nuxt@workspace:examples/nuxt"
   dependencies:
     "@babel/runtime-corejs3": 7.14.9
-    "@bloomreach/spa-sdk": 0.3.2-saas
-    "@bloomreach/vue-sdk": 0.3.2-saas
+    "@bloomreach/spa-sdk": 15.0.0-2
+    "@bloomreach/vue-sdk": 15.0.0-2
     "@nuxt/types": 2.15.7
     "@nuxt/typescript-build": 2.1.0
     "@nuxtjs/axios": 5.13.6
@@ -2446,7 +2446,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bloomreach/example-react@workspace:examples/react"
   dependencies:
-    "@bloomreach/react-sdk": 0.3.2-saas
+    "@bloomreach/react-sdk": 15.0.0-2
     "@types/react": 16.14.0
     "@types/react-dom": 16.9.14
     "@types/react-router-dom": 5.1.8
@@ -2465,8 +2465,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bloomreach/example-vue@workspace:examples/vue"
   dependencies:
-    "@bloomreach/spa-sdk": 0.3.2-saas
-    "@bloomreach/vue-sdk": 0.3.2-saas
+    "@bloomreach/spa-sdk": 15.0.0-2
+    "@bloomreach/vue-sdk": 15.0.0-2
     "@types/jest": 26.0.24
     "@typescript-eslint/eslint-plugin": 4.28.5
     "@typescript-eslint/parser": 4.28.5
@@ -2496,7 +2496,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@bloomreach/ng-sdk@0.3.2-saas, @bloomreach/ng-sdk@workspace:packages/ng-sdk":
+"@bloomreach/ng-sdk@15.0.0-2, @bloomreach/ng-sdk@workspace:packages/ng-sdk":
   version: 0.0.0-use.local
   resolution: "@bloomreach/ng-sdk@workspace:packages/ng-sdk"
   dependencies:
@@ -2510,7 +2510,7 @@ __metadata:
     "@angular/language-service": 11.2.14
     "@angular/platform-browser": 11.2.14
     "@angular/platform-browser-dynamic": 11.2.14
-    "@bloomreach/spa-sdk": 0.3.2-saas
+    "@bloomreach/spa-sdk": 15.0.0-2
     "@types/jest": 26.0.24
     codelyzer: 6.0.2
     jest: 26.6.3
@@ -2530,7 +2530,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@bloomreach/react-sdk@0.3.2-saas, @bloomreach/react-sdk@workspace:packages/react-sdk":
+"@bloomreach/react-sdk@15.0.0-2, @bloomreach/react-sdk@workspace:packages/react-sdk":
   version: 0.0.0-use.local
   resolution: "@bloomreach/react-sdk@workspace:packages/react-sdk"
   dependencies:
@@ -2538,7 +2538,7 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": 7.14.7
     "@babel/preset-env": 7.14.8
     "@babel/preset-react": 7.14.5
-    "@bloomreach/spa-sdk": 0.3.2-saas
+    "@bloomreach/spa-sdk": 15.0.0-2
     "@rollup/plugin-babel": 5.3.0
     "@types/enzyme": 3.10.9
     "@types/jest": 26.0.24
@@ -2567,7 +2567,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@bloomreach/spa-sdk@0.3.2-saas, @bloomreach/spa-sdk@workspace:packages/spa-sdk":
+"@bloomreach/spa-sdk@15.0.0-2, @bloomreach/spa-sdk@workspace:packages/spa-sdk":
   version: 0.0.0-use.local
   resolution: "@bloomreach/spa-sdk@workspace:packages/spa-sdk"
   dependencies:
@@ -2604,11 +2604,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@bloomreach/vue-sdk@0.3.2-saas, @bloomreach/vue-sdk@workspace:packages/vue-sdk":
+"@bloomreach/vue-sdk@15.0.0-2, @bloomreach/vue-sdk@workspace:packages/vue-sdk":
   version: 0.0.0-use.local
   resolution: "@bloomreach/vue-sdk@workspace:packages/vue-sdk"
   dependencies:
-    "@bloomreach/spa-sdk": 0.3.2-saas
+    "@bloomreach/spa-sdk": 15.0.0-2
     "@types/jest": 26.0.24
     "@types/node": 14.17.3
     "@typescript-eslint/eslint-plugin": 4.28.5
@@ -6809,6 +6809,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"auto-changelog@npm:2.3.0":
+  version: 2.3.0
+  resolution: "auto-changelog@npm:2.3.0"
+  dependencies:
+    commander: ^5.0.0
+    handlebars: ^4.7.3
+    node-fetch: ^2.6.0
+    parse-github-url: ^1.0.2
+    semver: ^6.3.0
+  bin:
+    auto-changelog: src/index.js
+  checksum: ba7eccb78be6141f3117b4f35689e389f44adceeebfe9632556d6c2615b5d9f77222e01faa439f89ce7e1ecc76bec118eff26c1d78ff3579278c44356b54fceb
+  languageName: node
+  linkType: hard
+
 "autoprefixer@npm:10.2.4":
   version: 10.2.4
   resolution: "autoprefixer@npm:10.2.4"
@@ -8794,6 +8809,13 @@ __metadata:
   version: 4.1.1
   resolution: "commander@npm:4.1.1"
   checksum: d7b9913ff92cae20cb577a4ac6fcc121bd6223319e54a40f51a14740a681ad5c574fd29a57da478a5f234a6fa6c52cbf0b7c641353e03c648b1ae85ba670b977
+  languageName: node
+  linkType: hard
+
+"commander@npm:^5.0.0":
+  version: 5.1.0
+  resolution: "commander@npm:5.1.0"
+  checksum: 0b7fec1712fbcc6230fcb161d8d73b4730fa91a21dc089515489402ad78810547683f058e2a9835929c212fead1d6a6ade70db28bbb03edbc2829a9ab7d69447
   languageName: node
   linkType: hard
 
@@ -13317,7 +13339,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"handlebars@npm:^4.7.6":
+"handlebars@npm:^4.7.3, handlebars@npm:^4.7.6":
   version: 4.7.7
   resolution: "handlebars@npm:4.7.7"
   dependencies:
@@ -18162,7 +18184,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"node-fetch@npm:2.6.1, node-fetch@npm:^2.6.1":
+"node-fetch@npm:2.6.1, node-fetch@npm:^2.6.0, node-fetch@npm:^2.6.1":
   version: 2.6.1
   resolution: "node-fetch@npm:2.6.1"
   checksum: 91075bedd57879117e310fbcc36983ad5d699e522edb1ebcdc4ee5294c982843982652925c3532729fdc86b2d64a8a827797a745f332040d91823c8752ee4d7c
@@ -19301,6 +19323,15 @@ fsevents@^1.2.7:
     git-config-path: ^2.0.0
     ini: ^1.3.5
   checksum: 243aa781d08f3208e94708a59e3410af90a7e831054c08775e7aeccaa23fc03240092ffd829412ee3dbe57f33ae876883b7e63171499041d4522e92d7d624c13
+  languageName: node
+  linkType: hard
+
+"parse-github-url@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "parse-github-url@npm:1.0.2"
+  bin:
+    parse-github-url: ./cli.js
+  checksum: a19b8bc6f8908a24cb63a10ff90cd39cec0745615a272ec686803684653be34eb3e638e31a66c8ee3a9568082ff686eaf010181688000a6274c86a23e9220f2f
   languageName: node
   linkType: hard
 
@@ -22744,6 +22775,8 @@ resolve@^2.0.0-next.3:
 "root-workspace-0b6124@workspace:.":
   version: 0.0.0-use.local
   resolution: "root-workspace-0b6124@workspace:."
+  dependencies:
+    auto-changelog: 2.3.0
   languageName: unknown
   linkType: soft
 

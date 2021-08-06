@@ -1,12 +1,8 @@
 {
   "name": "@bloomreach/vue-sdk",
-  "version": "0.3.2-saas",
+  "version": "15.0.0-2",
   "description": "Bloomreach SPA SDK for Vue.js",
-  "keywords": [
-    "bloomreach",
-    "sdk",
-    "vue"
-  ],
+  "keywords": ["bloomreach", "sdk", "vue"],
   "author": "Bloomreach B.V.",
   "license": "Apache-2.0",
   "homepage": "https://www.bloomreach.com",
@@ -21,24 +17,16 @@
   "main": "dist/index.common.js",
   "browser": "dist/index.umd.js",
   "typings": "typings.d.ts",
-  "files": [
-    "dist/*.js*",
-    "typings.d.ts"
-  ],
+  "files": ["dist/*.js*", "typings.d.ts"],
   "scripts": {
     "build": "vue-cli-service build --filename index --formats commonjs,umd --name BloomreachVueSdk --target lib src/main.ts",
     "lint": "vue-cli-service lint --no-fix",
     "prepare": "$npm_execpath run build",
     "test": "vue-cli-service test:unit --coverage"
   },
-  "browserslist": [
-    "last 1 chrome version",
-    "last 1 firefox version",
-    "last 1 safari version",
-    "last 1 edge version"
-  ],
+  "browserslist": ["last 1 chrome version", "last 1 firefox version", "last 1 safari version", "last 1 edge version"],
   "dependencies": {
-    "@bloomreach/spa-sdk": "0.3.2-saas",
+    "@bloomreach/spa-sdk": "15.0.0-2",
     "vue-class-component": "7.2.6",
     "vue-fragment": "1.5.1",
     "vue-property-decorator": "9.1.2"
@@ -74,13 +62,11 @@
   },
   "jest": {
     "preset": "@vue/cli-plugin-unit-jest/presets/typescript",
-    "reporters": [
-      "default",
-      "jest-junit"
-    ]
+    "reporters": ["default", "jest-junit"]
   },
   "jest-junit": {
     "outputDirectory": "coverage",
     "outputName": "TEST-vue-sdk.xml"
-  }
+  },
+  "stableVersion": "15.0.0-2"
 }

@@ -1,12 +1,8 @@
 {
   "name": "@bloomreach/react-sdk",
-  "version": "0.3.2-saas",
+  "version": "15.0.0-2",
   "description": "Bloomreach SPA SDK for React",
-  "keywords": [
-    "bloomreach",
-    "sdk",
-    "react"
-  ],
+  "keywords": ["bloomreach", "sdk", "react"],
   "author": "Bloomreach B.V.",
   "license": "Apache-2.0",
   "homepage": "https://www.bloomreach.com",
@@ -23,9 +19,7 @@
   "module": "dist/index.mjs",
   "es2015": "dist/index.es6.mjs",
   "types": "dist/index.d.ts",
-  "files": [
-    "dist/"
-  ],
+  "files": ["dist/"],
   "scripts": {
     "build": "rollup -c rollup.config.js",
     "lint": "tslint --project .",
@@ -39,7 +33,7 @@
     "last 1 edge version"
   ],
   "dependencies": {
-    "@bloomreach/spa-sdk": "0.3.2-saas"
+    "@bloomreach/spa-sdk": "15.0.0-2"
   },
   "peerDependencies": {
     "react": "^16.14"
@@ -75,17 +69,13 @@
   },
   "jest": {
     "preset": "ts-jest",
-    "reporters": [
-      "default",
-      "jest-junit"
-    ],
-    "setupFilesAfterEnv": [
-      "jest-enzyme"
-    ],
+    "reporters": ["default", "jest-junit"],
+    "setupFilesAfterEnv": ["jest-enzyme"],
     "testEnvironment": "enzyme"
   },
   "jest-junit": {
     "outputDirectory": "coverage",
     "outputName": "TEST-react-sdk.xml"
-  }
+  },
+  "stableVersion": "15.0.0-2"
 }

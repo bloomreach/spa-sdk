@@ -1,7 +1,7 @@
 {
   "name": "@bloomreach/example-angular",
   "description": "Example Angular SPA for Bloomreach Experience",
-  "version": "0.3.2-saas",
+  "version": "15.0.0-2",
   "private": true,
   "scripts": {
     "ng": "ng",
@@ -23,7 +23,7 @@
     "@angular/platform-browser-dynamic": "11.2.14",
     "@angular/platform-server": "11.2.14",
     "@angular/router": "11.2.14",
-    "@bloomreach/ng-sdk": "0.3.2-saas",
+    "@bloomreach/ng-sdk": "15.0.0-2",
     "@nguniversal/express-engine": "11.2.1",
     "express": "4.17.1",
     "rxjs": "6.6.7",
@@ -46,5 +46,6 @@
     "ts-node": "10.1.0",
     "tslint": "6.1.3",
     "typescript": "4.1.6"
-  }
+  },
+  "stableVersion": "15.0.0-2"
 }
