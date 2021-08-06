@@ -22,7 +22,7 @@ describe('BrContainerItemUndefined', () => {
   let component: jest.Mocked<ContainerItem>;
 
   beforeEach(() => {
-    component = ({ getType: jest.fn(() => 'Some Component') } as unknown) as typeof component;
+    component = { getType: jest.fn(() => 'Some Component') } as unknown as typeof component;
   });
 
   describe('render', () => {

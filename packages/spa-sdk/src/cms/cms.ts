@@ -123,7 +123,7 @@ export class CmsImpl implements Cms {
     this.logger?.debug('Received request to inject a resource.');
     this.logger?.debug('Resource:', resource);
 
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
       const script = this.window!.document.createElement('script');
 
       script.type = 'text/javascript';
