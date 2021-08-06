@@ -6,7 +6,8 @@
   },
   "extends": [
     "@nuxtjs/eslint-config-typescript",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+    "plugin:nuxt/recommended"
   ],
   "parserOptions": {
     "ecmaVersion": 2020
