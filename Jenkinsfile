@@ -75,7 +75,6 @@ pipeline {
 
     stage('Release') {
       when {
-        branch 'main'
         tag 'spa-sdk-*'
       }
 
