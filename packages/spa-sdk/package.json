@@ -1,6 +1,6 @@
 {
   "name": "@bloomreach/spa-sdk",
-  "version": "15.0.0",
+  "version": "15.0.1-0",
   "description": "Bloomreach SPA SDK",
   "keywords": [
     "bloomreach",
@@ -86,6 +86,7 @@
     "emittery": "0.7.2",
     "inversify": "5.1.1",
     "reflect-metadata": "0.1.13",
-    "xmldom": "0.6.0"
-  }
+    "xmldom": "github:xmldom/xmldom#0.7.0"
+  },
+  "stableVersion": "15.0.0"
 }

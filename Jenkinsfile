@@ -88,9 +88,14 @@ pipeline {
         }
 
         stage('Publish to GitHub') {
+          environment {
+            GIT_SSH_COMMAND='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
+          }
+
           steps {
             sh 'git remote add github git@github.com:bloomreach/spa-sdk.git'
             sshagent (credentials: ['spa-sdk-github']) {
+              sh 'git push github main'
               sh 'git push github ${TAG_NAME}'
             }
           }

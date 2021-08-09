@@ -2379,7 +2379,7 @@ __metadata:
     "@angular/platform-browser-dynamic": 11.2.14
     "@angular/platform-server": 11.2.14
     "@angular/router": 11.2.14
-    "@bloomreach/ng-sdk": 15.0.0
+    "@bloomreach/ng-sdk": 15.0.1-0
     "@nguniversal/builders": 11.2.1
     "@nguniversal/express-engine": 11.2.1
     "@types/cookie": 0.4.1
@@ -2402,7 +2402,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bloomreach/example-next@workspace:examples/next"
   dependencies:
-    "@bloomreach/react-sdk": 15.0.0
+    "@bloomreach/react-sdk": 15.0.1-0
     "@types/node": 14.17.3
     "@types/react": 16.14.0
     "@types/react-dom": 16.9.14
@@ -2419,8 +2419,8 @@ __metadata:
   resolution: "@bloomreach/example-nuxt@workspace:examples/nuxt"
   dependencies:
     "@babel/runtime-corejs3": 7.14.9
-    "@bloomreach/spa-sdk": 15.0.0
-    "@bloomreach/vue-sdk": 15.0.0
+    "@bloomreach/spa-sdk": 15.0.1-0
+    "@bloomreach/vue-sdk": 15.0.1-0
     "@nuxt/types": 2.15.7
     "@nuxt/typescript-build": 2.1.0
     "@nuxtjs/axios": 5.13.6
@@ -2446,7 +2446,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bloomreach/example-react@workspace:examples/react"
   dependencies:
-    "@bloomreach/react-sdk": 15.0.0
+    "@bloomreach/react-sdk": 15.0.1-0
     "@types/react": 16.14.0
     "@types/react-dom": 16.9.14
     "@types/react-router-dom": 5.1.8
@@ -2465,8 +2465,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bloomreach/example-vue@workspace:examples/vue"
   dependencies:
-    "@bloomreach/spa-sdk": 15.0.0
-    "@bloomreach/vue-sdk": 15.0.0
+    "@bloomreach/spa-sdk": 15.0.1-0
+    "@bloomreach/vue-sdk": 15.0.1-0
     "@types/jest": 26.0.24
     "@typescript-eslint/eslint-plugin": 4.28.5
     "@typescript-eslint/parser": 4.28.5
@@ -2496,7 +2496,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@bloomreach/ng-sdk@15.0.0, @bloomreach/ng-sdk@workspace:packages/ng-sdk":
+"@bloomreach/ng-sdk@15.0.1-0, @bloomreach/ng-sdk@workspace:packages/ng-sdk":
   version: 0.0.0-use.local
   resolution: "@bloomreach/ng-sdk@workspace:packages/ng-sdk"
   dependencies:
@@ -2510,7 +2510,7 @@ __metadata:
     "@angular/language-service": 11.2.14
     "@angular/platform-browser": 11.2.14
     "@angular/platform-browser-dynamic": 11.2.14
-    "@bloomreach/spa-sdk": 15.0.0
+    "@bloomreach/spa-sdk": 15.0.1-0
     "@types/jest": 26.0.24
     codelyzer: 6.0.2
     jest: 26.6.3
@@ -2530,7 +2530,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@bloomreach/react-sdk@15.0.0, @bloomreach/react-sdk@workspace:packages/react-sdk":
+"@bloomreach/react-sdk@15.0.1-0, @bloomreach/react-sdk@workspace:packages/react-sdk":
   version: 0.0.0-use.local
   resolution: "@bloomreach/react-sdk@workspace:packages/react-sdk"
   dependencies:
@@ -2538,7 +2538,7 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": 7.14.7
     "@babel/preset-env": 7.14.8
     "@babel/preset-react": 7.14.5
-    "@bloomreach/spa-sdk": 15.0.0
+    "@bloomreach/spa-sdk": 15.0.1-0
     "@rollup/plugin-babel": 5.3.0
     "@types/enzyme": 3.10.9
     "@types/jest": 26.0.24
@@ -2567,7 +2567,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@bloomreach/spa-sdk@15.0.0, @bloomreach/spa-sdk@workspace:packages/spa-sdk":
+"@bloomreach/spa-sdk@15.0.1-0, @bloomreach/spa-sdk@workspace:packages/spa-sdk":
   version: 0.0.0-use.local
   resolution: "@bloomreach/spa-sdk@workspace:packages/spa-sdk"
   dependencies:
@@ -2600,15 +2600,15 @@ __metadata:
     typedoc: 0.19.2
     typedoc-plugin-external-module-map: 1.2.1
     typescript: 4.1.6
-    xmldom: 0.6.0
+    xmldom: "github:xmldom/xmldom#0.7.0"
   languageName: unknown
   linkType: soft
 
-"@bloomreach/vue-sdk@15.0.0, @bloomreach/vue-sdk@workspace:packages/vue-sdk":
+"@bloomreach/vue-sdk@15.0.1-0, @bloomreach/vue-sdk@workspace:packages/vue-sdk":
   version: 0.0.0-use.local
   resolution: "@bloomreach/vue-sdk@workspace:packages/vue-sdk"
   dependencies:
-    "@bloomreach/spa-sdk": 15.0.0
+    "@bloomreach/spa-sdk": 15.0.1-0
     "@types/jest": 26.0.24
     "@types/node": 14.17.3
     "@typescript-eslint/eslint-plugin": 4.28.5
@@ -27493,10 +27493,10 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"xmldom@npm:0.6.0":
-  version: 0.6.0
-  resolution: "xmldom@npm:0.6.0"
-  checksum: 710f64f5b2ba8ac1cbcf62c2e35b095a2f9ccbd596062efe037a5ca85d3ee077b691c4d74952ff476e4bab0dd82727604262899f25dddbb02f89ddeea4cca7f9
+"xmldom@github:xmldom/xmldom#0.7.0":
+  version: 0.7.0
+  resolution: "xmldom@https://github.com/xmldom/xmldom.git#commit=c568938641cc1f121cef5b4df80fcfda1e489b6e"
+  checksum: 86beb4f90675610ad4c2de68a46c7747b90b2a077fa73069973bd681b07fe4384361cfe1785d090e42f499095a7cfaadc3988a1aca2a3ef55c3d9d9a98d9e1d0
   languageName: node
   linkType: hard
 

@@ -48,9 +48,19 @@ import {
   isMatched,
   parseUrl,
 } from './url';
+import { Cookie } from './spa/cookie';
 
 const DEFAULT_AUTHORIZATION_PARAMETER = 'token';
 const DEFAULT_SERVER_ID_PARAMETER = 'server-id';
+// Campaign query parameter
+const DEFAULT_CAMPAIGN_PARAMETER = 'btm_campaign';
+// Segment of the campaign query parameter
+const DEFAULT_SEGMENT_PARAMETER = 'btm_segment';
+// Query parameter for the cookie expires time in milliseconds
+const DEFAULT_TTL_PARAMETER = 'btm_ttl';
+const DEFAULT_TTL_VALUE = 7; // days
+// Campaign variant query parameter
+const DEFAULT_CAMPAIGN_VARIANT_PARAMETER = '_campaignVariant';
 
 const container = new Container({ skipBaseClassChecks: true });
 const pages = new WeakMap<Page, Container>();
@@ -159,17 +169,41 @@ function initializeWithJwt10(scope: Container, configuration: ConfigurationWithJ
   const authorizationParameter = configuration.authorizationQueryParameter ?? DEFAULT_AUTHORIZATION_PARAMETER;
   const endpointParameter = configuration.endpointQueryParameter ?? '';
   const serverIdParameter = configuration.serverIdQueryParameter ?? DEFAULT_SERVER_ID_PARAMETER;
+  const campaignParameter = DEFAULT_CAMPAIGN_PARAMETER;
+  const segmentParameter = DEFAULT_SEGMENT_PARAMETER;
+  const ttlParameter = DEFAULT_TTL_PARAMETER;
+
   const { url: path, searchParams } = extractSearchParams(
     configuration.path ?? configuration.request?.path ?? '/',
-    [authorizationParameter, serverIdParameter, endpointParameter].filter(Boolean),
+    [
+      authorizationParameter,
+      serverIdParameter,
+      endpointParameter,
+      campaignParameter,
+      segmentParameter,
+      ttlParameter,
+    ].filter(Boolean),
   );
   const authorizationToken = searchParams.get(authorizationParameter) ?? undefined;
   const endpoint = searchParams.get(endpointParameter) ?? undefined;
   const serverId = searchParams.get(serverIdParameter) ?? undefined;
+  const campaignId = searchParams.get(campaignParameter) ?? undefined;
+  const segmentId = searchParams.get(segmentParameter) ?? undefined;
+  const ttl = searchParams.get(ttlParameter) ?? undefined;
+
+  let endpointUrl = configuration.endpoint ?? endpoint;
+
+  const campaignVariantId = getCampaignVariantId(campaignParameter, segmentParameter, campaignId, segmentId, ttl);
+  if (Boolean(campaignVariantId)) {
+    const params = new URLSearchParams();
+    params.append(DEFAULT_CAMPAIGN_VARIANT_PARAMETER, campaignVariantId);
+    endpointUrl = appendSearchParams(endpointUrl ?? '', params);
+  }
+
   const config = {
     ...configuration,
     apiVersion: '1.0',
-    endpoint: configuration.endpoint ?? endpoint,
+    endpoint: endpointUrl,
     baseUrl: appendSearchParams(configuration.baseUrl ?? '', searchParams),
     origin: configuration.origin ?? parseUrl(configuration.endpoint ?? endpoint ?? '').origin,
   };
@@ -180,6 +214,22 @@ function initializeWithJwt10(scope: Container, configuration: ConfigurationWithJ
 
   if (serverId) {
     logger.debug('Server Id:', serverId);
+  }
+
+  if (campaignId) {
+    logger.debug('Campaign Id:', campaignId);
+  }
+
+  if (segmentId) {
+    logger.debug('Segment Id:', segmentId);
+  }
+
+  if (ttl) {
+    logger.debug('TTL:', ttl);
+  }
+
+  if (campaignVariantId) {
+    logger.debug('Campaign variant Id:', campaignVariantId);
   }
 
   logger.debug('Endpoint:', config.endpoint);
@@ -236,8 +286,8 @@ export function initialize(configuration: Configuration, model?: Page | PageMode
 
   return onReady(
     isConfigurationWithProxy(configuration) ? initializeWithProxy(scope, configuration, model) :
-    isConfigurationWithJwt09(configuration) ? initializeWithJwt09(scope, configuration, model) :
-    initializeWithJwt10(scope, configuration, model),
+      isConfigurationWithJwt09(configuration) ? initializeWithJwt09(scope, configuration, model) :
+        initializeWithJwt10(scope, configuration, model),
     (page) => {
       pages.set(page, scope);
       configuration.request?.emit?.('br:spa:initialized', page);
@@ -254,6 +304,43 @@ export function destroy(page: Page): void {
   pages.delete(page);
 
   return scope?.get<Spa>(SpaService).destroy();
+}
+
+/**
+ * Get the campaign variant from URL or cookie
+ * @param campaignId Campaign id from URL
+ * @param segmentId Segment id from URL
+ * @param ttl TTL param in days from URL
+ * @param campaignParameter Campaign query parameter in URL
+ * @param segmentParameter Segment query parameter in URL
+ */
+function getCampaignVariantId(
+  campaignParameter: string,
+  segmentParameter: string,
+  campaignId?: string,
+  segmentId?: string,
+  ttl?: string,
+): string {
+  const ttlNumber = isNaN(Number(ttl)) ? DEFAULT_TTL_VALUE : Number(ttl);
+  if (ttlNumber === 0) {
+    Cookie.ERASE_COOKIE(campaignParameter);
+    Cookie.ERASE_COOKIE(segmentParameter);
+    return '';
+  }
+
+  if (campaignId && segmentId) {
+    Cookie.SET_COOKIE(campaignParameter, campaignId, ttlNumber);
+    Cookie.SET_COOKIE(segmentParameter, segmentId, ttlNumber);
+    return `${campaignId}:${segmentId}`;
+  }
+
+  const { [campaignParameter]: cookieCampaignId, [segmentParameter]: cookieSegmentId } = Cookie.GET_COOKIE();
+
+  if (cookieCampaignId && cookieSegmentId) {
+    return `${cookieCampaignId}:${cookieSegmentId}`;
+  }
+
+  return '';
 }
 
 export { Configuration } from './configuration';
