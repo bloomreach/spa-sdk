@@ -1,6 +1,6 @@
 {
   "name": "@bloomreach/example-nuxt",
-  "version": "15.0.0",
+  "version": "15.0.1-0",
   "description": "Example Nuxt.js SPA for Bloomreach Experience",
   "private": true,
   "scripts": {
@@ -11,8 +11,8 @@
     "start": "cross-env NODE_ENV=production node server/index.js"
   },
   "dependencies": {
-    "@bloomreach/spa-sdk": "15.0.0",
-    "@bloomreach/vue-sdk": "15.0.0",
+    "@bloomreach/spa-sdk": "15.0.1-0",
+    "@bloomreach/vue-sdk": "15.0.1-0",
     "@nuxtjs/axios": "5.13.6",
     "@nuxtjs/dotenv": "1.4.1",
     "cross-env": "7.0.3",
@@ -34,5 +34,6 @@
     "eslint-plugin-prettier": "3.4.0",
     "nodemon": "2.0.12",
     "prettier": "2.3.2"
-  }
+  },
+  "stableVersion": "15.0.0"
 }

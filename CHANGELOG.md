@@ -2,10 +2,21 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### [15.0.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.0.0-1...15.0.0)
+#### [15.0.1-0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.0.0...15.0.1-0)
+
+- SPASDK-22 Update xmldom to the latest version to fix security issue [`#18`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/18)
+- SPASDK-34 Make the SPA Personalization aware [`#14`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/14)
+- SPASDK-34 Make the SPA Personalization aware [`#SPASDK-34`](https://issues.onehippo.com/browse/SPASDK-34)
+- SPASDK-33 Update git command to publish to github [`#SPASDK-33`](https://issues.onehippo.com/browse/SPASDK-33)
+- SPASDK-22 Update xmldom to the latest version to fix security issue [`#SPASDK-22`](https://issues.onehippo.com/browse/SPASDK-22)
+
+#### [spa-sdk-15.0.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.0.0-1...spa-sdk-15.0.0)
+
+> 9 August 2021
 
 - SPASDK-32 Auto generate a changelog and setup release notes process [`#15`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/15)
 - Resolve SPASDK-22 "Update and lock spa sdk dependencies" [`#10`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/10)
+- SPASDK-33 Bump versions to SPASDK-33 [`#SPASDK-33`](https://issues.onehippo.com/browse/SPASDK-33)
 - SPASDK-33 Remove 'main' branch specification [`#SPASDK-33`](https://issues.onehippo.com/browse/SPASDK-33)
 - SPASDK-32 Bump versions to 15.0.0-2 [`#SPASDK-32`](https://issues.onehippo.com/browse/SPASDK-32)
 - SPASDK-32 Add version to workspace so auto-changelog can detect it [`#SPASDK-32`](https://issues.onehippo.com/browse/SPASDK-32)
@@ -83,7 +94,5 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-2 Log warning for unsupported method "getContentReference" in v0.9 [`#SPASDK-2`](https://issues.onehippo.com/browse/SPASDK-2)
 - SPASDK-2 Add exported function "getContainerItemContent" [`#SPASDK-2`](https://issues.onehippo.com/browse/SPASDK-2)
 - SPASDK-1 Bump to use node 14 [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
-- SPASDK-1 Remove maven files and update Jenkinsfile [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
-- SPASDK-1 Initial move from brxm monorepo [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
 - TRIVIAL Set branch name to 'main' in changesetBaseRefs [`4dacdcd`](https://github.com/bloomreach/spa-sdk/commit/4dacdcd2fdb0712e40dcb33b9809ae12786f9ab1)
 - TRIVIAL Skip telemetry check on nuxt startup [`15deb25`](https://github.com/bloomreach/spa-sdk/commit/15deb25b1edde3af3296d4dc34dba1483fe278f2)
