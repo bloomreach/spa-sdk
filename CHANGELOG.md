@@ -2,9 +2,12 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### [15.0.0-2](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.0.0-1...15.0.0-2)
+#### [15.0.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.0.0-1...15.0.0)
 
+- SPASDK-32 Auto generate a changelog and setup release notes process [`#15`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/15)
 - Resolve SPASDK-22 "Update and lock spa sdk dependencies" [`#10`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/10)
+- SPASDK-33 Remove 'main' branch specification [`#SPASDK-33`](https://issues.onehippo.com/browse/SPASDK-33)
+- SPASDK-32 Bump versions to 15.0.0-2 [`#SPASDK-32`](https://issues.onehippo.com/browse/SPASDK-32)
 - SPASDK-32 Add version to workspace so auto-changelog can detect it [`#SPASDK-32`](https://issues.onehippo.com/browse/SPASDK-32)
 - SPASDK-22 Set explicit version for node types in next example [`#SPASDK-22`](https://issues.onehippo.com/browse/SPASDK-22)
 - SPASDK-22 Return back initila version befor changes [`#SPASDK-22`](https://issues.onehippo.com/browse/SPASDK-22)

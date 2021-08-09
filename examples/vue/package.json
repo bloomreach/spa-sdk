@@ -1,7 +1,7 @@
 {
   "name": "@bloomreach/example-vue",
   "description": "Example Vue.js SPA for Bloomreach Experience",
-  "version": "15.0.0-2",
+  "version": "15.0.0",
   "private": true,
   "scripts": {
     "build": "vue-cli-service build",
@@ -9,10 +9,15 @@
     "serve": "vue-cli-service serve",
     "test": "vue-cli-service test:unit --passWithNoTests"
   },
-  "browserslist": ["last 1 chrome version", "last 1 firefox version", "last 1 safari version", "last 1 edge version"],
+  "browserslist": [
+    "last 1 chrome version",
+    "last 1 firefox version",
+    "last 1 safari version",
+    "last 1 edge version"
+  ],
   "dependencies": {
-    "@bloomreach/spa-sdk": "15.0.0-2",
-    "@bloomreach/vue-sdk": "15.0.0-2",
+    "@bloomreach/spa-sdk": "15.0.0",
+    "@bloomreach/vue-sdk": "15.0.0",
     "axios": "0.21.1",
     "core-js": "3.16.0",
     "vue": "2.6.14",
@@ -44,6 +49,5 @@
   },
   "jest": {
     "preset": "@vue/cli-plugin-unit-jest/presets/typescript-and-babel"
-  },
-  "stableVersion": "15.0.0-2"
+  }
 }
