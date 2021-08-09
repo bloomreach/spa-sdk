@@ -22,7 +22,7 @@ describe('BrContainerNoMarkup', () => {
   let page: jest.Mocked<Page>;
 
   beforeEach(() => {
-    page = ({ isPreview: jest.fn() } as unknown) as typeof page;
+    page = { isPreview: jest.fn() } as unknown as typeof page;
   });
 
   describe('render', () => {

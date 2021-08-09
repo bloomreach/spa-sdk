@@ -63,11 +63,11 @@ describe('BrNodeContainer', () => {
   let parent: Wrapper<Vue>;
 
   beforeEach(() => {
-    component = ({
+    component = {
       getType: jest.fn(),
-    } as unknown) as typeof component;
+    } as unknown as typeof component;
     mapping = {};
-    page = ({} as unknown) as typeof page;
+    page = {} as unknown as typeof page;
 
     parent = shallowMount(BrPage, { propsData: { component, mapping, page } });
     provide = (parent.vm.$options.provide as typeof provide).bind(parent.vm);

@@ -25,10 +25,10 @@ describe('BrPage', () => {
   let page: jest.Mocked<Page>;
 
   beforeEach(() => {
-    page = ({
+    page = {
       getComponent: jest.fn(),
       sync: jest.fn(),
-    } as unknown) as typeof page;
+    } as unknown as typeof page;
   });
 
   afterEach(() => {
@@ -61,7 +61,7 @@ describe('BrPage', () => {
     it('should initialize a prefetched model', async () => {
       const configuration = {} as Configuration;
       const model = {} as PageModel;
-      mocked((initialize as unknown) as () => Page).mockReturnValueOnce(page);
+      mocked(initialize as unknown as () => Page).mockReturnValueOnce(page);
 
       shallowMount(BrPage, { propsData: { configuration, page: model } });
       await new Promise(process.nextTick);
@@ -98,7 +98,7 @@ describe('BrPage', () => {
 
   describe('destroyed', () => {
     it('should destroy a page upon component destruction', async () => {
-      mocked((initialize as unknown) as () => Page).mockReturnValueOnce(page);
+      mocked(initialize as unknown as () => Page).mockReturnValueOnce(page);
 
       const wrapper = shallowMount(BrPage, { propsData: { page } });
       await wrapper.vm.$nextTick();
@@ -110,7 +110,7 @@ describe('BrPage', () => {
 
   describe('mounted', () => {
     it('should sync a page on mount', async () => {
-      mocked((initialize as unknown) as () => Page).mockReturnValueOnce(page);
+      mocked(initialize as unknown as () => Page).mockReturnValueOnce(page);
 
       const wrapper = shallowMount(BrPage, { propsData: { page } });
       await wrapper.vm.$nextTick();

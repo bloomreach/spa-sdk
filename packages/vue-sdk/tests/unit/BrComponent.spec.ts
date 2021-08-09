@@ -44,11 +44,11 @@ describe('BrComponent', () => {
   let provide: () => unknown;
 
   beforeAll(() => {
-    parent = ({
+    parent = {
       getChildren: jest.fn(() => []),
       getComponent: jest.fn(),
-    } as unknown) as typeof parent;
-    page = ({ sync: jest.fn() } as unknown) as typeof page;
+    } as unknown as typeof parent;
+    page = { sync: jest.fn() } as unknown as typeof page;
 
     const wrapper = shallowMount(BrPage, { propsData: { parent, page } });
     provide = (wrapper.vm.$options.provide as typeof provide).bind(wrapper.vm);

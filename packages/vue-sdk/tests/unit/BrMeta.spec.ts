@@ -22,9 +22,9 @@ describe('BrMeta', () => {
   let meta: jest.Mocked<MetaCollection>;
 
   beforeEach(() => {
-    meta = ({
+    meta = {
       render: jest.fn(),
-    } as unknown) as typeof meta;
+    } as unknown as typeof meta;
   });
 
   describe('render', () => {

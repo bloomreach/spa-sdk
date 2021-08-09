@@ -52,13 +52,13 @@ describe('BrNodeComponent', () => {
   let shallowMountComponent: () => Wrapper<Vue>;
 
   beforeEach(() => {
-    component = ({
+    component = {
       getChildren: jest.fn(() => []),
       getMeta: jest.fn(),
       getName: jest.fn(),
-    } as unknown) as typeof component;
+    } as unknown as typeof component;
     mapping = { something: SomeComponent };
-    page = ({} as unknown) as typeof page;
+    page = {} as unknown as typeof page;
 
     const wrapper = shallowMount(BrPage, { propsData: { mapping, page } });
     provide = (wrapper.vm.$options.provide as typeof provide).bind(wrapper.vm);
@@ -68,7 +68,7 @@ describe('BrNodeComponent', () => {
 
   describe('render', () => {
     it('should surround the component with meta-data', () => {
-      component.getMeta.mockReturnValue((['a', 'b'] as unknown) as MetaCollection);
+      component.getMeta.mockReturnValue(['a', 'b'] as unknown as MetaCollection);
       const wrapper = shallowMountComponent();
       const metaComponent = wrapper.findComponent({ name: 'br-meta' });
 
@@ -85,8 +85,8 @@ describe('BrNodeComponent', () => {
     });
 
     it('should render a container', async () => {
-      const child1 = ({ getName: () => 'child1' } as unknown) as BrComponent;
-      const child2 = ({ getName: () => 'child2' } as unknown) as BrComponent;
+      const child1 = { getName: () => 'child1' } as unknown as BrComponent;
+      const child2 = { getName: () => 'child2' } as unknown as BrComponent;
       component.getChildren.mockReturnValue([child1, child2]);
       mocked(isContainer).mockReturnValueOnce(true);
 
@@ -114,8 +114,8 @@ describe('BrNodeComponent', () => {
     });
 
     it('should render children', async () => {
-      const child1 = ({ getName: () => 'child1' } as unknown) as BrComponent;
-      const child2 = ({ getName: () => 'child2' } as unknown) as BrComponent;
+      const child1 = { getName: () => 'child1' } as unknown as BrComponent;
+      const child2 = { getName: () => 'child2' } as unknown as BrComponent;
       component.getChildren.mockReturnValue([child1, child2]);
 
       const wrapper = shallowMountComponent();
