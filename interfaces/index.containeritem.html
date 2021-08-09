@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ContainerItem | @bloomreach/spa-sdk - v0.3.2-saas</title>
-	<meta name="description" content="Documentation for @bloomreach/spa-sdk - v0.3.2-saas">
+	<title>ContainerItem | @bloomreach/spa-sdk - v15.0.0</title>
+	<meta name="description" content="Documentation for @bloomreach/spa-sdk - v15.0.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
 </head>
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">@bloomreach/spa-sdk - v0.3.2-saas</a>
+					<a href="../index.html" class="title">@bloomreach/spa-sdk - v15.0.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -40,6 +40,8 @@
 							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
 							<input type="checkbox" id="tsd-filter-externals" checked />
 							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
 						</div>
 					</div>
 					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
@@ -81,7 +83,7 @@
 						<a href="index.component.html" class="tsd-signature-type">Component</a>
 					</li>
 					<li>
-						<span class="tsd-signature-type">Emitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ContainerItemEvents</span><span class="tsd-signature-symbol">&gt;</span>
+						<a href="index.emitter.html" class="tsd-signature-type">Emitter</a><span class="tsd-signature-symbol">&lt;</span><a href="index.containeritemevents.html" class="tsd-signature-type">ContainerItemEvents</a><span class="tsd-signature-symbol">&gt;</span>
 						<ul class="tsd-hierarchy">
 							<li>
 								<span class="target">ContainerItem</span>
@@ -306,7 +308,7 @@
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
 								<li>
-									<h4>T<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ComponentModels</span></h4>
+									<h4>T<span class="tsd-signature-symbol">: </span><a href="../modules/index.html#componentmodels_1" class="tsd-signature-type">ComponentModels$1</a></h4>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
@@ -420,12 +422,12 @@
 					<a name="off" class="tsd-anchor"></a>
 					<h3>off</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">off&lt;U&gt;<span class="tsd-signature-symbol">(</span>eventName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">U</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Listener</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ContainerItemEvents</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">U</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">off&lt;U&gt;<span class="tsd-signature-symbol">(</span>eventName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">U</span>, listener<span class="tsd-signature-symbol">: </span><a href="../modules/index.html#listener" class="tsd-signature-type">Listener</a><span class="tsd-signature-symbol">&lt;</span><a href="index.containeritemevents.html" class="tsd-signature-type">ContainerItemEvents</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">U</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="index.containeritem.html">ContainerItem</a>.<a href="index.containeritem.html#off">off</a></p>
+								<p>Inherited from <a href="index.emitter.html">Emitter</a>.<a href="index.emitter.html#off">off</a></p>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
@@ -435,7 +437,7 @@
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
 								<li>
-									<h4>U<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Extract</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">keyof </span><span class="tsd-signature-type">ContainerItemEvents</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
+									<h4>U<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Extract</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">keyof </span><a href="index.containeritemevents.html" class="tsd-signature-type">ContainerItemEvents</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
 								</li>
 							</ul>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -447,7 +449,7 @@
 									</div>
 								</li>
 								<li>
-									<h5>listener: <span class="tsd-signature-type">Listener</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ContainerItemEvents</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">U</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>listener: <a href="../modules/index.html#listener" class="tsd-signature-type">Listener</a><span class="tsd-signature-symbol">&lt;</span><a href="index.containeritemevents.html" class="tsd-signature-type">ContainerItemEvents</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">U</span><span class="tsd-signature-symbol">&gt;</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>The event listener.</p>
 									</div>
@@ -461,12 +463,12 @@
 					<a name="on" class="tsd-anchor"></a>
 					<h3>on</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">on&lt;U&gt;<span class="tsd-signature-symbol">(</span>eventName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">U</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Listener</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ContainerItemEvents</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">U</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">UnsubscribeFn</span></li>
+						<li class="tsd-signature tsd-kind-icon">on&lt;U&gt;<span class="tsd-signature-symbol">(</span>eventName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">U</span>, listener<span class="tsd-signature-symbol">: </span><a href="../modules/index.html#listener" class="tsd-signature-type">Listener</a><span class="tsd-signature-symbol">&lt;</span><a href="index.containeritemevents.html" class="tsd-signature-type">ContainerItemEvents</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">U</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules/index.html#unsubscribefn" class="tsd-signature-type">UnsubscribeFn</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="index.containeritem.html">ContainerItem</a>.<a href="index.containeritem.html#on">on</a></p>
+								<p>Inherited from <a href="index.emitter.html">Emitter</a>.<a href="index.emitter.html#on">on</a></p>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
@@ -476,7 +478,7 @@
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
 								<li>
-									<h4>U<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Extract</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">keyof </span><span class="tsd-signature-type">ContainerItemEvents</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
+									<h4>U<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Extract</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">keyof </span><a href="index.containeritemevents.html" class="tsd-signature-type">ContainerItemEvents</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
 								</li>
 							</ul>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -488,13 +490,13 @@
 									</div>
 								</li>
 								<li>
-									<h5>listener: <span class="tsd-signature-type">Listener</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ContainerItemEvents</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">U</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>listener: <a href="../modules/index.html#listener" class="tsd-signature-type">Listener</a><span class="tsd-signature-symbol">&lt;</span><a href="index.containeritemevents.html" class="tsd-signature-type">ContainerItemEvents</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">U</span><span class="tsd-signature-symbol">&gt;</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>The event listener.</p>
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">UnsubscribeFn</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../modules/index.html#unsubscribefn" class="tsd-signature-type">UnsubscribeFn</a></h4>
 							<p>The unsubscribe function.</p>
 						</li>
 					</ul>
@@ -591,9 +593,11 @@
 				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
 				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
 			</ul>
 		</div>

@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Page | @bloomreach/spa-sdk - v0.3.2-saas</title>
-	<meta name="description" content="Documentation for @bloomreach/spa-sdk - v0.3.2-saas">
+	<title>Page | @bloomreach/spa-sdk - v15.0.0</title>
+	<meta name="description" content="Documentation for @bloomreach/spa-sdk - v15.0.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
 </head>
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">@bloomreach/spa-sdk - v0.3.2-saas</a>
+					<a href="../index.html" class="title">@bloomreach/spa-sdk - v15.0.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -40,6 +40,8 @@
 							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
 							<input type="checkbox" id="tsd-filter-externals" checked />
 							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
 						</div>
 					</div>
 					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
@@ -116,7 +118,7 @@
 					<h3>get<wbr>Button</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
 						<li class="tsd-signature tsd-kind-icon">get<wbr>Button<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">typeof </span><a href="../modules/index.html#type_manage_content_button" class="tsd-signature-type">TYPE_MANAGE_CONTENT_BUTTON</a>, button<span class="tsd-signature-symbol">: </span><a href="index.managecontentbutton.html" class="tsd-signature-type">ManageContentButton</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="index.metacollection.html" class="tsd-signature-type">MetaCollection</a></li>
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Button<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">typeof </span><a href="../modules/index.html#type_manage_menu_button" class="tsd-signature-type">TYPE_MANAGE_MENU_BUTTON</a>, menu<span class="tsd-signature-symbol">: </span><a href="index.menu-1.html" class="tsd-signature-type">Menu</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="index.metacollection.html" class="tsd-signature-type">MetaCollection</a></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Button<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">typeof </span><a href="../modules/index.html#type_manage_menu_button" class="tsd-signature-type">TYPE_MANAGE_MENU_BUTTON</a>, menu<span class="tsd-signature-symbol">: </span><a href="index.menu_2.html" class="tsd-signature-type">Menu$2</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="index.metacollection.html" class="tsd-signature-type">MetaCollection</a></li>
 						<li class="tsd-signature tsd-kind-icon">get<wbr>Button<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, <span class="tsd-signature-symbol">...</span>params<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="index.metacollection.html" class="tsd-signature-type">MetaCollection</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
@@ -154,7 +156,7 @@
 									<h5>type: <span class="tsd-signature-symbol">typeof </span><a href="../modules/index.html#type_manage_menu_button" class="tsd-signature-type">TYPE_MANAGE_MENU_BUTTON</a></h5>
 								</li>
 								<li>
-									<h5>menu: <a href="index.menu-1.html" class="tsd-signature-type">Menu</a></h5>
+									<h5>menu: <a href="index.menu_2.html" class="tsd-signature-type">Menu$2</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="index.metacollection.html" class="tsd-signature-type">MetaCollection</a></h4>
@@ -200,7 +202,7 @@
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
 								<li>
-									<h4>T<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ChannelParameters</span> = <span class="tsd-signature-type">ChannelParameters</span></h4>
+									<h4>T<span class="tsd-signature-symbol">: </span><a href="../modules/index.html#channelparameters" class="tsd-signature-type">ChannelParameters</a> = <span class="tsd-signature-type">ChannelParameters</span></h4>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
@@ -347,7 +349,7 @@
 					<a name="getmeta" class="tsd-anchor"></a>
 					<h3>get<wbr>Meta</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Meta<span class="tsd-signature-symbol">(</span>meta<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MetaCollectionModel</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="index.metacollection.html" class="tsd-signature-type">MetaCollection</a></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Meta<span class="tsd-signature-symbol">(</span>meta<span class="tsd-signature-symbol">: </span><a href="index.metacollectionmodel.html" class="tsd-signature-type">MetaCollectionModel</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="index.metacollection.html" class="tsd-signature-type">MetaCollection</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -366,7 +368,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>meta: <span class="tsd-signature-type">MetaCollectionModel</span></h5>
+									<h5>meta: <a href="index.metacollectionmodel.html" class="tsd-signature-type">MetaCollectionModel</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>The meta-data collection model as returned by the page-model-api.</p>
 									</div>
@@ -481,7 +483,7 @@
 					<a name="getvisit" class="tsd-anchor"></a>
 					<h3>get<wbr>Visit</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Visit<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Visit</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Visit<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="index.visit.html" class="tsd-signature-type">Visit</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -489,7 +491,7 @@
 							</aside>
 							<div class="tsd-comment tsd-typography">
 							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Visit</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="index.visit.html" class="tsd-signature-type">Visit</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h4>
 							<p>The current visit data.</p>
 						</li>
 					</ul>
@@ -498,7 +500,7 @@
 					<a name="getvisitor" class="tsd-anchor"></a>
 					<h3>get<wbr>Visitor</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Visitor<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Visitor</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Visitor<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="index.visitor.html" class="tsd-signature-type">Visitor</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -506,7 +508,7 @@
 							</aside>
 							<div class="tsd-comment tsd-typography">
 							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Visitor</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="index.visitor.html" class="tsd-signature-type">Visitor</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h4>
 							<p>The current visitor data.</p>
 						</li>
 					</ul>
@@ -692,9 +694,11 @@
 				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
 				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
 			</ul>
 		</div>
