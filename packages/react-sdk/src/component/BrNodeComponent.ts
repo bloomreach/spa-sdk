@@ -21,6 +21,7 @@ import { BrMappingContext } from './BrMappingContext';
 
 export class BrNodeComponent<T extends Component> extends React.Component<BrProps<T>> {
   static contextType = BrMappingContext;
+
   context!: React.ContextType<typeof BrMappingContext>;
 
   protected getMapping(): React.ComponentType<BrProps> | undefined {

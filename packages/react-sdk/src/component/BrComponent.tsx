@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import { Component } from '@bloomreach/spa-sdk';
 import React from 'react';
 import { BrComponentContext } from './BrComponentContext';
 import { BrNode } from './BrNode';
@@ -33,28 +34,39 @@ interface BrComponentProps {
  */
 export class BrComponent extends React.Component<BrComponentProps> {
   static contextType = BrComponentContext;
+
   context: React.ContextType<typeof BrComponentContext>;
 
-  private getComponents() {
-    if (!this.context) {
+  private getComponents(): Component[] {
+    const {
+      context,
+      props: { path },
+    } = this;
+
+    if (!context) {
       return [];
     }
-    if (!this.props.path) {
-      return this.context.getChildren();
+    if (!path) {
+      return context.getChildren();
     }
 
-    const component = this.context.getComponent(...this.props.path.split('/'));
+    const component = context.getComponent(...path.split('/'));
 
     return component ? [component] : [];
   }
 
-  private renderComponents() {
+  private renderComponents(): JSX.Element[] {
+    const { children } = this.props;
+
     return this.getComponents().map((component, index) => (
-      <BrNode key={index} component={component}>{this.props.children}</BrNode>
+      // eslint-disable-next-line react/no-array-index-key
+      <BrNode key={index} component={component}>
+        {children}
+      </BrNode>
     ));
   }
 
-  render() {
+  render(): JSX.Element {
     return <>{this.renderComponents()}</>;
   }
 }

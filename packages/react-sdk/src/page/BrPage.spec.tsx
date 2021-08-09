@@ -40,13 +40,17 @@ const config = {
 const mapping = { TestComponent };
 
 describe('BrPage', () => {
-  const children = <div/>;
-  let wrapper: ShallowWrapper<React.ComponentProps<typeof BrPage>, { page?: Page }> ;
+  const children = <div />;
+  let wrapper: ShallowWrapper<React.ComponentProps<typeof BrPage>, { page?: Page }>;
 
   beforeEach(() => {
     jest.clearAllMocks();
 
-    wrapper = shallow(<BrPage configuration={config} mapping={mapping}>{children}</BrPage>);
+    wrapper = shallow(
+      <BrPage configuration={config} mapping={mapping}>
+        {children}
+      </BrPage>,
+    );
   });
 
   describe('componentDidMount', () => {
@@ -126,8 +130,7 @@ describe('BrPage', () => {
       const error = new Error('error-loading-page');
       mocked(initialize).mockRejectedValueOnce(error);
 
-      const setState = jest.spyOn(BrPage.prototype, 'setState')
-        .mockImplementationOnce(() => {});
+      const setState = jest.spyOn(BrPage.prototype, 'setState').mockImplementationOnce(() => {});
 
       mount(<BrPage configuration={config} mapping={mapping} />);
       await new Promise(process.nextTick);

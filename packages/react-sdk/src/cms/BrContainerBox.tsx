@@ -17,16 +17,12 @@
 import React from 'react';
 import { BrProps } from '../component';
 
-export function BrContainerBox(props: React.PropsWithChildren<BrProps>) {
+export function BrContainerBox({ page, children }: React.PropsWithChildren<BrProps>) {
   return (
-    // tslint:disable:jsx-no-multiline-js
-    <div className={props.page.isPreview() ? 'hst-container' : undefined}>
-      {React.Children.map(props.children, child => (
-        <div className={props.page.isPreview() ? 'hst-container-item' : undefined}>
-          {child}
-        </div>
+    <div className={page.isPreview() ? 'hst-container' : undefined}>
+      {React.Children.map(children, (child) => (
+        <div className={page.isPreview() ? 'hst-container-item' : undefined}>{child}</div>
       ))}
     </div>
-    // tslint:enable:jsx-no-multiline-js
   );
 }

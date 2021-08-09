@@ -55,11 +55,6 @@ describe('BrManageMenuButton', () => {
     context.getButton.mockReturnValueOnce(meta);
     const wrapper = shallow(<BrManageMenuButton {...props} />, { context });
 
-    expect(
-      wrapper
-        .find(BrMeta)
-        .first()
-        .prop('meta'),
-    ).toBe(meta);
+    expect(wrapper.find(BrMeta).first().prop('meta')).toBe(meta);
   });
 });

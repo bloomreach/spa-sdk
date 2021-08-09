@@ -32,23 +32,29 @@ describe('BrContainerBox', () => {
   it('should render itself as div element', () => {
     const wrapper = shallow(<BrContainerBox {...props} />);
 
-    expect(wrapper.equals(<div/>)).toBe(true);
+    expect(wrapper.equals(<div />)).toBe(true);
   });
 
   it('should render children as div elements', () => {
     const wrapper = shallow(
       <BrContainerBox {...props}>
-        <a/>
-        <b/>
-      </BrContainerBox>
+        <a />
+        <b />
+      </BrContainerBox>,
     );
 
-    expect(wrapper.equals(
-      <div>
-        <div><a/></div>
-        <div><b/></div>
-      </div>
-    )).toBe(true);
+    expect(
+      wrapper.equals(
+        <div>
+          <div>
+            <a />
+          </div>
+          <div>
+            <b />
+          </div>
+        </div>,
+      ),
+    ).toBe(true);
   });
 
   it('should render preview classes', () => {
@@ -56,16 +62,22 @@ describe('BrContainerBox', () => {
 
     const wrapper = shallow(
       <BrContainerBox {...props}>
-        <a/>
-        <b/>
-      </BrContainerBox>
+        <a />
+        <b />
+      </BrContainerBox>,
     );
 
-    expect(wrapper.equals(
-      <div className="hst-container">
-        <div className="hst-container-item"><a/></div>
-        <div className="hst-container-item"><b/></div>
-      </div>
-    )).toBe(true);
+    expect(
+      wrapper.equals(
+        <div className="hst-container">
+          <div className="hst-container-item">
+            <a />
+          </div>
+          <div className="hst-container-item">
+            <b />
+          </div>
+        </div>,
+      ),
+    ).toBe(true);
   });
 });

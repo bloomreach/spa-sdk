@@ -30,14 +30,14 @@ describe('BrMeta', () => {
   });
 
   it('should render meta-data surrounding children', () => {
-    mount((
+    mount(
       <div>
         <BrMeta meta={meta}>
-          <a/>
-          <b/>
+          <a />
+          <b />
         </BrMeta>
-      </div>
-    ));
+      </div>,
+    );
 
     expect(meta.render).toBeCalled();
 
@@ -52,7 +52,12 @@ describe('BrMeta', () => {
     meta.render.mockReturnValueOnce(clear);
 
     const container = document.createElement('div');
-    const wrapper = mount(<BrMeta meta={meta}><a/></BrMeta>, { attachTo: container });
+    const wrapper = mount(
+      <BrMeta meta={meta}>
+        <a />
+      </BrMeta>,
+      { attachTo: container },
+    );
     const newMeta = { length: 1, render: jest.fn() };
     wrapper.setProps({ meta: newMeta });
 
@@ -65,7 +70,12 @@ describe('BrMeta', () => {
     meta.render.mockReturnValueOnce(clear);
 
     const container = document.createElement('div');
-    const wrapper = mount(<div><BrMeta meta={meta} /></div>, { attachTo: container });
+    const wrapper = mount(
+      <div>
+        <BrMeta meta={meta} />
+      </div>,
+      { attachTo: container },
+    );
     wrapper.detach();
 
     expect(clear).toBeCalled();
@@ -74,14 +84,14 @@ describe('BrMeta', () => {
   it('should render only children if there is no meta', () => {
     meta.length = 0;
 
-    const wrapper = mount((
+    const wrapper = mount(
       <div>
         <BrMeta meta={meta}>
-          <a/>
-          <b/>
+          <a />
+          <b />
         </BrMeta>
-      </div>
-    ));
+      </div>,
+    );
 
     expect(wrapper.html()).toMatchSnapshot();
   });

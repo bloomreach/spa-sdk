@@ -17,6 +17,6 @@
 import React from 'react';
 import { BrProps } from '../component';
 
-export function BrContainerNoMarkup(props: React.PropsWithChildren<BrProps>) {
-  return <>{props.children}</>;
+export function BrContainerNoMarkup({ children }: React.PropsWithChildren<BrProps>) {
+  return <>{children}</>;
 }

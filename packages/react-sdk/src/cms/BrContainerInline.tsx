@@ -17,16 +17,14 @@
 import React from 'react';
 import { BrProps } from '../component';
 
-export function BrContainerInline(props: React.PropsWithChildren<BrProps>) {
+export function BrContainerInline(props: React.PropsWithChildren<BrProps>): JSX.Element {
+  const { page, children } = props;
+
   return (
-    // tslint:disable:jsx-no-multiline-js
-    <div className={props.page.isPreview() ? 'hst-container' : undefined}>
-      {React.Children.map(props.children, child => (
-        <span className={props.page.isPreview() ? 'hst-container-item' : undefined}>
-          {child}
-        </span>
+    <div className={page.isPreview() ? 'hst-container' : undefined}>
+      {React.Children.map(children, (child) => (
+        <span className={page.isPreview() ? 'hst-container-item' : undefined}>{child}</span>
       ))}
     </div>
-    // tslint:enable:jsx-no-multiline-js
   );
 }

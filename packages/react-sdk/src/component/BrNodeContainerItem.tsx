@@ -26,18 +26,18 @@ export class BrNodeContainerItem extends BrNodeComponent<ContainerItem> {
     this.onUpdate = this.onUpdate.bind(this);
   }
 
-  componentDidMount() {
+  componentDidMount(): void {
     this.props.component.on('update', this.onUpdate);
   }
 
-  componentDidUpdate(prevProps: BrProps<ContainerItem>) {
+  componentDidUpdate(prevProps: BrProps<ContainerItem>): void {
     if (this.props.component !== prevProps.component) {
       prevProps.component.off('update', this.onUpdate);
       this.props.component.on('update', this.onUpdate);
     }
   }
 
-  componentWillUnmount() {
+  componentWillUnmount(): void {
     this.props.component.off('update', this.onUpdate);
   }
 
@@ -48,11 +48,12 @@ export class BrNodeContainerItem extends BrNodeComponent<ContainerItem> {
       return this.context[type] as React.ComponentType<BrProps>;
     }
 
-    return this.context[TYPE_CONTAINER_ITEM_UNDEFINED as any] as React.ComponentType<BrProps>
-      ?? BrContainerItemUndefined;
+    return (
+      (this.context[TYPE_CONTAINER_ITEM_UNDEFINED as any] as React.ComponentType<BrProps>) ?? BrContainerItemUndefined
+    );
   }
 
-  protected onUpdate() {
+  protected onUpdate(): void {
     this.forceUpdate(() => this.props.page.sync());
   }
 }

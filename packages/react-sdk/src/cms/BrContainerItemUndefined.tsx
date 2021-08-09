@@ -18,6 +18,6 @@ import React from 'react';
 import { ContainerItem } from '@bloomreach/spa-sdk';
 import { BrProps } from '../component';
 
-export function BrContainerItemUndefined(props: React.PropsWithChildren<BrProps<ContainerItem>>) {
-  return <div>{`Component "${props.component.getType()}" is not defined.`}</div>;
+export function BrContainerItemUndefined({ component }: React.PropsWithChildren<BrProps<ContainerItem>>) {
+  return <div>{`Component "${component.getType()}" is not defined.`}</div>;
 }
