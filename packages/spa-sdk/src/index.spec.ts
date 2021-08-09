@@ -257,4 +257,44 @@ describe('initialize', () => {
   it('should emit a request event', async () => {
     expect(emit).toBeCalledWith('br:spa:initialized', page);
   });
+
+  it('should use campaign variant id as params from url', async () => {
+    const page = await initialize({
+      httpClient,
+      window,
+      endpoint: 'http://localhost:8080/site/my-spa/resourceapi',
+      origin: 'http://localhost:12345',
+      request: { path: '/?btm_campaign=12345&btm_segment=silver' },
+    });
+
+    expect(httpClient).toBeCalledWith({
+      headers: { 'Accept-Version': '1.0' },
+      method: 'GET',
+      url: 'http://localhost:8080/site/my-spa/resourceapi/?_campaignVariant=12345%3Asilver',
+    });
+
+    destroy(page);
+  });
+
+  it('should use campaign variant id as params from cookie', async () => {
+    Object.defineProperty(window.document, 'cookie', {
+      writable: true,
+      value: 'btm_segment=gold; btm_campaign=12345',
+    });
+
+    const page = await initialize({
+      httpClient,
+      window,
+      endpoint: 'http://localhost:8080/site/my-spa/resourceapi',
+      origin: 'http://localhost:12345',
+    });
+
+    expect(httpClient).toBeCalledWith({
+      headers: { 'Accept-Version': '1.0' },
+      method: 'GET',
+      url: 'http://localhost:8080/site/my-spa/resourceapi/?_campaignVariant=12345%3Agold',
+    });
+
+    destroy(page);
+  });
 });
