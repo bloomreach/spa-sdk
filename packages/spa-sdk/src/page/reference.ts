@@ -30,8 +30,5 @@ export function isReference(value: any): value is Reference {
 }
 
 export function resolve<T>(object: Record<string, any>, reference: Reference): T | undefined {
-  return reference.$ref.split('/').reduce(
-    (value, key) => key ? value?.[key] : object,
-    object,
-  ) as T;
+  return reference.$ref.split('/').reduce((value, key) => (key ? value?.[key] : object), object) as T;
 }

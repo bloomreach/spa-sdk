@@ -64,9 +64,7 @@ function isMatchedOrigin(origin: string, baseOrigin: string) {
   const [schema, host = ''] = origin.split('//', 2);
   const [baseSchema, baseHost = ''] = baseOrigin.split('//', 2);
 
-  return !baseOrigin
-    || !origin
-    || (!schema || !baseSchema || schema === baseSchema) && baseHost === host;
+  return !baseOrigin || !origin || ((!schema || !baseSchema || schema === baseSchema) && baseHost === host);
 }
 
 function isMatchedPathname(pathname: string, basePathname: string) {
@@ -76,7 +74,7 @@ function isMatchedPathname(pathname: string, basePathname: string) {
 function isMatchedQuery(search: URLSearchParams, baseSearch: URLSearchParams) {
   let match = true;
   baseSearch.forEach((value, key) => {
-    match = match && (!value && search.has(key) || search.getAll(key).includes(value));
+    match = match && ((!value && search.has(key)) || search.getAll(key).includes(value));
   });
 
   return match;
@@ -86,14 +84,16 @@ export function isMatched(link: string, base = '') {
   const linkUrl = parseUrl(link);
   const baseUrl = parseUrl(base);
 
-  return isMatchedOrigin(linkUrl.origin, baseUrl.origin)
-    && isMatchedPathname(linkUrl.pathname, baseUrl.pathname)
-    && isMatchedQuery(linkUrl.searchParams, baseUrl.searchParams);
+  return (
+    isMatchedOrigin(linkUrl.origin, baseUrl.origin) &&
+    isMatchedPathname(linkUrl.pathname, baseUrl.pathname) &&
+    isMatchedQuery(linkUrl.searchParams, baseUrl.searchParams)
+  );
 }
 
 export function mergeSearchParams(params: URLSearchParams, ...rest: URLSearchParams[]) {
   const result = new URLSearchParams(params);
-  rest.forEach(params => params.forEach((value, key) => result.set(key, value)));
+  rest.forEach((params) => params.forEach((value, key) => result.set(key, value)));
 
   return result;
 }
@@ -101,7 +101,7 @@ export function mergeSearchParams(params: URLSearchParams, ...rest: URLSearchPar
 export function parseUrl(url: string): Url {
   // URL constructor requires either a valid URL or a base URL.
   // Since this function returns a pathname, we can safely pass a fake host to be able to resolve relative URLs.
-  const parsedUrl = url ? new URL(url, 'http://example.com') : {} as URL;
+  const parsedUrl = url ? new URL(url, 'http://example.com') : ({} as URL);
   const { hash = '', search = '', searchParams = new URLSearchParams() } = parsedUrl;
 
   // For links like `//example.com?query#hash` pathname will be `/` so we need to strip query and hash parameters first.

@@ -80,20 +80,18 @@ export class PageImpl implements Page {
 
     this.root = componentFactory.create(model.page);
     this.content = new Map(
-      Object.entries(model.content || {}).map(
-        ([alias, model]) => [alias, this.contentFactory(model)],
-      ),
+      Object.entries(model.content || {}).map(([alias, model]) => [alias, this.contentFactory(model)]),
     );
   }
 
   protected onPageUpdate(event: PageUpdateEvent) {
-    Object.entries((event.page as PageModel).content || {}).forEach(
-      ([alias, model]) => this.content.set(alias, this.contentFactory(model)),
+    Object.entries((event.page as PageModel).content || {}).forEach(([alias, model]) =>
+      this.content.set(alias, this.contentFactory(model)),
     );
   }
 
   private static getContentReference(reference: Reference) {
-    return  reference.$ref.split('/', 3)[2] || '';
+    return reference.$ref.split('/', 3)[2] || '';
   }
 
   getButton(type: string, ...params: unknown[]) {
@@ -105,15 +103,15 @@ export class PageImpl implements Page {
   }
 
   getComponent<T extends Component>(): T;
+
   getComponent<T extends Component>(...componentNames: string[]): T | undefined;
+
   getComponent(...componentNames: string[]) {
     return this.root.getComponent(...componentNames);
   }
 
   getContent(reference: Reference | string) {
-    const contentReference = isReference(reference)
-      ? PageImpl.getContentReference(reference)
-      : reference;
+    const contentReference = isReference(reference) ? PageImpl.getContentReference(reference) : reference;
 
     return this.content.get(contentReference);
   }
@@ -131,9 +129,11 @@ export class PageImpl implements Page {
   }
 
   getUrl(link?: Link): string | undefined;
+
   getUrl(path: string): string;
+
   getUrl(link?: Link | string) {
-    return this.linkFactory.create(link as Link ?? { ...this.model._links.site, type: TYPE_LINK_INTERNAL });
+    return this.linkFactory.create((link as Link) ?? { ...this.model._links.site, type: TYPE_LINK_INTERNAL });
   }
 
   getVersion() {

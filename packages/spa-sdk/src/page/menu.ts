@@ -86,9 +86,7 @@ export class MenuImpl implements Menu {
   ) {
     this.items = model.data.siteMenuItems.map(menuItemFactory);
     this.meta = metaFactory(model.meta);
-    this.selected = model.data.selectSiteMenuItem
-      ? menuItemFactory(model.data.selectSiteMenuItem)
-      : undefined;
+    this.selected = model.data.selectSiteMenuItem ? menuItemFactory(model.data.selectSiteMenuItem) : undefined;
   }
 
   getItems(): MenuItem[] {

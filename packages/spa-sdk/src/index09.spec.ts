@@ -89,9 +89,9 @@ describe('initialize', () => {
   });
 
   it.each`
-    link                   | expected
-    ${''}                  | ${'//example.com/?token=something'}
-    ${'/site/my-spa/news'} | ${'//example.com/news?token=something'}
+    link                                                                   | expected
+    ${''}                                                                  | ${'//example.com/?token=something'}
+    ${'/site/my-spa/news'}                                                 | ${'//example.com/news?token=something'}
     ${{ href: 'http://127.0.0.1/news?a=b', type: TYPE_LINK_EXTERNAL }}     | ${'http://127.0.0.1/news?a=b'}
     ${{ href: '/news?a=b', type: TYPE_LINK_INTERNAL }}                     | ${'//example.com/news?a=b&token=something'}
     ${{ href: 'news#hash', type: TYPE_LINK_INTERNAL }}                     | ${'//example.com/news?token=something#hash'}
@@ -212,7 +212,7 @@ describe('initialize', () => {
       },
       '*',
     );
-    await new Promise(resolve => setTimeout(resolve, 0));
+    await new Promise((resolve) => setTimeout(resolve, 0));
 
     expect(httpClient).toBeCalled();
     expect(httpClient.mock.calls[0]).toMatchSnapshot();

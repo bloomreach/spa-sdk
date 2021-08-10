@@ -38,9 +38,9 @@ describe('appendSearchParams', () => {
 
 describe('buildUrl', () => {
   it.each`
-    source                    | result
-    ${{ path: '/' }}          | ${'/'}
-    ${{ pathname: '/path' }}  | ${'/path'}
+    source                                          | result
+    ${{ path: '/' }}                                | ${'/'}
+    ${{ pathname: '/path' }}                        | ${'/path'}
     ${{ origin: '//example.com', path: '/path' }}   | ${'//example.com/path'}
     ${{ pathname: '/path', search: '?a=b' }}        | ${'/path?a=b'}
     ${{ pathname: '/path', hash: '#hash' }}         | ${'/path#hash'}
@@ -88,30 +88,30 @@ describe('isAbsoluteUrl', () => {
 
 describe('isMatched', () => {
   it.each`
-    link                        | base
-    ${'http://example.com'}     | ${undefined}
-    ${'http://example.com'}     | ${''}
-    ${'http://example.com/'}    | ${'http://example.com/'}
-    ${'//example.com/'}         | ${'http://example.com/'}
-    ${'http://example.com/'}    | ${'//example.com/'}
-    ${'/'}                      | ${'http://example.com/'}
-    ${'/spa/something'}         | ${'/spa'}
-    ${'/spa/something?a=b'}     | ${'/spa?a=b'}
-    ${'/spa/something?a'}       | ${'/spa?a'}
-    ${'/spa/something?a=c'}     | ${'/spa?a'}
+    link                     | base
+    ${'http://example.com'}  | ${undefined}
+    ${'http://example.com'}  | ${''}
+    ${'http://example.com/'} | ${'http://example.com/'}
+    ${'//example.com/'}      | ${'http://example.com/'}
+    ${'http://example.com/'} | ${'//example.com/'}
+    ${'/'}                   | ${'http://example.com/'}
+    ${'/spa/something'}      | ${'/spa'}
+    ${'/spa/something?a=b'}  | ${'/spa?a=b'}
+    ${'/spa/something?a'}    | ${'/spa?a'}
+    ${'/spa/something?a=c'}  | ${'/spa?a'}
   `('should match "$link" with "$base"', ({ link, base }) => {
     expect(isMatched(link, base)).toBe(true);
   });
 
   it.each`
-    link                        | base
-    ${'http://example.com'}     | ${'http://example.com/'}
-    ${'https://example.com'}    | ${'http://example.com/'}
-    ${'http://example.com'}     | ${'http://localhost:8080/'}
-    ${'/spa'}                   | ${'/spa/something'}
-    ${'/spa/something'}         | ${'/spa?a=b'}
-    ${'/spa/something?c'}       | ${'/spa?a=b'}
-    ${'/spa/something'}         | ${'/spa?a'}
+    link                     | base
+    ${'http://example.com'}  | ${'http://example.com/'}
+    ${'https://example.com'} | ${'http://example.com/'}
+    ${'http://example.com'}  | ${'http://localhost:8080/'}
+    ${'/spa'}                | ${'/spa/something'}
+    ${'/spa/something'}      | ${'/spa?a=b'}
+    ${'/spa/something?c'}    | ${'/spa?a=b'}
+    ${'/spa/something'}      | ${'/spa?a'}
   `('should not match "$link" with "$base"', ({ link, base }) => {
     expect(isMatched(link, base)).toBe(false);
   });
@@ -133,15 +133,15 @@ describe('mergeSearchParams', () => {
 
 describe('parseUrl', () => {
   it.each`
-    url                           | hash       | origin                  | path        | pathname   | search | searchParams
-    ${''}                         | ${''}      | ${''}                   | ${''}       | ${''}      | ${''}  | ${new URLSearchParams()}
-    ${'/path'}                    | ${''}      | ${''}                   | ${'/path'}  | ${'/path'} | ${''}  | ${new URLSearchParams()}
-    ${'http://example.com'}       | ${''}      | ${'http://example.com'} | ${''}       | ${''}      | ${''}  | ${new URLSearchParams()}
-    ${'http://example.com/path'}  | ${''}      | ${'http://example.com'} | ${'/path'}  | ${'/path'} | ${''}  | ${new URLSearchParams()}
-    ${'http://example.com/#hash'} | ${'#hash'} | ${'http://example.com'} | ${'/#hash'} | ${'/'}     | ${''}  | ${new URLSearchParams()}
-    ${'http://example.com/path?a=b#hash'} | ${'#hash'} | ${'http://example.com'} | ${'/path?a=b#hash'} | ${'/path'} | ${'?a=b'}  | ${new URLSearchParams('a=b')}
+    url                                   | hash       | origin                  | path                | pathname   | search    | searchParams
+    ${''}                                 | ${''}      | ${''}                   | ${''}               | ${''}      | ${''}     | ${new URLSearchParams()}
+    ${'/path'}                            | ${''}      | ${''}                   | ${'/path'}          | ${'/path'} | ${''}     | ${new URLSearchParams()}
+    ${'http://example.com'}               | ${''}      | ${'http://example.com'} | ${''}               | ${''}      | ${''}     | ${new URLSearchParams()}
+    ${'http://example.com/path'}          | ${''}      | ${'http://example.com'} | ${'/path'}          | ${'/path'} | ${''}     | ${new URLSearchParams()}
+    ${'http://example.com/#hash'}         | ${'#hash'} | ${'http://example.com'} | ${'/#hash'}         | ${'/'}     | ${''}     | ${new URLSearchParams()}
+    ${'http://example.com/path?a=b#hash'} | ${'#hash'} | ${'http://example.com'} | ${'/path?a=b#hash'} | ${'/path'} | ${'?a=b'} | ${new URLSearchParams('a=b')}
   `('should parse "$url"', ({ url, searchParams, ...parts }) => {
-    const { searchParams: parsedSearchParams, ...parsedParts }  = parseUrl(url);
+    const { searchParams: parsedSearchParams, ...parsedParts } = parseUrl(url);
 
     expect(parsedParts).toEqual(parts);
     expect(Array.from(parsedSearchParams.entries())).toEqual(Array.from(searchParams.entries()));

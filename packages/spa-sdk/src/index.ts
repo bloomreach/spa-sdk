@@ -23,13 +23,7 @@ import 'reflect-metadata';
 import { Container } from 'inversify';
 import { SpaModule, SpaService, Spa, ApiOptionsToken } from './spa';
 import { CmsService, Cms, CmsModule, PostMessageService, PostMessage } from './cms';
-import {
-  PageModel,
-  PageModule09,
-  PageModule,
-  Page,
-  isPage,
-} from './page';
+import { PageModel, PageModule09, PageModule, Page, isPage } from './page';
 import {
   Configuration,
   ConfigurationWithProxy,
@@ -62,9 +56,7 @@ container.load(CmsModule(), LoggerModule(), UrlModule());
 function onReady<T>(value: T | Promise<T>, callback: (value: T) => unknown): T | Promise<T> {
   const wrapper = (result: T) => (callback(result), result);
 
-  return value instanceof Promise
-    ? value.then(wrapper)
-    : wrapper(value);
+  return value instanceof Promise ? value.then(wrapper) : wrapper(value);
 }
 
 function initializeWithProxy(scope: Container, configuration: ConfigurationWithProxy, model?: PageModel) {
@@ -135,21 +127,18 @@ function initializeWithJwt09(scope: Container, configuration: ConfigurationWithJ
   scope.bind(ApiOptionsToken).toConstantValue({ authorizationToken, serverId, ...config });
   scope.bind(UrlBuilderOptionsToken).toConstantValue(config);
 
-  return onReady(
-    scope.get<Spa>(SpaService).initialize(model ?? path),
-    (page) => {
-      if (page.isPreview() && config.cmsBaseUrl) {
-        logger.info('Running in preview mode.');
-        scope.get<PostMessage>(PostMessageService).initialize(config);
-        scope.get<Cms>(CmsService).initialize(config);
-      } else {
-        logger.info('Running in live mode.');
-      }
+  return onReady(scope.get<Spa>(SpaService).initialize(model ?? path), (page) => {
+    if (page.isPreview() && config.cmsBaseUrl) {
+      logger.info('Running in preview mode.');
+      scope.get<PostMessage>(PostMessageService).initialize(config);
+      scope.get<Cms>(CmsService).initialize(config);
+    } else {
+      logger.info('Running in live mode.');
+    }
 
-      scope.unbind(ApiOptionsToken);
-      scope.unbind(UrlBuilderOptionsToken);
-    },
-  );
+    scope.unbind(ApiOptionsToken);
+    scope.unbind(UrlBuilderOptionsToken);
+  });
 }
 
 function initializeWithJwt10(scope: Container, configuration: ConfigurationWithJwt10, model?: PageModel) {
@@ -188,7 +177,7 @@ function initializeWithJwt10(scope: Container, configuration: ConfigurationWithJ
 
   const campaignVariantId = Campaign.GET_VARIANT_ID(campaignId, segmentId, ttl, configuration.request);
 
-  if (Boolean(campaignVariantId)) {
+  if (campaignVariantId) {
     const params = new URLSearchParams();
     params.append(DEFAULT_CAMPAIGN_VARIANT_PARAMETER, campaignVariantId);
     endpointUrl = appendSearchParams(endpointUrl ?? '', params);
@@ -235,21 +224,18 @@ function initializeWithJwt10(scope: Container, configuration: ConfigurationWithJ
   scope.bind(ApiOptionsToken).toConstantValue({ authorizationToken, serverId, ...config });
   scope.bind(UrlBuilderOptionsToken).toConstantValue(config);
 
-  return onReady(
-    scope.get<Spa>(SpaService).initialize(model ?? path),
-    (page) => {
-      if (page.isPreview() && config.endpoint) {
-        logger.info('Running in preview mode.');
-        scope.get<PostMessage>(PostMessageService).initialize(config);
-        scope.get<Cms>(CmsService).initialize(config);
-      } else {
-        logger.info('Running in live mode.');
-      }
+  return onReady(scope.get<Spa>(SpaService).initialize(model ?? path), (page) => {
+    if (page.isPreview() && config.endpoint) {
+      logger.info('Running in preview mode.');
+      scope.get<PostMessage>(PostMessageService).initialize(config);
+      scope.get<Cms>(CmsService).initialize(config);
+    } else {
+      logger.info('Running in live mode.');
+    }
 
-      scope.unbind(ApiOptionsToken);
-      scope.unbind(UrlBuilderOptionsToken);
-    },
-  );
+    scope.unbind(ApiOptionsToken);
+    scope.unbind(UrlBuilderOptionsToken);
+  });
 }
 
 /**
@@ -279,9 +265,11 @@ export function initialize(configuration: Configuration, model?: Page | PageMode
   logger.debug('Configuration:', configuration);
 
   return onReady(
-    isConfigurationWithProxy(configuration) ? initializeWithProxy(scope, configuration, model) :
-      isConfigurationWithJwt09(configuration) ? initializeWithJwt09(scope, configuration, model) :
-        initializeWithJwt10(scope, configuration, model),
+    isConfigurationWithProxy(configuration)
+      ? initializeWithProxy(scope, configuration, model)
+      : isConfigurationWithJwt09(configuration)
+      ? initializeWithJwt09(scope, configuration, model)
+      : initializeWithJwt10(scope, configuration, model),
     (page) => {
       pages.set(page, scope);
       configuration.request?.emit?.('br:spa:initialized', page);

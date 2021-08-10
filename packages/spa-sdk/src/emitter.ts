@@ -57,6 +57,7 @@ export function EmitterMixin<T extends Constructor, U extends Events>(Super: T) 
     /* private */ emitter = new Typed<U>();
 
     on = this.emitter.on.bind(this.emitter);
+
     off = this.emitter.off.bind(this.emitter);
 
     /**

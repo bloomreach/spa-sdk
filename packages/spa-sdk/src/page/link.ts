@@ -34,7 +34,8 @@ export const TYPE_LINK_RESOURCE = 'resource';
  */
 export const TYPE_LINK_UNKNOWN = 'unknown';
 
-export type LinkType = typeof TYPE_LINK_EXTERNAL
+export type LinkType =
+  | typeof TYPE_LINK_EXTERNAL
   | typeof TYPE_LINK_INTERNAL
   | typeof TYPE_LINK_RESOURCE
   | typeof TYPE_LINK_UNKNOWN;
@@ -52,9 +53,10 @@ export interface Link {
  * @param value The value to check.
  */
 export function isLink(value: any): value is Link {
-  return !!value && (
-    Object.prototype.hasOwnProperty.call(value, 'href')
-      || Object.prototype.hasOwnProperty.call(value, 'type')
-      && [TYPE_LINK_EXTERNAL, TYPE_LINK_INTERNAL, TYPE_LINK_RESOURCE, TYPE_LINK_UNKNOWN].includes(value.type)
+  return (
+    !!value &&
+    (Object.prototype.hasOwnProperty.call(value, 'href') ||
+      (Object.prototype.hasOwnProperty.call(value, 'type') &&
+        [TYPE_LINK_EXTERNAL, TYPE_LINK_INTERNAL, TYPE_LINK_RESOURCE, TYPE_LINK_UNKNOWN].includes(value.type)))
   );
 }

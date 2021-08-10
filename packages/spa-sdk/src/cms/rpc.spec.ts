@@ -17,12 +17,13 @@
 import { Message, Rpc } from './rpc';
 
 describe('Rpc', () => {
-  const rpc = new class extends Rpc<any, any, any, any> {
+  const rpc = new (class extends Rpc<any, any, any, any> {
     send = jest.fn();
+
     process(message: Message) {
       super.process(message);
     }
-  }();
+  })();
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -32,12 +33,14 @@ describe('Rpc', () => {
     it('should send a request', () => {
       rpc.call('something', 'param1', 'param2');
 
-      expect(rpc.send).toHaveBeenCalledWith(expect.objectContaining({
-        type: 'brxm:request',
-        id: expect.any(String),
-        command: 'something',
-        payload: ['param1', 'param2'],
-      }));
+      expect(rpc.send).toHaveBeenCalledWith(
+        expect.objectContaining({
+          type: 'brxm:request',
+          id: expect.any(String),
+          command: 'something',
+          payload: ['param1', 'param2'],
+        }),
+      );
     });
   });
 
@@ -45,11 +48,13 @@ describe('Rpc', () => {
     it('should send an event', () => {
       rpc.trigger('something', { a: 'b' });
 
-      expect(rpc.send).toHaveBeenCalledWith(expect.objectContaining({
-        type: 'brxm:event',
-        event: 'something',
-        payload: { a: 'b' },
-      }));
+      expect(rpc.send).toHaveBeenCalledWith(
+        expect.objectContaining({
+          type: 'brxm:event',
+          event: 'something',
+          payload: { a: 'b' },
+        }),
+      );
     });
   });
 
@@ -68,7 +73,9 @@ describe('Rpc', () => {
 
     it('should resolve a call', () => {
       let id: string;
-      rpc.send.mockImplementationOnce((message) => { id = message.id; });
+      rpc.send.mockImplementationOnce((message) => {
+        id = message.id;
+      });
       const promise = rpc.call('command');
 
       rpc.process({ id: 'id', type: 'brxm:response', state: 'rejected', result: 'a' });
@@ -79,7 +86,9 @@ describe('Rpc', () => {
 
     it('should reject a call', () => {
       let id: string;
-      rpc.send.mockImplementationOnce((message) => { id = message.id; });
+      rpc.send.mockImplementationOnce((message) => {
+        id = message.id;
+      });
       const promise = rpc.call('command');
 
       rpc.process({ id: 'id', type: 'brxm:response', state: 'fulfilled', result: 'a' });
@@ -104,26 +113,32 @@ describe('Rpc', () => {
       rpc.process({ type: 'brxm:request', id: 'id1', command: 'command', payload: ['a', 'b'] });
 
       await new Promise(process.nextTick);
-      expect(rpc.send).toHaveBeenCalledWith(expect.objectContaining({
-        type: 'brxm:response',
-        id: 'id1',
-        state: 'fulfilled',
-        result: 'something',
-      }));
+      expect(rpc.send).toHaveBeenCalledWith(
+        expect.objectContaining({
+          type: 'brxm:response',
+          id: 'id1',
+          state: 'fulfilled',
+          result: 'something',
+        }),
+      );
     });
 
     it('should send a rejected response', async () => {
-      const callback = jest.fn(async () => { throw 'something'; });
+      const callback = jest.fn(async () => {
+        throw 'something';
+      });
       rpc.register('command', callback);
       rpc.process({ type: 'brxm:request', id: 'id1', command: 'command', payload: ['a', 'b'] });
 
       await new Promise(process.nextTick);
-      expect(rpc.send).toHaveBeenCalledWith(expect.objectContaining({
-        type: 'brxm:response',
-        id: 'id1',
-        state: 'rejected',
-        result: 'something',
-      }));
+      expect(rpc.send).toHaveBeenCalledWith(
+        expect.objectContaining({
+          type: 'brxm:response',
+          id: 'id1',
+          state: 'rejected',
+          result: 'something',
+        }),
+      );
     });
   });
 });

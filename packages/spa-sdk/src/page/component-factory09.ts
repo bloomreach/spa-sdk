@@ -44,10 +44,7 @@ export class ComponentFactory extends SimpleFactory<ComponentType, ComponentBuil
       const head = queue.shift()!;
       if (!head.children && head.model.components?.length) {
         head.children = [];
-        queue.unshift(
-          ...head.model.components.map(model => ({ model, siblings: head.children })),
-          head,
-        );
+        queue.unshift(...head.model.components.map((model) => ({ model, siblings: head.children })), head);
 
         continue;
       }

@@ -72,8 +72,7 @@ export class Spa {
     if (typeof model === 'string') {
       this.logger?.debug('Trying to request the page model.');
 
-      return this.api.getPage(model)
-        .then(this.hydrate.bind(this));
+      return this.api.getPage(model).then(this.hydrate.bind(this));
     }
 
     this.logger?.debug('Received dehydrated model.');

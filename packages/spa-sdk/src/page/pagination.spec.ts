@@ -37,7 +37,7 @@ function createPagination(paginationModel = model) {
 }
 
 beforeEach(() => {
-  paginationItemFactory = jest.fn(item => item) as unknown as typeof paginationItemFactory;
+  paginationItemFactory = jest.fn((item) => item) as unknown as typeof paginationItemFactory;
 });
 
 describe('PaginationImpl', () => {

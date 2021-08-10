@@ -40,7 +40,7 @@ describe('campaign', () => {
   it('should return SSR cookie', () => {
     const request = {
       headers: {
-        cookie: 'btm_campaign_id=12345; btm_segment=silver'
+        cookie: 'btm_campaign_id=12345; btm_segment=silver',
       },
     };
 

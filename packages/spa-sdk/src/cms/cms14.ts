@@ -39,6 +39,7 @@ interface CmsApi {
 @injectable()
 export class Cms14Impl implements Cms {
   private api?: CmsApi;
+
   private postponed: Function[] = [];
 
   constructor(
@@ -47,9 +48,7 @@ export class Cms14Impl implements Cms {
   ) {}
 
   private async flush() {
-    this.postponed
-      .splice(0)
-      .forEach(task => task());
+    this.postponed.splice(0).forEach((task) => task());
   }
 
   private postpone<T extends (...args: any[]) => any>(task: T) {

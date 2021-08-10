@@ -28,17 +28,17 @@ export type HttpClientConfig = {
   /**
    * HTTP request method.
    */
-  method: 'GET' | 'POST',
+  method: 'GET' | 'POST';
 
   /**
    * The URL to send the HTTP request to.
    */
-  url: string,
+  url: string;
 
   /**
    * Optional: the headers to send with the HTTP request.
    */
-  headers?: HttpHeaders,
+  headers?: HttpHeaders;
 
   /**
    * Optional: the data to send with the HTTP request.

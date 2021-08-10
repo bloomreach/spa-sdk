@@ -51,8 +51,9 @@ describe('LinkRewriterImpl', () => {
     it('should rewrite anchor links', () => {
       linkFactory.create.mockReturnValueOnce('url');
 
-      expect(linkRewriter.rewrite('<a href="/some/path" data-type="internal">something</a>'))
-        .toBe('<a href="url" data-type="internal">something</a>');
+      expect(linkRewriter.rewrite('<a href="/some/path" data-type="internal">something</a>')).toBe(
+        '<a href="url" data-type="internal">something</a>',
+      );
       expect(linkFactory.create).toBeCalledWith({ href: '/some/path', type: TYPE_LINK_INTERNAL });
     });
 
@@ -66,8 +67,7 @@ describe('LinkRewriterImpl', () => {
     it('should rewrite images links', () => {
       linkFactory.create.mockReturnValueOnce('url');
 
-      expect(linkRewriter.rewrite('<img src="/some/path" alt="something"/>'))
-        .toBe('<img src="url" alt="something"/>');
+      expect(linkRewriter.rewrite('<img src="/some/path" alt="something"/>')).toBe('<img src="url" alt="something"/>');
       expect(linkFactory.create).toBeCalledWith({ href: '/some/path', type: TYPE_LINK_RESOURCE });
     });
 

@@ -15,7 +15,7 @@
  */
 
 import { ContainerModule } from 'inversify';
-import { UrlBuilderImpl as UrlBuilderImpl } from './builder09';
+import { UrlBuilderImpl } from './builder09';
 import { UrlBuilderService } from './builder';
 
 export function UrlModule() {

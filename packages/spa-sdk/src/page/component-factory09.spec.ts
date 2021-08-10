@@ -15,12 +15,7 @@
  */
 
 import { ComponentFactory } from './component-factory09';
-import {
-  ComponentModel,
-  TYPE_COMPONENT,
-  TYPE_COMPONENT_CONTAINER_ITEM,
-  TYPE_COMPONENT_CONTAINER,
-} from './component09';
+import { ComponentModel, TYPE_COMPONENT, TYPE_COMPONENT_CONTAINER_ITEM, TYPE_COMPONENT_CONTAINER } from './component09';
 
 const model = {
   id: 'id',
@@ -52,32 +47,35 @@ describe('ComponentFactory', () => {
     });
 
     it('should throw an exception on unknown component type', () => {
-      const factory = new ComponentFactory()
-        .register(TYPE_COMPONENT_CONTAINER_ITEM, jest.fn());
+      const factory = new ComponentFactory().register(TYPE_COMPONENT_CONTAINER_ITEM, jest.fn());
 
-      expect(() => factory.create({
-        ...model,
-        id: 'id1',
-        type: TYPE_COMPONENT_CONTAINER,
-        name: 'Component 1',
-      })).toThrowError();
+      expect(() =>
+        factory.create({
+          ...model,
+          id: 'id1',
+          type: TYPE_COMPONENT_CONTAINER,
+          name: 'Component 1',
+        }),
+      ).toThrowError();
     });
 
     it('should produce a tree structure', () => {
-      const builder = jest.fn(model => model.id);
-      const factory = new ComponentFactory()
-        .register(TYPE_COMPONENT, builder);
+      const builder = jest.fn((model) => model.id);
+      const factory = new ComponentFactory().register(TYPE_COMPONENT, builder);
 
       const root = factory.create({
         ...model,
         id: 'root',
         components: [
           { ...model, id: 'a' },
-          { ...model, id: 'b',
+          {
+            ...model,
+            id: 'b',
             components: [
               { ...model, id: 'c' },
               { ...model, id: 'd' },
-            ] },
+            ],
+          },
         ],
       });
 

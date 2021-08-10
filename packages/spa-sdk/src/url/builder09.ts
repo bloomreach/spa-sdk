@@ -46,7 +46,9 @@ export interface UrlBuilderOptions {
 @injectable()
 export class UrlBuilderImpl {
   private apiBaseUrl: ReturnType<typeof parseUrl>;
+
   private cmsBaseUrl: ReturnType<typeof parseUrl>;
+
   private spaBaseUrl: ReturnType<typeof parseUrl>;
 
   constructor(@inject(UrlBuilderOptionsToken) options: UrlBuilderOptions) {

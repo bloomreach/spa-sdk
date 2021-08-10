@@ -127,12 +127,11 @@ describe('ContainerItemImpl', () => {
     });
 
     it('should not update a container item if it is not the same container item', async () => {
-      await eventBus.emitSerial(
-        'page.update',
-        { page: {
+      await eventBus.emitSerial('page.update', {
+        page: {
           page: { ...model, id: 'id2', label: 'b' },
-        } as PageModel },
-      );
+        } as PageModel,
+      });
 
       expect(metaFactory).not.toBeCalled();
       expect(containerItem.getType()).toBe('a');
@@ -142,24 +141,22 @@ describe('ContainerItemImpl', () => {
       const metaModel = {};
       const meta = {} as MetaCollection;
       metaFactory.mockReturnValueOnce(meta);
-      await eventBus.emitSerial(
-        'page.update',
-        { page: {
+      await eventBus.emitSerial('page.update', {
+        page: {
           page: { ...model, id: 'id1', _meta: metaModel },
-        } as PageModel },
-      );
+        } as PageModel,
+      });
 
       expect(metaFactory).toBeCalledWith(metaModel);
       expect(containerItem.getMeta()).toBe(meta);
     });
 
     it('should update a model on page.update event', async () => {
-      await eventBus.emitSerial(
-        'page.update',
-        { page: {
+      await eventBus.emitSerial('page.update', {
+        page: {
           page: { ...model, id: 'id1', label: 'b' },
-        } as PageModel },
-      );
+        } as PageModel,
+      });
 
       expect(containerItem.getType()).toBe('b');
     });
@@ -168,12 +165,11 @@ describe('ContainerItemImpl', () => {
       const listener = jest.fn();
       containerItem.on('update', listener);
 
-      await eventBus.emitSerial(
-        'page.update',
-        { page: {
+      await eventBus.emitSerial('page.update', {
+        page: {
           page: { ...model, id: 'id1' },
-        } as PageModel },
-      );
+        } as PageModel,
+      });
       await new Promise(process.nextTick);
 
       expect(listener).toBeCalledWith({});

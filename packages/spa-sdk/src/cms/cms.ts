@@ -50,8 +50,7 @@ interface CmsEvents {
   update: CmsUpdateEvent;
 }
 
-interface SpaProcedures extends Procedures {
-}
+type SpaProcedures = Procedures;
 
 interface SpaEvents {
   ready: never;

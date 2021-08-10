@@ -120,14 +120,14 @@ export class ApiImpl implements Api {
     } = options;
 
     return {
-      ...ip && { 'X-Forwarded-For': ip },
-      ...apiVersion && { [apiVersionHeader]: apiVersion },
-      ...authorizationToken && { [authorizationHeader]: `Bearer ${authorizationToken}` },
-      ...isConfigurationWithProxy(options) && cookie && { Cookie: cookie },
-      ...referer && { Referer: referer },
-      ...serverId && { [serverIdHeader]: serverId },
-      ...userAgent && { 'User-Agent': userAgent },
-      ...visitor && { [visitor.header]: visitor.id },
+      ...(ip && { 'X-Forwarded-For': ip }),
+      ...(apiVersion && { [apiVersionHeader]: apiVersion }),
+      ...(authorizationToken && { [authorizationHeader]: `Bearer ${authorizationToken}` }),
+      ...(isConfigurationWithProxy(options) && cookie && { Cookie: cookie }),
+      ...(referer && { Referer: referer }),
+      ...(serverId && { [serverIdHeader]: serverId }),
+      ...(userAgent && { 'User-Agent': userAgent }),
+      ...(visitor && { [visitor.header]: visitor.id }),
     };
   }
 

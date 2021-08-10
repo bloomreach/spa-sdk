@@ -286,12 +286,14 @@ describe('PageImpl', () => {
 
       expect(page.getContent('content')).toBeUndefined();
 
-      await eventBus.emitSerial('page.update', { page: {
-        ...model,
-        content: {
-          content: { id: 'id', name: 'content' } as ContentModel,
+      await eventBus.emitSerial('page.update', {
+        page: {
+          ...model,
+          content: {
+            content: { id: 'id', name: 'content' } as ContentModel,
+          },
         },
-      } });
+      });
 
       expect(contentFactory).toBeCalledWith({ id: 'id', name: 'content' });
       expect(page.getContent('content')).toBe(content);

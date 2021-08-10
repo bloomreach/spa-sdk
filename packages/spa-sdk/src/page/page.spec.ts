@@ -208,11 +208,11 @@ describe('PageImpl', () => {
     });
 
     it.each`
-      link                  | base                    | expected
-      ${'something'}        | ${'/news'}              | ${'/news/something'}
-      ${'/something'}       | ${'/news'}              | ${'/something'}
-      ${'something'}        | ${'/'}                  | ${'/something'}
-      ${'?page=1'}          | ${'/news'}              | ${'/news?page=1'}
+      link            | base       | expected
+      ${'something'}  | ${'/news'} | ${'/news/something'}
+      ${'/something'} | ${'/news'} | ${'/something'}
+      ${'something'}  | ${'/'}     | ${'/something'}
+      ${'?page=1'}    | ${'/news'} | ${'/news?page=1'}
     `('should resolve "$link" to "$expected" relative to "$base"', ({ link, base, expected }) => {
       const page = createPage({
         ...model,
@@ -221,9 +221,8 @@ describe('PageImpl', () => {
           site: { ...model.links.site, href: base },
         },
       });
-      linkFactory.create.mockImplementationOnce(
-        ((link?: Link | string) => isLink(link) ? link.href : link) as typeof linkFactory.create,
-      );
+      linkFactory.create.mockImplementationOnce(((link?: Link | string) =>
+        isLink(link) ? link.href : link) as typeof linkFactory.create);
 
       expect(page.getUrl(link)).toBe(expected);
     });

@@ -25,10 +25,12 @@ describe('createManageContentButton', () => {
 
   beforeEach(() => {
     content = { getMeta: jest.fn(() => meta) } as unknown as typeof content;
-    meta = [{
-      getPosition: jest.fn(() => META_POSITION_BEGIN),
-      getData: jest.fn(() => JSON.stringify({ 'HST-Type': TYPE_MANAGE_CONTENT_BUTTON, uuid: 'id' })),
-    }] as unknown as typeof meta;
+    meta = [
+      {
+        getPosition: jest.fn(() => META_POSITION_BEGIN),
+        getData: jest.fn(() => JSON.stringify({ 'HST-Type': TYPE_MANAGE_CONTENT_BUTTON, uuid: 'id' })),
+      },
+    ] as unknown as typeof meta;
   });
 
   it('should return content meta-data as-is if there are no custom parameters', () => {
@@ -40,22 +42,26 @@ describe('createManageContentButton', () => {
   });
 
   it('should generate add content button when there are no content parameters', () => {
-    expect(createManageContentButton({
-      documentTemplateQuery: 'new-content-document',
-      folderTemplateQuery: 'new-content-folder',
-      root: 'content',
-    })).toMatchSnapshot();
+    expect(
+      createManageContentButton({
+        documentTemplateQuery: 'new-content-document',
+        folderTemplateQuery: 'new-content-folder',
+        root: 'content',
+      }),
+    ).toMatchSnapshot();
   });
 
   it('should merge custom parameters', () => {
-    expect(createManageContentButton({
-      content,
-      documentTemplateQuery: 'new-news-document',
-      folderTemplateQuery: 'new-news-folder',
-      root: 'news',
-      path: '2020/11',
-      parameter: 'document',
-    })).toMatchSnapshot();
+    expect(
+      createManageContentButton({
+        content,
+        documentTemplateQuery: 'new-news-document',
+        folderTemplateQuery: 'new-news-folder',
+        root: 'news',
+        path: '2020/11',
+        parameter: 'document',
+      }),
+    ).toMatchSnapshot();
   });
 
   it('should set relative parameter flag', () => {

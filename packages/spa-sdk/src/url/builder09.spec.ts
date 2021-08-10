@@ -26,26 +26,26 @@ describe('UrlBuilderImpl', () => {
     const options6 = { ...options1, spaBaseUrl: 'https://example.com/news' };
 
     it.each`
-      options     | path                      | expected
-      ${options1} | ${'/'}                    | ${'http://localhost:8080/site/spa/resourceapi/'}
-      ${options1} | ${'/news'}                | ${'http://localhost:8080/site/spa/resourceapi/news'}
-      ${options1} | ${'/news/'}               | ${'http://localhost:8080/site/spa/resourceapi/news/'}
-      ${options1} | ${'/news/2019/foo.html'}  | ${'http://localhost:8080/site/spa/resourceapi/news/2019/foo.html'}
-      ${options1} | ${'/?a=b'}                | ${'http://localhost:8080/site/spa/resourceapi/?a=b'}
-      ${options1} | ${'/news?a=b'}            | ${'http://localhost:8080/site/spa/resourceapi/news?a=b'}
-      ${options2} | ${'/'}                    | ${'http://127.0.0.1/resourceapi/'}
-      ${options2} | ${'/news'}                | ${'http://127.0.0.1/resourceapi/news'}
-      ${options3} | ${'/news'}                | ${'http://localhost:8080/site/spa/resourceapi/news?param=value'}
-      ${options3} | ${'/news?a=b'}            | ${'http://localhost:8080/site/spa/resourceapi/news?a=b&param=value'}
+      options     | path                                    | expected
+      ${options1} | ${'/'}                                  | ${'http://localhost:8080/site/spa/resourceapi/'}
+      ${options1} | ${'/news'}                              | ${'http://localhost:8080/site/spa/resourceapi/news'}
+      ${options1} | ${'/news/'}                             | ${'http://localhost:8080/site/spa/resourceapi/news/'}
+      ${options1} | ${'/news/2019/foo.html'}                | ${'http://localhost:8080/site/spa/resourceapi/news/2019/foo.html'}
+      ${options1} | ${'/?a=b'}                              | ${'http://localhost:8080/site/spa/resourceapi/?a=b'}
+      ${options1} | ${'/news?a=b'}                          | ${'http://localhost:8080/site/spa/resourceapi/news?a=b'}
+      ${options2} | ${'/'}                                  | ${'http://127.0.0.1/resourceapi/'}
+      ${options2} | ${'/news'}                              | ${'http://127.0.0.1/resourceapi/news'}
+      ${options3} | ${'/news'}                              | ${'http://localhost:8080/site/spa/resourceapi/news?param=value'}
+      ${options3} | ${'/news?a=b'}                          | ${'http://localhost:8080/site/spa/resourceapi/news?a=b&param=value'}
       ${options3} | ${'/site/spa/resourceapi/news?a=b'}     | ${'http://localhost:8080/site/spa/resourceapi/news?param=value&a=b'}
       ${options3} | ${'/site/spa/resourceapi/news?param=b'} | ${'http://localhost:8080/site/spa/resourceapi/news?param=b'}
-      ${options4} | ${'/news'}                | ${'http://localhost:8080/site/spa/resourceapi'}
-      ${options4} | ${'/news/'}               | ${'http://localhost:8080/site/spa/resourceapi/'}
-      ${options4} | ${'/news?a=b'}            | ${'http://localhost:8080/site/spa/resourceapi?a=b'}
-      ${options4} | ${'/news/2019/?a=b'}      | ${'http://localhost:8080/site/spa/resourceapi/2019/?a=b'}
-      ${options5} | ${'/news/2019/?a=b'}      | ${'http://localhost:8080/site/spa/resourceapi/2019/?a=b'}
-      ${options6} | ${'/news/2019/?a=b'}      | ${'http://localhost:8080/site/spa/resourceapi/2019/?a=b'}
-      ${{}}       | ${'/news/2019/?a=b'}      | ${'/resourceapi/news/2019/?a=b'}
+      ${options4} | ${'/news'}                              | ${'http://localhost:8080/site/spa/resourceapi'}
+      ${options4} | ${'/news/'}                             | ${'http://localhost:8080/site/spa/resourceapi/'}
+      ${options4} | ${'/news?a=b'}                          | ${'http://localhost:8080/site/spa/resourceapi?a=b'}
+      ${options4} | ${'/news/2019/?a=b'}                    | ${'http://localhost:8080/site/spa/resourceapi/2019/?a=b'}
+      ${options5} | ${'/news/2019/?a=b'}                    | ${'http://localhost:8080/site/spa/resourceapi/2019/?a=b'}
+      ${options6} | ${'/news/2019/?a=b'}                    | ${'http://localhost:8080/site/spa/resourceapi/2019/?a=b'}
+      ${{}}       | ${'/news/2019/?a=b'}                    | ${'/resourceapi/news/2019/?a=b'}
     `('should create the Page Model API URL for "$path" using options "$options"', ({ options, path, expected }) => {
       const builder = new UrlBuilderImpl(options);
 
@@ -53,9 +53,9 @@ describe('UrlBuilderImpl', () => {
     });
 
     it.each`
-      options     | path                      | message
-      ${options4} | ${'/'}                    | ${'The path "/" does not start with the base path "/news".'}
-      ${options6} | ${'/something'}           | ${'The path "/something" does not start with the base path "/news".'}
+      options     | path            | message
+      ${options4} | ${'/'}          | ${'The path "/" does not start with the base path "/news".'}
+      ${options6} | ${'/something'} | ${'The path "/something" does not start with the base path "/news".'}
     `('should throw an error for the path "$path" with message "$message"', ({ options, path, message }) => {
       const builder = new UrlBuilderImpl(options);
 

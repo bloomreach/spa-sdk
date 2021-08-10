@@ -36,7 +36,8 @@ export const TYPE_COMPONENT_CONTAINER_ITEM = 'CONTAINER_ITEM_COMPONENT';
  */
 export const TYPE_COMPONENT_CONTAINER = 'CONTAINER_COMPONENT';
 
-export type ComponentType = typeof TYPE_COMPONENT
+export type ComponentType =
+  | typeof TYPE_COMPONENT
   | typeof TYPE_COMPONENT_CONTAINER_ITEM
   | typeof TYPE_COMPONENT_CONTAINER;
 
@@ -79,6 +80,7 @@ export class ComponentImpl implements Component {
   }
 
   getModels<T extends ComponentModels>(): T;
+
   getModels() {
     return this.model.models || {};
   }
@@ -100,20 +102,23 @@ export class ComponentImpl implements Component {
   }
 
   getComponent(): this;
+
   getComponent<U extends Component>(...componentNames: string[]): U | undefined;
+
   getComponent(...componentNames: string[]) {
     // tslint:disable-next-line:no-this-assignment
     let component: Component | undefined = this;
 
     while (componentNames.length && component) {
       const name = componentNames.shift()!;
-      component = component.getChildren().find(component => component.getName() === name);
+      component = component.getChildren().find((component) => component.getName() === name);
     }
 
     return component;
   }
 
   getComponentById<U extends Component>(id: string): U | this | undefined;
+
   getComponentById(id: string) {
     const queue = [this as Component];
 

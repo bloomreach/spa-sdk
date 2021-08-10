@@ -37,21 +37,18 @@ export class ComponentFactory extends SimpleFactory<ComponentType, ComponentBuil
 
     // tslint:disable-next-line: no-increment-decrement
     for (let i = 0; i < heap.length; i++) {
-      heap.push(...resolve<ComponentModel>(page, heap[i])?.children ?? []);
+      heap.push(...(resolve<ComponentModel>(page, heap[i])?.children ?? []));
     }
 
-    return heap.reverse().reduce<Component | undefined>(
-      (previous, reference) => {
-        const model = resolve<ComponentModel>(page, reference)!;
-        const children = model?.children?.map(child => pool.get(resolve<ComponentModel>(page, child)!)!) ?? [];
-        const component = this.buildComponent(model, children);
+    return heap.reverse().reduce<Component | undefined>((previous, reference) => {
+      const model = resolve<ComponentModel>(page, reference)!;
+      const children = model?.children?.map((child) => pool.get(resolve<ComponentModel>(page, child)!)!) ?? [];
+      const component = this.buildComponent(model, children);
 
-        pool.set(model, component);
+      pool.set(model, component);
 
-        return component;
-      },
-      undefined,
-    );
+      return component;
+    }, undefined);
   }
 
   private buildComponent(model: ComponentModel, children: Component[]) {
