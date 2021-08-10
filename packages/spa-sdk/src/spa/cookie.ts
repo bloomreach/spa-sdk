@@ -2,6 +2,12 @@ import { default as cookie } from 'cookie';
 
 export class Cookie {
   /**
+   * Check if window variable is defined
+   */
+  public static CAN_USE_DOM() {
+    return (typeof window !== 'undefined' && window.document);
+  }
+  /**
    * Set cookie in the document
    * @param name Cookie name
    * @param value Cookie value
