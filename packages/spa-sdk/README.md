@@ -122,7 +122,7 @@ The `initialize` function supports several options you may use to customize page
 | **`request.visitor`** <br> An object holding information about the current visitor. <br><br> Required: no <br> Default: _none_ |
 
 | These options are deprecated and will be removed in the next major release
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- | ----------------------------------------------- |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **`cmsBaseUrl`** <br> Base URL of the site (e.g. `http://localhost:8080/site` or `http://localhost:8080/site/channel`). This option is exclusive and should not be used together with `options` or `endpoint` <br><br> Required: _exclusive_ <br> Default: . _none_ |
 | **`options`** <br> The CMS URL options. This option is exclusive and should not be used together with `cmsBaseUrl` or `endpoint`. Use this property to enable the UrlRewriter-based setup. <br><br> Required: _exclusive_ <br> Default: _none_ |
 | **`options.live`** <br> The CMS URL options for the live site. <br><br> Required: yes <br> Default: _none_ |
