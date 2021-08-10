@@ -110,7 +110,7 @@ The `initialize` function supports several options you may use to customize page
 | **`window`** <br> A window object reference will be used to interact with brXM. It needs to be set when initialize is being called within an iframe or worker process. <br><br> Required: no <br> Default: `window` |
 
 | Relevance options (PaaS-only)
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------- |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **`visitor`** <br> An object holding information about the current visitor. The option takes precedence over `request.visitor` <br><br> Required: no <br> Default: . _none_ |
 | **`visitor.id`** <br> The current visitor identifier. <br><br> Required: yes <br> Default: _none_ |
 | **`visitor.header`** <br> An HTTP-header using to pass the visitor identifier to the Page Model API. <br><br> Required: yes <br> Default: _none_ |
@@ -266,7 +266,7 @@ The `Document` object holds document data that is used by the page components.
 The `ImageSet` object holds images collection that is used by the page components.
 
 | Method                                                  | Description                         |
-| ------------------------------------------------------- | ----------------------------------- |
+| ------------------------------------------------------- | ----------------------------------- | ----------------------------- |
 | <code>getDescription(): string &vert; undefined;</code> | Returns the image set description.  |
 | `getDisplayName(): string`                              | Returns the image set display name. |
 | `getId(): string`                                       | Returns the document id.            |
