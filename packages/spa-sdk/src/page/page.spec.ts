@@ -360,6 +360,24 @@ describe('PageImpl', () => {
       expect(page.toJSON()).toBe(model);
     });
   });
+
+  describe('sanitize', () => {
+    it('should sanitize html', () => {
+      const page = createPage();
+      const html = `
+        <div>
+          <h1>Hello, World!</h1>
+          <p>Sanitize before <a href="https://www.example.com/" name="use">use</a></p>
+          <script>alert(1);</script>
+        </div>`;
+      expect(page.sanitize(html)).toBe(`
+        <div>
+          <h1>Hello, World!</h1>
+          <p>Sanitize before <a href="https://www.example.com/" name="use">use</a></p>
+          
+        </div>`);
+    });
+  });
 });
 
 describe('isPage', () => {

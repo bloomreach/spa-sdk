@@ -15,6 +15,7 @@
  */
 
 import { inject, injectable, optional } from 'inversify';
+import sanitizeHtml from 'sanitize-html';
 import { ButtonFactory } from './button-factory';
 import { ComponentFactory } from './component-factory';
 import { ComponentMeta, ComponentModel, Component } from './component';
@@ -246,6 +247,12 @@ export interface Page {
    * @return A plain JavaScript object of the page model.
    */
   toJSON(): any;
+
+  /**
+   * Sanitize HTML content to allow only safe HTML markups.
+   * @param content The HTML content to sanitize.
+   */
+  sanitize(content: string): string;
 }
 
 @injectable()
@@ -360,6 +367,10 @@ export class PageImpl implements Page {
 
   toJSON(): PageModel {
     return this.model;
+  }
+
+  sanitize(content: string): string {
+    return sanitizeHtml(content);
   }
 }
 

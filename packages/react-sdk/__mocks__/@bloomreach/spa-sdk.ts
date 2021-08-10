@@ -43,6 +43,7 @@ const page = new class implements Page {
   rewriteLinks = jest.fn();
   sync = jest.fn();
   toJSON = jest.fn();
+  sanitize = jest.fn();
 };
 
 module.exports = {

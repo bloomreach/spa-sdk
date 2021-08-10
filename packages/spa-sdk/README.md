@@ -75,6 +75,23 @@ The middleware can be customized using the `withOptions` method.
 app.use(relevance.withOptions({ name: "_visitor", maxAge: 24 * 60 * 60 }));
 ```
 
+### Rendering HTML content safely
+
+The SPA SDK provides an API, ```Page.sanitize(html)```,
+which sanitizes HTML content using the [sanitize-html](https://www.npmjs.com/package/sanitize-html) library,
+to render the HTML content safely.
+
+For example, in a React example, you may sanitize and render the HTML content which came from the backend like the following example:
+
+```
+{/* Suppose the content.value below contains HTML markups string. */}
+<div>
+   {content && <div dangerouslySetInnerHTML={{ __html: page.rewriteLinks(page.sanitize(content.value)) }} />}
+</div>
+```
+
+The same principle may apply in other frameworks. e.g, `v-html` in Vue.js or `[innerHTML]` in Angular.
+
 ## License
 
 Published under [Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0) license.

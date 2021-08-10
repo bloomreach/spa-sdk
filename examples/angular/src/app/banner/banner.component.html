@@ -37,7 +37,7 @@
   />
   <div
     *ngIf="data?.content"
-    [innerHTML]="page.rewriteLinks(data!.content!.value)"
+    [innerHTML]="page.rewriteLinks(page.sanitize(data!.content!.value))"
   ></div>
   <p *ngIf="link" class="lead">
     <a

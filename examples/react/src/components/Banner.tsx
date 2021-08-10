@@ -44,7 +44,7 @@ export function Banner({ component, page }: BrProps): JSX.Element | null {
       {title && <h1>{title}</h1>}
       {image && <img className="img-fluid" src={image.getOriginal()?.getUrl()} alt={title} />}
       {/* eslint-disable-next-line react/no-danger */}
-      {content && <div dangerouslySetInnerHTML={{ __html: page.rewriteLinks(content.value) }} />}
+      {content && <div dangerouslySetInnerHTML={{ __html: page.rewriteLinks(page.sanitize(content.value)) }} />}
       {link && (
         <p className="lead">
           <Link to={link.getUrl()!} className="btn btn-primary btn-lg" role="button">
