@@ -84,9 +84,9 @@ function initializeWithProxy(scope: Container, configuration: ConfigurationWithP
   logger.debug('Base URL:', configuration.options.preview.spaBaseUrl);
 
   const options = isMatched(
-      configuration.path ?? configuration.request?.path ?? '/',
-      configuration.options.preview.spaBaseUrl,
-    )
+    configuration.path ?? configuration.request?.path ?? '/',
+    configuration.options.preview.spaBaseUrl,
+  )
     ? configuration.options.preview
     : configuration.options.live;
 
@@ -322,24 +322,27 @@ function getCampaignVariantId(
   ttl?: string,
 ): string {
   const ttlNumber = isNaN(Number(ttl)) ? DEFAULT_TTL_VALUE : Number(ttl);
-  if (ttlNumber === 0) {
+  if (Cookie.CAN_USE_DOM() && ttlNumber === 0) {
     Cookie.ERASE_COOKIE(campaignParameter);
     Cookie.ERASE_COOKIE(segmentParameter);
     return '';
   }
 
   if (campaignId && segmentId) {
-    Cookie.SET_COOKIE(campaignParameter, campaignId, ttlNumber);
-    Cookie.SET_COOKIE(segmentParameter, segmentId, ttlNumber);
+    if (Cookie.CAN_USE_DOM()) {
+      Cookie.SET_COOKIE(campaignParameter, campaignId, ttlNumber);
+      Cookie.SET_COOKIE(segmentParameter, segmentId, ttlNumber);
+    }
     return `${campaignId}:${segmentId}`;
   }
 
-  const { [campaignParameter]: cookieCampaignId, [segmentParameter]: cookieSegmentId } = Cookie.GET_COOKIE();
+  if (Cookie.CAN_USE_DOM()) {
+    const { [campaignParameter]: cookieCampaignId, [segmentParameter]: cookieSegmentId } = Cookie.GET_COOKIE();
 
-  if (cookieCampaignId && cookieSegmentId) {
-    return `${cookieCampaignId}:${cookieSegmentId}`;
+    if (cookieCampaignId && cookieSegmentId) {
+      return `${cookieCampaignId}:${cookieSegmentId}`;
+    }
   }
-
   return '';
 }
 
