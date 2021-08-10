@@ -42,7 +42,7 @@ export abstract class Logger implements Logger {
       return;
     }
 
-    return this.write(level, '[SPA]', `[${level.toUpperCase()}]`, ...message);
+    this.write(level, '[SPA]', `[${level.toUpperCase()}]`, ...message);
   }
 
   protected abstract write(level: Level, ...message: unknown[]): void;

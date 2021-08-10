@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { default as cookie } from 'cookie';
+import cookie from 'cookie';
 import { HttpRequest } from '../spa/http';
 
 export class Cookie {

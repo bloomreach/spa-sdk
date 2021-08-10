@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-// tslint:disable:max-line-length
+/* eslint-disable max-len */
 /**
  * Meta-data of a visitor.
  * @see https://documentation.bloomreach.com/library/enterprise/enterprise-features/targeting/visitors-visits-and-cookies.html
  */
-// tslint:enable:max-line-length
+/* eslint-enable max-len */
 export interface Visitor {
   /**
    * The visitor identifier.
@@ -37,12 +37,12 @@ export interface Visitor {
   new: boolean;
 }
 
-// tslint:disable:max-line-length
+/* eslint-disable max-len */
 /**
  * Meta-data of a current visit.
  * @see https://documentation.bloomreach.com/library/enterprise/enterprise-features/targeting/visitors-visits-and-cookies.html
  */
-// tslint:enable:max-line-length
+/* eslint-enable max-len */
 export interface Visit {
   /**
    * The visit identifier.

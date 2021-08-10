@@ -72,6 +72,7 @@ export interface ContainerItemContent<T> {
 /**
  * Container item update event.
  */
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface ContainerItemUpdateEvent {}
 
 export interface ContainerItemEvents {

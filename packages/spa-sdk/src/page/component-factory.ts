@@ -35,7 +35,7 @@ export class ComponentFactory extends SimpleFactory<ComponentType, ComponentBuil
     const heap = [page.root];
     const pool = new Map<ComponentModel, Component>();
 
-    // tslint:disable-next-line: no-increment-decrement
+    // eslint-disable-next-line no-plusplus
     for (let i = 0; i < heap.length; i++) {
       heap.push(...(resolve<ComponentModel>(page, heap[i])?.children ?? []));
     }

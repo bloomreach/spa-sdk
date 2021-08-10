@@ -245,12 +245,12 @@ export interface Page {
   /**
    * @return A plain JavaScript object of the page model.
    */
-  toJSON(): object;
+  toJSON(): any;
 }
 
 @injectable()
 export class PageImpl implements Page {
-  protected content = new WeakMap<object, unknown>();
+  protected content = new WeakMap<Record<string, any>, unknown>();
 
   protected root?: Component;
 
@@ -270,11 +270,11 @@ export class PageImpl implements Page {
     this.root = componentFactory.create(model);
   }
 
-  protected onPageUpdate(event: PageUpdateEvent) {
+  protected onPageUpdate(event: PageUpdateEvent): void {
     Object.assign(this.model.page, event.page.page);
   }
 
-  getButton(type: string, ...params: unknown[]) {
+  getButton(type: string, ...params: unknown[]): MetaCollection {
     return this.buttonFactory.create(type, ...params);
   }
 

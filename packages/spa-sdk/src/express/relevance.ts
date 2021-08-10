@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 
-import { default as cookie, CookieSerializeOptions } from 'cookie';
+import cookie, { CookieSerializeOptions } from 'cookie';
 import { IncomingMessage, OutgoingMessage } from 'http';
 import { Configuration, Page } from '..';
 
 declare module 'http' {
+  // eslint-disable-next-line no-shadow
   interface IncomingMessage {
     visitor: Required<Configuration>['request']['visitor'];
   }
@@ -69,6 +70,7 @@ function withOptions({
     if (value) {
       try {
         request.visitor = JSON.parse(value);
+        // eslint-disable-next-line no-empty
       } catch {}
     }
 
@@ -78,8 +80,8 @@ function withOptions({
         return;
       }
 
-      const { new: _, ...value } = visitor;
-      const serialized = cookie.serialize(name, JSON.stringify(value), { ...options, httpOnly, maxAge });
+      const { new: _, ...rest } = visitor;
+      const serialized = cookie.serialize(name, JSON.stringify(rest), { ...options, httpOnly, maxAge });
       const cookies = response.getHeader?.('set-cookie') ?? [];
 
       response.setHeader?.('Set-Cookie', [...(Array.isArray(cookies) ? cookies : [cookies]), serialized] as string[]);

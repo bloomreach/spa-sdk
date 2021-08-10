@@ -17,12 +17,6 @@
 import { Typed } from 'emittery';
 import { PageModel } from './page09';
 
-export type EventBus = Typed<Events>;
-
-export interface Events {
-  'page.update': PageUpdateEvent;
-}
-
 /**
  * Page model update event.
  */
@@ -32,3 +26,9 @@ export interface PageUpdateEvent {
    */
   page: PageModel;
 }
+
+export interface Events {
+  'page.update': PageUpdateEvent;
+}
+
+export type EventBus = Typed<Events>;

@@ -55,8 +55,8 @@ export class MetaCollectionImpl extends Array<Meta> implements MetaCollection {
     @inject(MetaFactory) metaFactory: MetaFactory,
   ) {
     super(
-      ...(model.beginNodeSpan || []).map((model) => metaFactory.create(model, META_POSITION_BEGIN)),
-      ...(model.endNodeSpan || []).map((model) => metaFactory.create(model, META_POSITION_END)),
+      ...(model.beginNodeSpan || []).map((beginModel) => metaFactory.create(beginModel, META_POSITION_BEGIN)),
+      ...(model.endNodeSpan || []).map((endModel) => metaFactory.create(endModel, META_POSITION_END)),
     );
 
     const prototype = Object.create(MetaCollectionImpl.prototype);

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { default as model } from './index09.fixture.json';
+import model from './index09.fixture.json';
 import {
   destroy,
   initialize,

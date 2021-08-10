@@ -96,12 +96,12 @@ export interface Api {
    * @param payload Payload with the component properties.
    * @return The Page Model.
    */
-  getComponent(url: string, payload: object): Promise<PageModel>;
+  getComponent(url: string, payload: Record<string, unknown>): Promise<PageModel>;
 }
 
 @injectable()
 export class ApiImpl implements Api {
-  private static getHeaders(options: ApiOptions) {
+  private static getHeaders(options: ApiOptions): { [k: string]: string | string[] } {
     const {
       /** @deprecated The cookie header should be ignored when the proxy-based setup is removed. */
       cookie,
@@ -144,13 +144,13 @@ export class ApiImpl implements Api {
     this.httpClient = options.httpClient;
   }
 
-  getPage(path: string) {
+  getPage(path: string): Promise<PageModel> {
     const url = this.urlBuilder.getApiUrl(path);
 
     return this.send({ url, method: 'GET' });
   }
 
-  getComponent(url: string, payload: object) {
+  getComponent(url: string, payload: Record<string, unknown>): Promise<PageModel> {
     const data = new URLSearchParams(payload as Record<string, string>);
 
     return this.send({
@@ -163,7 +163,7 @@ export class ApiImpl implements Api {
     });
   }
 
-  private async send(config: HttpClientConfig) {
+  private async send(config: HttpClientConfig): Promise<PageModel> {
     this.logger?.debug('Request:', config.method, config.url);
     this.logger?.debug('Headers:', { ...this.headers, ...config.headers });
     if (config.data) {

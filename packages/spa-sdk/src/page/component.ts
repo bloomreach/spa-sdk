@@ -49,18 +49,18 @@ export type ComponentType =
   | typeof TYPE_COMPONENT_CONTAINER_ITEM
   | typeof TYPE_COMPONENT_CONTAINER;
 
+type ComponentLinks = 'self';
+
+type ComponentModels = Record<string, any>;
+
+type ComponentParameters = Record<string, any>;
+
 /**
  * Meta-data of a component.
  */
 export interface ComponentMeta extends MetaCollectionModel {
   params?: ComponentParameters;
 }
-
-type ComponentLinks = 'self';
-
-type ComponentModels = Record<string, any>;
-
-type ComponentParameters = Record<string, any>;
 
 /**
  * Model of a component.
@@ -176,12 +176,12 @@ export class ComponentImpl implements Component {
   getComponent<U extends Component>(...componentNames: string[]): U | undefined;
 
   getComponent(...componentNames: string[]) {
-    // tslint:disable-next-line:no-this-assignment
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     let component: Component | undefined = this;
 
     while (componentNames.length && component) {
       const name = componentNames.shift()!;
-      component = component.getChildren().find((component) => component.getName() === name);
+      component = component.getChildren().find((childComponent) => childComponent.getName() === name);
     }
 
     return component;
@@ -201,6 +201,8 @@ export class ComponentImpl implements Component {
 
       queue.push(...component.getChildren());
     }
+
+    return undefined;
   }
 }
 

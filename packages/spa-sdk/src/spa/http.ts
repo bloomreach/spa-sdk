@@ -17,9 +17,9 @@
 import { Visitor } from '../page';
 
 /**
- * Fetches the page model data.
+ * Map of HTTP headers.
  */
-export type HttpClient<T> = (config: HttpClientConfig) => Promise<HttpResponse<T>>;
+export type HttpHeaders = Partial<Record<string, string | string[]>>;
 
 /**
  * Configuration of an HTTP client call.
@@ -48,9 +48,19 @@ export type HttpClientConfig = {
 };
 
 /**
- * Map of HTTP headers.
+ * An HTTP response.
  */
-export type HttpHeaders = Partial<Record<string, string | string[]>>;
+export interface HttpResponse<T> {
+  /**
+   * The data returned in the response.
+   */
+  data: T;
+}
+
+/**
+ * Fetches the page model data.
+ */
+export type HttpClient<T> = (config: HttpClientConfig) => Promise<HttpResponse<T>>;
 
 /**
  * An HTTP connection.
@@ -93,14 +103,4 @@ export interface HttpRequest {
    * Current request visitor.
    */
   visitor?: Omit<Visitor, 'new'>;
-}
-
-/**
- * An HTTP response.
- */
-export interface HttpResponse<T> {
-  /**
-   * The data returned in the response.
-   */
-  data: T;
 }

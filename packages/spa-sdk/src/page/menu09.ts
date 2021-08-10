@@ -20,6 +20,20 @@ import { MetaCollectionModel } from './meta-collection';
 type MenuItemLinks = 'site';
 
 /**
+ * Essentials component menu item model.
+ */
+export interface MenuItem {
+  childMenuItems: MenuItem[];
+  depth: number;
+  expanded: boolean;
+  name: string;
+  parameters: Record<string, unknown>;
+  repositoryBased: boolean;
+  selected: boolean;
+  _links: Partial<Record<MenuItemLinks, Link>>;
+}
+
+/**
  * Essentials component menu model.
  */
 export interface Menu {
@@ -33,18 +47,4 @@ export interface Menu {
   selectSiteMenuItem?: MenuItem | null;
 
   siteMenuItems: MenuItem[];
-}
-
-/**
- * Essentials component menu item model.
- */
-export interface MenuItem {
-  childMenuItems: MenuItem[];
-  depth: number;
-  expanded: boolean;
-  name: string;
-  parameters: object;
-  repositoryBased: boolean;
-  selected: boolean;
-  _links: Partial<Record<MenuItemLinks, Link>>;
 }

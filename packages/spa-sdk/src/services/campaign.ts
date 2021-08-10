@@ -67,6 +67,6 @@ export class Campaign {
    */
   private static getCookieTTL(ttl: string | undefined): number {
     const TTL = Number(ttl);
-    return isNaN(TTL) ? this.DEFAULT_TTL_DAYS : TTL;
+    return Number.isNaN(TTL) ? this.DEFAULT_TTL_DAYS : TTL;
   }
 }

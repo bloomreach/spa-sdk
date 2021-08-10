@@ -111,6 +111,7 @@ export abstract class Rpc<
   }
 
   protected process(message: Message) {
+    // eslint-disable-next-line default-case
     switch (message?.type) {
       case TYPE_EVENT:
         this.processEvent(message);
@@ -137,7 +138,7 @@ export abstract class Rpc<
     this.calls.delete(response.id);
 
     if (response.state === STATE_REJECTED) {
-      return void reject(response.result);
+      reject(response.result);
     }
 
     resolve(response.result);
@@ -151,14 +152,14 @@ export abstract class Rpc<
     }
 
     try {
-      return this.send({
+      this.send({
         type: TYPE_RESPONSE,
         id: request.id,
         state: STATE_FULFILLED,
         result: await callback(...request.payload),
       });
     } catch (result) {
-      return this.send({
+      this.send({
         result,
         type: TYPE_RESPONSE,
         id: request.id,

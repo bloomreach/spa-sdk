@@ -53,7 +53,8 @@ const pages = new WeakMap<Page, Container>();
 
 container.load(CmsModule(), LoggerModule(), UrlModule());
 
-function onReady<T>(value: T | Promise<T>, callback: (value: T) => unknown): T | Promise<T> {
+function onReady<T>(value: T | Promise<T>, callback: (cbValue: T) => unknown): T | Promise<T> {
+  // eslint-disable-next-line no-sequences
   const wrapper = (result: T) => (callback(result), result);
 
   return value instanceof Promise ? value.then(wrapper) : wrapper(value);
@@ -265,6 +266,7 @@ export function initialize(configuration: Configuration, model?: Page | PageMode
   logger.debug('Configuration:', configuration);
 
   return onReady(
+    // eslint-disable-next-line no-nested-ternary
     isConfigurationWithProxy(configuration)
       ? initializeWithProxy(scope, configuration, model)
       : isConfigurationWithJwt09(configuration)

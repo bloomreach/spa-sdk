@@ -125,6 +125,7 @@ describe('Rpc', () => {
 
     it('should send a rejected response', async () => {
       const callback = jest.fn(async () => {
+        // eslint-disable-next-line no-throw-literal
         throw 'something';
       });
       rpc.register('command', callback);

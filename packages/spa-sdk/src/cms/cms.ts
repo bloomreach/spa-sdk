@@ -80,7 +80,9 @@ export class CmsImpl implements Cms {
     this.window = window;
 
     if (this.window?.document?.readyState !== 'loading') {
-      return this.onInitialize();
+      this.onInitialize();
+
+      return;
     }
 
     this.window?.document?.addEventListener('readystatechange', this.onStateChange);

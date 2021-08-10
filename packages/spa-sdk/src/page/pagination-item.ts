@@ -22,8 +22,6 @@ import { Link } from './link';
 export const PaginationItemFactory = Symbol.for('PaginationItemFactory');
 export const PaginationItemModelToken = Symbol.for('PaginationItemModelToken');
 
-export type PaginationItemFactory = Builder<[PaginationItemModel], PaginationItem>;
-
 type PaginationItemLinks = 'self' | 'site';
 
 export interface PaginationItemModel {
@@ -42,6 +40,8 @@ export interface PaginationItem {
    */
   getUrl(): string | undefined;
 }
+
+export type PaginationItemFactory = Builder<[PaginationItemModel], PaginationItem>;
 
 @injectable()
 export class PaginationItemImpl implements PaginationItem {
