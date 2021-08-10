@@ -2600,7 +2600,7 @@ __metadata:
     typedoc: 0.19.2
     typedoc-plugin-external-module-map: 1.2.1
     typescript: 4.1.6
-    xmldom: "github:xmldom/xmldom#0.7.0"
+    xmldom: 0.6.0
   languageName: unknown
   linkType: soft
 
@@ -27493,10 +27493,10 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"xmldom@github:xmldom/xmldom#0.7.0":
-  version: 0.7.0
-  resolution: "xmldom@https://github.com/xmldom/xmldom.git#commit=c568938641cc1f121cef5b4df80fcfda1e489b6e"
-  checksum: 86beb4f90675610ad4c2de68a46c7747b90b2a077fa73069973bd681b07fe4384361cfe1785d090e42f499095a7cfaadc3988a1aca2a3ef55c3d9d9a98d9e1d0
+"xmldom@npm:0.6.0":
+  version: 0.6.0
+  resolution: "xmldom@npm:0.6.0"
+  checksum: 710f64f5b2ba8ac1cbcf62c2e35b095a2f9ccbd596062efe037a5ca85d3ee077b691c4d74952ff476e4bab0dd82727604262899f25dddbb02f89ddeea4cca7f9
   languageName: node
   linkType: hard
 
