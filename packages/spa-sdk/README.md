@@ -265,17 +265,17 @@ The `Document` object holds document data that is used by the page components.
 
 The `ImageSet` object holds images collection that is used by the page components.
 
-| Method                                                  | Description                         |
-| ------------------------------------------------------- | ----------------------------------- | ----------------------------- |
-| <code>getDescription(): string &vert; undefined;</code> | Returns the image set description.  |
-| `getDisplayName(): string`                              | Returns the image set display name. |
-| `getId(): string`                                       | Returns the document id.            |
-| `getFileName(): string`                                 | Returns the image set file name.    |
-| `getId(): string`                                       | Returns the image set id.           |
-| `getLocale(): string                                    | undefined`                          | Returns the image set locale. |
-| `getName(): string`                                     | Returns the image name.             |
-| <code>getOriginal(): Image &vert; undefined</code>      | Returns the original image.         |
-| <code>getThumbnail(): Image &vert; undefined</code>     | Returns the thumbnail.              |
+| Method                                              | Description                         |
+| --------------------------------------------------- | ----------------------------------- |
+| <code>getDescription(): string undefined;</code>    | Returns the image set description.  |
+| `getDisplayName(): string`                          | Returns the image set display name. |
+| `getId(): string`                                   | Returns the document id.            |
+| `getFileName(): string`                             | Returns the image set file name.    |
+| `getId(): string`                                   | Returns the image set id.           |
+| <code>getLocale(): string &vert; undefined</code>   | Returns the image set locale.       |
+| `getName(): string`                                 | Returns the image name.             |
+| <code>getOriginal(): Image &vert; undefined</code>  | Returns the original image.         |
+| <code>getThumbnail(): Image &vert; undefined</code> | Returns the thumbnail.              |
 
 ##### Image
 
