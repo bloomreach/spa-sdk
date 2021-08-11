@@ -20,12 +20,12 @@ import { Link, RouteComponentProps } from 'react-router-dom';
 import { BrComponent, BrPage, BrPageContext } from '@bloomreach/react-sdk';
 import { Banner, Content, Menu, NewsList } from './components';
 
-export default function App(props: RouteComponentProps) {
+export default function App({ location }: RouteComponentProps): JSX.Element {
   const configuration = {
     endpoint: process.env.REACT_APP_BRXM_ENDPOINT,
     endpointQueryParameter: 'endpoint',
     httpClient: axios,
-    path: `${props.location.pathname}${props.location.search}`,
+    path: `${location.pathname}${location.search}`,
   };
   const mapping = { Banner, Content, 'News List': NewsList, 'Simple Content': Content };
 

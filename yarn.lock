@@ -2556,6 +2556,7 @@ __metadata:
   resolution: "@bloomreach/example-react@workspace:examples/react"
   dependencies:
     "@bloomreach/react-sdk": 15.0.1-0
+    "@bloomreach/spa-sdk": 15.0.1-0
     "@types/react": 16.14.0
     "@types/react-dom": 16.9.14
     "@types/react-router-dom": 5.1.8

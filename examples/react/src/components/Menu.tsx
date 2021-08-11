@@ -23,7 +23,7 @@ interface MenuLinkProps {
   item: MenuItem;
 }
 
-function MenuLink({ item }: MenuLinkProps) {
+function MenuLink({ item }: MenuLinkProps): JSX.Element {
   const url = item.getUrl();
 
   if (!url) {
@@ -45,7 +45,7 @@ function MenuLink({ item }: MenuLinkProps) {
   );
 }
 
-export function Menu() {
+export function Menu(): JSX.Element | null {
   const component = React.useContext(BrComponentContext);
   const page = React.useContext(BrPageContext);
   const menuRef = component?.getModels<MenuModels>()?.menu;
@@ -59,6 +59,7 @@ export function Menu() {
     <ul className={`navbar-nav col-12 ${page!.isPreview() ? 'has-edit-button' : ''}`}>
       <BrManageMenuButton menu={menu} />
       {menu.getItems().map((item, index) => (
+        // eslint-disable-next-line react/no-array-index-key
         <li key={index} className={`nav-item ${item.isSelected() ? 'active' : ''}`}>
           <MenuLink item={item} />
         </li>
