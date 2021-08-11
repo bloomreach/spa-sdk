@@ -38,19 +38,18 @@ describe('BrManageContentButtonDirective', () => {
     page = { getButton: jest.fn(() => meta) } as unknown as typeof page;
   });
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ BrManageContentButtonDirective, TestComponent ],
-      providers: [
-        { provide: BrPageComponent, useValue: { state: new BehaviorSubject(page) } },
-      ],
-    })
-    .compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [BrManageContentButtonDirective, TestComponent],
+        providers: [{ provide: BrPageComponent, useValue: { state: new BehaviorSubject(page) } }],
+      }).compileComponents();
 
-    fixture = TestBed.createComponent(TestComponent);
-    fixture.componentInstance.content = content;
-    fixture.detectChanges();
-  }));
+      fixture = TestBed.createComponent(TestComponent);
+      fixture.componentInstance.content = content;
+      fixture.detectChanges();
+    }),
+  );
 
   describe('ngOnChanges', () => {
     it('should render a meta', () => {

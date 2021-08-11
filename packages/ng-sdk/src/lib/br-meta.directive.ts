@@ -14,26 +14,16 @@
  * limitations under the License.
  */
 
-import {
-  Directive,
-  OnChanges,
-  OnDestroy,
-  Optional,
-  SimpleChanges,
-  TemplateRef,
-  ViewContainerRef,
-} from '@angular/core';
+import { Directive, OnChanges, OnDestroy, Optional, SimpleChanges, TemplateRef, ViewContainerRef } from '@angular/core';
 import { MetaCollection } from '@bloomreach/spa-sdk';
 
 @Directive()
 export abstract class BrMetaDirective implements OnChanges, OnDestroy {
   protected meta?: MetaCollection | undefined;
+
   private clear?: ReturnType<MetaCollection['render']>;
 
-  constructor(
-    private container: ViewContainerRef,
-    @Optional() private template?: TemplateRef<never>,
-  ) {}
+  constructor(private container: ViewContainerRef, @Optional() private template?: TemplateRef<never>) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     this.clear?.();

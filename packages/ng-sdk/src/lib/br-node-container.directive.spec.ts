@@ -24,16 +24,14 @@ import {
   TYPE_CONTAINER_ORDERED_LIST,
   TYPE_CONTAINER_UNORDERED_LIST,
 } from '@bloomreach/spa-sdk';
+import { BehaviorSubject } from 'rxjs';
 import { BrContainerBoxComponent } from './br-container-box/br-container-box.component';
 import { BrContainerInlineComponent } from './br-container-inline/br-container-inline.component';
 import { BrContainerOrderedListComponent } from './br-container-ordered-list/br-container-ordered-list.component';
-import {
-  BrContainerUnorderedListComponent,
-} from './br-container-unordered-list/br-container-unordered-list.component';
+import { BrContainerUnorderedListComponent } from './br-container-unordered-list/br-container-unordered-list.component';
 import { BrNodeContainerDirective } from './br-node-container.directive';
 import { BrNodeDirective } from './br-node.directive';
 import { BrPageComponent } from './br-page/br-page.component';
-import { BehaviorSubject } from 'rxjs';
 
 Component({ selector: 'br-container-box', template: '' })(BrContainerBoxComponent);
 Component({ selector: 'br-container-inline', template: '' })(BrContainerInlineComponent);
@@ -92,17 +90,18 @@ describe('BrNodeContainerDirective', () => {
     } as typeof page;
   });
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ TestComponent, BrNodeDirective, BrNodeContainerDirective ],
-      imports: [ TestModule ],
-      providers: [
-        { provide: BrNodeDirective, useFactory: () => node },
-        { provide: BrPageComponent, useFactory: () => page },
-      ],
-    })
-    .compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [TestComponent, BrNodeDirective, BrNodeContainerDirective],
+        imports: [TestModule],
+        providers: [
+          { provide: BrNodeDirective, useFactory: () => node },
+          { provide: BrPageComponent, useFactory: () => page },
+        ],
+      }).compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TestComponent);

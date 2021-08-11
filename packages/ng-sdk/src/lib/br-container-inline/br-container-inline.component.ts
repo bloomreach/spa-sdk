@@ -24,6 +24,7 @@ import { Container, Page } from '@bloomreach/spa-sdk';
 })
 export class BrContainerInlineComponent {
   @Input() component!: Container;
+
   @Input() page!: Page;
 
   @HostBinding('class.hst-container')

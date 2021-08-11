@@ -24,6 +24,7 @@ import { Container, Page } from '@bloomreach/spa-sdk';
 })
 export class BrContainerUnorderedListComponent {
   @Input() component!: Container;
+
   @Input() page!: Page;
 
   @HostBinding('class.hst-container')
