@@ -34,7 +34,8 @@ import { BrProps } from './br-props.model';
 
 @Directive({
   selector: '[brNodeContainerItem]',
-  inputs: ['component:brNodeContainerItem'], // tslint:disable-line: no-inputs-metadata-property
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+  inputs: ['component:brNodeContainerItem'],
 })
 export class BrNodeContainerItemDirective
   extends BrNodeComponentDirective<ContainerItem>

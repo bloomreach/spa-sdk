@@ -31,7 +31,8 @@ import { BrProps } from './br-props.model';
 
 @Directive({
   selector: '[brNodeContainer]',
-  inputs: ['component:brNodeContainer'], // tslint:disable-line: no-inputs-metadata-property
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+  inputs: ['component:brNodeContainer'],
 })
 export class BrNodeContainerDirective extends BrNodeComponentDirective<Container> {
   protected getMapping(): Type<BrProps> | undefined {
@@ -49,7 +50,7 @@ export class BrNodeContainerDirective extends BrNodeComponentDirective<Container
       case TYPE_CONTAINER_UNORDERED_LIST:
         return BrContainerUnorderedListComponent;
       case TYPE_CONTAINER_NO_MARKUP:
-        return;
+        return undefined;
       default:
         return BrContainerBoxComponent;
     }

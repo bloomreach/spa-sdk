@@ -18,7 +18,8 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular
 import { Container, Page } from '@bloomreach/spa-sdk';
 
 @Component({
-  selector: 'div.br-container-inline', // tslint:disable-line: component-selector
+  // eslint-disable-next-line @angular-eslint/component-selector
+  selector: 'div.br-container-inline',
   templateUrl: './br-container-inline.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

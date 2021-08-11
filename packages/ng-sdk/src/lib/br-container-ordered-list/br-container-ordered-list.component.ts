@@ -18,7 +18,8 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular
 import { Container, Page } from '@bloomreach/spa-sdk';
 
 @Component({
-  selector: 'ol.br-container-ordered-list', // tslint:disable-line: component-selector
+  // eslint-disable-next-line @angular-eslint/component-selector
+  selector: 'ol.br-container-ordered-list',
   templateUrl: './br-container-ordered-list.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -31,7 +31,8 @@ import { BrProps } from './br-props.model';
 
 @Directive({
   selector: '[brNodeComponent]',
-  inputs: ['component:brNodeComponent'], // tslint:disable-line: no-inputs-metadata-property
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+  inputs: ['component:brNodeComponent'],
 })
 export class BrNodeComponentDirective<T extends Component> implements OnChanges, OnDestroy {
   component!: T;
@@ -93,7 +94,7 @@ export class BrNodeComponentDirective<T extends Component> implements OnChanges,
         this.container.createEmbeddedView(this.page.node, {
           component,
           $implicit: component,
-          page: this.page.state.getValue()!, // tslint:disable-line: no-non-null-assertion
+          page: this.page.state.getValue()!,
         }),
       )
       .flatMap((view) => view.rootNodes);

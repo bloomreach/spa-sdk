@@ -127,7 +127,7 @@ export class BrPageComponent implements AfterContentChecked, OnChanges, OnDestro
     const component = page?.getComponent();
 
     if (!page || !component) {
-      return;
+      return undefined;
     }
 
     return {
