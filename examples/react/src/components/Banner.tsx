@@ -41,14 +41,16 @@ export function Banner(props: BrProps) {
         root="banners"
         relative
       />
-      { title && <h1>{title}</h1> }
-      { image && <img className="img-fluid" src={image.getOriginal()?.getUrl()} alt={title} /> }
-      { content && <div dangerouslySetInnerHTML={{ __html: props.page.rewriteLinks(content.value) }} /> }
-      { link && (
+      {title && <h1>{title}</h1>}
+      {image && <img className="img-fluid" src={image.getOriginal()?.getUrl()} alt={title} />}
+      {content && <div dangerouslySetInnerHTML={{ __html: props.page.rewriteLinks(content.value) }} />}
+      {link && (
         <p className="lead">
-          <Link to={link.getUrl()!} className="btn btn-primary btn-lg" role="button">Learn more</Link>
+          <Link to={link.getUrl()!} className="btn btn-primary btn-lg" role="button">
+            Learn more
+          </Link>
         </p>
-      ) }
+      )}
     </div>
   );
 }

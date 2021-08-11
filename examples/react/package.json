@@ -16,7 +16,9 @@
     "start": "SKIP_PREFLIGHT_CHECK=true react-scripts start"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "@bloomreach/eslint-config-react"
+    ]
   },
   "browserslist": {
     "production": [
@@ -31,6 +33,7 @@
     ]
   },
   "devDependencies": {
+    "@bloomreach/eslint-config-react": "0.2.0",
     "@types/react": "16.14.0",
     "@types/react-dom": "16.9.14",
     "@types/react-router-dom": "5.1.8",
