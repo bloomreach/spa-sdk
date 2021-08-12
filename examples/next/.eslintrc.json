@@ -1,0 +1,4 @@
+{
+  "root": true,
+  "extends": "@bloomreach/eslint-config-next"
+}

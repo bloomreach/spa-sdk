@@ -28,8 +28,10 @@ export function NewsList(props: BrProps) {
 
   return (
     <div>
-      { pageable.items.map((reference, key) => <NewsListItem key={key} item={props.page.getContent<Document>(reference)!} />) }
-      { props.page.isPreview() && (
+      {pageable.items.map((reference, key) => (
+        <NewsListItem key={key} item={props.page.getContent<Document>(reference)!} />
+      ))}
+      {props.page.isPreview() && (
         <div className="has-edit-button float-right">
           <BrManageContentButton
             documentTemplateQuery="new-news-document"
@@ -37,7 +39,7 @@ export function NewsList(props: BrProps) {
             root="news"
           />
         </div>
-      ) }
+      )}
       <NewsListPagination {...pageable} />
     </div>
   );
@@ -54,16 +56,16 @@ export function NewsListItem({ item }: NewsListItemProps) {
     <div className="card mb-3">
       <BrManageContentButton content={item} />
       <div className="card-body">
-        { title && (
+        {title && (
           <h2 className="card-title">
             <Link href={item.getUrl() ?? '/'}>
               <a>{title}</a>
             </Link>
           </h2>
-        ) }
-        { author && <div className="card-subtitle mb-3 text-muted">{author}</div> }
-        { date && <div className="card-subtitle mb-3 small text-muted">{new Date(date).toDateString()}</div> }
-        { introduction && <p className="card-text">{introduction}</p> }
+        )}
+        {author && <div className="card-subtitle mb-3 text-muted">{author}</div>}
+        {date && <div className="card-subtitle mb-3 small text-muted">{new Date(date).toDateString()}</div>}
+        {introduction && <p className="card-text">{introduction}</p>}
       </div>
     </div>
   );
@@ -87,13 +89,13 @@ export function NewsListPagination(props: Pageable) {
             </a>
           </Link>
         </li>
-        { props.pageNumbersArray.map((pageNumber, key) => (
+        {props.pageNumbersArray.map((pageNumber, key) => (
           <li key={key} className={`page-item ${pageNumber === props.currentPage ? 'active' : ''}`}>
             <Link href={page.getUrl(`?page=${pageNumber}`)}>
               <a className="page-link">{pageNumber}</a>
             </Link>
           </li>
-        )) }
+        ))}
         <li className={`page-item ${props.next ? '' : 'disabled'}`}>
           <Link href={props.next ? page.getUrl(`?page=${props.nextPage}`) : '/'}>
             <a className="page-link" aria-label="Next">

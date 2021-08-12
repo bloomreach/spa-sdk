@@ -27,20 +27,16 @@ export default function Index({ configuration, page }: InferGetServerSidePropsTy
   const mapping = { Banner, Content, 'News List': NewsList, 'Simple Content': Content };
 
   return (
-    <BrPage
-      configuration={{ ...configuration, httpClient: axios }}
-      mapping={mapping}
-      page={page}
-    >
+    <BrPage configuration={{ ...configuration, httpClient: axios }} mapping={mapping} page={page}>
       <header>
         <nav className="navbar navbar-expand-sm navbar-dark sticky-top bg-dark" role="navigation">
           <div className="container">
             <BrPageContext.Consumer>
-              { page => (
+              {(page) => (
                 <Link href={page?.getUrl('/') ?? ''}>
-                  <a className="navbar-brand">{ page?.getTitle() || 'brXM + Next.js = ♥️'}</a>
+                  <a className="navbar-brand">{page?.getTitle() || 'brXM + Next.js = ♥️'}</a>
                 </Link>
-              ) }
+              )}
             </BrPageContext.Consumer>
             <div className="collapse navbar-collapse">
               <BrComponent path="menu">
@@ -65,11 +61,7 @@ export default function Index({ configuration, page }: InferGetServerSidePropsTy
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async ({
-  req: request,
-  res: response,
-  resolvedUrl: path,
-}) => {
+export const getServerSideProps: GetServerSideProps = async ({ req: request, res: response, resolvedUrl: path }) => {
   relevance(request, response);
 
   const configuration = {
@@ -80,4 +72,4 @@ export const getServerSideProps: GetServerSideProps = async ({
   const page = await initialize({ ...configuration, request, httpClient: axios });
 
   return { props: { configuration, page: page.toJSON() } };
-}
+};
