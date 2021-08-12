@@ -23,7 +23,7 @@ interface MenuLinkProps {
   item: MenuItem;
 }
 
-function MenuLink({ item }: MenuLinkProps) {
+function MenuLink({ item }: MenuLinkProps): JSX.Element {
   const url = item.getUrl();
 
   if (!url) {
@@ -45,7 +45,7 @@ function MenuLink({ item }: MenuLinkProps) {
   );
 }
 
-export function Menu() {
+export function Menu(): JSX.Element | null {
   const component = React.useContext(BrComponentContext);
   const page = React.useContext(BrPageContext);
   const menuRef = component?.getModels<MenuModels>()?.menu;

@@ -23,7 +23,23 @@ import { initialize } from '@bloomreach/spa-sdk';
 import { relevance } from '@bloomreach/spa-sdk/lib/express';
 import { Banner, Content, Menu, NewsList } from '../components';
 
-export default function Index({ configuration, page }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export const getServerSideProps: GetServerSideProps = async ({ req: request, res: response, resolvedUrl: path }) => {
+  relevance(request, response);
+
+  const configuration = {
+    path,
+    endpoint: process.env.BRXM_ENDPOINT ?? null,
+    endpointQueryParameter: 'endpoint',
+  };
+  const page = await initialize({ ...configuration, request, httpClient: axios });
+
+  return { props: { configuration, page: page.toJSON() } };
+};
+
+export default function Index({
+  configuration,
+  page,
+}: InferGetServerSidePropsType<typeof getServerSideProps>): JSX.Element {
   const mapping = { Banner, Content, 'News List': NewsList, 'Simple Content': Content };
 
   return (
@@ -32,9 +48,9 @@ export default function Index({ configuration, page }: InferGetServerSidePropsTy
         <nav className="navbar navbar-expand-sm navbar-dark sticky-top bg-dark" role="navigation">
           <div className="container">
             <BrPageContext.Consumer>
-              {(page) => (
-                <Link href={page?.getUrl('/') ?? ''}>
-                  <a className="navbar-brand">{page?.getTitle() || 'brXM + Next.js = ♥️'}</a>
+              {(contextPage) => (
+                <Link href={contextPage?.getUrl('/') ?? ''}>
+                  <a className="navbar-brand">{contextPage?.getTitle() || 'brXM + Next.js = ♥️'}</a>
                 </Link>
               )}
             </BrPageContext.Consumer>
@@ -60,16 +76,3 @@ export default function Index({ configuration, page }: InferGetServerSidePropsTy
     </BrPage>
   );
 }
-
-export const getServerSideProps: GetServerSideProps = async ({ req: request, res: response, resolvedUrl: path }) => {
-  relevance(request, response);
-
-  const configuration = {
-    path,
-    endpoint: process.env.BRXM_ENDPOINT ?? null,
-    endpointQueryParameter: 'endpoint',
-  };
-  const page = await initialize({ ...configuration, request, httpClient: axios });
-
-  return { props: { configuration, page: page.toJSON() } };
-};

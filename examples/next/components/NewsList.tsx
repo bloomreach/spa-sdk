@@ -19,37 +19,11 @@ import Link from 'next/link';
 import { Document } from '@bloomreach/spa-sdk';
 import { BrManageContentButton, BrPageContext, BrProps } from '@bloomreach/react-sdk';
 
-export function NewsList(props: BrProps) {
-  const { pageable } = props.component.getModels<PageableModels>();
-
-  if (!pageable) {
-    return null;
-  }
-
-  return (
-    <div>
-      {pageable.items.map((reference, key) => (
-        <NewsListItem key={key} item={props.page.getContent<Document>(reference)!} />
-      ))}
-      {props.page.isPreview() && (
-        <div className="has-edit-button float-right">
-          <BrManageContentButton
-            documentTemplateQuery="new-news-document"
-            folderTemplateQuery="new-news-folder"
-            root="news"
-          />
-        </div>
-      )}
-      <NewsListPagination {...pageable} />
-    </div>
-  );
-}
-
 interface NewsListItemProps {
   item: Document;
 }
 
-export function NewsListItem({ item }: NewsListItemProps) {
+export function NewsListItem({ item }: NewsListItemProps): JSX.Element {
   const { author, date, introduction, title } = item.getData<DocumentData>();
 
   return (
@@ -71,7 +45,7 @@ export function NewsListItem({ item }: NewsListItemProps) {
   );
 }
 
-export function NewsListPagination(props: Pageable) {
+export function NewsListPagination(props: Pageable): JSX.Element | null {
   const page = React.useContext(BrPageContext);
 
   if (!page || !props.showPagination) {
@@ -106,5 +80,31 @@ export function NewsListPagination(props: Pageable) {
         </li>
       </ul>
     </nav>
+  );
+}
+
+export function NewsList(props: BrProps): JSX.Element | null {
+  const { pageable } = props.component.getModels<PageableModels>();
+
+  if (!pageable) {
+    return null;
+  }
+
+  return (
+    <div>
+      {pageable.items.map((reference, key) => (
+        <NewsListItem key={key} item={props.page.getContent<Document>(reference)!} />
+      ))}
+      {props.page.isPreview() && (
+        <div className="has-edit-button float-right">
+          <BrManageContentButton
+            documentTemplateQuery="new-news-document"
+            folderTemplateQuery="new-news-folder"
+            root="news"
+          />
+        </div>
+      )}
+      <NewsListPagination {...pageable} />
+    </div>
   );
 }
