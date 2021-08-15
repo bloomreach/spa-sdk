@@ -24,6 +24,7 @@
     "@angular/platform-server": "11.2.14",
     "@angular/router": "11.2.14",
     "@bloomreach/ng-sdk": "15.0.1-0",
+    "@bloomreach/spa-sdk": "15.0.1-0",
     "@nguniversal/express-engine": "11.2.1",
     "express": "4.17.1",
     "rxjs": "6.6.7",

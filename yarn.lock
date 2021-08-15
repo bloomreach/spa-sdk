@@ -2481,6 +2481,7 @@ __metadata:
     "@angular/router": 11.2.14
     "@bloomreach/eslint-config-angular": 0.2.0
     "@bloomreach/ng-sdk": 15.0.1-0
+    "@bloomreach/spa-sdk": 15.0.1-0
     "@nguniversal/builders": 11.2.1
     "@nguniversal/express-engine": 11.2.1
     "@types/cookie": 0.4.1
