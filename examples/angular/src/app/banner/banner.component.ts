@@ -23,6 +23,7 @@ import { Component as BrComponent, Document, ImageSet, Page } from '@bloomreach/
 })
 export class BannerComponent {
   @Input() component!: BrComponent;
+
   @Input() page!: Page;
 
   get document() {

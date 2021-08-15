@@ -45,20 +45,13 @@ import { NewsItemComponent } from './news-item/news-item.component';
     NewsListComponent,
     ParseUrlPipe,
   ],
-  entryComponents: [
-    BannerComponent,
-    ContentComponent,
-    MenuComponent,
-    NewsListComponent,
-  ],
+  entryComponents: [BannerComponent, ContentComponent, MenuComponent, NewsListComponent],
   imports: [
     BrowserModule.withServerTransition({ appId: 'brxm-angular-spa' }),
     BrowserTransferStateModule,
     BrSdkModule,
     AppRoutingModule,
   ],
-  providers: [
-    { provide: ENDPOINT, useValue: environment.endpoint },
-  ],
+  providers: [{ provide: ENDPOINT, useValue: environment.endpoint }],
 })
-export class AppModule { }
+export class AppModule {}

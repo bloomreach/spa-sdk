@@ -23,6 +23,7 @@ import { Component as BrComponent, Menu, Page, isMenu } from '@bloomreach/spa-sd
 })
 export class MenuComponent {
   @Input() component!: BrComponent;
+
   @Input() page!: Page;
 
   @HostBinding('class') class = 'navbar-nav col-12';

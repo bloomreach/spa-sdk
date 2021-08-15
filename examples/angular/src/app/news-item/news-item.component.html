@@ -19,13 +19,19 @@
 
   <div class="card-body">
     <h2 *ngIf="data?.title" class="card-title">
-      <a [routerLink]="item.getUrl()! | parseUrl: 'pathname'"
-        [queryParams]="item.getUrl()! | parseUrl: 'searchParams'">
+      <a
+        [routerLink]="item.getUrl()! | parseUrl: 'pathname'"
+        [queryParams]="item.getUrl()! | parseUrl: 'searchParams'"
+      >
         {{ data!.title }}
       </a>
     </h2>
-    <div *ngIf="data?.author" class="card-subtitle mb-3 text-muted">{{ data!.author }}</div>
-    <div *ngIf="data?.date" class="card-subtitle mb-3 small text-muted">{{ data!.date | date }}</div>
+    <div *ngIf="data?.author" class="card-subtitle mb-3 text-muted">
+      {{ data!.author }}
+    </div>
+    <div *ngIf="data?.date" class="card-subtitle mb-3 small text-muted">
+      {{ data!.date | date }}
+    </div>
     <p *ngIf="data?.introduction" class="card-text">{{ data!.introduction }}</p>
   </div>
 </div>

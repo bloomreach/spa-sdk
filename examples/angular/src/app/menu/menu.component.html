@@ -17,22 +17,30 @@
 <ng-template [ngIf]="menu">
   <ng-container [brManageMenuButton]="menu"></ng-container>
 
-  <li *ngFor="let item of menu.getItems()" key={index} class="nav-item" [ngClass]="{ active: item.isSelected() }">
-    <span *ngIf="!item.getUrl()"
-      class="nav-link text-capitalize disabled">
+  <li
+    *ngFor="let item of menu.getItems()"
+    key="{index}"
+    class="nav-item"
+    [ngClass]="{ active: item.isSelected() }"
+  >
+    <span *ngIf="!item.getUrl()" class="nav-link text-capitalize disabled">
       {{ item.getName() }}
     </span>
 
-    <a *ngIf="item.getLink() | isExternalLink"
+    <a
+      *ngIf="item.getLink() | isExternalLink"
       class="nav-link text-capitalize"
-      [href]="item.getUrl()">
+      [href]="item.getUrl()"
+    >
       {{ item.getName() }}
     </a>
 
-    <a *ngIf="item.getLink() | isInternalLink"
+    <a
+      *ngIf="item.getLink() | isInternalLink"
       class="nav-link text-capitalize"
       [routerLink]="item.getUrl() | parseUrl: 'pathname'"
-      [queryParams]="item.getUrl() | parseUrl: 'searchParams'">
+      [queryParams]="item.getUrl() | parseUrl: 'searchParams'"
+    >
       {{ item.getName() }}
     </a>
   </li>
