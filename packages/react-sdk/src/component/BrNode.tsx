@@ -28,6 +28,10 @@ interface BrNodeProps {
 }
 
 export class BrNode extends React.Component<BrNodeProps> {
+  static contextType = BrPageContext;
+
+  context: React.ContextType<typeof BrPageContext>;
+
   private renderNode() {
     const { children, component } = this.props;
 
@@ -71,5 +75,3 @@ export class BrNode extends React.Component<BrNodeProps> {
     );
   }
 }
-
-BrNode.contextType = BrPageContext;

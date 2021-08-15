@@ -27,10 +27,11 @@ export function BrMeta({ children, meta }: React.PropsWithChildren<BrMetaProps>)
 
   useEffect(() => {
     if (!head.current?.nextSibling || !tail.current) {
-      return;
+      return undefined;
     }
 
     return meta.render(head.current.nextSibling, tail.current);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [meta, head.current?.nextSibling, tail.current]);
 
   return (

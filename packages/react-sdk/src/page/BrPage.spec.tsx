@@ -23,6 +23,7 @@ import { BrPage } from './BrPage';
 
 jest.mock('@bloomreach/spa-sdk');
 
+// eslint-disable-next-line react/prefer-stateless-function
 class TestComponent extends React.Component<BrProps> {}
 
 const config = {
