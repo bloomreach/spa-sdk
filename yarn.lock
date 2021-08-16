@@ -2421,9 +2421,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bloomreach/eslint-config-base@portal:/Users/vasilikauryha/projects/br/hippo-frontend-build/packages/eslint-config-base::locator=root-workspace-0b6124%40workspace%3A."
   dependencies:
-    eslint: ^7.32.0
-    eslint-config-airbnb-base: ^14.2.1
-    eslint-plugin-import: ^2.24.0
+    "@typescript-eslint/eslint-plugin": 4.29.1
+    "@typescript-eslint/parser": 4.29.1
+    eslint-config-airbnb-base: 14.2.1
+    eslint-plugin-import: 2.24.0
+    typescript: ^4
+  peerDependencies:
+    eslint: ">= 7"
   languageName: node
   linkType: soft
 
@@ -2432,6 +2436,9 @@ __metadata:
   resolution: "@bloomreach/eslint-config-next@portal:/Users/vasilikauryha/projects/br/hippo-frontend-build/packages/eslint-config-next::locator=root-workspace-0b6124%40workspace%3A."
   dependencies:
     "@bloomreach/eslint-config-base": "workspace:packages/eslint-config-base"
+    "@rushstack/eslint-patch": 1.0.6
+    eslint-config-next: 11.1.0
+    next: 11.1.0
   languageName: node
   linkType: soft
 
@@ -2440,7 +2447,7 @@ __metadata:
   resolution: "@bloomreach/eslint-config-nuxt@portal:/Users/vasilikauryha/projects/br/hippo-frontend-build/packages/eslint-config-nuxt::locator=root-workspace-0b6124%40workspace%3A."
   dependencies:
     "@bloomreach/eslint-config-base": "workspace:packages/eslint-config-base"
-    "@nuxtjs/eslint-config-typescript": ^6.0.1
+    "@nuxtjs/eslint-config-typescript": 6.0.1
   languageName: node
   linkType: soft
 
@@ -2449,6 +2456,10 @@ __metadata:
   resolution: "@bloomreach/eslint-config-react@portal:/Users/vasilikauryha/projects/br/hippo-frontend-build/packages/eslint-config-react::locator=root-workspace-0b6124%40workspace%3A."
   dependencies:
     "@bloomreach/eslint-config-base": "workspace:packages/eslint-config-base"
+    "@typescript-eslint/eslint-plugin": 4.29.1
+    "@typescript-eslint/parser": 4.29.1
+  peerDependencies:
+    eslint: ">= 7"
   languageName: node
   linkType: soft
 
@@ -2457,6 +2468,10 @@ __metadata:
   resolution: "@bloomreach/eslint-config-vue@portal:/Users/vasilikauryha/projects/br/hippo-frontend-build/packages/eslint-config-vue::locator=root-workspace-0b6124%40workspace%3A."
   dependencies:
     "@bloomreach/eslint-config-base": "workspace:packages/eslint-config-base"
+    "@vue/cli-service": 4.5.13
+    "@vue/eslint-config-airbnb": 5.3.0
+    "@vue/eslint-config-prettier": 6.0.0
+    "@vue/eslint-config-typescript": 7.0.0
   languageName: node
   linkType: soft
 
@@ -2510,7 +2525,6 @@ __metadata:
     "@types/react-dom": 16.9.14
     axios: 0.21.1
     eslint: 7.32.0
-    eslint-config-next: 11.1.0
     next: 11.1.0
     next-routes: 1.4.2
     react: 17.0.2
@@ -2560,7 +2574,6 @@ __metadata:
     "@types/react-router-dom": 5.1.8
     axios: 0.21.1
     eslint: 7.32.0
-    eslint-config-react-app: 6.0.0
     react: 16.14.0
     react-dom: 16.14.0
     react-router-dom: 5.2.0
@@ -3965,7 +3978,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nuxtjs/eslint-config-typescript@npm:6.0.1, @nuxtjs/eslint-config-typescript@npm:^6.0.1":
+"@nuxtjs/eslint-config-typescript@npm:6.0.1":
   version: 6.0.1
   resolution: "@nuxtjs/eslint-config-typescript@npm:6.0.1"
   dependencies:
@@ -4182,7 +4195,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rushstack/eslint-patch@npm:^1.0.6":
+"@rushstack/eslint-patch@npm:1.0.6, @rushstack/eslint-patch@npm:^1.0.6":
   version: 1.0.6
   resolution: "@rushstack/eslint-patch@npm:1.0.6"
   checksum: fbecc15d7e95186622514d86f566082f1f6d04c30d93830bffe154fd699780f32120bbbce2efb919658696af01c58f0e02e580941ede8eee8cc9b007637b639c
@@ -5270,7 +5283,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:^4.25.0, @typescript-eslint/eslint-plugin@npm:^4.5.0":
+"@typescript-eslint/eslint-plugin@npm:4.29.1, @typescript-eslint/eslint-plugin@npm:^4.25.0, @typescript-eslint/eslint-plugin@npm:^4.5.0":
   version: 4.29.1
   resolution: "@typescript-eslint/eslint-plugin@npm:4.29.1"
   dependencies:
@@ -5338,7 +5351,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:^4.20.0, @typescript-eslint/parser@npm:^4.25.0, @typescript-eslint/parser@npm:^4.5.0":
+"@typescript-eslint/parser@npm:4.29.1, @typescript-eslint/parser@npm:^4.20.0, @typescript-eslint/parser@npm:^4.25.0, @typescript-eslint/parser@npm:^4.5.0":
   version: 4.29.1
   resolution: "@typescript-eslint/parser@npm:4.29.1"
   dependencies:
@@ -11319,7 +11332,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-airbnb-base@npm:^14.0.0, eslint-config-airbnb-base@npm:^14.2.1":
+"eslint-config-airbnb-base@npm:14.2.1, eslint-config-airbnb-base@npm:^14.0.0":
   version: 14.2.1
   resolution: "eslint-config-airbnb-base@npm:14.2.1"
   dependencies:
@@ -11381,7 +11394,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-react-app@npm:6.0.0, eslint-config-react-app@npm:^6.0.0":
+"eslint-config-react-app@npm:^6.0.0":
   version: 6.0.0
   resolution: "eslint-config-react-app@npm:6.0.0"
   dependencies:
@@ -11517,7 +11530,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-import@npm:^2.21.2, eslint-plugin-import@npm:^2.22.1, eslint-plugin-import@npm:^2.23.3, eslint-plugin-import@npm:^2.24.0":
+"eslint-plugin-import@npm:2.24.0, eslint-plugin-import@npm:^2.21.2, eslint-plugin-import@npm:^2.22.1, eslint-plugin-import@npm:^2.23.3":
   version: 2.24.0
   resolution: "eslint-plugin-import@npm:2.24.0"
   dependencies:
@@ -11853,7 +11866,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:7.32.0, eslint@npm:^7.11.0, eslint@npm:^7.32.0":
+"eslint@npm:7.32.0, eslint@npm:^7.11.0":
   version: 7.32.0
   resolution: "eslint@npm:7.32.0"
   dependencies:
