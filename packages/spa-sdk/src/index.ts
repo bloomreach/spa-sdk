@@ -52,14 +52,12 @@ import { Cookie } from './spa/cookie';
 
 const DEFAULT_AUTHORIZATION_PARAMETER = 'token';
 const DEFAULT_SERVER_ID_PARAMETER = 'server-id';
-// Campaign query parameter
-const DEFAULT_CAMPAIGN_PARAMETER = 'btm_campaign';
-// Segment of the campaign query parameter
+
+const DEFAULT_CAMPAIGN_PARAMETER = 'btm_campaign_id';
 const DEFAULT_SEGMENT_PARAMETER = 'btm_segment';
-// Query parameter for the cookie expires time in milliseconds
 const DEFAULT_TTL_PARAMETER = 'btm_ttl';
-const DEFAULT_TTL_VALUE = 7; // days
-// Campaign variant query parameter
+const DEFAULT_TTL_VALUE = 14 * 24 * 60 * 60 * 1000;
+
 const DEFAULT_CAMPAIGN_VARIANT_PARAMETER = '_campaignVariant';
 
 const container = new Container({ skipBaseClassChecks: true });
@@ -194,6 +192,7 @@ function initializeWithJwt10(scope: Container, configuration: ConfigurationWithJ
   let endpointUrl = configuration.endpoint ?? endpoint;
 
   const campaignVariantId = getCampaignVariantId(campaignParameter, segmentParameter, campaignId, segmentId, ttl);
+
   if (Boolean(campaignVariantId)) {
     const params = new URLSearchParams();
     params.append(DEFAULT_CAMPAIGN_VARIANT_PARAMETER, campaignVariantId);
@@ -310,7 +309,7 @@ export function destroy(page: Page): void {
  * Get the campaign variant from URL or cookie
  * @param campaignId Campaign id from URL
  * @param segmentId Segment id from URL
- * @param ttl TTL param in days from URL
+ * @param ttl TTL param in milliseconds from URL
  * @param campaignParameter Campaign query parameter in URL
  * @param segmentParameter Segment query parameter in URL
  */
@@ -321,29 +320,37 @@ function getCampaignVariantId(
   segmentId?: string,
   ttl?: string,
 ): string {
-  const ttlNumber = isNaN(Number(ttl)) ? DEFAULT_TTL_VALUE : Number(ttl);
-  if (Cookie.CAN_USE_DOM() && ttlNumber === 0) {
+  const TTL = getCookieTTL(ttl);
+
+  if (TTL === 0) {
     Cookie.ERASE_COOKIE(campaignParameter);
     Cookie.ERASE_COOKIE(segmentParameter);
     return '';
   }
 
   if (campaignId && segmentId) {
-    if (Cookie.CAN_USE_DOM()) {
-      Cookie.SET_COOKIE(campaignParameter, campaignId, ttlNumber);
-      Cookie.SET_COOKIE(segmentParameter, segmentId, ttlNumber);
-    }
+    Cookie.SET_COOKIE(campaignParameter, campaignId, TTL);
+    Cookie.SET_COOKIE(segmentParameter, segmentId, TTL);
     return `${campaignId}:${segmentId}`;
   }
 
-  if (Cookie.CAN_USE_DOM()) {
-    const { [campaignParameter]: cookieCampaignId, [segmentParameter]: cookieSegmentId } = Cookie.GET_COOKIE();
+  const { [campaignParameter]: cookieCampaignId, [segmentParameter]: cookieSegmentId } = Cookie.GET_COOKIE();
 
-    if (cookieCampaignId && cookieSegmentId) {
-      return `${cookieCampaignId}:${cookieSegmentId}`;
-    }
+  if (cookieCampaignId && cookieSegmentId) {
+    return `${cookieCampaignId}:${cookieSegmentId}`;
   }
+
   return '';
+}
+
+/**
+ * Get cookie TTL value
+ * @param ttl TTL param in milliseconds
+ * @return number
+ */
+function getCookieTTL(ttl: string | undefined): number {
+  const TTL = Number(ttl);
+  return isNaN(TTL) ? DEFAULT_TTL_VALUE : TTL;
 }
 
 export { Configuration } from './configuration';

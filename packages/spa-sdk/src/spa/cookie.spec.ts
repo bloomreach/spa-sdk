@@ -6,29 +6,30 @@ describe('Cookie', () => {
       writable: true,
       value: '',
     });
-
-    const mockDate = new Date(1466424490000);
-    jest.spyOn(global, 'Date').mockImplementation(() => mockDate as unknown as string);
   });
 
   it('should set and parse cookie on document without ttl', () => {
     Cookie.SET_COOKIE('testName', 'testValue', 0);
-    expect(document.cookie).toEqual('testName=testValue; Expires=Mon, 20 Jun 2016 12:08:10 GMT');
+    expect(document.cookie).toEqual('testName=testValue; Max-Age=0');
   });
+
   it('should set and parse cookie on document with ttl', () => {
-    Cookie.SET_COOKIE('testName', 'testValue', 2);
-    expect(document.cookie).toEqual('testName=testValue; Expires=Wed, 22 Jun 2016 12:08:10 GMT');
+    Cookie.SET_COOKIE('testName', 'testValue', 24000);
+    expect(document.cookie).toEqual('testName=testValue; Max-Age=24');
   });
-  it('shouldnt set cookie with empty strings args', () => {
+
+  it('should not set cookie with empty strings args', () => {
     Cookie.SET_COOKIE('', '', 0);
     expect(document.cookie).toEqual('');
   });
+
   it('should set empty string with empty strings args', () => {
     Cookie.SET_COOKIE('testName', 'testValue', 0);
-    expect(Cookie.GET_COOKIE()).toEqual({ testName: 'testValue', Expires: 'Wed, 22 Jun 2016 12:08:10 GMT' });
+    expect(Cookie.GET_COOKIE()).toEqual({ testName: 'testValue', 'Max-Age': '0' });
   });
+
   it('should remove cookie from document', () => {
-    Cookie.SET_COOKIE('testName', 'testValue', 0);
+    Cookie.SET_COOKIE('testName', 'testValue', 24000);
     Cookie.ERASE_COOKIE('testName');
     expect(document.cookie).toEqual('testName=; Max-Age=0');
   });

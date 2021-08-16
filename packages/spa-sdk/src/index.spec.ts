@@ -264,7 +264,7 @@ describe('initialize', () => {
       window,
       endpoint: 'http://localhost:8080/site/my-spa/resourceapi',
       origin: 'http://localhost:12345',
-      request: { path: '/?btm_campaign=12345&btm_segment=silver' },
+      request: { path: '/?btm_campaign_id=12345&btm_segment=silver' },
     });
 
     expect(httpClient).toBeCalledWith({
@@ -279,7 +279,7 @@ describe('initialize', () => {
   it('should use campaign variant id as params from cookie', async () => {
     Object.defineProperty(window.document, 'cookie', {
       writable: true,
-      value: 'btm_segment=gold; btm_campaign=12345',
+      value: 'btm_segment=gold; btm_campaign_id=12345',
     });
 
     const page = await initialize({
