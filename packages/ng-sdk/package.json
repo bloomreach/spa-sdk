@@ -79,5 +79,17 @@
     "outputDirectory": "coverage",
     "outputName": "TEST-ng-sdk.xml"
   },
+  "eslintConfig": {
+    "extends": [
+      "@bloomreach/eslint-config-angular"
+    ],
+    "parserOptions": {
+      "project": [
+        "tsconfig.json",
+        "tsconfig.spec.json"
+      ],
+      "createDefaultProgram": true
+    }
+  },
   "stableVersion": "15.0.0"
 }

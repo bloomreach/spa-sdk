@@ -48,5 +48,17 @@
     "ts-node": "10.1.0",
     "typescript": "4.1.6"
   },
+  "eslintConfig": {
+    "extends": [
+      "@bloomreach/eslint-config-angular"
+    ],
+    "parserOptions": {
+      "project": [
+        "tsconfig.json",
+        "tsconfig.spec.json"
+      ],
+      "createDefaultProgram": true
+    }
+  },
   "stableVersion": "15.0.0"
 }
