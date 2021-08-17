@@ -60,7 +60,7 @@ describe('ComponentFactory', () => {
     });
 
     it('should produce a tree structure', () => {
-      const builder = jest.fn((model) => model.id);
+      const builder = jest.fn(({ id }) => id);
       const factory = new ComponentFactory().register(TYPE_COMPONENT, builder);
 
       const root = factory.create({

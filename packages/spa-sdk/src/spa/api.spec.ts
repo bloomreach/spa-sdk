@@ -45,7 +45,7 @@ const config = {
 };
 
 describe('ApiImpl', () => {
-  let api: ApiImpl;
+  let API: ApiImpl;
   let urlBuilder: jest.Mocked<UrlBuilder>;
 
   beforeEach(async () => {
@@ -54,11 +54,11 @@ describe('ApiImpl', () => {
       getApiUrl: jest.fn((path: string) => `http://example.com${path}`),
     } as unknown as jest.Mocked<UrlBuilder>;
 
-    api = new ApiImpl(urlBuilder, config);
+    API = new ApiImpl(urlBuilder, config);
   });
 
   describe('getPage', () => {
-    beforeEach(async () => api.getPage(config.request.path));
+    beforeEach(async () => API.getPage(config.request.path));
 
     it('should generate a URL', () => {
       expect(urlBuilder.getApiUrl).toBeCalledWith(config.request.path);
@@ -78,7 +78,7 @@ describe('ApiImpl', () => {
     });
 
     it('should return a page model', async () => {
-      expect(await api.getPage(config.request.path)).toBe(model);
+      expect(await API.getPage(config.request.path)).toBe(model);
     });
 
     it('should forward cookie header if the setup is using a reverse proxy', async () => {
@@ -258,7 +258,7 @@ describe('ApiImpl', () => {
   });
 
   describe('getComponent', () => {
-    beforeEach(async () => api.getComponent('http://example.com/component', { a: 'b' }));
+    beforeEach(async () => API.getComponent('http://example.com/component', { a: 'b' }));
 
     it('should request a component model', () => {
       expect(config.httpClient).toBeCalledWith(
@@ -274,7 +274,7 @@ describe('ApiImpl', () => {
     });
 
     it('should return a component model', async () => {
-      expect(await api.getComponent('/', {})).toBe(model);
+      expect(await API.getComponent('/', {})).toBe(model);
     });
   });
 });

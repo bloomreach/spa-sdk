@@ -76,11 +76,11 @@ describe('Spa', () => {
 
     it('should use a page model from the arguments', () => {
       jest.clearAllMocks();
-      const model = {} as PageModel;
+      const pageModel = {} as PageModel;
 
-      spa.initialize(model);
+      spa.initialize(pageModel);
       expect(api.getPage).not.toBeCalled();
-      expect(pageFactory).toBeCalledWith(model);
+      expect(pageFactory).toBeCalledWith(pageModel);
     });
 
     it('should create a page instance', () => {

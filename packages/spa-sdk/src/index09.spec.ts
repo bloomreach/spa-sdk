@@ -47,7 +47,7 @@ describe('initialize', () => {
   });
 
   it('should initialize a reverse proxy-based setup', async () => {
-    const page = await initialize({
+    const pageWithReverseProxy = await initialize({
       httpClient,
       window,
       request: { path: '/?bloomreach-preview=true' },
@@ -61,9 +61,9 @@ describe('initialize', () => {
         },
       },
     });
-    destroy(page);
+    destroy(pageWithReverseProxy);
 
-    expect(page.getTitle()).toBe('Homepage');
+    expect(pageWithReverseProxy.getTitle()).toBe('Homepage');
   });
 
   it('should be a page entity', () => {
@@ -88,6 +88,7 @@ describe('initialize', () => {
     expect(JSON.parse(meta2.getData())).toMatchSnapshot();
   });
 
+  /* eslint-disable max-len */
   it.each`
     link                                                                   | expected
     ${''}                                                                  | ${'//example.com/?token=something'}
@@ -99,6 +100,7 @@ describe('initialize', () => {
   `('should create a URL "$expected" for link "$link"', ({ link, expected }) => {
     expect(page.getUrl(link)).toBe(expected);
   });
+  /* eslint-enable max-len */
 
   it('should contain a main component', () => {
     const main = page.getComponent<Container>('main');
@@ -228,7 +230,7 @@ describe('initialize', () => {
   });
 
   it('should use an origin from the API base URL', async () => {
-    const page = await initialize({
+    const pageWithApiBaseUrl = await initialize({
       httpClient,
       window,
       apiBaseUrl: 'https://api.example.com/site/my-spa/resourceapi',
@@ -236,14 +238,14 @@ describe('initialize', () => {
       request: { path: '' },
     });
     const postMessageSpy = spyOn(window.parent, 'postMessage').and.callThrough();
-    await page.sync();
-    destroy(page);
+    await pageWithApiBaseUrl.sync();
+    destroy(pageWithApiBaseUrl);
 
     expect(postMessageSpy).toBeCalledWith(expect.anything(), 'https://api.example.com');
   });
 
   it('should use a custom origin', async () => {
-    const page = await initialize({
+    const pageWithCustomOrigin = await initialize({
       httpClient,
       window,
       cmsBaseUrl: 'http://localhost:8080/site/my-spa',
@@ -251,8 +253,8 @@ describe('initialize', () => {
       request: { path: '' },
     });
     const postMessageSpy = spyOn(window.parent, 'postMessage').and.callThrough();
-    await page.sync();
-    destroy(page);
+    await pageWithCustomOrigin.sync();
+    destroy(pageWithCustomOrigin);
 
     expect(postMessageSpy).toBeCalledWith(expect.anything(), 'http://localhost:12345');
   });

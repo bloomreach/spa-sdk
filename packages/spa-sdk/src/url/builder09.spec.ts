@@ -25,6 +25,7 @@ describe('UrlBuilderImpl', () => {
     const options5 = { ...options1, spaBaseUrl: '//example.com/news' };
     const options6 = { ...options1, spaBaseUrl: 'https://example.com/news' };
 
+    /* eslint-disable max-len */
     it.each`
       options     | path                                    | expected
       ${options1} | ${'/'}                                  | ${'http://localhost:8080/site/spa/resourceapi/'}
@@ -51,6 +52,7 @@ describe('UrlBuilderImpl', () => {
 
       expect(builder.getApiUrl(path)).toBe(expected);
     });
+    /* eslint-disable max-len */
 
     it.each`
       options     | path            | message

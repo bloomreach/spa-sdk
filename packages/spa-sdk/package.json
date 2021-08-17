@@ -34,16 +34,7 @@
     "test": "jest --coverage"
   },
   "eslintConfig": {
-    "extends": "@bloomreach/eslint-config-base",
-    "overrides": [
-      {
-        "files": "*.spec.ts",
-        "rules": {
-          "max-len": "off",
-          "no-shadow": "off"
-        }
-      }
-    ]
+    "extends": "@bloomreach/eslint-config-base"
   },
   "jest": {
     "preset": "ts-jest",

@@ -86,9 +86,9 @@ describe('ImageSetImpl', () => {
 
   describe('getLocale', () => {
     it('should return an image set locale', () => {
-      const imageSet = createImageSet({ ...model, data: { ...model.data, localeString: 'some-locale' } });
+      const imageSetWithLocale = createImageSet({ ...model, data: { ...model.data, localeString: 'some-locale' } });
 
-      expect(imageSet.getLocale()).toBe('some-locale');
+      expect(imageSetWithLocale.getLocale()).toBe('some-locale');
     });
 
     it('should return undefined when there is no locale', () => {
@@ -98,9 +98,9 @@ describe('ImageSetImpl', () => {
 
   describe('getOriginal', () => {
     it('should return undefined when there is no original image', () => {
-      const imageSet = createImageSet();
+      const imageSetWithoutOriginal = createImageSet();
 
-      expect(imageSet.getOriginal()).toBeUndefined();
+      expect(imageSetWithoutOriginal.getOriginal()).toBeUndefined();
     });
 
     it('should return an original image', () => {
@@ -116,9 +116,9 @@ describe('ImageSetImpl', () => {
 
   describe('getThumbnail', () => {
     it('should return undefined when there is no thumbnail', () => {
-      const imageSet = createImageSet();
+      const imageSetWithoutThumbnail = createImageSet();
 
-      expect(imageSet.getThumbnail()).toBeUndefined();
+      expect(imageSetWithoutThumbnail.getThumbnail()).toBeUndefined();
     });
 
     it('should return a thumbnail', () => {

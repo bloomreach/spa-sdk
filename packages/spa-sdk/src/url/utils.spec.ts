@@ -132,6 +132,7 @@ describe('mergeSearchParams', () => {
 });
 
 describe('parseUrl', () => {
+  /* eslint-disable max-len */
   it.each`
     url                                   | hash       | origin                  | path                | pathname   | search    | searchParams
     ${''}                                 | ${''}      | ${''}                   | ${''}               | ${''}      | ${''}     | ${new URLSearchParams()}
@@ -146,6 +147,7 @@ describe('parseUrl', () => {
     expect(parsedParts).toEqual(parts);
     expect(Array.from(parsedSearchParams.entries())).toEqual(Array.from(searchParams.entries()));
   });
+  /* eslint-disable max-len */
 });
 
 describe('resolveUrl', () => {
