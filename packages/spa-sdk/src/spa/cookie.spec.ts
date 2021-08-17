@@ -2,7 +2,7 @@ import { Cookie } from './cookie';
 
 describe('Cookie', () => {
   beforeEach(() => {
-    Object.defineProperty(window.document, 'cookie', {
+    Object.defineProperty(document, 'cookie', {
       writable: true,
       value: '',
     });
@@ -14,8 +14,8 @@ describe('Cookie', () => {
   });
 
   it('should set and parse cookie on document with ttl', () => {
-    Cookie.SET_COOKIE('testName', 'testValue', 24000);
-    expect(document.cookie).toEqual('testName=testValue; Max-Age=24');
+    Cookie.SET_COOKIE('testName', 'testValue', 7);
+    expect(document.cookie).toEqual('testName=testValue; Max-Age=604800');
   });
 
   it('should not set cookie with empty strings args', () => {
@@ -24,13 +24,18 @@ describe('Cookie', () => {
   });
 
   it('should set empty string with empty strings args', () => {
-    Cookie.SET_COOKIE('testName', 'testValue', 0);
-    expect(Cookie.GET_COOKIE()).toEqual({ testName: 'testValue', 'Max-Age': '0' });
+    Cookie.SET_COOKIE('testName', 'testValue', 14);
+    expect(Cookie.GET_COOKIE()).toEqual({ testName: 'testValue', 'Max-Age': '1209600' });
   });
 
   it('should remove cookie from document', () => {
-    Cookie.SET_COOKIE('testName', 'testValue', 24000);
+    Cookie.SET_COOKIE('testName', 'testValue', 0);
     Cookie.ERASE_COOKIE('testName');
     expect(document.cookie).toEqual('testName=; Max-Age=0');
+  });
+
+  it('should not set more than 28 days for ttl', () => {
+    Cookie.SET_COOKIE('testName', 'testValue', 29);
+    expect(document.cookie).toEqual('testName=testValue; Max-Age=2419200');
   });
 });

@@ -56,7 +56,7 @@ const DEFAULT_SERVER_ID_PARAMETER = 'server-id';
 const DEFAULT_CAMPAIGN_PARAMETER = 'btm_campaign_id';
 const DEFAULT_SEGMENT_PARAMETER = 'btm_segment';
 const DEFAULT_TTL_PARAMETER = 'btm_ttl';
-const DEFAULT_TTL_VALUE = 14 * 24 * 60 * 60 * 1000;
+const DEFAULT_TTL_VALUE = 7;
 
 const DEFAULT_CAMPAIGN_VARIANT_PARAMETER = '_campaignVariant';
 
@@ -309,7 +309,7 @@ export function destroy(page: Page): void {
  * Get the campaign variant from URL or cookie
  * @param campaignId Campaign id from URL
  * @param segmentId Segment id from URL
- * @param ttl TTL param in milliseconds from URL
+ * @param ttl TTL param in days from URL
  * @param campaignParameter Campaign query parameter in URL
  * @param segmentParameter Segment query parameter in URL
  */
@@ -345,7 +345,7 @@ function getCampaignVariantId(
 
 /**
  * Get cookie TTL value
- * @param ttl TTL param in milliseconds
+ * @param ttl TTL param in days
  * @return number
  */
 function getCookieTTL(ttl: string | undefined): number {
