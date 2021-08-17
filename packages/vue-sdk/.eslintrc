@@ -1,4 +1,0 @@
-{
-  "root": true,
-  "extends": "@bloomreach/eslint-config-vue"
-}

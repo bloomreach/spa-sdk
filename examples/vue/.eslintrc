@@ -1,9 +1,0 @@
-{
-  "root": true,
-  "extends": [
-    "@bloomreach/eslint-config-vue"
-  ],
-  "rules": {
-    "no-undef": "off"
-  }
-}

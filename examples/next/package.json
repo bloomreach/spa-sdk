@@ -27,5 +27,10 @@
     "start": "next start -p ${PORT:-3000}",
     "lint": "next lint"
   },
+  "eslintConfig": {
+    "extends": [
+      "@bloomreach/eslint-config-next"
+    ]
+  },
   "stableVersion": "15.0.0"
 }

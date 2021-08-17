@@ -37,5 +37,10 @@
     "nodemon": "2.0.12",
     "prettier": "2.3.2"
   },
+  "eslintConfig": {
+    "extends": [
+      "@bloomreach/eslint-config-nuxt"
+    ]
+  },
   "stableVersion": "15.0.0"
 }
