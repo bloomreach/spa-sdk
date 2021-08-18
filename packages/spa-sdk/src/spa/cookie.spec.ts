@@ -1,4 +1,5 @@
 import { Cookie } from './cookie';
+import { HttpRequest } from './http';
 
 describe('Cookie', () => {
   beforeEach(() => {
@@ -37,5 +38,13 @@ describe('Cookie', () => {
   it('should not set more than 28 days for ttl', () => {
     Cookie.SET_COOKIE('testName', 'testValue', 29);
     expect(document.cookie).toEqual('testName=testValue; Max-Age=2419200');
+  });
+
+  it('should get cookies from request object', () => {
+    const req: HttpRequest = {
+      headers: { cookie: 'foo=bar' },
+    };
+
+    expect(Cookie.GET_COOKIE_FROM_REQUEST(req)).toEqual({ foo: 'bar' });
   });
 });

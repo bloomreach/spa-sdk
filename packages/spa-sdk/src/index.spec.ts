@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 Hippo B.V. (http://www.onehippo.com)
+ * Copyright 2019-2021 Hippo B.V. (http://www.onehippo.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +26,7 @@ import {
   TYPE_CONTAINER_BOX,
 } from './index';
 import { PageModel, TYPE_LINK_RESOURCE, TYPE_LINK_EXTERNAL, TYPE_LINK_INTERNAL } from './page';
+import { HttpRequest } from './spa/http';
 
 describe('initialize', () => {
   let page: Page;
@@ -47,6 +48,10 @@ describe('initialize', () => {
 
   afterEach(() => {
     destroy(page);
+
+    document.cookie = 'btm_campaign=; Max-Age=0;';
+    document.cookie = 'btm_segment=; Max-Age=0;';
+    document.cookie = 'btm_ttl=; Max-Age=0;';
   });
 
   it('should initialize using endpoint from the query string', async () => {
@@ -277,10 +282,8 @@ describe('initialize', () => {
   });
 
   it('should use campaign variant id as params from cookie', async () => {
-    Object.defineProperty(window.document, 'cookie', {
-      writable: true,
-      value: 'btm_segment=gold; btm_campaign_id=12345',
-    });
+    document.cookie = 'btm_segment=gold';
+    document.cookie = 'btm_campaign_id=12345';
 
     const page = await initialize({
       httpClient,
@@ -293,6 +296,107 @@ describe('initialize', () => {
       headers: { 'Accept-Version': '1.0' },
       method: 'GET',
       url: 'http://localhost:8080/site/my-spa/resourceapi/?_campaignVariant=12345%3Agold',
+    });
+
+    destroy(page);
+  });
+
+  it('should use campaign variant id as params from request cookie', async () => {
+    const request: HttpRequest = {
+      headers: { cookie: 'btm_campaign_id=foo; btm_segment=bar' },
+    };
+
+    const page = await initialize({
+      httpClient,
+      request,
+      endpoint: 'http://localhost:8080/site/my-spa/resourceapi',
+      origin: 'http://localhost:12345',
+    });
+
+    expect(httpClient).toBeCalledWith({
+      headers: { 'Accept-Version': '1.0' },
+      method: 'GET',
+      url: 'http://localhost:8080/site/my-spa/resourceapi/?_campaignVariant=foo%3Abar',
+    });
+
+    destroy(page);
+  });
+
+  it('should use campaign variant id as params from request cookie', async () => {
+    const request: HttpRequest = {
+      headers: { cookie: 'btm_campaign_id=foo; btm_segment=bar' },
+    };
+
+    const page = await initialize({
+      httpClient,
+      request,
+      endpoint: 'http://localhost:8080/site/my-spa/resourceapi',
+      origin: 'http://localhost:12345',
+    });
+
+    expect(httpClient).toBeCalledWith({
+      headers: { 'Accept-Version': '1.0' },
+      method: 'GET',
+      url: 'http://localhost:8080/site/my-spa/resourceapi/?_campaignVariant=foo%3Abar',
+    });
+
+    destroy(page);
+  });
+
+  it('should omit campaign variant id if no url params and window does not contain respective cookies', async () => {
+    const page = await initialize({
+      httpClient,
+      endpoint: 'http://localhost:8080/site/my-spa/resourceapi',
+      origin: 'http://localhost:12345',
+    });
+
+    expect(httpClient).toBeCalledWith({
+      headers: { 'Accept-Version': '1.0' },
+      method: 'GET',
+      url: 'http://localhost:8080/site/my-spa/resourceapi/',
+    });
+
+    destroy(page);
+  });
+
+  it('should omit campaign variant id if no url params and request does not contain respective cookies', async () => {
+    const request: HttpRequest = {
+      headers: { cookie: '' },
+    };
+
+    const page = await initialize({
+      httpClient,
+      request,
+      endpoint: 'http://localhost:8080/site/my-spa/resourceapi',
+      origin: 'http://localhost:12345',
+    });
+
+    expect(httpClient).toBeCalledWith({
+      headers: { 'Accept-Version': '1.0' },
+      method: 'GET',
+      url: 'http://localhost:8080/site/my-spa/resourceapi/',
+    });
+
+    destroy(page);
+  });
+
+  it('should omit campaign variant id if url query params contain ttl equal zero', async () => {
+    const request: HttpRequest = {
+      headers: undefined,
+      path: '/?btm_campaign_id=12345&btm_segment=silver&btm_ttl=0',
+    };
+
+    const page = await initialize({
+      httpClient,
+      request,
+      endpoint: 'http://localhost:8080/site/my-spa/resourceapi',
+      origin: 'http://localhost:12345',
+    });
+
+    expect(httpClient).toBeCalledWith({
+      headers: { 'Accept-Version': '1.0' },
+      method: 'GET',
+      url: 'http://localhost:8080/site/my-spa/resourceapi/',
     });
 
     destroy(page);
