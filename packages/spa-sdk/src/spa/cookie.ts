@@ -19,13 +19,20 @@ import { HttpRequest } from './http';
 
 export class Cookie {
   /**
+   * Check if DOM is ready
+   */
+  private static isDomReady() {
+    return typeof window !== 'undefined' && document.readyState !== 'loading';
+  }
+
+  /**
    * Set cookie in the document
    * @param name Cookie name
    * @param value Cookie value
    * @param ttl  Sets the cookie max-age in seconds
    */
   public static SET_COOKIE(name: string, value: string, ttl: number): void {
-    if (document && name && value) {
+    if (this.isDomReady() && name && value) {
       const maxAge = ttl > 28 ? 2419200 : ttl * 24 * 60 * 60;
       document.cookie = cookie.serialize(name, value, { maxAge });
     }
@@ -36,7 +43,7 @@ export class Cookie {
    * @return Cookie object.
    */
   public static GET_COOKIE(): Record<string, string> {
-    return cookie.parse(document?.cookie ?? '');
+    return this.isDomReady() ? cookie.parse(document.cookie ?? '') : {};
   }
 
   /**
@@ -53,7 +60,7 @@ export class Cookie {
    * @param name Cookie name
    */
   public static ERASE_COOKIE(name: string): void {
-    if (document) {
+    if (this.isDomReady()) {
       document.cookie = cookie.serialize(name, '', { maxAge: 0 });
     }
   }
