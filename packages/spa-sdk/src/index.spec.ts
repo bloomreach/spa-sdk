@@ -26,6 +26,8 @@ import {
   TYPE_CONTAINER_BOX,
 } from './index';
 import { PageModel, TYPE_LINK_RESOURCE, TYPE_LINK_EXTERNAL, TYPE_LINK_INTERNAL } from './page';
+import { HttpRequest } from './spa/http';
+import { Cookie } from './spa/cookie';
 
 describe('initialize', () => {
   let page: Page;
@@ -47,6 +49,10 @@ describe('initialize', () => {
 
   afterEach(() => {
     destroy(page);
+
+    window.document.cookie = 'btm_campaign=; Max-Age=0;'
+    window.document.cookie = 'btm_segment=; Max-Age=0;'
+    window.document.cookie = 'btm_ttl=; Max-Age=0;'
   });
 
   it('should initialize using endpoint from the query string', async () => {
@@ -264,7 +270,7 @@ describe('initialize', () => {
       window,
       endpoint: 'http://localhost:8080/site/my-spa/resourceapi',
       origin: 'http://localhost:12345',
-      request: { path: '/?btm_campaign=12345&btm_segment=silver' },
+      path: '/?btm_campaign=12345&btm_segment=silver',
     });
 
     expect(httpClient).toBeCalledWith({
@@ -277,10 +283,8 @@ describe('initialize', () => {
   });
 
   it('should use campaign variant id as params from cookie', async () => {
-    Object.defineProperty(window.document, 'cookie', {
-      writable: true,
-      value: 'btm_segment=gold; btm_campaign=12345',
-    });
+    window.document.cookie = 'btm_segment=gold';
+    window.document.cookie = 'btm_campaign=12345';
 
     const page = await initialize({
       httpClient,
@@ -297,4 +301,110 @@ describe('initialize', () => {
 
     destroy(page);
   });
+
+  it('should use campaign variant id as params from request cookie', async () => {
+    const request: HttpRequest = {
+      headers: { cookie: 'btm_campaign=foo; btm_segment=bar'}
+    }
+    jest.spyOn(Cookie, 'CAN_USE_DOM').mockReturnValue(false);
+
+    const page = await initialize({
+      httpClient,
+      request,
+      endpoint: 'http://localhost:8080/site/my-spa/resourceapi',
+      origin: 'http://localhost:12345',
+    });
+
+    expect(httpClient).toBeCalledWith({
+      headers: { 'Accept-Version': '1.0' },
+      method: 'GET',
+      url: 'http://localhost:8080/site/my-spa/resourceapi/?_campaignVariant=foo%3Abar',
+    });
+
+    destroy(page);
+  });
+
+  it('should use campaign variant id as params from request cookie', async () => {
+    const request: HttpRequest = {
+      headers: { cookie: 'btm_campaign=foo; btm_segment=bar'}
+    }
+    jest.spyOn(Cookie, 'CAN_USE_DOM').mockReturnValue(false);
+
+    const page = await initialize({
+      httpClient,
+      request,
+      endpoint: 'http://localhost:8080/site/my-spa/resourceapi',
+      origin: 'http://localhost:12345',
+    });
+
+    expect(httpClient).toBeCalledWith({
+      headers: { 'Accept-Version': '1.0' },
+      method: 'GET',
+      url: 'http://localhost:8080/site/my-spa/resourceapi/?_campaignVariant=foo%3Abar',
+    });
+
+    destroy(page);
+  });
+
+  it('should omit campaign variant id if no url params and window does not contain respective cookies', async () => {
+    const page = await initialize({
+      httpClient,
+      endpoint: 'http://localhost:8080/site/my-spa/resourceapi',
+      origin: 'http://localhost:12345',
+    });
+
+    expect(httpClient).toBeCalledWith({
+      headers: { 'Accept-Version': '1.0' },
+      method: 'GET',
+      url: 'http://localhost:8080/site/my-spa/resourceapi/',
+    });
+
+    destroy(page);
+  });
+
+  it('should omit campaign variant id if no url params and request does not contain respective cookies', async () => {
+    const request: HttpRequest = {
+      headers: { cookie: ''}
+    }
+    jest.spyOn(Cookie, 'CAN_USE_DOM').mockReturnValue(false);
+
+    const page = await initialize({
+      httpClient,
+      request,
+      endpoint: 'http://localhost:8080/site/my-spa/resourceapi',
+      origin: 'http://localhost:12345',
+    });
+
+    expect(httpClient).toBeCalledWith({
+      headers: { 'Accept-Version': '1.0' },
+      method: 'GET',
+      url: 'http://localhost:8080/site/my-spa/resourceapi/',
+    });
+
+    destroy(page);
+  });
+
+  it('should omit campaign variant id if url query params contain ttl equal zero', async () => {
+    const request: HttpRequest = {
+      headers: undefined
+    }
+    jest.spyOn(Cookie, 'CAN_USE_DOM').mockReturnValue(false);
+
+    const page = await initialize({
+      httpClient,
+      request,
+      endpoint: 'http://localhost:8080/site/my-spa/resourceapi',
+      origin: 'http://localhost:12345',
+      path: '/?btm_campaign=12345&btm_segment=silver&btm_ttl=0',
+    });
+
+    expect(httpClient).toBeCalledWith({
+      headers: { 'Accept-Version': '1.0' },
+      method: 'GET',
+      url: 'http://localhost:8080/site/my-spa/resourceapi/',
+    });
+
+    destroy(page);
+  });
+
 });

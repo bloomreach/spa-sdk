@@ -1,4 +1,5 @@
 import { Cookie } from './cookie';
+import { HttpRequest } from './http';
 
 describe('Cookie', () => {
   beforeEach(() => {
@@ -32,4 +33,10 @@ describe('Cookie', () => {
     Cookie.ERASE_COOKIE('testName');
     expect(document.cookie).toEqual('testName=; Max-Age=0');
   });
+  it('should get cookies from request object', () => {
+    const req: HttpRequest = {
+      headers: { cookie: 'foo=bar'}
+    };
+    expect(Cookie.GET_COOKIE_FROM_REQUEST(req)).toEqual({ foo: 'bar' });
+  })
 });

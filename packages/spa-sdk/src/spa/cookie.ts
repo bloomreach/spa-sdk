@@ -1,4 +1,5 @@
 import { default as cookie } from 'cookie';
+import { HttpRequest } from './http';
 
 export class Cookie {
   /**
@@ -27,6 +28,15 @@ export class Cookie {
    */
   public static GET_COOKIE(): Record<string, string> {
     return cookie.parse(document.cookie ?? '');
+  }
+
+  /**
+   * Retrieve data from request cookies
+   * @param request Current user's request.
+   * @return Cookie object.
+   */
+  public static GET_COOKIE_FROM_REQUEST(request: HttpRequest): Record<string, string> {
+    return cookie.parse(request.headers?.cookie as string ?? '');
   }
 
   /**

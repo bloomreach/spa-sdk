@@ -49,6 +49,7 @@ import {
   parseUrl,
 } from './url';
 import { Cookie } from './spa/cookie';
+import { HttpRequest } from './spa/http';
 
 const DEFAULT_AUTHORIZATION_PARAMETER = 'token';
 const DEFAULT_SERVER_ID_PARAMETER = 'server-id';
@@ -193,7 +194,7 @@ function initializeWithJwt10(scope: Container, configuration: ConfigurationWithJ
 
   let endpointUrl = configuration.endpoint ?? endpoint;
 
-  const campaignVariantId = getCampaignVariantId(campaignParameter, segmentParameter, campaignId, segmentId, ttl);
+  const campaignVariantId = getCampaignVariantId(campaignParameter, segmentParameter, campaignId, segmentId, ttl, configuration.request);
   if (Boolean(campaignVariantId)) {
     const params = new URLSearchParams();
     params.append(DEFAULT_CAMPAIGN_VARIANT_PARAMETER, campaignVariantId);
@@ -320,11 +321,16 @@ function getCampaignVariantId(
   campaignId?: string,
   segmentId?: string,
   ttl?: string,
+  request?: HttpRequest,
 ): string {
   const ttlNumber = isNaN(Number(ttl)) ? DEFAULT_TTL_VALUE : Number(ttl);
   if (Cookie.CAN_USE_DOM() && ttlNumber === 0) {
     Cookie.ERASE_COOKIE(campaignParameter);
     Cookie.ERASE_COOKIE(segmentParameter);
+    return '';
+  }
+
+  if (!!request && ttlNumber === 0) {
     return '';
   }
 
@@ -336,13 +342,18 @@ function getCampaignVariantId(
     return `${campaignId}:${segmentId}`;
   }
 
-  if (Cookie.CAN_USE_DOM()) {
-    const { [campaignParameter]: cookieCampaignId, [segmentParameter]: cookieSegmentId } = Cookie.GET_COOKIE();
+  const getCookie = !!request
+    ? () => Cookie.GET_COOKIE_FROM_REQUEST(request)
+    : Cookie.CAN_USE_DOM()
+    ? () => Cookie.GET_COOKIE()
+    : () => ({});
+
+    const { [campaignParameter]: cookieCampaignId, [segmentParameter]: cookieSegmentId } = getCookie();
 
     if (cookieCampaignId && cookieSegmentId) {
       return `${cookieCampaignId}:${cookieSegmentId}`;
     }
-  }
+
   return '';
 }
 
