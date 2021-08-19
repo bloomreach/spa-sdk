@@ -49,7 +49,7 @@ describe('initialize', () => {
   afterEach(() => {
     destroy(page);
 
-    document.cookie = 'btm_campaign=; Max-Age=0;';
+    document.cookie = 'btm_campaign_id=; Max-Age=0;';
     document.cookie = 'btm_segment=; Max-Age=0;';
     document.cookie = 'btm_ttl=; Max-Age=0;';
   });
