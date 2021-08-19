@@ -48,7 +48,7 @@ import {
   isMatched,
   parseUrl,
 } from './url';
-import { Campaign } from './spa/campaign';
+import { Campaign } from './services/campaign';
 
 const DEFAULT_AUTHORIZATION_PARAMETER = 'token';
 const DEFAULT_SERVER_ID_PARAMETER = 'server-id';

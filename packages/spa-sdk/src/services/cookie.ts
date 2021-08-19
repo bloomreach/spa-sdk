@@ -15,7 +15,7 @@
  */
 
 import { default as cookie } from 'cookie';
-import { HttpRequest } from './http';
+import { HttpRequest } from '../spa/http';
 
 export class Cookie {
   static readonly MAX_TTL_DAYS = 28;

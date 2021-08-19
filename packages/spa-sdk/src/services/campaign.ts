@@ -15,7 +15,7 @@
  */
 
 import { Cookie } from './cookie';
-import { HttpRequest } from "./http";
+import { HttpRequest } from "../spa/http";
 
 export class Campaign {
   static readonly CAMPAIGN_PARAMETER = 'btm_campaign_id';

@@ -1,5 +1,5 @@
 import { Cookie } from './cookie';
-import { HttpRequest } from './http';
+import { HttpRequest } from '../spa/http';
 
 describe('Cookie', () => {
   beforeEach(() => {
