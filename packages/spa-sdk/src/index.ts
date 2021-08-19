@@ -48,17 +48,10 @@ import {
   isMatched,
   parseUrl,
 } from './url';
-import { Cookie } from './spa/cookie';
-import { HttpRequest } from './spa/http';
+import { Campaign } from './spa/campaign';
 
 const DEFAULT_AUTHORIZATION_PARAMETER = 'token';
 const DEFAULT_SERVER_ID_PARAMETER = 'server-id';
-
-const DEFAULT_CAMPAIGN_PARAMETER = 'btm_campaign_id';
-const DEFAULT_SEGMENT_PARAMETER = 'btm_segment';
-const DEFAULT_TTL_PARAMETER = 'btm_ttl';
-const DEFAULT_TTL_VALUE = 7;
-
 const DEFAULT_CAMPAIGN_VARIANT_PARAMETER = '_campaignVariant';
 
 const container = new Container({ skipBaseClassChecks: true });
@@ -168,9 +161,9 @@ function initializeWithJwt10(scope: Container, configuration: ConfigurationWithJ
   const authorizationParameter = configuration.authorizationQueryParameter ?? DEFAULT_AUTHORIZATION_PARAMETER;
   const endpointParameter = configuration.endpointQueryParameter ?? '';
   const serverIdParameter = configuration.serverIdQueryParameter ?? DEFAULT_SERVER_ID_PARAMETER;
-  const campaignParameter = DEFAULT_CAMPAIGN_PARAMETER;
-  const segmentParameter = DEFAULT_SEGMENT_PARAMETER;
-  const ttlParameter = DEFAULT_TTL_PARAMETER;
+  const campaignParameter = Campaign.CAMPAIGN_PARAMETER;
+  const segmentParameter = Campaign.SEGMENT_PARAMETER;
+  const ttlParameter = Campaign.TTL_PARAMETER;
 
   const { url: path, searchParams } = extractSearchParams(
     configuration.path ?? configuration.request?.path ?? '/',
@@ -183,6 +176,7 @@ function initializeWithJwt10(scope: Container, configuration: ConfigurationWithJ
       ttlParameter,
     ].filter(Boolean),
   );
+
   const authorizationToken = searchParams.get(authorizationParameter) ?? undefined;
   const endpoint = searchParams.get(endpointParameter) ?? undefined;
   const serverId = searchParams.get(serverIdParameter) ?? undefined;
@@ -192,14 +186,7 @@ function initializeWithJwt10(scope: Container, configuration: ConfigurationWithJ
 
   let endpointUrl = configuration.endpoint ?? endpoint;
 
-  const campaignVariantId = getCampaignVariantId(
-    campaignParameter,
-    segmentParameter,
-    campaignId,
-    segmentId,
-    ttl,
-    configuration.request,
-  );
+  const campaignVariantId = Campaign.GET_VARIANT_ID(campaignId, segmentId, ttl, configuration.request);
 
   if (Boolean(campaignVariantId)) {
     const params = new URLSearchParams();
@@ -311,58 +298,6 @@ export function destroy(page: Page): void {
   pages.delete(page);
 
   return scope?.get<Spa>(SpaService).destroy();
-}
-
-/**
- * Get the campaign variant from URL or cookie
- * @param campaignId Campaign id from URL
- * @param segmentId Segment id from URL
- * @param ttl TTL param in days from URL
- * @param campaignParameter Campaign query parameter in URL
- * @param segmentParameter Segment query parameter in URL
- * @param request Current user's request
- */
-function getCampaignVariantId(
-  campaignParameter: string,
-  segmentParameter: string,
-  campaignId?: string,
-  segmentId?: string,
-  ttl?: string,
-  request?: HttpRequest,
-): string {
-  const TTL = getCookieTTL(ttl);
-
-  if (TTL === 0) {
-    Cookie.ERASE_COOKIE(campaignParameter);
-    Cookie.ERASE_COOKIE(segmentParameter);
-    return '';
-  }
-
-  if (campaignId && segmentId) {
-    Cookie.SET_COOKIE(campaignParameter, campaignId, TTL);
-    Cookie.SET_COOKIE(segmentParameter, segmentId, TTL);
-    return `${campaignId}:${segmentId}`;
-  }
-
-  const { [campaignParameter]: cookieCampaignId, [segmentParameter]: cookieSegmentId } = request?.headers
-    ? Cookie.GET_COOKIE_FROM_REQUEST(request)
-    : Cookie.GET_COOKIE();
-
-  if (cookieCampaignId && cookieSegmentId) {
-    return `${cookieCampaignId}:${cookieSegmentId}`;
-  }
-
-  return '';
-}
-
-/**
- * Get cookie TTL value
- * @param ttl TTL param in days
- * @return number
- */
-function getCookieTTL(ttl: string | undefined): number {
-  const TTL = Number(ttl);
-  return isNaN(TTL) ? DEFAULT_TTL_VALUE : TTL;
 }
 
 export { Configuration } from './configuration';

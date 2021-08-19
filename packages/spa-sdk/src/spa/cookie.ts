@@ -18,12 +18,7 @@ import { default as cookie } from 'cookie';
 import { HttpRequest } from './http';
 
 export class Cookie {
-  /**
-   * Check if DOM is ready
-   */
-  private static isDomReady() {
-    return typeof window !== 'undefined' && document.readyState !== 'loading';
-  }
+  static readonly MAX_TTL_DAYS = 28;
 
   /**
    * Set cookie in the document
@@ -33,7 +28,7 @@ export class Cookie {
    */
   public static SET_COOKIE(name: string, value: string, ttl: number): void {
     if (this.isDomReady() && name && value) {
-      const maxAge = ttl > 28 ? 2419200 : ttl * 24 * 60 * 60;
+      const maxAge = ttl > this.MAX_TTL_DAYS ? this.getSeconds(this.MAX_TTL_DAYS) : this.getSeconds(ttl);
       document.cookie = cookie.serialize(name, value, { maxAge });
     }
   }
@@ -63,5 +58,21 @@ export class Cookie {
     if (this.isDomReady()) {
       document.cookie = cookie.serialize(name, '', { maxAge: 0 });
     }
+  }
+
+  /**
+   * Check if DOM is ready
+   */
+  private static isDomReady() {
+    return typeof window !== 'undefined' && document.readyState !== 'loading';
+  }
+
+  /**
+   * Convert days to seconds
+   * @param days Time in days
+   * @return number
+   */
+  private static getSeconds(days: number): number {
+    return days * 24 * 60 * 60;
   }
 }
