@@ -48,19 +48,10 @@ import {
   isMatched,
   parseUrl,
 } from './url';
-import { Cookie } from './spa/cookie';
-import { HttpRequest } from './spa/http';
+import { Campaign } from './services/campaign';
 
 const DEFAULT_AUTHORIZATION_PARAMETER = 'token';
 const DEFAULT_SERVER_ID_PARAMETER = 'server-id';
-// Campaign query parameter
-const DEFAULT_CAMPAIGN_PARAMETER = 'btm_campaign';
-// Segment of the campaign query parameter
-const DEFAULT_SEGMENT_PARAMETER = 'btm_segment';
-// Query parameter for the cookie expires time in milliseconds
-const DEFAULT_TTL_PARAMETER = 'btm_ttl';
-const DEFAULT_TTL_VALUE = 7; // days
-// Campaign variant query parameter
 const DEFAULT_CAMPAIGN_VARIANT_PARAMETER = '_campaignVariant';
 
 const container = new Container({ skipBaseClassChecks: true });
@@ -170,9 +161,9 @@ function initializeWithJwt10(scope: Container, configuration: ConfigurationWithJ
   const authorizationParameter = configuration.authorizationQueryParameter ?? DEFAULT_AUTHORIZATION_PARAMETER;
   const endpointParameter = configuration.endpointQueryParameter ?? '';
   const serverIdParameter = configuration.serverIdQueryParameter ?? DEFAULT_SERVER_ID_PARAMETER;
-  const campaignParameter = DEFAULT_CAMPAIGN_PARAMETER;
-  const segmentParameter = DEFAULT_SEGMENT_PARAMETER;
-  const ttlParameter = DEFAULT_TTL_PARAMETER;
+  const campaignParameter = Campaign.CAMPAIGN_PARAMETER;
+  const segmentParameter = Campaign.SEGMENT_PARAMETER;
+  const ttlParameter = Campaign.TTL_PARAMETER;
 
   const { url: path, searchParams } = extractSearchParams(
     configuration.path ?? configuration.request?.path ?? '/',
@@ -185,6 +176,7 @@ function initializeWithJwt10(scope: Container, configuration: ConfigurationWithJ
       ttlParameter,
     ].filter(Boolean),
   );
+
   const authorizationToken = searchParams.get(authorizationParameter) ?? undefined;
   const endpoint = searchParams.get(endpointParameter) ?? undefined;
   const serverId = searchParams.get(serverIdParameter) ?? undefined;
@@ -194,7 +186,8 @@ function initializeWithJwt10(scope: Container, configuration: ConfigurationWithJ
 
   let endpointUrl = configuration.endpoint ?? endpoint;
 
-  const campaignVariantId = getCampaignVariantId(campaignParameter, segmentParameter, campaignId, segmentId, ttl, configuration.request);
+  const campaignVariantId = Campaign.GET_VARIANT_ID(campaignId, segmentId, ttl, configuration.request);
+
   if (Boolean(campaignVariantId)) {
     const params = new URLSearchParams();
     params.append(DEFAULT_CAMPAIGN_VARIANT_PARAMETER, campaignVariantId);
@@ -305,56 +298,6 @@ export function destroy(page: Page): void {
   pages.delete(page);
 
   return scope?.get<Spa>(SpaService).destroy();
-}
-
-/**
- * Get the campaign variant from URL or cookie
- * @param campaignId Campaign id from URL
- * @param segmentId Segment id from URL
- * @param ttl TTL param in days from URL
- * @param campaignParameter Campaign query parameter in URL
- * @param segmentParameter Segment query parameter in URL
- */
-function getCampaignVariantId(
-  campaignParameter: string,
-  segmentParameter: string,
-  campaignId?: string,
-  segmentId?: string,
-  ttl?: string,
-  request?: HttpRequest,
-): string {
-  const ttlNumber = isNaN(Number(ttl)) ? DEFAULT_TTL_VALUE : Number(ttl);
-  if (Cookie.CAN_USE_DOM() && ttlNumber === 0) {
-    Cookie.ERASE_COOKIE(campaignParameter);
-    Cookie.ERASE_COOKIE(segmentParameter);
-    return '';
-  }
-
-  if (!!request && ttlNumber === 0) {
-    return '';
-  }
-
-  if (campaignId && segmentId) {
-    if (Cookie.CAN_USE_DOM()) {
-      Cookie.SET_COOKIE(campaignParameter, campaignId, ttlNumber);
-      Cookie.SET_COOKIE(segmentParameter, segmentId, ttlNumber);
-    }
-    return `${campaignId}:${segmentId}`;
-  }
-
-  const getCookie = !!request
-    ? () => Cookie.GET_COOKIE_FROM_REQUEST(request)
-    : Cookie.CAN_USE_DOM()
-    ? () => Cookie.GET_COOKIE()
-    : () => ({});
-
-    const { [campaignParameter]: cookieCampaignId, [segmentParameter]: cookieSegmentId } = getCookie();
-
-    if (cookieCampaignId && cookieSegmentId) {
-      return `${cookieCampaignId}:${cookieSegmentId}`;
-    }
-
-  return '';
 }
 
 export { Configuration } from './configuration';

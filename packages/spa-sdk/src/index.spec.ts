@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 Hippo B.V. (http://www.onehippo.com)
+ * Copyright 2019-2021 Hippo B.V. (http://www.onehippo.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,6 @@ import {
 } from './index';
 import { PageModel, TYPE_LINK_RESOURCE, TYPE_LINK_EXTERNAL, TYPE_LINK_INTERNAL } from './page';
 import { HttpRequest } from './spa/http';
-import { Cookie } from './spa/cookie';
 
 describe('initialize', () => {
   let page: Page;
@@ -50,9 +49,9 @@ describe('initialize', () => {
   afterEach(() => {
     destroy(page);
 
-    window.document.cookie = 'btm_campaign=; Max-Age=0;'
-    window.document.cookie = 'btm_segment=; Max-Age=0;'
-    window.document.cookie = 'btm_ttl=; Max-Age=0;'
+    document.cookie = 'btm_campaign_id=; Max-Age=0;';
+    document.cookie = 'btm_segment=; Max-Age=0;';
+    document.cookie = 'btm_ttl=; Max-Age=0;';
   });
 
   it('should initialize using endpoint from the query string', async () => {
@@ -270,7 +269,7 @@ describe('initialize', () => {
       window,
       endpoint: 'http://localhost:8080/site/my-spa/resourceapi',
       origin: 'http://localhost:12345',
-      path: '/?btm_campaign=12345&btm_segment=silver',
+      request: { path: '/?btm_campaign_id=12345&btm_segment=silver' },
     });
 
     expect(httpClient).toBeCalledWith({
@@ -283,8 +282,8 @@ describe('initialize', () => {
   });
 
   it('should use campaign variant id as params from cookie', async () => {
-    window.document.cookie = 'btm_segment=gold';
-    window.document.cookie = 'btm_campaign=12345';
+    document.cookie = 'btm_segment=gold';
+    document.cookie = 'btm_campaign_id=12345';
 
     const page = await initialize({
       httpClient,
@@ -304,9 +303,8 @@ describe('initialize', () => {
 
   it('should use campaign variant id as params from request cookie', async () => {
     const request: HttpRequest = {
-      headers: { cookie: 'btm_campaign=foo; btm_segment=bar'}
-    }
-    jest.spyOn(Cookie, 'CAN_USE_DOM').mockReturnValue(false);
+      headers: { cookie: 'btm_campaign_id=foo; btm_segment=bar' },
+    };
 
     const page = await initialize({
       httpClient,
@@ -326,9 +324,8 @@ describe('initialize', () => {
 
   it('should use campaign variant id as params from request cookie', async () => {
     const request: HttpRequest = {
-      headers: { cookie: 'btm_campaign=foo; btm_segment=bar'}
-    }
-    jest.spyOn(Cookie, 'CAN_USE_DOM').mockReturnValue(false);
+      headers: { cookie: 'btm_campaign_id=foo; btm_segment=bar' },
+    };
 
     const page = await initialize({
       httpClient,
@@ -364,9 +361,8 @@ describe('initialize', () => {
 
   it('should omit campaign variant id if no url params and request does not contain respective cookies', async () => {
     const request: HttpRequest = {
-      headers: { cookie: ''}
-    }
-    jest.spyOn(Cookie, 'CAN_USE_DOM').mockReturnValue(false);
+      headers: { cookie: '' },
+    };
 
     const page = await initialize({
       httpClient,
@@ -386,16 +382,15 @@ describe('initialize', () => {
 
   it('should omit campaign variant id if url query params contain ttl equal zero', async () => {
     const request: HttpRequest = {
-      headers: undefined
-    }
-    jest.spyOn(Cookie, 'CAN_USE_DOM').mockReturnValue(false);
+      headers: undefined,
+      path: '/?btm_campaign_id=12345&btm_segment=silver&btm_ttl=0',
+    };
 
     const page = await initialize({
       httpClient,
       request,
       endpoint: 'http://localhost:8080/site/my-spa/resourceapi',
       origin: 'http://localhost:12345',
-      path: '/?btm_campaign=12345&btm_segment=silver&btm_ttl=0',
     });
 
     expect(httpClient).toBeCalledWith({
@@ -406,5 +401,4 @@ describe('initialize', () => {
 
     destroy(page);
   });
-
 });
