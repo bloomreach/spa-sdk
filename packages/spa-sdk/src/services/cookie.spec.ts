@@ -40,11 +40,25 @@ describe('Cookie', () => {
     expect(document.cookie).toEqual('testName=testValue; Max-Age=2419200');
   });
 
+  it('should return empty object if DOM is not ready', () => {
+    jest.spyOn(Cookie, 'isDomReady' as never).mockImplementation(() => false as never);
+
+    expect(Cookie.GET_COOKIE()).toEqual({});
+  });
+
   it('should get cookies from request object', () => {
-    const req: HttpRequest = {
+    const request: HttpRequest = {
       headers: { cookie: 'foo=bar' },
     };
 
-    expect(Cookie.GET_COOKIE_FROM_REQUEST(req)).toEqual({ foo: 'bar' });
+    expect(Cookie.GET_COOKIE_FROM_REQUEST(request)).toEqual({ foo: 'bar' });
+  });
+
+  it('should return empty object if cookie is missing in the request', () => {
+    const request: HttpRequest = {
+      headers: {},
+    };
+
+    expect(Cookie.GET_COOKIE_FROM_REQUEST(request)).toEqual({});
   });
 });
