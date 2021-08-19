@@ -47,7 +47,7 @@
     "vue": "^2.6"
   },
   "devDependencies": {
-    "@bloomreach/eslint-config-vue": "0.2.0",
+    "@bloomreach/eslint-config-vue": "0.2.1-1",
     "@types/jest": "26.0.24",
     "@types/node": "14.17.3",
     "@vue/cli-plugin-babel": "4.5.13",

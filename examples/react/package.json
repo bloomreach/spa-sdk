@@ -34,7 +34,7 @@
     ]
   },
   "devDependencies": {
-    "@bloomreach/eslint-config-react": "0.2.0",
+    "@bloomreach/eslint-config-react": "0.2.1-1",
     "@types/react": "16.14.0",
     "@types/react-dom": "16.9.14",
     "@types/react-router-dom": "5.1.8",

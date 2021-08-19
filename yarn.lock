@@ -2417,20 +2417,41 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@bloomreach/eslint-config-angular@portal:/Users/vasilikauryha/projects/br/hippo-frontend-build/packages/eslint-config-angular::locator=root-workspace-0b6124%40workspace%3A.":
-  version: 0.0.0-use.local
-  resolution: "@bloomreach/eslint-config-angular@portal:/Users/vasilikauryha/projects/br/hippo-frontend-build/packages/eslint-config-angular::locator=root-workspace-0b6124%40workspace%3A."
+"@bloomreach/eslint-config-angular@npm:0.2.1-0":
+  version: 0.2.1-0
+  resolution: "@bloomreach/eslint-config-angular@npm:0.2.1-0"
   dependencies:
     "@angular-eslint/eslint-plugin": 4.3.0
     "@angular-eslint/eslint-plugin-template": 4.3.0
     "@angular-eslint/template-parser": 4.3.0
-    "@bloomreach/eslint-config-base": "workspace:packages/eslint-config-base"
+    "@bloomreach/eslint-config-base": 0.2.1-0
+  peerDependencies:
+    "@angular/compiler": ">= 11.2.0 < 12.0.0"
+    eslint: ">= 7"
+    typescript: ">= 4"
+  checksum: fc4f346161694856da6d2cad513d1b5ec846e91e8ea022f69d66a0572a63de3a7ecf24fed43197022c001598560b6a3a74b443fecd7d1a6f5213fbc0333c1b9a
   languageName: node
-  linkType: soft
+  linkType: hard
 
-"@bloomreach/eslint-config-base@portal:/Users/vasilikauryha/projects/br/hippo-frontend-build/packages/eslint-config-base::locator=root-workspace-0b6124%40workspace%3A.":
-  version: 0.0.0-use.local
-  resolution: "@bloomreach/eslint-config-base@portal:/Users/vasilikauryha/projects/br/hippo-frontend-build/packages/eslint-config-base::locator=root-workspace-0b6124%40workspace%3A."
+"@bloomreach/eslint-config-angular@npm:0.2.1-1":
+  version: 0.2.1-1
+  resolution: "@bloomreach/eslint-config-angular@npm:0.2.1-1"
+  dependencies:
+    "@angular-eslint/eslint-plugin": 4.3.0
+    "@angular-eslint/eslint-plugin-template": 4.3.0
+    "@angular-eslint/template-parser": 4.3.0
+    "@bloomreach/eslint-config-base": 0.2.1-1
+  peerDependencies:
+    "@angular/compiler": ">= 11.2.0 < 12.0.0"
+    eslint: ">= 7"
+    typescript: ">= 4"
+  checksum: c26bb3accc527bf02fe92cc01f34afb004afa39a51487938cbedaf9d63731700588af38bc1b6a86c6444b14a1178486a276c7e20770ff9037011c550105eec32
+  languageName: node
+  linkType: hard
+
+"@bloomreach/eslint-config-base@npm:0.2.1-0":
+  version: 0.2.1-0
+  resolution: "@bloomreach/eslint-config-base@npm:0.2.1-0"
   dependencies:
     "@typescript-eslint/eslint-plugin": 4.29.1
     "@typescript-eslint/parser": 4.29.1
@@ -2439,52 +2460,86 @@ __metadata:
     typescript: ^4
   peerDependencies:
     eslint: ">= 7"
+  checksum: a370a4f1d3d546af8f0027693e7f992e6bfec7c96a4fa7217048bb9baa6da7597975631c2f4c6d461541290e5c7f7143065697b51c86be3e881b9daaa2f4171c
   languageName: node
-  linkType: soft
+  linkType: hard
 
-"@bloomreach/eslint-config-next@portal:/Users/vasilikauryha/projects/br/hippo-frontend-build/packages/eslint-config-next::locator=root-workspace-0b6124%40workspace%3A.":
-  version: 0.0.0-use.local
-  resolution: "@bloomreach/eslint-config-next@portal:/Users/vasilikauryha/projects/br/hippo-frontend-build/packages/eslint-config-next::locator=root-workspace-0b6124%40workspace%3A."
+"@bloomreach/eslint-config-base@npm:0.2.1-1":
+  version: 0.2.1-1
+  resolution: "@bloomreach/eslint-config-base@npm:0.2.1-1"
   dependencies:
-    "@bloomreach/eslint-config-base": "workspace:packages/eslint-config-base"
+    "@typescript-eslint/eslint-plugin": 4.29.1
+    "@typescript-eslint/parser": 4.29.1
+    eslint-config-airbnb-base: 14.2.1
+    eslint-plugin-import: 2.24.0
+    typescript: ^4
+  peerDependencies:
+    eslint: ">= 7"
+  checksum: d0718bc9f3edd4853ccc67ce39df1349d14e23bc7296fb990ad9065beb0c21c833cf922ea5ae5fcd3b4db0eba17a97db9e8564131e3eee9e0642d14c36f76780
+  languageName: node
+  linkType: hard
+
+"@bloomreach/eslint-config-next@npm:0.2.1-0":
+  version: 0.2.1-0
+  resolution: "@bloomreach/eslint-config-next@npm:0.2.1-0"
+  dependencies:
+    "@bloomreach/eslint-config-base": 0.2.1-0
     "@rushstack/eslint-patch": 1.0.6
     eslint-config-next: 11.1.0
     next: 10.2.3
-  languageName: node
-  linkType: soft
-
-"@bloomreach/eslint-config-nuxt@portal:/Users/vasilikauryha/projects/br/hippo-frontend-build/packages/eslint-config-nuxt::locator=root-workspace-0b6124%40workspace%3A.":
-  version: 0.0.0-use.local
-  resolution: "@bloomreach/eslint-config-nuxt@portal:/Users/vasilikauryha/projects/br/hippo-frontend-build/packages/eslint-config-nuxt::locator=root-workspace-0b6124%40workspace%3A."
-  dependencies:
-    "@bloomreach/eslint-config-base": "workspace:packages/eslint-config-base"
-    "@nuxtjs/eslint-config-typescript": 6.0.1
-  languageName: node
-  linkType: soft
-
-"@bloomreach/eslint-config-react@portal:/Users/vasilikauryha/projects/br/hippo-frontend-build/packages/eslint-config-react::locator=root-workspace-0b6124%40workspace%3A.":
-  version: 0.0.0-use.local
-  resolution: "@bloomreach/eslint-config-react@portal:/Users/vasilikauryha/projects/br/hippo-frontend-build/packages/eslint-config-react::locator=root-workspace-0b6124%40workspace%3A."
-  dependencies:
-    "@bloomreach/eslint-config-base": "workspace:packages/eslint-config-base"
-    "@typescript-eslint/eslint-plugin": 4.29.1
-    "@typescript-eslint/parser": 4.29.1
   peerDependencies:
     eslint: ">= 7"
+    react: ">= 16.9"
+    react-dom: ">= 16.9"
+  checksum: 55ae0f80f5a52a211494e60e53f9f2b6edc3c98346b803f2e99508eafc911b67540183386da22719f01de982a987b6049228bd97508d1b841bc216bc6a51455f
   languageName: node
-  linkType: soft
+  linkType: hard
 
-"@bloomreach/eslint-config-vue@portal:/Users/vasilikauryha/projects/br/hippo-frontend-build/packages/eslint-config-vue::locator=root-workspace-0b6124%40workspace%3A.":
-  version: 0.0.0-use.local
-  resolution: "@bloomreach/eslint-config-vue@portal:/Users/vasilikauryha/projects/br/hippo-frontend-build/packages/eslint-config-vue::locator=root-workspace-0b6124%40workspace%3A."
+"@bloomreach/eslint-config-nuxt@npm:0.2.1-1":
+  version: 0.2.1-1
+  resolution: "@bloomreach/eslint-config-nuxt@npm:0.2.1-1"
   dependencies:
-    "@bloomreach/eslint-config-base": "workspace:packages/eslint-config-base"
+    "@bloomreach/eslint-config-base": 0.2.1-1
+    "@nuxtjs/eslint-config-typescript": 6.0.1
+  peerDependencies:
+    eslint: ">= 7"
+  checksum: b69cb51b721bf8b8447e7e5b32a1cfd4fc183d4295614a012120acaeb71f3e7ef4b035c4b88378678cf3ae7d166087f99855baaeb5e4feb86a8ed5d3fbf3acea
+  languageName: node
+  linkType: hard
+
+"@bloomreach/eslint-config-react@npm:0.2.1-1":
+  version: 0.2.1-1
+  resolution: "@bloomreach/eslint-config-react@npm:0.2.1-1"
+  dependencies:
+    "@bloomreach/eslint-config-base": 0.2.1-1
+    "@typescript-eslint/eslint-plugin": 4.29.1
+    "@typescript-eslint/parser": 4.29.1
+    eslint-config-airbnb: 18.2.1
+  peerDependencies:
+    eslint: ">= 7"
+  checksum: c54140139d9e7d533326ed8b0bf3cdfbe241dc3e2ecb8cf92fd65a2d76d238cb6c60893ffe3617d0167a0f65e7eb86b8584fd6ddaf1bd8cab4e313e367094c99
+  languageName: node
+  linkType: hard
+
+"@bloomreach/eslint-config-vue@npm:0.2.1-1":
+  version: 0.2.1-1
+  resolution: "@bloomreach/eslint-config-vue@npm:0.2.1-1"
+  dependencies:
+    "@bloomreach/eslint-config-base": 0.2.1-1
     "@vue/cli-service": 4.5.13
     "@vue/eslint-config-airbnb": 5.3.0
     "@vue/eslint-config-prettier": 6.0.0
     "@vue/eslint-config-typescript": 7.0.0
+  peerDependencies:
+    "@typescript-eslint/eslint-plugin": ">= 4.4"
+    "@typescript-eslint/parser": ">= 4.4"
+    eslint: ">= 7"
+    eslint-plugin-prettier: ">= 3.1"
+    eslint-plugin-vue: ^5.2.3 || ^6.0.0 || ^7.0.0
+    prettier: ">= 2"
+  checksum: 7093b8a16954d538ed25b10a5f389c1dfde98ce4ace5138ae36333e9f6965d94f20b5493c1e180658281b013761094251810d83b861df2ee34c858ee78aeac5a
   languageName: node
-  linkType: soft
+  linkType: hard
 
 "@bloomreach/example-angular@workspace:examples/angular":
   version: 0.0.0-use.local
@@ -2505,7 +2560,7 @@ __metadata:
     "@angular/platform-browser-dynamic": 11.2.14
     "@angular/platform-server": 11.2.14
     "@angular/router": 11.2.14
-    "@bloomreach/eslint-config-angular": 0.2.0
+    "@bloomreach/eslint-config-angular": 0.2.1-0
     "@bloomreach/ng-sdk": 15.0.1-0
     "@bloomreach/spa-sdk": 15.0.1-0
     "@nguniversal/builders": 11.2.1
@@ -2528,7 +2583,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bloomreach/example-next@workspace:examples/next"
   dependencies:
-    "@bloomreach/eslint-config-next": 0.2.0
+    "@bloomreach/eslint-config-next": 0.2.1-0
     "@bloomreach/react-sdk": 15.0.1-0
     "@bloomreach/spa-sdk": 15.0.1-0
     "@types/node": 14.17.3
@@ -2548,7 +2603,7 @@ __metadata:
   resolution: "@bloomreach/example-nuxt@workspace:examples/nuxt"
   dependencies:
     "@babel/runtime-corejs3": 7.14.9
-    "@bloomreach/eslint-config-nuxt": 0.2.0
+    "@bloomreach/eslint-config-nuxt": 0.2.1-1
     "@bloomreach/spa-sdk": 15.0.1-0
     "@bloomreach/vue-sdk": 15.0.1-0
     "@nuxt/types": 2.15.7
@@ -2577,7 +2632,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bloomreach/example-react@workspace:examples/react"
   dependencies:
-    "@bloomreach/eslint-config-react": 0.2.0
+    "@bloomreach/eslint-config-react": 0.2.1-1
     "@bloomreach/react-sdk": 15.0.1-0
     "@bloomreach/spa-sdk": 15.0.1-0
     "@types/react": 16.14.0
@@ -2597,7 +2652,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bloomreach/example-vue@workspace:examples/vue"
   dependencies:
-    "@bloomreach/eslint-config-vue": 0.2.0
+    "@bloomreach/eslint-config-vue": 0.2.1-1
     "@bloomreach/spa-sdk": 15.0.1-0
     "@bloomreach/vue-sdk": 15.0.1-0
     "@types/jest": 26.0.24
@@ -2643,7 +2698,7 @@ __metadata:
     "@angular/language-service": 11.2.14
     "@angular/platform-browser": 11.2.14
     "@angular/platform-browser-dynamic": 11.2.14
-    "@bloomreach/eslint-config-angular": 0.2.0
+    "@bloomreach/eslint-config-angular": 0.2.1-1
     "@bloomreach/spa-sdk": 15.0.1-0
     "@types/jest": 26.0.24
     jest: 26.6.3
@@ -2670,7 +2725,7 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": 7.14.7
     "@babel/preset-env": 7.14.8
     "@babel/preset-react": 7.14.5
-    "@bloomreach/eslint-config-react": 0.2.0
+    "@bloomreach/eslint-config-react": 0.2.1-1
     "@bloomreach/spa-sdk": 15.0.1-0
     "@rollup/plugin-babel": 5.3.0
     "@types/enzyme": 3.10.9
@@ -2708,7 +2763,7 @@ __metadata:
     "@babel/plugin-transform-object-assign": 7.14.5
     "@babel/polyfill": 7.12.1
     "@babel/preset-env": 7.14.8
-    "@bloomreach/eslint-config-base": 0.2.0
+    "@bloomreach/eslint-config-base": 0.2.1-1
     "@rollup/plugin-babel": 5.3.0
     "@types/cookie": 0.4.1
     "@types/jest": 26.0.24
@@ -2739,7 +2794,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bloomreach/vue-sdk@workspace:packages/vue-sdk"
   dependencies:
-    "@bloomreach/eslint-config-vue": 0.2.0
+    "@bloomreach/eslint-config-vue": 0.2.1-1
     "@bloomreach/spa-sdk": 15.0.1-0
     "@types/jest": 26.0.24
     "@types/node": 14.17.3
@@ -11347,7 +11402,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-airbnb-base@npm:14.2.1, eslint-config-airbnb-base@npm:^14.0.0":
+"eslint-config-airbnb-base@npm:14.2.1, eslint-config-airbnb-base@npm:^14.0.0, eslint-config-airbnb-base@npm:^14.2.1":
   version: 14.2.1
   resolution: "eslint-config-airbnb-base@npm:14.2.1"
   dependencies:
@@ -11358,6 +11413,23 @@ __metadata:
     eslint: ^5.16.0 || ^6.8.0 || ^7.2.0
     eslint-plugin-import: ^2.22.1
   checksum: 858bea748a3c8685b52fcf2488e6a0b964022f8387f4ee1e69cb707d4fda2a409f09eb8eea658bcd83fae3519967d10208ba7576dd3d3202b8cf0b9d1a6e21eb
+  languageName: node
+  linkType: hard
+
+"eslint-config-airbnb@npm:18.2.1":
+  version: 18.2.1
+  resolution: "eslint-config-airbnb@npm:18.2.1"
+  dependencies:
+    eslint-config-airbnb-base: ^14.2.1
+    object.assign: ^4.1.2
+    object.entries: ^1.1.2
+  peerDependencies:
+    eslint: ^5.16.0 || ^6.8.0 || ^7.2.0
+    eslint-plugin-import: ^2.22.1
+    eslint-plugin-jsx-a11y: ^6.4.1
+    eslint-plugin-react: ^7.21.5
+    eslint-plugin-react-hooks: ^4 || ^3 || ^2.3.0 || ^1.7.0
+  checksum: ea11cd0006912f7086fb278e03180da4bc2378cf4e93b1dd970775d8e9b50fd11a64209bdc0ed17654d29abe4ccfa19baa4d1e1e5bd3eb660fcf4798ba2810d2
   languageName: node
   linkType: hard
 
