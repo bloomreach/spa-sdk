@@ -24,6 +24,7 @@ const config = require('../nuxt.config');
 
 config.dev = process.env.NODE_ENV !== 'production';
 
+// eslint-disable-next-line func-names
 (async function () {
   const nuxt = new Nuxt(config);
 
