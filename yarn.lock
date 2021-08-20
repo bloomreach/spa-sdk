@@ -2466,16 +2466,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@bloomreach/eslint-config-react@npm:1.0.0":
-  version: 1.0.0
-  resolution: "@bloomreach/eslint-config-react@npm:1.0.0"
+"@bloomreach/eslint-config-react@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@bloomreach/eslint-config-react@npm:1.0.1"
   dependencies:
     "@bloomreach/eslint-config-base": 1.0.0
     "@typescript-eslint/eslint-plugin": 4.29.1
     "@typescript-eslint/parser": 4.29.1
+    eslint-config-airbnb: 18.2.1
   peerDependencies:
     eslint: ">= 7"
-  checksum: facbaec521aab8992e2e986745f67601fdbbedc538605ca8b17d49c75d98273a98b3c813ac8df76db8ceee9ddd9ee47d6face49f5ffc83933cd854da4f5e1932
+  checksum: b1ab7303618e8c47c786547cdf1b9e40332d1eaa5b6df310a9952619eb3a6ea6a6c73a62debd647d325466344de36858c10f66d56cd4d5997d72957129dba1c5
   languageName: node
   linkType: hard
 
@@ -2583,7 +2584,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bloomreach/example-react@workspace:examples/react"
   dependencies:
-    "@bloomreach/eslint-config-react": 1.0.0
+    "@bloomreach/eslint-config-react": 1.0.1
     "@bloomreach/react-sdk": 15.0.1-0
     "@bloomreach/spa-sdk": 15.0.1-0
     "@types/react": 16.14.0
@@ -2676,7 +2677,7 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": 7.14.7
     "@babel/preset-env": 7.14.8
     "@babel/preset-react": 7.14.5
-    "@bloomreach/eslint-config-react": 1.0.0
+    "@bloomreach/eslint-config-react": 1.0.1
     "@bloomreach/spa-sdk": 15.0.1-0
     "@rollup/plugin-babel": 5.3.0
     "@types/enzyme": 3.10.9
@@ -11360,7 +11361,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-airbnb-base@npm:14.2.1, eslint-config-airbnb-base@npm:^14.0.0":
+"eslint-config-airbnb-base@npm:14.2.1, eslint-config-airbnb-base@npm:^14.0.0, eslint-config-airbnb-base@npm:^14.2.1":
   version: 14.2.1
   resolution: "eslint-config-airbnb-base@npm:14.2.1"
   dependencies:
@@ -11371,6 +11372,23 @@ __metadata:
     eslint: ^5.16.0 || ^6.8.0 || ^7.2.0
     eslint-plugin-import: ^2.22.1
   checksum: 858bea748a3c8685b52fcf2488e6a0b964022f8387f4ee1e69cb707d4fda2a409f09eb8eea658bcd83fae3519967d10208ba7576dd3d3202b8cf0b9d1a6e21eb
+  languageName: node
+  linkType: hard
+
+"eslint-config-airbnb@npm:18.2.1":
+  version: 18.2.1
+  resolution: "eslint-config-airbnb@npm:18.2.1"
+  dependencies:
+    eslint-config-airbnb-base: ^14.2.1
+    object.assign: ^4.1.2
+    object.entries: ^1.1.2
+  peerDependencies:
+    eslint: ^5.16.0 || ^6.8.0 || ^7.2.0
+    eslint-plugin-import: ^2.22.1
+    eslint-plugin-jsx-a11y: ^6.4.1
+    eslint-plugin-react: ^7.21.5
+    eslint-plugin-react-hooks: ^4 || ^3 || ^2.3.0 || ^1.7.0
+  checksum: ea11cd0006912f7086fb278e03180da4bc2378cf4e93b1dd970775d8e9b50fd11a64209bdc0ed17654d29abe4ccfa19baa4d1e1e5bd3eb660fcf4798ba2810d2
   languageName: node
   linkType: hard
 
