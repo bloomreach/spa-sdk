@@ -89,7 +89,7 @@ export function createManageContentButton(params: ManageContentButton): MetaColl
     };
   }
 
-  const merge = (item: Meta) =>
+  const merge = (item: Meta): MetaModel =>
     ({
       type: TYPE_META_COMMENT,
       data: JSON.stringify(Object.assign(JSON.parse(item.getData()), model)),

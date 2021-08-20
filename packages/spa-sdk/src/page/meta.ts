@@ -52,11 +52,11 @@ export interface Meta {
 export class MetaImpl implements Meta {
   constructor(protected model: MetaModel, protected position: MetaPosition) {}
 
-  getData() {
+  getData(): string {
     return this.model.data;
   }
 
-  getPosition() {
+  getPosition(): MetaPosition {
     return this.position;
   }
 }

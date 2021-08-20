@@ -63,7 +63,7 @@ export class Cookie {
   /**
    * Check if DOM is ready
    */
-  private static isDomReady() {
+  private static isDomReady(): boolean {
     return typeof window !== 'undefined' && document.readyState !== 'loading';
   }
 

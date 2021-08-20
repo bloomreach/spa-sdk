@@ -33,11 +33,11 @@ export class ContainerImpl extends ComponentImpl implements Container {
 
   protected children!: ContainerItem[];
 
-  getChildren() {
+  getChildren(): ContainerItem[] {
     return this.children;
   }
 
-  getType() {
+  getType(): ContainerType {
     return this.model.xtype?.toLowerCase() as ContainerType;
   }
 }

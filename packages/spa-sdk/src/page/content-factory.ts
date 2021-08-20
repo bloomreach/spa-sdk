@@ -22,11 +22,11 @@ type ContentBuilder = Builder<[ContentModel], unknown>;
 
 @injectable()
 export class ContentFactory extends SimpleFactory<ContentModel['type'], ContentBuilder> {
-  create(model: ContentModel) {
+  create(model: ContentModel): ContentModel {
     if (!this.mapping.has(model.type)) {
       return model;
     }
 
-    return this.mapping.get(model.type)!(model);
+    return this.mapping.get(model.type)!(model) as ContentModel;
   }
 }

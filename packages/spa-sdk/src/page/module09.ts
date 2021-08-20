@@ -43,7 +43,7 @@ import { TYPE_MANAGE_MENU_BUTTON } from './menu';
 import { TYPE_META_COMMENT } from './meta';
 import { UrlBuilderService, UrlBuilder } from '../url';
 
-export function PageModule() {
+export function PageModule(): ContainerModule {
   return new ContainerModule((bind) => {
     bind(EventBusService)
       .toDynamicValue(() => new Typed())

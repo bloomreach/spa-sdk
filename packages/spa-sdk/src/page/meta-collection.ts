@@ -66,7 +66,7 @@ export class MetaCollectionImpl extends Array<Meta> implements MetaCollection {
     Object.freeze(this);
   }
 
-  clear(comments = [...this.comments]) {
+  clear(comments = [...this.comments]): void {
     comments.forEach((comment) => {
       comment.remove();
 
@@ -77,7 +77,7 @@ export class MetaCollectionImpl extends Array<Meta> implements MetaCollection {
     });
   }
 
-  render(head: Node, tail: Node) {
+  render(head: Node, tail: Node): () => void {
     const document = head.ownerDocument ?? tail.ownerDocument;
     const comments = document
       ? [

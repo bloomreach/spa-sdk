@@ -81,7 +81,7 @@ export abstract class Rpc<
 
   private callbacks = new Map<keyof TProcedures, Callable<Promise<any>, any>>();
 
-  private generateId() {
+  private generateId(): string {
     let id: string;
     do {
       id = `${Math.random()}`.slice(2);
@@ -90,7 +90,10 @@ export abstract class Rpc<
     return id;
   }
 
-  call<K extends keyof TRemoteProcedures & string>(command: K, ...payload: Parameters<TRemoteProcedures[K]>) {
+  call<K extends keyof TRemoteProcedures & string>(
+    command: K,
+    ...payload: Parameters<TRemoteProcedures[K]>
+  ): Promise<ReturnType<TRemoteProcedures[K]>> {
     return new Promise<ReturnType<TRemoteProcedures[K]>>((resolve, reject) => {
       const id = this.generateId();
 
@@ -102,15 +105,15 @@ export abstract class Rpc<
   register<K extends keyof TProcedures & string>(
     command: K,
     callback: Callable<Promise<ReturnType<TProcedures[K]>>, Parameters<TProcedures[K]>>,
-  ) {
+  ): void {
     this.callbacks.set(command, callback);
   }
 
-  trigger<K extends keyof TEvents>(event: K & string, payload: TEvents[K]) {
+  trigger<K extends keyof TEvents>(event: K & string, payload: TEvents[K]): void {
     this.send({ event, payload, type: TYPE_EVENT });
   }
 
-  protected process(message: Message) {
+  protected process(message: Message): void {
     // eslint-disable-next-line default-case
     switch (message?.type) {
       case TYPE_EVENT:
@@ -125,11 +128,11 @@ export abstract class Rpc<
     }
   }
 
-  private processEvent(event: Event) {
+  private processEvent(event: Event): void {
     this.emit(event.event, event.payload);
   }
 
-  private processResponse(response: Response) {
+  private processResponse(response: Response): void {
     if (!this.calls.has(response.id)) {
       return;
     }
@@ -144,7 +147,7 @@ export abstract class Rpc<
     resolve(response.result);
   }
 
-  private async processRequest(request: Request) {
+  private async processRequest(request: Request): Promise<void> {
     const callback = this.callbacks.get(request.command);
 
     if (!callback) {

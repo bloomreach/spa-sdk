@@ -71,25 +71,25 @@ export class ComponentImpl implements Component {
     this.meta = metaFactory(this.model._meta);
   }
 
-  getId() {
+  getId(): string {
     return this.model.id;
   }
 
-  getMeta() {
+  getMeta(): MetaCollection {
     return this.meta;
   }
 
   getModels<T extends ComponentModels>(): T;
 
-  getModels() {
+  getModels(): Record<string, unknown> {
     return this.model.models || {};
   }
 
-  getUrl() {
+  getUrl(): string {
     return this.urlBuilder.getApiUrl(this.model._links.componentRendering.href!);
   }
 
-  getName() {
+  getName(): string {
     return this.model.name || '';
   }
 
@@ -97,7 +97,7 @@ export class ComponentImpl implements Component {
     return (this.model._meta.params ?? {}) as T;
   }
 
-  getChildren() {
+  getChildren(): Component[] {
     return this.children;
   }
 
@@ -105,6 +105,7 @@ export class ComponentImpl implements Component {
 
   getComponent<U extends Component>(...componentNames: string[]): U | undefined;
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   getComponent(...componentNames: string[]) {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     let component: Component | undefined = this;
@@ -119,6 +120,7 @@ export class ComponentImpl implements Component {
 
   getComponentById<U extends Component>(id: string): U | this | undefined;
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   getComponentById(id: string) {
     const queue = [this as Component];
 

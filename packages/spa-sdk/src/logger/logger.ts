@@ -36,7 +36,7 @@ export abstract class Logger implements Logger {
     this.error = this.log.bind(this, Level.Error);
   }
 
-  private log(level: Level, ...message: unknown[]) {
+  private log(level: Level, ...message: unknown[]): void {
     const levels = Object.values(Level);
     if (!levels.includes(level) || levels.indexOf(level) < levels.indexOf(this.level)) {
       return;

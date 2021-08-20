@@ -72,7 +72,7 @@ export class CmsImpl implements Cms {
     this.rpcServer.register('inject', this.inject.bind(this));
   }
 
-  initialize({ window = GLOBAL_WINDOW }: CmsOptions) {
+  initialize({ window = GLOBAL_WINDOW }: CmsOptions): void {
     if (this.window === window) {
       return;
     }
@@ -88,13 +88,13 @@ export class CmsImpl implements Cms {
     this.window?.document?.addEventListener('readystatechange', this.onStateChange);
   }
 
-  private onInitialize() {
+  private onInitialize(): void {
     this.logger?.debug('The page is ready to accept incoming messages.');
 
     this.rpcServer.trigger('ready', undefined as never);
   }
 
-  private onStateChange() {
+  private onStateChange(): void {
     if (this.window!.document!.readyState === 'loading') {
       return;
     }
@@ -103,20 +103,20 @@ export class CmsImpl implements Cms {
     this.window!.document!.removeEventListener('readystatechange', this.onStateChange);
   }
 
-  protected onPageReady() {
+  protected onPageReady(): void {
     this.logger?.debug('Synchronizing the page.');
 
     this.rpcClient.call('sync');
   }
 
-  protected onUpdate(event: CmsUpdateEvent) {
+  protected onUpdate(event: CmsUpdateEvent): void {
     this.logger?.debug('Received update event.');
     this.logger?.debug('Event:', event);
 
     this.eventBus?.emit('cms.update', event);
   }
 
-  protected inject(resource: string) {
+  protected inject(resource: string): Promise<void> {
     if (!this.window?.document) {
       return Promise.reject(new Error('SPA document is not ready.'));
     }

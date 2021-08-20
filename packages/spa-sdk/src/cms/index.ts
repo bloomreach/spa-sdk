@@ -22,7 +22,7 @@ import { EventBusService } from './events';
 import { PostMessageService, PostMessage } from './post-message';
 import { RpcClientService, RpcServerService } from './rpc';
 
-export function CmsModule() {
+export function CmsModule(): ContainerModule {
   return new ContainerModule((bind) => {
     bind(EventBusService)
       .toDynamicValue(() => new Typed())

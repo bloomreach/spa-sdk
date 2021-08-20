@@ -48,7 +48,7 @@ export class Cms14Impl implements Cms {
     @inject(Logger) @optional() private logger?: Logger,
   ) {}
 
-  private async flush() {
+  private async flush(): Promise<void> {
     this.postponed.splice(0).forEach((task) => task());
   }
 
@@ -64,7 +64,7 @@ export class Cms14Impl implements Cms {
     };
   }
 
-  initialize({ window = GLOBAL_WINDOW }: CmsOptions) {
+  initialize({ window = GLOBAL_WINDOW }: CmsOptions): void {
     if (this.api || !window || window.SPA) {
       return;
     }
@@ -78,14 +78,14 @@ export class Cms14Impl implements Cms {
     };
   }
 
-  protected onInit(api: CmsApi) {
+  protected onInit(api: CmsApi): void {
     this.logger?.debug('Completed the handshake with the Experience Manager.');
 
     this.api = api;
     this.flush();
   }
 
-  protected onRenderComponent(id: string, properties: Record<string, unknown>) {
+  protected onRenderComponent(id: string, properties: Record<string, unknown>): void {
     this.logger?.debug('Received component rendering request.');
     this.logger?.debug('Component:', id);
     this.logger?.debug('Properties', properties);
@@ -93,7 +93,7 @@ export class Cms14Impl implements Cms {
     this.eventBus?.emit('cms.update', { id, properties });
   }
 
-  protected sync() {
+  protected sync(): void {
     this.logger?.debug('Synchronizing the page.');
 
     this.api!.sync();

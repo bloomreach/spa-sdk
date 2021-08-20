@@ -17,7 +17,7 @@
 import { ContainerModule } from 'inversify';
 import { UrlBuilderImpl, UrlBuilderService } from './builder';
 
-export function UrlModule() {
+export function UrlModule(): ContainerModule {
   return new ContainerModule((bind) => {
     bind(UrlBuilderService).to(UrlBuilderImpl).inSingletonScope();
   });

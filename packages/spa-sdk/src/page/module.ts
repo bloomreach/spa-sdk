@@ -57,7 +57,7 @@ import { TYPE_MANAGE_CONTENT_BUTTON, createManageContentButton } from './button-
 import { TYPE_META_COMMENT } from './meta';
 import { UrlBuilderService, UrlBuilder } from '../url';
 
-export function PageModule() {
+export function PageModule(): ContainerModule {
   return new ContainerModule((bind) => {
     bind(EventBusService)
       .toDynamicValue(() => new Typed())

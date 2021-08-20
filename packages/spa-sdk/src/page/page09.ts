@@ -159,7 +159,7 @@ export class PageImpl implements Page {
     this.cmsEventBus?.emit('page.ready', {});
   }
 
-  toJSON() {
+  toJSON(): PageModel {
     return this.model;
   }
 }

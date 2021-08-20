@@ -15,7 +15,7 @@
  */
 
 import { MetaFactory } from './meta-factory';
-import { MetaImpl, MetaType, META_POSITION_BEGIN, META_POSITION_END, TYPE_META_COMMENT } from './meta';
+import { MetaImpl, MetaType, META_POSITION_BEGIN, META_POSITION_END } from './meta';
 
 describe('MetaFactory', () => {
   describe('create', () => {

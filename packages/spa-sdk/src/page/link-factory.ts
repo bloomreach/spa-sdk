@@ -26,7 +26,7 @@ export class LinkFactory extends SimpleFactory<LinkType, LinkBuilder> {
 
   create(path: string): string;
 
-  create(link: Link | string) {
+  create(link: Link | string): string | undefined {
     if (isLink(link)) {
       return this.createLink(link);
     }
@@ -34,7 +34,7 @@ export class LinkFactory extends SimpleFactory<LinkType, LinkBuilder> {
     return this.createPath(link);
   }
 
-  private createLink(link: Link) {
+  private createLink(link: Link): string | undefined {
     if (!link.type || typeof link.href === 'undefined' || !this.mapping.has(link.type)) {
       return link.href;
     }
@@ -44,7 +44,7 @@ export class LinkFactory extends SimpleFactory<LinkType, LinkBuilder> {
     return builder(link.href);
   }
 
-  private createPath(path: string) {
+  private createPath(path: string): string | undefined {
     return this.createLink({ href: path, type: TYPE_LINK_INTERNAL });
   }
 }

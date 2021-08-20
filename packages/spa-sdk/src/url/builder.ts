@@ -61,7 +61,7 @@ export class UrlBuilderImpl {
     this.baseUrl = parseUrl(options.baseUrl ?? '');
   }
 
-  getApiUrl(link: string) {
+  getApiUrl(link: string): string {
     const { pathname, searchParams } = parseUrl(link);
 
     if (this.baseUrl.pathname && !pathname.startsWith(this.baseUrl.pathname)) {
@@ -77,7 +77,7 @@ export class UrlBuilderImpl {
     });
   }
 
-  getSpaUrl(link: string) {
+  getSpaUrl(link: string): string {
     const { hash, pathname, searchParams } = parseUrl(link);
     const route = !pathname.startsWith('/') && !this.baseUrl.pathname ? `/${pathname}` : pathname;
 

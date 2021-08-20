@@ -25,7 +25,7 @@ type MetaBuilder = (model: MetaModel, position: MetaPosition) => Meta;
  */
 @injectable()
 export class MetaFactory extends SimpleFactory<MetaType, MetaBuilder> {
-  create(meta: MetaModel, position: MetaPosition) {
+  create(meta: MetaModel, position: MetaPosition): Meta {
     const builder = this.mapping.get(meta.type);
     if (!builder) {
       throw new Error(`Unsupported meta type: '${meta.type}'.`);

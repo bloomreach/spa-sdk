@@ -42,7 +42,7 @@ export class LinkRewriterImpl implements LinkRewriter {
     @inject(XmlSerializerService) private xmlSerializer: XMLSerializer,
   ) {}
 
-  rewrite(content: string, type = 'text/html') {
+  rewrite(content: string, type = 'text/html'): string {
     const document = this.domParser.parseFromString(`<body>${content}</body>`, type);
 
     this.rewriteAnchors(document);
@@ -53,7 +53,7 @@ export class LinkRewriterImpl implements LinkRewriter {
     return body.replace(BODY_CONTENTS, '$1');
   }
 
-  private rewriteAnchors(document: Document) {
+  private rewriteAnchors(document: Document): void {
     Array.from(document.getElementsByTagName('a'))
       .filter((element) => element.hasAttribute('href') && element.hasAttribute('data-type'))
       .forEach((element) => {
@@ -68,7 +68,7 @@ export class LinkRewriterImpl implements LinkRewriter {
       });
   }
 
-  private rewriteImages(document: Document) {
+  private rewriteImages(document: Document): void {
     Array.from(document.getElementsByTagName('img'))
       .filter((element) => element.hasAttribute('src'))
       .forEach((element) => {

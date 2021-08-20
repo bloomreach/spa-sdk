@@ -55,12 +55,16 @@ container.load(CmsModule(), LoggerModule(), UrlModule());
 
 function onReady<T>(value: T | Promise<T>, callback: (cbValue: T) => unknown): T | Promise<T> {
   // eslint-disable-next-line no-sequences
-  const wrapper = (result: T) => (callback(result), result);
+  const wrapper = (result: T): T => (callback(result), result);
 
   return value instanceof Promise ? value.then(wrapper) : wrapper(value);
 }
 
-function initializeWithProxy(scope: Container, configuration: ConfigurationWithProxy, model?: PageModel) {
+function initializeWithProxy(
+  scope: Container,
+  configuration: ConfigurationWithProxy,
+  model?: PageModel,
+): Page | Promise<Page> {
   const logger = scope.get(Logger);
 
   logger.info('Enabled reverse-proxy based setup.');
@@ -91,7 +95,11 @@ function initializeWithProxy(scope: Container, configuration: ConfigurationWithP
   );
 }
 
-function initializeWithJwt09(scope: Container, configuration: ConfigurationWithJwt09, model?: PageModel) {
+function initializeWithJwt09(
+  scope: Container,
+  configuration: ConfigurationWithJwt09,
+  model?: PageModel,
+): Page | Promise<Page> {
   const logger = scope.get(Logger);
 
   logger.info('Enabled token-based setup.');
@@ -142,7 +150,11 @@ function initializeWithJwt09(scope: Container, configuration: ConfigurationWithJ
   });
 }
 
-function initializeWithJwt10(scope: Container, configuration: ConfigurationWithJwt10, model?: PageModel) {
+function initializeWithJwt10(
+  scope: Container,
+  configuration: ConfigurationWithJwt10,
+  model?: PageModel,
+): Page | Promise<Page> {
   const logger = scope.get(Logger);
 
   logger.info('Enabled token-based setup.');

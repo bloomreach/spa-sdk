@@ -31,7 +31,7 @@ export class ComponentFactory extends SimpleFactory<ComponentType, ComponentBuil
    * Produces a component based on the page model.
    * @param page The page model.
    */
-  create(page: PageModel) {
+  create(page: PageModel): Component | undefined {
     const heap = [page.root];
     const pool = new Map<ComponentModel, Component>();
 
@@ -51,7 +51,7 @@ export class ComponentFactory extends SimpleFactory<ComponentType, ComponentBuil
     }, undefined);
   }
 
-  private buildComponent(model: ComponentModel, children: Component[]) {
+  private buildComponent(model: ComponentModel, children: Component[]): Component {
     const builder = this.mapping.get(model.type);
     if (!builder) {
       throw new Error(`Unsupported component type: '${model.type}'.`);

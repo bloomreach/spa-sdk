@@ -286,6 +286,7 @@ export class PageImpl implements Page {
 
   getComponent<T extends Component>(...componentNames: string[]): T | undefined;
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   getComponent(...componentNames: string[]) {
     return this.root?.getComponent(...componentNames);
   }
@@ -313,11 +314,11 @@ export class PageImpl implements Page {
     return this.model.document && this.getContent(this.model.document);
   }
 
-  getMeta(meta: MetaCollectionModel) {
+  getMeta(meta: MetaCollectionModel): MetaCollection {
     return this.metaFactory(meta);
   }
 
-  getTitle() {
+  getTitle(): string | undefined {
     return resolve<PageRootModel>(this.model, this.model.root)?.meta?.pageTitle;
   }
 
@@ -325,7 +326,7 @@ export class PageImpl implements Page {
 
   getUrl(path: string): string;
 
-  getUrl(link?: Link | string) {
+  getUrl(link?: Link | string): string | undefined {
     if (typeof link === 'undefined' || isLink(link) || isAbsoluteUrl(link)) {
       return this.linkFactory.create((link as Link) ?? this.model.links.site ?? '');
     }
@@ -333,31 +334,31 @@ export class PageImpl implements Page {
     return resolveUrl(link, this.linkFactory.create(this.model.links.site) ?? '');
   }
 
-  getVersion() {
+  getVersion(): string | undefined {
     return this.model.meta.version;
   }
 
-  getVisitor() {
+  getVisitor(): Visitor | undefined {
     return this.model.meta.visitor;
   }
 
-  getVisit() {
+  getVisit(): Visit | undefined {
     return this.model.meta.visit;
   }
 
-  isPreview() {
+  isPreview(): boolean {
     return !!this.model.meta.preview;
   }
 
-  rewriteLinks(content: string, type = 'text/html') {
+  rewriteLinks(content: string, type = 'text/html'): string {
     return this.linkRewriter.rewrite(content, type);
   }
 
-  sync() {
+  sync(): void {
     this.cmsEventBus?.emit('page.ready', {});
   }
 
-  toJSON() {
+  toJSON(): PageModel {
     return this.model;
   }
 }

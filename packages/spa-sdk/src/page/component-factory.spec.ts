@@ -15,7 +15,7 @@
  */
 
 import { ComponentFactory } from './component-factory';
-import { ComponentModel, TYPE_COMPONENT, TYPE_COMPONENT_CONTAINER_ITEM, TYPE_COMPONENT_CONTAINER } from './component';
+import { TYPE_COMPONENT, TYPE_COMPONENT_CONTAINER_ITEM, TYPE_COMPONENT_CONTAINER } from './component';
 import { PageModel } from './page';
 
 const model = (page: Record<string, unknown>) =>

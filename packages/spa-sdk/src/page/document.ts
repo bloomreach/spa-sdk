@@ -91,27 +91,27 @@ export class DocumentImpl implements Document {
     this.meta = metaFactory(this.model.meta ?? {});
   }
 
-  getId() {
+  getId(): string {
     return this.model.data.id;
   }
 
-  getLocale() {
+  getLocale(): string | undefined {
     return this.model.data.localeString;
   }
 
-  getMeta() {
+  getMeta(): MetaCollection {
     return this.meta;
   }
 
-  getName() {
+  getName(): string {
     return this.model.data.name;
   }
 
-  getData() {
+  getData(): DocumentDataModel {
     return this.model.data;
   }
 
-  getUrl() {
+  getUrl(): string | undefined {
     return this.linkFactory.create(this.model.links.site);
   }
 }

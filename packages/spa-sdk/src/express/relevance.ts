@@ -63,7 +63,7 @@ function withOptions({
   name = DEFAULT_COOKIE_NAME,
   maxAge = DEFAULT_COOKIE_MAX_AGE_IN_SECONDS,
   ...options
-}: Options = {}) {
+}: Options = {}): Handler {
   const handler: Handler = (request, response, next) => {
     const { [name]: value } = cookie.parse(request.headers?.cookie ?? '');
 
@@ -80,6 +80,7 @@ function withOptions({
         return;
       }
 
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { new: _, ...rest } = visitor;
       const serialized = cookie.serialize(name, JSON.stringify(rest), { ...options, httpOnly, maxAge });
       const cookies = response.getHeader?.('set-cookie') ?? [];
