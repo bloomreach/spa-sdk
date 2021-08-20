@@ -2417,21 +2417,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@bloomreach/eslint-config-angular@npm:1.0.0":
-  version: 1.0.0
-  resolution: "@bloomreach/eslint-config-angular@npm:1.0.0"
+"@bloomreach/eslint-config-angular@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@bloomreach/eslint-config-angular@npm:1.0.1"
   dependencies:
     "@angular-eslint/eslint-plugin": 4.3.0
     "@angular-eslint/eslint-plugin-template": 4.3.0
     "@angular-eslint/template-parser": 4.3.0
-    "@bloomreach/eslint-config-base": 1.0.0
-  checksum: a91616b94a3744985d49daed9aa91314c7f35d5747d93730d4059f01a57a59a95fdb776dadc9b65aa58e11f641305cb36955769d2fb332743d96cbeea5fc00ca
+    "@bloomreach/eslint-config-base": 1.0.1
+  peerDependencies:
+    "@angular/compiler": ">= 11.2.0 < 12.0.0"
+    eslint: ">= 7"
+    typescript: ">= 4"
+  checksum: 35a5c106a374b3301638fd9f7aae57854d219e34f6a906d48df76fce9ed0c4357aa79ec356344e2519fafc4ddb082fa3b74910574eea7fb55f8a7c5a85b38d4f
   languageName: node
   linkType: hard
 
-"@bloomreach/eslint-config-base@npm:1.0.0":
-  version: 1.0.0
-  resolution: "@bloomreach/eslint-config-base@npm:1.0.0"
+"@bloomreach/eslint-config-base@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@bloomreach/eslint-config-base@npm:1.0.1"
   dependencies:
     "@typescript-eslint/eslint-plugin": 4.29.1
     "@typescript-eslint/parser": 4.29.1
@@ -2440,56 +2444,73 @@ __metadata:
     typescript: ^4
   peerDependencies:
     eslint: ">= 7"
-  checksum: 41464e6627ba780ba9c9f8635b2b454ae9e70b190a06e962879c320c0ed469dc6278ccb4b90364ccf797e5d56838c224256be1259f7ac0878d3a85d77b7474d7
+  checksum: f3fa79e6a859da1e2d14f8ac6b60bba504219151978d34cdff953ababc25695817462b459240d56ce09cfa9396098809e64e946d09173ab92ed84e2e792d274e
   languageName: node
   linkType: hard
 
-"@bloomreach/eslint-config-next@npm:1.0.0":
-  version: 1.0.0
-  resolution: "@bloomreach/eslint-config-next@npm:1.0.0"
+"@bloomreach/eslint-config-next@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@bloomreach/eslint-config-next@npm:1.0.1"
   dependencies:
-    "@bloomreach/eslint-config-base": 1.0.0
+    "@bloomreach/eslint-config-base": 1.0.1
     "@rushstack/eslint-patch": 1.0.6
     eslint-config-next: 11.1.0
     next: 10.2.3
-  checksum: c10a4f74d5d2638fbb1ed8bb4959c9528d8505be69c808c25390ad61929c9d2745986c8a8576faa503d2e8668f717a595ecc7605f3b3ade77fd677c79db8430d
+  peerDependencies:
+    eslint: ">= 7"
+    react: ">= 16.9"
+    react-dom: ">= 16.9"
+  checksum: ffbb4d146668bc4e783ba08687a1f027aaa01f14506b726f97b1acab4994b6e27e51e01728a269f3f31c136e6c2342cea0841e1c6ee32e477190bd31c98b162e
   languageName: node
   linkType: hard
 
-"@bloomreach/eslint-config-nuxt@npm:1.0.0":
-  version: 1.0.0
-  resolution: "@bloomreach/eslint-config-nuxt@npm:1.0.0"
-  dependencies:
-    "@bloomreach/eslint-config-base": 1.0.0
-    "@nuxtjs/eslint-config-typescript": 6.0.1
-  checksum: 26037c8955be7bd93b59e790f0dc65553ef0e92e7abda5983087c9e0f7adcc7d7c5fd448f68d5f20210d4822357de16404a91dc0000282d87d7a524e26170f59
-  languageName: node
-  linkType: hard
-
-"@bloomreach/eslint-config-react@npm:1.0.1":
+"@bloomreach/eslint-config-nuxt@npm:1.0.1":
   version: 1.0.1
-  resolution: "@bloomreach/eslint-config-react@npm:1.0.1"
+  resolution: "@bloomreach/eslint-config-nuxt@npm:1.0.1"
   dependencies:
-    "@bloomreach/eslint-config-base": 1.0.0
+    "@bloomreach/eslint-config-base": 1.0.1
+    "@nuxtjs/eslint-config-typescript": 6.0.1
+  peerDependencies:
+    eslint: ">= 7"
+  checksum: a8e75a9619bf2775f0eb3dc118b118838b0583f8780446901fab080af0aa29d0e838c155b3ff72d5fb6d8be245f33f46a62ea5ec84dd12790573ccb71bd35ded
+  languageName: node
+  linkType: hard
+
+"@bloomreach/eslint-config-react@npm:1.0.2":
+  version: 1.0.2
+  resolution: "@bloomreach/eslint-config-react@npm:1.0.2"
+  dependencies:
+    "@bloomreach/eslint-config-base": 1.0.1
     "@typescript-eslint/eslint-plugin": 4.29.1
     "@typescript-eslint/parser": 4.29.1
     eslint-config-airbnb: 18.2.1
   peerDependencies:
     eslint: ">= 7"
-  checksum: b1ab7303618e8c47c786547cdf1b9e40332d1eaa5b6df310a9952619eb3a6ea6a6c73a62debd647d325466344de36858c10f66d56cd4d5997d72957129dba1c5
+    eslint-plugin-import: ^2.22.1
+    eslint-plugin-jsx-a11y: ^6.4.1
+    eslint-plugin-react: ^7.21.5
+    eslint-plugin-react-hooks: ^4 || ^3 || ^2.3.0 || ^1.7.0
+  checksum: 09a6f3f45eb9f91fefcd43e189ae5b1ef830fcb29ea25cfe06e4ecac9f7d8182d2bdd954dbff3f806f7f197991add7791e4abd4be9282dbcd4370ecc0340ba9e
   languageName: node
   linkType: hard
 
-"@bloomreach/eslint-config-vue@npm:1.0.0":
-  version: 1.0.0
-  resolution: "@bloomreach/eslint-config-vue@npm:1.0.0"
+"@bloomreach/eslint-config-vue@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@bloomreach/eslint-config-vue@npm:1.0.1"
   dependencies:
-    "@bloomreach/eslint-config-base": 1.0.0
+    "@bloomreach/eslint-config-base": 1.0.1
     "@vue/cli-service": 4.5.13
     "@vue/eslint-config-airbnb": 5.3.0
     "@vue/eslint-config-prettier": 6.0.0
     "@vue/eslint-config-typescript": 7.0.0
-  checksum: c3da818cda87b505f199b6ae24fd2916bb8e6103d589dbe3670f3d90b6fbaa6fb3bd6b8618ba1000692631f1539482f220d15ea01bb65f255a55779d3392b321
+  peerDependencies:
+    "@typescript-eslint/eslint-plugin": ">= 4.4"
+    "@typescript-eslint/parser": ">= 4.4"
+    eslint: ">= 7"
+    eslint-plugin-prettier: ">= 3.1"
+    eslint-plugin-vue: ^5.2.3 || ^6.0.0 || ^7.0.0
+    prettier: ">= 2"
+  checksum: 816693d884c2c614c51e6c05be6e9e941b7aa647eb1185635821e131303a1b732b937f03a3026d68d5b3e620037756dfb7f5dd2e0825a30fc59b7b55dc051ed4
   languageName: node
   linkType: hard
 
@@ -2512,7 +2533,7 @@ __metadata:
     "@angular/platform-browser-dynamic": 11.2.14
     "@angular/platform-server": 11.2.14
     "@angular/router": 11.2.14
-    "@bloomreach/eslint-config-angular": 1.0.0
+    "@bloomreach/eslint-config-angular": 1.0.1
     "@bloomreach/ng-sdk": 15.0.1-0
     "@bloomreach/spa-sdk": 15.0.1-0
     "@nguniversal/builders": 11.2.1
@@ -2535,7 +2556,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bloomreach/example-next@workspace:examples/next"
   dependencies:
-    "@bloomreach/eslint-config-next": 1.0.0
+    "@bloomreach/eslint-config-next": 1.0.1
     "@bloomreach/react-sdk": 15.0.1-0
     "@bloomreach/spa-sdk": 15.0.1-0
     "@types/node": 14.17.3
@@ -2555,7 +2576,7 @@ __metadata:
   resolution: "@bloomreach/example-nuxt@workspace:examples/nuxt"
   dependencies:
     "@babel/runtime-corejs3": 7.14.9
-    "@bloomreach/eslint-config-nuxt": 1.0.0
+    "@bloomreach/eslint-config-nuxt": 1.0.1
     "@bloomreach/spa-sdk": 15.0.1-0
     "@bloomreach/vue-sdk": 15.0.1-0
     "@nuxt/types": 2.15.7
@@ -2584,7 +2605,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bloomreach/example-react@workspace:examples/react"
   dependencies:
-    "@bloomreach/eslint-config-react": 1.0.1
+    "@bloomreach/eslint-config-react": 1.0.2
     "@bloomreach/react-sdk": 15.0.1-0
     "@bloomreach/spa-sdk": 15.0.1-0
     "@types/react": 16.14.0
@@ -2604,7 +2625,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bloomreach/example-vue@workspace:examples/vue"
   dependencies:
-    "@bloomreach/eslint-config-vue": 1.0.0
+    "@bloomreach/eslint-config-vue": 1.0.1
     "@bloomreach/spa-sdk": 15.0.1-0
     "@bloomreach/vue-sdk": 15.0.1-0
     "@types/jest": 26.0.24
@@ -2650,7 +2671,7 @@ __metadata:
     "@angular/language-service": 11.2.14
     "@angular/platform-browser": 11.2.14
     "@angular/platform-browser-dynamic": 11.2.14
-    "@bloomreach/eslint-config-angular": 1.0.0
+    "@bloomreach/eslint-config-angular": 1.0.1
     "@bloomreach/spa-sdk": 15.0.1-0
     "@types/jest": 26.0.24
     jest: 26.6.3
@@ -2677,7 +2698,7 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": 7.14.7
     "@babel/preset-env": 7.14.8
     "@babel/preset-react": 7.14.5
-    "@bloomreach/eslint-config-react": 1.0.1
+    "@bloomreach/eslint-config-react": 1.0.2
     "@bloomreach/spa-sdk": 15.0.1-0
     "@rollup/plugin-babel": 5.3.0
     "@types/enzyme": 3.10.9
@@ -2715,7 +2736,7 @@ __metadata:
     "@babel/plugin-transform-object-assign": 7.14.5
     "@babel/polyfill": 7.12.1
     "@babel/preset-env": 7.14.8
-    "@bloomreach/eslint-config-base": 1.0.0
+    "@bloomreach/eslint-config-base": 1.0.1
     "@rollup/plugin-babel": 5.3.0
     "@types/cookie": 0.4.1
     "@types/jest": 26.0.24
@@ -2746,7 +2767,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bloomreach/vue-sdk@workspace:packages/vue-sdk"
   dependencies:
-    "@bloomreach/eslint-config-vue": 1.0.0
+    "@bloomreach/eslint-config-vue": 1.0.1
     "@bloomreach/spa-sdk": 15.0.1-0
     "@types/jest": 26.0.24
     "@types/node": 14.17.3
