@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { DOMParser, XMLSerializer } from 'xmldom';
+import { DOMParser, XMLSerializer } from '@xmldom/xmldom';
 import { injectable, inject } from 'inversify';
 import { LinkFactory } from './link-factory';
 import { Link, TYPE_LINK_RESOURCE } from './link';

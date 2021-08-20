@@ -25,6 +25,7 @@ pipeline {
 
   options {
     gitLabConnection('https://code.bloomreach.com/')
+    gitlabCommitStatus(name: 'jenkins')
   }
 
   triggers {

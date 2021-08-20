@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { DOMParser, XMLSerializer } from 'xmldom';
+import { DOMParser, XMLSerializer } from '@xmldom/xmldom';
 import { LinkFactory } from './link-factory';
 import { LinkRewriterImpl, LinkRewriter } from './link-rewriter';
 import { TYPE_LINK_INTERNAL, TYPE_LINK_RESOURCE } from './link';

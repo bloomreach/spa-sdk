@@ -15,7 +15,7 @@
  */
 
 import { ContainerModule } from 'inversify';
-import { DOMParser, XMLSerializer } from 'xmldom';
+import { DOMParser, XMLSerializer } from '@xmldom/xmldom';
 import { Typed } from 'emittery';
 
 import { ButtonFactory } from './button-factory';
