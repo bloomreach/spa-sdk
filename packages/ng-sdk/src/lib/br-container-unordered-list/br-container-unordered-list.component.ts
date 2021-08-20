@@ -18,12 +18,14 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular
 import { Container, Page } from '@bloomreach/spa-sdk';
 
 @Component({
-  selector: 'ul.br-container-unordered-list', // tslint:disable-line: component-selector
+  // eslint-disable-next-line @angular-eslint/component-selector
+  selector: 'ul.br-container-unordered-list',
   templateUrl: './br-container-unordered-list.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BrContainerUnorderedListComponent {
   @Input() component!: Container;
+
   @Input() page!: Page;
 
   @HostBinding('class.hst-container')

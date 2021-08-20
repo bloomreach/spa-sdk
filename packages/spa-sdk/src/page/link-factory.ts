@@ -23,7 +23,9 @@ type LinkBuilder = (link: string) => string;
 @injectable()
 export class LinkFactory extends SimpleFactory<LinkType, LinkBuilder> {
   create(link: Link): string | undefined;
+
   create(path: string): string;
+
   create(link: Link | string) {
     if (isLink(link)) {
       return this.createLink(link);

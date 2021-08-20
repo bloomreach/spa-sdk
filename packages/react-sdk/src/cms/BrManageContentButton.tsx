@@ -24,11 +24,12 @@ import { BrPageContext } from '../page/BrPageContext';
  */
 export class BrManageContentButton extends React.Component<ManageContentButton> {
   static contextType = BrPageContext;
+
   context: React.ContextType<typeof BrPageContext>;
 
-  render() {
-    return this.context?.isPreview()
-      ? <BrMeta meta={this.context.getButton(TYPE_MANAGE_CONTENT_BUTTON, this.props)} />
-      : null;
+  render(): JSX.Element | null {
+    const { context } = this;
+
+    return context?.isPreview() ? <BrMeta meta={context.getButton(TYPE_MANAGE_CONTENT_BUTTON, this.props)} /> : null;
   }
 }

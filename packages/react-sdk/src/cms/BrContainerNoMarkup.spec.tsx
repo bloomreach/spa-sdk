@@ -38,16 +38,18 @@ describe('BrContainerNoMarkup', () => {
   it('should render children as they are', () => {
     const wrapper = shallow(
       <BrContainerNoMarkup {...props}>
-        <a/>
-        <b/>
-      </BrContainerNoMarkup>
+        <a />
+        <b />
+      </BrContainerNoMarkup>,
     );
 
-    expect(wrapper.equals(
-      <>
-        <a/>
-        <b/>
-      </>
-    )).toBe(true);
+    expect(
+      wrapper.equals(
+        <>
+          <a />
+          <b />
+        </>,
+      ),
+    ).toBe(true);
   });
 });

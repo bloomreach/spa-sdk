@@ -47,7 +47,8 @@ export const TYPE_CONTAINER_NO_MARKUP = 'hst.nomarkup';
  * Container Type.
  * @see https://documentation.bloomreach.com/library/concepts/template-composer/channel-editor-containers.html
  */
-export type ContainerType = typeof TYPE_CONTAINER_BOX
+export type ContainerType =
+  | typeof TYPE_CONTAINER_BOX
   | typeof TYPE_CONTAINER_UNORDERED_LIST
   | typeof TYPE_CONTAINER_ORDERED_LIST
   | typeof TYPE_CONTAINER_INLINE

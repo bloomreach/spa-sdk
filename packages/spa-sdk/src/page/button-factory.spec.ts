@@ -39,9 +39,7 @@ describe('ButtonFactory', () => {
   beforeEach(() => {
     builder1 = jest.fn(() => ({} as MetaCollection));
     builder2 = jest.fn(() => ({} as MetaCollection));
-    factory = createButtonFactory()
-      .register('type1', builder1)
-      .register('type2', builder2);
+    factory = createButtonFactory().register('type1', builder1).register('type2', builder2);
   });
 
   describe('create', () => {

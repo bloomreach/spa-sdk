@@ -80,20 +80,23 @@ export function createManageContentButton(params: ManageContentButton): MetaColl
 
   if (!meta) {
     return {
-      beginNodeSpan: [{
-        type: TYPE_META_COMMENT,
-        data: JSON.stringify({ 'HST-Type': TYPE_MANAGE_CONTENT_BUTTON, ...model }),
-      }],
+      beginNodeSpan: [
+        {
+          type: TYPE_META_COMMENT,
+          data: JSON.stringify({ 'HST-Type': TYPE_MANAGE_CONTENT_BUTTON, ...model }),
+        },
+      ],
     };
   }
 
-  const merge = (item: Meta) => ({
-    type: TYPE_META_COMMENT,
-    data: JSON.stringify(Object.assign(JSON.parse(item.getData()), model)),
-  } as MetaModel);
+  const merge = (item: Meta) =>
+    ({
+      type: TYPE_META_COMMENT,
+      data: JSON.stringify(Object.assign(JSON.parse(item.getData()), model)),
+    } as MetaModel);
 
   return {
-    beginNodeSpan: meta.filter(item => item.getPosition() === META_POSITION_BEGIN).map(merge),
-    endNodeSpan: meta.filter(item => item.getPosition() === META_POSITION_END).map(merge),
+    beginNodeSpan: meta.filter((item) => item.getPosition() === META_POSITION_BEGIN).map(merge),
+    endNodeSpan: meta.filter((item) => item.getPosition() === META_POSITION_END).map(merge),
   };
 }

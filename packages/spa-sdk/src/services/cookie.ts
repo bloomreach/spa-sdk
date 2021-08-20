@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { default as cookie } from 'cookie';
+import cookie from 'cookie';
 import { HttpRequest } from '../spa/http';
 
 export class Cookie {
@@ -47,7 +47,7 @@ export class Cookie {
    * @return Cookie object.
    */
   public static GET_COOKIE_FROM_REQUEST(request: HttpRequest): Record<string, string> {
-    return cookie.parse(request.headers?.cookie as string ?? '');
+    return cookie.parse((request.headers?.cookie as string) ?? '');
   }
 
   /**

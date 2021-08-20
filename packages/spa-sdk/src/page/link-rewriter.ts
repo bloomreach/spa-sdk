@@ -55,7 +55,7 @@ export class LinkRewriterImpl implements LinkRewriter {
 
   private rewriteAnchors(document: Document) {
     Array.from(document.getElementsByTagName('a'))
-      .filter(element => element.hasAttribute('href') && element.hasAttribute('data-type'))
+      .filter((element) => element.hasAttribute('href') && element.hasAttribute('data-type'))
       .forEach((element) => {
         const url = this.linkFactory.create({
           href: element.getAttribute('href') ?? undefined,
@@ -70,7 +70,7 @@ export class LinkRewriterImpl implements LinkRewriter {
 
   private rewriteImages(document: Document) {
     Array.from(document.getElementsByTagName('img'))
-      .filter(element => element.hasAttribute('src'))
+      .filter((element) => element.hasAttribute('src'))
       .forEach((element) => {
         const url = this.linkFactory.create({
           href: element.getAttribute('src') ?? undefined,

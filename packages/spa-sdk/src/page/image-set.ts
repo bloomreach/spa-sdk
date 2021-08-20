@@ -92,13 +92,9 @@ export class ImageSetImpl implements ImageSet {
     @inject(ImageSetModelToken) protected model: ImageSetModel,
     @inject(ImageFactory) imageFactory: ImageFactory,
   ) {
-    this.original = model.data.original
-      ? imageFactory(model.data.original)
-      : undefined;
+    this.original = model.data.original ? imageFactory(model.data.original) : undefined;
 
-    this.thumbnail = model.data.thumbnail
-      ? imageFactory(model.data.thumbnail)
-      : undefined;
+    this.thumbnail = model.data.thumbnail ? imageFactory(model.data.thumbnail) : undefined;
   }
 
   getDescription(): string | undefined {

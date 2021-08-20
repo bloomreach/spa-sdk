@@ -25,16 +25,14 @@ export function BrMeta({ children, meta }: React.PropsWithChildren<BrMetaProps>)
   const head = useRef<HTMLSpanElement>(null);
   const tail = useRef<HTMLSpanElement>(null);
 
-  useEffect(
-    () => {
-      if (!head.current?.nextSibling || !tail.current) {
-        return;
-      }
+  useEffect(() => {
+    if (!head.current?.nextSibling || !tail.current) {
+      return undefined;
+    }
 
-      return meta.render(head.current.nextSibling, tail.current);
-    },
-    [meta, head.current?.nextSibling, tail.current],
-  );
+    return meta.render(head.current.nextSibling, tail.current);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [meta, head.current?.nextSibling, tail.current]);
 
   return (
     <>

@@ -104,7 +104,7 @@ export interface PageModel {
   document?: Reference;
   links: Record<PageLinks, Link>;
   meta: PageMeta;
-  page: Record<string,  (ComponentModel | ContainerItemModel | ContainerModel) & PageRootModel | ContentModel>;
+  page: Record<string, ((ComponentModel | ContainerItemModel | ContainerModel) & PageRootModel) | ContentModel>;
   root: Reference;
 }
 
@@ -245,12 +245,12 @@ export interface Page {
   /**
    * @return A plain JavaScript object of the page model.
    */
-  toJSON(): object;
+  toJSON(): any;
 }
 
 @injectable()
 export class PageImpl implements Page {
-  protected content = new WeakMap<object, unknown>();
+  protected content = new WeakMap<Record<string, any>, unknown>();
 
   protected root?: Component;
 
@@ -270,11 +270,11 @@ export class PageImpl implements Page {
     this.root = componentFactory.create(model);
   }
 
-  protected onPageUpdate(event: PageUpdateEvent) {
+  protected onPageUpdate(event: PageUpdateEvent): void {
     Object.assign(this.model.page, event.page.page);
   }
 
-  getButton(type: string, ...params: unknown[]) {
+  getButton(type: string, ...params: unknown[]): MetaCollection {
     return this.buttonFactory.create(type, ...params);
   }
 
@@ -283,12 +283,15 @@ export class PageImpl implements Page {
   }
 
   getComponent<T extends Component>(): T;
+
   getComponent<T extends Component>(...componentNames: string[]): T | undefined;
+
   getComponent(...componentNames: string[]) {
     return this.root?.getComponent(...componentNames);
   }
 
   getContent<T>(reference: Reference | string): T | undefined;
+
   getContent(reference: Reference | string): unknown | undefined {
     const model = resolve<ContentModel>(
       this.model,
@@ -319,10 +322,12 @@ export class PageImpl implements Page {
   }
 
   getUrl(link?: Link): string | undefined;
+
   getUrl(path: string): string;
+
   getUrl(link?: Link | string) {
     if (typeof link === 'undefined' || isLink(link) || isAbsoluteUrl(link)) {
-      return this.linkFactory.create(link as Link ?? this.model.links.site ?? '');
+      return this.linkFactory.create((link as Link) ?? this.model.links.site ?? '');
     }
 
     return resolveUrl(link, this.linkFactory.create(this.model.links.site) ?? '');

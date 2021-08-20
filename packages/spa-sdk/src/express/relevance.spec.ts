@@ -63,7 +63,10 @@ describe('relevance', () => {
     beforeEach(() => {
       page = { getVisitor: jest.fn() } as unknown as typeof page;
       request = {
-        once: jest.fn((event, listener) => { listener(page); return request; }),
+        once: jest.fn((event, listener) => {
+          listener(page);
+          return request;
+        }),
       } as unknown as typeof request;
       response = { getHeader: jest.fn(), setHeader: jest.fn() };
 

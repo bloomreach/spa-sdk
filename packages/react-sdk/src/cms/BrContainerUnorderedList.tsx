@@ -17,16 +17,12 @@
 import React from 'react';
 import { BrProps } from '../component';
 
-export function BrContainerUnorderedList(props: React.PropsWithChildren<BrProps>) {
+export function BrContainerUnorderedList({ page, children }: React.PropsWithChildren<BrProps>): JSX.Element {
   return (
-    // tslint:disable:jsx-no-multiline-js
-    <ul className={props.page.isPreview() ? 'hst-container' : undefined}>
-      {React.Children.map(props.children, child => (
-        <li className={props.page.isPreview() ? 'hst-container-item' : undefined}>
-          {child}
-        </li>
+    <ul className={page.isPreview() ? 'hst-container' : undefined}>
+      {React.Children.map(children, (child) => (
+        <li className={page.isPreview() ? 'hst-container-item' : undefined}>{child}</li>
       ))}
     </ul>
-    // tslint:enable:jsx-no-multiline-js
   );
 }

@@ -25,13 +25,14 @@ describe('BrContainerUnorderedListComponent', () => {
   let container: Container;
   let page: jest.Mocked<Page>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ BrContainerUnorderedListComponent ],
-      schemas: [ NO_ERRORS_SCHEMA ],
-    })
-    .compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [BrContainerUnorderedListComponent],
+        schemas: [NO_ERRORS_SCHEMA],
+      }).compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     container = {

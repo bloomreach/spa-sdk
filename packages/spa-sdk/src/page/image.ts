@@ -22,8 +22,6 @@ import { Link } from './link';
 export const ImageFactory = Symbol.for('ImageFactory');
 export const ImageModelToken = Symbol.for('ImageModelToken');
 
-export type ImageFactory = Builder<[ImageModel], Image>;
-
 type ImageLinks = 'site';
 
 /**
@@ -81,6 +79,8 @@ export interface Image {
    */
   getWidth(): number;
 }
+
+export type ImageFactory = Builder<[ImageModel], Image>;
 
 @injectable()
 export class ImageImpl implements Image {

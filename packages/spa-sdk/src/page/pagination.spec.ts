@@ -37,7 +37,7 @@ function createPagination(paginationModel = model) {
 }
 
 beforeEach(() => {
-  paginationItemFactory = jest.fn(item => item) as unknown as typeof paginationItemFactory;
+  paginationItemFactory = jest.fn((item) => item) as unknown as typeof paginationItemFactory;
 });
 
 describe('PaginationImpl', () => {
@@ -81,9 +81,9 @@ describe('PaginationImpl', () => {
 
     it('should return the next page', () => {
       const next = {} as PaginationItemModel;
-      const pagination = createPagination({ ...model, next });
+      const paginationWithNext = createPagination({ ...model, next });
 
-      expect(pagination.getNext()).toBe(next);
+      expect(paginationWithNext.getNext()).toBe(next);
       expect(paginationItemFactory).toBeCalledWith(next);
     });
   });
@@ -109,9 +109,9 @@ describe('PaginationImpl', () => {
 
     it('should return the previous page', () => {
       const previous = {} as PaginationItemModel;
-      const pagination = createPagination({ ...model, previous });
+      const paginationWithPrevius = createPagination({ ...model, previous });
 
-      expect(pagination.getPrevious()).toBe(previous);
+      expect(paginationWithPrevius.getPrevious()).toBe(previous);
       expect(paginationItemFactory).toBeCalledWith(previous);
     });
   });
@@ -134,9 +134,9 @@ describe('PaginationImpl', () => {
     });
 
     it('should return false', () => {
-      const pagination = createPagination({ ...model, enabled: false });
+      const disabledPagination = createPagination({ ...model, enabled: false });
 
-      expect(pagination.isEnabled()).toBe(false);
+      expect(disabledPagination.isEnabled()).toBe(false);
     });
   });
 });

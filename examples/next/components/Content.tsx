@@ -32,17 +32,18 @@ export function Content(props: BrProps) {
     publicationDate,
     date = publicationDate,
     image: imageRef,
-    title } = document.getData<DocumentData>();
+    title,
+  } = document.getData<DocumentData>();
   const image = imageRef && props.page.getContent<ImageSet>(imageRef);
 
   return (
     <div className={props.page.isPreview() ? 'has-edit-button' : ''}>
       <BrManageContentButton content={document} />
-      { image && <img className="img-fluid mb-3" src={image.getOriginal()?.getUrl()} alt={title} /> }
-      { title && <h1>{title}</h1> }
-      { author && <p className="mb-3 text-muted">{author}</p> }
-      { date && <p className="mb-3 small text-muted">{new Date(date).toDateString()}</p> }
-      { content && <div dangerouslySetInnerHTML={{ __html: props.page.rewriteLinks(content.value) }} /> }
+      {image && <img className="img-fluid mb-3" src={image.getOriginal()?.getUrl()} alt={title} />}
+      {title && <h1>{title}</h1>}
+      {author && <p className="mb-3 text-muted">{author}</p>}
+      {date && <p className="mb-3 small text-muted">{new Date(date).toDateString()}</p>}
+      {content && <div dangerouslySetInnerHTML={{ __html: props.page.rewriteLinks(content.value) }} />}
     </div>
   );
 }

@@ -44,7 +44,7 @@ describe('BrComponent', () => {
     const component1 = {} as Component;
     const component2 = {} as Component;
     context.getChildren.mockReturnValueOnce([component1, component2]);
-    const wrapper = shallow(<BrComponent/>, { context });
+    const wrapper = shallow(<BrComponent />, { context });
 
     expect(context.getChildren).toBeCalled();
     expect(wrapper.contains(<BrNode component={component1} />)).toBe(true);
@@ -74,8 +74,19 @@ describe('BrComponent', () => {
   it('should pass children down', () => {
     const component = {} as Component;
     context.getComponent.mockReturnValueOnce(component);
-    const wrapper = shallow(<BrComponent path="a/b"><a/></BrComponent>, { context });
+    const wrapper = shallow(
+      <BrComponent path="a/b">
+        <a />
+      </BrComponent>,
+      { context },
+    );
 
-    expect(wrapper.contains(<BrNode component={component}><a/></BrNode>)).toBe(true);
+    expect(
+      wrapper.contains(
+        <BrNode component={component}>
+          <a />
+        </BrNode>,
+      ),
+    ).toBe(true);
   });
 });

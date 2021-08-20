@@ -17,7 +17,8 @@
 import { Component } from '@angular/core';
 
 @Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'app-root',
   templateUrl: './app.component.html',
 })
-export class AppComponent { }
+export class AppComponent {}

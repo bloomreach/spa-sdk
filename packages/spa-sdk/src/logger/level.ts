@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+// eslint-disable-next-line no-shadow
 export enum Level {
   Debug = 'debug',
   Info = 'info',

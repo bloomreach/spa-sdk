@@ -19,20 +19,20 @@ import { Link } from 'react-router-dom';
 import { Document, ImageSet } from '@bloomreach/spa-sdk';
 import { BrManageContentButton, BrProps } from '@bloomreach/react-sdk';
 
-export function Banner(props: BrProps) {
-  const { document: documentRef } = props.component.getModels();
-  const document = !!documentRef && props.page.getContent(documentRef);
+export function Banner({ component, page }: BrProps): JSX.Element | null {
+  const { document: documentRef } = component.getModels();
+  const document = !!documentRef && page.getContent(documentRef);
 
   if (!document) {
     return null;
   }
 
   const { content, image: imageRef, link: linkRef, title } = document.getData<DocumentData>();
-  const image = imageRef && props.page.getContent<ImageSet>(imageRef);
-  const link = linkRef && props.page.getContent<Document>(linkRef);
+  const image = imageRef && page.getContent<ImageSet>(imageRef);
+  const link = linkRef && page.getContent<Document>(linkRef);
 
   return (
-    <div className={`jumbotron mb-3 ${props.page.isPreview() ? 'has-edit-button' : ''}`}>
+    <div className={`jumbotron mb-3 ${page.isPreview() ? 'has-edit-button' : ''}`}>
       <BrManageContentButton
         content={document}
         documentTemplateQuery="new-banner-document"
@@ -41,14 +41,17 @@ export function Banner(props: BrProps) {
         root="banners"
         relative
       />
-      { title && <h1>{title}</h1> }
-      { image && <img className="img-fluid" src={image.getOriginal()?.getUrl()} alt={title} /> }
-      { content && <div dangerouslySetInnerHTML={{ __html: props.page.rewriteLinks(content.value) }} /> }
-      { link && (
+      {title && <h1>{title}</h1>}
+      {image && <img className="img-fluid" src={image.getOriginal()?.getUrl()} alt={title} />}
+      {/* eslint-disable-next-line react/no-danger */}
+      {content && <div dangerouslySetInnerHTML={{ __html: page.rewriteLinks(content.value) }} />}
+      {link && (
         <p className="lead">
-          <Link to={link.getUrl()!} className="btn btn-primary btn-lg" role="button">Learn more</Link>
+          <Link to={link.getUrl()!} className="btn btn-primary btn-lg" role="button">
+            Learn more
+          </Link>
         </p>
-      ) }
+      )}
     </div>
   );
 }

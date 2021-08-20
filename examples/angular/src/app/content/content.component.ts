@@ -23,6 +23,7 @@ import { Component as BrComponent, Document, ImageSet, Page } from '@bloomreach/
 })
 export class ContentComponent {
   @Input() component!: BrComponent;
+
   @Input() page!: Page;
 
   get document() {
@@ -35,7 +36,7 @@ export class ContentComponent {
     return this.document?.getData<DocumentData>();
   }
 
-  get date(){
+  get date() {
     return this.data?.date ?? this.data?.publicationDate;
   }
 

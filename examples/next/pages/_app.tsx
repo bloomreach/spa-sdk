@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { AppProps } from 'next/app'
+import { AppProps } from 'next/app';
 import Head from 'next/head';
 
 import './app.css';
@@ -27,11 +27,14 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="description" content="Example Next.js SPA for Bloomreach Experience" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        <link rel="shortcut icon" type="image/png" href='/favicon.png' sizes="64x64" />
-        <link rel="stylesheet" media="screen"
+        <link rel="shortcut icon" type="image/png" href="/favicon.png" sizes="64x64" />
+        <link
+          rel="stylesheet"
+          media="screen"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-          crossOrigin="anonymous" />
+          crossOrigin="anonymous"
+        />
 
         <title>brXM + Next.js = ♥️</title>
       </Head>

@@ -50,8 +50,7 @@ interface CmsEvents {
   update: CmsUpdateEvent;
 }
 
-interface SpaProcedures extends Procedures {
-}
+type SpaProcedures = Procedures;
 
 interface SpaEvents {
   ready: never;
@@ -81,7 +80,9 @@ export class CmsImpl implements Cms {
     this.window = window;
 
     if (this.window?.document?.readyState !== 'loading') {
-      return this.onInitialize();
+      this.onInitialize();
+
+      return;
     }
 
     this.window?.document?.addEventListener('readystatechange', this.onStateChange);

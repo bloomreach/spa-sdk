@@ -23,7 +23,13 @@ import {
 } from '@bloomreach/spa-sdk';
 import { BrNodeComponent } from './BrNodeComponent';
 import { BrProps } from './BrProps';
-import { BrContainerBox, BrContainerInline, BrContainerNoMarkup, BrContainerOrderedList, BrContainerUnorderedList } from '../cms';
+import {
+  BrContainerBox,
+  BrContainerInline,
+  BrContainerNoMarkup,
+  BrContainerOrderedList,
+  BrContainerUnorderedList,
+} from '../cms';
 
 export class BrNodeContainer extends BrNodeComponent<Container> {
   protected getMapping(): React.ComponentType<BrProps> {
@@ -34,11 +40,16 @@ export class BrNodeContainer extends BrNodeComponent<Container> {
     }
 
     switch (type) {
-      case TYPE_CONTAINER_INLINE: return BrContainerInline;
-      case TYPE_CONTAINER_NO_MARKUP: return BrContainerNoMarkup;
-      case TYPE_CONTAINER_ORDERED_LIST: return BrContainerOrderedList;
-      case TYPE_CONTAINER_UNORDERED_LIST: return BrContainerUnorderedList;
-      default: return BrContainerBox;
+      case TYPE_CONTAINER_INLINE:
+        return BrContainerInline;
+      case TYPE_CONTAINER_NO_MARKUP:
+        return BrContainerNoMarkup;
+      case TYPE_CONTAINER_ORDERED_LIST:
+        return BrContainerOrderedList;
+      case TYPE_CONTAINER_UNORDERED_LIST:
+        return BrContainerUnorderedList;
+      default:
+        return BrContainerBox;
     }
   }
 }

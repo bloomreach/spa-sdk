@@ -38,19 +38,18 @@ describe('BrManageMenuButtonDirective', () => {
     page = { getButton: jest.fn(() => meta) } as unknown as typeof page;
   });
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ BrManageMenuButtonDirective, TestComponent ],
-      providers: [
-        { provide: BrPageComponent, useValue: { state: new BehaviorSubject(page) } },
-      ]
-    })
-    .compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [BrManageMenuButtonDirective, TestComponent],
+        providers: [{ provide: BrPageComponent, useValue: { state: new BehaviorSubject(page) } }],
+      }).compileComponents();
 
-    fixture = TestBed.createComponent(TestComponent);
-    fixture.componentInstance.menu = menu;
-    fixture.detectChanges();
-  }));
+      fixture = TestBed.createComponent(TestComponent);
+      fixture.componentInstance.menu = menu;
+      fixture.detectChanges();
+    }),
+  );
 
   describe('ngOnChanges', () => {
     it('should use a menu meta entity', () => {

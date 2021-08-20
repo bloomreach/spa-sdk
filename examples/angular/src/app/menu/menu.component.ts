@@ -18,11 +18,13 @@ import { Component, HostBinding, Input } from '@angular/core';
 import { Component as BrComponent, Menu, Page, isMenu } from '@bloomreach/spa-sdk';
 
 @Component({
-  selector: 'ul.br-menu', // tslint:disable-line: component-selector
+  // eslint-disable-next-line @angular-eslint/component-selector
+  selector: 'ul.br-menu',
   templateUrl: './menu.component.html',
 })
 export class MenuComponent {
   @Input() component!: BrComponent;
+
   @Input() page!: Page;
 
   @HostBinding('class') class = 'navbar-nav col-12';

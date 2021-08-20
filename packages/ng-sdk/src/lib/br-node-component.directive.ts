@@ -31,7 +31,8 @@ import { BrProps } from './br-props.model';
 
 @Directive({
   selector: '[brNodeComponent]',
-  inputs: [ 'component:brNodeComponent' ], // tslint:disable-line: no-inputs-metadata-property
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+  inputs: ['component:brNodeComponent'],
 })
 export class BrNodeComponentDirective<T extends Component> implements OnChanges, OnDestroy {
   component!: T;
@@ -87,13 +88,16 @@ export class BrNodeComponentDirective<T extends Component> implements OnChanges,
   }
 
   private renderChildren() {
-    const nodes = this.component.getChildren()
-      .map(component => this.container.createEmbeddedView(this.page.node, {
-        component,
-        $implicit: component,
-        page: this.page.state.getValue()!, // tslint:disable-line: no-non-null-assertion
-      }))
-      .flatMap(view => view.rootNodes);
+    const nodes = this.component
+      .getChildren()
+      .map((component) =>
+        this.container.createEmbeddedView(this.page.node, {
+          component,
+          $implicit: component,
+          page: this.page.state.getValue()!,
+        }),
+      )
+      .flatMap((view) => view.rootNodes);
 
     const head = nodes[0] ?? this.container.element.nativeElement;
     const tail = nodes[nodes.length - 1] ?? head;

@@ -53,6 +53,7 @@ export interface UrlBuilder {
 @injectable()
 export class UrlBuilderImpl {
   private endpoint: ReturnType<typeof parseUrl>;
+
   private baseUrl: ReturnType<typeof parseUrl>;
 
   constructor(@inject(UrlBuilderOptionsToken) options: UrlBuilderOptions) {
@@ -78,9 +79,7 @@ export class UrlBuilderImpl {
 
   getSpaUrl(link: string) {
     const { hash, pathname, searchParams } = parseUrl(link);
-    const route = !pathname.startsWith('/') && !this.baseUrl.pathname
-      ? `/${pathname}`
-      : pathname;
+    const route = !pathname.startsWith('/') && !this.baseUrl.pathname ? `/${pathname}` : pathname;
 
     return buildUrl({
       origin: this.baseUrl.origin,

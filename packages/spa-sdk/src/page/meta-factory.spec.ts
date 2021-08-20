@@ -21,9 +21,7 @@ describe('MetaFactory', () => {
   describe('create', () => {
     const builder1 = jest.fn((model, position) => new MetaImpl(model, position));
     const builder2 = jest.fn((model, position) => new MetaImpl(model, position));
-    const factory = new MetaFactory()
-      .register('type1' as MetaType, builder1)
-      .register('type2' as MetaType, builder2);
+    const factory = new MetaFactory().register('type1' as MetaType, builder1).register('type2' as MetaType, builder2);
 
     beforeEach(() => {
       builder1.mockClear();

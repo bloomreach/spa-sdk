@@ -36,15 +36,16 @@ describe('BrPageComponent', () => {
   let page: jest.Mocked<Page>;
   let transferState: jest.Mocked<TransferState>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ BrNodeTypePipe, BrPageComponent ],
-      imports: [ HttpClientTestingModule ],
-      providers: [{ provide: TransferState, useFactory: () => transferState }],
-      schemas: [ NO_ERRORS_SCHEMA ],
-    })
-    .compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [BrNodeTypePipe, BrPageComponent],
+        imports: [HttpClientTestingModule],
+        providers: [{ provide: TransferState, useFactory: () => transferState }],
+        schemas: [NO_ERRORS_SCHEMA],
+      }).compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     httpMock = getTestBed().inject(HttpTestingController);

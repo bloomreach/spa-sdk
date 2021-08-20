@@ -15,11 +15,7 @@
  */
 
 import { inject, injectable, optional } from 'inversify';
-import {
-  ComponentImpl,
-  ComponentModel,
-  TYPE_COMPONENT_CONTAINER_ITEM,
-} from './component09';
+import { ComponentImpl, ComponentModel, TYPE_COMPONENT_CONTAINER_ITEM } from './component09';
 import { ComponentModelToken } from './component';
 import { ContainerItemEvents, ContainerItemMeta, ContainerItem } from './container-item';
 import { EmitterMixin } from '../emitter';

@@ -23,5 +23,6 @@ import { BrComponentContext } from './br-component.directive';
 })
 export class BrNodeDirective {
   @Input('brNode') component!: Component;
+
   @Input('brNodeTemplate') template?: TemplateRef<BrComponentContext>;
 }

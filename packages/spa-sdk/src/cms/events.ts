@@ -18,13 +18,6 @@ import { Typed } from 'emittery';
 
 export const EventBusService = Symbol('EventBusService');
 
-export type EventBus = Typed<Events>;
-
-export interface Events {
-  'cms.update': CmsUpdateEvent;
-  'page.ready': PageReadyEvent;
-}
-
 /**
  * Channel Manager component update event.
  */
@@ -37,10 +30,18 @@ export interface CmsUpdateEvent {
   /**
    * Updated component's properties.
    */
-  properties: object;
+  properties: Record<string, unknown>;
 }
 
 /**
  * SPA page rendered event.
  */
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface PageReadyEvent {}
+
+export interface Events {
+  'cms.update': CmsUpdateEvent;
+  'page.ready': PageReadyEvent;
+}
+
+export type EventBus = Typed<Events>;

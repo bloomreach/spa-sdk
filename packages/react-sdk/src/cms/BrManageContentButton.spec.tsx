@@ -54,11 +54,6 @@ describe('BrManageContentButton', () => {
     const wrapper = shallow(<BrManageContentButton content={content} root="content" />, { context });
 
     expect(context.getButton).toBeCalledWith(expect.any(String), { content, root: 'content' });
-    expect(
-      wrapper
-        .find(BrMeta)
-        .first()
-        .prop('meta'),
-    ).toBe(meta);
+    expect(wrapper.find(BrMeta).first().prop('meta')).toBe(meta);
   });
 });

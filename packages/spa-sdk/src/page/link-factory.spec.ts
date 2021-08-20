@@ -21,9 +21,7 @@ describe('LinkFactory', () => {
   describe('create', () => {
     const builder1 = jest.fn();
     const builder2 = jest.fn();
-    const factory = new LinkFactory()
-      .register(TYPE_LINK_EXTERNAL, builder1)
-      .register(TYPE_LINK_INTERNAL, builder2);
+    const factory = new LinkFactory().register(TYPE_LINK_EXTERNAL, builder1).register(TYPE_LINK_INTERNAL, builder2);
 
     beforeEach(() => {
       builder1.mockClear();
