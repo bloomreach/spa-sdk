@@ -27,5 +27,6 @@ if (environment.production) {
 document.addEventListener('DOMContentLoaded', () => {
   platformBrowserDynamic()
     .bootstrapModule(AppModule)
+    // eslint-disable-next-line no-console
     .catch((err) => console.error(err));
 });

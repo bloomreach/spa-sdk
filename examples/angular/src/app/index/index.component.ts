@@ -60,13 +60,13 @@ export class IndexComponent implements OnInit {
     ) as Observable<NavigationEnd>;
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.navigationEnd.subscribe((event) => {
       this.configuration = { ...this.configuration, path: event.url };
     });
   }
 
-  setVisitor(page?: Page) {
+  setVisitor(page?: Page): void {
     this.configuration.visitor = page?.getVisitor();
   }
 }

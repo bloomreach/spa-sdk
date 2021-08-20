@@ -30,10 +30,11 @@ export class MenuComponent {
   @HostBinding('class') class = 'navbar-nav col-12';
 
   @HostBinding('class.has-edit-button')
-  get isPreview() {
+  get isPreview(): boolean {
     return this.page.isPreview();
   }
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   get menu() {
     const menuRef = this.component.getModels<MenuModels>()?.menu;
     const menu = menuRef && this.page.getContent<Menu>(menuRef);

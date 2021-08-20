@@ -26,7 +26,7 @@ export class NewsListComponent {
 
   @Input() page!: Page;
 
-  get pagination() {
+  get pagination(): Pageable {
     return this.component.getModels<PageableModels>().pageable;
   }
 }

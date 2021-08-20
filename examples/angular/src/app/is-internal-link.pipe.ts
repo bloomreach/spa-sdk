@@ -19,7 +19,7 @@ import { TYPE_LINK_INTERNAL, isLink } from '@bloomreach/spa-sdk';
 
 @Pipe({ name: 'isInternalLink' })
 export class IsInternalLinkPipe implements PipeTransform {
-  transform(value: unknown) {
+  transform(value: unknown): boolean {
     return isLink(value) && value.type === TYPE_LINK_INTERNAL;
   }
 }

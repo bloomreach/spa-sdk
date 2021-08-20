@@ -26,21 +26,21 @@ export class BannerComponent {
 
   @Input() page!: Page;
 
-  get document() {
+  get document(): Document | undefined {
     const { document } = this.component.getModels<DocumentModels>();
 
     return document && this.page.getContent<Document>(document);
   }
 
-  get data() {
+  get data(): DocumentData | undefined {
     return this.document?.getData<DocumentData>();
   }
 
-  get image() {
+  get image(): ImageSet | undefined {
     return this.data?.image && this.page.getContent<ImageSet>(this.data.image);
   }
 
-  get link() {
+  get link(): Document | undefined {
     return this.data?.link && this.page.getContent<Document>(this.data.link);
   }
 }

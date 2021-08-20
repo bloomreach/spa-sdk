@@ -19,7 +19,7 @@ import { TYPE_LINK_EXTERNAL, isLink } from '@bloomreach/spa-sdk';
 
 @Pipe({ name: 'isExternalLink' })
 export class IsExternalLinkPipe implements PipeTransform {
-  transform(value: unknown) {
+  transform(value: unknown): boolean {
     return isLink(value) && value.type === TYPE_LINK_EXTERNAL;
   }
 }
