@@ -180,7 +180,9 @@ export class BrPageComponent implements AfterContentChecked, OnChanges, OnDestro
     });
   }
 
-  private request(...[{ data: body, headers, method, url }]: Parameters<Configuration['httpClient']>) {
+  private request(...[{ data: body, headers, method, url }]: Parameters<Configuration['httpClient']>): Promise<void | {
+    data: PageModel;
+  }> {
     return this.httpClient
       .request<PageModel>(method, url, {
         body,

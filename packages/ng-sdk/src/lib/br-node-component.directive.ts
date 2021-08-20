@@ -47,6 +47,7 @@ export class BrNodeComponentDirective<T extends Component> implements OnChanges,
     protected page: BrPageComponent,
   ) {}
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   ngOnChanges(changes: SimpleChanges): void {
     this.clear?.();
     this.container.clear();
@@ -60,7 +61,7 @@ export class BrNodeComponentDirective<T extends Component> implements OnChanges,
     return this.page.mapping[this.component.getName()];
   }
 
-  private render() {
+  private render(): { head: any; tail: any } {
     if (this.node.template) {
       return this.renderTemplate();
     }
@@ -73,7 +74,7 @@ export class BrNodeComponentDirective<T extends Component> implements OnChanges,
     return this.renderMapping(component);
   }
 
-  private renderTemplate() {
+  private renderTemplate(): { head: any; tail: any } {
     // tslint:disable: no-non-null-assertion
     const embeddedViewRef = this.container.createEmbeddedView(this.node.template!, {
       $implicit: this.component,
@@ -87,7 +88,7 @@ export class BrNodeComponentDirective<T extends Component> implements OnChanges,
     return { head, tail };
   }
 
-  private renderChildren() {
+  private renderChildren(): { head: any; tail: any } {
     const nodes = this.component
       .getChildren()
       .map((component) =>
@@ -105,7 +106,7 @@ export class BrNodeComponentDirective<T extends Component> implements OnChanges,
     return { head, tail };
   }
 
-  private renderMapping(component: Type<BrProps>) {
+  private renderMapping(component: Type<BrProps>): { head: any; tail: any } {
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(component);
     const componentRef = this.container.createComponent(componentFactory, undefined, this.injector);
 

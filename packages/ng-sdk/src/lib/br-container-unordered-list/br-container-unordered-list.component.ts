@@ -29,7 +29,7 @@ export class BrContainerUnorderedListComponent {
   @Input() page!: Page;
 
   @HostBinding('class.hst-container')
-  get isPreview() {
+  get isPreview(): boolean {
     return this.page?.isPreview();
   }
 }

@@ -25,6 +25,7 @@ export abstract class BrMetaDirective implements OnChanges, OnDestroy {
 
   constructor(private container: ViewContainerRef, @Optional() private template?: TemplateRef<never>) {}
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   ngOnChanges(changes: SimpleChanges): void {
     this.clear?.();
     this.container.clear();
@@ -38,7 +39,7 @@ export abstract class BrMetaDirective implements OnChanges, OnDestroy {
     this.container.clear();
   }
 
-  private render() {
+  private render(): { head: any; tail: any } {
     if (!this.template) {
       return {
         head: this.container.element.nativeElement,
