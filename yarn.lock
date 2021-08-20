@@ -2720,7 +2720,7 @@ __metadata:
     "@types/jest": 26.0.24
     "@types/node": 14.17.3
     "@types/xmldom": 0.1.31
-    "@xmldom/xmldom": 0.7.1
+    "@xmldom/xmldom": 0.7.2
     babel-plugin-transform-async-to-promises: 0.8.15
     cookie: 0.4.1
     emittery: 0.7.2
@@ -6192,10 +6192,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@xmldom/xmldom@npm:0.7.1":
-  version: 0.7.1
-  resolution: "@xmldom/xmldom@npm:0.7.1"
-  checksum: a2176b35dc1d1547f4dbd381525d56e203bcbe10e197e29966b255d989eea9bdde1d717b624ded34ca7a3ac934270a94ec63fb93da5a266b0da1d4a9fa218dfb
+"@xmldom/xmldom@npm:0.7.2":
+  version: 0.7.2
+  resolution: "@xmldom/xmldom@npm:0.7.2"
+  checksum: bfaaa310bc71098f351d49f814b5f92af21d3d6640d80f9d574a7303d47fb34e2189d4bd076e570e8aca999af2108e460d5959c93d33463adc157f2bcb587059
   languageName: node
   linkType: hard
 

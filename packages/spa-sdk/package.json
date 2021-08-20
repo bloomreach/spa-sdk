@@ -85,7 +85,7 @@
     "typescript": "4.1.6"
   },
   "dependencies": {
-    "@xmldom/xmldom": "0.7.1",
+    "@xmldom/xmldom": "0.7.2",
     "cookie": "0.4.1",
     "emittery": "0.7.2",
     "inversify": "5.1.1",
