@@ -18,7 +18,7 @@ import React from 'react';
 import { Document, ImageSet } from '@bloomreach/spa-sdk';
 import { BrManageContentButton, BrProps } from '@bloomreach/react-sdk';
 
-export function Content(props: BrProps) {
+export function Content(props: BrProps): JSX.Element | null {
   const { document: documentRef } = props.component.getModels<DocumentModels>();
   const document = documentRef && props.page.getContent<Document>(documentRef);
 
@@ -39,6 +39,7 @@ export function Content(props: BrProps) {
   return (
     <div className={props.page.isPreview() ? 'has-edit-button' : ''}>
       <BrManageContentButton content={document} />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
       {image && <img className="img-fluid mb-3" src={image.getOriginal()?.getUrl()} alt={title} />}
       {title && <h1>{title}</h1>}
       {author && <p className="mb-3 text-muted">{author}</p>}

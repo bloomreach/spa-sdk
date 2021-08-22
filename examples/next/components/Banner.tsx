@@ -19,7 +19,7 @@ import Link from 'next/link';
 import { Document, ImageSet } from '@bloomreach/spa-sdk';
 import { BrManageContentButton, BrProps } from '@bloomreach/react-sdk';
 
-export function Banner(props: BrProps) {
+export function Banner(props: BrProps): JSX.Element | null {
   const { document: documentRef } = props.component.getModels();
   const document = !!documentRef && props.page.getContent(documentRef);
 
@@ -42,6 +42,7 @@ export function Banner(props: BrProps) {
         relative
       />
       {title && <h1>{title}</h1>}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
       {image && <img className="img-fluid" src={image.getOriginal()?.getUrl()} alt={title} />}
       {content && <div dangerouslySetInnerHTML={{ __html: props.page.rewriteLinks(content.value) }} />}
       {link && (
