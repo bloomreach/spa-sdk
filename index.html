@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>@bloomreach/spa-sdk - v15.0.1-0</title>
-	<meta name="description" content="Documentation for @bloomreach/spa-sdk - v15.0.1-0">
+	<title>@bloomreach/spa-sdk - v15.1.0</title>
+	<meta name="description" content="Documentation for @bloomreach/spa-sdk - v15.1.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
 </head>
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">@bloomreach/spa-sdk - v15.0.1-0</a>
+					<a href="index.html" class="title">@bloomreach/spa-sdk - v15.1.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -56,7 +56,7 @@
 					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1>@bloomreach/spa-sdk - v15.0.1-0</h1>
+			<h1>@bloomreach/spa-sdk - v15.1.0</h1>
 		</div>
 	</div>
 </header>
@@ -210,29 +210,77 @@ app.use(relevance);
 							<td><strong><code>window</code></strong> <br> A window object reference will be used to interact with brXM. It needs to be set when initialize is being called within an iframe or worker process. <br><br> Required: no <br> Default: <code>window</code></td>
 						</tr>
 				</tbody></table>
-				<p>| Relevance options (PaaS-only)
-					| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------- |
-					| <strong><code>visitor</code></strong> <br> An object holding information about the current visitor. The option takes precedence over <code>request.visitor</code> <br><br> Required: no <br> Default: . <em>none</em> |
-					| <strong><code>visitor.id</code></strong> <br> The current visitor identifier. <br><br> Required: yes <br> Default: <em>none</em> |
-					| <strong><code>visitor.header</code></strong> <br> An HTTP-header using to pass the visitor identifier to the Page Model API. <br><br> Required: yes <br> Default: <em>none</em> |
-					| <strong><code>request</code></strong> <br> Current user&#39;s request. <br><br> Required: yes <br> Default: <em>none</em> |
-					| <strong><code>request.connection</code></strong> <br> Current request remote connection containing the remote address. This option is used in <a href="https://documentation.bloomreach.com/14/library/enterprise/enterprise-features/targeting/targeting.html">the Relevance Module</a> <br><br> Required: no <br> Default: . <em>none</em> |
-					| <strong><code>request.emit</code></strong> <br> Emits an event in the request scope. This option can be used in <a href="https://nodejs.org/api/stream.html#stream_readable_streams">Node.js integration</a> <br><br> Required: no <br> Default: . <em>none</em> |
-					| <strong><code>request.headers</code></strong> <br> An object holding request headers. It should contain a <code>Cookie</code> header if rendering is happening on the server-side in the UrlRewriter-based setup. <br><br> Required: no <br> Default: <code>{}</code> |
-					| <strong><code>request.path</code></strong> <br> The path part of the URL, including a query string if present (e.g. <code>/path/to/page?foo=1</code>). The option is <strong>deprecated</strong> in favor of <code>path</code> <br><br> Required: no <br> Default: . <code>/</code> |
-				| <strong><code>request.visitor</code></strong> <br> An object holding information about the current visitor. <br><br> Required: no <br> Default: <em>none</em> |</p>
-				<p>| These options are deprecated and will be removed in the next major release
-					| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- | ----------------------------------------------- |
-					| <strong><code>cmsBaseUrl</code></strong> <br> Base URL of the site (e.g. <code>http://localhost:8080/site</code> or <code>http://localhost:8080/site/channel</code>). This option is exclusive and should not be used together with <code>options</code> or <code>endpoint</code> <br><br> Required: <em>exclusive</em> <br> Default: . <em>none</em> |
-					| <strong><code>options</code></strong> <br> The CMS URL options. This option is exclusive and should not be used together with <code>cmsBaseUrl</code> or <code>endpoint</code>. Use this property to enable the UrlRewriter-based setup. <br><br> Required: <em>exclusive</em> <br> Default: <em>none</em> |
-					| <strong><code>options.live</code></strong> <br> The CMS URL options for the live site. <br><br> Required: yes <br> Default: <em>none</em> |
-					| <strong><code>options.live.apiBaseUrl</code></strong> <br> Base URL of the Page Model API for the live site (e.g. <code>http://localhost:8080/delivery/site/v1/channels/brxsaas/pages</code> or <code>http://localhost:8080/site/channel/resourceapi</code> <br><br> Required: no <br> Default: ) <code>options.live.cmsBaseUrl</code> + <code>&quot;/resourceapi&quot;</code> . |
-					| <strong><code>options.live.cmsBaseUrl</code></strong> <br> Base URL of the live site (e.g. <code>http://localhost:8080/site</code> or <code>http://localhost:8080/site/channel</code> <br><br> Required: yes <br> Default: ) <em>none</em> . |
-					| <strong><code>options.live.spaBaseUrl</code></strong> <br> Base URL of the live SPA (e.g. <code>/account</code> or <code>//www.example.com</code> <br><br> Required: no <br> Default: ) <code>&quot;&quot;</code> . |
-					| <strong><code>options.preview</code></strong> <br> The CMS URL options for the preview site. <br><br> Required: yes <br> Default: <em>none</em> |
-					| <strong><code>options.preview.apiBaseUrl</code></strong> <br> Base URL of the Page Model API for the preview site (e.g. <code>http://localhost:8080/site/_cmsinternal/resourceapi</code> or <code>http://localhost:8080/site/_cmsinternal/channel/resourceapi</code> <br><br> Required: no <br> Default: ) <code>options</code><br><code>.preview.cmsBaseUrl</code> <br>+ <code>&quot;/resourceapi&quot;</code> . |
-					| <strong><code>options.preview.cmsBaseUrl</code></strong> <br> Base URL of the live site (e.g. <code>http://localhost:8080/site/_cmsinternal</code> or <code>http://localhost:8080/site/_cmsinternal/channel</code> <br><br> Required: yes <br> Default: ) <em>none</em> . |
-				| <strong><code>options.preview.spaBaseUrl</code></strong> <br> Base URL of the live SPA (e.g. <code>/site/_cmsinternal?bloomreach-preview=true</code> or <code>/site/_cmsinternal/channel?bloomreach-preview=true</code>). This path and query string parameters will be used to detect whether it is a preview mode or not. <br><br> Required: no <br> Default: <code>&quot;&quot;</code> |</p>
+				<table>
+					<thead>
+						<tr>
+							<th>Relevance options (PaaS-only)</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td><strong><code>visitor</code></strong> <br> An object holding information about the current visitor. The option takes precedence over <code>request.visitor</code> <br><br> Required: no <br> Default: . <em>none</em></td>
+						</tr>
+						<tr>
+							<td><strong><code>visitor.id</code></strong> <br> The current visitor identifier. <br><br> Required: yes <br> Default: <em>none</em></td>
+						</tr>
+						<tr>
+							<td><strong><code>visitor.header</code></strong> <br> An HTTP-header using to pass the visitor identifier to the Page Model API. <br><br> Required: yes <br> Default: <em>none</em></td>
+						</tr>
+						<tr>
+							<td><strong><code>request</code></strong> <br> Current user&#39;s request. <br><br> Required: yes <br> Default: <em>none</em></td>
+						</tr>
+						<tr>
+							<td><strong><code>request.connection</code></strong> <br> Current request remote connection containing the remote address. This option is used in <a href="https://documentation.bloomreach.com/14/library/enterprise/enterprise-features/targeting/targeting.html">the Relevance Module</a> <br><br> Required: no <br> Default: . <em>none</em></td>
+						</tr>
+						<tr>
+							<td><strong><code>request.emit</code></strong> <br> Emits an event in the request scope. This option can be used in <a href="https://nodejs.org/api/stream.html#stream_readable_streams">Node.js integration</a> <br><br> Required: no <br> Default: . <em>none</em></td>
+						</tr>
+						<tr>
+							<td><strong><code>request.headers</code></strong> <br> An object holding request headers. It should contain a <code>Cookie</code> header if rendering is happening on the server-side in the UrlRewriter-based setup. <br><br> Required: no <br> Default: <code>{}</code></td>
+						</tr>
+						<tr>
+							<td><strong><code>request.path</code></strong> <br> The path part of the URL, including a query string if present (e.g. <code>/path/to/page?foo=1</code>). The option is <strong>deprecated</strong> in favor of <code>path</code> <br><br> Required: no <br> Default: . <code>/</code></td>
+						</tr>
+						<tr>
+							<td><strong><code>request.visitor</code></strong> <br> An object holding information about the current visitor. <br><br> Required: no <br> Default: <em>none</em></td>
+						</tr>
+				</tbody></table>
+				<table>
+					<thead>
+						<tr>
+							<th>These options are deprecated and will be removed in the next major release</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td><strong><code>cmsBaseUrl</code></strong> <br> Base URL of the site (e.g. <code>http://localhost:8080/site</code> or <code>http://localhost:8080/site/channel</code>). This option is exclusive and should not be used together with <code>options</code> or <code>endpoint</code> <br><br> Required: <em>exclusive</em> <br> Default: . <em>none</em></td>
+						</tr>
+						<tr>
+							<td><strong><code>options</code></strong> <br> The CMS URL options. This option is exclusive and should not be used together with <code>cmsBaseUrl</code> or <code>endpoint</code>. Use this property to enable the UrlRewriter-based setup. <br><br> Required: <em>exclusive</em> <br> Default: <em>none</em></td>
+						</tr>
+						<tr>
+							<td><strong><code>options.live</code></strong> <br> The CMS URL options for the live site. <br><br> Required: yes <br> Default: <em>none</em></td>
+						</tr>
+						<tr>
+							<td><strong><code>options.live.apiBaseUrl</code></strong> <br> Base URL of the Page Model API for the live site (e.g. <code>http://localhost:8080/delivery/site/v1/channels/brxsaas/pages</code> or <code>http://localhost:8080/site/channel/resourceapi</code> <br><br> Required: no <br> Default: ) <code>options.live.cmsBaseUrl</code> + <code>&quot;/resourceapi&quot;</code> .</td>
+						</tr>
+						<tr>
+							<td><strong><code>options.live.cmsBaseUrl</code></strong> <br> Base URL of the live site (e.g. <code>http://localhost:8080/site</code> or <code>http://localhost:8080/site/channel</code> <br><br> Required: yes <br> Default: ) <em>none</em> .</td>
+						</tr>
+						<tr>
+							<td><strong><code>options.live.spaBaseUrl</code></strong> <br> Base URL of the live SPA (e.g. <code>/account</code> or <code>//www.example.com</code> <br><br> Required: no <br> Default: ) <code>&quot;&quot;</code> .</td>
+						</tr>
+						<tr>
+							<td><strong><code>options.preview</code></strong> <br> The CMS URL options for the preview site. <br><br> Required: yes <br> Default: <em>none</em></td>
+						</tr>
+						<tr>
+							<td><strong><code>options.preview.apiBaseUrl</code></strong> <br> Base URL of the Page Model API for the preview site (e.g. <code>http://localhost:8080/site/_cmsinternal/resourceapi</code> or <code>http://localhost:8080/site/_cmsinternal/channel/resourceapi</code> <br><br> Required: no <br> Default: ) <code>options</code><br><code>.preview.cmsBaseUrl</code> <br>+ <code>&quot;/resourceapi&quot;</code> .</td>
+						</tr>
+						<tr>
+							<td><strong><code>options.preview.cmsBaseUrl</code></strong> <br> Base URL of the live site (e.g. <code>http://localhost:8080/site/_cmsinternal</code> or <code>http://localhost:8080/site/_cmsinternal/channel</code> <br><br> Required: yes <br> Default: ) <em>none</em> .</td>
+						</tr>
+						<tr>
+							<td><strong><code>options.preview.spaBaseUrl</code></strong> <br> Base URL of the live SPA (e.g. <code>/site/_cmsinternal?bloomreach-preview=true</code> or <code>/site/_cmsinternal/channel?bloomreach-preview=true</code>). This path and query string parameters will be used to detect whether it is a preview mode or not. <br><br> Required: no <br> Default: <code>&quot;&quot;</code></td>
+						</tr>
+				</tbody></table>
 				<a href="#functions" id="functions" style="color: inherit; text-decoration: none;">
 					<h4>Functions</h4>
 				</a>
@@ -634,7 +682,7 @@ app.use(relevance);
 						</tr>
 					</thead>
 					<tbody><tr>
-							<td><code>getDescription(): string &vert; undefined;</code></td>
+							<td><code>getDescription(): string undefined;</code></td>
 							<td>Returns the image set description.</td>
 						</tr>
 						<tr>
@@ -654,8 +702,8 @@ app.use(relevance);
 							<td>Returns the image set id.</td>
 						</tr>
 						<tr>
-							<td>`getLocale(): string</td>
-							<td>undefined`</td>
+							<td><code>getLocale(): string &vert; undefined</code></td>
+							<td>Returns the image set locale.</td>
 						</tr>
 						<tr>
 							<td><code>getName(): string</code></td>
