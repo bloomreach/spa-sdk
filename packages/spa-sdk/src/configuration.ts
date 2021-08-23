@@ -111,5 +111,5 @@ export function isConfigurationWithProxy(value: any): value is ConfigurationWith
 }
 
 export function isConfigurationWithJwt09(value: any): value is ConfigurationWithJwt09 {
-  return !!(value?.cmsBaseUrl);
+  return !!value?.cmsBaseUrl;
 }

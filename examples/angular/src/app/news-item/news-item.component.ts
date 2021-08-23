@@ -24,7 +24,7 @@ import { Document } from '@bloomreach/spa-sdk';
 export class NewsItemComponent {
   @Input() item!: Document;
 
-  get data() {
+  get data(): DocumentData {
     return this.item.getData<DocumentData>();
   }
 }

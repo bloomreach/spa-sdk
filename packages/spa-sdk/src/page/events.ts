@@ -19,12 +19,6 @@ import { PageModel } from './page';
 
 export const EventBusService = Symbol('EventBusService');
 
-export type EventBus = Typed<Events>;
-
-export interface Events {
-  'page.update': PageUpdateEvent;
-}
-
 /**
  * Page model update event.
  */
@@ -34,3 +28,9 @@ export interface PageUpdateEvent {
    */
   page: PageModel;
 }
+
+export interface Events {
+  'page.update': PageUpdateEvent;
+}
+
+export type EventBus = Typed<Events>;

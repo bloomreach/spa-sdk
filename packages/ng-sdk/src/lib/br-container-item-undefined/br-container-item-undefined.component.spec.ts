@@ -15,18 +15,19 @@
  */
 
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { BrContainerItemUndefinedComponent } from './br-container-item-undefined.component';
 import { ContainerItem } from '@bloomreach/spa-sdk';
+import { BrContainerItemUndefinedComponent } from './br-container-item-undefined.component';
 
 describe('BrContainerItemUndefinedComponent', () => {
   let component: BrContainerItemUndefinedComponent;
   let fixture: ComponentFixture<BrContainerItemUndefinedComponent>;
   let containerItem: ContainerItem;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({ declarations: [ BrContainerItemUndefinedComponent ] })
-      .compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({ declarations: [BrContainerItemUndefinedComponent] }).compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     containerItem = {

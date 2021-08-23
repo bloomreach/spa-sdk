@@ -21,24 +21,26 @@ import { Logger } from '../logger';
 
 const GLOBAL_WINDOW = typeof window === 'undefined' ? undefined : window;
 
+interface CmsApi {
+  sync(): void;
+}
+
+interface SpaApi {
+  init(api: CmsApi): void;
+  renderComponent(id: string, properties: Record<string, unknown>): void;
+}
+
 declare global {
   interface Window {
     SPA?: SpaApi;
   }
 }
 
-interface SpaApi {
-  init(api: CmsApi): void;
-  renderComponent(id: string, properties: object): void;
-}
-
-interface CmsApi {
-  sync(): void;
-}
-
 @injectable()
 export class Cms14Impl implements Cms {
   private api?: CmsApi;
+
+  // eslint-disable-next-line @typescript-eslint/ban-types
   private postponed: Function[] = [];
 
   constructor(
@@ -46,10 +48,8 @@ export class Cms14Impl implements Cms {
     @inject(Logger) @optional() private logger?: Logger,
   ) {}
 
-  private async flush() {
-    this.postponed
-      .splice(0)
-      .forEach(task => task());
+  private async flush(): Promise<void> {
+    this.postponed.splice(0).forEach((task) => task());
   }
 
   private postpone<T extends (...args: any[]) => any>(task: T) {
@@ -59,10 +59,12 @@ export class Cms14Impl implements Cms {
       }
 
       this.postponed.push(task.bind(this, ...args));
+
+      return undefined;
     };
   }
 
-  initialize({ window = GLOBAL_WINDOW }: CmsOptions) {
+  initialize({ window = GLOBAL_WINDOW }: CmsOptions): void {
     if (this.api || !window || window.SPA) {
       return;
     }
@@ -76,14 +78,14 @@ export class Cms14Impl implements Cms {
     };
   }
 
-  protected onInit(api: CmsApi) {
+  protected onInit(api: CmsApi): void {
     this.logger?.debug('Completed the handshake with the Experience Manager.');
 
     this.api = api;
     this.flush();
   }
 
-  protected onRenderComponent(id: string, properties: object) {
+  protected onRenderComponent(id: string, properties: Record<string, unknown>): void {
     this.logger?.debug('Received component rendering request.');
     this.logger?.debug('Component:', id);
     this.logger?.debug('Properties', properties);
@@ -91,7 +93,7 @@ export class Cms14Impl implements Cms {
     this.eventBus?.emit('cms.update', { id, properties });
   }
 
-  protected sync() {
+  protected sync(): void {
     this.logger?.debug('Synchronizing the page.');
 
     this.api!.sync();

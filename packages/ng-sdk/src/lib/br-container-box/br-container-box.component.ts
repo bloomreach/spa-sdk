@@ -18,16 +18,18 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular
 import { Container, Page } from '@bloomreach/spa-sdk';
 
 @Component({
-  selector: 'div.br-container-box', // tslint:disable-line: component-selector
+  // eslint-disable-next-line @angular-eslint/component-selector
+  selector: 'div.br-container-box',
   templateUrl: './br-container-box.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BrContainerBoxComponent {
   @Input() component!: Container;
+
   @Input() page!: Page;
 
   @HostBinding('class.hst-container')
-  get isPreview() {
+  get isPreview(): boolean {
     return this.page?.isPreview();
   }
 }

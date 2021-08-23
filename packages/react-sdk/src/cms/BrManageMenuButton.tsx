@@ -31,11 +31,15 @@ interface BrManageMenuButtonProps {
  */
 export class BrManageMenuButton extends React.Component<BrManageMenuButtonProps> {
   static contextType = BrPageContext;
+
   context: React.ContextType<typeof BrPageContext>;
 
-  render() {
-    return this.context?.isPreview()
-      ? <BrMeta meta={this.context.getButton(TYPE_MANAGE_MENU_BUTTON, this.props.menu)} />
-      : null;
+  render(): JSX.Element | null {
+    const {
+      context,
+      props: { menu },
+    } = this;
+
+    return context?.isPreview() ? <BrMeta meta={context.getButton(TYPE_MANAGE_MENU_BUTTON, menu)} /> : null;
   }
 }

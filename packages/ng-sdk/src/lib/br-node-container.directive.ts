@@ -25,15 +25,14 @@ import {
 import { BrContainerBoxComponent } from './br-container-box/br-container-box.component';
 import { BrContainerInlineComponent } from './br-container-inline/br-container-inline.component';
 import { BrContainerOrderedListComponent } from './br-container-ordered-list/br-container-ordered-list.component';
-import {
-  BrContainerUnorderedListComponent,
-} from './br-container-unordered-list/br-container-unordered-list.component';
+import { BrContainerUnorderedListComponent } from './br-container-unordered-list/br-container-unordered-list.component';
 import { BrNodeComponentDirective } from './br-node-component.directive';
 import { BrProps } from './br-props.model';
 
 @Directive({
   selector: '[brNodeContainer]',
-  inputs: [ 'component:brNodeContainer' ], // tslint:disable-line: no-inputs-metadata-property
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+  inputs: ['component:brNodeContainer'],
 })
 export class BrNodeContainerDirective extends BrNodeComponentDirective<Container> {
   protected getMapping(): Type<BrProps> | undefined {
@@ -44,11 +43,16 @@ export class BrNodeContainerDirective extends BrNodeComponentDirective<Container
     }
 
     switch (type) {
-      case TYPE_CONTAINER_INLINE: return BrContainerInlineComponent;
-      case TYPE_CONTAINER_ORDERED_LIST: return BrContainerOrderedListComponent;
-      case TYPE_CONTAINER_UNORDERED_LIST: return BrContainerUnorderedListComponent;
-      case TYPE_CONTAINER_NO_MARKUP: return;
-      default: return BrContainerBoxComponent;
+      case TYPE_CONTAINER_INLINE:
+        return BrContainerInlineComponent;
+      case TYPE_CONTAINER_ORDERED_LIST:
+        return BrContainerOrderedListComponent;
+      case TYPE_CONTAINER_UNORDERED_LIST:
+        return BrContainerUnorderedListComponent;
+      case TYPE_CONTAINER_NO_MARKUP:
+        return undefined;
+      default:
+        return BrContainerBoxComponent;
     }
   }
 }

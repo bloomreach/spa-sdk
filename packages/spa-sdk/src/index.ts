@@ -23,13 +23,7 @@ import 'reflect-metadata';
 import { Container } from 'inversify';
 import { SpaModule, SpaService, Spa, ApiOptionsToken } from './spa';
 import { CmsService, Cms, CmsModule, PostMessageService, PostMessage } from './cms';
-import {
-  PageModel,
-  PageModule09,
-  PageModule,
-  Page,
-  isPage,
-} from './page';
+import { PageModel, PageModule09, PageModule, Page, isPage } from './page';
 import {
   Configuration,
   ConfigurationWithProxy,
@@ -48,18 +42,10 @@ import {
   isMatched,
   parseUrl,
 } from './url';
-import { Cookie } from './spa/cookie';
+import { Campaign } from './services/campaign';
 
 const DEFAULT_AUTHORIZATION_PARAMETER = 'token';
 const DEFAULT_SERVER_ID_PARAMETER = 'server-id';
-// Campaign query parameter
-const DEFAULT_CAMPAIGN_PARAMETER = 'btm_campaign';
-// Segment of the campaign query parameter
-const DEFAULT_SEGMENT_PARAMETER = 'btm_segment';
-// Query parameter for the cookie expires time in milliseconds
-const DEFAULT_TTL_PARAMETER = 'btm_ttl';
-const DEFAULT_TTL_VALUE = 7; // days
-// Campaign variant query parameter
 const DEFAULT_CAMPAIGN_VARIANT_PARAMETER = '_campaignVariant';
 
 const container = new Container({ skipBaseClassChecks: true });
@@ -67,15 +53,18 @@ const pages = new WeakMap<Page, Container>();
 
 container.load(CmsModule(), LoggerModule(), UrlModule());
 
-function onReady<T>(value: T | Promise<T>, callback: (value: T) => unknown): T | Promise<T> {
-  const wrapper = (result: T) => (callback(result), result);
+function onReady<T>(value: T | Promise<T>, callback: (cbValue: T) => unknown): T | Promise<T> {
+  // eslint-disable-next-line no-sequences
+  const wrapper = (result: T): T => (callback(result), result);
 
-  return value instanceof Promise
-    ? value.then(wrapper)
-    : wrapper(value);
+  return value instanceof Promise ? value.then(wrapper) : wrapper(value);
 }
 
-function initializeWithProxy(scope: Container, configuration: ConfigurationWithProxy, model?: PageModel) {
+function initializeWithProxy(
+  scope: Container,
+  configuration: ConfigurationWithProxy,
+  model?: PageModel,
+): Page | Promise<Page> {
   const logger = scope.get(Logger);
 
   logger.info('Enabled reverse-proxy based setup.');
@@ -106,7 +95,11 @@ function initializeWithProxy(scope: Container, configuration: ConfigurationWithP
   );
 }
 
-function initializeWithJwt09(scope: Container, configuration: ConfigurationWithJwt09, model?: PageModel) {
+function initializeWithJwt09(
+  scope: Container,
+  configuration: ConfigurationWithJwt09,
+  model?: PageModel,
+): Page | Promise<Page> {
   const logger = scope.get(Logger);
 
   logger.info('Enabled token-based setup.');
@@ -143,24 +136,25 @@ function initializeWithJwt09(scope: Container, configuration: ConfigurationWithJ
   scope.bind(ApiOptionsToken).toConstantValue({ authorizationToken, serverId, ...config });
   scope.bind(UrlBuilderOptionsToken).toConstantValue(config);
 
-  return onReady(
-    scope.get<Spa>(SpaService).initialize(model ?? path),
-    (page) => {
-      if (page.isPreview() && config.cmsBaseUrl) {
-        logger.info('Running in preview mode.');
-        scope.get<PostMessage>(PostMessageService).initialize(config);
-        scope.get<Cms>(CmsService).initialize(config);
-      } else {
-        logger.info('Running in live mode.');
-      }
+  return onReady(scope.get<Spa>(SpaService).initialize(model ?? path), (page) => {
+    if (page.isPreview() && config.cmsBaseUrl) {
+      logger.info('Running in preview mode.');
+      scope.get<PostMessage>(PostMessageService).initialize(config);
+      scope.get<Cms>(CmsService).initialize(config);
+    } else {
+      logger.info('Running in live mode.');
+    }
 
-      scope.unbind(ApiOptionsToken);
-      scope.unbind(UrlBuilderOptionsToken);
-    },
-  );
+    scope.unbind(ApiOptionsToken);
+    scope.unbind(UrlBuilderOptionsToken);
+  });
 }
 
-function initializeWithJwt10(scope: Container, configuration: ConfigurationWithJwt10, model?: PageModel) {
+function initializeWithJwt10(
+  scope: Container,
+  configuration: ConfigurationWithJwt10,
+  model?: PageModel,
+): Page | Promise<Page> {
   const logger = scope.get(Logger);
 
   logger.info('Enabled token-based setup.');
@@ -169,9 +163,9 @@ function initializeWithJwt10(scope: Container, configuration: ConfigurationWithJ
   const authorizationParameter = configuration.authorizationQueryParameter ?? DEFAULT_AUTHORIZATION_PARAMETER;
   const endpointParameter = configuration.endpointQueryParameter ?? '';
   const serverIdParameter = configuration.serverIdQueryParameter ?? DEFAULT_SERVER_ID_PARAMETER;
-  const campaignParameter = DEFAULT_CAMPAIGN_PARAMETER;
-  const segmentParameter = DEFAULT_SEGMENT_PARAMETER;
-  const ttlParameter = DEFAULT_TTL_PARAMETER;
+  const campaignParameter = Campaign.CAMPAIGN_PARAMETER;
+  const segmentParameter = Campaign.SEGMENT_PARAMETER;
+  const ttlParameter = Campaign.TTL_PARAMETER;
 
   const { url: path, searchParams } = extractSearchParams(
     configuration.path ?? configuration.request?.path ?? '/',
@@ -184,6 +178,7 @@ function initializeWithJwt10(scope: Container, configuration: ConfigurationWithJ
       ttlParameter,
     ].filter(Boolean),
   );
+
   const authorizationToken = searchParams.get(authorizationParameter) ?? undefined;
   const endpoint = searchParams.get(endpointParameter) ?? undefined;
   const serverId = searchParams.get(serverIdParameter) ?? undefined;
@@ -193,8 +188,9 @@ function initializeWithJwt10(scope: Container, configuration: ConfigurationWithJ
 
   let endpointUrl = configuration.endpoint ?? endpoint;
 
-  const campaignVariantId = getCampaignVariantId(campaignParameter, segmentParameter, campaignId, segmentId, ttl);
-  if (Boolean(campaignVariantId)) {
+  const campaignVariantId = Campaign.GET_VARIANT_ID(campaignId, segmentId, ttl, configuration.request);
+
+  if (campaignVariantId) {
     const params = new URLSearchParams();
     params.append(DEFAULT_CAMPAIGN_VARIANT_PARAMETER, campaignVariantId);
     endpointUrl = appendSearchParams(endpointUrl ?? '', params);
@@ -241,21 +237,18 @@ function initializeWithJwt10(scope: Container, configuration: ConfigurationWithJ
   scope.bind(ApiOptionsToken).toConstantValue({ authorizationToken, serverId, ...config });
   scope.bind(UrlBuilderOptionsToken).toConstantValue(config);
 
-  return onReady(
-    scope.get<Spa>(SpaService).initialize(model ?? path),
-    (page) => {
-      if (page.isPreview() && config.endpoint) {
-        logger.info('Running in preview mode.');
-        scope.get<PostMessage>(PostMessageService).initialize(config);
-        scope.get<Cms>(CmsService).initialize(config);
-      } else {
-        logger.info('Running in live mode.');
-      }
+  return onReady(scope.get<Spa>(SpaService).initialize(model ?? path), (page) => {
+    if (page.isPreview() && config.endpoint) {
+      logger.info('Running in preview mode.');
+      scope.get<PostMessage>(PostMessageService).initialize(config);
+      scope.get<Cms>(CmsService).initialize(config);
+    } else {
+      logger.info('Running in live mode.');
+    }
 
-      scope.unbind(ApiOptionsToken);
-      scope.unbind(UrlBuilderOptionsToken);
-    },
-  );
+    scope.unbind(ApiOptionsToken);
+    scope.unbind(UrlBuilderOptionsToken);
+  });
 }
 
 /**
@@ -285,9 +278,12 @@ export function initialize(configuration: Configuration, model?: Page | PageMode
   logger.debug('Configuration:', configuration);
 
   return onReady(
-    isConfigurationWithProxy(configuration) ? initializeWithProxy(scope, configuration, model) :
-      isConfigurationWithJwt09(configuration) ? initializeWithJwt09(scope, configuration, model) :
-        initializeWithJwt10(scope, configuration, model),
+    // eslint-disable-next-line no-nested-ternary
+    isConfigurationWithProxy(configuration)
+      ? initializeWithProxy(scope, configuration, model)
+      : isConfigurationWithJwt09(configuration)
+      ? initializeWithJwt09(scope, configuration, model)
+      : initializeWithJwt10(scope, configuration, model),
     (page) => {
       pages.set(page, scope);
       configuration.request?.emit?.('br:spa:initialized', page);
@@ -304,46 +300,6 @@ export function destroy(page: Page): void {
   pages.delete(page);
 
   return scope?.get<Spa>(SpaService).destroy();
-}
-
-/**
- * Get the campaign variant from URL or cookie
- * @param campaignId Campaign id from URL
- * @param segmentId Segment id from URL
- * @param ttl TTL param in days from URL
- * @param campaignParameter Campaign query parameter in URL
- * @param segmentParameter Segment query parameter in URL
- */
-function getCampaignVariantId(
-  campaignParameter: string,
-  segmentParameter: string,
-  campaignId?: string,
-  segmentId?: string,
-  ttl?: string,
-): string {
-  const ttlNumber = isNaN(Number(ttl)) ? DEFAULT_TTL_VALUE : Number(ttl);
-  if (Cookie.CAN_USE_DOM() && ttlNumber === 0) {
-    Cookie.ERASE_COOKIE(campaignParameter);
-    Cookie.ERASE_COOKIE(segmentParameter);
-    return '';
-  }
-
-  if (campaignId && segmentId) {
-    if (Cookie.CAN_USE_DOM()) {
-      Cookie.SET_COOKIE(campaignParameter, campaignId, ttlNumber);
-      Cookie.SET_COOKIE(segmentParameter, segmentId, ttlNumber);
-    }
-    return `${campaignId}:${segmentId}`;
-  }
-
-  if (Cookie.CAN_USE_DOM()) {
-    const { [campaignParameter]: cookieCampaignId, [segmentParameter]: cookieSegmentId } = Cookie.GET_COOKIE();
-
-    if (cookieCampaignId && cookieSegmentId) {
-      return `${cookieCampaignId}:${cookieSegmentId}`;
-    }
-  }
-  return '';
 }
 
 export { Configuration } from './configuration';

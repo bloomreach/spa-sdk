@@ -37,7 +37,7 @@ describe('PostMessage', () => {
     it('should not process a message if not initialized', async () => {
       window.postMessage({ some: 'data' }, '*');
 
-      await new Promise(resolve => setTimeout(resolve, 0));
+      await new Promise((resolve) => setTimeout(resolve, 0));
 
       expect(processSpy).not.toHaveBeenCalled();
     });
@@ -47,7 +47,7 @@ describe('PostMessage', () => {
       mocked(isMatched).mockReturnValueOnce(true);
       window.postMessage({ some: 'data' }, '*');
 
-      await new Promise(resolve => setTimeout(resolve, 0));
+      await new Promise((resolve) => setTimeout(resolve, 0));
 
       expect(processSpy).toHaveBeenCalledWith({ some: 'data' });
     });
@@ -57,7 +57,7 @@ describe('PostMessage', () => {
       mocked(isMatched).mockReturnValueOnce(true);
       window.postMessage({ some: 'data' }, '*');
 
-      await new Promise(resolve => setTimeout(resolve, 0));
+      await new Promise((resolve) => setTimeout(resolve, 0));
 
       expect(isMatched).toHaveBeenCalledWith(expect.anything(), '');
       expect(processSpy).toHaveBeenCalledWith({ some: 'data' });
@@ -68,7 +68,7 @@ describe('PostMessage', () => {
       mocked(isMatched).mockReturnValueOnce(false);
       window.postMessage({ some: 'data' }, '*');
 
-      await new Promise(resolve => setTimeout(resolve, 0));
+      await new Promise((resolve) => setTimeout(resolve, 0));
 
       expect(processSpy).not.toHaveBeenCalledWith({ some: 'data' });
     });
@@ -78,7 +78,7 @@ describe('PostMessage', () => {
       mocked(isMatched).mockReturnValueOnce(true);
       window.postMessage(undefined, '*');
 
-      await new Promise(resolve => setTimeout(resolve, 0));
+      await new Promise((resolve) => setTimeout(resolve, 0));
 
       expect(processSpy).not.toHaveBeenCalled();
     });

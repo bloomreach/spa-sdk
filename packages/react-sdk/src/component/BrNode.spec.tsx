@@ -88,10 +88,15 @@ describe('BrNode', () => {
   });
 
   it('should render children if present', () => {
-    const wrapper = shallow(<BrNode {...props}><a/><b/></BrNode>);
+    const wrapper = shallow(
+      <BrNode {...props}>
+        <a />
+        <b />
+      </BrNode>,
+    );
 
-    expect(wrapper.contains(<a/>)).toBe(true);
-    expect(wrapper.contains(<b/>)).toBe(true);
+    expect(wrapper.contains(<a />)).toBe(true);
+    expect(wrapper.contains(<b />)).toBe(true);
   });
 
   it('should render model children if component children are not present', () => {

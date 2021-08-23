@@ -17,16 +17,12 @@
 import React from 'react';
 import { BrProps } from '../component';
 
-export function BrContainerOrderedList(props: React.PropsWithChildren<BrProps>) {
+export function BrContainerOrderedList({ page, children }: React.PropsWithChildren<BrProps>): JSX.Element {
   return (
-    // tslint:disable:jsx-no-multiline-js
-    <ol className={props.page.isPreview() ? 'hst-container' : undefined}>
-      {React.Children.map(props.children, child => (
-        <li className={props.page.isPreview() ? 'hst-container-item' : undefined}>
-          {child}
-        </li>
+    <ol className={page.isPreview() ? 'hst-container' : undefined}>
+      {React.Children.map(children, (child) => (
+        <li className={page.isPreview() ? 'hst-container-item' : undefined}>{child}</li>
       ))}
     </ol>
-    // tslint:enable:jsx-no-multiline-js
   );
 }

@@ -52,8 +52,10 @@ export type Procedures = Record<string, Callable>;
 export type Events = Record<string, any>;
 
 export interface RpcClient<TProcedures extends Procedures, TEvents extends Events> extends Emitter<TEvents> {
-  call<K extends keyof TProcedures & string>(command: K, ...params: Parameters<TProcedures[K]>):
-    Promise<ReturnType<TProcedures[K]>>;
+  call<K extends keyof TProcedures & string>(
+    command: K,
+    ...params: Parameters<TProcedures[K]>
+  ): Promise<ReturnType<TProcedures[K]>>;
 }
 
 export interface RpcServer<TProcedures extends Procedures, TEvents extends Events> {
@@ -76,9 +78,10 @@ export abstract class Rpc<
   implements RpcClient<TRemoteProcedures, TRemoteEvents>, RpcServer<TProcedures, TEvents>
 {
   private calls = new Map<string, [Callable, Callable]>();
+
   private callbacks = new Map<keyof TProcedures, Callable<Promise<any>, any>>();
 
-  private generateId() {
+  private generateId(): string {
     let id: string;
     do {
       id = `${Math.random()}`.slice(2);
@@ -87,7 +90,10 @@ export abstract class Rpc<
     return id;
   }
 
-  call<K extends keyof TRemoteProcedures & string>(command: K, ...payload: Parameters<TRemoteProcedures[K]>) {
+  call<K extends keyof TRemoteProcedures & string>(
+    command: K,
+    ...payload: Parameters<TRemoteProcedures[K]>
+  ): Promise<ReturnType<TRemoteProcedures[K]>> {
     return new Promise<ReturnType<TRemoteProcedures[K]>>((resolve, reject) => {
       const id = this.generateId();
 
@@ -99,15 +105,16 @@ export abstract class Rpc<
   register<K extends keyof TProcedures & string>(
     command: K,
     callback: Callable<Promise<ReturnType<TProcedures[K]>>, Parameters<TProcedures[K]>>,
-  ) {
+  ): void {
     this.callbacks.set(command, callback);
   }
 
-  trigger<K extends keyof TEvents>(event: K & string, payload: TEvents[K]) {
+  trigger<K extends keyof TEvents>(event: K & string, payload: TEvents[K]): void {
     this.send({ event, payload, type: TYPE_EVENT });
   }
 
-  protected process(message: Message) {
+  protected process(message: Message): void {
+    // eslint-disable-next-line default-case
     switch (message?.type) {
       case TYPE_EVENT:
         this.processEvent(message);
@@ -121,11 +128,11 @@ export abstract class Rpc<
     }
   }
 
-  private processEvent(event: Event) {
+  private processEvent(event: Event): void {
     this.emit(event.event, event.payload);
   }
 
-  private processResponse(response: Response) {
+  private processResponse(response: Response): void {
     if (!this.calls.has(response.id)) {
       return;
     }
@@ -134,13 +141,13 @@ export abstract class Rpc<
     this.calls.delete(response.id);
 
     if (response.state === STATE_REJECTED) {
-      return void reject(response.result);
+      reject(response.result);
     }
 
     resolve(response.result);
   }
 
-  private async processRequest(request: Request) {
+  private async processRequest(request: Request): Promise<void> {
     const callback = this.callbacks.get(request.command);
 
     if (!callback) {
@@ -148,14 +155,14 @@ export abstract class Rpc<
     }
 
     try {
-      return this.send({
+      this.send({
         type: TYPE_RESPONSE,
         id: request.id,
         state: STATE_FULFILLED,
         result: await callback(...request.payload),
       });
     } catch (result) {
-      return this.send({
+      this.send({
         result,
         type: TYPE_RESPONSE,
         id: request.id,

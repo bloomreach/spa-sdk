@@ -25,7 +25,13 @@ import {
   TYPE_CONTAINER_ORDERED_LIST,
   TYPE_CONTAINER_UNORDERED_LIST,
 } from '@bloomreach/spa-sdk';
-import { BrContainerBox, BrContainerInline, BrContainerNoMarkup, BrContainerOrderedList, BrContainerUnorderedList } from '../cms';
+import {
+  BrContainerBox,
+  BrContainerInline,
+  BrContainerNoMarkup,
+  BrContainerOrderedList,
+  BrContainerUnorderedList,
+} from '../cms';
 import { BrNodeComponent } from './BrNodeComponent';
 import { BrNodeContainer } from './BrNodeContainer';
 
@@ -56,11 +62,13 @@ describe('BrNodeContainer', () => {
     it('should render a mapped container', () => {
       props.component.getType.mockReturnValue('test' as ReturnType<Container['getType']>);
       const wrapper = mount(
-        <BrNodeContainer {...props}><a/></BrNodeContainer>,
+        <BrNodeContainer {...props}>
+          <a />
+        </BrNodeContainer>,
         {
           context: {
             test: ({ children }: React.PropsWithChildren<typeof props>) => <div>{children}</div>,
-          }
+          },
         },
       );
 
@@ -69,37 +77,87 @@ describe('BrNodeContainer', () => {
 
     it('should render inline container', () => {
       props.component.getType.mockReturnValue(TYPE_CONTAINER_INLINE);
-      const wrapper = shallow(<BrNodeContainer {...props}><a/></BrNodeContainer>);
+      const wrapper = shallow(
+        <BrNodeContainer {...props}>
+          <a />
+        </BrNodeContainer>,
+      );
 
-      expect(wrapper.equals(<BrContainerInline {...props}><a/></BrContainerInline>)).toBe(true);
+      expect(
+        wrapper.equals(
+          <BrContainerInline {...props}>
+            <a />
+          </BrContainerInline>,
+        ),
+      ).toBe(true);
     });
 
     it('should render no markup container', () => {
       props.component.getType.mockReturnValue(TYPE_CONTAINER_NO_MARKUP);
-      const wrapper = shallow(<BrNodeContainer {...props}><a/></BrNodeContainer>);
+      const wrapper = shallow(
+        <BrNodeContainer {...props}>
+          <a />
+        </BrNodeContainer>,
+      );
 
-      expect(wrapper.equals(<BrContainerNoMarkup {...props}><a/></BrContainerNoMarkup>)).toBe(true);
+      expect(
+        wrapper.equals(
+          <BrContainerNoMarkup {...props}>
+            <a />
+          </BrContainerNoMarkup>,
+        ),
+      ).toBe(true);
     });
 
     it('should render ordered list container', () => {
       props.component.getType.mockReturnValue(TYPE_CONTAINER_ORDERED_LIST);
-      const wrapper = shallow(<BrNodeContainer {...props}><a/></BrNodeContainer>);
+      const wrapper = shallow(
+        <BrNodeContainer {...props}>
+          <a />
+        </BrNodeContainer>,
+      );
 
-      expect(wrapper.equals(<BrContainerOrderedList {...props}><a/></BrContainerOrderedList>)).toBe(true);
+      expect(
+        wrapper.equals(
+          <BrContainerOrderedList {...props}>
+            <a />
+          </BrContainerOrderedList>,
+        ),
+      ).toBe(true);
     });
 
     it('should render unordered list container', () => {
       props.component.getType.mockReturnValue(TYPE_CONTAINER_UNORDERED_LIST);
-      const wrapper = shallow(<BrNodeContainer {...props}><a/></BrNodeContainer>);
+      const wrapper = shallow(
+        <BrNodeContainer {...props}>
+          <a />
+        </BrNodeContainer>,
+      );
 
-      expect(wrapper.equals(<BrContainerUnorderedList {...props}><a/></BrContainerUnorderedList>)).toBe(true);
+      expect(
+        wrapper.equals(
+          <BrContainerUnorderedList {...props}>
+            <a />
+          </BrContainerUnorderedList>,
+        ),
+      ).toBe(true);
     });
 
     it('should render box container', () => {
       props.component.getType.mockReturnValue(TYPE_CONTAINER_BOX);
-      const wrapper = shallow(<BrNodeContainer {...props}><a/></BrNodeContainer>);
+      const wrapper = shallow(
+        <BrNodeContainer {...props}>
+          <a />
+        </BrNodeContainer>,
+      );
 
-      expect(wrapper.equals(<BrContainerBox {...props}><a/></BrContainerBox>)).toBe(true);
+      expect(
+        wrapper.equals(
+          <BrContainerBox {...props}>
+            <a />
+          </BrContainerBox>,
+        ),
+      ).toBe(true);
     });
 
     it('should render box container on an unknown type', () => {

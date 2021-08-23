@@ -14,6 +14,9 @@
   limitations under the License.
   -->
 
-<li *ngFor="let child of component.getChildren()" [ngClass]="{'hst-container-item': page.isPreview()}">
+<li
+  *ngFor="let child of component.getChildren()"
+  [ngClass]="{ 'hst-container-item': page.isPreview() }"
+>
   <ng-container [brComponent]="child"></ng-container>
 </li>

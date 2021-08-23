@@ -26,9 +26,7 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import { ContainerItem, TYPE_CONTAINER_ITEM_UNDEFINED } from '@bloomreach/spa-sdk';
-import {
-  BrContainerItemUndefinedComponent,
-} from './br-container-item-undefined/br-container-item-undefined.component';
+import { BrContainerItemUndefinedComponent } from './br-container-item-undefined/br-container-item-undefined.component';
 import { BrNodeComponentDirective } from './br-node-component.directive';
 import { BrNodeDirective } from './br-node.directive';
 import { BrPageComponent } from './br-page/br-page.component';
@@ -36,11 +34,13 @@ import { BrProps } from './br-props.model';
 
 @Directive({
   selector: '[brNodeContainerItem]',
-  inputs: [ 'component:brNodeContainerItem' ], // tslint:disable-line: no-inputs-metadata-property
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+  inputs: ['component:brNodeContainerItem'],
 })
 export class BrNodeContainerItemDirective
-extends BrNodeComponentDirective<ContainerItem>
-implements OnChanges, OnDestroy {
+  extends BrNodeComponentDirective<ContainerItem>
+  implements OnChanges, OnDestroy
+{
   constructor(
     container: ViewContainerRef,
     injector: Injector,

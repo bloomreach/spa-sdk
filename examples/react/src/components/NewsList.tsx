@@ -19,8 +19,80 @@ import { Link } from 'react-router-dom';
 import { Document } from '@bloomreach/spa-sdk';
 import { BrManageContentButton, BrPageContext, BrProps } from '@bloomreach/react-sdk';
 
-export function NewsList(props: BrProps) {
-  const { pageable } = props.component.getModels<PageableModels>();
+interface NewsListItemProps {
+  item: Document;
+}
+
+export function NewsListItem({ item }: NewsListItemProps): JSX.Element {
+  const { author, date, introduction, title } = item.getData<DocumentData>();
+
+  return (
+    <div className="card mb-3">
+      <BrManageContentButton content={item} />
+      <div className="card-body">
+        {title && (
+          <h2 className="card-title">
+            <Link to={item.getUrl()!}>{title}</Link>
+          </h2>
+        )}
+        {author && <div className="card-subtitle mb-3 text-muted">{author}</div>}
+        {date && <div className="card-subtitle mb-3 small text-muted">{new Date(date).toDateString()}</div>}
+        {introduction && <p className="card-text">{introduction}</p>}
+      </div>
+    </div>
+  );
+}
+
+type NewsListPaginationProps = Pick<
+  Pageable,
+  'showPagination' | 'previous' | 'previousPage' | 'pageNumbersArray' | 'currentPage' | 'next' | 'nextPage'
+>;
+
+export function NewsListPagination({
+  showPagination,
+  previous,
+  previousPage,
+  pageNumbersArray,
+  currentPage,
+  next,
+  nextPage,
+}: NewsListPaginationProps): JSX.Element | null {
+  const page = React.useContext(BrPageContext);
+
+  if (!page || !showPagination) {
+    return null;
+  }
+
+  return (
+    <nav aria-label="News List Pagination">
+      <ul className="pagination">
+        <li className={`page-item ${previous ? '' : 'disabled'}`}>
+          <Link to={previous ? page.getUrl(`?page=${previousPage}`) : '#'} className="page-link" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+            <span className="sr-only">Previous</span>
+          </Link>
+        </li>
+        {pageNumbersArray.map((pageNumber, key) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <li key={key} className={`page-item ${pageNumber === currentPage ? 'active' : ''}`}>
+            <Link to={page.getUrl(`?page=${pageNumber}`)} className="page-link">
+              {pageNumber}
+            </Link>
+          </li>
+        ))}
+        <li className={`page-item ${next ? '' : 'disabled'}`}>
+          <Link to={next ? page.getUrl(`?page=${nextPage}`) : '#'} className="page-link" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            <span className="sr-only">Next</span>
+          </Link>
+        </li>
+      </ul>
+    </nav>
+  );
+}
+
+export function NewsList({ component, page }: BrProps): JSX.Element | null {
+  const { pageable } = component.getModels<PageableModels>();
 
   if (!pageable) {
     return null;
@@ -28,8 +100,11 @@ export function NewsList(props: BrProps) {
 
   return (
     <div>
-      { pageable.items.map((reference, key) => <NewsListItem key={key} item={props.page.getContent<Document>(reference)!} />) }
-      { props.page.isPreview() && (
+      {pageable.items.map((reference, key) => (
+        // eslint-disable-next-line react/no-array-index-key
+        <NewsListItem key={key} item={page.getContent<Document>(reference)!} />
+      ))}
+      {page.isPreview() && (
         <div className="has-edit-button float-right">
           <BrManageContentButton
             documentTemplateQuery="new-news-document"
@@ -37,64 +112,16 @@ export function NewsList(props: BrProps) {
             root="news"
           />
         </div>
-      ) }
-      <NewsListPagination {...pageable} />
+      )}
+      <NewsListPagination
+        showPagination={pageable.showPagination}
+        previousPage={pageable.previousPage}
+        pageNumbersArray={pageable.pageNumbersArray}
+        currentPage={pageable.currentPage}
+        nextPage={pageable.nextPage}
+        next={pageable.next}
+        previous={pageable.previous}
+      />
     </div>
-  );
-}
-
-interface NewsListItemProps {
-  item: Document;
-}
-
-export function NewsListItem({ item }: NewsListItemProps) {
-  const { author, date, introduction, title } = item.getData<DocumentData>();
-
-  return (
-    <div className="card mb-3">
-      <BrManageContentButton content={item} />
-      <div className="card-body">
-        { title && (
-          <h2 className="card-title">
-            <Link to={item.getUrl()!}>{title}</Link>
-          </h2>
-        ) }
-        { author && <div className="card-subtitle mb-3 text-muted">{author}</div> }
-        { date && <div className="card-subtitle mb-3 small text-muted">{new Date(date).toDateString()}</div> }
-        { introduction && <p className="card-text">{introduction}</p> }
-      </div>
-    </div>
-  );
-}
-
-export function NewsListPagination(props: Pageable) {
-  const page = React.useContext(BrPageContext);
-
-  if (!page || !props.showPagination) {
-    return null;
-  }
-
-  return (
-    <nav aria-label="News List Pagination">
-      <ul className="pagination">
-        <li className={`page-item ${props.previous ? '' : 'disabled'}`}>
-          <Link to={props.previous ? page.getUrl(`?page=${props.previousPage}`) : '#'} className="page-link" aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-            <span className="sr-only">Previous</span>
-          </Link>
-        </li>
-        { props.pageNumbersArray.map((pageNumber, key) => (
-          <li key={key} className={`page-item ${pageNumber === props.currentPage ? 'active' : ''}`}>
-            <Link to={page.getUrl(`?page=${pageNumber}`)} className="page-link">{pageNumber}</Link>
-          </li>
-        )) }
-        <li className={`page-item ${props.next ? '' : 'disabled'}`}>
-          <Link to={props.next ? page.getUrl(`?page=${props.nextPage}`) : '#'} className="page-link" aria-label="Next">
-            <span aria-hidden="true">&raquo;</span>
-            <span className="sr-only">Next</span>
-          </Link>
-        </li>
-      </ul>
-    </nav>
   );
 }

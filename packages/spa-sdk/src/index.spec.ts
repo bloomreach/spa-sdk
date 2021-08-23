@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 Hippo B.V. (http://www.onehippo.com)
+ * Copyright 2019-2021 Hippo B.V. (http://www.onehippo.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { default as model } from './index.fixture.json';
+import model from './index.fixture.json';
 import {
   destroy,
   initialize,
@@ -26,16 +26,17 @@ import {
   TYPE_CONTAINER_BOX,
 } from './index';
 import { PageModel, TYPE_LINK_RESOURCE, TYPE_LINK_EXTERNAL, TYPE_LINK_INTERNAL } from './page';
+import { HttpRequest } from './spa/http';
 
 describe('initialize', () => {
-  let page: Page;
+  let defaultPage: Page;
   const emit = jest.fn();
   const httpClient = jest.fn(async () => ({ data: model as unknown as PageModel }));
 
   beforeEach(async () => {
     emit.mockClear();
     httpClient.mockClear();
-    page = await initialize({
+    defaultPage = await initialize({
       httpClient,
       window,
       baseUrl: '//example.com',
@@ -46,7 +47,11 @@ describe('initialize', () => {
   });
 
   afterEach(() => {
-    destroy(page);
+    destroy(defaultPage);
+
+    document.cookie = 'btm_campaign_id=; Max-Age=0;';
+    document.cookie = 'btm_segment=; Max-Age=0;';
+    document.cookie = 'btm_ttl=; Max-Age=0;';
   });
 
   it('should initialize using endpoint from the query string', async () => {
@@ -64,17 +69,17 @@ describe('initialize', () => {
   });
 
   it('should be a page entity', () => {
-    expect(page.getTitle()).toBe('Homepage');
+    expect(defaultPage.getTitle()).toBe('Homepage');
   });
 
   it('should contain a root component', () => {
-    const root = page.getComponent();
+    const root = defaultPage.getComponent();
     expect(root!.getName()).toBe('test');
     expect(root!.getParameters()).toEqual({});
   });
 
   it('should contain page meta-data', () => {
-    const [meta1, meta2] = page.getComponent()!.getMeta();
+    const [meta1, meta2] = defaultPage.getComponent()!.getMeta();
 
     expect(meta1).toBeDefined();
     expect(meta1.getPosition()).toBe(META_POSITION_END);
@@ -85,20 +90,22 @@ describe('initialize', () => {
     expect(JSON.parse(meta2.getData())).toMatchSnapshot();
   });
 
+  /* eslint-disable max-len */
   it.each`
-    link                   | expected
-    ${''}                  | ${'//example.com/?token=something'}
-    ${'/news'} | ${'//example.com/news?token=something'}
+    link                                                                   | expected
+    ${''}                                                                  | ${'//example.com/?token=something'}
+    ${'/news'}                                                             | ${'//example.com/news?token=something'}
     ${{ href: 'http://127.0.0.1/news?a=b', type: TYPE_LINK_EXTERNAL }}     | ${'http://127.0.0.1/news?a=b'}
     ${{ href: '/news?a=b', type: TYPE_LINK_INTERNAL }}                     | ${'//example.com/news?a=b&token=something'}
     ${{ href: 'news#hash', type: TYPE_LINK_INTERNAL }}                     | ${'//example.com/news?token=something#hash'}
     ${{ href: 'http://127.0.0.1/resource.jpg', type: TYPE_LINK_RESOURCE }} | ${'http://127.0.0.1/resource.jpg'}
   `('should create a URL "$expected" for link "$link"', ({ link, expected }) => {
-    expect(page.getUrl(link)).toBe(expected);
+    expect(defaultPage.getUrl(link)).toBe(expected);
   });
+  /* eslint-enable max-len */
 
   it('should contain a main component', () => {
-    const main = page.getComponent<Container>('main');
+    const main = defaultPage.getComponent<Container>('main');
 
     expect(main).toBeDefined();
     expect(main!.getName()).toBe('main');
@@ -107,7 +114,7 @@ describe('initialize', () => {
   });
 
   it('should contain two banners', () => {
-    const main = page.getComponent<Container>('main');
+    const main = defaultPage.getComponent<Container>('main');
     const children = main!.getChildren();
 
     expect(children.length).toBe(2);
@@ -124,12 +131,12 @@ describe('initialize', () => {
     expect(banner1.isHidden()).toBe(true);
     expect(banner1.getParameters()).toEqual({ document: 'banners/banner2' });
 
-    expect(page.getComponent('main', 'banner')).toBe(banner0);
-    expect(page.getComponent('main', 'banner1')).toBe(banner1);
+    expect(defaultPage.getComponent('main', 'banner')).toBe(banner0);
+    expect(defaultPage.getComponent('main', 'banner1')).toBe(banner1);
   });
 
   it('should contain components meta-data', () => {
-    const [meta1, meta2] = page.getComponent('main', 'banner')!.getMeta();
+    const [meta1, meta2] = defaultPage.getComponent('main', 'banner')!.getMeta();
 
     expect(meta1).toBeDefined();
     expect(meta1.getPosition()).toBe(META_POSITION_BEGIN);
@@ -141,11 +148,11 @@ describe('initialize', () => {
   });
 
   it('should resolve content references', () => {
-    const banner0 = page.getComponent('main', 'banner');
-    const document0 = page.getContent(banner0!.getModels().document);
+    const banner0 = defaultPage.getComponent('main', 'banner');
+    const document0 = defaultPage.getContent(banner0!.getModels().document);
 
-    const banner1 = page.getComponent('main', 'banner1');
-    const document1 = page.getContent(banner1!.getModels().document);
+    const banner1 = defaultPage.getComponent('main', 'banner1');
+    const document1 = defaultPage.getContent(banner1!.getModels().document);
 
     expect(document0).toBeDefined();
     expect(document0!.getName()).toBe('banner1');
@@ -154,8 +161,8 @@ describe('initialize', () => {
   });
 
   it('should contain content meta-data', () => {
-    const banner0 = page.getComponent('main', 'banner');
-    const document0 = page.getContent(banner0!.getModels().document);
+    const banner0 = defaultPage.getComponent('main', 'banner');
+    const document0 = defaultPage.getContent(banner0!.getModels().document);
     const [meta] = document0!.getMeta();
 
     expect(meta).toBeDefined();
@@ -164,29 +171,31 @@ describe('initialize', () => {
   });
 
   it('should rewrite content links', () => {
-    const banner0 = page.getComponent('main', 'banner');
-    const document0 = page.getContent(banner0!.getModels().document);
-    const banner1 = page.getComponent('main', 'banner1');
-    const document1 = page.getContent(banner1!.getModels().document);
+    const banner0 = defaultPage.getComponent('main', 'banner');
+    const document0 = defaultPage.getContent(banner0!.getModels().document);
+    const banner1 = defaultPage.getComponent('main', 'banner1');
+    const document1 = defaultPage.getContent(banner1!.getModels().document);
 
     expect(document0!.getUrl()).toBe('http://127.0.0.1/site/another-spa/banner1.html');
     expect(document1!.getUrl()).toBe('//example.com/banner2.html?token=something');
   });
 
   it('should rewrite links in the HTML blob', () => {
-    const banner = page.getComponent('main', 'banner');
-    const document = page.getContent(banner!.getModels().document);
+    const banner = defaultPage.getComponent('main', 'banner');
+    const document = defaultPage.getContent(banner!.getModels().document);
     const { content } = document!.getData<{ content: any }>();
 
-    expect(page.rewriteLinks(content.value)).toMatchSnapshot();
+    expect(defaultPage.rewriteLinks(content.value)).toMatchSnapshot();
   });
 
   it('should react on a component rendering', async () => {
-    const banner0 = page.getComponent('main', 'banner') as ContainerItem;
-    const banner1 = page.getComponent('main', 'banner1') as ContainerItem;
+    const banner0 = defaultPage.getComponent('main', 'banner') as ContainerItem;
+    const banner1 = defaultPage.getComponent('main', 'banner1') as ContainerItem;
     const listener0 = jest.fn();
     const listener1 = jest.fn();
-    const [[id, containerItemModel]] = Object.entries(model.page).filter(([, { id }]: any) => id === 'r1_r1_r1');
+    const [[id, containerItemModel]] = Object.entries(model.page).filter(
+      ([, { id: pageId }]: any) => pageId === 'r1_r1_r1',
+    );
 
     httpClient.mockClear();
     banner0.on('update', listener0);
@@ -211,7 +220,7 @@ describe('initialize', () => {
       },
       '*',
     );
-    await new Promise(resolve => setTimeout(resolve, 0));
+    await new Promise((resolve) => setTimeout(resolve, 0));
 
     expect(httpClient).toBeCalled();
     expect(httpClient.mock.calls[0]).toMatchSnapshot();
@@ -221,7 +230,7 @@ describe('initialize', () => {
 
   it('should use an origin from the endpoint', async () => {
     const postMessageSpy = spyOn(window.parent, 'postMessage').and.callThrough();
-    await page.sync();
+    await defaultPage.sync();
 
     expect(postMessageSpy).toBeCalledWith(expect.anything(), 'http://localhost:8080');
   });
@@ -255,7 +264,7 @@ describe('initialize', () => {
   });
 
   it('should emit a request event', async () => {
-    expect(emit).toBeCalledWith('br:spa:initialized', page);
+    expect(emit).toBeCalledWith('br:spa:initialized', defaultPage);
   });
 
   it('should use campaign variant id as params from url', async () => {
@@ -264,7 +273,7 @@ describe('initialize', () => {
       window,
       endpoint: 'http://localhost:8080/site/my-spa/resourceapi',
       origin: 'http://localhost:12345',
-      request: { path: '/?btm_campaign=12345&btm_segment=silver' },
+      request: { path: '/?btm_campaign_id=12345&btm_segment=silver' },
     });
 
     expect(httpClient).toBeCalledWith({
@@ -277,10 +286,8 @@ describe('initialize', () => {
   });
 
   it('should use campaign variant id as params from cookie', async () => {
-    Object.defineProperty(window.document, 'cookie', {
-      writable: true,
-      value: 'btm_segment=gold; btm_campaign=12345',
-    });
+    document.cookie = 'btm_segment=gold';
+    document.cookie = 'btm_campaign_id=12345';
 
     const page = await initialize({
       httpClient,
@@ -293,6 +300,107 @@ describe('initialize', () => {
       headers: { 'Accept-Version': '1.0' },
       method: 'GET',
       url: 'http://localhost:8080/site/my-spa/resourceapi/?_campaignVariant=12345%3Agold',
+    });
+
+    destroy(page);
+  });
+
+  it('should use campaign variant id as params from request cookie', async () => {
+    const request: HttpRequest = {
+      headers: { cookie: 'btm_campaign_id=foo; btm_segment=bar' },
+    };
+
+    const page = await initialize({
+      httpClient,
+      request,
+      endpoint: 'http://localhost:8080/site/my-spa/resourceapi',
+      origin: 'http://localhost:12345',
+    });
+
+    expect(httpClient).toBeCalledWith({
+      headers: { 'Accept-Version': '1.0' },
+      method: 'GET',
+      url: 'http://localhost:8080/site/my-spa/resourceapi/?_campaignVariant=foo%3Abar',
+    });
+
+    destroy(page);
+  });
+
+  it('should use campaign variant id as params from request cookie', async () => {
+    const request: HttpRequest = {
+      headers: { cookie: 'btm_campaign_id=foo; btm_segment=bar' },
+    };
+
+    const page = await initialize({
+      httpClient,
+      request,
+      endpoint: 'http://localhost:8080/site/my-spa/resourceapi',
+      origin: 'http://localhost:12345',
+    });
+
+    expect(httpClient).toBeCalledWith({
+      headers: { 'Accept-Version': '1.0' },
+      method: 'GET',
+      url: 'http://localhost:8080/site/my-spa/resourceapi/?_campaignVariant=foo%3Abar',
+    });
+
+    destroy(page);
+  });
+
+  it('should omit campaign variant id if no url params and window does not contain respective cookies', async () => {
+    const page = await initialize({
+      httpClient,
+      endpoint: 'http://localhost:8080/site/my-spa/resourceapi',
+      origin: 'http://localhost:12345',
+    });
+
+    expect(httpClient).toBeCalledWith({
+      headers: { 'Accept-Version': '1.0' },
+      method: 'GET',
+      url: 'http://localhost:8080/site/my-spa/resourceapi/',
+    });
+
+    destroy(page);
+  });
+
+  it('should omit campaign variant id if no url params and request does not contain respective cookies', async () => {
+    const request: HttpRequest = {
+      headers: { cookie: '' },
+    };
+
+    const page = await initialize({
+      httpClient,
+      request,
+      endpoint: 'http://localhost:8080/site/my-spa/resourceapi',
+      origin: 'http://localhost:12345',
+    });
+
+    expect(httpClient).toBeCalledWith({
+      headers: { 'Accept-Version': '1.0' },
+      method: 'GET',
+      url: 'http://localhost:8080/site/my-spa/resourceapi/',
+    });
+
+    destroy(page);
+  });
+
+  it('should omit campaign variant id if url query params contain ttl equal zero', async () => {
+    const request: HttpRequest = {
+      headers: undefined,
+      path: '/?btm_campaign_id=12345&btm_segment=silver&btm_ttl=0',
+    };
+
+    const page = await initialize({
+      httpClient,
+      request,
+      endpoint: 'http://localhost:8080/site/my-spa/resourceapi',
+      origin: 'http://localhost:12345',
+    });
+
+    expect(httpClient).toBeCalledWith({
+      headers: { 'Accept-Version': '1.0' },
+      method: 'GET',
+      url: 'http://localhost:8080/site/my-spa/resourceapi/',
     });
 
     destroy(page);

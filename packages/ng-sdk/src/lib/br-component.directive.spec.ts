@@ -64,16 +64,17 @@ describe('BrComponentDirective', () => {
     } as unknown as typeof page;
   });
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ BrComponentDirective, TemplateComponent, TestComponent ],
-      providers: [
-        { provide: BrPageComponent, useFactory: () => ({ node: template, state: new BehaviorSubject(page) }) },
-        { provide: TemplateRef, useValue: 'Some Template' },
-      ],
-    })
-    .compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [BrComponentDirective, TemplateComponent, TestComponent],
+        providers: [
+          { provide: BrPageComponent, useFactory: () => ({ node: template, state: new BehaviorSubject(page) }) },
+          { provide: TemplateRef, useValue: 'Some Template' },
+        ],
+      }).compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     const templateFixture = TestBed.createComponent(TemplateComponent);
@@ -160,14 +161,13 @@ describe('BrComponentDirective', () => {
     it('should render current node children if the component is not set', () => {
       TestBed.resetTestingModule();
       TestBed.configureTestingModule({
-        declarations: [ BrComponentDirective, TemplateComponent, TestComponent ],
+        declarations: [BrComponentDirective, TemplateComponent, TestComponent],
         providers: [
           { provide: BrNodeDirective, useValue: { component } },
           { provide: BrPageComponent, useValue: { node: template, state: new BehaviorSubject(page) } },
           { provide: TemplateRef, useValue: 'Some Template' },
         ],
-      })
-      .compileComponents();
+      }).compileComponents();
       fixture = TestBed.createComponent(TestComponent);
 
       const child1 = { getName: () => 'child1' } as SpaComponent;

@@ -46,7 +46,9 @@ export interface UrlBuilderOptions {
 @injectable()
 export class UrlBuilderImpl {
   private apiBaseUrl: ReturnType<typeof parseUrl>;
+
   private cmsBaseUrl: ReturnType<typeof parseUrl>;
+
   private spaBaseUrl: ReturnType<typeof parseUrl>;
 
   constructor(@inject(UrlBuilderOptionsToken) options: UrlBuilderOptions) {
@@ -55,7 +57,7 @@ export class UrlBuilderImpl {
     this.spaBaseUrl = parseUrl(options.spaBaseUrl ?? DEFAULT_SPA_BASE_URL);
   }
 
-  getApiUrl(link: string) {
+  getApiUrl(link: string): string {
     const { pathname, searchParams } = parseUrl(link);
 
     // TODO: Remove when HSTTWO-4728 is resolved
@@ -80,7 +82,7 @@ export class UrlBuilderImpl {
     });
   }
 
-  getSpaUrl(link: string) {
+  getSpaUrl(link: string): string {
     const { hash, pathname, searchParams } = parseUrl(link);
     let route = pathname.startsWith(this.cmsBaseUrl.pathname)
       ? pathname.substring(this.cmsBaseUrl.pathname.length)

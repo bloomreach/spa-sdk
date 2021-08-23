@@ -17,11 +17,11 @@
 import { Component, ElementRef, Input, NgModule, TemplateRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component as SpaComponent, MetaCollection, Page } from '@bloomreach/spa-sdk';
+import { BehaviorSubject } from 'rxjs';
 import { BrComponentContext } from './br-component.directive';
 import { BrNodeComponentDirective } from './br-node-component.directive';
 import { BrNodeDirective } from './br-node.directive';
 import { BrPageComponent } from './br-page/br-page.component';
-import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'br-component-test',
@@ -32,6 +32,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 class ComponentTestComponent {
   @Input() component!: SpaComponent;
+
   @Input() page!: Page;
 }
 
@@ -57,6 +58,7 @@ class TemplateComponent {
 @Component({ template: '<ng-container #container [brNodeComponent]="component"></ng-container>' })
 class TestComponent {
   @Input() component!: SpaComponent;
+
   @ViewChild('container') container!: ElementRef<Comment>;
 }
 
@@ -84,17 +86,18 @@ describe('BrNodeComponentDirective', () => {
     } as unknown as typeof page;
   });
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ BrNodeComponentDirective, TemplateComponent, TestComponent ],
-      imports: [ TestModule ],
-      providers: [
-        { provide: BrNodeDirective, useFactory: () => node },
-        { provide: BrPageComponent, useFactory: () => page },
-      ],
-    })
-    .compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [BrNodeComponentDirective, TemplateComponent, TestComponent],
+        imports: [TestModule],
+        providers: [
+          { provide: BrNodeDirective, useFactory: () => node },
+          { provide: BrPageComponent, useFactory: () => page },
+        ],
+      }).compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     const templateFixture = TestBed.createComponent(TemplateComponent);

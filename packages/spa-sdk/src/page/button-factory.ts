@@ -27,7 +27,7 @@ export class ButtonFactory extends SimpleFactory<string, ButtonBuilder> {
     super();
   }
 
-  create(type: string, ...params: unknown[]) {
+  create(type: string, ...params: unknown[]): MetaCollection {
     if (!this.mapping.has(type)) {
       throw new Error(`Unsupported button type: '${type}'.`);
     }

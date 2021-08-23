@@ -44,7 +44,7 @@ export class Spa {
     this.onCmsUpdate = this.onCmsUpdate.bind(this);
   }
 
-  protected async onCmsUpdate(event: CmsUpdateEvent) {
+  protected async onCmsUpdate(event: CmsUpdateEvent): Promise<void> {
     this.logger?.debug('Recieved CMS update event.');
     this.logger?.debug('Event:', event);
 
@@ -72,8 +72,7 @@ export class Spa {
     if (typeof model === 'string') {
       this.logger?.debug('Trying to request the page model.');
 
-      return this.api.getPage(model)
-        .then(this.hydrate.bind(this));
+      return this.api.getPage(model).then(this.hydrate.bind(this));
     }
 
     this.logger?.debug('Received dehydrated model.');
@@ -81,7 +80,7 @@ export class Spa {
     return this.hydrate(model);
   }
 
-  private hydrate(model: PageModel) {
+  private hydrate(model: PageModel): Page {
     this.logger?.debug('Model:', model);
     this.logger?.debug('Hydrating.');
 
@@ -97,7 +96,7 @@ export class Spa {
   /**
    * Destroys the integration with the SPA page.
    */
-  destroy() {
+  destroy(): void {
     this.cmsEventBus?.off('cms.update', this.onCmsUpdate);
     this.eventBus?.clearListeners();
     delete this.page;

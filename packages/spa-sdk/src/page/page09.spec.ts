@@ -81,11 +81,11 @@ describe('PageImpl', () => {
   describe('getButton', () => {
     it('should delegate to the ButtonFactory to create button', () => {
       const page = createPage();
-      const model = {};
+      const testModel = {};
 
-      page.getButton('something', model);
+      page.getButton('something', testModel);
 
-      expect(buttonFactory.create).toHaveBeenCalledWith('something', model);
+      expect(buttonFactory.create).toHaveBeenCalledWith('something', testModel);
     });
   });
 
@@ -148,11 +148,11 @@ describe('PageImpl', () => {
   describe('getMeta', () => {
     it('should delegate to the MetaFactory to create new meta', () => {
       const page = createPage();
-      const model = {};
+      const testModel = {};
 
-      page.getMeta(model);
+      page.getMeta(testModel);
 
-      expect(metaFactory).toHaveBeenCalledWith(model);
+      expect(metaFactory).toHaveBeenCalledWith(testModel);
     });
   });
 
@@ -286,12 +286,14 @@ describe('PageImpl', () => {
 
       expect(page.getContent('content')).toBeUndefined();
 
-      await eventBus.emitSerial('page.update', { page: {
-        ...model,
-        content: {
-          content: { id: 'id', name: 'content' } as ContentModel,
+      await eventBus.emitSerial('page.update', {
+        page: {
+          ...model,
+          content: {
+            content: { id: 'id', name: 'content' } as ContentModel,
+          },
         },
-      } });
+      });
 
       expect(contentFactory).toBeCalledWith({ id: 'id', name: 'content' });
       expect(page.getContent('content')).toBe(content);

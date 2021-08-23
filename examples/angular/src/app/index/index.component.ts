@@ -47,11 +47,7 @@ export class IndexComponent implements OnInit {
 
   private navigationEnd: Observable<NavigationEnd>;
 
-  constructor(
-    router: Router,
-    @Inject(ENDPOINT) endpoint?: string,
-    @Inject(REQUEST) @Optional() request?: Request,
-  ) {
+  constructor(router: Router, @Inject(ENDPOINT) endpoint?: string, @Inject(REQUEST) @Optional() request?: Request) {
     this.configuration = {
       endpoint,
       request,
@@ -60,17 +56,17 @@ export class IndexComponent implements OnInit {
     } as IndexComponent['configuration'];
 
     this.navigationEnd = router.events.pipe(
-      filter(event => event instanceof NavigationEnd),
+      filter((event) => event instanceof NavigationEnd),
     ) as Observable<NavigationEnd>;
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.navigationEnd.subscribe((event) => {
       this.configuration = { ...this.configuration, path: event.url };
     });
   }
 
-  setVisitor(page?: Page) {
+  setVisitor(page?: Page): void {
     this.configuration.visitor = page?.getVisitor();
   }
 }

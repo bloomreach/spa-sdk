@@ -31,30 +31,27 @@ export class ComponentFactory extends SimpleFactory<ComponentType, ComponentBuil
    * Produces a component based on the page model.
    * @param page The page model.
    */
-  create(page: PageModel) {
+  create(page: PageModel): Component | undefined {
     const heap = [page.root];
     const pool = new Map<ComponentModel, Component>();
 
-    // tslint:disable-next-line: no-increment-decrement
+    // eslint-disable-next-line no-plusplus
     for (let i = 0; i < heap.length; i++) {
-      heap.push(...resolve<ComponentModel>(page, heap[i])?.children ?? []);
+      heap.push(...(resolve<ComponentModel>(page, heap[i])?.children ?? []));
     }
 
-    return heap.reverse().reduce<Component | undefined>(
-      (previous, reference) => {
-        const model = resolve<ComponentModel>(page, reference)!;
-        const children = model?.children?.map(child => pool.get(resolve<ComponentModel>(page, child)!)!) ?? [];
-        const component = this.buildComponent(model, children);
+    return heap.reverse().reduce<Component | undefined>((previous, reference) => {
+      const model = resolve<ComponentModel>(page, reference)!;
+      const children = model?.children?.map((child) => pool.get(resolve<ComponentModel>(page, child)!)!) ?? [];
+      const component = this.buildComponent(model, children);
 
-        pool.set(model, component);
+      pool.set(model, component);
 
-        return component;
-      },
-      undefined,
-    );
+      return component;
+    }, undefined);
   }
 
-  private buildComponent(model: ComponentModel, children: Component[]) {
+  private buildComponent(model: ComponentModel, children: Component[]): Component {
     const builder = this.mapping.get(model.type);
     if (!builder) {
       throw new Error(`Unsupported component type: '${model.type}'.`);

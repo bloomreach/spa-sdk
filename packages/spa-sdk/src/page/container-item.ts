@@ -72,6 +72,7 @@ export interface ContainerItemContent<T> {
 /**
  * Container item update event.
  */
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface ContainerItemUpdateEvent {}
 
 export interface ContainerItemEvents {
@@ -129,7 +130,7 @@ export class ContainerItemImpl
     eventBus?.on('page.update', this.onPageUpdate.bind(this));
   }
 
-  protected onPageUpdate(event: PageUpdateEvent) {
+  protected onPageUpdate(event: PageUpdateEvent): void {
     const page = event.page as PageModel;
     const model = resolve<ContainerItemModel>(page, page.root);
     if (model?.id !== this.getId()) {
@@ -144,15 +145,15 @@ export class ContainerItemImpl
     this.emit('update', {});
   }
 
-  getLabel() {
+  getLabel(): string | undefined {
     return this.model.label;
   }
 
-  getType() {
+  getType(): string | undefined {
     return this.model.ctype ?? this.model.label;
   }
 
-  isHidden() {
+  isHidden(): boolean {
     return !!this.model.meta.hidden;
   }
 
@@ -160,7 +161,7 @@ export class ContainerItemImpl
     return (this.model.meta.paramsInfo ?? {}) as T;
   }
 
-  getContentReference() {
+  getContentReference(): Reference | undefined {
     return this.model.content;
   }
 }

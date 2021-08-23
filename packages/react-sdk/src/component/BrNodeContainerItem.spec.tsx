@@ -81,19 +81,33 @@ describe('BrNodeContainerItem', () => {
     });
 
     it('should render undefined container item', () => {
-      const wrapper = shallow(<BrNodeContainerItem {...props}><a/></BrNodeContainerItem>);
+      const wrapper = shallow(
+        <BrNodeContainerItem {...props}>
+          <a />
+        </BrNodeContainerItem>,
+      );
 
-      expect(wrapper.equals(<BrContainerItemUndefined {...props}><a/></BrContainerItemUndefined>)).toBe(true);
+      expect(
+        wrapper.equals(
+          <BrContainerItemUndefined {...props}>
+            <a />
+          </BrContainerItemUndefined>,
+        ),
+      ).toBe(true);
     });
 
     it('should override undefined container item', () => {
       props.component.getType.mockReturnValueOnce('test');
       const wrapper = mount(
-        <BrNodeContainerItem {...props}><a/></BrNodeContainerItem>,
+        <BrNodeContainerItem {...props}>
+          <a />
+        </BrNodeContainerItem>,
         {
           context: {
-            [TYPE_CONTAINER_ITEM_UNDEFINED]: ({ children }: React.PropsWithChildren<typeof props>) => <div>{children}</div>,
-          }
+            [TYPE_CONTAINER_ITEM_UNDEFINED]: ({ children }: React.PropsWithChildren<typeof props>) => (
+              <div>{children}</div>
+            ),
+          },
         },
       );
 

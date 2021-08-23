@@ -31,6 +31,7 @@ export abstract class SimpleFactory<T, U extends Builder<any, any>> implements F
    * @param type The entity type.
    * @param builder The entity builder.
    */
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   register(type: T, builder: U) {
     this.mapping.set(type, builder);
 

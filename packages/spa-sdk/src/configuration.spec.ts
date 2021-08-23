@@ -18,12 +18,14 @@ import { isConfigurationWithProxy } from './configuration';
 
 describe('isConfigurationWithProxy', () => {
   it('should return true if a configuration has correct options', () => {
-    expect(isConfigurationWithProxy({
-      options: {
-        live: {},
-        preview: {},
-      },
-    })).toBe(true);
+    expect(
+      isConfigurationWithProxy({
+        options: {
+          live: {},
+          preview: {},
+        },
+      }),
+    ).toBe(true);
   });
 
   it('should return false', () => {

@@ -54,14 +54,14 @@ export class PostMessage<
     this.onMessage = this.onMessage.bind(this);
   }
 
-  initialize({ origin, window = GLOBAL_WINDOW }: PostMessageOptions) {
+  initialize({ origin, window = GLOBAL_WINDOW }: PostMessageOptions): void {
     this.window?.removeEventListener('message', this.onMessage, false);
     this.origin = origin;
     this.window = window;
     this.window?.addEventListener('message', this.onMessage, false);
   }
 
-  protected send(message: Message) {
+  protected send(message: Message): void {
     if (!this.origin) {
       return;
     }
@@ -70,7 +70,7 @@ export class PostMessage<
     this.window?.parent?.postMessage(message, this.origin);
   }
 
-  private onMessage(event: MessageEvent) {
+  private onMessage(event: MessageEvent): void {
     if (!event.data || !isMatched(event.origin, this.origin === '*' ? '' : this.origin)) {
       return;
     }

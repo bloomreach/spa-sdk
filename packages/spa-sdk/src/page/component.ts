@@ -44,9 +44,16 @@ export const TYPE_COMPONENT_CONTAINER_ITEM = 'container-item';
  */
 export const TYPE_COMPONENT_CONTAINER_ITEM_CONTENT = 'componentcontent';
 
-export type ComponentType = typeof TYPE_COMPONENT
+export type ComponentType =
+  | typeof TYPE_COMPONENT
   | typeof TYPE_COMPONENT_CONTAINER_ITEM
   | typeof TYPE_COMPONENT_CONTAINER;
+
+type ComponentLinks = 'self';
+
+type ComponentModels = Record<string, any>;
+
+type ComponentParameters = Record<string, any>;
 
 /**
  * Meta-data of a component.
@@ -54,12 +61,6 @@ export type ComponentType = typeof TYPE_COMPONENT
 export interface ComponentMeta extends MetaCollectionModel {
   params?: ComponentParameters;
 }
-
-type ComponentLinks = 'self';
-
-type ComponentModels = Record<string, any>;
-
-type ComponentParameters = Record<string, any>;
 
 /**
  * Model of a component.
@@ -140,24 +141,25 @@ export class ComponentImpl implements Component {
     this.meta = metaFactory(this.model.meta);
   }
 
-  getId() {
+  getId(): string {
     return this.model.id;
   }
 
-  getMeta() {
+  getMeta(): MetaCollection {
     return this.meta;
   }
 
   getModels<T extends ComponentModels>(): T;
-  getModels() {
+
+  getModels(): Record<string, unknown> {
     return this.model.models || {};
   }
 
-  getUrl() {
+  getUrl(): string | undefined {
     return this.linkFactory.create(this.model.links.self);
   }
 
-  getName() {
+  getName(): string {
     return this.model.name || '';
   }
 
@@ -165,25 +167,30 @@ export class ComponentImpl implements Component {
     return (this.model.meta.params ?? {}) as T;
   }
 
-  getChildren() {
+  getChildren(): Component[] {
     return this.children;
   }
 
   getComponent(): this;
+
   getComponent<U extends Component>(...componentNames: string[]): U | undefined;
+
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   getComponent(...componentNames: string[]) {
-    // tslint:disable-next-line:no-this-assignment
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     let component: Component | undefined = this;
 
     while (componentNames.length && component) {
       const name = componentNames.shift()!;
-      component = component.getChildren().find(component => component.getName() === name);
+      component = component.getChildren().find((childComponent) => childComponent.getName() === name);
     }
 
     return component;
   }
 
   getComponentById<U extends Component>(id: string): U | this | undefined;
+
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   getComponentById(id: string) {
     const queue = [this as Component];
 
@@ -196,6 +203,8 @@ export class ComponentImpl implements Component {
 
       queue.push(...component.getChildren());
     }
+
+    return undefined;
   }
 }
 

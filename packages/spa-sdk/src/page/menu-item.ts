@@ -22,16 +22,13 @@ import { Link } from './link';
 export const MenuItemFactory = Symbol.for('MenuItemFactory');
 export const MenuItemModelToken = Symbol.for('MenuItemModelToken');
 
-export type MenuItemFactory = Builder<[MenuItemModel], MenuItem>;
-
 type MenuItemLinks = 'site';
-
 export interface MenuItemModel {
   childMenuItems: MenuItemModel[];
   depth: number;
   expanded: boolean;
   name: string;
-  parameters: object;
+  parameters: Record<string, unknown>;
   repositoryBased: boolean;
   selected: boolean;
   links: Partial<Record<MenuItemLinks, Link>>;
@@ -61,7 +58,7 @@ export interface MenuItem {
   /**
    * @return The menu item parameters.
    */
-  getParameters(): object;
+  getParameters(): Record<string, unknown>;
 
   /**
    * @return The menu item url.
@@ -83,6 +80,8 @@ export interface MenuItem {
    */
   isSelected(): boolean;
 }
+
+export type MenuItemFactory = Builder<[MenuItemModel], MenuItem>;
 
 @injectable()
 export class MenuItemImpl implements MenuItem {
@@ -112,7 +111,7 @@ export class MenuItemImpl implements MenuItem {
     return this.model.name;
   }
 
-  getParameters(): object {
+  getParameters(): Record<string, unknown> {
     return this.model.parameters;
   }
 

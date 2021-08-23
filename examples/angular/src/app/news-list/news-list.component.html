@@ -15,7 +15,10 @@
   -->
 
 <ng-template [ngIf]="pagination">
-  <br-news-item *ngFor="let reference of pagination.items" [item]="page.getContent(reference)"></br-news-item>
+  <br-news-item
+    *ngFor="let reference of pagination.items"
+    [item]="page.getContent(reference)"
+  ></br-news-item>
 
   <div *ngIf="page.isPreview()" class="has-edit-button float-right">
     <ng-container
@@ -30,33 +33,41 @@
   <nav *ngIf="pagination.showPagination" aria-label="News List Pagination">
     <ul class="pagination">
       <li class="page-item" [ngClass]="{ disabled: !pagination.previous }">
-        <a class="page-link"
+        <a
+          class="page-link"
           aria-label="Previous"
           routerLink="./"
           [queryParams]="{ page: pagination.previousPage }"
-          queryParamsHandling="merge">
+          queryParamsHandling="merge"
+        >
           <span aria-hidden="true">&laquo;</span>
           <span class="sr-only">Previous</span>
         </a>
       </li>
 
-      <li *ngFor="let page of pagination.pageNumbersArray"
+      <li
+        *ngFor="let page of pagination.pageNumbersArray"
         class="page-item"
-        [ngClass]="{ active: page === pagination.currentPage }">
-        <a class="page-link"
+        [ngClass]="{ active: page === pagination.currentPage }"
+      >
+        <a
+          class="page-link"
           routerLink="./"
           [queryParams]="{ page: page }"
-          queryParamsHandling="merge">
+          queryParamsHandling="merge"
+        >
           {{ page }}
         </a>
       </li>
 
       <li class="page-item" [ngClass]="{ disabled: !pagination.next }">
-        <a class="page-link"
+        <a
+          class="page-link"
           aria-label="Next"
           routerLink="./"
           [queryParams]="{ page: pagination.nextPage }"
-          queryParamsHandling="merge">
+          queryParamsHandling="merge"
+        >
           <span class="sr-only">Next</span>
           <span aria-hidden="true">&raquo;</span>
         </a>

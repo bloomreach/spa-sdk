@@ -15,18 +15,14 @@
  */
 
 import { ComponentFactory } from './component-factory';
-import {
-  ComponentModel,
-  TYPE_COMPONENT,
-  TYPE_COMPONENT_CONTAINER_ITEM,
-  TYPE_COMPONENT_CONTAINER,
-} from './component';
-import  { PageModel } from './page';
+import { TYPE_COMPONENT, TYPE_COMPONENT_CONTAINER_ITEM, TYPE_COMPONENT_CONTAINER } from './component';
+import { PageModel } from './page';
 
-const model = (page: Record<string, unknown>) => ({
-  page,
-  root: { $ref: '/page/root' },
-} as unknown as PageModel);
+const model = (page: Record<string, unknown>) =>
+  ({
+    page,
+    root: { $ref: '/page/root' },
+  } as unknown as PageModel);
 
 describe('ComponentFactory', () => {
   describe('create', () => {
@@ -52,38 +48,42 @@ describe('ComponentFactory', () => {
     });
 
     it('should throw an exception on unknown component type', () => {
-      const factory = new ComponentFactory()
-        .register(TYPE_COMPONENT_CONTAINER_ITEM, jest.fn());
+      const factory = new ComponentFactory().register(TYPE_COMPONENT_CONTAINER_ITEM, jest.fn());
 
-      expect(() => factory.create(model({
-        root: {
-          id: 'id2',
-          name: 'Component 2',
-          type: TYPE_COMPONENT_CONTAINER,
-        },
-      }))).toThrowError();
+      expect(() =>
+        factory.create(
+          model({
+            root: {
+              id: 'id2',
+              name: 'Component 2',
+              type: TYPE_COMPONENT_CONTAINER,
+            },
+          }),
+        ),
+      ).toThrowError();
     });
 
     it('should produce a tree structure', () => {
-      const builder = jest.fn(model => model.id);
-      const factory = new ComponentFactory()
-        .register(TYPE_COMPONENT, builder);
+      const builder = jest.fn(({ id }) => id);
+      const factory = new ComponentFactory().register(TYPE_COMPONENT, builder);
 
-      const root = factory.create(model({
-        root: {
-          id: 'root',
-          children: [{ $ref: '/page/a' }, { $ref: '/page/b' }],
-          type: TYPE_COMPONENT,
-        },
-        a: { id: 'a', type: TYPE_COMPONENT },
-        b: {
-          id: 'b',
-          children: [{ $ref: '/page/c' }, { $ref: '/page/d' }],
-          type: TYPE_COMPONENT,
-        },
-        c: { id: 'c', type: TYPE_COMPONENT },
-        d: { id: 'd', type: TYPE_COMPONENT },
-      }));
+      const root = factory.create(
+        model({
+          root: {
+            id: 'root',
+            children: [{ $ref: '/page/a' }, { $ref: '/page/b' }],
+            type: TYPE_COMPONENT,
+          },
+          a: { id: 'a', type: TYPE_COMPONENT },
+          b: {
+            id: 'b',
+            children: [{ $ref: '/page/c' }, { $ref: '/page/d' }],
+            type: TYPE_COMPONENT,
+          },
+          c: { id: 'c', type: TYPE_COMPONENT },
+          d: { id: 'd', type: TYPE_COMPONENT },
+        }),
+      );
 
       expect(builder).toBeCalledTimes(5);
       expect(builder).nthCalledWith(1, expect.objectContaining({ id: 'd' }), []);

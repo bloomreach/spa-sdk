@@ -69,7 +69,7 @@ describe('CmsImpl', () => {
       cms.initialize({ window });
 
       document.dispatchEvent(new ProgressEvent('readystatechange'));
-      await new Promise(resolve => setTimeout(resolve, 0));
+      await new Promise((resolve) => setTimeout(resolve, 0));
 
       expect(rpcServer.trigger).not.toHaveBeenCalled();
     });
@@ -80,7 +80,7 @@ describe('CmsImpl', () => {
       cms.initialize({ window });
 
       document.dispatchEvent(new ProgressEvent('readystatechange'));
-      await new Promise(resolve => setTimeout(resolve, 0));
+      await new Promise((resolve) => setTimeout(resolve, 0));
 
       expect(rpcServer.trigger).toHaveBeenCalledWith('ready', undefined);
     });
@@ -122,7 +122,7 @@ describe('CmsImpl', () => {
     const getDocument = jest.fn<Document | undefined, []>(() => sourceDocument);
 
     beforeEach(() => {
-      ([[, inject]] = rpcServer.register.mock.calls);
+      [[, inject]] = rpcServer.register.mock.calls;
       cms.initialize({ window });
       Object.defineProperty(window, 'document', { get: getDocument });
     });

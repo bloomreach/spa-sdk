@@ -19,57 +19,33 @@ import Link from 'next/link';
 import { Document } from '@bloomreach/spa-sdk';
 import { BrManageContentButton, BrPageContext, BrProps } from '@bloomreach/react-sdk';
 
-export function NewsList(props: BrProps) {
-  const { pageable } = props.component.getModels<PageableModels>();
-
-  if (!pageable) {
-    return null;
-  }
-
-  return (
-    <div>
-      { pageable.items.map((reference, key) => <NewsListItem key={key} item={props.page.getContent<Document>(reference)!} />) }
-      { props.page.isPreview() && (
-        <div className="has-edit-button float-right">
-          <BrManageContentButton
-            documentTemplateQuery="new-news-document"
-            folderTemplateQuery="new-news-folder"
-            root="news"
-          />
-        </div>
-      ) }
-      <NewsListPagination {...pageable} />
-    </div>
-  );
-}
-
 interface NewsListItemProps {
   item: Document;
 }
 
-export function NewsListItem({ item }: NewsListItemProps) {
+export function NewsListItem({ item }: NewsListItemProps): JSX.Element {
   const { author, date, introduction, title } = item.getData<DocumentData>();
 
   return (
     <div className="card mb-3">
       <BrManageContentButton content={item} />
       <div className="card-body">
-        { title && (
+        {title && (
           <h2 className="card-title">
             <Link href={item.getUrl() ?? '/'}>
               <a>{title}</a>
             </Link>
           </h2>
-        ) }
-        { author && <div className="card-subtitle mb-3 text-muted">{author}</div> }
-        { date && <div className="card-subtitle mb-3 small text-muted">{new Date(date).toDateString()}</div> }
-        { introduction && <p className="card-text">{introduction}</p> }
+        )}
+        {author && <div className="card-subtitle mb-3 text-muted">{author}</div>}
+        {date && <div className="card-subtitle mb-3 small text-muted">{new Date(date).toDateString()}</div>}
+        {introduction && <p className="card-text">{introduction}</p>}
       </div>
     </div>
   );
 }
 
-export function NewsListPagination(props: Pageable) {
+export function NewsListPagination(props: Pageable): JSX.Element | null {
   const page = React.useContext(BrPageContext);
 
   if (!page || !props.showPagination) {
@@ -87,13 +63,13 @@ export function NewsListPagination(props: Pageable) {
             </a>
           </Link>
         </li>
-        { props.pageNumbersArray.map((pageNumber, key) => (
+        {props.pageNumbersArray.map((pageNumber, key) => (
           <li key={key} className={`page-item ${pageNumber === props.currentPage ? 'active' : ''}`}>
             <Link href={page.getUrl(`?page=${pageNumber}`)}>
               <a className="page-link">{pageNumber}</a>
             </Link>
           </li>
-        )) }
+        ))}
         <li className={`page-item ${props.next ? '' : 'disabled'}`}>
           <Link href={props.next ? page.getUrl(`?page=${props.nextPage}`) : '/'}>
             <a className="page-link" aria-label="Next">
@@ -104,5 +80,31 @@ export function NewsListPagination(props: Pageable) {
         </li>
       </ul>
     </nav>
+  );
+}
+
+export function NewsList(props: BrProps): JSX.Element | null {
+  const { pageable } = props.component.getModels<PageableModels>();
+
+  if (!pageable) {
+    return null;
+  }
+
+  return (
+    <div>
+      {pageable.items.map((reference, key) => (
+        <NewsListItem key={key} item={props.page.getContent<Document>(reference)!} />
+      ))}
+      {props.page.isPreview() && (
+        <div className="has-edit-button float-right">
+          <BrManageContentButton
+            documentTemplateQuery="new-news-document"
+            folderTemplateQuery="new-news-folder"
+            root="news"
+          />
+        </div>
+      )}
+      <NewsListPagination {...pageable} />
+    </div>
   );
 }

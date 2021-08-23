@@ -17,11 +17,11 @@
 import { SimpleFactory } from './factory';
 
 describe('SimpleFactory', () => {
-  const factory = new class extends SimpleFactory<string, (param: string) => string> {
+  const factory = new (class extends SimpleFactory<string, (param: string) => string> {
     create(param: string) {
-      this.mapping.forEach(builder => builder(param));
+      this.mapping.forEach((builder) => builder(param));
     }
-  };
+  })();
 
   describe('register', () => {
     it('should provide a fluent interface', () => {

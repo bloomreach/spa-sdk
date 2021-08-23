@@ -22,9 +22,7 @@ describe('ContentFactory', () => {
     it('should call a registered builder', () => {
       const builder1 = jest.fn(() => 'content1');
       const builder2 = jest.fn(() => 'content2');
-      const factory = new ContentFactory()
-        .register('type1', builder1)
-        .register('type2', builder2);
+      const factory = new ContentFactory().register('type1', builder1).register('type2', builder2);
 
       factory.create({ id: 'id1', type: 'type1' } as ContentModel);
       factory.create({ id: 'id2', type: 'type2' } as ContentModel);

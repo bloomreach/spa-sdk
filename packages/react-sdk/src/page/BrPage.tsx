@@ -63,62 +63,74 @@ export class BrPage extends React.Component<BrPageProps, BrPageState> {
     this.state = { page: props.page && initialize(props.configuration, props.page) };
   }
 
-  componentDidMount() {
-    if (!this.props.page) {
+  componentDidMount(): void {
+    const { page } = this.props;
+
+    if (!page) {
       this.initialize();
     }
 
-    this.state.page?.sync();
+    const { page: pageInState } = this.state;
+    pageInState?.sync();
   }
 
-  componentDidUpdate(prevProps: BrPageProps, prevState: BrPageState) {
-    if (this.props.configuration !== prevProps.configuration || this.props.page !== prevProps.page) {
+  componentDidUpdate(prevProps: BrPageProps, prevState: BrPageState): void {
+    const { configuration, page } = this.props;
+
+    if (configuration !== prevProps.configuration || page !== prevProps.page) {
       this.destroy();
-      this.initialize(this.props.page === prevProps.page);
+      this.initialize(page === prevProps.page);
     }
 
-    if (this.state.page !== prevState.page) {
-      this.forceUpdate(() => this.state.page?.sync());
+    const { page: pageInState } = this.state;
+
+    if (pageInState !== prevState.page) {
+      this.forceUpdate(() => pageInState?.sync());
     }
   }
 
-  componentWillUnmount() {
+  componentWillUnmount(): void {
     this.destroy();
   }
 
-  private async initialize(force = false) {
-    const model = force ? undefined : this.props.page;
+  private async initialize(force = false): Promise<void> {
+    const { page, configuration } = this.props;
+    const model = force ? undefined : page;
 
     try {
       this.setState({
-        page: model
-          ? initialize(this.props.configuration, model)
-          : await initialize(this.props.configuration),
+        page: model ? initialize(configuration, model) : await initialize(configuration),
       });
     } catch (error) {
-      this.setState(() => { throw error; });
+      this.setState(() => {
+        throw error;
+      });
     }
   }
 
-  private destroy() {
-    if (!this.state.page) {
+  private destroy(): void {
+    const { page } = this.state;
+
+    if (!page) {
       return;
     }
 
-    destroy(this.state.page);
+    destroy(page);
   }
 
-  render () {
-    if (!this.state.page) {
+  render(): JSX.Element | null {
+    const { page } = this.state;
+
+    if (!page) {
       return null;
     }
 
+    const { mapping, children } = this.props;
+
     return (
-      <BrPageContext.Provider value={this.state.page}>
-        <BrMappingContext.Provider value={this.props.mapping}>
-          <BrNode component={this.state.page.getComponent()}>
-            {this.props.children}
-          </BrNode>
+      <BrPageContext.Provider value={page}>
+        <BrMappingContext.Provider value={mapping}>
+          <BrNode component={page.getComponent()}>{children}</BrNode>
         </BrMappingContext.Provider>
       </BrPageContext.Provider>
     );

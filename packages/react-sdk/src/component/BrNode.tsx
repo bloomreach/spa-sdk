@@ -29,45 +29,48 @@ interface BrNodeProps {
 
 export class BrNode extends React.Component<BrNodeProps> {
   static contextType = BrPageContext;
+
   context: React.ContextType<typeof BrPageContext>;
 
-  private renderNode() {
-    if (React.Children.count(this.props.children)) {
-      return this.props.children;
+  private renderNode(): JSX.Element | React.ReactNode {
+    const { children, component } = this.props;
+
+    if (React.Children.count(children)) {
+      return children;
     }
 
-    const children = this.props.component.getChildren()
-      .map((child, index) => <BrNode key={index} component={child} />);
+    // eslint-disable-next-line react/no-array-index-key
+    const childrenList = component.getChildren().map((child, index) => <BrNode key={index} component={child} />);
 
-    if (isContainer(this.props.component)) {
+    if (isContainer(component)) {
       return (
-        <BrNodeContainer component={this.props.component} page={this.context!}>
-          {children}
+        <BrNodeContainer component={component} page={this.context!}>
+          {childrenList}
         </BrNodeContainer>
       );
     }
 
-    if (isContainerItem(this.props.component)) {
+    if (isContainerItem(component)) {
       return (
-        <BrNodeContainerItem component={this.props.component} page={this.context!}>
-          {children}
+        <BrNodeContainerItem component={component} page={this.context!}>
+          {childrenList}
         </BrNodeContainerItem>
       );
     }
 
     return (
-      <BrNodeComponent component={this.props.component} page={this.context!}>
-        {children}
+      <BrNodeComponent component={component} page={this.context!}>
+        {childrenList}
       </BrNodeComponent>
     );
   }
 
-  render() {
-    return(
-      <BrComponentContext.Provider value={this.props.component}>
-        <BrMeta meta={this.props.component.getMeta()}>
-          {this.renderNode()}
-        </BrMeta>
+  render(): JSX.Element {
+    const { component } = this.props;
+
+    return (
+      <BrComponentContext.Provider value={component}>
+        <BrMeta meta={component.getMeta()}>{this.renderNode()}</BrMeta>
       </BrComponentContext.Provider>
     );
   }

@@ -18,7 +18,7 @@ import { ContainerModule } from 'inversify';
 import { ConsoleLogger, ConsoleToken } from './console';
 import { Logger } from './logger';
 
-export function LoggerModule() {
+export function LoggerModule(): ContainerModule {
   return new ContainerModule((bind) => {
     bind(ConsoleToken).toConstantValue(console);
     bind(ConsoleLogger).toSelf().inSingletonScope();

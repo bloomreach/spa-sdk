@@ -21,13 +21,14 @@ import { BrMappingContext } from './BrMappingContext';
 
 export class BrNodeComponent<T extends Component> extends React.Component<BrProps<T>> {
   static contextType = BrMappingContext;
+
   context!: React.ContextType<typeof BrMappingContext>;
 
   protected getMapping(): React.ComponentType<BrProps> | undefined {
     return this.context[this.props.component.getName()] as React.ComponentType<BrProps>;
   }
 
-  render() {
+  render(): React.ReactNode {
     const mapping = this.getMapping();
     if (!mapping) {
       return this.props.children;

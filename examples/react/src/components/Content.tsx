@@ -18,9 +18,9 @@ import React from 'react';
 import { Document, ImageSet } from '@bloomreach/spa-sdk';
 import { BrManageContentButton, BrProps } from '@bloomreach/react-sdk';
 
-export function Content(props: BrProps) {
-  const { document: documentRef } = props.component.getModels<DocumentModels>();
-  const document = documentRef && props.page.getContent<Document>(documentRef);
+export function Content({ component, page }: BrProps): JSX.Element | null {
+  const { document: documentRef } = component.getModels<DocumentModels>();
+  const document = documentRef && page.getContent<Document>(documentRef);
 
   if (!document) {
     return null;
@@ -32,17 +32,19 @@ export function Content(props: BrProps) {
     publicationDate,
     date = publicationDate,
     image: imageRef,
-    title } = document.getData<DocumentData>();
-  const image = imageRef && props.page.getContent<ImageSet>(imageRef);
+    title,
+  } = document.getData<DocumentData>();
+  const image = imageRef && page.getContent<ImageSet>(imageRef);
 
   return (
-    <div className={props.page.isPreview() ? 'has-edit-button' : ''}>
+    <div className={page.isPreview() ? 'has-edit-button' : ''}>
       <BrManageContentButton content={document} />
-      { image && <img className="img-fluid mb-3" src={image.getOriginal()?.getUrl()} alt={title} /> }
-      { title && <h1>{title}</h1> }
-      { author && <p className="mb-3 text-muted">{author}</p> }
-      { date && <p className="mb-3 small text-muted">{new Date(date).toDateString()}</p> }
-      { content && <div dangerouslySetInnerHTML={{ __html: props.page.rewriteLinks(content.value) }} /> }
+      {image && <img className="img-fluid mb-3" src={image.getOriginal()?.getUrl()} alt={title} />}
+      {title && <h1>{title}</h1>}
+      {author && <p className="mb-3 text-muted">{author}</p>}
+      {date && <p className="mb-3 small text-muted">{new Date(date).toDateString()}</p>}
+      {/* eslint-disable-next-line react/no-danger */}
+      {content && <div dangerouslySetInnerHTML={{ __html: page.rewriteLinks(content.value) }} />}
     </div>
   );
 }

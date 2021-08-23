@@ -32,16 +32,16 @@ import {
   TemplateRef,
   Type,
   ViewChild,
-  EventEmitter
+  EventEmitter,
 } from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {isPlatformBrowser, isPlatformServer} from '@angular/common';
-import {makeStateKey, StateKey, TransferState} from '@angular/platform-browser';
-import {from, of, BehaviorSubject, Subject} from 'rxjs';
-import {filter, map, mapTo, pairwise, pluck, switchMap, take} from 'rxjs/operators';
-import {destroy, initialize, isPage, Configuration, Page, PageModel} from '@bloomreach/spa-sdk';
-import {BrComponentContext} from '../br-component.directive';
-import {BrProps} from '../br-props.model';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
+import { makeStateKey, StateKey, TransferState } from '@angular/platform-browser';
+import { from, of, BehaviorSubject, Subject } from 'rxjs';
+import { filter, map, mapTo, pairwise, pluck, switchMap, take } from 'rxjs/operators';
+import { destroy, initialize, isPage, Configuration, Page, PageModel } from '@bloomreach/spa-sdk';
+import { BrComponentContext } from '../br-component.directive';
+import { BrProps } from '../br-props.model';
 
 interface BrNodeContext extends BrComponentContext {
   template?: TemplateRef<BrComponentContext>;
@@ -90,9 +90,9 @@ export class BrPageComponent implements AfterContentChecked, OnChanges, OnDestro
    */
   @Output() httpError = new EventEmitter<HttpErrorResponse>();
 
-  @ViewChild('brNode', {static: true}) node!: TemplateRef<BrNodeContext>;
+  @ViewChild('brNode', { static: true }) node!: TemplateRef<BrNodeContext>;
 
-  @ContentChild(TemplateRef, {static: true}) private template?: TemplateRef<BrComponentContext>;
+  @ContentChild(TemplateRef, { static: true }) private template?: TemplateRef<BrComponentContext>;
 
   private afterContentChecked$ = new Subject();
 
@@ -105,23 +105,20 @@ export class BrPageComponent implements AfterContentChecked, OnChanges, OnDestro
   ) {
     this.request = this.request.bind(this);
 
-    this.state.pipe(
-      pairwise(),
-      pluck(0),
-      filter(isPage),
-    )
-      .subscribe(destroy);
+    this.state.pipe(pairwise(), pluck(0), filter(isPage)).subscribe(destroy);
 
-    this.state.pipe(
-      filter(isPage),
-      switchMap((page) => this.afterContentChecked$.pipe(take(1), mapTo(page))),
-    )
+    this.state
+      .pipe(
+        filter(isPage),
+        switchMap((page) => this.afterContentChecked$.pipe(take(1), mapTo(page))),
+      )
       .subscribe((page) => zone.runOutsideAngular(() => page.sync()));
 
-    this.state.pipe(
-      filter(() => isPlatformServer(this.platform)),
-      filter(isPage),
-    )
+    this.state
+      .pipe(
+        filter(() => isPlatformServer(this.platform)),
+        filter(isPage),
+      )
       .subscribe((page) => this.stateKey && this.transferState?.set(this.stateKey, page.toJSON()));
   }
 
@@ -130,7 +127,7 @@ export class BrPageComponent implements AfterContentChecked, OnChanges, OnDestro
     const component = page?.getComponent();
 
     if (!page || !component) {
-      return;
+      return undefined;
     }
 
     return {
@@ -174,29 +171,26 @@ export class BrPageComponent implements AfterContentChecked, OnChanges, OnDestro
       this.transferState?.remove(this.stateKey);
     }
 
-    const configuration = {httpClient: this.request, ...this.configuration} as Configuration;
-    const observable = page
-      ? of(initialize(configuration, page))
-      : from(initialize(configuration));
+    const configuration = { httpClient: this.request, ...this.configuration } as Configuration;
+    const observable = page ? of(initialize(configuration, page)) : from(initialize(configuration));
 
-    observable.subscribe(state => {
+    observable.subscribe((state) => {
       this.state.next(state);
       this.changeDetectorRef.detectChanges();
     });
   }
 
-  private request(...[{data: body, headers, method, url}]: Parameters<Configuration['httpClient']>) {
-    return this.httpClient.request<PageModel>(
-      method,
-      url,
-      {
+  private request(...[{ data: body, headers, method, url }]: Parameters<Configuration['httpClient']>): Promise<void | {
+    data: PageModel;
+  }> {
+    return this.httpClient
+      .request<PageModel>(method, url, {
         body,
         headers: headers as Record<string, string | string[]>,
-        responseType: 'json'
-      },
-    )
-      .pipe(map(data => ({data})))
+        responseType: 'json',
+      })
+      .pipe(map((data) => ({ data })))
       .toPromise()
-      .catch(error => this.httpError.emit(error));
+      .catch((error) => this.httpError.emit(error));
   }
 }

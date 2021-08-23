@@ -55,8 +55,8 @@ export class MetaCollectionImpl extends Array<Meta> implements MetaCollection {
     @inject(MetaFactory) metaFactory: MetaFactory,
   ) {
     super(
-      ...(model.beginNodeSpan || []).map(model => metaFactory.create(model, META_POSITION_BEGIN)),
-      ...(model.endNodeSpan || []).map(model => metaFactory.create(model, META_POSITION_END)),
+      ...(model.beginNodeSpan || []).map((beginModel) => metaFactory.create(beginModel, META_POSITION_BEGIN)),
+      ...(model.endNodeSpan || []).map((endModel) => metaFactory.create(endModel, META_POSITION_END)),
     );
 
     const prototype = Object.create(MetaCollectionImpl.prototype);
@@ -66,7 +66,7 @@ export class MetaCollectionImpl extends Array<Meta> implements MetaCollection {
     Object.freeze(this);
   }
 
-  clear(comments = [...this.comments]) {
+  clear(comments = [...this.comments]): void {
     comments.forEach((comment) => {
       comment.remove();
 
@@ -77,33 +77,33 @@ export class MetaCollectionImpl extends Array<Meta> implements MetaCollection {
     });
   }
 
-  render(head: Node, tail: Node) {
+  render(head: Node, tail: Node): () => void {
     const document = head.ownerDocument ?? tail.ownerDocument;
     const comments = document
       ? [
-        ...this.filter(isMetaComment)
-          .filter(meta => meta.getPosition() === META_POSITION_BEGIN)
-          .map(meta => document.createComment(meta.getData()))
-          .map((comment) => {
-            head.parentNode?.insertBefore(comment, head);
+          ...this.filter(isMetaComment)
+            .filter((meta) => meta.getPosition() === META_POSITION_BEGIN)
+            .map((meta) => document.createComment(meta.getData()))
+            .map((comment) => {
+              head.parentNode?.insertBefore(comment, head);
 
-            return comment;
-          }),
+              return comment;
+            }),
 
-        ...this.filter(isMetaComment)
-          .filter(meta => meta.getPosition() === META_POSITION_END)
-          .reverse()
-          .map(meta => document.createComment(meta.getData()))
-          .map((comment) => {
-            if (tail.nextSibling) {
-              tail.parentNode?.insertBefore(comment, tail.nextSibling);
-            } else {
-              tail.parentNode?.appendChild(comment);
-            }
+          ...this.filter(isMetaComment)
+            .filter((meta) => meta.getPosition() === META_POSITION_END)
+            .reverse()
+            .map((meta) => document.createComment(meta.getData()))
+            .map((comment) => {
+              if (tail.nextSibling) {
+                tail.parentNode?.insertBefore(comment, tail.nextSibling);
+              } else {
+                tail.parentNode?.appendChild(comment);
+              }
 
-            return comment;
-          }),
-      ]
+              return comment;
+            }),
+        ]
       : [];
 
     this.comments.push(...comments);

@@ -36,13 +36,13 @@ export abstract class Logger implements Logger {
     this.error = this.log.bind(this, Level.Error);
   }
 
-  private log(level: Level, ...message: unknown[]) {
+  private log(level: Level, ...message: unknown[]): void {
     const levels = Object.values(Level);
     if (!levels.includes(level) || levels.indexOf(level) < levels.indexOf(this.level)) {
       return;
     }
 
-    return this.write(level, '[SPA]', `[${level.toUpperCase()}]`, ...message);
+    this.write(level, '[SPA]', `[${level.toUpperCase()}]`, ...message);
   }
 
   protected abstract write(level: Level, ...message: unknown[]): void;

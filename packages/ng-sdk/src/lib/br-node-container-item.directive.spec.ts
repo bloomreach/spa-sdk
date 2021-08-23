@@ -19,9 +19,7 @@ import { Component, Input, NgModule } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { BehaviorSubject } from 'rxjs';
 import { ContainerItem, TYPE_CONTAINER_ITEM_UNDEFINED } from '@bloomreach/spa-sdk';
-import {
-  BrContainerItemUndefinedComponent,
-} from './br-container-item-undefined/br-container-item-undefined.component';
+import { BrContainerItemUndefinedComponent } from './br-container-item-undefined/br-container-item-undefined.component';
 import { BrNodeContainerItemDirective } from './br-node-container-item.directive';
 import { BrNodeDirective } from './br-node.directive';
 import { BrPageComponent } from './br-page/br-page.component';
@@ -73,17 +71,18 @@ describe('BrNodeContainerItemDirective', () => {
     } as unknown as typeof page;
   });
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ TestComponent, BrNodeContainerItemDirective ],
-      imports: [ TestModule ],
-      providers: [
-        { provide: BrNodeDirective, useFactory: () => node },
-        { provide: BrPageComponent, useFactory: () => page },
-      ],
-    })
-    .compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [TestComponent, BrNodeContainerItemDirective],
+        imports: [TestModule],
+        providers: [
+          { provide: BrNodeDirective, useFactory: () => node },
+          { provide: BrPageComponent, useFactory: () => page },
+        ],
+      }).compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TestComponent);

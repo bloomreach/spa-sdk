@@ -62,9 +62,9 @@ describe('ImageImpl', () => {
     });
 
     it('should return an image file name', () => {
-      const image = createImage({ ...model, fileName: 'something.jpg' });
+      const imageWithFileName = createImage({ ...model, fileName: 'something.jpg' });
 
-      expect(image.getFileName()).toBe('something.jpg');
+      expect(imageWithFileName.getFileName()).toBe('something.jpg');
     });
   });
 

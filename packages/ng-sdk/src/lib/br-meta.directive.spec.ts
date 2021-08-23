@@ -38,16 +38,17 @@ describe('BrMetaDirective', () => {
     meta = { render: jest.fn(() => clear) } as unknown as typeof meta;
   });
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ BrMetaTestDirective, TestComponent ],
-    })
-    .compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [BrMetaTestDirective, TestComponent],
+      }).compileComponents();
 
-    fixture = TestBed.createComponent(TestComponent);
-    fixture.componentInstance.meta = meta;
-    fixture.detectChanges();
-  }));
+      fixture = TestBed.createComponent(TestComponent);
+      fixture.componentInstance.meta = meta;
+      fixture.detectChanges();
+    }),
+  );
 
   describe('ngOnChanges', () => {
     describe('when there is no template', () => {

@@ -18,10 +18,11 @@ import { Level } from './level';
 import { Logger } from './logger';
 
 describe('Logger', () => {
-  const logger = new class extends Logger {
+  const logger = new (class extends Logger {
     level = Level.Warn;
+
     write = jest.fn();
-  }();
+  })();
 
   beforeEach(() => {
     jest.clearAllMocks();

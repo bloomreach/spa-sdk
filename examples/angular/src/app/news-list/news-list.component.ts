@@ -23,9 +23,10 @@ import { Component as BrComponent, Page } from '@bloomreach/spa-sdk';
 })
 export class NewsListComponent {
   @Input() component!: BrComponent;
+
   @Input() page!: Page;
 
-  get pagination() {
+  get pagination(): Pageable {
     return this.component.getModels<PageableModels>().pageable;
   }
 }

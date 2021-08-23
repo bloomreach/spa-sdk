@@ -68,7 +68,7 @@ describe('Spa', () => {
   });
 
   describe('initialize', () => {
-    beforeEach(async () => await spa.initialize(config.request.path));
+    beforeEach(async () => spa.initialize(config.request.path));
 
     it('should get page through an API', () => {
       expect(api.getPage).toBeCalledWith(config.request.path);
@@ -76,11 +76,11 @@ describe('Spa', () => {
 
     it('should use a page model from the arguments', () => {
       jest.clearAllMocks();
-      const model = {} as PageModel;
+      const pageModel = {} as PageModel;
 
-      spa.initialize(model);
+      spa.initialize(pageModel);
       expect(api.getPage).not.toBeCalled();
-      expect(pageFactory).toBeCalledWith(model);
+      expect(pageFactory).toBeCalledWith(pageModel);
     });
 
     it('should create a page instance', () => {
@@ -95,7 +95,9 @@ describe('Spa', () => {
 
     it('should reject a promise when fetching the page model fails', () => {
       const error = new Error('Failed to fetch page model data');
-      api.getPage.mockImplementationOnce(async () => { throw error; });
+      api.getPage.mockImplementationOnce(async () => {
+        throw error;
+      });
       const promise = spa.initialize(config.request.path);
 
       expect.assertions(1);

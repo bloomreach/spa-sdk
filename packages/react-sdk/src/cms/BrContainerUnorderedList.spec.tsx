@@ -32,23 +32,29 @@ describe('BrContainerUnorderedList', () => {
   it('should render itself as ul element', () => {
     const wrapper = shallow(<BrContainerUnorderedList {...props} />);
 
-    expect(wrapper.equals(<ul/>)).toBe(true);
+    expect(wrapper.equals(<ul />)).toBe(true);
   });
 
   it('should render children as li elements', () => {
     const wrapper = shallow(
       <BrContainerUnorderedList {...props}>
-        <a/>
-        <b/>
-      </BrContainerUnorderedList>
+        <a />
+        <b />
+      </BrContainerUnorderedList>,
     );
 
-    expect(wrapper.equals(
-      <ul>
-        <li><a/></li>
-        <li><b/></li>
-      </ul>
-    )).toBe(true);
+    expect(
+      wrapper.equals(
+        <ul>
+          <li>
+            <a />
+          </li>
+          <li>
+            <b />
+          </li>
+        </ul>,
+      ),
+    ).toBe(true);
   });
 
   it('should render preview classes', () => {
@@ -56,16 +62,22 @@ describe('BrContainerUnorderedList', () => {
 
     const wrapper = shallow(
       <BrContainerUnorderedList {...props}>
-        <a/>
-        <b/>
-      </BrContainerUnorderedList>
+        <a />
+        <b />
+      </BrContainerUnorderedList>,
     );
 
-    expect(wrapper.equals(
-      <ul className="hst-container">
-        <li className="hst-container-item"><a/></li>
-        <li className="hst-container-item"><b/></li>
-      </ul>
-    )).toBe(true);
+    expect(
+      wrapper.equals(
+        <ul className="hst-container">
+          <li className="hst-container-item">
+            <a />
+          </li>
+          <li className="hst-container-item">
+            <b />
+          </li>
+        </ul>,
+      ),
+    ).toBe(true);
   });
 });

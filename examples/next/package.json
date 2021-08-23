@@ -1,12 +1,13 @@
 {
   "name": "@bloomreach/example-next",
-  "version": "15.0.1-0",
+  "version": "15.1.0",
   "description": "Example Next.js SPA for Bloomreach Experience",
   "private": true,
   "author": "Bloomreach B.V.",
   "license": "Apache-2.0",
   "dependencies": {
-    "@bloomreach/react-sdk": "15.0.1-0",
+    "@bloomreach/react-sdk": "15.1.0",
+    "@bloomreach/spa-sdk": "15.1.0",
     "axios": "0.21.1",
     "next": "10.2.3",
     "next-routes": "1.4.2",
@@ -14,14 +15,21 @@
     "react-dom": "16.14.0"
   },
   "devDependencies": {
+    "@bloomreach/eslint-config-next": "1.0.1",
     "@types/node": "14.17.3",
     "@types/react": "16.14.0",
-    "@types/react-dom": "16.9.14"
+    "@types/react-dom": "16.9.14",
+    "eslint": "7.32.0"
   },
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start -p ${PORT:-3000}"
+    "start": "next start -p ${PORT:-3000}",
+    "lint": "eslint --ext js,ts,tsx ."
   },
-  "stableVersion": "15.0.0"
+  "eslintConfig": {
+    "extends": [
+      "@bloomreach/eslint-config-next"
+    ]
+  }
 }

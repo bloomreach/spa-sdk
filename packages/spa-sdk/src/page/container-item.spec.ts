@@ -133,13 +133,12 @@ describe('ContainerItemImpl', () => {
     });
 
     it('should not update a container item if it is not the same container item', async () => {
-      await eventBus.emitSerial(
-        'page.update',
-        { page: {
+      await eventBus.emitSerial('page.update', {
+        page: {
           page: { ...model, id: 'id2', label: 'b' },
           root: { $ref: '/page/id2' },
-        } as unknown as PageModel },
-      );
+        } as unknown as PageModel,
+      });
 
       expect(metaFactory).not.toBeCalled();
       expect(containerItem.getType()).toBe('a');
@@ -149,30 +148,24 @@ describe('ContainerItemImpl', () => {
       const metaModel = {};
       const meta = {} as MetaCollection;
       metaFactory.mockReturnValueOnce(meta);
-      await eventBus.emitSerial(
-        'page.update',
-        {
-          page: {
-            page: { root: { ...model, id: 'id1', meta: metaModel } },
-            root: { $ref: '/page/root' },
-          } as unknown as PageModel,
-        },
-      );
+      await eventBus.emitSerial('page.update', {
+        page: {
+          page: { root: { ...model, id: 'id1', meta: metaModel } },
+          root: { $ref: '/page/root' },
+        } as unknown as PageModel,
+      });
 
       expect(metaFactory).toBeCalledWith(metaModel);
       expect(containerItem.getMeta()).toBe(meta);
     });
 
     it('should update a model on page.update event', async () => {
-      await eventBus.emitSerial(
-        'page.update',
-        {
-          page: {
-            page: { root: { ...model, id: 'id1', label: 'b' } },
-            root: { $ref: '/page/root' },
-          } as unknown as PageModel,
-        },
-      );
+      await eventBus.emitSerial('page.update', {
+        page: {
+          page: { root: { ...model, id: 'id1', label: 'b' } },
+          root: { $ref: '/page/root' },
+        } as unknown as PageModel,
+      });
 
       expect(containerItem.getType()).toBe('b');
     });
@@ -181,15 +174,12 @@ describe('ContainerItemImpl', () => {
       const listener = jest.fn();
       containerItem.on('update', listener);
 
-      await eventBus.emitSerial(
-        'page.update',
-        {
-          page: {
-            page: { root: { ...model, id: 'id1' } },
-            root: { $ref: '/page/root' },
-          } as unknown as PageModel,
-        },
-      );
+      await eventBus.emitSerial('page.update', {
+        page: {
+          page: { root: { ...model, id: 'id1' } },
+          root: { $ref: '/page/root' },
+        } as unknown as PageModel,
+      });
       await new Promise(process.nextTick);
 
       expect(listener).toBeCalledWith({});
@@ -261,5 +251,4 @@ fdescribe('getContainerItemContent', () => {
 
     expect(getContainerItemContent(containerItem, page)).toBe('data');
   });
-
 });

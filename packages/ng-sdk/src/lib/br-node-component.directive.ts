@@ -31,7 +31,8 @@ import { BrProps } from './br-props.model';
 
 @Directive({
   selector: '[brNodeComponent]',
-  inputs: [ 'component:brNodeComponent' ], // tslint:disable-line: no-inputs-metadata-property
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+  inputs: ['component:brNodeComponent'],
 })
 export class BrNodeComponentDirective<T extends Component> implements OnChanges, OnDestroy {
   component!: T;
@@ -46,6 +47,7 @@ export class BrNodeComponentDirective<T extends Component> implements OnChanges,
     protected page: BrPageComponent,
   ) {}
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   ngOnChanges(changes: SimpleChanges): void {
     this.clear?.();
     this.container.clear();
@@ -59,7 +61,7 @@ export class BrNodeComponentDirective<T extends Component> implements OnChanges,
     return this.page.mapping[this.component.getName()];
   }
 
-  private render() {
+  private render(): { head: any; tail: any } {
     if (this.node.template) {
       return this.renderTemplate();
     }
@@ -72,7 +74,7 @@ export class BrNodeComponentDirective<T extends Component> implements OnChanges,
     return this.renderMapping(component);
   }
 
-  private renderTemplate() {
+  private renderTemplate(): { head: any; tail: any } {
     // tslint:disable: no-non-null-assertion
     const embeddedViewRef = this.container.createEmbeddedView(this.node.template!, {
       $implicit: this.component,
@@ -86,14 +88,17 @@ export class BrNodeComponentDirective<T extends Component> implements OnChanges,
     return { head, tail };
   }
 
-  private renderChildren() {
-    const nodes = this.component.getChildren()
-      .map(component => this.container.createEmbeddedView(this.page.node, {
-        component,
-        $implicit: component,
-        page: this.page.state.getValue()!, // tslint:disable-line: no-non-null-assertion
-      }))
-      .flatMap(view => view.rootNodes);
+  private renderChildren(): { head: any; tail: any } {
+    const nodes = this.component
+      .getChildren()
+      .map((component) =>
+        this.container.createEmbeddedView(this.page.node, {
+          component,
+          $implicit: component,
+          page: this.page.state.getValue()!,
+        }),
+      )
+      .flatMap((view) => view.rootNodes);
 
     const head = nodes[0] ?? this.container.element.nativeElement;
     const tail = nodes[nodes.length - 1] ?? head;
@@ -101,7 +106,7 @@ export class BrNodeComponentDirective<T extends Component> implements OnChanges,
     return { head, tail };
   }
 
-  private renderMapping(component: Type<BrProps>) {
+  private renderMapping(component: Type<BrProps>): { head: any; tail: any } {
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(component);
     const componentRef = this.container.createComponent(componentFactory, undefined, this.injector);
 

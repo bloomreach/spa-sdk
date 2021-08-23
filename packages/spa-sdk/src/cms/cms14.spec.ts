@@ -37,10 +37,10 @@ describe('Cms', () => {
 
     it('should not initialize an SPA object if there is already one', () => {
       const spa: any = {};
-      const window = { SPA: spa } as Window;
-      cms.initialize({ window });
+      const windowWithSpa = { SPA: spa } as Window;
+      cms.initialize({ window: windowWithSpa });
 
-      expect(window.SPA).toBe(spa);
+      expect(windowWithSpa.SPA).toBe(spa);
     });
 
     it('should initialize an SPA object', () => {

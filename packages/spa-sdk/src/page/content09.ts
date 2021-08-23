@@ -84,27 +84,27 @@ export class ContentImpl implements Content {
     this.meta = metaFactory(this.model._meta ?? {});
   }
 
-  getId() {
+  getId(): string {
     return this.model.id;
   }
 
-  getLocale() {
+  getLocale(): string | undefined {
     return this.model.localeString;
   }
 
-  getMeta() {
+  getMeta(): MetaCollection {
     return this.meta;
   }
 
-  getName() {
+  getName(): string {
     return this.model.name;
   }
 
-  getData() {
+  getData(): ContentModel {
     return this.model;
   }
 
-  getUrl() {
+  getUrl(): string | undefined {
     return this.linkFactory.create(this.model._links.site);
   }
 }

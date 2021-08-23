@@ -36,7 +36,7 @@ export class ComponentFactory extends SimpleFactory<ComponentType, ComponentBuil
    * Produces a component based on the model.
    * @param model The component model.
    */
-  create(model: ComponentModel) {
+  create(model: ComponentModel): Component {
     let component: Component;
     const queue = [{ model } as Task];
 
@@ -45,7 +45,7 @@ export class ComponentFactory extends SimpleFactory<ComponentType, ComponentBuil
       if (!head.children && head.model.components?.length) {
         head.children = [];
         queue.unshift(
-          ...head.model.components.map(model => ({ model, siblings: head.children })),
+          ...head.model.components.map((componentModel) => ({ model: componentModel, siblings: head.children })),
           head,
         );
 
@@ -62,7 +62,7 @@ export class ComponentFactory extends SimpleFactory<ComponentType, ComponentBuil
     return component!;
   }
 
-  private buildComponent(model: ComponentModel, children: Component[]) {
+  private buildComponent(model: ComponentModel, children: Component[]): Component {
     const builder = this.mapping.get(model.type);
     if (!builder) {
       throw new Error(`Unsupported component type: '${model.type}'.`);

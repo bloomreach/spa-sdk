@@ -48,7 +48,9 @@ export interface Emitter<T> {
   off<U extends Extract<keyof T, string>>(eventName: U, listener: Listener<T, U>): void;
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function EmitterMixin<T extends Constructor, U extends Events>(Super: T) {
+  // eslint-disable-next-line no-shadow
   return class EmitterMixin extends Super implements Emitter<U> {
     /**
      * @todo should be private
@@ -57,6 +59,7 @@ export function EmitterMixin<T extends Constructor, U extends Events>(Super: T) 
     /* private */ emitter = new Typed<U>();
 
     on = this.emitter.on.bind(this.emitter);
+
     off = this.emitter.off.bind(this.emitter);
 
     /**

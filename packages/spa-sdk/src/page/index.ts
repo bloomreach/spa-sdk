@@ -68,14 +68,9 @@ export type EventBus = Typed<{ 'page.update': { page: PageModel } }>;
 /**
  * Menu content model.
  */
-export type Menu = Menu09 | Menu09 & Menu10;
+export type Menu = Menu09 | (Menu09 & Menu10);
 
-export {
-  Component,
-  TYPE_COMPONENT,
-  TYPE_COMPONENT_CONTAINER,
-  TYPE_COMPONENT_CONTAINER_ITEM,
-} from './component';
+export { Component, TYPE_COMPONENT, TYPE_COMPONENT_CONTAINER, TYPE_COMPONENT_CONTAINER_ITEM } from './component';
 export {
   TYPE_COMPONENT as TYPE_COMPONENT_09,
   TYPE_COMPONENT_CONTAINER as TYPE_COMPONENT_CONTAINER_09,

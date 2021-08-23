@@ -45,7 +45,7 @@ const config = {
 };
 
 describe('ApiImpl', () => {
-  let api: ApiImpl;
+  let API: ApiImpl;
   let urlBuilder: jest.Mocked<UrlBuilder>;
 
   beforeEach(async () => {
@@ -54,11 +54,11 @@ describe('ApiImpl', () => {
       getApiUrl: jest.fn((path: string) => `http://example.com${path}`),
     } as unknown as jest.Mocked<UrlBuilder>;
 
-    api = new ApiImpl(urlBuilder, config);
+    API = new ApiImpl(urlBuilder, config);
   });
 
   describe('getPage', () => {
-    beforeEach(async () => await api.getPage(config.request.path));
+    beforeEach(async () => API.getPage(config.request.path));
 
     it('should generate a URL', () => {
       expect(urlBuilder.getApiUrl).toBeCalledWith(config.request.path);
@@ -78,7 +78,7 @@ describe('ApiImpl', () => {
     });
 
     it('should return a page model', async () => {
-      expect(await api.getPage(config.request.path)).toBe(model);
+      expect(await API.getPage(config.request.path)).toBe(model);
     });
 
     it('should forward cookie header if the setup is using a reverse proxy', async () => {
@@ -87,58 +87,68 @@ describe('ApiImpl', () => {
       const api = new ApiImpl(urlBuilder, config);
       await api.getPage(config.request.path);
 
-      expect(config.httpClient).toBeCalledWith(expect.objectContaining({
-        headers: expect.objectContaining({
-          Cookie: 'JSESSIONID=1234',
+      expect(config.httpClient).toBeCalledWith(
+        expect.objectContaining({
+          headers: expect.objectContaining({
+            Cookie: 'JSESSIONID=1234',
+          }),
         }),
-      }));
+      );
     });
 
     it('should not include x-forwarded-for header when the remote address could not be determined', async () => {
       const api = new ApiImpl(urlBuilder, { httpClient: config.httpClient, request: { path: config.request.path } });
       await api.getPage(config.request.path);
 
-      expect(config.httpClient).toBeCalledWith(expect.not.objectContaining({
-        headers: {
-          'x-forwarded-for': expect.anything(),
-        },
-      }));
+      expect(config.httpClient).toBeCalledWith(
+        expect.not.objectContaining({
+          headers: {
+            'x-forwarded-for': expect.anything(),
+          },
+        }),
+      );
     });
 
     it('should not include visitor header when visitor configuration is not defined', async () => {
       const api = new ApiImpl(urlBuilder, { httpClient: config.httpClient, request: { path: config.request.path } });
       await api.getPage(config.request.path);
 
-      expect(config.httpClient).toBeCalledWith(expect.not.objectContaining({
-        headers: {
-          'visitor-header': expect.anything(),
-        },
-      }));
+      expect(config.httpClient).toBeCalledWith(
+        expect.not.objectContaining({
+          headers: {
+            'visitor-header': expect.anything(),
+          },
+        }),
+      );
     });
 
     it('should prefer visitor from the common config', async () => {
-      const api = new ApiImpl(
-        urlBuilder,
-        { ...config, visitor: { header: 'custom-visitor-header', id: 'custom-visitor' } },
-      );
+      const api = new ApiImpl(urlBuilder, {
+        ...config,
+        visitor: { header: 'custom-visitor-header', id: 'custom-visitor' },
+      });
       await api.getPage(config.request.path);
 
-      expect(config.httpClient).toBeCalledWith(expect.not.objectContaining({
-        headers: {
-          'custom-visitor-header': 'custom-visitor',
-        },
-      }));
+      expect(config.httpClient).toBeCalledWith(
+        expect.not.objectContaining({
+          headers: {
+            'custom-visitor-header': 'custom-visitor',
+          },
+        }),
+      );
     });
 
     it('should not include API version header when the API version is not set', async () => {
       const api = new ApiImpl(urlBuilder, { httpClient: config.httpClient, request: { path: config.request.path } });
       await api.getPage(config.request.path);
 
-      expect(config.httpClient).toBeCalledWith(expect.not.objectContaining({
-        headers: {
-          'Accept-Version': expect.anything(),
-        },
-      }));
+      expect(config.httpClient).toBeCalledWith(
+        expect.not.objectContaining({
+          headers: {
+            'Accept-Version': expect.anything(),
+          },
+        }),
+      );
     });
 
     it('should include a custom API version header', async () => {
@@ -150,11 +160,13 @@ describe('ApiImpl', () => {
       });
       await api.getPage(config.request.path);
 
-      expect(config.httpClient).toBeCalledWith(expect.objectContaining({
-        headers: {
-          'X-Version': 'version',
-        },
-      }));
+      expect(config.httpClient).toBeCalledWith(
+        expect.objectContaining({
+          headers: {
+            'X-Version': 'version',
+          },
+        }),
+      );
     });
 
     it('should fall back to the default API version header', async () => {
@@ -165,11 +177,13 @@ describe('ApiImpl', () => {
       });
       await api.getPage(config.request.path);
 
-      expect(config.httpClient).toBeCalledWith(expect.objectContaining({
-        headers: {
-          'Accept-Version': 'version',
-        },
-      }));
+      expect(config.httpClient).toBeCalledWith(
+        expect.objectContaining({
+          headers: {
+            'Accept-Version': 'version',
+          },
+        }),
+      );
     });
 
     it('should include a custom authorization header', async () => {
@@ -181,11 +195,13 @@ describe('ApiImpl', () => {
       });
       await api.getPage(config.request.path);
 
-      expect(config.httpClient).toBeCalledWith(expect.objectContaining({
-        headers: {
-          'X-Auth': 'Bearer token',
-        },
-      }));
+      expect(config.httpClient).toBeCalledWith(
+        expect.objectContaining({
+          headers: {
+            'X-Auth': 'Bearer token',
+          },
+        }),
+      );
     });
 
     it('should fall back to the default authorization header', async () => {
@@ -196,11 +212,13 @@ describe('ApiImpl', () => {
       });
       await api.getPage(config.request.path);
 
-      expect(config.httpClient).toBeCalledWith(expect.objectContaining({
-        headers: {
-          Authorization: 'Bearer token',
-        },
-      }));
+      expect(config.httpClient).toBeCalledWith(
+        expect.objectContaining({
+          headers: {
+            Authorization: 'Bearer token',
+          },
+        }),
+      );
     });
 
     it('should include a custom server-id header', async () => {
@@ -212,11 +230,13 @@ describe('ApiImpl', () => {
       });
       await api.getPage(config.request.path);
 
-      expect(config.httpClient).toBeCalledWith(expect.objectContaining({
-        headers: {
-          'X-Custom-Server-Id': 'some',
-        },
-      }));
+      expect(config.httpClient).toBeCalledWith(
+        expect.objectContaining({
+          headers: {
+            'X-Custom-Server-Id': 'some',
+          },
+        }),
+      );
     });
 
     it('should fall back to the default server-id header', async () => {
@@ -227,30 +247,34 @@ describe('ApiImpl', () => {
       });
       await api.getPage(config.request.path);
 
-      expect(config.httpClient).toBeCalledWith(expect.objectContaining({
-        headers: {
-          'Server-Id': 'some',
-        },
-      }));
+      expect(config.httpClient).toBeCalledWith(
+        expect.objectContaining({
+          headers: {
+            'Server-Id': 'some',
+          },
+        }),
+      );
     });
   });
 
   describe('getComponent', () => {
-    beforeEach(async () => await api.getComponent('http://example.com/component', { a: 'b' }));
+    beforeEach(async () => API.getComponent('http://example.com/component', { a: 'b' }));
 
     it('should request a component model', () => {
-      expect(config.httpClient).toBeCalledWith(expect.objectContaining({
-        url: 'http://example.com/component',
-        method: 'POST',
-        data: 'a=b',
-        headers: expect.objectContaining({
-          'Content-Type': 'application/x-www-form-urlencoded',
+      expect(config.httpClient).toBeCalledWith(
+        expect.objectContaining({
+          url: 'http://example.com/component',
+          method: 'POST',
+          data: 'a=b',
+          headers: expect.objectContaining({
+            'Content-Type': 'application/x-www-form-urlencoded',
+          }),
         }),
-      }));
+      );
     });
 
     it('should return a component model', async () => {
-      expect(await api.getComponent('/', {})).toBe(model);
+      expect(await API.getComponent('/', {})).toBe(model);
     });
   });
 });

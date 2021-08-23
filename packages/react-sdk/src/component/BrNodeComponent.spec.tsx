@@ -50,22 +50,36 @@ describe('BrNodeComponent', () => {
 
     it('should fallback when there is no mapping', () => {
       props.component.getName.mockReturnValue('something');
-      const wrapper = shallow(<BrNodeComponent {...props}><b/></BrNodeComponent>, { context });
+      const wrapper = shallow(
+        <BrNodeComponent {...props}>
+          <b />
+        </BrNodeComponent>,
+        { context },
+      );
 
-      expect(wrapper.equals(<b/>)).toBe(true);
+      expect(wrapper.equals(<b />)).toBe(true);
     });
 
     it('should render a mapped component', () => {
       props.component.getName.mockReturnValue('test');
-      const wrapper = mount(<BrNodeComponent {...props}><b/></BrNodeComponent>, { context });
+      const wrapper = mount(
+        <BrNodeComponent {...props}>
+          <b />
+        </BrNodeComponent>,
+        { context },
+      );
 
       expect(wrapper.html()).toBe('<a><b></b></a>');
     });
 
     it('should render children on a fallback', () => {
-      const wrapper = shallow(<BrNodeComponent {...props}><b/></BrNodeComponent>);
+      const wrapper = shallow(
+        <BrNodeComponent {...props}>
+          <b />
+        </BrNodeComponent>,
+      );
 
-      expect(wrapper.equals(<b/>)).toBe(true);
+      expect(wrapper.equals(<b />)).toBe(true);
     });
   });
 });

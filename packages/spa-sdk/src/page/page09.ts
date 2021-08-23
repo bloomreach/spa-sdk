@@ -30,9 +30,10 @@ import { LinkFactory } from './link-factory';
 import { LinkRewriter, LinkRewriterService } from './link-rewriter';
 import { Link, TYPE_LINK_INTERNAL } from './link';
 import { MetaCollectionFactory } from './meta-collection-factory';
-import { MetaCollectionModel } from './meta-collection';
+import { MetaCollection, MetaCollectionModel } from './meta-collection';
 import { PageModelToken, PageModel as PageModel10, Page } from './page';
 import { Reference, isReference } from './reference';
+import { Visit, Visitor } from './relevance';
 
 /**
  * Meta-data of a page root component.
@@ -79,24 +80,20 @@ export class PageImpl implements Page {
     eventBus?.on('page.update', this.onPageUpdate.bind(this));
 
     this.root = componentFactory.create(model.page);
-    this.content = new Map(
-      Object.entries(model.content || {}).map(
-        ([alias, model]) => [alias, this.contentFactory(model)],
-      ),
+    this.content = new Map(Object.entries(model.content || {}).map(([alias, m]) => [alias, this.contentFactory(m)]));
+  }
+
+  protected onPageUpdate(event: PageUpdateEvent): void {
+    Object.entries((event.page as PageModel).content || {}).forEach(([alias, model]) =>
+      this.content.set(alias, this.contentFactory(model)),
     );
   }
 
-  protected onPageUpdate(event: PageUpdateEvent) {
-    Object.entries((event.page as PageModel).content || {}).forEach(
-      ([alias, model]) => this.content.set(alias, this.contentFactory(model)),
-    );
+  private static getContentReference(reference: Reference): string {
+    return reference.$ref.split('/', 3)[2] || '';
   }
 
-  private static getContentReference(reference: Reference) {
-    return  reference.$ref.split('/', 3)[2] || '';
-  }
-
-  getButton(type: string, ...params: unknown[]) {
+  getButton(type: string, ...params: unknown[]): MetaCollection {
     return this.buttonFactory.create(type, ...params);
   }
 
@@ -105,15 +102,15 @@ export class PageImpl implements Page {
   }
 
   getComponent<T extends Component>(): T;
+
   getComponent<T extends Component>(...componentNames: string[]): T | undefined;
-  getComponent(...componentNames: string[]) {
+
+  getComponent(...componentNames: string[]): Component | undefined {
     return this.root.getComponent(...componentNames);
   }
 
-  getContent(reference: Reference | string) {
-    const contentReference = isReference(reference)
-      ? PageImpl.getContentReference(reference)
-      : reference;
+  getContent(reference: Reference | string): Content | undefined {
+    const contentReference = isReference(reference) ? PageImpl.getContentReference(reference) : reference;
 
     return this.content.get(contentReference);
   }
@@ -122,45 +119,47 @@ export class PageImpl implements Page {
     throw new Error('The page document is not supported by this version of the Page Model API.');
   }
 
-  getMeta(meta: MetaCollectionModel) {
+  getMeta(meta: MetaCollectionModel): MetaCollection {
     return this.metaFactory(meta);
   }
 
-  getTitle() {
+  getTitle(): string | undefined {
     return this.model.page._meta.pageTitle;
   }
 
   getUrl(link?: Link): string | undefined;
+
   getUrl(path: string): string;
-  getUrl(link?: Link | string) {
-    return this.linkFactory.create(link as Link ?? { ...this.model._links.site, type: TYPE_LINK_INTERNAL });
+
+  getUrl(link?: Link | string): string | undefined {
+    return this.linkFactory.create((link as Link) ?? { ...this.model._links.site, type: TYPE_LINK_INTERNAL });
   }
 
-  getVersion() {
+  getVersion(): string | undefined {
     return this.model._meta.version;
   }
 
-  getVisitor() {
+  getVisitor(): Visitor | undefined {
     return this.model._meta.visitor;
   }
 
-  getVisit() {
+  getVisit(): Visit | undefined {
     return this.model._meta.visit;
   }
 
-  isPreview() {
+  isPreview(): boolean {
     return !!this.model._meta.preview;
   }
 
-  rewriteLinks(content: string, type = 'text/html') {
+  rewriteLinks(content: string, type = 'text/html'): string {
     return this.linkRewriter.rewrite(content, type);
   }
 
-  sync() {
+  sync(): void {
     this.cmsEventBus?.emit('page.ready', {});
   }
 
-  toJSON() {
+  toJSON(): PageModel {
     return this.model;
   }
 }

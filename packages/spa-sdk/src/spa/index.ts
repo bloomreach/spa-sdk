@@ -18,7 +18,7 @@ import { ContainerModule } from 'inversify';
 import { ApiImpl, ApiService } from './api';
 import { SpaService, Spa } from './spa';
 
-export function SpaModule() {
+export function SpaModule(): ContainerModule {
   return new ContainerModule((bind) => {
     bind(ApiService).to(ApiImpl).inSingletonScope();
     bind(SpaService).to(Spa).inSingletonScope();

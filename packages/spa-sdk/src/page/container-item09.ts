@@ -15,11 +15,7 @@
  */
 
 import { inject, injectable, optional } from 'inversify';
-import {
-  ComponentImpl,
-  ComponentModel,
-  TYPE_COMPONENT_CONTAINER_ITEM,
-} from './component09';
+import { ComponentImpl, ComponentModel, TYPE_COMPONENT_CONTAINER_ITEM } from './component09';
 import { ComponentModelToken } from './component';
 import { ContainerItemEvents, ContainerItemMeta, ContainerItem } from './container-item';
 import { EmitterMixin } from '../emitter';
@@ -57,7 +53,7 @@ export class ContainerItemImpl
     eventBus?.on('page.update', this.onPageUpdate.bind(this));
   }
 
-  protected onPageUpdate(event: PageUpdateEvent) {
+  protected onPageUpdate(event: PageUpdateEvent): void {
     const { page: model } = event.page as PageModel;
     if (model.id !== this.getId()) {
       return;
@@ -71,15 +67,15 @@ export class ContainerItemImpl
     this.emit('update', {});
   }
 
-  getLabel() {
+  getLabel(): string | undefined {
     return this.model.label;
   }
 
-  getType() {
+  getType(): string | undefined {
     return this.model.ctype ?? this.model.label;
   }
 
-  isHidden() {
+  isHidden(): boolean {
     return !!this.model._meta.hidden;
   }
 
@@ -87,7 +83,7 @@ export class ContainerItemImpl
     return (this.model._meta.paramsInfo ?? {}) as T;
   }
 
-  getContentReference() {
+  getContentReference(): undefined {
     this.logger?.warn('The method "getContentReference" is not supported in PMA 0.9 and always returns "undefined".');
     return undefined;
   }
