@@ -16,20 +16,25 @@
 
 import React from 'react';
 import { mount, shallow } from 'enzyme';
-import { Component, Page } from '@bloomreach/spa-sdk';
+import { Component, MetaCollection, Page } from '@bloomreach/spa-sdk';
 import { BrNodeComponent } from './BrNodeComponent';
+import { BrMeta } from '../meta';
 
 describe('BrNodeComponent', () => {
   const context = {
     test: ({ children }: React.PropsWithChildren<typeof props>) => <a>{children}</a>,
   };
   const props = {
-    component: { getName: jest.fn() } as unknown as jest.Mocked<Component>,
+    component: { getName: jest.fn(), getMeta: jest.fn() } as unknown as jest.Mocked<Component>,
     page: {} as jest.Mocked<Page>,
   };
 
+  const emptyMeta = {} as MetaCollection;
+
   beforeEach(() => {
     jest.resetAllMocks();
+
+    props.component.getMeta.mockReturnValue(emptyMeta);
   });
 
   describe('getMapping', () => {
@@ -57,7 +62,13 @@ describe('BrNodeComponent', () => {
         { context },
       );
 
-      expect(wrapper.equals(<b />)).toBe(true);
+      expect(
+        wrapper.equals(
+          <BrMeta meta={emptyMeta}>
+            <b />
+          </BrMeta>,
+        ),
+      ).toBe(true);
     });
 
     it('should render a mapped component', () => {
@@ -79,7 +90,13 @@ describe('BrNodeComponent', () => {
         </BrNodeComponent>,
       );
 
-      expect(wrapper.equals(<b />)).toBe(true);
+      expect(
+        wrapper.equals(
+          <BrMeta meta={emptyMeta}>
+            <b />
+          </BrMeta>,
+        ),
+      ).toBe(true);
     });
   });
 });

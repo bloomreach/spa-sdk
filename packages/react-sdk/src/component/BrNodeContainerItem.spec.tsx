@@ -16,10 +16,11 @@
 
 import React from 'react';
 import { mount, shallow } from 'enzyme';
-import { ContainerItem, Page, TYPE_CONTAINER_ITEM_UNDEFINED } from '@bloomreach/spa-sdk';
+import { ContainerItem, MetaCollection, Page, TYPE_CONTAINER_ITEM_UNDEFINED } from '@bloomreach/spa-sdk';
 import { BrContainerItemUndefined } from '../cms';
 import { BrNodeComponent } from './BrNodeComponent';
 import { BrNodeContainerItem } from './BrNodeContainerItem';
+import { BrMeta } from '../meta';
 
 jest.mock('@bloomreach/spa-sdk', () => () => ({ [TYPE_CONTAINER_ITEM_UNDEFINED]: 'StringValue' }));
 
@@ -29,12 +30,17 @@ describe('BrNodeContainerItem', () => {
       getType: jest.fn(),
       on: jest.fn(),
       off: jest.fn(),
+      getMeta: jest.fn(),
     } as unknown as jest.Mocked<ContainerItem>,
     page: { sync: jest.fn() } as unknown as jest.Mocked<Page>,
   };
 
+  const emptyMeta = {} as MetaCollection;
+
   beforeEach(() => {
     jest.clearAllMocks();
+
+    props.component.getMeta.mockReturnValue(emptyMeta);
   });
 
   describe('componentDidMount', () => {
@@ -89,9 +95,11 @@ describe('BrNodeContainerItem', () => {
 
       expect(
         wrapper.equals(
-          <BrContainerItemUndefined {...props}>
-            <a />
-          </BrContainerItemUndefined>,
+          <BrMeta meta={emptyMeta}>
+            <BrContainerItemUndefined {...props}>
+              <a />
+            </BrContainerItemUndefined>
+          </BrMeta>,
         ),
       ).toBe(true);
     });

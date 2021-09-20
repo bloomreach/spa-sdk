@@ -36,7 +36,7 @@ export class BrNode extends React.Component<BrNodeProps> {
     const { children, component } = this.props;
 
     if (React.Children.count(children)) {
-      return children;
+      return <BrMeta meta={component.getMeta()}>{children}</BrMeta>;
     }
 
     // eslint-disable-next-line react/no-array-index-key
@@ -68,10 +68,6 @@ export class BrNode extends React.Component<BrNodeProps> {
   render(): JSX.Element {
     const { component } = this.props;
 
-    return (
-      <BrComponentContext.Provider value={component}>
-        <BrMeta meta={component.getMeta()}>{this.renderNode()}</BrMeta>
-      </BrComponentContext.Provider>
-    );
+    return <BrComponentContext.Provider value={component}>{this.renderNode()}</BrComponentContext.Provider>;
   }
 }
