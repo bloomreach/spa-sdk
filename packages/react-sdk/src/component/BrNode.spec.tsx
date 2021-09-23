@@ -16,7 +16,7 @@
 
 import React from 'react';
 import { mocked } from 'ts-jest/utils';
-import { shallow } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import { isContainer, isContainerItem, Component, MetaCollection, Page } from '@bloomreach/spa-sdk';
 import { BrMeta } from '../meta';
 import { BrNode } from './BrNode';
@@ -32,6 +32,7 @@ describe('BrNode', () => {
     component: {
       getChildren: jest.fn(() => []),
       getMeta: jest.fn(() => []),
+      getName: jest.fn(),
     } as unknown as jest.Mocked<Component>,
   };
 
@@ -53,7 +54,7 @@ describe('BrNode', () => {
   it('should render a component meta-data', () => {
     const meta = {} as MetaCollection;
     props.component.getMeta.mockReturnValueOnce(meta);
-    const wrapper = shallow(<BrNode {...props} />);
+    const wrapper = mount(<BrNode {...props} />);
 
     expect(wrapper.find(BrMeta).first().prop('meta')).toBe(meta);
   });
