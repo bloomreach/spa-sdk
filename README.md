@@ -114,7 +114,7 @@ Generally speaking for any kind of development one would:
 1. Branch the `development` branch to a new branch e.g. `mybranch`
 2. Do work on `mybranch` until finished
 3. Create an MR of `mybranch` to be merged into `development`
-4. Create a test release if it has to be published to `npm` for test purposes but use `prerelease` strategy and use `dist-tag`
+4. Create a test release if it has to be published to `npm` for test purposes but use `prerelease` strategy and use `dist-tag` that mentions jira ticket or general effort for easier recognition
 5. Get reviews & approval
 6. After the pipelines are green: merge the MR to `development`
 
