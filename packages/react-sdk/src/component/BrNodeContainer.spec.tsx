@@ -18,6 +18,7 @@ import React from 'react';
 import { mount, shallow } from 'enzyme';
 import {
   Container,
+  MetaCollection,
   Page,
   TYPE_CONTAINER_BOX,
   TYPE_CONTAINER_INLINE,
@@ -34,15 +35,20 @@ import {
 } from '../cms';
 import { BrNodeComponent } from './BrNodeComponent';
 import { BrNodeContainer } from './BrNodeContainer';
+import { BrMeta } from '../meta';
 
 describe('BrNodeContainer', () => {
   const props = {
-    component: { getType: jest.fn() } as unknown as jest.Mocked<Container>,
+    component: { getType: jest.fn(), getMeta: jest.fn() } as unknown as jest.Mocked<Container>,
     page: {} as jest.Mocked<Page>,
   };
 
+  const emptyMeta = {} as MetaCollection;
+
   beforeEach(() => {
     jest.resetAllMocks();
+
+    props.component.getMeta.mockReturnValue(emptyMeta);
   });
 
   describe('getMapping', () => {
@@ -85,9 +91,11 @@ describe('BrNodeContainer', () => {
 
       expect(
         wrapper.equals(
-          <BrContainerInline {...props}>
-            <a />
-          </BrContainerInline>,
+          <BrMeta meta={emptyMeta}>
+            <BrContainerInline {...props}>
+              <a />
+            </BrContainerInline>
+          </BrMeta>,
         ),
       ).toBe(true);
     });
@@ -102,9 +110,11 @@ describe('BrNodeContainer', () => {
 
       expect(
         wrapper.equals(
-          <BrContainerNoMarkup {...props}>
-            <a />
-          </BrContainerNoMarkup>,
+          <BrMeta meta={emptyMeta}>
+            <BrContainerNoMarkup {...props}>
+              <a />
+            </BrContainerNoMarkup>
+          </BrMeta>,
         ),
       ).toBe(true);
     });
@@ -119,9 +129,11 @@ describe('BrNodeContainer', () => {
 
       expect(
         wrapper.equals(
-          <BrContainerOrderedList {...props}>
-            <a />
-          </BrContainerOrderedList>,
+          <BrMeta meta={emptyMeta}>
+            <BrContainerOrderedList {...props}>
+              <a />
+            </BrContainerOrderedList>
+          </BrMeta>,
         ),
       ).toBe(true);
     });
@@ -136,9 +148,11 @@ describe('BrNodeContainer', () => {
 
       expect(
         wrapper.equals(
-          <BrContainerUnorderedList {...props}>
-            <a />
-          </BrContainerUnorderedList>,
+          <BrMeta meta={emptyMeta}>
+            <BrContainerUnorderedList {...props}>
+              <a />
+            </BrContainerUnorderedList>
+          </BrMeta>,
         ),
       ).toBe(true);
     });
@@ -153,9 +167,11 @@ describe('BrNodeContainer', () => {
 
       expect(
         wrapper.equals(
-          <BrContainerBox {...props}>
-            <a />
-          </BrContainerBox>,
+          <BrMeta meta={emptyMeta}>
+            <BrContainerBox {...props}>
+              <a />
+            </BrContainerBox>
+          </BrMeta>,
         ),
       ).toBe(true);
     });
@@ -163,7 +179,13 @@ describe('BrNodeContainer', () => {
     it('should render box container on an unknown type', () => {
       const wrapper = shallow(<BrNodeContainer {...props} />);
 
-      expect(wrapper.equals(<BrContainerBox {...props} />)).toBe(true);
+      expect(
+        wrapper.equals(
+          <BrMeta meta={emptyMeta}>
+            <BrContainerBox {...props} />
+          </BrMeta>,
+        ),
+      ).toBe(true);
     });
   });
 });

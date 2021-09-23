@@ -18,6 +18,7 @@ import React from 'react';
 import { Component } from '@bloomreach/spa-sdk';
 import { BrProps } from './BrProps';
 import { BrMappingContext } from './BrMappingContext';
+import { BrMeta } from '../meta';
 
 export class BrNodeComponent<T extends Component> extends React.Component<BrProps<T>> {
   static contextType = BrMappingContext;
@@ -30,10 +31,10 @@ export class BrNodeComponent<T extends Component> extends React.Component<BrProp
 
   render(): React.ReactNode {
     const mapping = this.getMapping();
-    if (!mapping) {
-      return this.props.children;
-    }
+    const meta = this.props.component.getMeta();
 
-    return React.createElement(mapping, this.props);
+    const children = mapping ? React.createElement(mapping, this.props) : this.props.children;
+
+    return React.createElement(BrMeta, { meta }, children);
   }
 }
