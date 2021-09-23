@@ -2,14 +2,13 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### [spa-sdk-15.1.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.0.1-0...spa-sdk-15.1.0)
+#### [15.1.2](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.1.0...15.1.2)
 
-> 23 August 2021
-
-- Resolve SPASDK-13 "Migrate to eslint all spa sdk projects" [`#24`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/24)
-- SPASDK-42 Link doesn't get updated when btm_campaign_id is present [`#27`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/27)
-- Resolve SPASDK-43 "Bugfix/ sbcp does not work with ssr apps" [`#26`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/26)
-- SPASDK-34 Check if window variable is defined(Fix SSR issue) [`#21`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/21)
+- SPASDK-52 Move meta component inside BrNodeComponent [`#32`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/32)
+- SPASDK-55 Document "getContainerItemContent' utility fn [`#33`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/33)
+- SPASDK-52 Move meta component inside BrNodeComponent [`#SPASDK-52`](https://issues.onehippo.com/browse/SPASDK-52)
+- SPASDK-55 Document "getContainerItemContent' utility fn [`#SPASDK-55`](https://issues.onehippo.com/browse/SPASDK-55)
+- SPASDK-47 Merge branch 'development' into 'main' [`#SPASDK-47`](https://issues.onehippo.com/browse/SPASDK-47)
 - SPASDK-47 Bump versions to 15.1.0 [`#SPASDK-47`](https://issues.onehippo.com/browse/SPASDK-47)
 - SPASDK-13 [example-next] Fix all lint warnings [`#SPASDK-13`](https://issues.onehippo.com/browse/SPASDK-13)
 - SPASDK-13 [example-nuxt] Fix all lint warnings [`#SPASDK-13`](https://issues.onehippo.com/browse/SPASDK-13)
@@ -20,6 +19,26 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-13 Bump eslint configs to the latest version [`#SPASDK-13`](https://issues.onehippo.com/browse/SPASDK-13)
 - SPASDK-13 Bump eslint-config-react version [`#SPASDK-13`](https://issues.onehippo.com/browse/SPASDK-13)
 - SPASDK-46 Bump xmldom to 0.7.2 [`#SPASDK-46`](https://issues.onehippo.com/browse/SPASDK-46)
+- SPASDK-33 Merge branch 'development' into 'main' [`#SPASDK-33`](https://issues.onehippo.com/browse/SPASDK-33)
+- SPASDK-33 Merge branch 'development' into 'main' [`#SPASDK-33`](https://issues.onehippo.com/browse/SPASDK-33)
+- SPASDK-33 Merge branch 'development' into 'main' [`#SPASDK-33`](https://issues.onehippo.com/browse/SPASDK-33)
+- TRIVIAL Update readme table [`e7aacbe`](https://github.com/bloomreach/spa-sdk/commit/e7aacbed48bba8865def26d63e5f218f54cbb5d4)
+- TRIVIAL Update development rules about publishing test version to npm [`c40e06f`](https://github.com/bloomreach/spa-sdk/commit/c40e06fd54738ef29eb293d7a3918d415653afe4)
+- TRIVIAL Add jenkins status to gitlab MRs [`4da0713`](https://github.com/bloomreach/spa-sdk/commit/4da07135f78485d4577c24b1320d22453028f3e0)
+- TRIVIAL Update readme table [`0d6b7c2`](https://github.com/bloomreach/spa-sdk/commit/0d6b7c292eae27e5b3ad95a68772421f1470106e)
+- TRIVIAL Merge branch 'development' into main [`52412ae`](https://github.com/bloomreach/spa-sdk/commit/52412ae42ab0303cdf514081c3b254fde2cdab3c)
+- TRIVIAL Merge branch 'development' into 'main' [`f446241`](https://github.com/bloomreach/spa-sdk/commit/f44624130fea51d553e2f1488ce433a11846f71a)
+
+#### [spa-sdk-15.1.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.0.1-0...spa-sdk-15.1.0)
+
+> 20 August 2021
+
+- SPASDK-46 Bump xmldom to 0.7.x to fix npm audit warning [`#28`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/28)
+- Resolve SPASDK-13 "Migrate to eslint all spa sdk projects" [`#24`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/24)
+- SPASDK-42 Link doesn't get updated when btm_campaign_id is present [`#27`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/27)
+- Resolve SPASDK-43 "Bugfix/ sbcp does not work with ssr apps" [`#26`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/26)
+- SPASDK-34 Check if window variable is defined(Fix SSR issue) [`#21`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/21)
+- SPASDK-47 Bump versions to 15.1.0 [`#SPASDK-47`](https://issues.onehippo.com/browse/SPASDK-47)
 - SPASDK-46 Bump xmldom to 0.7.1 [`#SPASDK-46`](https://issues.onehippo.com/browse/SPASDK-46)
 - SPASDK-13 Update eslint configs to latest version [`#SPASDK-13`](https://issues.onehippo.com/browse/SPASDK-13)
 - SPASDK-13 Remove IDE specific settings [`#SPASDK-13`](https://issues.onehippo.com/browse/SPASDK-13)
@@ -60,7 +79,6 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-43 Add new method to get cookies from the request object [`#SPASDK-43`](https://issues.onehippo.com/browse/SPASDK-43)
 - SPASDK-34 Check if window variable is defined(Fix SSR issue) [`#SPASDK-34`](https://issues.onehippo.com/browse/SPASDK-34)
 - Revert "SPASDK-22 Update xmldom to the latest version to fix security issue" [`abc3314`](https://github.com/bloomreach/spa-sdk/commit/abc33141c2579341a12a02f5b9b148d6c5ae7aa8)
-- TRIVIAL Add jenkins status to gitlab MRs [`4da0713`](https://github.com/bloomreach/spa-sdk/commit/4da07135f78485d4577c24b1320d22453028f3e0)
 - TRIVIAL Update readme table [`c4d00b2`](https://github.com/bloomreach/spa-sdk/commit/c4d00b2301485695717483d517ee299fd93998b9)
 
 #### [spa-sdk-15.0.1-0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.0.0...spa-sdk-15.0.1-0)
