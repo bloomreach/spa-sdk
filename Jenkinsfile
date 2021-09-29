@@ -94,8 +94,6 @@ pipeline {
           }
 
           steps {
-            sh 'git remote -v'
-            sh 'git remote remove github'
             sh 'git remote add github git@github.com:bloomreach/spa-sdk.git'
             sh 'git fetch github'
             sshagent (credentials: ['github-spa-sdk']) {
