@@ -64,6 +64,12 @@ pipeline {
     VUE_SSR_PUBLIC_URL = "https://${VUE_SSR_APP_NAME}.herokuapp.com"
   }
 
+  post {
+    cleanup {
+      deleteDir()
+    }
+  }
+
   stages {
     stage('Build, Lint & Test') {
       steps {
@@ -94,10 +100,9 @@ pipeline {
           }
 
           steps {
-            sh 'git remote add github git@github.com:bloomreach/spa-sdk.git'
-            sshagent (credentials: ['spa-sdk-github']) {
-              sh 'git push github main'
-              sh 'git push github ${TAG_NAME}'
+            sshagent (credentials: ['github-spa-sdk']) {
+              sh 'git remote add github git@github.com:bloomreach/spa-sdk.git'
+              sh 'git push -u --follow-tags github origin/main:github/main'
             }
           }
         }
