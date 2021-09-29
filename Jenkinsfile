@@ -103,7 +103,7 @@ pipeline {
             sshagent (credentials: ['github-spa-sdk']) {
               sh 'git remote add github git@github.com:bloomreach/spa-sdk.git'
               sh 'git fetch github'
-              sh 'git push -u github test-pipeline'
+              sh 'git push -u github origin/test-pipeline:github/test-pipeline'
               // sh 'git push github ${TAG_NAME}'
             }
           }
