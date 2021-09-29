@@ -81,9 +81,9 @@ pipeline {
     // }
 
     stage('Release') {
-      // when {
-        // tag 'spa-sdk-*'
-      // }
+      when {
+        tag 'spa-sdk-*'
+      }
 
       stages {
         // stage('Publish to NPM') {
@@ -102,9 +102,8 @@ pipeline {
           steps {
             sshagent (credentials: ['github-spa-sdk']) {
               sh 'git remote add github git@github.com:bloomreach/spa-sdk.git'
-              sh 'git fetch github'
-              sh 'git push -u github origin/test-pipeline:github/test-pipeline'
-              // sh 'git push github ${TAG_NAME}'
+              sh 'git push -u github origin/main:github/main'
+              sh 'git push github ${TAG_NAME}'
             }
           }
         }
