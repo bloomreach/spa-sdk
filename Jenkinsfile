@@ -64,6 +64,12 @@ pipeline {
     VUE_SSR_PUBLIC_URL = "https://${VUE_SSR_APP_NAME}.herokuapp.com"
   }
 
+  post {
+    cleanup {
+      deleteDir() /* clean up our workspace */
+    }
+  }
+
   stages {
     // stage('Build, Lint & Test') {
     //   steps {
