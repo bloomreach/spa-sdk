@@ -1,11 +1,11 @@
 {
   "name": "@bloomreach/example-react",
   "description": "Example React SPA for Bloomreach Experience",
-  "version": "15.2.1-0",
+  "version": "15.2.1",
   "private": true,
   "dependencies": {
-    "@bloomreach/react-sdk": "15.2.1-0",
-    "@bloomreach/spa-sdk": "15.2.1-0",
+    "@bloomreach/react-sdk": "15.2.1",
+    "@bloomreach/spa-sdk": "15.2.1",
     "axios": "0.21.1",
     "react": "16.14.0",
     "react-dom": "16.14.0",
@@ -41,6 +41,5 @@
     "eslint": "7.32.0",
     "react-scripts": "4.0.3",
     "typescript": "4.1.6"
-  },
-  "stableVersion": "15.2.0"
+  }
 }
