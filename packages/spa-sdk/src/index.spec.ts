@@ -49,9 +49,9 @@ describe('initialize', () => {
   afterEach(() => {
     destroy(defaultPage);
 
-    document.cookie = 'btm_campaign_id=; Max-Age=0;';
-    document.cookie = 'btm_segment=; Max-Age=0;';
-    document.cookie = 'btm_ttl=; Max-Age=0;';
+    document.cookie = '__br__campaign_id=; Max-Age=0;';
+    document.cookie = '__br__segment=; Max-Age=0;';
+    document.cookie = '__br__ttl=; Max-Age=0;';
   });
 
   it('should initialize using endpoint from the query string', async () => {
@@ -279,15 +279,15 @@ describe('initialize', () => {
     expect(httpClient).toBeCalledWith({
       headers: { 'Accept-Version': '1.0' },
       method: 'GET',
-      url: 'http://localhost:8080/site/my-spa/resourceapi/?_campaignVariant=12345%3Asilver',
+      url: 'http://localhost:8080/site/my-spa/resourceapi/?__br__campaignVariant=12345%3Asilver',
     });
 
     destroy(page);
   });
 
   it('should use campaign variant id as params from cookie', async () => {
-    document.cookie = 'btm_segment=gold';
-    document.cookie = 'btm_campaign_id=12345';
+    document.cookie = '__br__segment=gold';
+    document.cookie = '__br__campaign_id=12345';
 
     const page = await initialize({
       httpClient,
@@ -299,7 +299,7 @@ describe('initialize', () => {
     expect(httpClient).toBeCalledWith({
       headers: { 'Accept-Version': '1.0' },
       method: 'GET',
-      url: 'http://localhost:8080/site/my-spa/resourceapi/?_campaignVariant=12345%3Agold',
+      url: 'http://localhost:8080/site/my-spa/resourceapi/?__br__campaignVariant=12345%3Agold',
     });
 
     destroy(page);
@@ -307,7 +307,7 @@ describe('initialize', () => {
 
   it('should use campaign variant id as params from request cookie', async () => {
     const request: HttpRequest = {
-      headers: { cookie: 'btm_campaign_id=foo; btm_segment=bar' },
+      headers: { cookie: '__br__campaign_id=foo; __br__segment=bar' },
     };
 
     const page = await initialize({
@@ -320,7 +320,7 @@ describe('initialize', () => {
     expect(httpClient).toBeCalledWith({
       headers: { 'Accept-Version': '1.0' },
       method: 'GET',
-      url: 'http://localhost:8080/site/my-spa/resourceapi/?_campaignVariant=foo%3Abar',
+      url: 'http://localhost:8080/site/my-spa/resourceapi/?__br__campaignVariant=foo%3Abar',
     });
 
     destroy(page);
@@ -328,7 +328,7 @@ describe('initialize', () => {
 
   it('should use campaign variant id as params from request cookie', async () => {
     const request: HttpRequest = {
-      headers: { cookie: 'btm_campaign_id=foo; btm_segment=bar' },
+      headers: { cookie: '__br__campaign_id=foo; __br__segment=bar' },
     };
 
     const page = await initialize({
@@ -341,7 +341,7 @@ describe('initialize', () => {
     expect(httpClient).toBeCalledWith({
       headers: { 'Accept-Version': '1.0' },
       method: 'GET',
-      url: 'http://localhost:8080/site/my-spa/resourceapi/?_campaignVariant=foo%3Abar',
+      url: 'http://localhost:8080/site/my-spa/resourceapi/?__br__campaignVariant=foo%3Abar',
     });
 
     destroy(page);
@@ -401,6 +401,29 @@ describe('initialize', () => {
       headers: { 'Accept-Version': '1.0' },
       method: 'GET',
       url: 'http://localhost:8080/site/my-spa/resourceapi/',
+    });
+
+    destroy(page);
+  });
+
+  it('should use segment ids as params from cookie', async () => {
+    document.cookie = '__br__segment=gold';
+    document.cookie = '__br__campaign_id=12345';
+    document.cookie = '__br__segment_ids=12345,2345';
+
+    const page = await initialize({
+      httpClient,
+      window,
+      endpoint: 'http://localhost:8080/site/my-spa/resourceapi',
+      origin: 'http://localhost:12345',
+    });
+
+    expect(httpClient).toBeCalledWith({
+      headers: { 'Accept-Version': '1.0' },
+      method: 'GET',
+      url:
+        'http://localhost:8080/site/my-spa/resourceapi/' +
+        '?__br__campaignVariant=12345%3Agold&__br__segmentIds=12345%2C2345',
     });
 
     destroy(page);

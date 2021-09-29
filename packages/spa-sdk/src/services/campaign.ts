@@ -18,11 +18,11 @@ import { Cookie } from './cookie';
 import { HttpRequest } from '../spa/http';
 
 export class Campaign {
-  static readonly CAMPAIGN_PARAMETER = 'btm_campaign_id';
+  static readonly CAMPAIGN_PARAMETER = '__br__campaign_id';
 
-  static readonly SEGMENT_PARAMETER = 'btm_segment';
+  static readonly SEGMENT_PARAMETER = '__br__segment';
 
-  static readonly TTL_PARAMETER = 'btm_ttl';
+  static readonly TTL_PARAMETER = '__br__ttl';
 
   static readonly DEFAULT_TTL_DAYS = 7;
 
