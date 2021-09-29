@@ -18,9 +18,9 @@ import { Campaign } from './campaign';
 
 describe('campaign', () => {
   afterEach(() => {
-    document.cookie = 'btm_campaign_id=; Max-Age=0;';
-    document.cookie = 'btm_segment=; Max-Age=0;';
-    document.cookie = 'btm_ttl=; Max-Age=0;';
+    document.cookie = `${Campaign.CAMPAIGN_PARAMETER}=; Max-Age=0;`;
+    document.cookie = `${Campaign.SEGMENT_PARAMETER}=; Max-Age=0;`;
+    document.cookie = `${Campaign.TTL_PARAMETER}=; Max-Age=0;`;
   });
 
   it('should return an empty string', () => {
@@ -31,8 +31,8 @@ describe('campaign', () => {
   });
 
   it('should return CSR cookie', () => {
-    document.cookie = 'btm_campaign_id=12345';
-    document.cookie = 'btm_segment=gold';
+    document.cookie = `${Campaign.CAMPAIGN_PARAMETER}=12345`;
+    document.cookie = `${Campaign.SEGMENT_PARAMETER}=gold`;
 
     expect(Campaign.GET_VARIANT_ID()).toBe('12345:gold');
   });
@@ -40,7 +40,7 @@ describe('campaign', () => {
   it('should return SSR cookie', () => {
     const request = {
       headers: {
-        cookie: 'btm_campaign_id=12345; btm_segment=silver',
+        cookie: `${Campaign.CAMPAIGN_PARAMETER}=12345; ${Campaign.SEGMENT_PARAMETER}=silver`,
       },
     };
 
@@ -48,8 +48,8 @@ describe('campaign', () => {
   });
 
   it('should delete cookie', () => {
-    document.cookie = 'btm_campaign_id=12345';
-    document.cookie = 'btm_segment=gold';
+    document.cookie = `${Campaign.CAMPAIGN_PARAMETER}=12345`;
+    document.cookie = `${Campaign.SEGMENT_PARAMETER}=gold`;
 
     Campaign.GET_VARIANT_ID(undefined, undefined, '0');
 

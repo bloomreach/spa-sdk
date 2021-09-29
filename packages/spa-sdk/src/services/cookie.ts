@@ -24,10 +24,10 @@ export class Cookie {
    * Set cookie in the document
    * @param name Cookie name
    * @param value Cookie value
-   * @param ttl  Sets the cookie max-age in seconds
+   * @param ttl  Sets the cookie max-age in days
    */
   public static SET_COOKIE(name: string, value: string, ttl: number): void {
-    if (this.isDomReady() && name && value) {
+    if (this.isWindowAvailable() && name && value) {
       const maxAge = ttl > this.MAX_TTL_DAYS ? this.getSeconds(this.MAX_TTL_DAYS) : this.getSeconds(ttl);
       document.cookie = cookie.serialize(name, value, { maxAge });
     }
@@ -38,7 +38,7 @@ export class Cookie {
    * @return Cookie object.
    */
   public static GET_COOKIE(): Record<string, string> {
-    return this.isDomReady() ? cookie.parse(document.cookie ?? '') : {};
+    return this.isWindowAvailable() ? cookie.parse(document.cookie ?? '') : {};
   }
 
   /**
@@ -55,16 +55,16 @@ export class Cookie {
    * @param name Cookie name
    */
   public static ERASE_COOKIE(name: string): void {
-    if (this.isDomReady()) {
+    if (this.isWindowAvailable()) {
       document.cookie = cookie.serialize(name, '', { maxAge: 0 });
     }
   }
 
   /**
-   * Check if DOM is ready
+   * Check if Window is available
    */
-  private static isDomReady(): boolean {
-    return typeof window !== 'undefined' && document.readyState !== 'loading';
+  private static isWindowAvailable(): boolean {
+    return typeof window !== 'undefined';
   }
 
   /**
