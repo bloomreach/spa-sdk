@@ -43,10 +43,19 @@ import {
   parseUrl,
 } from './url';
 import { Campaign } from './services/campaign';
+import { Segmentation } from './services/segmentation';
 
 const DEFAULT_AUTHORIZATION_PARAMETER = 'token';
 const DEFAULT_SERVER_ID_PARAMETER = 'server-id';
-const DEFAULT_CAMPAIGN_VARIANT_PARAMETER = '_campaignVariant';
+
+const BTM_PREFIX = 'btm_';
+const DEFAULT_CAMPAIGN_VARIANT_PARAMETER_URL = `${BTM_PREFIX}campaign_id`;
+const DEFAULT_SEGMENT_PARAMETER_URL = `${BTM_PREFIX}segment`;
+const DEFAULT_TTL_PARAMETER_URL = `${BTM_PREFIX}ttl`;
+
+const BR_PREFIX = '__br__';
+const DEFAULT_CAMPAIGN_VARIANT_PARAMETER_API = `${BR_PREFIX}campaignVariant`;
+const DEFAULT_SEGMENT_IDS_PARAMETER_API = `${BR_PREFIX}segmentIds`;
 
 const container = new Container({ skipBaseClassChecks: true });
 const pages = new WeakMap<Page, Container>();
@@ -163,9 +172,9 @@ function initializeWithJwt10(
   const authorizationParameter = configuration.authorizationQueryParameter ?? DEFAULT_AUTHORIZATION_PARAMETER;
   const endpointParameter = configuration.endpointQueryParameter ?? '';
   const serverIdParameter = configuration.serverIdQueryParameter ?? DEFAULT_SERVER_ID_PARAMETER;
-  const campaignParameter = Campaign.CAMPAIGN_PARAMETER;
-  const segmentParameter = Campaign.SEGMENT_PARAMETER;
-  const ttlParameter = Campaign.TTL_PARAMETER;
+  const campaignParameter = DEFAULT_CAMPAIGN_VARIANT_PARAMETER_URL;
+  const segmentParameter = DEFAULT_SEGMENT_PARAMETER_URL;
+  const ttlParameter = DEFAULT_TTL_PARAMETER_URL;
 
   const { url: path, searchParams } = extractSearchParams(
     configuration.path ?? configuration.request?.path ?? '/',
@@ -189,12 +198,16 @@ function initializeWithJwt10(
   let endpointUrl = configuration.endpoint ?? endpoint;
 
   const campaignVariantId = Campaign.GET_VARIANT_ID(campaignId, segmentId, ttl, configuration.request);
+  const segmentIds = Segmentation.GET_SEGMENT_IDS();
+  const params = new URLSearchParams();
 
   if (campaignVariantId) {
-    const params = new URLSearchParams();
-    params.append(DEFAULT_CAMPAIGN_VARIANT_PARAMETER, campaignVariantId);
-    endpointUrl = appendSearchParams(endpointUrl ?? '', params);
+    params.append(DEFAULT_CAMPAIGN_VARIANT_PARAMETER_API, campaignVariantId);
   }
+  if (segmentIds) {
+    params.append(DEFAULT_SEGMENT_IDS_PARAMETER_API, segmentIds);
+  }
+  endpointUrl = appendSearchParams(endpointUrl ?? '', params);
 
   const config = {
     ...configuration,

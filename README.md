@@ -114,18 +114,20 @@ Generally speaking for any kind of development one would:
 1. Branch the `development` branch to a new branch e.g. `mybranch`
 2. Do work on `mybranch` until finished
 3. Create an MR of `mybranch` to be merged into `development`
-4. Create a test release if it has to be published to `npm` for test purposes but use `prerelease` strategy and use `dist-tag` that mentions jira ticket or general effort for easier recognition
+4. Create a test release if it has to be published to `npm` for test purposes
+   but use `prerelease` strategy and use `dist-tag` that mentions jira ticket or
+   general effort for easier recognition by running `yarn release prerelease --tag [your Jira issue / effort name]`
 5. Get reviews & approval
 6. After the pipelines are green: merge the MR to `development`
 
 ## Releasing
 
-1. Check out `development` branch 
+1. Check out `development` branch and make sure its up to date and the pipeline is green
 2. Run `yarn bump [new version]` in the workspace root to update the versions in all package files
-3. Commit these changes and push to origin
-4. Create an MR to merge development into main if the build is successful (**do not check 'delete source branch after merge'**)
-5. After the merge is successful set a tag `spa-sdk-[new version]` on the `main` branch
-6. Push the tag to origin
+3. Commit these version changes with `git commit -am "[your Jira issue] Bumping versions to [new version]"`
+4. Merge `development` branch into `main` branch
+5. Create a new *annotated* tag on the `main` branch using `git tag -a spa-sdk-[new-version]`
+6. Push to origin with `git push --follow-tags`
 7. Jenkins should now detect the tag and run the release pipeline
-8. After the release is published create a Release on github and gitlab with release notes
+8. After the release is published create a Release on github with release notes
 

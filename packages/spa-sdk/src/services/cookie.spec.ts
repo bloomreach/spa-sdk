@@ -56,8 +56,8 @@ describe('Cookie', () => {
     expect(document.cookie).toEqual('testName=testValue; Max-Age=2419200');
   });
 
-  it('should return empty object if DOM is not ready', () => {
-    jest.spyOn(Cookie, 'isDomReady' as never).mockImplementation(() => false as never);
+  it('should return empty object if Window is not available', () => {
+    jest.spyOn(Cookie, 'isWindowAvailable' as never).mockImplementation(() => false as never);
 
     expect(Cookie.GET_COOKIE()).toEqual({});
   });
