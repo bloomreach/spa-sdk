@@ -122,12 +122,18 @@ Generally speaking for any kind of development one would:
 
 ## Releasing
 
+Prerequisites:
+- You need access to the npm registry and rights to publish packages
+- You need access to the heroku dashboard and rights to deploy apps
+
+Steps to follow:
 1. Check out `development` branch and make sure its up to date and the pipeline is green
 2. Run `yarn bump [new version]` in the workspace root to update the versions in all package files
 3. Commit these version changes with `git commit -am "[your Jira issue] Bumping versions to [new version]"`
 4. Merge `development` branch into `main` branch
-5. Create a new *annotated* tag on the `main` branch using `git tag -a spa-sdk-[new-version]`
+5. Create a new _annotated_ tag on the `main` branch using `git tag -a spa-sdk-[new-version]`
 6. Push to origin with `git push --follow-tags`
-7. Jenkins should now detect the tag and run the release pipeline
-8. After the release is published create a Release on github with release notes
-
+7. [Create a Heroku Auth token](https://help.heroku.com/PBGP6IDE/how-should-i-generate-an-api-key-that-allows-me-to-use-the-heroku-platform-api)
+   using the Heroku CLI
+8. Run the [release script](./release.sh) and provide the token as the argument
+9. After these steps completed successfully create a Release on github with release notes
