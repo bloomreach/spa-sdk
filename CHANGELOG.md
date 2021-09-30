@@ -2,9 +2,19 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### [15.2.1](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.1.2...15.2.1)
+#### [15.2.2-0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.2.1...15.2.2-0)
+
+- SPASDK-58 Update push to github script in Jenkins [`#SPASDK-58`](https://issues.onehippo.com/browse/SPASDK-58)
+
+#### [spa-sdk-15.2.1](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.1.2...spa-sdk-15.2.1)
+
+> 30 September 2021
 
 - SPASDK-53 Handle segmentation; Change campaign variant parameter; [`#31`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/31)
+- SPASDK-53 Merge branch 'development' into 'main' [`#SPASDK-53`](https://issues.onehippo.com/browse/SPASDK-53)
+- SPASDK-58 Adjust README according to release process [`#SPASDK-58`](https://issues.onehippo.com/browse/SPASDK-58)
+- SPASDK-58 Adjust jenkins file so github push works [`#SPASDK-58`](https://issues.onehippo.com/browse/SPASDK-58)
+- SPASDK-53 Bump versions to 15.2.1 [`#SPASDK-53`](https://issues.onehippo.com/browse/SPASDK-53)
 - SPASDK-53 Handle segmentation; Change campaign variant parameter; [`#SPASDK-53`](https://issues.onehippo.com/browse/SPASDK-53)
 
 #### [spa-sdk-15.1.2](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.1.0...spa-sdk-15.1.2)
@@ -184,5 +194,7 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-2 Log warning for unsupported method "getContentReference" in v0.9 [`#SPASDK-2`](https://issues.onehippo.com/browse/SPASDK-2)
 - SPASDK-2 Add exported function "getContainerItemContent" [`#SPASDK-2`](https://issues.onehippo.com/browse/SPASDK-2)
 - SPASDK-1 Bump to use node 14 [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
+- SPASDK-1 Remove maven files and update Jenkinsfile [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
+- SPASDK-1 Initial move from brxm monorepo [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
 - TRIVIAL Set branch name to 'main' in changesetBaseRefs [`4dacdcd`](https://github.com/bloomreach/spa-sdk/commit/4dacdcd2fdb0712e40dcb33b9809ae12786f9ab1)
 - TRIVIAL Skip telemetry check on nuxt startup [`15deb25`](https://github.com/bloomreach/spa-sdk/commit/15deb25b1edde3af3296d4dc34dba1483fe278f2)
