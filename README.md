@@ -126,8 +126,7 @@ Generally speaking for any kind of development one would:
 2. Run `yarn bump [new version]` in the workspace root to update the versions in all package files
 3. Commit these version changes with `git commit -am "[your Jira issue] Bumping versions to [new version]"`
 4. Merge `development` branch into `main` branch
-5. Create a new *annotated* tag on the `main` branch using `git tag -a spa-sdk-[new-version]`
+5. Create a new _annotated_ tag on the `main` branch using `git tag -a spa-sdk-[new-version]`
 6. Push to origin with `git push --follow-tags`
 7. Jenkins should now detect the tag and run the release pipeline
 8. After the release is published create a Release on github with release notes
-

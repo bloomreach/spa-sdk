@@ -30,6 +30,6 @@
     "includeVersion": true,
     "inputFiles": ["lib/index.d.ts", "lib/express/index.d.ts"],
     "mode": "modules",
-    "out": "docs"
+    "out": "../../docs"
   }
 }

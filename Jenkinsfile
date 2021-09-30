@@ -86,37 +86,48 @@ pipeline {
       }
 
       stages {
-        stage('Publish to NPM') {
-          steps {
-            withCredentials([[$class: 'StringBinding', credentialsId: 'NPM_AUTH_TOKEN', variable: 'YARN_NPM_AUTH_TOKEN']]) {
-              sh 'yarn release'
-            }
-          }
-        }
+        // stage('Publish to NPM') {
+        //   steps {
+        //     withCredentials([[$class: 'StringBinding', credentialsId: 'NPM_AUTH_TOKEN', variable: 'YARN_NPM_AUTH_TOKEN']]) {
+        //       sh 'yarn release'
+        //     }
+        //   }
+        // }
 
-        stage('Publish to GitHub') {
+        stage('GitHub') {
           environment {
             GIT_SSH_COMMAND='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
           }
 
-          steps {
-            sshagent (credentials: ['github-spa-sdk']) {
-              sh 'git remote add github git@github.com:bloomreach/spa-sdk.git'
-              sh 'git push -u --follow-tags github main'
+          stages {
+            stage('Set up remote') {
+              steps {
+                sshagent (credentials: ['github-spa-sdk']) {
+                  sh 'git remote add github git@github.com:bloomreach/spa-sdk.git'
+                  sh 'git fetch github'
+                }
+              }
             }
-          }
-        }
 
-        stage('Publish SPA SDK TypeDoc') {
-          steps {
-            sh 'git clone -b gh-pages --single-branch git@github.com:bloomreach/spa-sdk.git packages/spa-sdk/docs'
-            sh 'cd packages/spa-sdk/docs'
-            sh 'git rm . -r'
-            sh 'yarn workspace @bloomreach/spa-sdk docs --disableOutputCheck'
-            sh 'git add --all'
-            sh 'git commit -m "Update SPA SDK TypeDocs for release ${TAG_NAME}"'
-            sshagent (credentials: ['spa-sdk-github']) {
-              sh 'git push'
+            stage('Publish to GitHub') {
+              steps {
+                sshagent (credentials: ['github-spa-sdk']) {
+                  sh 'git push --follow-tags github github/main'
+                }
+              }
+            }
+
+            stage('Publish SPA SDK TypeDoc') {
+              steps {
+                sshagent (credentials: ['github-spa-sdk']) {
+                  sh 'git checkout gh-pages'
+                  sh 'git rm -r packages/spa-sdk/docs'
+                  sh 'yarn workspace @bloomreach/spa-sdk docs --disableOutputCheck'
+                  sh 'git add --all'
+                  sh 'git commit -m "Update SPA SDK TypeDocs for release ${TAG_NAME}"'
+                  sh 'git push github github/gh-pages'
+                }
+              }
             }
           }
         }
