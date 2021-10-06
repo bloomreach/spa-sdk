@@ -130,9 +130,9 @@ Steps to follow:
 1. Check out `development` branch and make sure its up to date and the pipeline is green
 2. Run `yarn bump [new version]` in the workspace root to update the versions in all package files
 3. Commit these version changes with `git commit -am "[your Jira issue] Bumping versions to [new version]"`
-4. Merge `development` branch into `main` branch
-5. Create a new _annotated_ tag on the `main` branch using `git tag -a spa-sdk-[new-version]`
-6. Push to origin with `git push --follow-tags`
+4. Push to `origin` with `git push --follow-tags`
+5. Merge `development` branch into `main` branch with `git merge development --ff-only`
+6. Create a new _annotated_ tag on the `main` branch using `git tag -a spa-sdk-[new-version]`
 7. [Create a Heroku Auth token](https://help.heroku.com/PBGP6IDE/how-should-i-generate-an-api-key-that-allows-me-to-use-the-heroku-platform-api)
    using the Heroku CLI
 8. Run the [release script](./release.sh) and provide the token as the argument

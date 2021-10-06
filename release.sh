@@ -20,7 +20,7 @@ HEROKU_TEAM="bloomreach"
 createCSRApp() {
   local NAME=$1;
   echo "Deploying ${NAME} app";
-  npx heroku apps:destroy --app=$NAME --confirm $NAME || return 0
+  npx heroku apps:destroy --app=$NAME --confirm $NAME 
   npx heroku apps:create --app=$NAME --team=$HEROKU_TEAM
   npx heroku buildpacks:set --app=$NAME heroku/nodejs
   npx heroku buildpacks:add --app=$NAME https://github.com/timanovsky/subdir-heroku-buildpack.git
@@ -32,7 +32,7 @@ createCSRApp() {
 createSSRApp() {
   local NAME=$1;
   echo "Deploying ${NAME} app";
-  npx heroku apps:destroy --app=$NAME --confirm $NAME || return 0
+  npx heroku apps:destroy --app=$NAME --confirm $NAME
   npx heroku apps:create --app=$NAME --team=$HEROKU_TEAM
   npx heroku buildpacks:set --app=$NAME heroku/nodejs
   npx heroku buildpacks:add --app=$NAME https://github.com/heroku/heroku-buildpack-multi-procfile
@@ -47,9 +47,10 @@ echo "Running release script for ${VERSION} (Heroku postfix: ${VERSION_FOR_HEROK
 echo 'Publishing to github remote'
 git remote add github git@github.com:bloomreach/spa-sdk.git
 git fetch github
-git push --follow-tags github github/main
+git push -f --follow-tags github main
 
 echo 'Publishing TypeDoc to github pages'
+rm ./packages/spa-sdk/docs
 git clone -b gh-pages --single-branch git@github.com:bloomreach/spa-sdk.git packages/spa-sdk/docs
 
 pushd packages/spa-sdk/docs
@@ -64,7 +65,7 @@ git commit -m "Update SPA SDK TypeDocs for release ${VERSION}"
 git push
 popd
 
-if [-z "$HEROKU_API_KEY"]
+if [ -z "$HEROKU_API_KEY" ]
 then
   echo 'No Heroku API key provided, apps not deployed to Heroku'
 else
