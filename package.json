@@ -38,7 +38,8 @@
     "typescript": "~4.1"
   },
   "devDependencies": {
-    "auto-changelog": "2.3.0"
+    "auto-changelog": "2.3.0",
+    "heroku": "7.59.0"
   },
   "auto-changelog": {
     "hideCredit": true,
