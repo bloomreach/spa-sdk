@@ -1,6 +1,6 @@
 {
   "private": true,
-  "version": "15.2.2-0",
+  "version": "15.3.0",
   "workspaces": [
     "packages/*",
     "examples/*"
@@ -51,6 +51,5 @@
     "issueUrl": "https://issues.onehippo.com/browse/{id}",
     "issuePattern": "^[A-Z]+-\\d+",
     "mergeUrl": "https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/{id}"
-  },
-  "stableVersion": "15.2.1"
+  }
 }
