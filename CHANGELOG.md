@@ -2,14 +2,30 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### [15.3.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.2.1...15.3.0)
+#### [15.3.1](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.3.0...15.3.1)
 
+- SPASDK-61 Provide options to html sanitizer to allow some attributes for anchor [`#40`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/40)
+- SPASDK-61 Provide options to html sanitizer to allow some attributes for anchor [`#SPASDK-61`](https://issues.onehippo.com/browse/SPASDK-61)
+- SPASDK-60 Improve README explanation of release process [`#SPASDK-60`](https://issues.onehippo.com/browse/SPASDK-60)
+- SPASDK-60 Use correct path to app in heroku deploy [`#SPASDK-60`](https://issues.onehippo.com/browse/SPASDK-60)
+- SPASDK-60 Additional fixes to the release script [`#SPASDK-60`](https://issues.onehippo.com/browse/SPASDK-60)
+- SPASDK-60 Add heroku as dev dep to enforce version and all build packs are installed [`#SPASDK-60`](https://issues.onehippo.com/browse/SPASDK-60)
+
+#### [spa-sdk-15.3.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.2.2-0...spa-sdk-15.3.0)
+
+> 6 October 2021
+
+- SPASDK-59 Bumping versions to 15.3.0 [`#SPASDK-59`](https://issues.onehippo.com/browse/SPASDK-59)
 - SPASDK-58 Remove release pipeline and use release script [`#SPASDK-58`](https://issues.onehippo.com/browse/SPASDK-58)
 - SPASDK-38 Add page api to sanitize html content in SPA SDK [`#SPASDK-38`](https://issues.onehippo.com/browse/SPASDK-38)
+
+#### [spa-sdk-15.2.2-0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.2.1...spa-sdk-15.2.2-0)
+
+> 30 September 2021
+
+- SPASDK-58 Merge branch 'development' [`#SPASDK-58`](https://issues.onehippo.com/browse/SPASDK-58)
 - SPASDK-58 Bump versions to 15.2.2-0 [`#SPASDK-58`](https://issues.onehippo.com/browse/SPASDK-58)
 - SPASDK-58 Update push to github script in Jenkins [`#SPASDK-58`](https://issues.onehippo.com/browse/SPASDK-58)
-- SPASDK-58 Adjust README according to release process [`#SPASDK-58`](https://issues.onehippo.com/browse/SPASDK-58)
-- SPASDK-58 Adjust jenkins file so github push works [`#SPASDK-58`](https://issues.onehippo.com/browse/SPASDK-58)
 
 #### [spa-sdk-15.2.1](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.1.2...spa-sdk-15.2.1)
 
