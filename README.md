@@ -111,29 +111,38 @@ any other working branches.
 
 Generally speaking for any kind of development one would:
 
-1. Branch the `development` branch to a new branch e.g. `mybranch`
-2. Do work on `mybranch` until finished
-3. Create an MR of `mybranch` to be merged into `development`
-4. Create a test release if it has to be published to `npm` for test purposes
+* Branch the `development` branch to a new branch e.g. `mybranch`
+* Do work on `mybranch` until finished
+* Create an MR of `mybranch` to be merged into `development`
+* Create a test release if it has to be published to `npm` for test purposes
    but use `prerelease` strategy and use `dist-tag` that mentions jira ticket or
    general effort for easier recognition by running `yarn release prerelease --tag [your Jira issue / effort name]`
-5. Get reviews & approval
-6. After the pipelines are green: merge the MR to `development`
+* Get reviews & approval
+* After the pipelines are green: merge the MR to `development`
 
 ## Releasing
+#### Prerequisites
+* You need access to the npm @bloomreach organization and rights to publish packages
+* You need access to the heroku dashboard and rights to deploy apps
+* You need access to the SPA SDK Jira project to manage releases
 
-Prerequisites:
-- You need access to the npm registry and rights to publish packages
-- You need access to the heroku dashboard and rights to deploy apps
+#### Steps
+Pre release actions:
+* Check if issues mentioned in the commits since the last release have the fixVersion assigned as the version you are about to release
+* Check if all issues in the upcoming release are closed, any open issues must be moved to a different release, or the
+    release must be postponed
+* Check out the `development` branch and make sure your local branch its up to date and the pipeline for `development` is green
 
-Steps to follow:
-1. Check out `development` branch and make sure its up to date and the pipeline is green
-2. Run `yarn bump [new version]` in the workspace root to update the versions in all package files
-3. Commit these version changes with `git commit -am "[your Jira issue] Bumping versions to [new version]"`
-4. Push to `origin` with `git push --follow-tags`
-5. Merge `development` branch into `main` branch with `git merge development --ff-only`
-6. Create a new _annotated_ tag on the `main` branch using `git tag -a spa-sdk-[new-version]`
-7. [Create a Heroku Auth token](https://help.heroku.com/PBGP6IDE/how-should-i-generate-an-api-key-that-allows-me-to-use-the-heroku-platform-api)
-   using the Heroku CLI
-8. Run the [release script](./release.sh) and provide the token as the argument
-9. After these steps completed successfully create a Release on github with release notes
+Release actions:
+* Run `yarn bump [new version]` in the workspace root to update the versions in all package files
+* Commit these version changes with `git commit -am "[your Jira issue] Bumping versions to [new version]"`
+* Push to `origin` with `git push`
+* Merge `development` branch into `main` branch with `git merge development --ff-only`
+* Create a new _annotated_ tag on the `main` branch using `git tag -a spa-sdk-[new-version]`
+* Push to `origin` with `git push --follow-tags`
+* [Create a Heroku Auth token](https://help.heroku.com/PBGP6IDE/how-should-i-generate-an-api-key-that-allows-me-to-use-the-heroku-platform-api) using the Heroku CLI
+* Run the [release script](./release.sh) and provide the token as the argument similar to `./release.sh 295a6002-b3ed-474e-b250-dx1886f322ec`
+
+Post release actions:
+* Set the Jira release version as released
+* Create release notes on github 

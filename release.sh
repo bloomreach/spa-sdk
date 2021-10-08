@@ -43,26 +43,26 @@ echo '--------------------------------------------------------------------------
 
 echo 'Publishing to github remote'
 echo '-----------------------------------------------------------------------------'
-# git remote add github git@github.com:bloomreach/spa-sdk.git
-# git fetch github
-# git push -f --follow-tags github main
+git remote add github git@github.com:bloomreach/spa-sdk.git
+git fetch github
+git push -f --follow-tags github main
 
 echo 'Publishing TypeDoc to github pages'
 echo '-----------------------------------------------------------------------------'
-# rm ./packages/spa-sdk/docs
-# git clone -b gh-pages --single-branch git@github.com:bloomreach/spa-sdk.git packages/spa-sdk/docs
+rm ./packages/spa-sdk/docs
+git clone -b gh-pages --single-branch git@github.com:bloomreach/spa-sdk.git packages/spa-sdk/docs
 
-# pushd packages/spa-sdk/docs
-# git rm -r .
-# popd
+pushd packages/spa-sdk/docs
+git rm -r .
+popd
 
-# yarn workspace @bloomreach/spa-sdk docs --disableOutputCheck
+yarn workspace @bloomreach/spa-sdk docs --disableOutputCheck
 
-# pushd packages/spa-sdk/docs
-# git add --all
-# git commit -m "Update SPA SDK TypeDocs for release ${VERSION}"
-# git push
-# popd
+pushd packages/spa-sdk/docs
+git add --all
+git commit -m "Update SPA SDK TypeDocs for release ${VERSION}"
+git push
+popd
 
 if [ -z "$HEROKU_API_KEY" ]
 then
@@ -85,4 +85,4 @@ fi
 
 echo "Publishing ${VERSION} to 'latest' dist-tag"
 echo '-----------------------------------------------------------------------------'
-# yarn release
+yarn release
