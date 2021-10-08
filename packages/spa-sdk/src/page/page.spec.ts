@@ -368,13 +368,28 @@ describe('PageImpl', () => {
         <div>
           <h1>Hello, World!</h1>
           <p>Sanitize before <a href="https://www.example.com/" name="use">use</a></p>
-          <script>alert(1);</script>
+          <div><script>alert(1);</script></div>
         </div>`;
       expect(page.sanitize(html)).toBe(`
         <div>
           <h1>Hello, World!</h1>
           <p>Sanitize before <a href="https://www.example.com/" name="use">use</a></p>
-          
+          <div></div>
+        </div>`);
+    });
+    it('should keep data-type, title, target, name and href attributes in anchor', () => {
+      const page = createPage();
+      const html = `
+        <div>
+          <h1>Hello, World!</h1>
+          <a data-type="internal" title="foo" target="_blank" href="https://www.example.com/" name="use">use</a>
+          <div><script>alert(1);</script></div>
+        </div>`;
+      expect(page.sanitize(html)).toBe(`
+        <div>
+          <h1>Hello, World!</h1>
+          <a data-type="internal" title="foo" target="_blank" href="https://www.example.com/" name="use">use</a>
+          <div></div>
         </div>`);
     });
   });

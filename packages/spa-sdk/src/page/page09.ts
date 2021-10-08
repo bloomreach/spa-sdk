@@ -165,7 +165,7 @@ export class PageImpl implements Page {
   }
 
   sanitize(content: string): string {
-    return sanitizeHtml(content);
+    return sanitizeHtml(content, { allowedAttributes: { a: ['href', 'name', 'target', 'title', 'data-type'] } });
   }
 }
 
