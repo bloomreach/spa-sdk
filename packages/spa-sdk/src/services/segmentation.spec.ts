@@ -30,4 +30,20 @@ describe('campaign', () => {
 
     expect(Segmentation.GET_SEGMENT_IDS()).toBe('12345');
   });
+
+  it('should return SSR cookie', () => {
+    const request = {
+      headers: {
+        cookie: `${Segmentation.SEGMENT_IDS_PARAMETER}=12345`,
+      },
+    };
+
+    expect(Segmentation.GET_SEGMENT_IDS(request)).toBe('12345');
+  });
+
+  it('should return empty string if SSR cookie is absent', () => {
+    const request = {};
+
+    expect(Segmentation.GET_SEGMENT_IDS(request)).toBe('');
+  });
 });

@@ -198,7 +198,8 @@ function initializeWithJwt10(
   let endpointUrl = configuration.endpoint ?? endpoint;
 
   const campaignVariantId = Campaign.GET_VARIANT_ID(campaignId, segmentId, ttl, configuration.request);
-  const segmentIds = Segmentation.GET_SEGMENT_IDS();
+  const segmentIds = Segmentation.GET_SEGMENT_IDS(configuration.request);
+
   const params = new URLSearchParams();
 
   if (campaignVariantId) {

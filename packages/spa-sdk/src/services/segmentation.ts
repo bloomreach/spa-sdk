@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import { HttpRequest } from '../spa/http';
 import { Cookie } from './cookie';
 
 export class Segmentation {
@@ -23,8 +24,8 @@ export class Segmentation {
    * Get the segmentIds from cookie
    * @return string
    */
-  public static GET_SEGMENT_IDS(): string {
-    const cookie = Cookie.GET_COOKIE();
+  public static GET_SEGMENT_IDS(request?: HttpRequest): string {
+    const cookie = request?.headers ? Cookie.GET_COOKIE_FROM_REQUEST(request) : Cookie.GET_COOKIE();
 
     return cookie[this.SEGMENT_IDS_PARAMETER] ?? '';
   }

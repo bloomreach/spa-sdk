@@ -428,4 +428,46 @@ describe('initialize', () => {
 
     destroy(page);
   });
+
+  it('should use segment ids from request as a query param', async () => {
+    const request: HttpRequest = {
+      headers: { cookie: '__br__segment_ids=foo,bar' },
+    };
+
+    const page = await initialize({
+      httpClient,
+      request,
+      endpoint: 'http://localhost:8080/site/my-spa/resourceapi',
+      origin: 'http://localhost:12345',
+    });
+
+    expect(httpClient).toBeCalledWith({
+      headers: { 'Accept-Version': '1.0' },
+      method: 'GET',
+      url: 'http://localhost:8080/site/my-spa/resourceapi/?__br__segmentIds=foo%2Cbar',
+    });
+
+    destroy(page);
+  });
+
+  it('should omi query param if request do not contains segment ids', async () => {
+    const request: HttpRequest = {
+      headers: { cookie: '' },
+    };
+
+    const page = await initialize({
+      httpClient,
+      request,
+      endpoint: 'http://localhost:8080/site/my-spa/resourceapi',
+      origin: 'http://localhost:12345',
+    });
+
+    expect(httpClient).toBeCalledWith({
+      headers: { 'Accept-Version': '1.0' },
+      method: 'GET',
+      url: 'http://localhost:8080/site/my-spa/resourceapi/',
+    });
+
+    destroy(page);
+  });
 });
