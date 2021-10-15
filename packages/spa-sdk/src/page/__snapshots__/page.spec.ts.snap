@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PageImpl sanitize should keep rel, data-type, title, target, name and href attributes in anchor 1`] = `
+"
+        <div>
+          <h1>Hello, World!</h1>
+          <a rel=\\"noopener\\" data-type=\\"internal\\" title=\\"foo\\" target=\\"_blank\\" href=\\"https://www.example.com/\\" name=\\"use\\">use</a>
+          <div></div>
+        </div>"
+`;
+
+exports[`PageImpl sanitize should sanitize html 1`] = `
+"
+        <div>
+          <h1>Hello, World!</h1>
+          <p>Sanitize before <a href=\\"https://www.example.com/\\" name=\\"use\\">use</a></p>
+          <div></div>
+        </div>"
+`;
