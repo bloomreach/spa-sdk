@@ -23,7 +23,7 @@ export const DomParserService = Symbol.for('DomParserService');
 export const LinkRewriterService = Symbol.for('LinkRewriterService');
 export const XmlSerializerService = Symbol.for('XmlSerializerService');
 
-const BODY_CONTENTS = /^<body.*?>(.*)<\/body>$/;
+const BODY_CONTENTS = /^<body.*?>(.*)<\/body>$/s;
 
 export interface LinkRewriter {
   /**

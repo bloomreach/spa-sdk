@@ -57,6 +57,17 @@ describe('LinkRewriterImpl', () => {
       expect(linkFactory.create).toBeCalledWith({ href: '/some/path', type: TYPE_LINK_INTERNAL });
     });
 
+    it('should rewrite anchor links if content has line breaks', () => {
+      linkFactory.create.mockReturnValueOnce('url');
+
+      const content = `<p>Paragraph.
+              <a href="http://www.example.com/test" data-type="internal">Anchor</a>.
+        </p>`;
+      expect(linkRewriter.rewrite(content)).toBe(`<p>Paragraph.
+              <a href="url" data-type="internal">Anchor</a>.
+        </p>`);
+    });
+
     it('should ignore images without src attribute', () => {
       const html = '<img alt="something"/>';
 
