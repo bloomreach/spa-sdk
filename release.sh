@@ -49,7 +49,7 @@ git push -f --follow-tags github main
 
 echo 'Publishing TypeDoc to github pages'
 echo '-----------------------------------------------------------------------------'
-rm -r ./packages/spa-sdk/docs
+rm -fr ./packages/spa-sdk/docs
 git clone -b gh-pages --single-branch git@github.com:bloomreach/spa-sdk.git packages/spa-sdk/docs
 
 pushd packages/spa-sdk/docs
