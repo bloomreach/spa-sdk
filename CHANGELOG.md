@@ -2,9 +2,22 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### [15.3.1](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.3.0...15.3.1)
+#### [15.3.2](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.3.1...15.3.2)
+
+- SPASDK-62 Retrieve segmentation cookies from request object in case SSR [`#41`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/41)
+- SPASDK-63 Allow attribute "rel" in sanitize [`#42`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/42)
+- SPASDK-49 Add `s` flag to regular expression to match body content [`#38`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/38)
+- SPASDK-62 Retrieve segmentation cookies from request object in case SSR [`#SPASDK-62`](https://issues.onehippo.com/browse/SPASDK-62)
+- SPASDK-63 Allow attribute "rel" in sanitize [`#SPASDK-63`](https://issues.onehippo.com/browse/SPASDK-63)
+- SPASDK-49 Add `s` flag to regular expression to match body content [`#SPASDK-49`](https://issues.onehippo.com/browse/SPASDK-49)
+- TRIVIAL Fix release script part related to the publishing TypyDoc [`8faca44`](https://github.com/bloomreach/spa-sdk/commit/8faca440aed3751041e8f80d070366189072d2de)
+
+#### [spa-sdk-15.3.1](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.3.0...spa-sdk-15.3.1)
+
+> 8 October 2021
 
 - SPASDK-61 Provide options to html sanitizer to allow some attributes for anchor [`#40`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/40)
+- SPASDK-61 Bumping versions to 15.3.1 [`#SPASDK-61`](https://issues.onehippo.com/browse/SPASDK-61)
 - SPASDK-61 Provide options to html sanitizer to allow some attributes for anchor [`#SPASDK-61`](https://issues.onehippo.com/browse/SPASDK-61)
 - SPASDK-60 Improve README explanation of release process [`#SPASDK-60`](https://issues.onehippo.com/browse/SPASDK-60)
 - SPASDK-60 Use correct path to app in heroku deploy [`#SPASDK-60`](https://issues.onehippo.com/browse/SPASDK-60)
@@ -215,5 +228,7 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-2 Log warning for unsupported method "getContentReference" in v0.9 [`#SPASDK-2`](https://issues.onehippo.com/browse/SPASDK-2)
 - SPASDK-2 Add exported function "getContainerItemContent" [`#SPASDK-2`](https://issues.onehippo.com/browse/SPASDK-2)
 - SPASDK-1 Bump to use node 14 [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
+- SPASDK-1 Remove maven files and update Jenkinsfile [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
+- SPASDK-1 Initial move from brxm monorepo [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
 - TRIVIAL Set branch name to 'main' in changesetBaseRefs [`4dacdcd`](https://github.com/bloomreach/spa-sdk/commit/4dacdcd2fdb0712e40dcb33b9809ae12786f9ab1)
 - TRIVIAL Skip telemetry check on nuxt startup [`15deb25`](https://github.com/bloomreach/spa-sdk/commit/15deb25b1edde3af3296d4dc34dba1483fe278f2)
