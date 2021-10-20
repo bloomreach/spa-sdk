@@ -17,6 +17,10 @@ exposes a simplified declarative Vue.js interface over the Page Model.
 - [Vue Router](https://router.vuejs.org/) support;
 - [Jest](https://jestjs.io/) support.
 
+**Important notice**: Vue SDK does not work in combination with `nomarkup`
+xtype container components. (The xtype of a container component is described [here](https://documentation.bloomreach.com/api-reference/content/management/site-management-api/schemas.html) and [here](https://documentation.bloomreach.com/14/library/concepts/template-composer/channel-editor-containers.html))
+The problem is that Vue 2 does not support multi-root templates and the fragement libraries such as [Vue Fragment](https://www.npmjs.com/package/vue-fragment) that enable this for Vue 2 all add 'magic' parentNodes which is incompatible with some of the Bloomreach Experience Manager code constructs. We are looking into updating to Vue 3 when possible which [does support multi-root templates](https://v3.vuejs.org/guide/migration/fragments.html#_2-x-syntax) without extra magic.
+
 ## Get Started
 
 ### Installation
