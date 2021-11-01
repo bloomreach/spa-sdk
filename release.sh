@@ -9,32 +9,51 @@ VERSION=$(node -p -e "require('./package.json').version")
 VERSION_FOR_HEROKU=`echo $VERSION | sed -E "s/^[^0-9]*([0-9].*)$/\1/" | sed -E "s/\./\-/g"`
 HEROKU_TEAM="bloomreach"
 
-# Define functions for deploying to Heroku
-createCSRApp() {
-  local NAME=$1;
-  local APP_PATH=$2
-  echo "Deploying ${NAME} app using path ${APP_PATH}";
-  echo '-----------------------------------------------------------------------------'
-  npx heroku apps:destroy --app=$NAME --confirm $NAME
-  npx heroku apps:create --app=$NAME --team=$HEROKU_TEAM
-  npx heroku buildpacks:set --app=$NAME heroku/nodejs
-  npx heroku buildpacks:add --app=$NAME https://github.com/timanovsky/subdir-heroku-buildpack.git
-  npx heroku buildpacks:add --app=$NAME https://github.com/heroku/heroku-buildpack-static.git
-  npx heroku config:set --app=$NAME PROJECT_PATH=$APP_PATH
-  git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/$NAME.git main
-}
+# Define function for deploying to Heroku
+createApp() {
+  local APP_TYPE=$1;
+  local APP_NAME=$2;
+  local APP_VERSION=$3;
+  local APP_PATH=$4;
+  local NAME="${APP_NAME}-${APP_TYPE}-${APP_VERSION}";
 
-createSSRApp() {
-  local NAME=$1;
-  local APP_PATH=$2
   echo "Deploying ${NAME} app using path ${APP_PATH}";
   echo '-----------------------------------------------------------------------------'
+
+  # Common heroku settup for both ssr and csr apps
   npx heroku apps:destroy --app=$NAME --confirm $NAME
   npx heroku apps:create --app=$NAME --team=$HEROKU_TEAM
+
   npx heroku buildpacks:set --app=$NAME heroku/nodejs
-  npx heroku buildpacks:add --app=$NAME https://github.com/heroku/heroku-buildpack-multi-procfile
-  npx heroku config:set  --app=$NAME PROJECT_PATH=$APP_PATH PROCFILE=$APP_PATH/universal.Procfile
+
+  # Add build packs based on the app type
+  if [[ $APP_TYPE = "csr" ]]
+  then
+    npx heroku buildpacks:add --app=$NAME https://github.com/timanovsky/subdir-heroku-buildpack.git
+    npx heroku buildpacks:add --app=$NAME https://github.com/heroku/heroku-buildpack-static.git
+  elif [[ $APP_TYPE = "ssr" ]]
+  then
+    npx heroku buildpacks:add --app=$NAME https://github.com/heroku/heroku-buildpack-multi-procfile
+  fi
+
+  # Set common config options
+  npx heroku config:set --app=$NAME PROJECT_PATH=$APP_PATH
+  npx heroku config:set --app=$NAME PROCFILE=$APP_PATH/Procfile
+
+
+  # Set project specific config options
+  if [[ $APP_TYPE = "ssr" ]] && [[ $APP_NAME = "ng" ]]
+  then
+    npx heroku config:set --app=$NAME PROCFILE=$APP_PATH/universal.Procfile
+  elif [[ $APP_TYPE = "ssr" ]] && [[ $APP_NAME = "vue" ]]
+  then
+    npx heroku config:set --app=$NAME HOST=0.0.0.0
+  fi
+
   git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/$NAME.git main
+
+  echo "Deploying ${NAME} app using path ${APP_PATH} has been done"
+  echo '-----------------------------------------------------------------------------'
 }
 
 # Execute release process
@@ -72,15 +91,16 @@ else
   echo 'Deploying CSR apps to Heroku'
   echo '-----------------------------------------------------------------------------'
 
-  createCSRApp "ng-csr-${VERSION_FOR_HEROKU}" "examples/angular"
-  createCSRApp "react-csr-${VERSION_FOR_HEROKU}" "examples/react"
-  createCSRApp "vue-csr-${VERSION_FOR_HEROKU}" "examples/vue"
+  createApp "csr" "ng" ${VERSION_FOR_HEROKU} "examples/angular"
+  createApp "csr" "react" ${VERSION_FOR_HEROKU} "examples/react"
+  createApp "csr" "vue" ${VERSION_FOR_HEROKU} "examples/vue"
 
   echo 'Deploying SSR apps to Heroku'
   echo '-----------------------------------------------------------------------------'
-  createSSRApp "ng-ssr-${VERSION_FOR_HEROKU}" "examples/angular"
-  createSSRApp "react-ssr-${VERSION_FOR_HEROKU}" "examples/next"
-  createSSRApp "vue-ssr-${VERSION_FOR_HEROKU}" "examples/nuxt"
+
+  createApp "ssr" "ng" ${VERSION_FOR_HEROKU} "examples/angular"
+  createApp "ssr" "react" ${VERSION_FOR_HEROKU} "examples/next"
+  createApp "ssr" "vue" ${VERSION_FOR_HEROKU} "examples/nuxt"
 fi
 
 echo "Publishing ${VERSION} to 'latest' dist-tag"
