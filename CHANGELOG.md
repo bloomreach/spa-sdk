@@ -2,11 +2,22 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### [15.3.2](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.3.1...15.3.2)
+#### [15.3.3](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.3.2...15.3.3)
+
+- SPASDK-69 Rework heroku deploy script [`#44`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/44)
+- SPASDK-65 Warn for incompatibility of nomarkup container with vue-sdk [`#43`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/43)
+- SPASDK-69 Rework heroku deploy script [`#SPASDK-69`](https://issues.onehippo.com/browse/SPASDK-69)
+- SPASDK-65 Warn for incompatibility of nomarkup container with vue-sdk [`#SPASDK-65`](https://issues.onehippo.com/browse/SPASDK-65)
+- TRIVIAL Add force flag to remove all folders inside docs folder [`6f0f3bd`](https://github.com/bloomreach/spa-sdk/commit/6f0f3bd625ab21440fd56b0ffc443404e17e6f65)
+
+#### [spa-sdk-15.3.2](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.3.1...spa-sdk-15.3.2)
+
+> 19 October 2021
 
 - SPASDK-62 Retrieve segmentation cookies from request object in case SSR [`#41`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/41)
 - SPASDK-63 Allow attribute "rel" in sanitize [`#42`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/42)
 - SPASDK-49 Add `s` flag to regular expression to match body content [`#38`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/38)
+- SPASDK-64 Bumping version to 15.3.2 [`#SPASDK-64`](https://issues.onehippo.com/browse/SPASDK-64)
 - SPASDK-62 Retrieve segmentation cookies from request object in case SSR [`#SPASDK-62`](https://issues.onehippo.com/browse/SPASDK-62)
 - SPASDK-63 Allow attribute "rel" in sanitize [`#SPASDK-63`](https://issues.onehippo.com/browse/SPASDK-63)
 - SPASDK-49 Add `s` flag to regular expression to match body content [`#SPASDK-49`](https://issues.onehippo.com/browse/SPASDK-49)
@@ -228,7 +239,5 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-2 Log warning for unsupported method "getContentReference" in v0.9 [`#SPASDK-2`](https://issues.onehippo.com/browse/SPASDK-2)
 - SPASDK-2 Add exported function "getContainerItemContent" [`#SPASDK-2`](https://issues.onehippo.com/browse/SPASDK-2)
 - SPASDK-1 Bump to use node 14 [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
-- SPASDK-1 Remove maven files and update Jenkinsfile [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
-- SPASDK-1 Initial move from brxm monorepo [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
 - TRIVIAL Set branch name to 'main' in changesetBaseRefs [`4dacdcd`](https://github.com/bloomreach/spa-sdk/commit/4dacdcd2fdb0712e40dcb33b9809ae12786f9ab1)
 - TRIVIAL Skip telemetry check on nuxt startup [`15deb25`](https://github.com/bloomreach/spa-sdk/commit/15deb25b1edde3af3296d4dc34dba1483fe278f2)
