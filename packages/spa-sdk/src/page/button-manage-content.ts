@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Hippo B.V. (http://www.onehippo.com)
+ * Copyright 2020-2021 Hippo B.V. (http://www.onehippo.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -59,6 +59,34 @@ export interface ManageContentButton {
    * Path to the root folder of selectable document locations.
    */
   root?: string;
+
+  /**
+   * The root path of the CMS configuration to use for the picker, relative to /hippo:configuration/hippo:frontend/cms.
+   * Default value: "cms-pickers/documents".
+   */
+  pickerConfiguration?: string;
+
+  /**
+   * The initial path to use in the picker if nothing has been selected yet, relative to the pickerRootPath.
+   * Default value: "" (empty string).
+   */
+  pickerInitialPath?: string;
+
+  /**
+   * Whether the picker remembers the last visited path. Default: true.
+   */
+  pickerRemembersLastVisited?: boolean;
+
+  /**
+   * The absolute root path to use in the picker, or an empty string if the channel content path is used. If configured
+   * it must start with a "/". Default value: "" (empty string).
+   */
+  pickerRootPath?: string;
+
+  /**
+   * Types of nodes to be able to select in the picker, separated by a comma. By default all types are allowed.
+   */
+  pickerSelectableNodeTypes?: string;
 }
 
 export function createManageContentButton(params: ManageContentButton): MetaCollection | MetaCollectionModel {
@@ -70,6 +98,11 @@ export function createManageContentButton(params: ManageContentButton): MetaColl
     ['rootPath', params.root],
     ['parameterName', params.parameter],
     ['parameterValueIsRelativePath', params.relative ? 'true' : undefined],
+    ['pickerConfiguration', params.pickerConfiguration],
+    ['pickerInitialPath', params.pickerInitialPath],
+    ['pickerRemembersLastVisited', params.pickerRemembersLastVisited ? 'true' : undefined],
+    ['pickerRootPath', params.pickerRootPath],
+    ['pickerSelectableNodeTypes', params.pickerSelectableNodeTypes],
   ].filter(([, value]) => !!value);
 
   if (!entries.length) {
