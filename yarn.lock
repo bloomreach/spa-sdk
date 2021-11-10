@@ -2535,6 +2535,7 @@ __metadata:
     "@angular/router": 11.2.14
     "@bloomreach/eslint-config-angular": 1.0.1
     "@bloomreach/ng-sdk": 15.3.3
+    "@bloomreach/segmentation": 0.0.13
     "@bloomreach/spa-sdk": 15.3.3
     "@nguniversal/builders": 11.2.1
     "@nguniversal/express-engine": 11.2.1

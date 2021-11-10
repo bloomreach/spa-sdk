@@ -18,6 +18,7 @@
   [configuration]="configuration"
   [mapping]="mapping"
   (state)="setVisitor($event)"
+  (state)="initializePersonalization()"
   class="d-flex flex-column vh-100"
 >
   <ng-template let-page="page">

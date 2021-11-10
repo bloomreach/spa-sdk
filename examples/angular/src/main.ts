@@ -19,10 +19,13 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
+import CookieConsentInit from './cookieconsent';
 
 if (environment.production) {
   enableProdMode();
 }
+
+CookieConsentInit();
 
 document.addEventListener('DOMContentLoaded', () => {
   platformBrowserDynamic()
