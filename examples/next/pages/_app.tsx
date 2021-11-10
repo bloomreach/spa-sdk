@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import { initializePersonalization } from '@bloomreach/segmentation';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import React, { useState } from 'react';
@@ -65,6 +66,11 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
           expires={28}
           onAccept={() => {
             setCookieAccepted(true);
+
+            initializePersonalization({
+              projectToken: '8d33057c-1240-11ec-90a7-ee6a68e885cd',
+              path: pageProps.configuration.path,
+            });
           }}
         >
           This website uses cookies to enhance the user experience.

@@ -2558,6 +2558,7 @@ __metadata:
   dependencies:
     "@bloomreach/eslint-config-next": 1.0.1
     "@bloomreach/react-sdk": 15.3.3
+    "@bloomreach/segmentation": 0.0.13
     "@bloomreach/spa-sdk": 15.3.3
     "@types/node": 14.17.3
     "@types/react": 16.14.0
@@ -2726,6 +2727,16 @@ __metadata:
     react: ^16.14
   languageName: unknown
   linkType: soft
+
+"@bloomreach/segmentation@npm:0.0.13":
+  version: 0.0.13
+  resolution: "@bloomreach/segmentation@npm:0.0.13"
+  dependencies:
+    cookie: 0.4.1
+    whatwg-fetch: 3.6.2
+  checksum: 0dd69c115e57ad0565f329e27f07f81092f5188ddadb858cfd21540f3e84d4d7747fd7563ba10a91091c182eb769817fce9685ee39a007be948c67fc08f8c05d
+  languageName: node
+  linkType: hard
 
 "@bloomreach/spa-sdk@15.3.3, @bloomreach/spa-sdk@workspace:packages/spa-sdk":
   version: 0.0.0-use.local
@@ -29125,7 +29136,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"whatwg-fetch@npm:^3.4.1":
+"whatwg-fetch@npm:3.6.2, whatwg-fetch@npm:^3.4.1":
   version: 3.6.2
   resolution: "whatwg-fetch@npm:3.6.2"
   checksum: ee976b7249e7791edb0d0a62cd806b29006ad7ec3a3d89145921ad8c00a3a67e4be8f3fb3ec6bc7b58498724fd568d11aeeeea1f7827e7e1e5eae6c8a275afed

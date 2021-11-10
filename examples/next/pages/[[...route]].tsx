@@ -14,14 +14,18 @@
  * limitations under the License.
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import Link from 'next/link';
 import { BrComponent, BrPage, BrPageContext } from '@bloomreach/react-sdk';
 import { initialize } from '@bloomreach/spa-sdk';
+import { initializePersonalization } from '@bloomreach/segmentation';
 import { relevance } from '@bloomreach/spa-sdk/lib/express';
+import { getCookieConsentValue } from 'react-cookie-consent';
 import { Banner, Content, Menu, NewsList } from '../components';
+
+const isClient = typeof window !== 'undefined';
 
 export const getServerSideProps: GetServerSideProps = async ({ req: request, res: response, resolvedUrl: path }) => {
   relevance(request, response);
@@ -41,6 +45,15 @@ export default function Index({
   page,
 }: InferGetServerSidePropsType<typeof getServerSideProps>): JSX.Element {
   const mapping = { Banner, Content, 'News List': NewsList, 'Simple Content': Content };
+
+  useEffect(() => {
+    if (isClient && getCookieConsentValue() === 'true') {
+      initializePersonalization({
+        projectToken: '8d33057c-1240-11ec-90a7-ee6a68e885cd',
+        path: configuration.path,
+      });
+    }
+  });
 
   return (
     <BrPage configuration={{ ...configuration, httpClient: axios }} mapping={mapping} page={page}>
