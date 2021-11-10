@@ -11,6 +11,7 @@
     "start": "cross-env NODE_ENV=production node server/index.js"
   },
   "dependencies": {
+    "@bloomreach/segmentation": "0.0.13",
     "@bloomreach/spa-sdk": "15.3.3",
     "@bloomreach/vue-sdk": "15.3.3",
     "@nuxtjs/axios": "5.13.6",

@@ -37,6 +37,15 @@ module.exports = {
         integrity: 'sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk',
         crossorigin: 'anonymous',
       },
+      {
+        rel: 'stylesheet',
+        href: 'https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css',
+      },
+    ],
+    script: [
+      {
+        src: 'https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js',
+      },
     ],
   },
   env: {
@@ -45,7 +54,7 @@ module.exports = {
   loading: { color: '#fff' },
   buildModules: ['@nuxt/typescript-build'],
   modules: ['@nuxtjs/axios', '@nuxtjs/dotenv'],
-  plugins: ['~/plugins/brxm'],
+  plugins: ['~/plugins/brxm', '~/plugins/cookieconsent.client'],
   server: {
     port: port && port.substring(ARG_PORT.length + 1),
   },

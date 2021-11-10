@@ -2579,6 +2579,7 @@ __metadata:
   dependencies:
     "@babel/runtime-corejs3": 7.14.9
     "@bloomreach/eslint-config-nuxt": 1.0.1
+    "@bloomreach/segmentation": 0.0.13
     "@bloomreach/spa-sdk": 15.3.3
     "@bloomreach/vue-sdk": 15.3.3
     "@nuxt/types": 2.15.7
