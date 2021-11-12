@@ -47,12 +47,10 @@ describe('campaign', () => {
     expect(Campaign.GET_VARIANT_ID(undefined, undefined, undefined, request)).toBe('12345:silver');
   });
 
-  it('should delete cookie', () => {
+  it('should return empty varian id if ttl is equal zero', () => {
     document.cookie = `${Campaign.CAMPAIGN_PARAMETER}=12345`;
     document.cookie = `${Campaign.SEGMENT_PARAMETER}=gold`;
 
-    Campaign.GET_VARIANT_ID(undefined, undefined, '0');
-
-    expect(Campaign.GET_VARIANT_ID()).toBe('');
+    expect(Campaign.GET_VARIANT_ID(undefined, undefined, '0')).toBe('');
   });
 });

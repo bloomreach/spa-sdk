@@ -38,14 +38,10 @@ export class Campaign {
     const TTL = this.getCookieTTL(ttl);
 
     if (TTL === 0) {
-      Cookie.ERASE_COOKIE(this.CAMPAIGN_PARAMETER);
-      Cookie.ERASE_COOKIE(this.SEGMENT_PARAMETER);
       return '';
     }
 
     if (campaignId && segmentId) {
-      Cookie.SET_COOKIE(this.CAMPAIGN_PARAMETER, campaignId, TTL);
-      Cookie.SET_COOKIE(this.SEGMENT_PARAMETER, segmentId, TTL);
       return `${campaignId}:${segmentId}`;
     }
 
