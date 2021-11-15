@@ -13,7 +13,6 @@
     "next": "10.2.3",
     "next-routes": "1.4.2",
     "react": "16.14.0",
-    "react-cookie-consent": "6.4.1",
     "react-dom": "16.14.0"
   },
   "devDependencies": {
