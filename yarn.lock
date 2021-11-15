@@ -2611,6 +2611,7 @@ __metadata:
   dependencies:
     "@bloomreach/eslint-config-react": 1.0.2
     "@bloomreach/react-sdk": 15.3.3
+    "@bloomreach/segmentation": 0.0.13
     "@bloomreach/spa-sdk": 15.3.3
     "@types/react": 16.14.0
     "@types/react-dom": 16.9.14
