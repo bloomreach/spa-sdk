@@ -22,13 +22,12 @@ import { filter } from 'rxjs/operators';
 import { Request } from 'express';
 import { BrPageComponent } from '@bloomreach/ng-sdk';
 import { Page } from '@bloomreach/spa-sdk';
-import { initializePersonalization } from '@bloomreach/segmentation';
 
 import { BannerComponent } from '../banner/banner.component';
 import { ContentComponent } from '../content/content.component';
 import { MenuComponent } from '../menu/menu.component';
 import { NewsListComponent } from '../news-list/news-list.component';
-import { isConsentReceived } from '../utils/cookieconsent';
+import { isConsentReceived, runPersonalization } from '../utils/cookieconsent';
 
 export const ENDPOINT = new InjectionToken<string>('brXM API endpoint');
 
@@ -76,10 +75,7 @@ export class IndexComponent implements OnInit {
 
   initializePersonalization(): void {
     if (isClient && isConsentReceived()) {
-      initializePersonalization({
-        projectToken: '8d33057c-1240-11ec-90a7-ee6a68e885cd',
-        path: this.configuration.path ?? '/',
-      });
+      runPersonalization(this.configuration.path);
     }
   }
 }

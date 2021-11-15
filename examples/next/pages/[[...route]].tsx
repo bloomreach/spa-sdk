@@ -20,10 +20,9 @@ import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import Link from 'next/link';
 import { BrComponent, BrPage, BrPageContext } from '@bloomreach/react-sdk';
 import { initialize } from '@bloomreach/spa-sdk';
-import { initializePersonalization } from '@bloomreach/segmentation';
 import { relevance } from '@bloomreach/spa-sdk/lib/express';
 import { Banner, Content, Menu, NewsList } from '../components';
-import { isConsentReceived } from '../utils/cookieconsent';
+import { isConsentReceived, runPersonalization } from '../utils/cookieconsent';
 
 const isClient = typeof window !== 'undefined';
 
@@ -48,10 +47,7 @@ export default function Index({
 
   useEffect(() => {
     if (isClient && isConsentReceived()) {
-      initializePersonalization({
-        projectToken: '8d33057c-1240-11ec-90a7-ee6a68e885cd',
-        path: configuration.path,
-      });
+      runPersonalization(configuration.path);
     }
   }, [configuration.path]);
 

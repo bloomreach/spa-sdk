@@ -51,13 +51,12 @@ import axios from 'axios';
 import { Configuration } from '@bloomreach/spa-sdk';
 import { Component, Vue, Watch } from 'vue-property-decorator';
 import { Route } from 'vue-router';
-import { initializePersonalization } from '@bloomreach/segmentation';
 
 import Banner from './components/BrBanner.vue';
 import Content from './components/BrContent.vue';
 import Menu from './components/BrMenu.vue';
 import NewsList from './components/BrNewsList.vue';
-import { isConsentReceived } from './utils/cookieconsent';
+import { isConsentReceived, runPersonalization } from './utils/cookieconsent';
 
 @Component({
   data(this: App) {
@@ -89,10 +88,7 @@ export default class App extends Vue {
     this.$set(this.configuration, 'path', this.$route.fullPath);
 
     if (isConsentReceived()) {
-      initializePersonalization({
-        projectToken: '8d33057c-1240-11ec-90a7-ee6a68e885cd',
-        path: this.configuration.path ?? '/',
-      });
+      runPersonalization(this.configuration.path);
     }
   }
 }

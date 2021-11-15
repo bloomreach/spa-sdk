@@ -45,7 +45,6 @@
 </template>
 
 <script lang="ts">
-import { initializePersonalization } from '@bloomreach/segmentation';
 import { Configuration, initialize } from '@bloomreach/spa-sdk';
 import { Component, Vue, Watch } from 'nuxt-property-decorator';
 
@@ -96,10 +95,7 @@ export default class App extends Vue {
     this.configuration.httpClient = this.$axios;
 
     if (this.$isConsentReceived()) {
-      initializePersonalization({
-        projectToken: '8d33057c-1240-11ec-90a7-ee6a68e885cd',
-        path: this.configuration.path,
-      });
+      this.$runPersonalization(this.$route.fullPath);
     }
   }
 
