@@ -57,6 +57,7 @@ import Banner from './components/BrBanner.vue';
 import Content from './components/BrContent.vue';
 import Menu from './components/BrMenu.vue';
 import NewsList from './components/BrNewsList.vue';
+import { isConsentReceived } from './utils/cookieconsent';
 
 @Component({
   data(this: App) {
@@ -87,7 +88,7 @@ export default class App extends Vue {
   navigate(): void {
     this.$set(this.configuration, 'path', this.$route.fullPath);
 
-    if (window.cookieconsent.utils.getCookie('cookieconsent_status') === window.cookieconsent.status.allow) {
+    if (isConsentReceived()) {
       initializePersonalization({
         projectToken: '8d33057c-1240-11ec-90a7-ee6a68e885cd',
         path: this.configuration.path ?? '/',

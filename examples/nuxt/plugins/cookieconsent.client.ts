@@ -1,5 +1,28 @@
+/* eslint-disable max-len */
 import type { Plugin } from '@nuxt/types';
 import { initializePersonalization } from '@bloomreach/segmentation';
+
+declare global {
+  interface Window {
+    cookieconsent?: {
+      status: {
+        allow: 'allow';
+        deny: 'deny';
+        dismiss: 'dismiss';
+      };
+      initialise(config: {
+        [key: string]: unknown;
+        onInitialise(status: keyof Required<Window>['cookieconsent']['status']): void;
+        onStatusChange(status: keyof Required<Window>['cookieconsent']['status']): void;
+      }): void;
+      utils: {
+        getCookie(name: string): string;
+      };
+    };
+  }
+}
+
+const COOKIE_CONSENTS_EXPIRATION_VALUE = 28; // Days
 
 const injectScript = (scriptContent: string): void => {
   const scriptTag = document.createElement('script');
@@ -15,7 +38,6 @@ const exponeaSdkSnippet = `
       // customer: window.currentUserId,
   });
   exponea.start();
-  console.log('Exponea STARTED');
 `;
 
 const runExponeaCookie = (path: string): void => {
@@ -23,10 +45,14 @@ const runExponeaCookie = (path: string): void => {
   initializePersonalization({ projectToken: '8d33057c-1240-11ec-90a7-ee6a68e885cd', path });
 };
 
-const CookieConsentPlugin: Plugin = (context, inject): void => {
-  inject('cookieconsent', window.cookieconsent);
+export const isConsentReceived = (): boolean => {
+  const { cookieconsent } = window;
 
-  window.cookieconsent.initialise({
+  return !!cookieconsent && cookieconsent.utils.getCookie('cookieconsent_status') === cookieconsent.status.allow;
+};
+
+const CookieConsentInit = (): void => {
+  window.cookieconsent?.initialise?.({
     palette: {
       popup: {
         background: '#000',
@@ -36,21 +62,26 @@ const CookieConsentPlugin: Plugin = (context, inject): void => {
       },
     },
     cookie: {
-      expiryDays: 28,
+      expiryDays: COOKIE_CONSENTS_EXPIRATION_VALUE,
     },
     showLink: false,
     type: 'opt-in',
     onInitialise: (status) => {
-      if (status === window.cookieconsent.status.allow) {
-        runExponeaCookie(context.route.fullPath);
+      if (status === window.cookieconsent?.status.allow) {
+        runExponeaCookie(`${window.location.pathname}${window.location.search}`);
       }
     },
     onStatusChange: (status) => {
-      if (status === window.cookieconsent.status.allow) {
-        runExponeaCookie(context.route.fullPath);
+      if (status === window.cookieconsent?.status.allow) {
+        runExponeaCookie(`${window.location.pathname}${window.location.search}`);
       }
     },
   });
+};
+
+const CookieConsentPlugin: Plugin = (_, inject): void => {
+  inject('isConsentReceived', isConsentReceived);
+  CookieConsentInit();
 };
 
 export default CookieConsentPlugin;

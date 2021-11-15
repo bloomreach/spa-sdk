@@ -20,7 +20,7 @@ import { Link, RouteComponentProps } from 'react-router-dom';
 import { BrComponent, BrPage, BrPageContext } from '@bloomreach/react-sdk';
 import { initializePersonalization } from '@bloomreach/segmentation';
 import { Banner, Content, Menu, NewsList } from './components';
-import CookieConsentInit from './utils/cookieconsent';
+import CookieConsentInit, { isConsentReceived } from './utils/cookieconsent';
 
 export default function App({ location }: RouteComponentProps): JSX.Element {
   const configuration = {
@@ -36,7 +36,7 @@ export default function App({ location }: RouteComponentProps): JSX.Element {
   }, []);
 
   useEffect(() => {
-    if (window.cookieconsent.utils.getCookie('cookieconsent_status') === window.cookieconsent.status.allow) {
+    if (isConsentReceived()) {
       initializePersonalization({
         projectToken: '8d33057c-1240-11ec-90a7-ee6a68e885cd',
         path: configuration.path ?? '/',

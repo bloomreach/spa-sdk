@@ -23,6 +23,7 @@ import { initialize } from '@bloomreach/spa-sdk';
 import { initializePersonalization } from '@bloomreach/segmentation';
 import { relevance } from '@bloomreach/spa-sdk/lib/express';
 import { Banner, Content, Menu, NewsList } from '../components';
+import { isConsentReceived } from '../utils/cookieconsent';
 
 const isClient = typeof window !== 'undefined';
 
@@ -46,10 +47,7 @@ export default function Index({
   const mapping = { Banner, Content, 'News List': NewsList, 'Simple Content': Content };
 
   useEffect(() => {
-    if (
-      isClient &&
-      window.cookieconsent.utils.getCookie('cookieconsent_status') === window.cookieconsent.status.allow
-    ) {
+    if (isClient && isConsentReceived()) {
       initializePersonalization({
         projectToken: '8d33057c-1240-11ec-90a7-ee6a68e885cd',
         path: configuration.path,

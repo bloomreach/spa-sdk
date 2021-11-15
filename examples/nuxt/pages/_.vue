@@ -95,7 +95,7 @@ export default class App extends Vue {
   beforeMount() {
     this.configuration.httpClient = this.$axios;
 
-    if (this.$cookieconsent.utils.getCookie('cookieconsent_status') === this.$cookieconsent.status.allow) {
+    if (this.$isConsentReceived()) {
       initializePersonalization({
         projectToken: '8d33057c-1240-11ec-90a7-ee6a68e885cd',
         path: this.configuration.path,

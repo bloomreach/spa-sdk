@@ -19,15 +19,15 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
-import CookieConsentInit from './cookieconsent';
+import CookieConsentInit from './app/utils/cookieconsent';
 
 if (environment.production) {
   enableProdMode();
 }
 
-CookieConsentInit();
-
 document.addEventListener('DOMContentLoaded', () => {
+  CookieConsentInit();
+
   platformBrowserDynamic()
     .bootstrapModule(AppModule)
     // eslint-disable-next-line no-console
