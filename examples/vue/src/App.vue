@@ -51,6 +51,7 @@ import axios from 'axios';
 import { Configuration } from '@bloomreach/spa-sdk';
 import { Component, Vue, Watch } from 'vue-property-decorator';
 import { Route } from 'vue-router';
+import { initializePersonalization } from '@bloomreach/segmentation';
 
 import Banner from './components/BrBanner.vue';
 import Content from './components/BrContent.vue';
@@ -85,6 +86,13 @@ export default class App extends Vue {
   @Watch('$route', { immediate: true, deep: true })
   navigate(): void {
     this.$set(this.configuration, 'path', this.$route.fullPath);
+
+    if (window.cookieconsent.utils.getCookie('cookieconsent_status') === window.cookieconsent.status.allow) {
+      initializePersonalization({
+        projectToken: '8d33057c-1240-11ec-90a7-ee6a68e885cd',
+        path: this.configuration.path ?? '/',
+      });
+    }
   }
 }
 </script>

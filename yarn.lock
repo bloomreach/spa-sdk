@@ -2630,6 +2630,7 @@ __metadata:
   resolution: "@bloomreach/example-vue@workspace:examples/vue"
   dependencies:
     "@bloomreach/eslint-config-vue": 1.0.1
+    "@bloomreach/segmentation": 0.0.13
     "@bloomreach/spa-sdk": 15.3.3
     "@bloomreach/vue-sdk": 15.3.3
     "@types/jest": 26.0.24

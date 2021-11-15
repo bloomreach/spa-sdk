@@ -18,9 +18,11 @@ import Vue from 'vue';
 import { BrSdk } from '@bloomreach/vue-sdk';
 import App from './App.vue';
 import router from './router';
+import CookieConsentInit from './utils/cookieconsent';
 
 Vue.config.productionTip = false;
 Vue.use(BrSdk);
+CookieConsentInit();
 
 new Vue({
   router,
