@@ -17,5 +17,6 @@
 export const environment = {
   endpoint: undefined,
   exponeaProjectToken: undefined,
+  exponeaApiUrl: '',
   production: true,
 };
