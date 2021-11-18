@@ -1,5 +1,5 @@
 <!--
-  Copyright 2020 Hippo B.V. (http://www.onehippo.com)
+  Copyright 2020-2021 Hippo B.V. (http://www.onehippo.com)
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@
       folder-template-query="new-banner-folder"
       parameter="document"
       root="banners"
+      picker-selectable-node-types="best:banner,hap:bannerdocument"
       :relative="true"
     />
     <h1 v-if="data.title">{{ data.title }}</h1>
