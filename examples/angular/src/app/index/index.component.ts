@@ -27,12 +27,8 @@ import { BannerComponent } from '../banner/banner.component';
 import { ContentComponent } from '../content/content.component';
 import { MenuComponent } from '../menu/menu.component';
 import { NewsListComponent } from '../news-list/news-list.component';
-import { isConsentReceived, runPersonalization } from '../utils/cookieconsent';
 
 export const ENDPOINT = new InjectionToken<string>('brXM API endpoint');
-
-const isClient = typeof window !== 'undefined';
-
 @Component({
   selector: 'br-index',
   templateUrl: './index.component.html',
@@ -71,11 +67,5 @@ export class IndexComponent implements OnInit {
 
   setVisitor(page?: Page): void {
     this.configuration.visitor = page?.getVisitor();
-  }
-
-  initializePersonalization(): void {
-    if (isClient && isConsentReceived()) {
-      runPersonalization(this.configuration.path);
-    }
   }
 }

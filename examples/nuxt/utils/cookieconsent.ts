@@ -1,5 +1,4 @@
 /* eslint-disable max-len */
-import type { Plugin } from '@nuxt/types';
 import { initializePersonalization, initializeCampaignPersonalization } from '@bloomreach/segmentation';
 
 declare global {
@@ -24,8 +23,8 @@ declare global {
 
 const COOKIE_CONSENTS_EXPIRATION_VALUE = 28; // Days
 
-const exponeaProjectToken = process.env.EXPONEA_PROJECT_TOKEN;
-const exponeaApiUrl = process.env.EXPONEA_API_URL;
+const exponeaProjectToken = process.env.VUE_APP_EXPONEA_PROJECT_TOKEN;
+const exponeaApiUrl = process.env.VUE_APP_EXPONEA_API_URL;
 
 const injectScript = (scriptContent: string): void => {
   const scriptTag = document.createElement('script');
@@ -96,11 +95,4 @@ const CookieConsentInit = (): void => {
   });
 };
 
-const CookieConsentPlugin: Plugin = (_, inject): void => {
-  inject('isConsentReceived', isConsentReceived);
-  inject('runPersonalization', runPersonalization);
-
-  CookieConsentInit();
-};
-
-export default CookieConsentPlugin;
+export default CookieConsentInit;

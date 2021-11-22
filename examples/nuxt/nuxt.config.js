@@ -54,7 +54,7 @@ module.exports = {
   loading: { color: '#fff' },
   buildModules: ['@nuxt/typescript-build'],
   modules: ['@nuxtjs/axios', '@nuxtjs/dotenv'],
-  plugins: ['~/plugins/brxm', '~/plugins/cookieconsent.client'],
+  plugins: ['~/plugins/brxm'],
   server: {
     port: port && port.substring(ARG_PORT.length + 1),
   },

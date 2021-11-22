@@ -16,16 +16,11 @@
 
 import { AppProps } from 'next/app';
 import Head from 'next/head';
-import React, { useEffect } from 'react';
-import CookieConsentInit from '../utils/cookieconsent';
+import React from 'react';
 
 import './app.css';
 
 export default function App({ Component, pageProps }: AppProps): JSX.Element {
-  useEffect(() => {
-    CookieConsentInit();
-  }, []);
-
   return (
     <>
       <Head>

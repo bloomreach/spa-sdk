@@ -40,6 +40,7 @@
           </div>
         </div>
       </footer>
+      <br-cookie-consent :is-preview="props.page.isPreview()" :path="configuration.path"></br-cookie-consent>
     </template>
   </br-page>
 </template>
@@ -52,8 +53,10 @@ import Banner from '~/components/BrBanner.vue';
 import Content from '~/components/BrContent.vue';
 import Menu from '~/components/BrMenu.vue';
 import NewsList from '~/components/BrNewsList.vue';
+import CookieConsent from '~/components/BrCookieConsent.vue';
 
 @Component({
+  components: { 'br-cookie-consent': CookieConsent },
   async asyncData(context) {
     const configuration = {
       baseUrl: process.env.BASE_URL !== '/' ? process.env.BASE_URL : '',
@@ -93,10 +96,6 @@ export default class App extends Vue {
 
   beforeMount() {
     this.configuration.httpClient = this.$axios;
-
-    if (this.$isConsentReceived()) {
-      this.$runPersonalization(this.$route.fullPath);
-    }
   }
 
   beforeUpdate() {

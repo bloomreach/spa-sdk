@@ -14,17 +14,14 @@
  * limitations under the License.
  */
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import axios from 'axios';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import Link from 'next/link';
 import { BrComponent, BrPage, BrPageContext } from '@bloomreach/react-sdk';
 import { initialize } from '@bloomreach/spa-sdk';
 import { relevance } from '@bloomreach/spa-sdk/lib/express';
-import { Banner, Content, Menu, NewsList } from '../components';
-import { isConsentReceived, runPersonalization } from '../utils/cookieconsent';
-
-const isClient = typeof window !== 'undefined';
+import { Banner, Content, Menu, NewsList, CookieConsent } from '../components';
 
 export const getServerSideProps: GetServerSideProps = async ({ req: request, res: response, resolvedUrl: path }) => {
   relevance(request, response);
@@ -44,12 +41,6 @@ export default function Index({
   page,
 }: InferGetServerSidePropsType<typeof getServerSideProps>): JSX.Element {
   const mapping = { Banner, Content, 'News List': NewsList, 'Simple Content': Content };
-
-  useEffect(() => {
-    if (isClient && isConsentReceived()) {
-      runPersonalization(configuration.path);
-    }
-  }, [configuration.path]);
 
   return (
     <BrPage configuration={{ ...configuration, httpClient: axios }} mapping={mapping} page={page}>
@@ -82,6 +73,9 @@ export default function Index({
           </div>
         </div>
       </footer>
+      <BrPageContext.Consumer>
+        {(p) => <CookieConsent isPreview={!!p?.isPreview()} path={configuration.path} />}
+      </BrPageContext.Consumer>
     </BrPage>
   );
 }

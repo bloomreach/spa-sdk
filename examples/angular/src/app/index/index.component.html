@@ -18,7 +18,6 @@
   [configuration]="configuration"
   [mapping]="mapping"
   (state)="setVisitor($event)"
-  (state)="initializePersonalization()"
   class="d-flex flex-column vh-100"
 >
   <ng-template let-page="page">
@@ -52,5 +51,9 @@
         </div>
       </div>
     </footer>
+    <br-cookie-consent
+      [isPreview]="page.isPreview()"
+      [path]="configuration.path"
+    ></br-cookie-consent>
   </ng-template>
 </br-page>

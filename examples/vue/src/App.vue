@@ -41,6 +41,7 @@
             </div>
           </div>
         </footer>
+        <br-cookie-consent :isPreview="props.page.isPreview()" :path="configuration.path"></br-cookie-consent>
       </template>
     </br-page>
   </div>
@@ -56,9 +57,10 @@ import Banner from './components/BrBanner.vue';
 import Content from './components/BrContent.vue';
 import Menu from './components/BrMenu.vue';
 import NewsList from './components/BrNewsList.vue';
-import { isConsentReceived, runPersonalization } from './utils/cookieconsent';
+import CookieConsent from './components/BrCookieConsent.vue';
 
 @Component({
+  components: { 'br-cookie-consent': CookieConsent },
   data(this: App) {
     return {
       configuration: {
@@ -86,10 +88,6 @@ export default class App extends Vue {
   @Watch('$route', { immediate: true, deep: true })
   navigate(): void {
     this.$set(this.configuration, 'path', this.$route.fullPath);
-
-    if (isConsentReceived()) {
-      runPersonalization(this.configuration.path);
-    }
   }
 }
 </script>

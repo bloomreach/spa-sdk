@@ -14,12 +14,11 @@
  * limitations under the License.
  */
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import axios from 'axios';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { BrComponent, BrPage, BrPageContext } from '@bloomreach/react-sdk';
-import { Banner, Content, Menu, NewsList } from './components';
-import CookieConsentInit, { isConsentReceived, runPersonalization } from './utils/cookieconsent';
+import { Banner, Content, Menu, NewsList, CookieConsent } from './components';
 
 export default function App({ location }: RouteComponentProps): JSX.Element {
   const configuration = {
@@ -29,16 +28,6 @@ export default function App({ location }: RouteComponentProps): JSX.Element {
     path: `${location.pathname}${location.search}`,
   };
   const mapping = { Banner, Content, 'News List': NewsList, 'Simple Content': Content };
-
-  useEffect(() => {
-    CookieConsentInit();
-  }, []);
-
-  useEffect(() => {
-    if (isConsentReceived()) {
-      runPersonalization(configuration.path);
-    }
-  }, [configuration.path]);
 
   return (
     <BrPage configuration={configuration} mapping={mapping}>
@@ -71,6 +60,9 @@ export default function App({ location }: RouteComponentProps): JSX.Element {
           </div>
         </div>
       </footer>
+      <BrPageContext.Consumer>
+        {(page) => <CookieConsent isPreview={!!page?.isPreview()} path={configuration.path} />}
+      </BrPageContext.Consumer>
     </BrPage>
   );
 }
