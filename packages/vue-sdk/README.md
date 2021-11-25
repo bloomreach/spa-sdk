@@ -498,15 +498,20 @@ This component places a button on the page that opens the linked content in the
 document editor or opens a document editor to create a new one. The button will
 only be shown in preview mode.
 
-| Property                  | Required | Description                                                                                     |
-| ------------------------- | :------: | ----------------------------------------------------------------------------------------------- |
-| `content`                 |   _no_   | The content entity to open for editing.                                                         |
-| `document-template-query` |   _no_   | Template query to use for creating new documents.                                               |
-| `folder-template-query`   |   _no_   | Template query to use in case folders specified by `path` do not yet exist and must be created. |
-| `path`                    |   _no_   | Initial location of a new document, relative to the `root`.                                     |
-| `parameter`               |   _no_   | Name of the component parameter in which the document path is stored.                           |
-| `relative`                |   _no_   | Flag indicating that the picked value should be stored as a relative path.                      |
-| `root`                    |   _no_   | Path to the root folder of selectable document locations.                                       |
+| Property                    | Required | Description                                                                                     |
+| --------------------------- | :------: | ----------------------------------------------------------------------------------------------- |
+| `content`                   |   _no_   | The content entity to open for editing.                                                         |
+| `document-template-query`   |   _no_   | Template query to use for creating new documents.                                               |
+| `folder-template-query`     |   _no_   | Template query to use in case folders specified by `path` do not yet exist and must be created. |
+| `path`                      |   _no_   | Initial location of a new document, relative to the `root`.                                     |
+| `parameter`                 |   _no_   | Name of the component parameter in which the document path is stored.                           |
+| `pickerConfiguration`       |   _no_   | The root path of the CMS configuration to use for the picker, relative to `/hippo:configuration/hippo:frontend/cms`. |
+| `pickerInitialPath`         |   _no_   | The initial path to use in the picker if nothing has been selected yet, relative to the pickerRootPath. |
+| `pickerRemembersLastVisited`|   _no_   | Whether the picker remembers the last visited path.                                             |
+| `pickerRootPath`            |   _no_   | The absolute root path to use in the picker, or an empty string if the channel content path is used. |
+| `pickerSelectableNodeTypes` |   _no_   | Types of nodes to be able to select in the picker, separated by a comma.                        |
+| `relative`                  |   _no_   | Flag indicating that the picked value should be stored as a relative path.                      |
+| `root`                      |   _no_   | Path to the root folder of selectable document locations.                                       |
 
 ### br-manage-menu-button
 

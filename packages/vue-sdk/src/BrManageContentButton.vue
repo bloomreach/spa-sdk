@@ -1,5 +1,5 @@
 <!--
-  Copyright 2020 Hippo B.V. (http://www.onehippo.com)
+  Copyright 2020-2021 Hippo B.V. (http://www.onehippo.com)
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -49,6 +49,16 @@ export default class BrManageContentButton extends Vue implements ManageContentB
   @Prop() path?: ManageContentButton['path'];
 
   @Prop() parameter?: ManageContentButton['parameter'];
+
+  @Prop() pickerConfiguration?: ManageContentButton['pickerConfiguration'];
+
+  @Prop() pickerInitialPath?: ManageContentButton['pickerInitialPath'];
+
+  @Prop() pickerRemembersLastVisited?: ManageContentButton['pickerRemembersLastVisited'];
+
+  @Prop() pickerRootPath?: ManageContentButton['pickerRootPath'];
+
+  @Prop() pickerSelectableNodeTypes?: ManageContentButton['pickerSelectableNodeTypes'];
 
   @Prop() relative?: ManageContentButton['relative'];
 
