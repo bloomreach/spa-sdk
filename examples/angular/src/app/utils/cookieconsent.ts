@@ -10,14 +10,18 @@ declare global {
         deny: 'deny';
         dismiss: 'dismiss';
       };
-      initialise(config: {
-        [key: string]: unknown;
-        onInitialise(status: keyof Required<Window>['cookieconsent']['status']): void;
-        onStatusChange(status: keyof Required<Window>['cookieconsent']['status']): void;
-      }): void;
+      initialise(
+        config: {
+          [key: string]: unknown;
+          onInitialise(status: keyof Required<Window>['cookieconsent']['status']): void;
+          onStatusChange(status: keyof Required<Window>['cookieconsent']['status']): void;
+        },
+        complete: (popup: Required<Window>['cookieconsent']['Popup']) => void,
+      ): void;
       utils: {
         getCookie(name: string): string;
       };
+      Popup: unknown;
     };
   }
 }
@@ -66,33 +70,42 @@ const injectExponeaScriptSnippet = (token?: string, apiUrl?: string): void => {
   injectScript(getExponeaSdkSnippet(token, apiUrl));
 };
 
+let isConsentInitilaised = false;
+
 const CookieConsentInit = (): void => {
-  window.cookieconsent?.initialise?.({
-    palette: {
-      popup: {
-        background: '#000',
+  if (isConsentInitilaised) return;
+
+  window.cookieconsent?.initialise?.(
+    {
+      palette: {
+        popup: {
+          background: '#000',
+        },
+        button: {
+          background: '#f1d600',
+        },
       },
-      button: {
-        background: '#f1d600',
+      cookie: {
+        expiryDays: COOKIE_CONSENTS_EXPIRATION_VALUE,
+      },
+      showLink: false,
+      type: 'opt-in',
+      onInitialise: (status) => {
+        if (status === window.cookieconsent?.status.allow) {
+          injectExponeaScriptSnippet(exponeaProjectToken, exponeaApiUrl);
+        }
+      },
+      onStatusChange: (status) => {
+        if (status === window.cookieconsent?.status.allow) {
+          injectExponeaScriptSnippet(exponeaProjectToken, exponeaApiUrl);
+          runPersonalization(`${window.location.pathname}${window.location.search}`);
+        }
       },
     },
-    cookie: {
-      expiryDays: COOKIE_CONSENTS_EXPIRATION_VALUE,
+    (popup) => {
+      isConsentInitilaised = !!popup;
     },
-    showLink: false,
-    type: 'opt-in',
-    onInitialise: (status) => {
-      if (status === window.cookieconsent?.status.allow) {
-        injectExponeaScriptSnippet(exponeaProjectToken, exponeaApiUrl);
-      }
-    },
-    onStatusChange: (status) => {
-      if (status === window.cookieconsent?.status.allow) {
-        injectExponeaScriptSnippet(exponeaProjectToken, exponeaApiUrl);
-        runPersonalization(`${window.location.pathname}${window.location.search}`);
-      }
-    },
-  });
+  );
 };
 
 export default CookieConsentInit;
