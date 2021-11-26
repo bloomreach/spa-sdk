@@ -258,9 +258,23 @@ describe('ApiImpl', () => {
   });
 
   describe('getComponent', () => {
-    beforeEach(async () => API.getComponent('http://example.com/component', { a: 'b' }));
-
     it('should request a component model', () => {
+      API.getComponent('http://example.com/component', {});
+
+      expect(config.httpClient).toBeCalledWith(
+        expect.objectContaining({
+          url: 'http://example.com/component',
+          method: 'GET',
+          headers: expect.objectContaining({
+            'Content-Type': 'application/x-www-form-urlencoded',
+          }),
+        }),
+      );
+    });
+
+    it('should request a customized component model', () => {
+      API.getComponent('http://example.com/component', { a: 'b' });
+
       expect(config.httpClient).toBeCalledWith(
         expect.objectContaining({
           url: 'http://example.com/component',
