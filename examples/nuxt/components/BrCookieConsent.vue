@@ -35,10 +35,10 @@ export default class BrCookieConsent extends Vue {
   created(): void {
     if (isClient && !this.isPreview) {
       CookieConsentInit();
-    }
 
-    if (isClient && !this.isPreview && isConsentReceived()) {
-      runPersonalization(this.path);
+      if (isConsentReceived()) {
+        runPersonalization(this.path);
+      }
     }
   }
 }
