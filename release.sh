@@ -103,6 +103,10 @@ else
   createApp "ssr" "vue" ${VERSION_FOR_HEROKU} "examples/nuxt"
 fi
 
+echo "Build packages"
+echo '-----------------------------------------------------------------------------'
+yarn build
+
 echo "Publishing ${VERSION} to 'latest' dist-tag"
 echo '-----------------------------------------------------------------------------'
 yarn release
