@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 Hippo B.V. (http://www.onehippo.com)
+ * Copyright 2019-2021 Hippo B.V. (http://www.onehippo.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ import Link from 'next/link';
 import { BrComponent, BrPage, BrPageContext } from '@bloomreach/react-sdk';
 import { initialize } from '@bloomreach/spa-sdk';
 import { relevance } from '@bloomreach/spa-sdk/lib/express';
-import { Banner, Content, Menu, NewsList } from '../components';
+import { Banner, Content, Menu, NewsList, CookieConsent } from '../components';
 
 export const getServerSideProps: GetServerSideProps = async ({ req: request, res: response, resolvedUrl: path }) => {
   relevance(request, response);
@@ -73,6 +73,9 @@ export default function Index({
           </div>
         </div>
       </footer>
+      <BrPageContext.Consumer>
+        {(p) => <CookieConsent isPreview={!!p?.isPreview()} path={configuration.path} />}
+      </BrPageContext.Consumer>
     </BrPage>
   );
 }

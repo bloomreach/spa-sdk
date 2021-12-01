@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Hippo B.V. (http://www.onehippo.com)
+ * Copyright 2020-2021 Hippo B.V. (http://www.onehippo.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,7 +29,6 @@ import { MenuComponent } from '../menu/menu.component';
 import { NewsListComponent } from '../news-list/news-list.component';
 
 export const ENDPOINT = new InjectionToken<string>('brXM API endpoint');
-
 @Component({
   selector: 'br-index',
   templateUrl: './index.component.html',

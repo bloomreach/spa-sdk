@@ -14,15 +14,27 @@
  * limitations under the License.
  */
 
-import Vue from 'vue';
-import { BrSdk } from '@bloomreach/vue-sdk';
-import App from './App.vue';
-import router from './router';
+import { Component, Input, OnInit } from '@angular/core';
+import CookieConsentInit, { isConsentReceived, runPersonalization } from '../utils/cookieconsent';
 
-Vue.config.productionTip = false;
-Vue.use(BrSdk);
+const isClient = typeof window !== 'undefined';
 
-new Vue({
-  router,
-  render: (h) => h(App),
-}).$mount('#app');
+@Component({
+  selector: 'br-cookie-consent',
+  template: '',
+})
+export class CookieConsentComponent implements OnInit {
+  @Input() isPreview!: boolean;
+
+  @Input() path!: string;
+
+  ngOnInit(): void {
+    if (isClient && !this.isPreview) {
+      CookieConsentInit();
+
+      if (isConsentReceived()) {
+        runPersonalization(this.path);
+      }
+    }
+  }
+}

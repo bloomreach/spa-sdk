@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 Hippo B.V. (http://www.onehippo.com)
+ * Copyright 2019-2021 Hippo B.V. (http://www.onehippo.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 import { AppProps } from 'next/app';
 import Head from 'next/head';
+import React from 'react';
 
 import './app.css';
 
@@ -35,6 +36,8 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossOrigin="anonymous"
         />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
+        <script defer src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"></script>
 
         <title>brXM + Next.js = ♥️</title>
       </Head>

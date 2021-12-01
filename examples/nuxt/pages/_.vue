@@ -1,5 +1,5 @@
 <!--
-  Copyright 2020 Hippo B.V. (http://www.onehippo.com)
+  Copyright 2020-2021 Hippo B.V. (http://www.onehippo.com)
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -40,6 +40,7 @@
           </div>
         </div>
       </footer>
+      <br-cookie-consent :is-preview="props.page.isPreview()" :path="configuration.path"></br-cookie-consent>
     </template>
   </br-page>
 </template>
@@ -52,8 +53,10 @@ import Banner from '~/components/BrBanner.vue';
 import Content from '~/components/BrContent.vue';
 import Menu from '~/components/BrMenu.vue';
 import NewsList from '~/components/BrNewsList.vue';
+import CookieConsent from '~/components/BrCookieConsent.vue';
 
 @Component({
+  components: { 'br-cookie-consent': CookieConsent },
   async asyncData(context) {
     const configuration = {
       baseUrl: process.env.BASE_URL !== '/' ? process.env.BASE_URL : '',

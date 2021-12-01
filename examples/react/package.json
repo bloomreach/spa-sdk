@@ -5,6 +5,7 @@
   "private": true,
   "dependencies": {
     "@bloomreach/react-sdk": "15.3.3",
+    "@bloomreach/segmentation": "0.0.13",
     "@bloomreach/spa-sdk": "15.3.3",
     "axios": "0.21.1",
     "react": "16.14.0",

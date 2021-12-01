@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 Hippo B.V. (http://www.onehippo.com)
+ * Copyright 2019-2021 Hippo B.V. (http://www.onehippo.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ import React from 'react';
 import axios from 'axios';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { BrComponent, BrPage, BrPageContext } from '@bloomreach/react-sdk';
-import { Banner, Content, Menu, NewsList } from './components';
+import { Banner, Content, Menu, NewsList, CookieConsent } from './components';
 
 export default function App({ location }: RouteComponentProps): JSX.Element {
   const configuration = {
@@ -60,6 +60,9 @@ export default function App({ location }: RouteComponentProps): JSX.Element {
           </div>
         </div>
       </footer>
+      <BrPageContext.Consumer>
+        {(page) => <CookieConsent isPreview={!!page?.isPreview()} path={configuration.path} />}
+      </BrPageContext.Consumer>
     </BrPage>
   );
 }

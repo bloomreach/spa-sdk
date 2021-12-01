@@ -7,6 +7,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@bloomreach/react-sdk": "15.3.3",
+    "@bloomreach/segmentation": "0.0.13",
     "@bloomreach/spa-sdk": "15.3.3",
     "axios": "0.21.1",
     "next": "10.2.3",
