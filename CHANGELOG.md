@@ -2,7 +2,13 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### [15.4.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.3.3...15.4.0)
+#### [15.4.1](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.4.0...15.4.1)
+
+- TRIVIAL Update release script with build step before publising [`b377221`](https://github.com/bloomreach/spa-sdk/commit/b377221d974138c1ee092610c037ee1987b765b6)
+
+#### [spa-sdk-15.4.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.3.3...spa-sdk-15.4.0)
+
+> 1 December 2021
 
 - Resolve SPASDK-72 "Feature/ add cookie consent dialog to example apps" [`#46`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/46)
 - SPASDK-73 Add "picker" options to manage-content-button [`#45`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/45)
@@ -26,6 +32,7 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-74 Load component via GET if payload is empty [`#SPASDK-74`](https://issues.onehippo.com/browse/SPASDK-74)
 - SPASDK-73 Add "pickerSelectableNodeTypes" to examples [`#SPASDK-73`](https://issues.onehippo.com/browse/SPASDK-73)
 - SPASDK-73 Add "picker" options to manage-content-button [`#SPASDK-73`](https://issues.onehippo.com/browse/SPASDK-73)
+- TRIVIAL Bumping version to 15.4.0 [`ba8e0ad`](https://github.com/bloomreach/spa-sdk/commit/ba8e0adb0547e41e26d0691560884b340c7d512a)
 
 #### [spa-sdk-15.3.3](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.3.2...spa-sdk-15.3.3)
 
@@ -267,7 +274,5 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-2 Log warning for unsupported method "getContentReference" in v0.9 [`#SPASDK-2`](https://issues.onehippo.com/browse/SPASDK-2)
 - SPASDK-2 Add exported function "getContainerItemContent" [`#SPASDK-2`](https://issues.onehippo.com/browse/SPASDK-2)
 - SPASDK-1 Bump to use node 14 [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
-- SPASDK-1 Remove maven files and update Jenkinsfile [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
-- SPASDK-1 Initial move from brxm monorepo [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
 - TRIVIAL Set branch name to 'main' in changesetBaseRefs [`4dacdcd`](https://github.com/bloomreach/spa-sdk/commit/4dacdcd2fdb0712e40dcb33b9809ae12786f9ab1)
 - TRIVIAL Skip telemetry check on nuxt startup [`15deb25`](https://github.com/bloomreach/spa-sdk/commit/15deb25b1edde3af3296d4dc34dba1483fe278f2)
