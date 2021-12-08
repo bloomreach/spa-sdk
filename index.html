@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title></title>
-	<meta name="description" content="Documentation for ">
+	<title>@bloomreach/spa-sdk - v15.4.1</title>
+	<meta name="description" content="Documentation for @bloomreach/spa-sdk - v15.4.1">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
 </head>
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title"></a>
+					<a href="index.html" class="title">@bloomreach/spa-sdk - v15.4.1</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -56,7 +56,7 @@
 					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1></h1>
+			<h1>@bloomreach/spa-sdk - v15.4.1</h1>
 		</div>
 	</div>
 </header>
@@ -64,6 +64,912 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
+				<a href="#bloomreach-spa-sdk" id="bloomreach-spa-sdk" style="color: inherit; text-decoration: none;">
+					<h1>Bloomreach SPA SDK</h1>
+				</a>
+				<p>Bloomreach SPA SDK provides simplified headless integration with <a href="https://www.bloomreach.com/en/products/experience-manager">Bloomreach Experience Manager</a>
+					for JavaScript-based applications. This library interacts with the <a href="https://documentation.bloomreach.com/library/concepts/page-model-api/introduction.html">Page Model API</a>
+				and exposes a simplified and framework-agnostic interface over the page model.</p>
+				<a href="#features" id="features" style="color: inherit; text-decoration: none;">
+					<h2>Features</h2>
+				</a>
+				<ul>
+					<li>Page Model API Client</li>
+					<li>Page Model Javascript implementation</li>
+					<li>URL Generator</li>
+					<li>Integration with Bloomreach Experience Manager Preview</li>
+				</ul>
+				<a href="#get-started" id="get-started" style="color: inherit; text-decoration: none;">
+					<h2>Get Started</h2>
+				</a>
+				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+					<h3>Installation</h3>
+				</a>
+				<p>To get the SDK into your project with <a href="https://docs.npmjs.com/cli/npm">NPM</a>:</p>
+				<pre><code class="language-bash">npm install @bloomreach/spa-sdk
+</code></pre>
+				<p>And with <a href="https://yarnpkg.com">Yarn</a>:</p>
+				<pre><code class="language-bash">yarn add @bloomreach/spa-sdk
+</code></pre>
+				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+					<h3>Usage</h3>
+				</a>
+				<p>The following code snippet requests a related page model and shows the page&#39;s title.</p>
+				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> axios <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;axios&quot;</span>;
+<span class="hljs-keyword">import</span> { initialize } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@bloomreach/spa-sdk&quot;</span>;
+
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">showPage</span>(<span class="hljs-params">path</span>) </span>{
+  <span class="hljs-keyword">const</span> page = <span class="hljs-keyword">await</span> initialize({
+    <span class="hljs-comment">// The path to request from the Page Model API, should include query</span>
+    <span class="hljs-comment">// parameters if those are present in the url</span>
+    path,
+    <span class="hljs-comment">// The location of the Page Model API of the brX channel</span>
+    <span class="hljs-attr">endpoint</span>: <span class="hljs-string">&quot;http://localhost:8080/delivery/site/v1/channels/brxsaas/pages&quot;</span>,
+    <span class="hljs-comment">// The httpClient used to make requests</span>
+    <span class="hljs-attr">httpClient</span>: axios,
+  });
+
+  <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&quot;#title&quot;</span>).innerText = page.getTitle();
+}
+
+showPage(<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-built_in">window</span>.location.pathname}</span><span class="hljs-subst">${<span class="hljs-built_in">window</span>.location.search}</span>`</span>);
+</code></pre>
+				<a href="#relevance-integration" id="relevance-integration" style="color: inherit; text-decoration: none;">
+					<h3>Relevance Integration</h3>
+				</a>
+				<p>(not applicable to Content SaaS)</p>
+				<p>The SDK provides basic <a href="https://expressjs.com/en/guide/using-middleware.html">Express
+					middleware</a> for seamless
+				integration with <a href="https://documentation.bloomreach.com/14/library/enterprise/enterprise-features/targeting/targeting.html">the Relevance Module</a>.</p>
+				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> express <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;express&quot;</span>;
+<span class="hljs-keyword">import</span> { relevance } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@bloomreach/spa-sdk/lib/express&quot;</span>;
+
+<span class="hljs-keyword">const</span> app = express();
+
+app.use(relevance);
+</code></pre>
+				<p>The middleware can be customized using the <code>withOptions</code> method.</p>
+				<pre><code class="language-javascript">app.use(relevance.withOptions({ <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;_visitor&quot;</span>, <span class="hljs-attr">maxAge</span>: <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span> }));
+</code></pre>
+				<a href="#rendering-html-content-safely" id="rendering-html-content-safely" style="color: inherit; text-decoration: none;">
+					<h3>Rendering HTML content safely</h3>
+				</a>
+				<p>The SPA SDK provides an API, <code>Page.sanitize(html)</code>,
+					which sanitizes HTML content using the <a href="https://www.npmjs.com/package/sanitize-html">sanitize-html</a> library,
+				to render the HTML content safely.</p>
+				<p>For example, in a React example, you may sanitize and render the HTML content which came from the backend like the following example:</p>
+				<pre><code><span class="xml">{/* Suppose the content.value below contains HTML markups string. */}
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+   {content &amp;&amp; <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">dangerouslySetInnerHTML</span>=</span></span><span class="hljs-template-variable">{{ <span class="hljs-name">__html:</span> page.rewriteLinks(<span class="hljs-name">page.sanitize</span>(<span class="hljs-name">content.value</span>)) }}</span><span class="xml"><span class="hljs-tag"> /&gt;</span>}
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+</code></pre>
+				<p>The same principle may apply in other frameworks. e.g, <code>v-html</code> in Vue.js or <code>[innerHTML]</code> in Angular.</p>
+				<a href="#license" id="license" style="color: inherit; text-decoration: none;">
+					<h2>License</h2>
+				</a>
+				<p>Published under <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</a> license.</p>
+				<a href="#reference" id="reference" style="color: inherit; text-decoration: none;">
+					<h2>Reference</h2>
+				</a>
+				<a href="#configuration" id="configuration" style="color: inherit; text-decoration: none;">
+					<h4>Configuration</h4>
+				</a>
+				<p>The <code>initialize</code> function supports several options you may use to customize page initialization.</p>
+				<table>
+					<thead>
+						<tr>
+							<th>Commonly used options</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td><strong><code>debug</code></strong> <br> The option enabling debug mode. <br><br> Required: no <br> Default: <code>false</code></td>
+						</tr>
+						<tr>
+							<td><strong><code>endpoint</code></strong> <br> Base URL of the Page Model API (e.g. <code>http://localhost:8080/delivery/site/v1/channels/brxsaas/pages</code> or <code>http://localhost:8080/site/channel/resourceapi</code>). This option is exclusive and should not be used together with <code>options</code> or <code>cmsBaseUrl</code> <br><br> Required: yes <br> Default: . <em>none</em></td>
+						</tr>
+						<tr>
+							<td><strong><code>httpClient</code></strong> <br> The HTTP client that will be used to fetch the page model. Signature is similar to <a href="https://github.com/axios/axios#axiosconfig">Axios</a> client. <br><br> Required: yes <br> Default: <em>none</em></td>
+						</tr>
+						<tr>
+							<td><strong><code>path</code></strong> <br> The path part of the URL, <strong>including a query string if present (e.g. <code>/path/to/page?foo=1</code></strong> <br><br> Required: no <br> Default: ) <code>/</code> .</td>
+						</tr>
+						<tr>
+							<td><strong><code>origin</code></strong> <br> The brXM origin to verify an integration with the Experience Manager. This option should be used when the brXM is accessible from a host other than the Page Model API. By default, the origin from the <code>apiBaseUrl</code> or <code>endpoint</code> parameters is used. <br><br> Required: no <br> Default: <em>none</em></td>
+						</tr>
+						<tr>
+							<td><strong><code>baseUrl</code></strong> <br> Base URL of the SPA (e.g. <code>/account</code> or <code>//www.example.com</code>). This option can only be used if <code>endpoint</code> is present. <br><br> Required: no <br> Default: <code>&quot;&quot;</code></td>
+						</tr>
+						<tr>
+							<td><strong><code>apiBaseUrl</code></strong> <br> Base URL of the Page Model API (e.g. <code>http://localhost:8080/delivery/site/v1/channels/brxsaas/pages</code> or <code>http://localhost:8080/site/channel/resourceapi</code>). This option will be ignored if <code>options</code> is present. <br><br> Required: no <br> Default: <code>cmsBaseUrl</code> + <code>&quot;/resourceapi&quot;</code></td>
+						</tr>
+						<tr>
+							<td><strong><code>spaBaseUrl</code></strong> <br> Base URL of the SPA (e.g. <code>/account</code> or <code>//www.example.com</code>). This option will be ignored if <code>options</code> is present. <br><br> Required: no <br> Default: <code>&quot;&quot;</code></td>
+						</tr>
+				</tbody></table>
+				<table>
+					<thead>
+						<tr>
+							<th>Extra options</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td><strong><code>apiVersion</code></strong> <br> Current API version. By default, the compatible with the current setup version will be chosen. <br><br> Required: no <br> Default: <em>none</em></td>
+						</tr>
+						<tr>
+							<td><strong><code>apiVersionHeader</code></strong> <br> API version header. <br><br> Required: <code>&quot;Accept-Version&quot;</code> <br> Default: <em>none</em></td>
+						</tr>
+						<tr>
+							<td><strong><code>authorizationHeader</code></strong> <br> Authorization header for the Page Model API. <br><br> Required: no <br> Default: <code>&quot;Authorization&quot;</code></td>
+						</tr>
+						<tr>
+							<td><strong><code>authorizationQueryParameter</code></strong> <br> The query string parameter used to pass authorization header value. <br><br> Required: no <br> Default: <code>&quot;token&quot;</code></td>
+						</tr>
+						<tr>
+							<td><strong><code>authorizationToken</code></strong> <br> Authorization token for the Page Model API. By default, the SDK will try to extract the token from the request query string using <code>authorizationQueryParameter</code> option. <br><br> Required: no <br> Default: <em>none</em></td>
+						</tr>
+						<tr>
+							<td><strong><code>endpointQueryParameter</code></strong> <br> The query string parameter used as the brXM endpoint (<code>cmsBaseUrl</code>). The option will be ignored if the <code>cmsBaseUrl</code> option is not empty. In case when this option is used, the <code>apiBaseUrl</code> will be prepended with the value from the query parameter. This option should be used only for testing or debugging. By default, the option is disabled. <br><br> Required: no <br> Default: <em>none</em></td>
+						</tr>
+						<tr>
+							<td><strong><code>serverId</code></strong> <br> Cluster node identifier. By default, the SDK will try to extract the value from the request query string using <code>serverIdQueryParameter</code> option. <br><br> Required: no <br> Default: <em>none</em></td>
+						</tr>
+						<tr>
+							<td><strong><code>serverIdHeader</code></strong> <br> Header identifying the current cluster node. <br><br> Required: no <br> Default: <code>&quot;Server-Id&quot;</code></td>
+						</tr>
+						<tr>
+							<td><strong><code>serverIdQueryParameter</code></strong> <br> The query string parameter used to pass a cluster node identifier. <br><br> Required: no <br> Default: <code>&quot;server-id&quot;</code></td>
+						</tr>
+						<tr>
+							<td><strong><code>window</code></strong> <br> A window object reference will be used to interact with brXM. It needs to be set when initialize is being called within an iframe or worker process. <br><br> Required: no <br> Default: <code>window</code></td>
+						</tr>
+				</tbody></table>
+				<table>
+					<thead>
+						<tr>
+							<th>Relevance options (PaaS-only)</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td><strong><code>visitor</code></strong> <br> An object holding information about the current visitor. The option takes precedence over <code>request.visitor</code> <br><br> Required: no <br> Default: . <em>none</em></td>
+						</tr>
+						<tr>
+							<td><strong><code>visitor.id</code></strong> <br> The current visitor identifier. <br><br> Required: yes <br> Default: <em>none</em></td>
+						</tr>
+						<tr>
+							<td><strong><code>visitor.header</code></strong> <br> An HTTP-header using to pass the visitor identifier to the Page Model API. <br><br> Required: yes <br> Default: <em>none</em></td>
+						</tr>
+						<tr>
+							<td><strong><code>request</code></strong> <br> Current user&#39;s request. <br><br> Required: yes <br> Default: <em>none</em></td>
+						</tr>
+						<tr>
+							<td><strong><code>request.connection</code></strong> <br> Current request remote connection containing the remote address. This option is used in <a href="https://documentation.bloomreach.com/14/library/enterprise/enterprise-features/targeting/targeting.html">the Relevance Module</a> <br><br> Required: no <br> Default: . <em>none</em></td>
+						</tr>
+						<tr>
+							<td><strong><code>request.emit</code></strong> <br> Emits an event in the request scope. This option can be used in <a href="https://nodejs.org/api/stream.html#stream_readable_streams">Node.js integration</a> <br><br> Required: no <br> Default: . <em>none</em></td>
+						</tr>
+						<tr>
+							<td><strong><code>request.headers</code></strong> <br> An object holding request headers. It should contain a <code>Cookie</code> header if rendering is happening on the server-side in the UrlRewriter-based setup. <br><br> Required: no <br> Default: <code>{}</code></td>
+						</tr>
+						<tr>
+							<td><strong><code>request.path</code></strong> <br> The path part of the URL, including a query string if present (e.g. <code>/path/to/page?foo=1</code>). The option is <strong>deprecated</strong> in favor of <code>path</code> <br><br> Required: no <br> Default: . <code>/</code></td>
+						</tr>
+						<tr>
+							<td><strong><code>request.visitor</code></strong> <br> An object holding information about the current visitor. <br><br> Required: no <br> Default: <em>none</em></td>
+						</tr>
+				</tbody></table>
+				<table>
+					<thead>
+						<tr>
+							<th>These options are deprecated and will be removed in the next major release</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td><strong><code>cmsBaseUrl</code></strong> <br> Base URL of the site (e.g. <code>http://localhost:8080/site</code> or <code>http://localhost:8080/site/channel</code>). This option is exclusive and should not be used together with <code>options</code> or <code>endpoint</code> <br><br> Required: <em>exclusive</em> <br> Default: . <em>none</em></td>
+						</tr>
+						<tr>
+							<td><strong><code>options</code></strong> <br> The CMS URL options. This option is exclusive and should not be used together with <code>cmsBaseUrl</code> or <code>endpoint</code>. Use this property to enable the UrlRewriter-based setup. <br><br> Required: <em>exclusive</em> <br> Default: <em>none</em></td>
+						</tr>
+						<tr>
+							<td><strong><code>options.live</code></strong> <br> The CMS URL options for the live site. <br><br> Required: yes <br> Default: <em>none</em></td>
+						</tr>
+						<tr>
+							<td><strong><code>options.live.apiBaseUrl</code></strong> <br> Base URL of the Page Model API for the live site (e.g. <code>http://localhost:8080/delivery/site/v1/channels/brxsaas/pages</code> or <code>http://localhost:8080/site/channel/resourceapi</code> <br><br> Required: no <br> Default: ) <code>options.live.cmsBaseUrl</code> + <code>&quot;/resourceapi&quot;</code> .</td>
+						</tr>
+						<tr>
+							<td><strong><code>options.live.cmsBaseUrl</code></strong> <br> Base URL of the live site (e.g. <code>http://localhost:8080/site</code> or <code>http://localhost:8080/site/channel</code> <br><br> Required: yes <br> Default: ) <em>none</em> .</td>
+						</tr>
+						<tr>
+							<td><strong><code>options.live.spaBaseUrl</code></strong> <br> Base URL of the live SPA (e.g. <code>/account</code> or <code>//www.example.com</code> <br><br> Required: no <br> Default: ) <code>&quot;&quot;</code> .</td>
+						</tr>
+						<tr>
+							<td><strong><code>options.preview</code></strong> <br> The CMS URL options for the preview site. <br><br> Required: yes <br> Default: <em>none</em></td>
+						</tr>
+						<tr>
+							<td><strong><code>options.preview.apiBaseUrl</code></strong> <br> Base URL of the Page Model API for the preview site (e.g. <code>http://localhost:8080/site/_cmsinternal/resourceapi</code> or <code>http://localhost:8080/site/_cmsinternal/channel/resourceapi</code> <br><br> Required: no <br> Default: ) <code>options</code><br><code>.preview.cmsBaseUrl</code> <br>+ <code>&quot;/resourceapi&quot;</code> .</td>
+						</tr>
+						<tr>
+							<td><strong><code>options.preview.cmsBaseUrl</code></strong> <br> Base URL of the live site (e.g. <code>http://localhost:8080/site/_cmsinternal</code> or <code>http://localhost:8080/site/_cmsinternal/channel</code> <br><br> Required: yes <br> Default: ) <em>none</em> .</td>
+						</tr>
+						<tr>
+							<td><strong><code>options.preview.spaBaseUrl</code></strong> <br> Base URL of the live SPA (e.g. <code>/site/_cmsinternal?bloomreach-preview=true</code> or <code>/site/_cmsinternal/channel?bloomreach-preview=true</code>). This path and query string parameters will be used to detect whether it is a preview mode or not. <br><br> Required: no <br> Default: <code>&quot;&quot;</code></td>
+						</tr>
+				</tbody></table>
+				<a href="#functions" id="functions" style="color: inherit; text-decoration: none;">
+					<h4>Functions</h4>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th>Function</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td><code>initialize(config, model?): Promise&lt;Page&gt;</code></td>
+							<td>This function accepts a configuration object as an argument and returns a promisified JavaScript object representing the page model. In case, when the page model has already been fetched, you can pass this JSON blob as a second parameter.</td>
+						</tr>
+						<tr>
+							<td><code>destroy(page: Page): void</code></td>
+							<td>Destroys the integration with the SPA page object.</td>
+						</tr>
+						<tr>
+							<td><code>getContainerItemContent&lt;T&gt;(component: ContainerItem, page: Page): T | null</code></td>
+							<td>Returns the content object that belongs to the container item, or null if not found.</td>
+						</tr>
+						<tr>
+							<td><code>isPage(value): boolean</code></td>
+							<td>Checks whether a value is a page.</td>
+						</tr>
+						<tr>
+							<td><code>isComponent(value): boolean</code></td>
+							<td>Checks whether a value is a page component.</td>
+						</tr>
+						<tr>
+							<td><code>isContainer(value): boolean</code></td>
+							<td>Checks whether a value is a page container.</td>
+						</tr>
+						<tr>
+							<td><code>isContainerItem(value): boolean</code></td>
+							<td>Checks whether a value is a page container item.</td>
+						</tr>
+						<tr>
+							<td><code>isContent(value): boolean</code></td>
+							<td>Checks whether a value is a content object.</td>
+						</tr>
+						<tr>
+							<td><code>isDocument(value): boolean</code></td>
+							<td>Checks whether a value is a document object.</td>
+						</tr>
+						<tr>
+							<td><code>isImageSet(value): boolean</code></td>
+							<td>Checks whether a value is an image set object.</td>
+						</tr>
+						<tr>
+							<td><code>isMenu(value): boolean</code></td>
+							<td>Checks whether a value is a menu object.</td>
+						</tr>
+						<tr>
+							<td><code>isMeta(value): boolean</code></td>
+							<td>Checks whether a value is a meta-data object.</td>
+						</tr>
+						<tr>
+							<td><code>isMetaComment(value): boolean</code></td>
+							<td>Checks whether a value is a meta-data comment.</td>
+						</tr>
+						<tr>
+							<td><code>isPagination(value): boolean</code></td>
+							<td>Checks whether a value is a pagination.</td>
+						</tr>
+						<tr>
+							<td><code>isLink(value): boolean</code></td>
+							<td>Checks whether a value is a link.</td>
+						</tr>
+						<tr>
+							<td><code>isReference(value): boolean</code></td>
+							<td>Checks whether a value is a content reference.</td>
+						</tr>
+						<tr>
+							<td><code>relevance(request: IncomingMessage, response: OutgoingMessage, next?: () =&gt; void): void</code></td>
+							<td>Express middleware for seamless integration with <a href="https://documentation.bloomreach.com/14/library/enterprise/enterprise-features/targeting/targeting.html">the Relevance Module</a>.</td>
+						</tr>
+						<tr>
+							<td><code>relevance.withOptions(options?: Options): Handler</code></td>
+							<td>Customizes Express middleware for <a href="https://documentation.bloomreach.com/14/library/enterprise/enterprise-features/targeting/targeting.html">the Relevance Module</a> integration.</td>
+						</tr>
+				</tbody></table>
+				<a href="#constants" id="constants" style="color: inherit; text-decoration: none;">
+					<h4>Constants</h4>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th>Constant</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td><code>META_POSITION_BEGIN</code></td>
+							<td>Meta-data following before a page component.</td>
+						</tr>
+						<tr>
+							<td><code>META_POSITION_END</code></td>
+							<td>Meta-data following after a page component.</td>
+						</tr>
+						<tr>
+							<td><code>TYPE_CONTAINER_BOX</code></td>
+							<td>A blocked container with blocked items.</td>
+						</tr>
+						<tr>
+							<td><code>TYPE_CONTAINER_INLINE</code></td>
+							<td>A blocked container with inline items.</td>
+						</tr>
+						<tr>
+							<td><code>TYPE_CONTAINER_NO_MARKUP</code></td>
+							<td>A container without surrounding markup.</td>
+						</tr>
+						<tr>
+							<td><code>TYPE_CONTAINER_ORDERED_LIST</code></td>
+							<td>An ordered list container.</td>
+						</tr>
+						<tr>
+							<td><code>TYPE_CONTAINER_UNORDERED_LIST</code></td>
+							<td>An unordered list container.</td>
+						</tr>
+						<tr>
+							<td><code>TYPE_CONTAINER_ITEM_UNDEFINED</code></td>
+							<td>A container item without mapping.</td>
+						</tr>
+						<tr>
+							<td><code>TYPE_LINK_EXTERNAL</code></td>
+							<td>Link to a page outside the current application.</td>
+						</tr>
+						<tr>
+							<td><code>TYPE_LINK_INTERNAL</code></td>
+							<td>Link to a page inside the current application.</td>
+						</tr>
+						<tr>
+							<td><code>TYPE_LINK_RESOURCE</code></td>
+							<td>Link to a CMS resource.</td>
+						</tr>
+						<tr>
+							<td><code>TYPE_MANAGE_MENU_BUTTON</code></td>
+							<td>A manage menu button.</td>
+						</tr>
+						<tr>
+							<td><code>TYPE_MANAGE_CONTENT_BUTTON</code></td>
+							<td>A manage content button.</td>
+						</tr>
+				</tbody></table>
+				<a href="#objects" id="objects" style="color: inherit; text-decoration: none;">
+					<h4>Objects</h4>
+				</a>
+				<a href="#page" id="page" style="color: inherit; text-decoration: none;">
+					<h5>Page</h5>
+				</a>
+				<p>The <code>Page</code> class represents the brXM page to render. This is the main entry point to the page model.</p>
+				<table>
+					<thead>
+						<tr>
+							<th>Method</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td><code>getButton(type: string, ...params: any[]): MetaCollection</code></td>
+							<td>Generates a meta-data collection for the Experience Manager buttons.</td>
+						</tr>
+						<tr>
+							<td><code>getChannelParameters(): object</code></td>
+							<td>Gets current channel parameters.</td>
+						</tr>
+						<tr>
+							<td><code>getComponent(...componentNames): Component &vert; undefined</code></td>
+							<td>Gets a component in the page (e.g. <code>getComponent(&#39;main&#39;, &#39;right&#39;)</code>). If <code>componentNames</code> is omitted, then the page root component will be returned.</td>
+						</tr>
+						<tr>
+							<td><code>getContent<T>(reference: Reference &vert; string): Content &vert; T &vert; undefined</code></td>
+							<td>Gets a content item used on the page.</td>
+						</tr>
+						<tr>
+							<td><code>getDocument<T>(): T &vert; undefined</code></td>
+							<td>Gets the page root document. This option is available only along with the Experience Pages feature.</td>
+						</tr>
+						<tr>
+							<td><code>getMeta(meta): MetaCollection</code></td>
+							<td>Generates a meta-data collection from the provided <code>meta</code> model. The method is <strong>deprecated</strong> and will be removed in the next major release.</td>
+						</tr>
+						<tr>
+							<td><code>getTitle(): string &vert; undefined</code></td>
+							<td>Gets the title of the page, or <code>undefined</code> if not configured.</td>
+						</tr>
+						<tr>
+							<td><code>getUrl(link?: Link): string</code></td>
+							<td>Generates a URL for a link object.<br> - If the link object type is internal, then it will prepend <code>spaBaseUrl</code> or <code>baseUrl</code>. In case when the link starts with the same path as in <code>cmsBaseUrl</code>, this part will be removed.<br> - If the link object type is unknown, then it will return <code>undefined</code>.<br> - If the link parameter is omitted, then the link to the current page will be returned.<br> - In other cases, the link will be returned as-is.</td>
+						</tr>
+						<tr>
+							<td><code>getUrl(path: string): string</code></td>
+							<td>Generates an SPA URL for the path.<br> - If it is a relative path and <code>cmsBaseUrl</code> is present, then it will prepend <code>spaBaseUrl</code>.<br> - If it is an absolute path and <code>cmsBaseUrl</code> is present, then the behavior will be similar to internal link generation.<br> - If it is a relative path and <code>endpoint</code> is present, then it will resolve this link relative to the current page URL.<br> - If it is an absolute path and <code>endpoint</code> is present, then it will resolve this link relative to the <code>baseUrl</code> option.</td>
+						</tr>
+						<tr>
+							<td><code> getVersion(): string &vert; undefined</code></td>
+							<td>Returns the Page Model version.</td>
+						</tr>
+						<tr>
+							<td><code>getVisitor(): Visitor &vert; undefined</code></td>
+							<td>Gets the current visitor information, or undefined if the <a href="https://documentation.bloomreach.com/library/enterprise/enterprise-features/targeting/targeting.html">Relevance Module</a> is not enabled. The <code>Visitor</code> object consists of the following properties:<br> - <code>id: string</code> - the current visitor identifier;<br> - <code>header: string</code> - an HTTP-header using to pass the visitor identifier to the Page Model API.</td>
+						</tr>
+						<tr>
+							<td><code>getVisit(): Visit &vert; undefined</code></td>
+							<td>Gets the current visit information, or undefined if the <a href="https://documentation.bloomreach.com/library/enterprise/enterprise-features/targeting/targeting.html">Relevance Module</a> is not enabled. The <code>Visit</code> object consists of the following properties:<br> - <code>id: string</code> - the current visit identifier;<br> - <code>new: boolean</code> - a flag showing that this is a new visit.</td>
+						</tr>
+						<tr>
+							<td><code>isPreview(): boolean</code></td>
+							<td>Returns whether the page is in the preview mode.</td>
+						</tr>
+						<tr>
+							<td><code>rewriteLinks(content: string, type?: string): string</code></td>
+							<td>Rewrite links to pages and resources in the HTML content. This method looks up for <code>a</code> tags with <code>data-type</code> and <code>href</code> attributes and <code>img</code> tags with <code>src</code> attribute. Links will be updated according to the configuration used to initialize the page. The <code>type</code> parameter is similar to <code>mimeType</code> parameter of the <a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMParser">DOMParser</a>.</td>
+						</tr>
+						<tr>
+							<td><code>sync(): void</code></td>
+							<td>Synchronizes the brXM integration state (UI elements positions).</td>
+						</tr>
+						<tr>
+							<td><code>toJSON(): object</code></td>
+							<td>A plain JavaScript object of the page model.</td>
+						</tr>
+				</tbody></table>
+				<a href="#component" id="component" style="color: inherit; text-decoration: none;">
+					<h5>Component</h5>
+				</a>
+				<p>The <code>Component</code> class corresponds to page nodes, and it may hold other components inside.</p>
+				<table>
+					<thead>
+						<tr>
+							<th>Method</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td><code>getId(): string</code></td>
+							<td>Returns the component id.</td>
+						</tr>
+						<tr>
+							<td><code>getMeta(): MetaCollection</code></td>
+							<td>Returns the component meta-data collection.</td>
+						</tr>
+						<tr>
+							<td><code>getModels(): object</code></td>
+							<td>Returns the map of the component models.</td>
+						</tr>
+						<tr>
+							<td><code>getUrl(): string &vert; undefined</code></td>
+							<td>Returns the link to the partial component model.</td>
+						</tr>
+						<tr>
+							<td><code>getName(): string</code></td>
+							<td>Returns the name of the component.</td>
+						</tr>
+						<tr>
+							<td><code>getParameters(): object</code></td>
+							<td>Returns the parameters of the component.</td>
+						</tr>
+						<tr>
+							<td><code>getChildren(): Component[]</code></td>
+							<td>Returns the direct children of the component.</td>
+						</tr>
+						<tr>
+							<td><code>getComponent(...componentNames: string[]): Component &vert; undefined</code></td>
+							<td>Looks up for a nested component.</td>
+						</tr>
+						<tr>
+							<td><code>getComponentById(id: string): Component &vert; undefined</code></td>
+							<td>Looks up for a nested component by its id.</td>
+						</tr>
+				</tbody></table>
+				<a href="#container" id="container" style="color: inherit; text-decoration: none;">
+					<h5>Container</h5>
+				</a>
+				<p>The <code>Container</code> class represents a page node that is actually present in the DOM but as an element surrounding its children. Container extends the Component class, and therefore, all the <a href="#component">Component methods</a> are applicable here.</p>
+				<table>
+					<thead>
+						<tr>
+							<th>Method</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td><code>getType(): string &vert; undefined</code></td>
+							<td>Returns the <a href="https://documentation.bloomreach.com/library/concepts/template-composer/channel-editor-containers.html">type</a> of a container.</td>
+						</tr>
+				</tbody></table>
+				<a href="#container-item" id="container-item" style="color: inherit; text-decoration: none;">
+					<h5>Container Item</h5>
+				</a>
+				<p>The <code>ContainerItem</code> objects are usually visible on the page and interact with the user. Container Item extends the Component class, and therefore, all the <a href="#component">Component methods</a> are applicable here.</p>
+				<table>
+					<thead>
+						<tr>
+							<th>Method</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td><code>getLabel(): string &vert; undefined</code></td>
+							<td>Returns the label of a container item catalogue component.</td>
+						</tr>
+						<tr>
+							<td><code>getType(): string &vert; undefined</code></td>
+							<td>Returns the type of a container item. The available types depend on which container items have been configured in the backend (e.g. &quot;Banner&quot;).</td>
+						</tr>
+						<tr>
+							<td><code>isHidden(): boolean</code></td>
+							<td>Returns whether the component should not render anything. Hiding components is only possible with the Relevance feature.</td>
+						</tr>
+						<tr>
+							<td><code>on(eventName: string, listener: Function): Function</code></td>
+							<td>Subscribes for an event and returns the unsubscribe function.</td>
+						</tr>
+						<tr>
+							<td><code>off(eventName: string, listener: Function): void</code></td>
+							<td>Unsubscribes from an event.</td>
+						</tr>
+				</tbody></table>
+				<a href="#content" id="content" style="color: inherit; text-decoration: none;">
+					<h5>Content</h5>
+				</a>
+				<p>The <code>Content</code> object holds document data that is used by the page components.</p>
+				<table>
+					<thead>
+						<tr>
+							<th>Method</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td><code>getId(): string</code></td>
+							<td>Returns the content id.</td>
+						</tr>
+						<tr>
+							<td><code>getLocale(): string &vert; undefined</code></td>
+							<td>Returns the content locale.</td>
+						</tr>
+						<tr>
+							<td><code>getMeta(): MetaCollection</code></td>
+							<td>Returns the content meta-data collection.</td>
+						</tr>
+						<tr>
+							<td><code>getName(): string</code></td>
+							<td>Returns the content name.</td>
+						</tr>
+						<tr>
+							<td><code>getData(): object</code></td>
+							<td>Returns the content data as it is returned in the Page Model API.</td>
+						</tr>
+						<tr>
+							<td><code>getUrl(): string &vert; undefined</code></td>
+							<td>Returns the link to the content.</td>
+						</tr>
+				</tbody></table>
+				<a href="#document" id="document" style="color: inherit; text-decoration: none;">
+					<h5>Document</h5>
+				</a>
+				<p>The <code>Document</code> object holds document data that is used by the page components.</p>
+				<table>
+					<thead>
+						<tr>
+							<th>Method</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td><code>getId(): string</code></td>
+							<td>Returns the document id.</td>
+						</tr>
+						<tr>
+							<td><code>getLocale(): string &vert; undefined</code></td>
+							<td>Returns the document locale.</td>
+						</tr>
+						<tr>
+							<td><code>getMeta(): MetaCollection</code></td>
+							<td>Returns the document meta-data collection.</td>
+						</tr>
+						<tr>
+							<td><code>getName(): string</code></td>
+							<td>Returns the document name.</td>
+						</tr>
+						<tr>
+							<td><code>getData(): object</code></td>
+							<td>Returns the document data as it is returned in the Page Model API.</td>
+						</tr>
+						<tr>
+							<td><code>getUrl(): string &vert; undefined</code></td>
+							<td>Returns the link to the content.</td>
+						</tr>
+				</tbody></table>
+				<a href="#imageset" id="imageset" style="color: inherit; text-decoration: none;">
+					<h5>ImageSet</h5>
+				</a>
+				<p>The <code>ImageSet</code> object holds images collection that is used by the page components.</p>
+				<table>
+					<thead>
+						<tr>
+							<th>Method</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td><code>getDescription(): string undefined;</code></td>
+							<td>Returns the image set description.</td>
+						</tr>
+						<tr>
+							<td><code>getDisplayName(): string</code></td>
+							<td>Returns the image set display name.</td>
+						</tr>
+						<tr>
+							<td><code>getId(): string</code></td>
+							<td>Returns the document id.</td>
+						</tr>
+						<tr>
+							<td><code>getFileName(): string</code></td>
+							<td>Returns the image set file name.</td>
+						</tr>
+						<tr>
+							<td><code>getId(): string</code></td>
+							<td>Returns the image set id.</td>
+						</tr>
+						<tr>
+							<td><code>getLocale(): string &vert; undefined</code></td>
+							<td>Returns the image set locale.</td>
+						</tr>
+						<tr>
+							<td><code>getName(): string</code></td>
+							<td>Returns the image name.</td>
+						</tr>
+						<tr>
+							<td><code>getOriginal(): Image &vert; undefined</code></td>
+							<td>Returns the original image.</td>
+						</tr>
+						<tr>
+							<td><code>getThumbnail(): Image &vert; undefined</code></td>
+							<td>Returns the thumbnail.</td>
+						</tr>
+				</tbody></table>
+				<a href="#image" id="image" style="color: inherit; text-decoration: none;">
+					<h5>Image</h5>
+				</a>
+				<p>The <code>Image</code> object holds an image object that is used by the <code>ImageSet</code> object.</p>
+				<table>
+					<thead>
+						<tr>
+							<th>Method</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td><code>getDisplayName(): string</code></td>
+							<td>Returns the image display name.</td>
+						</tr>
+						<tr>
+							<td><code>getFileName(): string &vert; undefined</code></td>
+							<td>Returns the image file name.</td>
+						</tr>
+						<tr>
+							<td><code>getHeight(): number</code></td>
+							<td>Returns the image height.</td>
+						</tr>
+						<tr>
+							<td><code>getMimeType(): string</code></td>
+							<td>Returns the image mime-type.</td>
+						</tr>
+						<tr>
+							<td><code>getName(): string</code></td>
+							<td>Returns the image name.</td>
+						</tr>
+						<tr>
+							<td><code>getSize(): number</code></td>
+							<td>Returns the image size.</td>
+						</tr>
+						<tr>
+							<td><code>getUrl(): string &vert; undefined</code></td>
+							<td>Returns the image link.</td>
+						</tr>
+						<tr>
+							<td><code>getWidth(): number</code></td>
+							<td>Returns the image width.</td>
+						</tr>
+				</tbody></table>
+				<a href="#menu" id="menu" style="color: inherit; text-decoration: none;">
+					<h5>Menu</h5>
+				</a>
+				<p>The <code>Menu</code> object holds the page menu data with all the menu items.</p>
+				<table>
+					<thead>
+						<tr>
+							<th>Method</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td><code>getItems(): MenuItem[]</code></td>
+							<td>Returns the menu items.</td>
+						</tr>
+						<tr>
+							<td><code>getMeta(): MetaCollection</code></td>
+							<td>Returns the menu meta-data collection.</td>
+						</tr>
+						<tr>
+							<td><code>getName(): string</code></td>
+							<td>Returns the menu name.</td>
+						</tr>
+						<tr>
+							<td><code>getSelected(): MenuItem &vert; undefined</code></td>
+							<td>Returns the current menu item. The method is <strong>deprecated</strong> and will be removed in the next major release.</td>
+						</tr>
+				</tbody></table>
+				<a href="#menuitem" id="menuitem" style="color: inherit; text-decoration: none;">
+					<h5>MenuItem</h5>
+				</a>
+				<p>The <code>MenuItem</code> object holds a menu item that is used by the <code>Menu</code> object.</p>
+				<table>
+					<thead>
+						<tr>
+							<th>Method</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td><code>getChildren(): MenuItem[]</code></td>
+							<td>Returns the child items.</td>
+						</tr>
+						<tr>
+							<td><code>getDepth(): number</code></td>
+							<td>Returns the menu item depth level.</td>
+						</tr>
+						<tr>
+							<td><code>getLink(): Link &vert; undefined</code></td>
+							<td>Returns the menu item link.</td>
+						</tr>
+						<tr>
+							<td><code>getName(): string</code></td>
+							<td>Returns the menu item name.</td>
+						</tr>
+						<tr>
+							<td><code>getParameters(): object</code></td>
+							<td>Returns the menu item parameters.</td>
+						</tr>
+						<tr>
+							<td><code>getUrl(): string &vert; undefined</code></td>
+							<td>Returns the menu item url.</td>
+						</tr>
+						<tr>
+							<td><code>isExpanded(): boolean</code></td>
+							<td>Returns whether the menu item is expanded.</td>
+						</tr>
+						<tr>
+							<td><code>isRepositoryBased(): boolean</code></td>
+							<td>Returns whether the menu item is repository based.</td>
+						</tr>
+						<tr>
+							<td><code>isSelected(): boolean</code></td>
+							<td>Returns whether the menu item is selected.</td>
+						</tr>
+				</tbody></table>
+				<a href="#metacollection" id="metacollection" style="color: inherit; text-decoration: none;">
+					<h5>MetaCollection</h5>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th>Method</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td><code>clear(): void</code></td>
+							<td>Clears previously rendered meta-data objects.</td>
+						</tr>
+						<tr>
+							<td><code>render(head: HTMLElement, tail: HTMLElement): () =&gt; void;</code></td>
+							<td>Renders meta-data objects on the page and returns the callback clearing rendered objects.</td>
+						</tr>
+				</tbody></table>
+				<a href="#meta" id="meta" style="color: inherit; text-decoration: none;">
+					<h5>Meta</h5>
+				</a>
+				<p>The <code>Meta</code> objects are being used by the brXM to page and its components.</p>
+				<table>
+					<thead>
+						<tr>
+							<th>Method</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td><code>getData(): string</code></td>
+							<td>Returns the meta-data.</td>
+						</tr>
+						<tr>
+							<td><code>getPosition(): string</code></td>
+							<td>Returns the meta-data position relative to the related element.</td>
+						</tr>
+				</tbody></table>
+				<a href="#pagination" id="pagination" style="color: inherit; text-decoration: none;">
+					<h5>Pagination</h5>
+				</a>
+				<p>The <code>Pagination</code> object holds the pagination data with all the pagination items.</p>
+				<table>
+					<thead>
+						<tr>
+							<th>Method</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td><code>getCurrent(): PaginationItem</code></td>
+							<td>Returns the current page.</td>
+						</tr>
+						<tr>
+							<td><code>getFirst(): PaginationItem</code></td>
+							<td>Returns the first page.</td>
+						</tr>
+						<tr>
+							<td><code>getItems(): Reference[]</code></td>
+							<td>Returns the current page items.</td>
+						</tr>
+						<tr>
+							<td><code>getLast(): PaginationItem</code></td>
+							<td>Returns the last page.</td>
+						</tr>
+						<tr>
+							<td><code>getNext(): PaginationItem &vert; undefined</code></td>
+							<td>Returns the next page.</td>
+						</tr>
+						<tr>
+							<td><code>getOffset(): number</code></td>
+							<td>Returns the number of items before the current page.</td>
+						</tr>
+						<tr>
+							<td><code>getPages(): PaginationItem[]</code></td>
+							<td>Returns currently listed pages.</td>
+						</tr>
+						<tr>
+							<td><code>getPrevious(): PaginationItem &vert; undefined</code></td>
+							<td>Returns the previous page.</td>
+						</tr>
+						<tr>
+							<td><code>getSize(): number</code></td>
+							<td>Returns the number of items listed on the current page.</td>
+						</tr>
+						<tr>
+							<td><code>getTotal(): number</code></td>
+							<td>Returns the total number of items.</td>
+						</tr>
+						<tr>
+							<td><code>isEnabled(): boolean</code></td>
+							<td>Returns whether the pagination is enabled.</td>
+						</tr>
+				</tbody></table>
+				<a href="#paginationitem" id="paginationitem" style="color: inherit; text-decoration: none;">
+					<h5>PaginationItem</h5>
+				</a>
+				<p>The <code>PaginationItem</code> object holds a pagination item that is used by the <code>Pagination</code> object.</p>
+				<table>
+					<thead>
+						<tr>
+							<th>Method</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td><code>getNumber(): number</code></td>
+							<td>Returns the page number.</td>
+						</tr>
+						<tr>
+							<td><code>getUrl(): string &vert; undefined</code></td>
+							<td>Returns the page URL.</td>
+						</tr>
+				</tbody></table>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -71,6 +977,18 @@
 				<ul>
 					<li class="globals  ">
 						<a href="globals.html"><em>Globals</em></a>
+					</li>
+					<li class="label tsd-is-external">
+						<span>Internals</span>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/index.html">index</a>
+					</li>
+					<li class="label tsd-is-external">
+						<span>Externals</span>
+					</li>
+					<li class=" tsd-kind-module tsd-is-external">
+						<a href="modules/express.html">express</a>
 					</li>
 				</ul>
 			</nav>
@@ -85,6 +1003,17 @@
 	<div class="container">
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+			</ul>
 		</div>
 	</div>
 </footer>
