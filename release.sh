@@ -60,6 +60,15 @@ createApp() {
 echo "Running release script for ${VERSION} (Heroku postfix: ${VERSION_FOR_HEROKU})"
 echo '-----------------------------------------------------------------------------'
 
+echo "Build packages"
+echo '-----------------------------------------------------------------------------'
+yarn build
+
+echo "Running tests and lint"
+echo '-----------------------------------------------------------------------------'
+yarn lint
+yarn test
+
 echo 'Publishing to github remote'
 echo '-----------------------------------------------------------------------------'
 git remote add github git@github.com:bloomreach/spa-sdk.git
@@ -102,10 +111,6 @@ else
   createApp "ssr" "react" ${VERSION_FOR_HEROKU} "examples/next"
   createApp "ssr" "vue" ${VERSION_FOR_HEROKU} "examples/nuxt"
 fi
-
-echo "Build packages"
-echo '-----------------------------------------------------------------------------'
-yarn build
 
 echo "Publishing ${VERSION} to 'latest' dist-tag"
 echo '-----------------------------------------------------------------------------'
