@@ -62,5 +62,48 @@ pipeline {
         sh 'yarn test'
       }
     }
+    stage('Deploy to Heroku') {
+      when {
+        branch 'main'
+      }
+
+      environment {
+        VERSION = sh(script: "node -p -e \"require('./package.json').version\"", returnStdout: true).trim()
+        // Replace dots with dashes in version because the Heroku URL requires dashes
+        VERSION_FOR_HEROKU = "${VERSION.replace('.', '-')}"
+        HEROKU_TEAM = "bloomreach"
+      }
+      stages {
+        stage('Setup git config') {
+          steps {
+            sh 'git config user.email "jenkins@onehippo.com"'
+            sh 'git config user.name "Jenkins"'
+          }
+        }
+        stage('Deploy apps') {
+          matrix {
+            axes {
+              axis {
+                  name 'APP_TYPE'
+                  values 'ssr', 'csr'
+              }
+              axis {
+                  name 'APP_NAME'
+                  values 'ng', 'react', 'vue'
+              }
+            }
+            stages {
+              stage('Deploy app') {
+                steps {
+                  withCredentials([[$class: 'StringBinding', credentialsId: 'HEROKU_API_KEY', variable: 'HEROKU_API_KEY']]) {
+                    sh './scripts/deploy_heroku_app.sh ${APP_TYPE} ${APP_NAME} ${VERSION_FOR_HEROKU}'
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
