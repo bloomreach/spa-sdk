@@ -19,7 +19,6 @@ pipeline {
     docker {
       label 'docker'
       image 'node:14'
-      args '-v  /etc/passwd:/etc/passwd'
     }
   }
 
