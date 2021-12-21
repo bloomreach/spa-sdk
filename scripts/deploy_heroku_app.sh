@@ -26,33 +26,33 @@ echo "Deploying ${NAME} app using path ${APP_PATH}";
 echo '-----------------------------------------------------------------------------'
 
 # Common heroku settup for both ssr and csr apps
-heroku apps:destroy --app=$NAME --confirm $NAME
-heroku apps:create --app=$NAME --team=$HEROKU_TEAM
+$HEROKU_BIN apps:destroy --app=$NAME --confirm $NAME
+$HEROKU_BIN apps:create --app=$NAME --team=$HEROKU_TEAM
 
-heroku buildpacks:set --app=$NAME heroku/nodejs
+$HEROKU_BIN buildpacks:set --app=$NAME heroku/nodejs
 
 # Add build packs based on the app type
 if [[ $APP_TYPE = "csr" ]]
 then
-  heroku buildpacks:add --app=$NAME https://github.com/timanovsky/subdir-heroku-buildpack.git
-  heroku buildpacks:add --app=$NAME https://github.com/heroku/heroku-buildpack-static.git
+  $HEROKU_BIN buildpacks:add --app=$NAME https://github.com/timanovsky/subdir-heroku-buildpack.git
+  $HEROKU_BIN buildpacks:add --app=$NAME https://github.com/heroku/heroku-buildpack-static.git
 elif [[ $APP_TYPE = "ssr" ]]
 then
-  heroku buildpacks:add --app=$NAME https://github.com/heroku/heroku-buildpack-multi-procfile
+  $HEROKU_BIN buildpacks:add --app=$NAME https://github.com/heroku/heroku-buildpack-multi-procfile
 fi
 
 # Set common config options
-heroku config:set --app=$NAME PROJECT_PATH=$APP_PATH
-heroku config:set --app=$NAME PROCFILE=$APP_PATH/Procfile
+$HEROKU_BIN config:set --app=$NAME PROJECT_PATH=$APP_PATH
+$HEROKU_BIN config:set --app=$NAME PROCFILE=$APP_PATH/Procfile
 
 
 # Set project specific config options
 if [[ $APP_TYPE = "ssr" ]] && [[ $APP_NAME = "ng" ]]
 then
-  heroku config:set --app=$NAME PROCFILE=$APP_PATH/universal.Procfile
+  $HEROKU_BIN config:set --app=$NAME PROCFILE=$APP_PATH/universal.Procfile
 elif [[ $APP_TYPE = "ssr" ]] && [[ $APP_NAME = "vue" ]]
 then
-  heroku config:set --app=$NAME HOST=0.0.0.0
+  $HEROKU_BIN config:set --app=$NAME HOST=0.0.0.0
 fi
 
 git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/$NAME.git HEAD:refs/heads/main

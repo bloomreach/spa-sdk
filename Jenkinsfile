@@ -77,12 +77,18 @@ pipeline {
         // Replace dots with dashes in version because the Heroku URL requires dashes
         VERSION_FOR_HEROKU = "${VERSION.replace('.', '-')}"
         HEROKU_TEAM = "bloomreach"
+        HEROKU_BIN = "${HOME}/tmp/node_modules/.bin/heroku"
       }
       stages {
         stage('Setup git config') {
           steps {
             sh 'git config user.email "jenkins@onehippo.com"'
             sh 'git config user.name "Jenkins"'
+          }
+        }
+        stage('Install heroku cli') {
+          steps {
+            sh "npm install --no-save --prefix=${HOME}/tmp heroku"
           }
         }
         stage('Deploy apps') {
