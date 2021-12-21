@@ -23,6 +23,11 @@ pipeline {
     }
   }
 
+  environment {
+    // Setup HOME to WORKSPACE path to avoid access errors during npm install
+    HOME = "${env.WORKSPACE}"
+  }
+
   options {
     gitLabConnection('https://code.bloomreach.com/')
     gitlabCommitStatus(name: 'jenkins')
