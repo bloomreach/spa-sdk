@@ -48,7 +48,7 @@ pipeline {
   stages {
     stage('Install') {
       steps {
-        sh 'HOME=$(pwd) yarn'
+        sh 'yarn'
       }
     }
     stage('Build') {
