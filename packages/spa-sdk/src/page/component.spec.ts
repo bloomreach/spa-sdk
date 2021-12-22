@@ -123,6 +123,25 @@ describe('ComponentImpl', () => {
     });
   });
 
+  describe('getProperties', () => {
+    it('should return parameters', () => {
+      const component = createComponent({
+        ...model,
+        meta: {
+          params: { a: '1', b: '2' },
+        },
+      });
+
+      expect(component.getProperties()).toEqual({ a: '1', b: '2' });
+    });
+
+    it('should return an empty object', () => {
+      const component = createComponent();
+
+      expect(component.getProperties()).toEqual({});
+    });
+  });
+
   describe('getComponent', () => {
     it('should return a reference to itself', () => {
       const component = createComponent();

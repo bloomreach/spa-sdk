@@ -97,6 +97,10 @@ export class ComponentImpl implements Component {
     return (this.model._meta.params ?? {}) as T;
   }
 
+  getProperties<T>(): T {
+    return this.getParameters<T>();
+  }
+
   getChildren(): Component[] {
     return this.children;
   }

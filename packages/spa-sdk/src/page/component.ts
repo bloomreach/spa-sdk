@@ -55,6 +55,8 @@ type ComponentModels = Record<string, any>;
 
 type ComponentParameters = Record<string, any>;
 
+type ComponentProperties = ComponentParameters;
+
 /**
  * Meta-data of a component.
  */
@@ -108,6 +110,12 @@ export interface Component {
    * @return The parameters of the component.
    */
   getParameters<T = ComponentParameters>(): T;
+
+  /**
+   * @return The properties of the component.
+   * @alias getParameters
+   */
+  getProperties<T = ComponentProperties>(): T;
 
   /**
    * @return The direct children of the component.
@@ -165,6 +173,10 @@ export class ComponentImpl implements Component {
 
   getParameters<T>(): T {
     return (this.model.meta.params ?? {}) as T;
+  }
+
+  getProperties<T>(): T {
+    return this.getParameters<T>();
   }
 
   getChildren(): Component[] {

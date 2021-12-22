@@ -229,6 +229,7 @@ The `Component` class corresponds to page nodes, and it may hold other component
 | <code>getUrl(): string &vert; undefined</code>                                     | Returns the link to the partial component model. |
 | `getName(): string`                                                                | Returns the name of the component.               |
 | `getParameters(): object`                                                          | Returns the parameters of the component.         |
+| `getProperties(): object`                                                          | Alias for `getParameters` method.         |
 | `getChildren(): Component[]`                                                       | Returns the direct children of the component.    |
 | <code>getComponent(...componentNames: string[]): Component &vert; undefined</code> | Looks up for a nested component.                 |
 | <code>getComponentById(id: string): Component &vert; undefined</code>              | Looks up for a nested component by its id.       |
