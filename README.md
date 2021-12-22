@@ -140,9 +140,9 @@ Release actions:
 * Merge `development` branch into `main` branch with `git merge development --ff-only`
 * Create a new _annotated_ tag on the `main` branch using `git tag -a spa-sdk-[new-version]`
 * Push to `origin` with `git push --follow-tags`
-* [Create a Heroku Auth token](https://help.heroku.com/PBGP6IDE/how-should-i-generate-an-api-key-that-allows-me-to-use-the-heroku-platform-api) using the Heroku CLI
-* Run the [release script](./release.sh) and provide the token as the argument similar to `./release.sh 295a6002-b3ed-474e-b250-dx1886f322ec`
+* Run the [release script](./release.sh)
 
 Post release actions:
+* Check that all example apps have been deployed to Heroku
 * Set the Jira release version as released
 * Create release notes on github 
