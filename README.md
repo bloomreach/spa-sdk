@@ -145,4 +145,5 @@ Release actions:
 Post release actions:
 * Check that all example apps have been deployed to Heroku
 * Set the Jira release version as released
-* Create release notes on github 
+* Create release notes on github
+* Check that TypeDoc has been deployed correctly to [github pages](https://bloomreach.github.io/spa-sdk/)
