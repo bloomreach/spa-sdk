@@ -124,6 +124,25 @@ describe('ContainerItemImpl', () => {
     });
   });
 
+  describe('getProperties', () => {
+    it('should return parameters', () => {
+      const containerItem = createContainerItem({
+        ...model,
+        meta: {
+          paramsInfo: { a: '1', b: '2' },
+        },
+      });
+
+      expect(containerItem.getProperties()).toEqual({ a: '1', b: '2' });
+    });
+
+    it('should return an empty object', () => {
+      const containerItem = createContainerItem();
+
+      expect(containerItem.getProperties()).toEqual({});
+    });
+  });
+
   describe('onPageUpdate', () => {
     let containerItem: ContainerItem;
 
@@ -211,7 +230,7 @@ describe('isContainerItem', () => {
   });
 });
 
-fdescribe('getContainerItemContent', () => {
+describe('getContainerItemContent', () => {
   const content = { $ref: 'content-reference' };
   let page: jest.Mocked<Page>;
 
