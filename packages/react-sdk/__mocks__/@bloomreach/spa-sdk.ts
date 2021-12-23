@@ -23,6 +23,7 @@ const component = new class implements Component {
   getUrl = jest.fn();
   getName = jest.fn();
   getParameters = jest.fn();
+  getProperties = jest.fn();
   getChildren = jest.fn();
   getComponent = jest.fn();
   getComponentById = jest.fn();
