@@ -83,6 +83,12 @@ export class ContainerItemImpl
     return (this.model._meta.paramsInfo ?? {}) as T;
   }
 
+  getContent<T>(): T | null {
+    this.logger?.warn('The method "getContent" is not supported in PMA 0.9 and always returns "null".');
+
+    return null;
+  }
+
   getContentReference(): undefined {
     this.logger?.warn('The method "getContentReference" is not supported in PMA 0.9 and always returns "undefined".');
     return undefined;

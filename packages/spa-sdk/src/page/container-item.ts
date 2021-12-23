@@ -107,10 +107,41 @@ export interface ContainerItem extends Component, Emitter<ContainerItemEvents> {
   isHidden(): boolean;
 
   /**
+   * Returns the content of this component.
+   *
+   * @param page The page that contains the content
+   */
+  getContent<T>(page: Page): T | null;
+
+  /**
    * Returns a [RFC-6901](https://tools.ietf.org/html/rfc6901) JSON Pointer
    * to the content of this container item.
    */
   getContentReference(): Reference | undefined;
+}
+
+/**
+ * Returns the content of this component.
+ *
+ * @param component The component that references the content
+ * @param page The page that contains the content
+ */
+export function getContainerItemContent<T>(component: ContainerItem, page: Page): T | null {
+  const contentRef = component.getContentReference();
+  if (!contentRef) {
+    return null;
+  }
+
+  const componentContent = page.getContent<ContainerItemContent<T>>(contentRef);
+  if (!componentContent) {
+    return null;
+  }
+
+  if (componentContent?.type !== TYPE_COMPONENT_CONTAINER_ITEM_CONTENT) {
+    return null;
+  }
+
+  return componentContent.data;
 }
 
 @injectable()
@@ -161,6 +192,10 @@ export class ContainerItemImpl
     return (this.model.meta.paramsInfo ?? {}) as T;
   }
 
+  getContent<T>(page: Page): T | null {
+    return getContainerItemContent(this, page);
+  }
+
   getContentReference(): Reference | undefined {
     return this.model.content;
   }
@@ -172,28 +207,4 @@ export class ContainerItemImpl
  */
 export function isContainerItem(value: any): value is ContainerItem {
   return value instanceof ContainerItemImpl;
-}
-
-/**
- * Returns the content of this component.
- *
- * @param component The component that references the content
- * @param page The page that contains the content
- */
-export function getContainerItemContent<T>(component: ContainerItem, page: Page): T | null {
-  const contentRef = component.getContentReference();
-  if (!contentRef) {
-    return null;
-  }
-
-  const componentContent = page.getContent<ContainerItemContent<T>>(contentRef);
-  if (!componentContent) {
-    return null;
-  }
-
-  if (componentContent?.type !== TYPE_COMPONENT_CONTAINER_ITEM_CONTENT) {
-    return null;
-  }
-
-  return componentContent.data;
 }

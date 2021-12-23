@@ -253,6 +253,8 @@ The `ContainerItem` objects are usually visible on the page and interact with th
 | `isHidden(): boolean`                                 | Returns whether the component should not render anything. Hiding components is only possible with the Relevance feature.                       |
 | `on(eventName: string, listener: Function): Function` | Subscribes for an event and returns the unsubscribe function.                                                                                  |
 | `off(eventName: string, listener: Function): void`    | Unsubscribes from an event.                                                                                                                    |
+| <code>getContentReference(): Reference &vert; undefined</code> | Returns a [RFC-6901](https://tools.ietf.org/html/rfc6901) JSON Pointer to the content of this container item.   |
+| <code>getContent<T>(page: Page): T &vert; null;</code> | Returns the content of this component from the page that contains the content.   |
 
 ##### Content
 

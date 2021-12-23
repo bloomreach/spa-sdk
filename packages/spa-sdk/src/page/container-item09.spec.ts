@@ -176,6 +176,14 @@ describe('ContainerItemImpl', () => {
     });
   });
 
+  describe('getContent', () => {
+    it('should always return null', () => {
+      const containerItem = createContainerItem();
+
+      expect(containerItem.getContent()).toBeNull();
+    });
+  });
+
   describe('getContentReference', () => {
     it('should always return undefined', () => {
       const containerItem = createContainerItem();

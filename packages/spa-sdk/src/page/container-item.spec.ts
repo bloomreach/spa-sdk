@@ -205,6 +205,49 @@ describe('ContainerItemImpl', () => {
     });
   });
 
+  describe('getContent', () => {
+    let page: jest.Mocked<Page>;
+    const modelWithContent: ContainerItemModel = {
+      ...model,
+      content: { $ref: 'content-reference' },
+    };
+
+    beforeEach(() => {
+      page = { getContent: jest.fn() } as unknown as typeof page;
+    });
+
+    it('should return null if the component has no content reference', () => {
+      const containerItem = createContainerItem();
+
+      expect(containerItem.getContent(page)).toBeNull();
+    });
+
+    it('should return null if the page has no content for the component reference', () => {
+      const containerItem = createContainerItem(modelWithContent);
+
+      expect(containerItem.getContent(page)).toBeNull();
+    });
+
+    it('should return null if the content is of the wrong type', () => {
+      const containerItem = createContainerItem(modelWithContent);
+      const containerItemContent = { type: 'wrong-type' } as ContainerItemContent<string>;
+      page.getContent.mockReturnValue(containerItemContent);
+
+      expect(containerItem.getContent(page)).toBeNull();
+    });
+
+    it('should return the content of the container-item', () => {
+      const containerItem = createContainerItem(modelWithContent);
+      const containerItemContent = {
+        data: 'data',
+        type: TYPE_COMPONENT_CONTAINER_ITEM_CONTENT,
+      } as ContainerItemContent<string>;
+      page.getContent.mockReturnValue(containerItemContent);
+
+      expect(containerItem.getContent<string>(page)).toBe('data');
+    });
+  });
+
   describe('getContentReference', () => {
     it('should return a content reference', () => {
       const content = { $ref: 'content-reference' };
