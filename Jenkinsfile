@@ -81,7 +81,7 @@ pipeline {
       stages {
         stage('Setup git config') {
           steps {
-            sh 'git config user.email "jenkins@onehippo.com"'
+            sh 'git config user.email "jenkins@code.bloomreach.com"'
             sh 'git config user.name "Jenkins"'
           }
         }
