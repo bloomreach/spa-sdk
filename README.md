@@ -140,7 +140,7 @@ Release actions:
 * Merge `development` branch into `main` branch with `git merge development --ff-only`
 * Create a new _annotated_ tag on the `main` branch using `git tag -a spa-sdk-[new-version]`
 * Push to `origin` with `git push --follow-tags`
-* Run the [release script](./release.sh)
+* Run the [release script](./scripts/release.sh)
 
 Post release actions:
 * Check that all example apps have been deployed to Heroku
