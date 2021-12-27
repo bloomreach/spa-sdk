@@ -2,8 +2,40 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### [15.4.1](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.4.0...15.4.1)
+#### [15.4.2](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.4.1...15.4.2)
 
+- Resolve SPASDK-76 "Feature/ heroku cd pipeline" [`#51`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/51)
+- Resolve SPASDK-78 "Feature/ add an alias for helper method getcontaineritemcontent" [`#53`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/53)
+- Resolve SPASDK-77 "Feature/ add alias `getProperties` to match with experience manager terminology" [`#52`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/52)
+- SPASDK-75 Update file header to replace Hippo with Bloomreach [`#48`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/48)
+- SPASDK-76 Move release script to the scripts folder [`#SPASDK-76`](https://issues.onehippo.com/browse/SPASDK-76)
+- SPASDK-76 Rename Jenkins email to consistency [`#SPASDK-76`](https://issues.onehippo.com/browse/SPASDK-76)
+- SPASDK-76 Call explicitly yarn install [`#SPASDK-76`](https://issues.onehippo.com/browse/SPASDK-76)
+- SPASDK-76 Remove script for heroku deploy from release script [`#SPASDK-76`](https://issues.onehippo.com/browse/SPASDK-76)
+- SPASDK-76 HOME env variable already set at the begin of pipeline [`#SPASDK-76`](https://issues.onehippo.com/browse/SPASDK-76)
+- SPASDK-76 Remove unused args for docker container [`#SPASDK-76`](https://issues.onehippo.com/browse/SPASDK-76)
+- SPASDK-76 Setup heroku cli via npm and provide bin path to deploy script [`#SPASDK-76`](https://issues.onehippo.com/browse/SPASDK-76)
+- SPASDK-76 Chnage HOME env path to WORKSPACE path [`#SPASDK-76`](https://issues.onehippo.com/browse/SPASDK-76)
+- SPASDK-76 Define matrix for deploy all example apps to heroku [`#SPASDK-76`](https://issues.onehippo.com/browse/SPASDK-76)
+- SPASDK-76 Create a separate bash script to handle deploy specific app to heroku [`#SPASDK-76`](https://issues.onehippo.com/browse/SPASDK-76)
+- SPASDK-78 Add method `getContent` to Container Item [`#SPASDK-78`](https://issues.onehippo.com/browse/SPASDK-78)
+- SPASDK-78 Add description for the method `getContentReference` in Container Item [`#SPASDK-78`](https://issues.onehippo.com/browse/SPASDK-78)
+- SPASDK-77 Add `getProperies` method to the mock object in react sdk [`#SPASDK-77`](https://issues.onehippo.com/browse/SPASDK-77)
+- SPASDK-77 Verify that getProperties return paramsInfo for container item [`#SPASDK-77`](https://issues.onehippo.com/browse/SPASDK-77)
+- SPASDK-77 Add `getProperties` method as alias for `getParameters` in component [`#SPASDK-77`](https://issues.onehippo.com/browse/SPASDK-77)
+- SPASDK-75 Update file header to replace Hippo with Bloomreach [`#SPASDK-75`](https://issues.onehippo.com/browse/SPASDK-75)
+- SPASDK-75 Update file header to replace Hippo with Bloomreach [`#SPASDK-75`](https://issues.onehippo.com/browse/SPASDK-75)
+- TRIVIAL Merge branch 'trivial/enhance-release-script' into 'development' [`0a0df95`](https://github.com/bloomreach/spa-sdk/commit/0a0df958ff9274fdb366d8ebfc09952803c2a882)
+- TRIVIAL Stop execution of release in case build, lint or test has been finished with non zero result [`35393c8`](https://github.com/bloomreach/spa-sdk/commit/35393c8b4046c91bf1ce5b12170c86eb17a39b75)
+- TRIVIAL Add reminder to post release actions about check typedoc [`49e01ce`](https://github.com/bloomreach/spa-sdk/commit/49e01ce7df91a18a631744f1ad74bb435dddf326)
+- TRIVIAL Merge branch 'enhance-release-script' into development [`f45e24c`](https://github.com/bloomreach/spa-sdk/commit/f45e24c9c12201d0fce6b3c8ed51f0b7461d717f)
+- TRIVIAL Add lint, test and build steps at the beginning of the script [`60dd968`](https://github.com/bloomreach/spa-sdk/commit/60dd9681110ab611e4efa62e3e4f859513a549d2)
+
+#### [spa-sdk-15.4.1](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.4.0...spa-sdk-15.4.1)
+
+> 1 December 2021
+
+- TRIVIAL Bumping version to 15.4.1 [`65dd1c3`](https://github.com/bloomreach/spa-sdk/commit/65dd1c38be90986df001eec1c28f74f76a6520fa)
 - TRIVIAL Update release script with build step before publising [`b377221`](https://github.com/bloomreach/spa-sdk/commit/b377221d974138c1ee092610c037ee1987b765b6)
 
 #### [spa-sdk-15.4.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.3.3...spa-sdk-15.4.0)
@@ -274,5 +306,7 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-2 Log warning for unsupported method "getContentReference" in v0.9 [`#SPASDK-2`](https://issues.onehippo.com/browse/SPASDK-2)
 - SPASDK-2 Add exported function "getContainerItemContent" [`#SPASDK-2`](https://issues.onehippo.com/browse/SPASDK-2)
 - SPASDK-1 Bump to use node 14 [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
+- SPASDK-1 Remove maven files and update Jenkinsfile [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
+- SPASDK-1 Initial move from brxm monorepo [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
 - TRIVIAL Set branch name to 'main' in changesetBaseRefs [`4dacdcd`](https://github.com/bloomreach/spa-sdk/commit/4dacdcd2fdb0712e40dcb33b9809ae12786f9ab1)
 - TRIVIAL Skip telemetry check on nuxt startup [`15deb25`](https://github.com/bloomreach/spa-sdk/commit/15deb25b1edde3af3296d4dc34dba1483fe278f2)

@@ -2534,9 +2534,9 @@ __metadata:
     "@angular/platform-server": 11.2.14
     "@angular/router": 11.2.14
     "@bloomreach/eslint-config-angular": 1.0.1
-    "@bloomreach/ng-sdk": 15.4.1
+    "@bloomreach/ng-sdk": 15.4.2
     "@bloomreach/segmentation": 0.0.13
-    "@bloomreach/spa-sdk": 15.4.1
+    "@bloomreach/spa-sdk": 15.4.2
     "@nguniversal/builders": 11.2.1
     "@nguniversal/express-engine": 11.2.1
     "@types/cookie": 0.4.1
@@ -2558,9 +2558,9 @@ __metadata:
   resolution: "@bloomreach/example-next@workspace:examples/next"
   dependencies:
     "@bloomreach/eslint-config-next": 1.0.1
-    "@bloomreach/react-sdk": 15.4.1
+    "@bloomreach/react-sdk": 15.4.2
     "@bloomreach/segmentation": 0.0.13
-    "@bloomreach/spa-sdk": 15.4.1
+    "@bloomreach/spa-sdk": 15.4.2
     "@types/node": 14.17.3
     "@types/react": 16.14.0
     "@types/react-dom": 16.9.14
@@ -2580,8 +2580,8 @@ __metadata:
     "@babel/runtime-corejs3": 7.14.9
     "@bloomreach/eslint-config-nuxt": 1.0.1
     "@bloomreach/segmentation": 0.0.13
-    "@bloomreach/spa-sdk": 15.4.1
-    "@bloomreach/vue-sdk": 15.4.1
+    "@bloomreach/spa-sdk": 15.4.2
+    "@bloomreach/vue-sdk": 15.4.2
     "@nuxt/types": 2.15.7
     "@nuxt/typescript-build": 2.1.0
     "@nuxtjs/axios": 5.13.6
@@ -2609,9 +2609,9 @@ __metadata:
   resolution: "@bloomreach/example-react@workspace:examples/react"
   dependencies:
     "@bloomreach/eslint-config-react": 1.0.2
-    "@bloomreach/react-sdk": 15.4.1
+    "@bloomreach/react-sdk": 15.4.2
     "@bloomreach/segmentation": 0.0.13
-    "@bloomreach/spa-sdk": 15.4.1
+    "@bloomreach/spa-sdk": 15.4.2
     "@types/react": 16.14.0
     "@types/react-dom": 16.9.14
     "@types/react-router-dom": 5.1.8
@@ -2631,8 +2631,8 @@ __metadata:
   dependencies:
     "@bloomreach/eslint-config-vue": 1.0.1
     "@bloomreach/segmentation": 0.0.13
-    "@bloomreach/spa-sdk": 15.4.1
-    "@bloomreach/vue-sdk": 15.4.1
+    "@bloomreach/spa-sdk": 15.4.2
+    "@bloomreach/vue-sdk": 15.4.2
     "@types/jest": 26.0.24
     "@vue/cli-plugin-babel": 4.5.13
     "@vue/cli-plugin-eslint": 4.5.13
@@ -2658,7 +2658,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@bloomreach/ng-sdk@15.4.1, @bloomreach/ng-sdk@workspace:packages/ng-sdk":
+"@bloomreach/ng-sdk@15.4.2, @bloomreach/ng-sdk@workspace:packages/ng-sdk":
   version: 0.0.0-use.local
   resolution: "@bloomreach/ng-sdk@workspace:packages/ng-sdk"
   dependencies:
@@ -2677,7 +2677,7 @@ __metadata:
     "@angular/platform-browser": 11.2.14
     "@angular/platform-browser-dynamic": 11.2.14
     "@bloomreach/eslint-config-angular": 1.0.1
-    "@bloomreach/spa-sdk": 15.4.1
+    "@bloomreach/spa-sdk": 15.4.2
     "@types/jest": 26.0.24
     jest: 26.6.3
     jest-junit: 12.2.0
@@ -2695,7 +2695,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@bloomreach/react-sdk@15.4.1, @bloomreach/react-sdk@workspace:packages/react-sdk":
+"@bloomreach/react-sdk@15.4.2, @bloomreach/react-sdk@workspace:packages/react-sdk":
   version: 0.0.0-use.local
   resolution: "@bloomreach/react-sdk@workspace:packages/react-sdk"
   dependencies:
@@ -2704,7 +2704,7 @@ __metadata:
     "@babel/preset-env": 7.14.8
     "@babel/preset-react": 7.14.5
     "@bloomreach/eslint-config-react": 1.0.2
-    "@bloomreach/spa-sdk": 15.4.1
+    "@bloomreach/spa-sdk": 15.4.2
     "@rollup/plugin-babel": 5.3.0
     "@types/enzyme": 3.10.9
     "@types/jest": 26.0.24
@@ -2741,7 +2741,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@bloomreach/spa-sdk@15.4.1, @bloomreach/spa-sdk@workspace:packages/spa-sdk":
+"@bloomreach/spa-sdk@15.4.2, @bloomreach/spa-sdk@workspace:packages/spa-sdk":
   version: 0.0.0-use.local
   resolution: "@bloomreach/spa-sdk@workspace:packages/spa-sdk"
   dependencies:
@@ -2780,12 +2780,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@bloomreach/vue-sdk@15.4.1, @bloomreach/vue-sdk@workspace:packages/vue-sdk":
+"@bloomreach/vue-sdk@15.4.2, @bloomreach/vue-sdk@workspace:packages/vue-sdk":
   version: 0.0.0-use.local
   resolution: "@bloomreach/vue-sdk@workspace:packages/vue-sdk"
   dependencies:
     "@bloomreach/eslint-config-vue": 1.0.1
-    "@bloomreach/spa-sdk": 15.4.1
+    "@bloomreach/spa-sdk": 15.4.2
     "@types/jest": 26.0.24
     "@types/node": 14.17.3
     "@vue/cli-plugin-babel": 4.5.13
