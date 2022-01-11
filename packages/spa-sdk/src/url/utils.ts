@@ -24,19 +24,28 @@ interface Url {
 }
 
 export function parseUrl(url: string): Url {
-  // URL constructor requires either a valid URL or a base URL.
-  // Since this function returns a pathname, we can safely pass a fake host to be able to resolve relative URLs.
-  const parsedUrl = url ? new URL(url, 'http://example.com') : ({} as URL);
-  const { hash = '', search = '', searchParams = new URLSearchParams() } = parsedUrl;
+  // Since the incoming url might be just a string or relative path we should provide a dummy base URL
+  // to be able to resolve relative URLs.
+  // The dummy URL have to be unique to avoid any intersection with a real URL
+  // because we are using the origin property from parsed URL object.
+  const DUMMY_BASE_URL = 'http://zmfrzxvybc5jb20.com';
+  const parsedUrl = new URL(url, DUMMY_BASE_URL);
+  const { hash, search, searchParams } = parsedUrl;
 
-  // For links like `//example.com?query#hash` pathname will be `/` so we need to strip query and hash parameters first.
-  let origin = url.substring(0, url.length - search.length - hash.length);
-  let { pathname = '' } = parsedUrl;
-  if (!origin.endsWith(pathname)) {
-    pathname = pathname.substring(1);
+  let { origin, pathname } = parsedUrl;
+
+  // If url is a string or relative path, like 'someurl', '/news', etc we should return origin as an empty string.
+  origin = origin !== DUMMY_BASE_URL ? origin : '';
+
+  // For urls without protocol like //example.com?query#hash we should omit protocol from origin as well
+  if (url.startsWith('//')) {
+    origin = origin.replace(parsedUrl.protocol, '');
   }
 
-  origin = origin.substring(0, origin.length - pathname.length);
+  // For urls like `//example.com?query#hash` pathname should be empty string ''.
+  if (url.startsWith(origin) && !url.replace(origin, '').startsWith('/') && pathname.startsWith('/')) {
+    pathname = pathname.substring(1);
+  }
 
   return { hash, origin, pathname, search, searchParams, path: `${pathname}${search}${hash}` };
 }
