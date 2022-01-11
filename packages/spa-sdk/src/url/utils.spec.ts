@@ -134,13 +134,18 @@ describe('mergeSearchParams', () => {
 describe('parseUrl', () => {
   /* eslint-disable max-len */
   it.each`
-    url                                   | hash       | origin                  | path                | pathname   | search    | searchParams
-    ${''}                                 | ${''}      | ${''}                   | ${''}               | ${''}      | ${''}     | ${new URLSearchParams()}
-    ${'/path'}                            | ${''}      | ${''}                   | ${'/path'}          | ${'/path'} | ${''}     | ${new URLSearchParams()}
-    ${'http://example.com'}               | ${''}      | ${'http://example.com'} | ${''}               | ${''}      | ${''}     | ${new URLSearchParams()}
-    ${'http://example.com/path'}          | ${''}      | ${'http://example.com'} | ${'/path'}          | ${'/path'} | ${''}     | ${new URLSearchParams()}
-    ${'http://example.com/#hash'}         | ${'#hash'} | ${'http://example.com'} | ${'/#hash'}         | ${'/'}     | ${''}     | ${new URLSearchParams()}
-    ${'http://example.com/path?a=b#hash'} | ${'#hash'} | ${'http://example.com'} | ${'/path?a=b#hash'} | ${'/path'} | ${'?a=b'} | ${new URLSearchParams('a=b')}
+    url                                   | hash       | origin                  | path                  | pathname   | search      | searchParams
+    ${''}                                 | ${''}      | ${''}                   | ${''}                 | ${''}      | ${''}       | ${new URLSearchParams()}
+    ${'/path'}                            | ${''}      | ${''}                   | ${'/path'}            | ${'/path'} | ${''}       | ${new URLSearchParams()}
+    ${"/path?a='"}                        | ${''}      | ${''}                   | ${'/path?a=%27'}      | ${'/path'} | ${'?a=%27'} | ${new URLSearchParams("a='")}
+    ${'http://example.com'}               | ${''}      | ${'http://example.com'} | ${''}                 | ${''}      | ${''}       | ${new URLSearchParams()}
+    ${'http://example.com?a=b#hash'}      | ${'#hash'} | ${'http://example.com'} | ${'?a=b#hash'}        | ${''}      | ${'?a=b'}   | ${new URLSearchParams('a=b')}
+    ${'http://example.com/'}              | ${''}      | ${'http://example.com'} | ${'/'}                | ${'/'}     | ${''}       | ${new URLSearchParams()}
+    ${'http://example.com/path'}          | ${''}      | ${'http://example.com'} | ${'/path'}            | ${'/path'} | ${''}       | ${new URLSearchParams()}
+    ${'http://example.com/#hash'}         | ${'#hash'} | ${'http://example.com'} | ${'/#hash'}           | ${'/'}     | ${''}       | ${new URLSearchParams()}
+    ${'http://example.com/path?a=b#hash'} | ${'#hash'} | ${'http://example.com'} | ${'/path?a=b#hash'}   | ${'/path'} | ${'?a=b'}   | ${new URLSearchParams('a=b')}
+    ${"http://example.com/path?a='#hash"} | ${'#hash'} | ${'http://example.com'} | ${'/path?a=%27#hash'} | ${'/path'} | ${'?a=%27'} | ${new URLSearchParams("a='")}
+    ${'//example.com?a=b#hash'}           | ${'#hash'} | ${'//example.com'}      | ${'?a=b#hash'}        | ${''}      | ${'?a=b'}   | ${new URLSearchParams('a=b')}
   `('should parse "$url"', ({ url, searchParams, ...parts }) => {
     const { searchParams: parsedSearchParams, ...parsedParts } = parseUrl(url);
 
