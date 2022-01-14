@@ -136,13 +136,12 @@ Pre release actions:
 Release actions:
 * Run `yarn bump [new version]` in the workspace root to update the versions in all package files
 * Commit these version changes with `git commit -am "[your Jira issue] Bumping versions to [new version]"`
-* Push to `origin` with `git push`
-* Merge `development` branch into `main` branch with `git merge development --ff-only`
 * Create a new _annotated_ tag on the `main` branch using `git tag -a spa-sdk-[new-version]`
 * Push to `origin` with `git push --follow-tags`
-* Run the [release script](./scripts/release.sh)
+* Make MR to the `main` branch and merge it after approve
 
 Post release actions:
+* Check that release pipeline is green
 * Check that all example apps have been deployed to Heroku
 * Set the Jira release version as released
 * Create release notes on github
