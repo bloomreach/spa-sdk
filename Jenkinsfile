@@ -140,17 +140,11 @@ pipeline {
         stage('Deploy to Heroku') {
           environment {
             // Replace dots with dashes in version because the Heroku URL requires dashes
-            VERSION_FOR_HEROKU = "${VERSION.replace('.', '-')}"
+            VERSION_FOR_HEROKU = "${VERSION.replace('.', '-')}-cd-test" // TODO: REMOVE BEFORE MERGE
             HEROKU_TEAM = "bloomreach"
-            HEROKU_BIN = "${HOME}/tmp/node_modules/.bin/heroku"
           }
 
           stages {
-            stage('Install heroku cli') {
-              steps {
-                sh "npm install --no-save --prefix=${HOME}/tmp heroku"
-              }
-            }
             stage('Deploy apps') {
               matrix {
                 axes {
@@ -167,8 +161,7 @@ pipeline {
                   stage('Deploy app') {
                     steps {
                       withCredentials([[$class: 'StringBinding', credentialsId: 'HEROKU_API_KEY', variable: 'HEROKU_API_KEY']]) {
-                        // sh './scripts/deploy_heroku_app.sh ${APP_TYPE} ${APP_NAME} ${VERSION_FOR_HEROKU}' // TODO: UNCOMMENT BEFORE MERGE!!!
-                        echo 'deploy to HEROKU: "${APP_TYPE}" "${APP_NAME}" "${VERSION_FOR_HEROKU}"'
+                        sh 'yarn run deploy-to-heroku "${APP_TYPE}" "${APP_NAME}" "${VERSION_FOR_HEROKU}"'
                       }
                     }
                   }

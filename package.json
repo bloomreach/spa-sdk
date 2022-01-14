@@ -29,6 +29,7 @@
     "bump": "yarn workspaces foreach version ${0} && yarn changelog",
     "changelog": "auto-changelog",
     "docs": "yarn workspaces foreach --parallel run docs",
+    "deploy-to-heroku": "./scripts/deploy_heroku_app.sh ${0} ${1} ${2}",
     "heroku-postbuild": "cd ${PROJECT_PATH:-.} && yarn workspaces foreach --parallel --recursive --topological run build",
     "lint": "yarn workspaces foreach --parallel run lint",
     "release": "yarn workspaces foreach --include '@bloomreach/*-sdk' npm publish --access public",
@@ -39,7 +40,7 @@
   },
   "devDependencies": {
     "auto-changelog": "2.3.0",
-    "heroku": "7.59.0"
+    "heroku": "7.59.2"
   },
   "auto-changelog": {
     "hideCredit": true,
