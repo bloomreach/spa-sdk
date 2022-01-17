@@ -69,7 +69,7 @@ pipeline {
     }
     stage('Release') {
       when {
-        branch 'SPASDK-82-release-pipeline-final' // TODO: CHANGE TO main
+        branch 'main'
       }
 
       environment {
@@ -82,7 +82,7 @@ pipeline {
           steps {
             sshagent (credentials: ['github-spa-sdk']) {
               sh 'git remote add github git@github.com:bloomreach/spa-sdk.git'
-              sh 'git push -u --follow-tags github HEAD:refs/heads/test-release-pipeline' // TODO: CHANGE TO main
+              sh 'git push -u --follow-tags github HEAD:refs/heads/main'
             }
           }
         }
@@ -102,7 +102,7 @@ pipeline {
             stage('Clone github pages with TypeDoc') {
               steps {
                 sshagent (credentials: ['github-spa-sdk']) {
-                  sh 'git clone -b test-release-pipeline-gh-pages --single-branch git@github.com:bloomreach/spa-sdk.git spa-sdk-typedoc' // TODO: CHANGE TO CORRECT BRANCH gh-pages
+                  sh 'git clone -b gh-pages --single-branch git@github.com:bloomreach/spa-sdk.git spa-sdk-typedoc'
                 }
               }
             }
@@ -114,7 +114,6 @@ pipeline {
             }
             stage('Publish to github pages') {
               steps {
-                sh 'echo $(date +"%T") > spa-sdk-typedoc/test.txt' // REMOVE IT!!!
                 sh 'git -C spa-sdk-typedoc add --all'
                 sh 'git -C spa-sdk-typedoc commit -m "Update SPA SDK TypeDocs for release ${VERSION}"'
                 sshagent (credentials: ['github-spa-sdk']) {
@@ -132,15 +131,14 @@ pipeline {
         stage('Publish to NPM') {
           steps {
             withCredentials([[$class: 'StringBinding', credentialsId: 'NPM_AUTH_TOKEN', variable: 'YARN_NPM_AUTH_TOKEN']]) {
-              // sh 'yarn release' // TODO: UNCOMMENT BEFORE MERGE!!!
-              echo 'Remove ME before MERGE!!!!'
+              sh 'yarn release'
             }
           }
         }
         stage('Deploy to Heroku') {
           environment {
             // Replace dots with dashes in version because the Heroku URL requires dashes
-            VERSION_FOR_HEROKU = "${VERSION.replace('.', '-')}-cd-test" // TODO: REMOVE BEFORE MERGE
+            VERSION_FOR_HEROKU = "${VERSION.replace('.', '-')}"
             HEROKU_TEAM = "bloomreach"
           }
 
