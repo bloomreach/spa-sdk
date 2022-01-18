@@ -136,7 +136,7 @@ Pre release actions:
 Release actions:
 * Run `yarn bump [new version]` in the workspace root to update the versions in all package files
 * Commit these version changes with `git commit -am "[your Jira issue] Bumping versions to [new version]"`
-* Create a new _annotated_ tag on the `main` branch using `git tag -a spa-sdk-[new-version]`
+* Create a new _annotated_ tag on the `development` branch using `git tag -a spa-sdk-[new-version]`
 * Push to `origin` with `git push --follow-tags`
 * Make MR to the `main` branch and merge it after approve
 
