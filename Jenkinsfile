@@ -19,6 +19,7 @@ pipeline {
     docker {
       label 'docker'
       image 'node:14'
+      args '-v  /etc/passwd:/etc/passwd'
     }
   }
 
@@ -66,47 +67,101 @@ pipeline {
         sh 'yarn test'
       }
     }
-    stage('Deploy to Heroku') {
+    stage('Release') {
       when {
         branch 'main'
       }
 
       environment {
+        GIT_SSH_COMMAND='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
         VERSION = sh(script: "node -p -e \"require('./package.json').version\"", returnStdout: true).trim()
-        // Replace dots with dashes in version because the Heroku URL requires dashes
-        VERSION_FOR_HEROKU = "${VERSION.replace('.', '-')}"
-        HEROKU_TEAM = "bloomreach"
-        HEROKU_BIN = "${HOME}/tmp/node_modules/.bin/heroku"
       }
+
       stages {
+        stage('Publish to Github') {
+          steps {
+            sshagent (credentials: ['github-spa-sdk']) {
+              sh 'git remote add github git@github.com:bloomreach/spa-sdk.git'
+              sh 'git push -u --follow-tags github HEAD:refs/heads/main'
+            }
+          }
+        }
         stage('Setup git config') {
           steps {
-            sh 'git config user.email "jenkins@code.bloomreach.com"'
-            sh 'git config user.name "Jenkins"'
+            sh 'git config --global user.email "jenkins@code.bloomreach.com"'
+            sh 'git config --global user.name "Jenkins"'
           }
         }
-        stage('Install heroku cli') {
-          steps {
-            sh "npm install --no-save --prefix=${HOME}/tmp heroku"
-          }
-        }
-        stage('Deploy apps') {
-          matrix {
-            axes {
-              axis {
-                  name 'APP_TYPE'
-                  values 'ssr', 'csr'
-              }
-              axis {
-                  name 'APP_NAME'
-                  values 'ng', 'react', 'vue'
+        stage('Generate and publish SPA SDK TypeDoc') {
+          stages {
+            stage('Generate SPA SDK TypeDoc') {
+              steps {
+                sh 'yarn workspace @bloomreach/spa-sdk docs'
               }
             }
-            stages {
-              stage('Deploy app') {
-                steps {
-                  withCredentials([[$class: 'StringBinding', credentialsId: 'HEROKU_API_KEY', variable: 'HEROKU_API_KEY']]) {
-                    sh './scripts/deploy_heroku_app.sh ${APP_TYPE} ${APP_NAME} ${VERSION_FOR_HEROKU}'
+            stage('Clone github pages with TypeDoc') {
+              steps {
+                sshagent (credentials: ['github-spa-sdk']) {
+                  sh 'git clone -b gh-pages --single-branch git@github.com:bloomreach/spa-sdk.git spa-sdk-typedoc'
+                }
+              }
+            }
+            stage('Copy new version of TypeDoc') {
+              steps {
+                sh 'rm -rf spa-sdk-typedoc/*'
+                sh 'cp -r packages/spa-sdk/docs/. spa-sdk-typedoc/'
+              }
+            }
+            stage('Publish to github pages') {
+              steps {
+                sh 'git -C spa-sdk-typedoc add --all'
+                sh 'git -C spa-sdk-typedoc commit -m "Update SPA SDK TypeDocs for release ${VERSION}"'
+                sshagent (credentials: ['github-spa-sdk']) {
+                  sh 'git -C spa-sdk-typedoc push'
+                }
+              }
+            }
+            stage('Cleanup') {
+              steps {
+                sh 'rm -rf spa-sdk-typedoc'
+              }
+            }
+          }
+        }
+        stage('Publish to NPM') {
+          steps {
+            withCredentials([[$class: 'StringBinding', credentialsId: 'NPM_AUTH_TOKEN', variable: 'YARN_NPM_AUTH_TOKEN']]) {
+              sh 'yarn release'
+            }
+          }
+        }
+        stage('Deploy to Heroku') {
+          environment {
+            // Replace dots with dashes in version because the Heroku URL requires dashes
+            VERSION_FOR_HEROKU = "${VERSION.replace('.', '-')}"
+            HEROKU_TEAM = "bloomreach"
+          }
+
+          stages {
+            stage('Deploy apps') {
+              matrix {
+                axes {
+                  axis {
+                    name 'APP_TYPE'
+                    values 'ssr', 'csr'
+                  }
+                  axis {
+                    name 'APP_NAME'
+                    values 'ng', 'react', 'vue'
+                  }
+                }
+                stages {
+                  stage('Deploy app') {
+                    steps {
+                      withCredentials([[$class: 'StringBinding', credentialsId: 'HEROKU_API_KEY', variable: 'HEROKU_API_KEY']]) {
+                        sh 'yarn run deploy-to-heroku "${APP_TYPE}" "${APP_NAME}" "${VERSION_FOR_HEROKU}"'
+                      }
+                    }
                   }
                 }
               }
