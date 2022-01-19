@@ -2534,9 +2534,9 @@ __metadata:
     "@angular/platform-server": 11.2.14
     "@angular/router": 11.2.14
     "@bloomreach/eslint-config-angular": 1.0.1
-    "@bloomreach/ng-sdk": 15.4.2
+    "@bloomreach/ng-sdk": 15.4.3
     "@bloomreach/segmentation": 0.0.13
-    "@bloomreach/spa-sdk": 15.4.2
+    "@bloomreach/spa-sdk": 15.4.3
     "@nguniversal/builders": 11.2.1
     "@nguniversal/express-engine": 11.2.1
     "@types/cookie": 0.4.1
@@ -2558,9 +2558,9 @@ __metadata:
   resolution: "@bloomreach/example-next@workspace:examples/next"
   dependencies:
     "@bloomreach/eslint-config-next": 1.0.1
-    "@bloomreach/react-sdk": 15.4.2
+    "@bloomreach/react-sdk": 15.4.3
     "@bloomreach/segmentation": 0.0.13
-    "@bloomreach/spa-sdk": 15.4.2
+    "@bloomreach/spa-sdk": 15.4.3
     "@types/node": 14.17.3
     "@types/react": 16.14.0
     "@types/react-dom": 16.9.14
@@ -2580,8 +2580,8 @@ __metadata:
     "@babel/runtime-corejs3": 7.14.9
     "@bloomreach/eslint-config-nuxt": 1.0.1
     "@bloomreach/segmentation": 0.0.13
-    "@bloomreach/spa-sdk": 15.4.2
-    "@bloomreach/vue-sdk": 15.4.2
+    "@bloomreach/spa-sdk": 15.4.3
+    "@bloomreach/vue-sdk": 15.4.3
     "@nuxt/types": 2.15.7
     "@nuxt/typescript-build": 2.1.0
     "@nuxtjs/axios": 5.13.6
@@ -2609,9 +2609,9 @@ __metadata:
   resolution: "@bloomreach/example-react@workspace:examples/react"
   dependencies:
     "@bloomreach/eslint-config-react": 1.0.2
-    "@bloomreach/react-sdk": 15.4.2
+    "@bloomreach/react-sdk": 15.4.3
     "@bloomreach/segmentation": 0.0.13
-    "@bloomreach/spa-sdk": 15.4.2
+    "@bloomreach/spa-sdk": 15.4.3
     "@types/react": 16.14.0
     "@types/react-dom": 16.9.14
     "@types/react-router-dom": 5.1.8
@@ -2631,8 +2631,8 @@ __metadata:
   dependencies:
     "@bloomreach/eslint-config-vue": 1.0.1
     "@bloomreach/segmentation": 0.0.13
-    "@bloomreach/spa-sdk": 15.4.2
-    "@bloomreach/vue-sdk": 15.4.2
+    "@bloomreach/spa-sdk": 15.4.3
+    "@bloomreach/vue-sdk": 15.4.3
     "@types/jest": 26.0.24
     "@vue/cli-plugin-babel": 4.5.13
     "@vue/cli-plugin-eslint": 4.5.13
@@ -2658,7 +2658,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@bloomreach/ng-sdk@15.4.2, @bloomreach/ng-sdk@workspace:packages/ng-sdk":
+"@bloomreach/ng-sdk@15.4.3, @bloomreach/ng-sdk@workspace:packages/ng-sdk":
   version: 0.0.0-use.local
   resolution: "@bloomreach/ng-sdk@workspace:packages/ng-sdk"
   dependencies:
@@ -2677,7 +2677,7 @@ __metadata:
     "@angular/platform-browser": 11.2.14
     "@angular/platform-browser-dynamic": 11.2.14
     "@bloomreach/eslint-config-angular": 1.0.1
-    "@bloomreach/spa-sdk": 15.4.2
+    "@bloomreach/spa-sdk": 15.4.3
     "@types/jest": 26.0.24
     jest: 26.6.3
     jest-junit: 12.2.0
@@ -2695,7 +2695,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@bloomreach/react-sdk@15.4.2, @bloomreach/react-sdk@workspace:packages/react-sdk":
+"@bloomreach/react-sdk@15.4.3, @bloomreach/react-sdk@workspace:packages/react-sdk":
   version: 0.0.0-use.local
   resolution: "@bloomreach/react-sdk@workspace:packages/react-sdk"
   dependencies:
@@ -2704,7 +2704,7 @@ __metadata:
     "@babel/preset-env": 7.14.8
     "@babel/preset-react": 7.14.5
     "@bloomreach/eslint-config-react": 1.0.2
-    "@bloomreach/spa-sdk": 15.4.2
+    "@bloomreach/spa-sdk": 15.4.3
     "@rollup/plugin-babel": 5.3.0
     "@types/enzyme": 3.10.9
     "@types/jest": 26.0.24
@@ -2741,7 +2741,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@bloomreach/spa-sdk@15.4.2, @bloomreach/spa-sdk@workspace:packages/spa-sdk":
+"@bloomreach/spa-sdk@15.4.3, @bloomreach/spa-sdk@workspace:packages/spa-sdk":
   version: 0.0.0-use.local
   resolution: "@bloomreach/spa-sdk@workspace:packages/spa-sdk"
   dependencies:
@@ -2780,12 +2780,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@bloomreach/vue-sdk@15.4.2, @bloomreach/vue-sdk@workspace:packages/vue-sdk":
+"@bloomreach/vue-sdk@15.4.3, @bloomreach/vue-sdk@workspace:packages/vue-sdk":
   version: 0.0.0-use.local
   resolution: "@bloomreach/vue-sdk@workspace:packages/vue-sdk"
   dependencies:
     "@bloomreach/eslint-config-vue": 1.0.1
-    "@bloomreach/spa-sdk": 15.4.2
+    "@bloomreach/spa-sdk": 15.4.3
     "@types/jest": 26.0.24
     "@types/node": 14.17.3
     "@vue/cli-plugin-babel": 4.5.13
@@ -3012,9 +3012,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@heroku-cli/plugin-apps@npm:^7.54.0":
-  version: 7.54.0
-  resolution: "@heroku-cli/plugin-apps@npm:7.54.0"
+"@heroku-cli/plugin-apps@npm:^7.59.1":
+  version: 7.59.1
+  resolution: "@heroku-cli/plugin-apps@npm:7.59.1"
   dependencies:
     "@heroku-cli/color": ^1.1.14
     "@heroku-cli/command": ^8.4.1
@@ -3026,7 +3026,7 @@ __metadata:
     shell-escape: ^0.2.0
     tslib: ^1
     urijs: ^1.19.1
-  checksum: 32e6eadb01b391859b483f6d793ed53f386707719434bb20a03beb1512b1864e0f3ab093c9bb9a2bee13df6576c195d4c57b25ec421b8cac0a63d9091cb36ce2
+  checksum: 9ebebd95d0b993555a9923d6277e5c68d073713592e1a8ad0e5cd476ea988c7b75ce9d6acc35ba42581de51c4ae6057a6f08ed575fcd56eba30d38f9db9c020b
   languageName: node
   linkType: hard
 
@@ -3230,9 +3230,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@heroku-cli/plugin-pg-v5@npm:^7.58.0":
-  version: 7.58.0
-  resolution: "@heroku-cli/plugin-pg-v5@npm:7.58.0"
+"@heroku-cli/plugin-pg-v5@npm:^7.59.2":
+  version: 7.59.2
+  resolution: "@heroku-cli/plugin-pg-v5@npm:7.59.2"
   dependencies:
     "@heroku-cli/plugin-addons": ^1.2.29
     bytes: ^3.1.0
@@ -3246,7 +3246,7 @@ __metadata:
     strip-eof: ^2.0.0
     tunnel-ssh: ^4.1.4
     uuid: ^8.3.1
-  checksum: a437cb5d75c96e86a4757bd96b8a1054e30fb9f42ba201030014dabea6f415720d2a3313e6537467ec6b9088cf04789055cd0a5fefd188b22d7209da4c39d3dc
+  checksum: 898bf4c0d6f0bdce6d19407d3032ece65455caf9eaf3ddf445eb9d41b106473fd7ef236735990b2e6c24a149f371416df34ae7e29d102aa80328a69827cb6e54
   languageName: node
   linkType: hard
 
@@ -3297,14 +3297,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@heroku-cli/plugin-redis-v5@npm:^7.59.0":
-  version: 7.59.0
-  resolution: "@heroku-cli/plugin-redis-v5@npm:7.59.0"
+"@heroku-cli/plugin-redis-v5@npm:^7.59.1":
+  version: 7.59.1
+  resolution: "@heroku-cli/plugin-redis-v5@npm:7.59.1"
   dependencies:
     heroku-cli-util: ^8.0.11
     redis-parser: ^3.0.0
     ssh2: ^0.8.9
-  checksum: 0420bdf9cd30f1a111fda5774b70f96cfb829b31a5230588c0bdea91f6939463ec7582b4b07478bea99ff41eb49798d0e1dbe5392552ad39959c105e823417cb
+  checksum: 7b9e8f78b8849e0563cd80daa16dc677e2f46c736d0d4b5866e4f731c1ce2b3c8a926b80f2229b970fc3d07a822a0435a6ae1df8fa37991d1f2158fc35781607
   languageName: node
   linkType: hard
 
@@ -15003,14 +15003,14 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"heroku@npm:7.59.0":
-  version: 7.59.0
-  resolution: "heroku@npm:7.59.0"
+"heroku@npm:7.59.2":
+  version: 7.59.2
+  resolution: "heroku@npm:7.59.2"
   dependencies:
     "@heroku-cli/color": 1.1.14
     "@heroku-cli/command": ^8.4.1
     "@heroku-cli/plugin-addons-v5": ^7.54.0
-    "@heroku-cli/plugin-apps": ^7.54.0
+    "@heroku-cli/plugin-apps": ^7.59.1
     "@heroku-cli/plugin-apps-v5": ^7.54.1
     "@heroku-cli/plugin-auth": ^7.54.0
     "@heroku-cli/plugin-autocomplete": ^7.54.0
@@ -15025,11 +15025,11 @@ fsevents@^1.2.7:
     "@heroku-cli/plugin-local": ^7.54.0
     "@heroku-cli/plugin-oauth-v5": ^7.54.0
     "@heroku-cli/plugin-orgs-v5": ^7.54.0
-    "@heroku-cli/plugin-pg-v5": ^7.58.0
+    "@heroku-cli/plugin-pg-v5": ^7.59.2
     "@heroku-cli/plugin-pipelines": ^7.54.0
     "@heroku-cli/plugin-ps": ^7.54.0
     "@heroku-cli/plugin-ps-exec": 2.3.8
-    "@heroku-cli/plugin-redis-v5": ^7.59.0
+    "@heroku-cli/plugin-redis-v5": ^7.59.1
     "@heroku-cli/plugin-run": ^7.56.0
     "@heroku-cli/plugin-spaces": ^7.54.0
     "@heroku-cli/plugin-status": ^7.54.0
@@ -15056,7 +15056,7 @@ fsevents@^1.2.7:
     uuid: 3.3.2
   bin:
     heroku: ./bin/run
-  checksum: 4fbb54b38a0b1046bec53d7d2edbd87cf7562d7c0bf46e438654f5a30f6d47f1ef2092ba8d7e1aba9727317c551d1e23c34bbdd432d07d5c986eafd01107f450
+  checksum: 0e31fd10ccafdbd2762b5c96455f7c1a76bd25cc82172ddde8230a237b4b995482a937f6b1ee02af9a608b0ff2b40641ae77c232b6ab3a1c6592175e15f10642
   languageName: node
   linkType: hard
 
@@ -24726,7 +24726,7 @@ resolve@^2.0.0-next.3:
   resolution: "root-workspace-0b6124@workspace:."
   dependencies:
     auto-changelog: 2.3.0
-    heroku: 7.59.0
+    heroku: 7.59.2
   languageName: unknown
   linkType: soft
 
