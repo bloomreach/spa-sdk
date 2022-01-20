@@ -78,11 +78,19 @@ pipeline {
       }
 
       stages {
+        stage('Fetch tags') {
+          steps {
+            sshagent (credentials: ['a9511950-0b5d-4727-aa82-a0d7f205b1f4']) {
+              sh 'git fetch --tags'
+            }
+          }
+        }
         stage('Publish to Github') {
           steps {
             sshagent (credentials: ['github-spa-sdk']) {
               sh 'git remote add github git@github.com:bloomreach/spa-sdk.git'
-              sh 'git push -u --follow-tags github HEAD:refs/heads/main'
+              sh 'git push github HEAD:refs/heads/main'
+              sh 'git push github "spa-sdk-${VERSION}"'
             }
           }
         }
