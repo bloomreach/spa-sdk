@@ -491,8 +491,8 @@ only be shown in preview mode.
 | Property                    | Required | Description                                                                                     |
 | --------------------------- | :------: | ----------------------------------------------------------------------------------------------- |
 | `brManageContentButton`     |   _no_   | The content entity to open for editing.                                                         |
-| `documentTemplateQuery`     |   _no_   | Template query to use for creating new documents.                                               |
-| `folderTemplateQuery`       |   _no_   | Template query to use in case folders specified by `path` do not yet exist and must be created. |
+| `documentTemplateQuery`     |   _no_   | Template query to use for creating new documents, such as `new-banner-document` for `banner` document type. In case the document type is in a namespace other than `brxsaas`, the key also includes namespace prefix, such as `new-vuestorefront-accordion-document` for `accordion` document type in `vuestorefront` namespace. |
+| `folderTemplateQuery`       |   _no_   | Template query to use in case folders specified by `path` do not yet exist and must be created, such as `new-banner-folder` for `banner` document type. In case the document type is in a namespace other than `brxsaas`, the key also includes namespace prefix, such as `new-vuestorefront-accordion-folder` for `accordion` document type in `vuestorefront` namespace. |
 | `path`                      |   _no_   | Initial location of a new document, relative to the `root`.                                     |
 | `parameter`                 |   _no_   | Name of the component parameter in which the document path is stored.                           |
 | `pickerConfiguration`       |   _no_   | The root path of the CMS configuration to use for the picker, relative to `/hippo:configuration/hippo:frontend/cms`. |
