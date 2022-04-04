@@ -2,7 +2,21 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### [15.4.3](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.4.2...15.4.3)
+#### [15.4.4](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.4.3...15.4.4)
+
+- Resolve SPASDK-109 "Eature/ preview session persistence docs" [`#66`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/66)
+- SPASDK-107 Indicate that the change only applies to Content SaaS [`#62`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/62)
+- SPASDK-107 Describe template query formats in readme doc files [`#61`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/61)
+- SPASDK-109 Describe solution to make persist the preview related data when navigated to the page without SPA SDK [`#SPASDK-109`](https://issues.onehippo.com/browse/SPASDK-109)
+- SPASDK-107 Indicate that the change only applies to Content SaaS [`#SPASDK-107`](https://issues.onehippo.com/browse/SPASDK-107)
+- SPASDK-107 Update template query names to correct ones in vue sdk doc [`#SPASDK-107`](https://issues.onehippo.com/browse/SPASDK-107)
+- SPASDK-107 Describe template query formats in readme doc files [`#SPASDK-107`](https://issues.onehippo.com/browse/SPASDK-107)
+- TRIVIAL Merge branch 'fetch-tags-during-release-pipeline' into 'development' [`4048f73`](https://github.com/bloomreach/spa-sdk/commit/4048f73dce43c1d3f99a6b28533779c52a8839ca)
+- TRIVIAL Fetch all tags before mirroring to the github [`c7373de`](https://github.com/bloomreach/spa-sdk/commit/c7373de3213bf3a396d74efc74e0ad6ed11a07bd)
+
+#### [spa-sdk-15.4.3](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.4.2...spa-sdk-15.4.3)
+
+> 18 January 2022
 
 - SPASDK-82 Release pipeline [`#56`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/56)
 - SPASDK-80 Use origin from URL object instead of modifying incoming url [`#55`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/55)
@@ -13,6 +27,7 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-82 Use heroku from dev dependencies and run deploy via scripts section [`#SPASDK-82`](https://issues.onehippo.com/browse/SPASDK-82)
 - SPASDK-82 Setup release pipeline triggered by merge in main branch [`#SPASDK-82`](https://issues.onehippo.com/browse/SPASDK-82)
 - SPASDK-80 Use origin from URL object instead of modifying incoming url [`#SPASDK-80`](https://issues.onehippo.com/browse/SPASDK-80)
+- TRIVIAL Bumping versions to 15.4.3 [`34b67fa`](https://github.com/bloomreach/spa-sdk/commit/34b67fa6a8144d2d0993d06c77320649ea19e8d0)
 
 #### [spa-sdk-15.4.2](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.4.1...spa-sdk-15.4.2)
 
@@ -322,5 +337,6 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-2 Add exported function "getContainerItemContent" [`#SPASDK-2`](https://issues.onehippo.com/browse/SPASDK-2)
 - SPASDK-1 Bump to use node 14 [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
 - SPASDK-1 Remove maven files and update Jenkinsfile [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
+- SPASDK-1 Initial move from brxm monorepo [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
 - TRIVIAL Set branch name to 'main' in changesetBaseRefs [`4dacdcd`](https://github.com/bloomreach/spa-sdk/commit/4dacdcd2fdb0712e40dcb33b9809ae12786f9ab1)
 - TRIVIAL Skip telemetry check on nuxt startup [`15deb25`](https://github.com/bloomreach/spa-sdk/commit/15deb25b1edde3af3296d4dc34dba1483fe278f2)
