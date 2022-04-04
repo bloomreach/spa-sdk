@@ -1,7 +1,7 @@
 {
   "name": "@bloomreach/example-angular",
   "description": "Example Angular SPA for Bloomreach Experience",
-  "version": "15.4.3",
+  "version": "15.4.4",
   "private": true,
   "scripts": {
     "ng": "ng",
@@ -23,9 +23,9 @@
     "@angular/platform-browser-dynamic": "11.2.14",
     "@angular/platform-server": "11.2.14",
     "@angular/router": "11.2.14",
-    "@bloomreach/ng-sdk": "15.4.3",
+    "@bloomreach/ng-sdk": "15.4.4",
     "@bloomreach/segmentation": "0.0.13",
-    "@bloomreach/spa-sdk": "15.4.3",
+    "@bloomreach/spa-sdk": "15.4.4",
     "@nguniversal/express-engine": "11.2.1",
     "express": "4.17.1",
     "rxjs": "6.6.7",
