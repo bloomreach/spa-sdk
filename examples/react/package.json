@@ -7,7 +7,7 @@
     "@bloomreach/react-sdk": "15.4.4",
     "@bloomreach/segmentation": "0.0.13",
     "@bloomreach/spa-sdk": "15.4.4",
-    "axios": "0.21.1",
+    "axios": "0.26.1",
     "react": "16.14.0",
     "react-dom": "16.14.0",
     "react-router-dom": "5.2.0"
