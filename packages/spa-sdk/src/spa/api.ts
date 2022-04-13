@@ -104,7 +104,7 @@ export interface Api {
 
 @injectable()
 export class ApiImpl implements Api {
-  private static getHeaders(options: ApiOptions): { [k: string]: string | string[] } {
+  private static getHeaders(options: ApiOptions): HttpHeaders {
     const {
       /** @deprecated The cookie header should be ignored when the proxy-based setup is removed. */
       cookie,
@@ -131,7 +131,9 @@ export class ApiImpl implements Api {
       ...(serverId && { [serverIdHeader]: serverId }),
       ...(userAgent && { 'User-Agent': userAgent }),
       ...(visitor && { [visitor.header]: visitor.id }),
-    };
+      // The current cast is required because of the different types of nodejs http.request.headers and axios types,
+      // it might be removed after fixing the following issue: https://github.com/axios/axios/issues/4272
+    } as HttpHeaders;
   }
 
   private headers: HttpHeaders;

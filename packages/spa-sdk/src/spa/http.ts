@@ -19,7 +19,7 @@ import { Visitor } from '../page';
 /**
  * Map of HTTP headers.
  */
-export type HttpHeaders = Partial<Record<string, string | string[]>>;
+export type HttpHeaders = Record<string, string | number | boolean>;
 
 /**
  * Configuration of an HTTP client call.
@@ -90,7 +90,7 @@ export interface HttpRequest {
   /**
    * All request headers (including cookies).
    */
-  headers?: HttpHeaders;
+  headers?: Partial<Record<string, string | string[]>>;
 
   /**
    * The path part of the URL, including a query string if present.
