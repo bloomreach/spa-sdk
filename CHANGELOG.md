@@ -2,7 +2,15 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### [15.4.4](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.4.3...15.4.4)
+#### [15.4.5](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.4.4...15.4.5)
+
+- Resolve SPASDK-110 "Change HttpClient interface to follow the axios api definition" [`#68`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/68)
+- SPASDK-110 Update axios in example apps to the latest version (0.26.1) [`#SPASDK-110`](https://issues.onehippo.com/browse/SPASDK-110)
+- SPASDK-110 Make headers type in `HttpClient` compatible with latest axios (0.26.0) [`#SPASDK-110`](https://issues.onehippo.com/browse/SPASDK-110)
+
+#### [spa-sdk-15.4.4](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.4.3...spa-sdk-15.4.4)
+
+> 4 April 2022
 
 - Resolve SPASDK-109 "Eature/ preview session persistence docs" [`#66`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/66)
 - SPASDK-107 Indicate that the change only applies to Content SaaS [`#62`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/62)
@@ -11,6 +19,7 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-107 Indicate that the change only applies to Content SaaS [`#SPASDK-107`](https://issues.onehippo.com/browse/SPASDK-107)
 - SPASDK-107 Update template query names to correct ones in vue sdk doc [`#SPASDK-107`](https://issues.onehippo.com/browse/SPASDK-107)
 - SPASDK-107 Describe template query formats in readme doc files [`#SPASDK-107`](https://issues.onehippo.com/browse/SPASDK-107)
+- TRIVIAL Bumping versions to 15.4.4 [`2deeb62`](https://github.com/bloomreach/spa-sdk/commit/2deeb623dfb9c666035342a75d9ac7e96461050b)
 - TRIVIAL Merge branch 'fetch-tags-during-release-pipeline' into 'development' [`4048f73`](https://github.com/bloomreach/spa-sdk/commit/4048f73dce43c1d3f99a6b28533779c52a8839ca)
 - TRIVIAL Fetch all tags before mirroring to the github [`c7373de`](https://github.com/bloomreach/spa-sdk/commit/c7373de3213bf3a396d74efc74e0ad6ed11a07bd)
 
@@ -336,7 +345,5 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-2 Log warning for unsupported method "getContentReference" in v0.9 [`#SPASDK-2`](https://issues.onehippo.com/browse/SPASDK-2)
 - SPASDK-2 Add exported function "getContainerItemContent" [`#SPASDK-2`](https://issues.onehippo.com/browse/SPASDK-2)
 - SPASDK-1 Bump to use node 14 [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
-- SPASDK-1 Remove maven files and update Jenkinsfile [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
-- SPASDK-1 Initial move from brxm monorepo [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
 - TRIVIAL Set branch name to 'main' in changesetBaseRefs [`4dacdcd`](https://github.com/bloomreach/spa-sdk/commit/4dacdcd2fdb0712e40dcb33b9809ae12786f9ab1)
 - TRIVIAL Skip telemetry check on nuxt startup [`15deb25`](https://github.com/bloomreach/spa-sdk/commit/15deb25b1edde3af3296d4dc34dba1483fe278f2)
