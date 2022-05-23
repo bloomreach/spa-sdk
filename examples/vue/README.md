@@ -4,8 +4,8 @@ generated with [Vue CLI](https://cli.vuejs.org/).
 
 ## Install and run
 ```bash
-yarn
-yarn serve --port=3000
+npm ci
+npm run serve --port=3000
 ```
 
 ## Available scripts
@@ -13,12 +13,12 @@ In the project directory, you can run:
 
 ### Compiles and hot-reloads for development
 ```bash
-yarn serve
+npm run serve
 ```
 
 ### Compiles and minifies for production
 ```bash
-yarn build
+npm run build
 ```
 
 ### Customize configuration

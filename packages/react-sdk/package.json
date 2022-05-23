@@ -29,7 +29,7 @@
   "scripts": {
     "build": "rollup -c rollup.config.js",
     "lint": "eslint --ext js,ts,tsx src",
-    "prepare": "$npm_execpath run build",
+    "prepack": "$npm_execpath run build",
     "test": "jest --coverage"
   },
   "browserslist": [

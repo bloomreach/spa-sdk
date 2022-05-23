@@ -72,30 +72,28 @@ and the Framework SDK contains:
 
 ## Development
 
-### Yarn workspace
+### Lerna-lite + npm workspaces
 
-Due to the correlated nature of the packages it was decided to choose
-[yarn](https://yarnpkg.com/) as a package manager because of its
-[workspaces](https://yarnpkg.com/features/workspaces) feature.
+This repository uses [npm workspaces](https://docs.npmjs.com/cli/v8/using-npm/workspaces) and
+[lerna-lite](https://github.com/ghiscoding/lerna-lite) to manage its packages and builds.
 
-This yarn workspace configuration is located in the root
-[package.json](./package.json). The workspace actually uses yarn 2 / berry and
-will locally install this yarn version upon running the`yarn` command. You would
-still have a yarn v1 global install to run the commands but yarn will use v2
-when running commands inside the spa-sdk repository.
+This lerna workspace configuration is located in [lerna.json](./lerna.json) and the packages are listed in the root
+[package.json](./package.json).
 
 #### Installation
 
-Installation of the dependencies of all the workspaces is done by running `yarn`
+Installation of the dependencies of all the workspaces is done by running `npm ci`
 in the root of the workspace. This will also symlink all the related packages.
 To have correct compilation of the packages you therefore also need to run the
-`yarn build` command to create the `dist` output of each package that others
+`npm run build` command to create the `dist` output of each package that others
 would depend on.
 
 #### Commands
 
-Its recommended to use the yarn workspace command to run any of the package.json
-scripts in the workspaces. e.g. `yarn workspace @bloomreach/spa-sdk build`
+To run commands in one of the packages while at the root of the workspace you can use the npm `--workspace` flag to run
+any of the package.json scripts, e.g. `npm run build --workspace  @bloomreach/spa-sdk`. You can also use the lerna cli
+to run commands if you require topological ordering such as `npx lerna run build --scope @bloomreach/example-react
+--include-dependencies` which wil build example-react as well as its dependency structure.
 
 The root workspace commands are straightforward and are listed in the
 [package.json](./package.json) scripts property.
@@ -116,7 +114,7 @@ Generally speaking for any kind of development one would:
 * Create an MR of `mybranch` to be merged into `development`
 * Create a test release if it has to be published to `npm` for test purposes
    but use `prerelease` strategy and use `dist-tag` that mentions jira ticket or
-   general effort for easier recognition by running `yarn release prerelease --tag [your Jira issue / effort name]`
+   general effort for easier recognition by running `npm run release -- prerelease --dist-tag [your Jira issue / effort name]`
 * Get reviews & approval
 * After the pipelines are green: merge the MR to `development`
 
@@ -134,7 +132,7 @@ Pre release actions:
 * Check out the `development` branch and make sure your local branch its up to date and the pipeline for `development` is green
 
 Release actions:
-* Run `yarn bump [new version]` in the workspace root to update the versions in all package files
+* Run `npm run bump -- [new version]` in the workspace root to update the versions in all package files
 * Commit these version changes with `git commit -am "[your Jira issue] Bumping versions to [new version]"`
 * Create a new _annotated_ tag on the `development` branch using `git tag -a spa-sdk-[new-version]`
 * Push to `origin` with `git push --follow-tags`

@@ -12,4 +12,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-web yarn workspace @bloomreach/example-next start
+web: npm run start --workspace @bloomreach/example-next
