@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 APP_TYPE=$1;
 APP_NAME=$2;
 APP_VERSION=$3;
