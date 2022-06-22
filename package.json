@@ -27,6 +27,7 @@
     "url": "https://issues.onehippo.com/projects/SPASDK/issues"
   },
   "scripts": {
+    "audit": "lerna exec 'npm audit --omit=dev --audit-level=critical' --no-private --stream",
     "build": "lerna run build",
     "bump": "lerna version --exact --no-push --no-git-tag-version --yes",
     "postbump": "npm version $(node -p -e \"require('./lerna.json').version\") --no-git-tag-version && npm install --legacy-peer-deps --package-lock-only",
@@ -43,6 +44,7 @@
   },
   "devDependencies": {
     "@lerna-lite/cli": "1.5.1",
+    "@lerna-lite/exec": "1.5.1",
     "@lerna-lite/publish": "1.5.1",
     "@lerna-lite/run": "1.5.1",
     "auto-changelog": "2.3.0",
