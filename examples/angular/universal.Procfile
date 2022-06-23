@@ -12,4 +12,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-web: yarn workspace @bloomreach/example-angular start:ssr --prod
+web: npm run start:ssr --workspace @bloomreach/example-angular -- --prod

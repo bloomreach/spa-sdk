@@ -30,7 +30,7 @@
     "build": "rollup -c rollup.config.js",
     "docs": "typedoc",
     "lint": "eslint --ext js,ts src",
-    "prepare": "$npm_execpath run build",
+    "prepack": "$npm_execpath run build",
     "test": "jest --coverage"
   },
   "eslintConfig": {

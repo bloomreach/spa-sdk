@@ -35,6 +35,7 @@ interface BrPageProps {
    * The pre-initialized page instance or prefetched page model.
    * Mostly this property should be used to transfer state from the server-side to the client-side.
    */
+  // eslint-disable-next-line react/require-default-props
   page?: Page | PageModel;
 }
 

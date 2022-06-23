@@ -26,6 +26,7 @@ interface BrComponentProps {
    * relative to the current component (e.g. `main/container`).
    * If it is omitted, all the children will be rendered.
    */
+  // eslint-disable-next-line react/require-default-props
   path?: string;
 }
 

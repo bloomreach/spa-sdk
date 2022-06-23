@@ -5,8 +5,8 @@ generated with [Angular CLI](https://github.com/angular/angular-cli).
 
 ## Install and run
 ```bash
-yarn
-yarn start
+npm ci
+npm run start
 ```
 
 ## Available scripts
@@ -15,21 +15,21 @@ In the project directory, you can run:
 
 ### Development server
 
-Run `yarn start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `npm run start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-For Angular Universal application, you can use `yarn dev:ssr`.
+For Angular Universal application, you can use `npm run dev:ssr`.
 
 ### Code scaffolding
 
-Run `yarn ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
 ### Build
 
-Run `yarn build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Run `npm run build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
 ### Launch
 
-Run `yarn start:ssr` to start Angular Universal application.
+Run `npm run start:ssr` to start Angular Universal application.
 
 ## Requesting & persisting user consent
 Personalization is handled via a separate package [npm package](https://www.npmjs.com/package/@bloomreach/segmentation) such that you can easily exclude it if you don't plan to use it.
