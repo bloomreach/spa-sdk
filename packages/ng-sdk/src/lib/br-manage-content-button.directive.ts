@@ -1,5 +1,5 @@
 /*
- * Copyright 2020-2021 Bloomreach
+ * Copyright 2020-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import { BrMetaDirective } from './br-meta.directive';
 import { BrPageComponent } from './br-page/br-page.component';
 
 /**
- * The button direcrtive that opens for editing a content.
+ * The button directive that opens for editing a content.
  */
 @Directive({ selector: '[brManageContentButton]' })
 export class BrManageContentButtonDirective extends BrMetaDirective implements OnChanges, ManageContentButton {
@@ -35,6 +35,8 @@ export class BrManageContentButtonDirective extends BrMetaDirective implements O
   @Input() parameter?: ManageContentButton['parameter'];
 
   @Input() pickerConfiguration?: ManageContentButton['pickerConfiguration'];
+
+  @Input() pickerEnableUpload?: ManageContentButton['pickerEnableUpload'];
 
   @Input() pickerInitialPath?: ManageContentButton['pickerInitialPath'];
 

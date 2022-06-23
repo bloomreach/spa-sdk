@@ -1,0 +1,13 @@
+{
+  "version": "15.4.6",
+  "npmClient": "npm",
+  "packages": [
+    "examples/*",
+    "packages/*"
+  ],
+  "command": {
+    "version": {
+      "message": "TRIVIAL Bump versions to %v"
+    }
+  }
+}

@@ -1,8 +1,10 @@
 #!/bin/bash
 
-APP_TYPE=$1;
-APP_NAME=$2;
-APP_VERSION=$3;
+set -e
+
+APP_TYPE=$2;
+APP_NAME=$3;
+APP_VERSION=$4;
 NAME="${APP_NAME}-${APP_TYPE}-${APP_VERSION}";
 
 if [[ $APP_NAME = "ng" ]]
@@ -24,6 +26,9 @@ fi
 
 echo "Deploying ${NAME} app using path ${APP_PATH}";
 echo '-----------------------------------------------------------------------------'
+
+heroku plugins:install buildpack-registry
+heroku plugins:install buildpacks
 
 # Common heroku settup for both ssr and csr apps
 heroku apps:destroy --app=$NAME --confirm $NAME

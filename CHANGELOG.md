@@ -2,11 +2,27 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### [15.4.5](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.4.4...15.4.5)
+#### [15.4.6](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.4.5...15.4.6)
+
+- SPASDK-36 Lerna setup and audit scripts [`#74`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/74)
+- CICD-181: Immediately fail script if any command fails [`#73`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/73)
+- Add "pickerEnableUpload" to ng and vue sdk + add documentation [`#72`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/72)
+- SPASDK-114 Add pickerEnableUpload option to manage-content-btn [`#70`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/70)
+- SPASDK-36 Enable auditing of just the SDK packages [`#SPASDK-36`](https://issues.onehippo.com/browse/SPASDK-36)
+- SPASDK-36 Switch from using yarn to lerna-lite + npm workspaces [`#SPASDK-36`](https://issues.onehippo.com/browse/SPASDK-36)
+- CICD-181: Immediately fail script if any command fails [`#CICD-181`](https://issues.onehippo.com/browse/CICD-181)
+- SPASDK-114 Add documentation about ManageContentButton.pickerEnableUpload [`#SPASDK-114`](https://issues.onehippo.com/browse/SPASDK-114)
+- SPASDK-114 Add ManageContentButton.pickerEnableUpload to ng-sdk and vue-sdk [`#SPASDK-114`](https://issues.onehippo.com/browse/SPASDK-114)
+- SPASDK-114 Add pickerEnableUpload option to manage-content-btn [`#SPASDK-114`](https://issues.onehippo.com/browse/SPASDK-114)
+
+#### [spa-sdk-15.4.5](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.4.4...spa-sdk-15.4.5)
+
+> 13 April 2022
 
 - Resolve SPASDK-110 "Change HttpClient interface to follow the axios api definition" [`#68`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/68)
 - SPASDK-110 Update axios in example apps to the latest version (0.26.1) [`#SPASDK-110`](https://issues.onehippo.com/browse/SPASDK-110)
 - SPASDK-110 Make headers type in `HttpClient` compatible with latest axios (0.26.0) [`#SPASDK-110`](https://issues.onehippo.com/browse/SPASDK-110)
+- TRIVIAL Bumping versions to 15.4.5 [`bccf5b4`](https://github.com/bloomreach/spa-sdk/commit/bccf5b4778e5d729ce8b23a861e3b9b302aad57f)
 
 #### [spa-sdk-15.4.4](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.4.3...spa-sdk-15.4.4)
 
@@ -345,5 +361,7 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-2 Log warning for unsupported method "getContentReference" in v0.9 [`#SPASDK-2`](https://issues.onehippo.com/browse/SPASDK-2)
 - SPASDK-2 Add exported function "getContainerItemContent" [`#SPASDK-2`](https://issues.onehippo.com/browse/SPASDK-2)
 - SPASDK-1 Bump to use node 14 [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
+- SPASDK-1 Remove maven files and update Jenkinsfile [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
+- SPASDK-1 Initial move from brxm monorepo [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
 - TRIVIAL Set branch name to 'main' in changesetBaseRefs [`4dacdcd`](https://github.com/bloomreach/spa-sdk/commit/4dacdcd2fdb0712e40dcb33b9809ae12786f9ab1)
 - TRIVIAL Skip telemetry check on nuxt startup [`15deb25`](https://github.com/bloomreach/spa-sdk/commit/15deb25b1edde3af3296d4dc34dba1483fe278f2)

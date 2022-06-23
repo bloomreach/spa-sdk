@@ -1,5 +1,5 @@
 /*
- * Copyright 2020-2021 Bloomreach
+ * Copyright 2020-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -67,6 +67,11 @@ export interface ManageContentButton {
   pickerConfiguration?: string;
 
   /**
+   * When this picker is used for images, this flag determines if uploads are enabled
+   */
+  pickerEnableUpload?: boolean;
+
+  /**
    * The initial path to use in the picker if nothing has been selected yet, relative to the pickerRootPath.
    * Default value: "" (empty string).
    */
@@ -98,6 +103,7 @@ export function createManageContentButton(params: ManageContentButton): MetaColl
     ['rootPath', params.root],
     ['parameterName', params.parameter],
     ['parameterValueIsRelativePath', params.relative ? 'true' : undefined],
+    ['pickerEnableUpload', params.pickerEnableUpload],
     ['pickerConfiguration', params.pickerConfiguration],
     ['pickerInitialPath', params.pickerInitialPath],
     ['pickerRemembersLastVisited', params.pickerRemembersLastVisited ? 'true' : undefined],

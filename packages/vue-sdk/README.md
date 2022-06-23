@@ -510,6 +510,7 @@ only be shown in preview mode.
 | `path`                      |   _no_   | Initial location of a new document, relative to the `root`.                                     |
 | `parameter`                 |   _no_   | Name of the component parameter in which the document path is stored.                           |
 | `pickerConfiguration`       |   _no_   | The root path of the CMS configuration to use for the picker, relative to `/hippo:configuration/hippo:frontend/cms`. |
+| `pickerEnableUpload`        |   _no_   | When this picker is used for images, this flag determines if uploads are enabled.               |
 | `pickerInitialPath`         |   _no_   | The initial path to use in the picker if nothing has been selected yet, relative to the pickerRootPath. |
 | `pickerRemembersLastVisited`|   _no_   | Whether the picker remembers the last visited path.                                             |
 | `pickerRootPath`            |   _no_   | The absolute root path to use in the picker, or an empty string if the channel content path is used. |

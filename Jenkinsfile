@@ -18,7 +18,7 @@ pipeline {
   agent {
     docker {
       label 'docker'
-      image 'node:14'
+      image 'node:16'
       args '-v  /etc/passwd:/etc/passwd'
     }
   }
@@ -49,22 +49,22 @@ pipeline {
   stages {
     stage('Install') {
       steps {
-        sh 'yarn install'
+        sh 'npm ci'
       }
     }
     stage('Build') {
       steps {
-        sh 'yarn build'
+        sh 'npm run build'
       }
     }
     stage('Lint') {
       steps {
-        sh 'yarn lint'
+        sh 'npm run lint'
       }
     }
     stage('Unit tests') {
       steps {
-        sh 'yarn test'
+        sh 'npm run test'
       }
     }
     stage('Release') {
@@ -104,7 +104,7 @@ pipeline {
           stages {
             stage('Generate SPA SDK TypeDoc') {
               steps {
-                sh 'yarn workspace @bloomreach/spa-sdk docs'
+                sh 'npm run docs --workspace @bloomreach/spa-sdk'
               }
             }
             stage('Clone github pages with TypeDoc') {
@@ -138,8 +138,9 @@ pipeline {
         }
         stage('Publish to NPM') {
           steps {
-            withCredentials([[$class: 'StringBinding', credentialsId: 'NPM_AUTH_TOKEN', variable: 'YARN_NPM_AUTH_TOKEN']]) {
-              sh 'yarn release'
+            withCredentials([[$class: 'StringBinding', credentialsId: 'NPM_AUTH_TOKEN', variable: 'NPM_AUTH_TOKEN']]) {
+              sh 'echo "//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}" >> ~/.npmrc'
+              sh 'npm run release -- --yes'
             }
           }
         }
@@ -167,7 +168,7 @@ pipeline {
                   stage('Deploy app') {
                     steps {
                       withCredentials([[$class: 'StringBinding', credentialsId: 'HEROKU_API_KEY', variable: 'HEROKU_API_KEY']]) {
-                        sh 'yarn run deploy-to-heroku "${APP_TYPE}" "${APP_NAME}" "${VERSION_FOR_HEROKU}"'
+                        sh 'npm run deploy-to-heroku "${APP_TYPE}" "${APP_NAME}" "${VERSION_FOR_HEROKU}"'
                       }
                     }
                   }
