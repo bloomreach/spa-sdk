@@ -1,5 +1,5 @@
 {
-  "version": "15.4.6",
+  "version": "15.5.0",
   "npmClient": "npm",
   "packages": [
     "examples/*",

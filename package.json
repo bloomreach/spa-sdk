@@ -1,6 +1,6 @@
 {
   "private": true,
-  "version": "15.4.6",
+  "version": "15.5.0",
   "description": "Bloomreach SPA SDK",
   "name": "spa-sdk-workspace",
   "keywords": [
@@ -29,7 +29,7 @@
   "scripts": {
     "audit": "lerna exec 'npm audit --omit=dev --audit-level=critical' --no-private --stream",
     "build": "lerna run build",
-    "bump": "lerna version --exact --no-push --no-git-tag-version --yes",
+    "bump": "lerna version --exact --no-push --no-git-tag-version --yes --force-publish",
     "postbump": "npm version $(node -p -e \"require('./lerna.json').version\") --no-git-tag-version && npm install --legacy-peer-deps --package-lock-only",
     "changelog": "auto-changelog",
     "docs": "lerna run docs",
