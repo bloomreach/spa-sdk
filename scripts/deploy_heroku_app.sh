@@ -31,7 +31,7 @@ heroku plugins:install buildpack-registry
 heroku plugins:install buildpacks
 
 # Common heroku settup for both ssr and csr apps
-heroku apps:destroy --app=$NAME --confirm $NAME
+heroku apps:destroy --app=$NAME --confirm $NAME || true
 heroku apps:create --app=$NAME --team=$HEROKU_TEAM
 
 heroku buildpacks:set --app=$NAME heroku/nodejs
