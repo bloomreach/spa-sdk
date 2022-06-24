@@ -1,5 +1,5 @@
 {
-  "version": "15.4.7-react17",
+  "version": "15.5.0",
   "npmClient": "npm",
   "packages": [
     "examples/*",
