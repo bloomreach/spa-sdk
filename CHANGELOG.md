@@ -2,12 +2,25 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### [15.4.6](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.4.5...15.4.6)
+#### [15.5.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.4.6...15.5.0)
+
+- SPASDK-104 Allow react 17 to be used [`#77`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/77)
+- SPASDK-118 Generate changelog after version bump [`#SPASDK-118`](https://issues.onehippo.com/browse/SPASDK-118)
+- SPASDK-118 Bumping versions to 15.5.0 [`#SPASDK-118`](https://issues.onehippo.com/browse/SPASDK-118)
+- SPASDK-118 Do not exit execution when apps do not exit yet [`#SPASDK-118`](https://issues.onehippo.com/browse/SPASDK-118)
+- SPASDK-118 Always bump all versions of packages at the same time [`#SPASDK-118`](https://issues.onehippo.com/browse/SPASDK-118)
+- SPASDK-104 Bump versions to test react 17 [`#SPASDK-104`](https://issues.onehippo.com/browse/SPASDK-104)
+- SPASDK-104 Allow react 17 to be used [`#SPASDK-104`](https://issues.onehippo.com/browse/SPASDK-104)
+
+#### [spa-sdk-15.4.6](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.4.5...spa-sdk-15.4.6)
+
+> 23 June 2022
 
 - SPASDK-36 Lerna setup and audit scripts [`#74`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/74)
 - CICD-181: Immediately fail script if any command fails [`#73`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/73)
 - Add "pickerEnableUpload" to ng and vue sdk + add documentation [`#72`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/72)
 - SPASDK-114 Add pickerEnableUpload option to manage-content-btn [`#70`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/70)
+- SPASDK-116 Bumping versions to 15.4.6 [`#SPASDK-116`](https://issues.onehippo.com/browse/SPASDK-116)
 - SPASDK-36 Enable auditing of just the SDK packages [`#SPASDK-36`](https://issues.onehippo.com/browse/SPASDK-36)
 - SPASDK-36 Switch from using yarn to lerna-lite + npm workspaces [`#SPASDK-36`](https://issues.onehippo.com/browse/SPASDK-36)
 - CICD-181: Immediately fail script if any command fails [`#CICD-181`](https://issues.onehippo.com/browse/CICD-181)
