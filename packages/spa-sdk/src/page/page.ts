@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 Bloomreach
+ * Copyright 2019-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -74,6 +74,11 @@ interface PageRootModel {
  * Meta-data of a page.
  */
 interface PageMeta {
+  /**
+   * The page locale, e.g. en_US, nl_NL, etc
+   */
+  locale?: string;
+
   /**
    * The current Page Model version.
    */
@@ -169,6 +174,11 @@ export interface Page {
    * This option is available only along with the Experience Pages feature.
    */
   getDocument<T>(): T | undefined;
+
+  /**
+   * The page locale, defaults to en_US.
+   */
+  getLocale(): string;
 
   /**
    * Generates a meta-data collection from the provided meta-data model.
@@ -319,6 +329,10 @@ export class PageImpl implements Page {
 
   getDocument<T>(): T | undefined {
     return this.model.document && this.getContent(this.model.document);
+  }
+
+  getLocale(): string {
+    return this.model.meta.locale || 'en_US';
   }
 
   getMeta(meta: MetaCollectionModel): MetaCollection {
