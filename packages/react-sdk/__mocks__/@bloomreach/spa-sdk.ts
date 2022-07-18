@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 Bloomreach
+ * Copyright 2019-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,6 +34,7 @@ const page = new class implements Page {
   getComponent = jest.fn(() => component);
   getContent = jest.fn();
   getDocument = jest.fn();
+  getLocale = jest.fn();
   getMeta = jest.fn();
   getTitle = jest.fn();
   getUrl = jest.fn();
