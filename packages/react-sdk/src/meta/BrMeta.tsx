@@ -18,7 +18,7 @@ import React, { useEffect, useRef } from 'react';
 import { MetaCollection } from '@bloomreach/spa-sdk';
 
 interface BrMetaProps {
-  meta: MetaCollection;
+  meta?: MetaCollection;
 }
 
 export function BrMeta({ children, meta }: React.PropsWithChildren<BrMetaProps>): JSX.Element {
@@ -30,15 +30,15 @@ export function BrMeta({ children, meta }: React.PropsWithChildren<BrMetaProps>)
       return undefined;
     }
 
-    return meta.render(head.current.nextSibling, tail.current);
+    return meta?.render(head.current.nextSibling, tail.current);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [meta, head.current?.nextSibling, tail.current]);
 
   return (
     <>
-      {meta.length > 0 && <span style={{ display: 'none' }} ref={head} />}
+      {meta && meta.length > 0 && <span style={{ display: 'none' }} ref={head} />}
       {children}
-      {meta.length > 0 && <span style={{ display: 'none' }} ref={tail} />}
+      {meta && meta.length > 0 && <span style={{ display: 'none' }} ref={tail} />}
     </>
   );
 }

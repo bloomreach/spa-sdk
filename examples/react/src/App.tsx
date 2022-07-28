@@ -35,11 +35,13 @@ export default function App({ location }: RouteComponentProps): JSX.Element {
         <nav className="navbar navbar-expand-sm navbar-dark sticky-top bg-dark" role="navigation">
           <div className="container">
             <BrPageContext.Consumer>
-              {(page) => (
-                <Link to={page!.getUrl('/')} className="navbar-brand">
-                  {page!.getTitle() || 'brXM + React = ♥️'}
-                </Link>
-              )}
+              {(page) =>
+                page && (
+                  <Link to={page!.getUrl('/')} className="navbar-brand">
+                    {page!.getTitle() || 'brXM + React = ♥️'}
+                  </Link>
+                  // eslint-disable-next-line prettier/prettier
+                )}
             </BrPageContext.Consumer>
             <div className="collapse navbar-collapse">
               <BrComponent path="menu">

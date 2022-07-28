@@ -19,6 +19,18 @@ import { CmsOptions, PostMessageOptions } from './cms';
 import { UrlBuilderOptions09, UrlBuilderOptions } from './url';
 
 /**
+ * Configuration options for configuring behavior of the SDK.
+ */
+export interface SDKOptions {
+  /**
+   * The NBRMode parameter used to indicate whether the children of the BrPage component should be rendered
+   * immediatly or wait with rendering until the Page model has been retrieved and parsed.
+   * By default, the option is `false`.
+   */
+  NBRMode?: boolean;
+}
+
+/**
  * Configuration options for generating the page model URL.
  */
 export interface UrlOptions {
@@ -36,7 +48,7 @@ export interface UrlOptions {
 /**
  * Configuration of the SPA SDK using reverse proxy-based setup.
  */
-export interface ConfigurationWithProxy extends ApiOptions, CmsOptions {
+export interface ConfigurationWithProxy extends ApiOptions, CmsOptions, SDKOptions {
   /**
    * Options for generating the page model API URL.
    */
@@ -57,7 +69,7 @@ export interface ConfigurationWithProxy extends ApiOptions, CmsOptions {
 /**
  * Configuration of the SPA SDK using the JWT token-based setup.
  */
-export interface ConfigurationWithJwt extends ApiOptions, CmsOptions, PostMessageOptions {
+export interface ConfigurationWithJwt extends ApiOptions, CmsOptions, PostMessageOptions, SDKOptions {
   /**
    * The query string parameter used to pass authorization header value.
    * By default, `token` parameter is used.

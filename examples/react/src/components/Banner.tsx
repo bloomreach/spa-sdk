@@ -20,10 +20,10 @@ import { Document, ImageSet } from '@bloomreach/spa-sdk';
 import { BrManageContentButton, BrProps } from '@bloomreach/react-sdk';
 
 export function Banner({ component, page }: BrProps): JSX.Element | null {
-  const { document: documentRef } = component.getModels();
-  const document = !!documentRef && page.getContent(documentRef);
+  const documentRef = component?.getModels().document;
+  const document = !!documentRef && page?.getContent(documentRef);
 
-  if (!document) {
+  if (!document || !page) {
     return null;
   }
 

@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-import React from 'react';
 import { Component } from '@bloomreach/spa-sdk';
-import { BrProps } from './BrProps';
-import { BrMappingContext } from './BrMappingContext';
+import React from 'react';
 import { BrMeta } from '../meta';
+import { BrMappingContext } from './BrMappingContext';
+import { BrProps } from './BrProps';
 
 export class BrNodeComponent<T extends Component> extends React.Component<BrProps<T>> {
   static contextType = BrMappingContext;
@@ -26,12 +26,12 @@ export class BrNodeComponent<T extends Component> extends React.Component<BrProp
   context!: React.ContextType<typeof BrMappingContext>;
 
   protected getMapping(): React.ComponentType<BrProps> | undefined {
-    return this.context[this.props.component.getName()] as React.ComponentType<BrProps>;
+    return this.props.component && (this.context[this.props.component.getName()] as React.ComponentType<BrProps>);
   }
 
   render(): React.ReactNode {
     const mapping = this.getMapping();
-    const meta = this.props.component.getMeta();
+    const meta = this.props.component?.getMeta();
 
     const children = mapping ? React.createElement(mapping, this.props) : this.props.children;
 

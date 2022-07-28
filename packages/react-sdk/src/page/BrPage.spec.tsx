@@ -121,10 +121,43 @@ describe('BrPage', () => {
   });
 
   describe('render', () => {
-    it('should render nothing if there is no page', () => {
-      wrapper.setState({ page: undefined });
+    it('should render children', () => {
+      expect(wrapper.contains(children)).toBe(true);
+    });
 
-      expect(wrapper.isEmptyRender()).toBe(true);
+    it('should not render children if there is no page and NBR mode is false', () => {
+      const shallowWrapper = shallow(
+        <BrPage configuration={{ ...config, NBRMode: false }} mapping={mapping}>
+          {children}
+        </BrPage>,
+      );
+      shallowWrapper.setState({ page: undefined });
+
+      expect(shallowWrapper.contains(children)).toBe(false);
+    });
+
+    it('should render children if there is no page and NBR mode is true', () => {
+      const shallowWrapper = shallow(
+        <BrPage configuration={{ ...config, NBRMode: true }} mapping={mapping}>
+          {children}
+        </BrPage>,
+      );
+      shallowWrapper.setState({ page: undefined });
+
+      expect(shallowWrapper.contains(children)).toBe(true);
+    });
+
+    it('should mount children if there is no page and NBR mode is true', () => {});
+
+    it('should keep children mounted as page becomes available if there is no page and NBR mode is true', () => {});
+
+    it('should render BrPageContext.provider', () => {
+      const page = wrapper.state('page')!;
+      expect(wrapper.find('ContextProvider').first().prop('value')).toEqual(page);
+    });
+
+    it('should render BrMappingContext.provider', () => {
+      expect(wrapper.find('ContextProvider').last().prop('value')).toEqual(mapping);
     });
 
     it('should render nothing if there is an error loading the page', async () => {
@@ -140,25 +173,12 @@ describe('BrPage', () => {
       expect(setState.mock.calls[0][0]).toThrowError(error);
     });
 
-    it('should render BrPageContext.provider', () => {
-      const page = wrapper.state('page')!;
-      expect(wrapper.find('ContextProvider').first().prop('value')).toEqual(page);
-    });
-
-    it('should render BrMappingContext.provider', () => {
-      expect(wrapper.find('ContextProvider').last().prop('value')).toEqual(mapping);
-    });
-
     it('should render root component', () => {
       const node = wrapper.find(BrNode);
       const root = wrapper.state('page')!.getComponent();
 
       expect(node.exists()).toBe(true);
       expect(node.prop('component')).toBe(root);
-    });
-
-    it('should render children', () => {
-      expect(wrapper.contains(children)).toBe(true);
     });
   });
 });

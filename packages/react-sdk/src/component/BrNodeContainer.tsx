@@ -33,7 +33,7 @@ import {
 
 export class BrNodeContainer extends BrNodeComponent<Container> {
   protected getMapping(): React.ComponentType<BrProps> {
-    const type = this.props.component.getType();
+    const type = this.props.component?.getType();
 
     if (type && type in this.context) {
       return this.context[type] as React.ComponentType<BrProps>;

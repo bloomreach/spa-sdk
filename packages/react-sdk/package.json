@@ -73,6 +73,9 @@
   },
   "eslintConfig": {
     "extends": "@bloomreach/eslint-config-react",
+    "rules": {
+      "react/require-default-props": "off"
+    },
     "overrides": [
       {
         "files": "*.spec.tsx",

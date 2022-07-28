@@ -23,10 +23,10 @@ export interface BrProps<T extends Component = Component> {
   /**
    * The mapped component.
    */
-  component: T;
+  component?: T;
 
   /**
    * The current page.
    */
-  page: Page;
+  page?: Page;
 }
