@@ -27,6 +27,7 @@
   ],
   "scripts": {
     "build": "vue-cli-service build --filename index --formats commonjs,umd --name BloomreachVueSdk --target lib src/main.ts",
+    "dev": "npm run build -- --watch",
     "lint": "vue-cli-service lint --no-fix",
     "prepack": "$npm_execpath run build",
     "test": "vue-cli-service test:unit --coverage"
