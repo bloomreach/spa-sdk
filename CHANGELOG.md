@@ -2,15 +2,40 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### [15.5.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.4.6...15.5.0)
+#### [v16.0.0-alpha.0](https://github.com/bloomreach/spa-sdk/compare/v15.5.1...v16.0.0-alpha.0)
+
+- SPASDK-123 Add getLocale to Page object [`#81`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/81)
+- SPASDK-119 Improve heroku deploy speed by using lerna filter flags [`#80`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/80)
+- SPASDK-124 Optionally provide the heroku app name as arg [`#SPASDK-124`](https://issues.onehippo.com/browse/SPASDK-124)
+- SPASDK-124 Allow delay in page and component context instantiation [`#SPASDK-124`](https://issues.onehippo.com/browse/SPASDK-124)
+- SPASDK-124 Add 'dev' script to all packages for easy development start [`#SPASDK-124`](https://issues.onehippo.com/browse/SPASDK-124)
+- SPASDK-123 Add getLocale to Page object [`#SPASDK-123`](https://issues.onehippo.com/browse/SPASDK-123)
+- SPASDK-119 Improve heroku deploy speed by using lerna filter flags [`#SPASDK-119`](https://issues.onehippo.com/browse/SPASDK-119)
+
+#### [v15.5.1](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.5.0...v15.5.1)
+
+> 24 June 2022
+
+- TRIVIAL Bump versions to 15.5.1 [`94d2699`](https://github.com/bloomreach/spa-sdk/commit/94d26991ce5e8d4f2916aa6756b0c927b721a25e)
+
+#### [spa-sdk-15.5.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.4.6...spa-sdk-15.5.0)
+
+> 24 June 2022
 
 - SPASDK-104 Allow react 17 to be used [`#77`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/77)
+- SPASDK-118 Add changelog for 15.5.0 [`#SPASDK-118`](https://issues.onehippo.com/browse/SPASDK-118)
+- SPASDK-118 Generate changelog for 15.5.0 [`#SPASDK-118`](https://issues.onehippo.com/browse/SPASDK-118)
 - SPASDK-118 Generate changelog after version bump [`#SPASDK-118`](https://issues.onehippo.com/browse/SPASDK-118)
+- SPASDK-118 Release 15.5.0 [`#SPASDK-118`](https://issues.onehippo.com/browse/SPASDK-118)
 - SPASDK-118 Bumping versions to 15.5.0 [`#SPASDK-118`](https://issues.onehippo.com/browse/SPASDK-118)
 - SPASDK-118 Do not exit execution when apps do not exit yet [`#SPASDK-118`](https://issues.onehippo.com/browse/SPASDK-118)
 - SPASDK-118 Always bump all versions of packages at the same time [`#SPASDK-118`](https://issues.onehippo.com/browse/SPASDK-118)
 - SPASDK-104 Bump versions to test react 17 [`#SPASDK-104`](https://issues.onehippo.com/browse/SPASDK-104)
 - SPASDK-104 Allow react 17 to be used [`#SPASDK-104`](https://issues.onehippo.com/browse/SPASDK-104)
+- SPASDK-116 Release 15.4.6 [`#SPASDK-116`](https://issues.onehippo.com/browse/SPASDK-116)
+- TRIVIAL Merge branch 'development' into 'main' [`bd4ba15`](https://github.com/bloomreach/spa-sdk/commit/bd4ba15a2d771d208db3f7a0f88773b2384cc4d2)
+- TRIVIAL Merge branch 'development' into 'main' [`a540e23`](https://github.com/bloomreach/spa-sdk/commit/a540e23ddc5ee23d8dc82c60d969b1039dc656f9)
+- TRIVIAL Merge branch 'development' into 'main' [`3d91af7`](https://github.com/bloomreach/spa-sdk/commit/3d91af742fcb528c062fc2fd284e10611469dd91)
 
 #### [spa-sdk-15.4.6](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.4.5...spa-sdk-15.4.6)
 
@@ -374,7 +399,5 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-2 Log warning for unsupported method "getContentReference" in v0.9 [`#SPASDK-2`](https://issues.onehippo.com/browse/SPASDK-2)
 - SPASDK-2 Add exported function "getContainerItemContent" [`#SPASDK-2`](https://issues.onehippo.com/browse/SPASDK-2)
 - SPASDK-1 Bump to use node 14 [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
-- SPASDK-1 Remove maven files and update Jenkinsfile [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
-- SPASDK-1 Initial move from brxm monorepo [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
 - TRIVIAL Set branch name to 'main' in changesetBaseRefs [`4dacdcd`](https://github.com/bloomreach/spa-sdk/commit/4dacdcd2fdb0712e40dcb33b9809ae12786f9ab1)
 - TRIVIAL Skip telemetry check on nuxt startup [`15deb25`](https://github.com/bloomreach/spa-sdk/commit/15deb25b1edde3af3296d4dc34dba1483fe278f2)
