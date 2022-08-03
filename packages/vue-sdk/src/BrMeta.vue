@@ -21,7 +21,7 @@ import { Fragment } from 'vue-fragment';
 
 @Component
 export default class BrMeta extends Vue {
-  @Prop() meta!: MetaCollection;
+  @Prop() meta?: MetaCollection;
 
   private clear?: ReturnType<MetaCollection['render']>;
 
@@ -42,7 +42,7 @@ export default class BrMeta extends Vue {
   }
 
   private inject() {
-    this.clear = this.$vnode.elm && this.meta.render(this.$vnode.elm, this.$vnode.elm);
+    this.clear = this.$vnode.elm && this.meta?.render(this.$vnode.elm, this.$vnode.elm);
   }
 
   @Watch('meta', { deep: false })

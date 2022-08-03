@@ -18,30 +18,32 @@
   <div id="app" class="d-flex flex-column vh-100">
     <br-page :configuration="configuration" :mapping="mapping">
       <template v-slot:default="props">
-        <header>
-          <nav class="navbar navbar-expand-sm navbar-dark sticky-top bg-dark" role="navigation">
-            <div class="container">
-              <router-link :to="props.page.getUrl('/')" class="navbar-brand">
-                {{ props.page.getTitle() || 'brXM + Vue.js = ♥' }}
-              </router-link>
-              <div class="collapse navbar-collapse">
-                <br-component component="menu" />
+        <template v-if="props.page">
+          <header>
+            <nav class="navbar navbar-expand-sm navbar-dark sticky-top bg-dark" role="navigation">
+              <div class="container">
+                <router-link :to="props.page.getUrl('/')" class="navbar-brand">
+                  {{ props.page.getTitle() || 'brXM + Vue.js = ♥' }}
+                </router-link>
+                <div class="collapse navbar-collapse">
+                  <br-component component="menu" />
+                </div>
+              </div>
+            </nav>
+          </header>
+          <section class="container flex-fill pt-3">
+            <br-component component="main" />
+          </section>
+          <footer class="bg-dark text-light py-3">
+            <div class="container clearfix">
+              <div class="float-left pr-3">&copy; Bloomreach</div>
+              <div class="overflow-hidden">
+                <br-component component="footer" />
               </div>
             </div>
-          </nav>
-        </header>
-        <section class="container flex-fill pt-3">
-          <br-component component="main" />
-        </section>
-        <footer class="bg-dark text-light py-3">
-          <div class="container clearfix">
-            <div class="float-left pr-3">&copy; Bloomreach</div>
-            <div class="overflow-hidden">
-              <br-component component="footer" />
-            </div>
-          </div>
-        </footer>
-        <br-cookie-consent :isPreview="props.page.isPreview()" :path="configuration.path"></br-cookie-consent>
+          </footer>
+          <br-cookie-consent :isPreview="props.page.isPreview()" :path="configuration.path"></br-cookie-consent>
+        </template>
       </template>
     </br-page>
   </div>

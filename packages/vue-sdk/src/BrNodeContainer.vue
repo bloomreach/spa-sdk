@@ -83,13 +83,13 @@ import BrContainerUnorderedList from './BrContainerUnorderedList.vue';
   },
   computed: {
     component(this: BrNodeContainer) {
-      return this.component$();
+      return this.component$?.();
     },
     mapping(this: BrNodeContainer) {
       return this.mapping$();
     },
     page(this: BrNodeContainer) {
-      return this.page$();
+      return this.page$?.();
     },
   },
   data: () => ({
@@ -100,10 +100,10 @@ import BrContainerUnorderedList from './BrContainerUnorderedList.vue';
   }),
 })
 export default class BrNodeContainer extends Vue {
-  @Inject() private component$!: () => Container;
+  @Inject() private component$?: () => Container;
 
   @Inject() private mapping$!: () => Record<string, Vue.Component>;
 
-  @Inject() private page$!: () => Page;
+  @Inject() private page$?: () => Page;
 }
 </script>

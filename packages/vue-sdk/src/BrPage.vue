@@ -15,7 +15,7 @@
   -->
 
 <template>
-  <br-node-component v-if="state" :component="root">
+  <br-node-component v-if="state || configuration.NBRMode" :component="root">
     <slot :component="root" :page="state" />
   </br-node-component>
 </template>

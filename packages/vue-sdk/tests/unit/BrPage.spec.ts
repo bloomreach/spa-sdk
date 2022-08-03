@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
+import { Component, Configuration, destroy, initialize, Page, PageModel } from '@bloomreach/spa-sdk';
+import { mount, shallowMount } from '@vue/test-utils';
 import { mocked } from 'ts-jest/utils';
-import { shallowMount } from '@vue/test-utils';
-import { Component, Configuration, PageModel, Page, destroy, initialize } from '@bloomreach/spa-sdk';
+import { Component as VueComponent, Vue } from 'vue-property-decorator';
 import BrPage from '@/BrPage.vue';
 
 jest.mock('@bloomreach/spa-sdk');
@@ -32,15 +33,82 @@ describe('BrPage', () => {
   });
 
   afterEach(() => {
+    jest.useRealTimers();
     jest.resetAllMocks();
   });
 
   describe('update', () => {
-    it('should render nothing if the page was not initialized', async () => {
-      const wrapper = shallowMount(BrPage);
+    it('should render nothing if the page was not initialized and NBR mode is false', async () => {
+      const configuration = {
+        NBRMode: false,
+      } as Configuration;
+      const wrapper = shallowMount(BrPage, { propsData: { configuration } });
       await new Promise(process.nextTick);
 
       expect(wrapper.html()).toEqual('');
+    });
+
+    it('should render the children components if the page was not initialized and NBR mode is true', async () => {
+      const configuration = {
+        NBRMode: true,
+      } as Configuration;
+      const wrapper = shallowMount(BrPage, { propsData: { configuration } });
+      await new Promise(process.nextTick);
+
+      expect(wrapper.html()).not.toEqual('');
+    });
+
+    it('should run child component effects while retrieving Page model when NBR mode is true', () => {
+      jest.useFakeTimers();
+
+      const initializeDone = jest.fn();
+      const someEffect = jest.fn();
+
+      mocked(initialize).mockClear();
+      mocked(initialize).mockImplementationOnce(async () => {
+        setTimeout(initializeDone, 1000);
+        return page;
+      });
+
+      const configuration = {
+        NBRMode: true,
+      } as Configuration;
+
+      const MyComponent = {
+        mounted() {
+          someEffect();
+        },
+        template: '<div>Hello world</div>',
+      };
+
+      @VueComponent({
+        name: 'wrapper-component',
+        components: { BrPage, MyComponent },
+        data() {
+          return {
+            configuration,
+            mapping: {},
+          };
+        },
+        template: `
+          <br-page :configuration="configuration" :mapping="mapping">
+          <template v-slot:default="props">
+            <my-component></my-component>
+          </template>
+          </br-page>
+        `,
+      })
+      class WrapperComponent extends Vue {}
+
+      mount(WrapperComponent);
+
+      jest.runAllTimers();
+      const someEffectOrder = someEffect.mock.invocationCallOrder[0];
+      const initializeDoneOrder = initializeDone.mock.invocationCallOrder[0];
+
+      expect(someEffect).toHaveBeenCalled();
+      expect(initializeDone).toHaveBeenCalled();
+      expect(someEffectOrder).toBeLessThan(initializeDoneOrder);
     });
 
     it('should fetch a page model', async () => {

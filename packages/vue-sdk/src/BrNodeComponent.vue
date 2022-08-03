@@ -15,32 +15,32 @@
   -->
 
 <template>
-  <br-meta :meta="component.getMeta()">
+  <br-meta :meta="meta">
     <slot>
       <br-node-container-item v-if="isContainerItem(component)" />
 
       <br-node-container v-else-if="isContainer(component)">
-        <br-node-component v-for="(component, key) in component.getChildren()" :key="key" :component="component" />
+        <br-node-component v-for="(component, key) in children" :key="key" :component="component" />
       </br-node-container>
 
       <component
-        v-else-if="component.getName() in mapping"
-        :is="mapping[component.getName()]"
+        v-else-if="name in mapping"
+        :is="mapping[name]"
         :component="component"
         :page="page"
       />
 
-      <br-node-component v-else v-for="(component, key) in component.getChildren()" :key="key" :component="component" />
+      <br-node-component v-else v-for="(component, key) in children" :key="key" :component="component" />
     </slot>
   </br-meta>
 </template>
 
 <script lang="ts">
-import { Component as SpaComponent, Page, isContainerItem, isContainer } from '@bloomreach/spa-sdk';
+import { Component as SpaComponent, isContainer, isContainerItem, Page } from '@bloomreach/spa-sdk';
 import { Component, Inject, Prop, Provide, Vue } from 'vue-property-decorator';
 import BrMeta from './BrMeta.vue';
-import BrNodeContainerItem from './BrNodeContainerItem.vue';
 import BrNodeContainer from './BrNodeContainer.vue';
+import BrNodeContainerItem from './BrNodeContainerItem.vue';
 
 @Component({
   components: {
@@ -53,7 +53,16 @@ import BrNodeContainer from './BrNodeContainer.vue';
       return this.mapping$();
     },
     page(this: BrNodeComponent) {
-      return this.page$();
+      return this.page$?.();
+    },
+    children(this: BrNodeComponent) {
+      return this.component?.getChildren();
+    },
+    meta(this: BrNodeComponent) {
+      return this.component?.getMeta();
+    },
+    name(this: BrNodeComponent) {
+      return this.component?.getName();
     },
   },
   methods: {
@@ -63,11 +72,11 @@ import BrNodeContainer from './BrNodeContainer.vue';
   name: 'br-node-component',
 })
 export default class BrNodeComponent extends Vue {
-  @Prop() component!: SpaComponent;
+  @Prop() component?: SpaComponent;
 
   @Inject() private mapping$!: () => Record<string, Vue.Component>;
 
-  @Inject() private page$!: () => Page;
+  @Inject() private page$?: () => Page;
 
   @Provide() // ProvideReactive doesn't work with recursive components
   private component$() {
