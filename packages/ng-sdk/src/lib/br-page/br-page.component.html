@@ -34,7 +34,7 @@
 </ng-template>
 
 <ng-template
-  *ngIf="context"
+  *ngIf="context?.template"
   [ngTemplateOutlet]="brNode"
   [ngTemplateOutletContext]="context"
 ></ng-template>

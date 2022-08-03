@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BrPageComponent template render should not render children if there is no page and NBR mode is false 1`] = `
+<div
+  id="root0"
+>
+  <div>
+    <br-page>
+      
+      
+    </br-page>
+  </div>
+</div>
+`;
+
+exports[`BrPageComponent template render should render children if there is no page and NBR mode is true 1`] = `
+<div
+  id="root1"
+>
+  <div>
+    <br-page>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <br-my-component>
+        <div>
+          Hello World
+        </div>
+      </br-my-component>
+      
+      
+      
+    </br-page>
+  </div>
+</div>
+`;

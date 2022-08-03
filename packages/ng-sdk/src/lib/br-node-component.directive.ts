@@ -35,7 +35,7 @@ import { BrProps } from './br-props.model';
   inputs: ['component:brNodeComponent'],
 })
 export class BrNodeComponentDirective<T extends Component> implements OnChanges, OnDestroy {
-  component!: T;
+  component?: T;
 
   private clear?: ReturnType<MetaCollection['render']>;
 
@@ -54,11 +54,11 @@ export class BrNodeComponentDirective<T extends Component> implements OnChanges,
 
     const { head, tail } = this.render();
 
-    this.clear = head && tail && this.component.getMeta().render(head, tail);
+    this.clear = head && tail && this.component?.getMeta()?.render(head, tail);
   }
 
   protected getMapping(): Type<BrProps> | undefined {
-    return this.page.mapping[this.component.getName()];
+    return this.component && this.page.mapping[this.component.getName()];
   }
 
   private render(): { head: any; tail: any } {
@@ -79,7 +79,7 @@ export class BrNodeComponentDirective<T extends Component> implements OnChanges,
     const embeddedViewRef = this.container.createEmbeddedView(this.node.template!, {
       $implicit: this.component,
       component: this.component,
-      page: this.page.state.getValue()!,
+      page: this.page.state.getValue(),
     });
     // tslint:enable: no-non-null-assertion
     const [head] = embeddedViewRef.rootNodes;
@@ -90,8 +90,8 @@ export class BrNodeComponentDirective<T extends Component> implements OnChanges,
 
   private renderChildren(): { head: any; tail: any } {
     const nodes = this.component
-      .getChildren()
-      .map((component) =>
+      ?.getChildren()
+      ?.map((component) =>
         this.container.createEmbeddedView(this.page.node, {
           component,
           $implicit: component,
@@ -100,8 +100,8 @@ export class BrNodeComponentDirective<T extends Component> implements OnChanges,
       )
       .flatMap((view) => view.rootNodes);
 
-    const head = nodes[0] ?? this.container.element.nativeElement;
-    const tail = nodes[nodes.length - 1] ?? head;
+    const head = nodes?.[0] ?? this.container.element.nativeElement;
+    const tail = nodes?.[nodes.length - 1] ?? head;
 
     return { head, tail };
   }

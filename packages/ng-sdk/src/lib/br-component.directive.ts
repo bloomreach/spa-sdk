@@ -36,17 +36,17 @@ export interface BrComponentContext {
   /**
    * The implicit value of the context is pointing to the current component.
    */
-  $implicit: Component;
+  $implicit?: Component;
 
   /**
    * The current component.
    */
-  component: Component;
+  component?: Component;
 
   /**
    * The current page.
    */
-  page: Page;
+  page?: Page;
 }
 
 /**

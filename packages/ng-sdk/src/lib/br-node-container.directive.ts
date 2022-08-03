@@ -36,7 +36,7 @@ import { BrProps } from './br-props.model';
 })
 export class BrNodeContainerDirective extends BrNodeComponentDirective<Container> {
   protected getMapping(): Type<BrProps> | undefined {
-    const type = this.component.getType();
+    const type = this.component?.getType();
 
     if (type && type in this.page.mapping) {
       return this.page.mapping[type];
