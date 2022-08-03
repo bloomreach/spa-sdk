@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import React from 'react';
-import { mocked } from 'ts-jest/utils';
+import { destroy, initialize, Page, PageModel } from '@bloomreach/spa-sdk';
 import { mount, shallow, ShallowWrapper } from 'enzyme';
-import { PageModel, Page, destroy, initialize } from '@bloomreach/spa-sdk';
+import React, { useEffect } from 'react';
+import { mocked } from 'ts-jest/utils';
 import { BrNode, BrProps } from '../component';
 import { BrPage } from './BrPage';
 
@@ -126,25 +126,49 @@ describe('BrPage', () => {
     });
 
     it('should not render children if there is no page and NBR mode is false', () => {
-      const shallowWrapper = shallow(
-        <BrPage configuration={{ ...config, NBRMode: false }} mapping={mapping}>
-          {children}
-        </BrPage>,
-      );
-      shallowWrapper.setState({ page: undefined });
+      wrapper.setState({ page: undefined });
+      wrapper.setProps({ configuration: { ...config, NBRMode: false } });
 
-      expect(shallowWrapper.contains(children)).toBe(false);
+      expect(wrapper.contains(children)).toBe(false);
     });
 
     it('should render children if there is no page and NBR mode is true', () => {
-      const shallowWrapper = shallow(
+      wrapper.setState({ page: undefined });
+      wrapper.setProps({ configuration: { ...config, NBRMode: true } });
+
+      expect(wrapper.contains(children)).toBe(true);
+    });
+
+    it('should run child component effects while retrieving Page model when NBR mode is true', () => {
+      jest.useFakeTimers();
+
+      const initializeDone = jest.fn();
+      const someEffect = jest.fn();
+
+      function MyComponent(): JSX.Element {
+        useEffect(() => someEffect());
+        return <></>;
+      }
+
+      const page = initialize(config);
+      mocked(initialize).mockClear();
+      mocked(initialize).mockImplementationOnce(() => {
+        setTimeout(initializeDone, 1000);
+        return page;
+      });
+
+      mount(
         <BrPage configuration={{ ...config, NBRMode: true }} mapping={mapping}>
-          {children}
+          <MyComponent />
         </BrPage>,
       );
-      shallowWrapper.setState({ page: undefined });
 
-      expect(shallowWrapper.contains(children)).toBe(true);
+      jest.runAllTimers();
+      const someEffectOrder = someEffect.mock.invocationCallOrder[0];
+      const initializeDoneOrder = initializeDone.mock.invocationCallOrder[0];
+      expect(someEffectOrder).toBeLessThan(initializeDoneOrder);
+
+      jest.useRealTimers();
     });
 
     it('should mount children if there is no page and NBR mode is true', () => {});
