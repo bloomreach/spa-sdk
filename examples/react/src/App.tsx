@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2021 Bloomreach
+ * Copyright 2019-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +26,7 @@ export default function App({ location }: RouteComponentProps): JSX.Element {
     endpointQueryParameter: 'endpoint',
     httpClient: axios,
     path: `${location.pathname}${location.search}`,
+    debug: true,
   };
   const mapping = { Banner, Content, 'News List': NewsList, 'Simple Content': Content };
 
