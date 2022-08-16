@@ -2,10 +2,18 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### [v16.0.0-alpha.0](https://github.com/bloomreach/spa-sdk/compare/v15.5.1...v16.0.0-alpha.0)
+#### [v16.0.0](https://github.com/bloomreach/spa-sdk/compare/v15.5.1...v16.0.0)
 
 - SPASDK-123 Add getLocale to Page object [`#81`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/81)
 - SPASDK-119 Improve heroku deploy speed by using lerna filter flags [`#80`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/80)
+- SPASDK-124 Merge branch 'feature/SPADSK-124-nbr-react' into 'development' [`#SPASDK-124`](https://issues.onehippo.com/browse/SPASDK-124)
+- SPASDK-124 Set debug mode to true by default on example apps [`#SPASDK-124`](https://issues.onehippo.com/browse/SPASDK-124)
+- SPASDK-124 Update copyright on files [`#SPASDK-124`](https://issues.onehippo.com/browse/SPASDK-124)
+- SPASDK-124 Document NBR mode usage [`#SPASDK-124`](https://issues.onehippo.com/browse/SPASDK-124)
+- SPASDK-124 Adjust Vue SDK to NBR Mode [`#SPASDK-124`](https://issues.onehippo.com/browse/SPASDK-124)
+- SPASDK-124 Adjust NG SDK to NBR Mode [`#SPASDK-124`](https://issues.onehippo.com/browse/SPASDK-124)
+- SPASDK-124 Add test for call order on child components [`#SPASDK-124`](https://issues.onehippo.com/browse/SPASDK-124)
+- SPASDK-124 Bumping versions to 16.0.0-alpha.0 [`#SPASDK-124`](https://issues.onehippo.com/browse/SPASDK-124)
 - SPASDK-124 Optionally provide the heroku app name as arg [`#SPASDK-124`](https://issues.onehippo.com/browse/SPASDK-124)
 - SPASDK-124 Allow delay in page and component context instantiation [`#SPASDK-124`](https://issues.onehippo.com/browse/SPASDK-124)
 - SPASDK-124 Add 'dev' script to all packages for easy development start [`#SPASDK-124`](https://issues.onehippo.com/browse/SPASDK-124)
@@ -399,5 +407,7 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-2 Log warning for unsupported method "getContentReference" in v0.9 [`#SPASDK-2`](https://issues.onehippo.com/browse/SPASDK-2)
 - SPASDK-2 Add exported function "getContainerItemContent" [`#SPASDK-2`](https://issues.onehippo.com/browse/SPASDK-2)
 - SPASDK-1 Bump to use node 14 [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
+- SPASDK-1 Remove maven files and update Jenkinsfile [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
+- SPASDK-1 Initial move from brxm monorepo [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
 - TRIVIAL Set branch name to 'main' in changesetBaseRefs [`4dacdcd`](https://github.com/bloomreach/spa-sdk/commit/4dacdcd2fdb0712e40dcb33b9809ae12786f9ab1)
 - TRIVIAL Skip telemetry check on nuxt startup [`15deb25`](https://github.com/bloomreach/spa-sdk/commit/15deb25b1edde3af3296d4dc34dba1483fe278f2)

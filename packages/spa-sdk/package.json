@@ -1,6 +1,6 @@
 {
   "name": "@bloomreach/spa-sdk",
-  "version": "16.0.0-alpha.0",
+  "version": "16.0.0",
   "description": "Bloomreach SPA SDK",
   "keywords": [
     "bloomreach",
