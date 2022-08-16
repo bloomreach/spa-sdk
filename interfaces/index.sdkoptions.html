@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>HttpConnection | @bloomreach/spa-sdk - v16.0.0</title>
+	<title>SDKOptions | @bloomreach/spa-sdk - v16.0.0</title>
 	<meta name="description" content="Documentation for @bloomreach/spa-sdk - v16.0.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -59,10 +59,10 @@
 					<a href="../modules/index.html">index</a>
 				</li>
 				<li>
-					<a href="index.httpconnection.html">HttpConnection</a>
+					<a href="index.sdkoptions.html">SDKOptions</a>
 				</li>
 			</ul>
-			<h1>Interface HttpConnection</h1>
+			<h1>Interface SDKOptions</h1>
 		</div>
 	</div>
 </header>
@@ -72,7 +72,7 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>An HTTP connection.</p>
+						<p>Configuration options for configuring behavior of the SDK.</p>
 					</div>
 				</div>
 			</section>
@@ -80,7 +80,15 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">HttpConnection</span>
+						<span class="target">SDKOptions</span>
+						<ul class="tsd-hierarchy">
+							<li>
+								<a href="index.configurationwithproxy.html" class="tsd-signature-type">ConfigurationWithProxy</a>
+							</li>
+							<li>
+								<a href="index.configurationwithjwt.html" class="tsd-signature-type">ConfigurationWithJwt</a>
+							</li>
+						</ul>
 					</li>
 				</ul>
 			</section>
@@ -91,7 +99,7 @@
 						<section class="tsd-index-section tsd-is-not-exported">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="index.httpconnection.html#remoteaddress" class="tsd-kind-icon">remote<wbr>Address</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="index.sdkoptions.html#nbrmode" class="tsd-kind-icon">NBRMode</a></li>
 							</ul>
 						</section>
 					</div>
@@ -100,14 +108,16 @@
 			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-					<a name="remoteaddress" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> remote<wbr>Address</h3>
-					<div class="tsd-signature tsd-kind-icon">remote<wbr>Address<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
+					<a name="nbrmode" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> NBRMode</h3>
+					<div class="tsd-signature tsd-kind-icon">NBRMode<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></div>
 					<aside class="tsd-sources">
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Client&#39;s remote IP address.</p>
+							<p>The NBRMode parameter used to indicate whether the children of the BrPage component should be rendered
+								immediatly or wait with rendering until the Page model has been retrieved and parsed.
+							By default, the option is <code>false</code>.</p>
 						</div>
 					</div>
 				</section>
@@ -138,10 +148,10 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-module tsd-is-not-exported">
-						<a href="index.httpconnection.html" class="tsd-kind-icon">Http<wbr>Connection</a>
+						<a href="index.sdkoptions.html" class="tsd-kind-icon">SDKOptions</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-								<a href="index.httpconnection.html#remoteaddress" class="tsd-kind-icon">remote<wbr>Address</a>
+								<a href="index.sdkoptions.html#nbrmode" class="tsd-kind-icon">NBRMode</a>
 							</li>
 						</ul>
 					</li>
