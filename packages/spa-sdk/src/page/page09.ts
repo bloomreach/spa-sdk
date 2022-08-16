@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Bloomreach
+ * Copyright 2020-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -118,6 +118,10 @@ export class PageImpl implements Page {
 
   getDocument<T>(): T | undefined {
     throw new Error('The page document is not supported by this version of the Page Model API.');
+  }
+
+  getLocale(): string {
+    throw new Error('The locale is not supported by this version of the Page Model API.');
   }
 
   getMeta(meta: MetaCollectionModel): MetaCollection {

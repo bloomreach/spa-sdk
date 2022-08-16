@@ -1,5 +1,5 @@
 /*
- * Copyright 2020-2021 Bloomreach
+ * Copyright 2020-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,32 +14,32 @@
  * limitations under the License.
  */
 
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import {
   AfterContentChecked,
-  ChangeDetectorRef,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ContentChild,
+  EventEmitter,
   Inject,
   Input,
   NgZone,
   OnChanges,
   OnDestroy,
-  Output,
   Optional,
+  Output,
   PLATFORM_ID,
   SimpleChanges,
   TemplateRef,
   Type,
   ViewChild,
-  EventEmitter,
 } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { makeStateKey, StateKey, TransferState } from '@angular/platform-browser';
-import { from, of, BehaviorSubject, Subject } from 'rxjs';
+import { Configuration, destroy, initialize, isPage, Page, PageModel } from '@bloomreach/spa-sdk';
+import { BehaviorSubject, from, of, Subject } from 'rxjs';
 import { filter, map, mapTo, pairwise, pluck, switchMap, take } from 'rxjs/operators';
-import { destroy, initialize, isPage, Configuration, Page, PageModel } from '@bloomreach/spa-sdk';
 import { BrComponentContext } from '../br-component.directive';
 import { BrProps } from '../br-props.model';
 
@@ -122,19 +122,20 @@ export class BrPageComponent implements AfterContentChecked, OnChanges, OnDestro
       .subscribe((page) => this.stateKey && this.transferState?.set(this.stateKey, page.toJSON()));
   }
 
-  get context(): BrNodeContext | undefined {
+  get context(): BrNodeContext {
     const page = this.state.getValue();
     const component = page?.getComponent();
+    const pageOrNBR = page || this.configuration?.NBRMode;
 
-    if (!page || !component) {
-      return undefined;
-    }
+    // if (!page || !component) {
+    //   return undefined;
+    // }
 
     return {
       component,
       page,
       $implicit: component,
-      template: this.template,
+      template: pageOrNBR ? this.template : undefined,
     };
   }
 

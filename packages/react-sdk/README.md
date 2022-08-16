@@ -71,6 +71,42 @@ export default function App() {
 }
 ```
 
+### Non-blocking render mode (NBRMode)
+
+Non-blocking rendering mode can be used to decrease the time for your application to load fully on the client side. By
+default the NBRMode configuration is `false` to avoid breaking existing setups. Setting it to `true` will enable
+non-blocking render mode. When the mode is active the children of the BrPage component will start mounting while the
+Page Model is being fetched. These children might contain logic themselves that queries some external API and using
+non-blocking render mode would allow this to be executed in parallel to requesting the Page Model.
+
+```jsx
+const fetchData = async () => {
+  const data = await fetch('https://yourapi.com');
+}
+
+function MyComponent() {
+  useEffect(() => {
+    // This will run in parallel to fetching the PageModel from the Delivery API
+    fetchData().catch(console.error);
+  }, []);
+  
+  return `<div>Hello</div>`
+}
+
+export default function App() {
+  const configuration = {
+    /* ... */
+    NBRMode: true,
+  };
+
+  return (
+    <BrPage configuration={configuration} mapping={{ ... }}>
+      <MyComponent/>
+    </BrPage>
+  );
+}
+```
+
 ### Configuration
 
 The `BrPage` component supports several options you may use to customize page

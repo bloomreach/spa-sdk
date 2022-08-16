@@ -19,10 +19,10 @@ import { Document, ImageSet } from '@bloomreach/spa-sdk';
 import { BrManageContentButton, BrProps } from '@bloomreach/react-sdk';
 
 export function Content({ component, page }: BrProps): JSX.Element | null {
-  const { document: documentRef } = component.getModels<DocumentModels>();
-  const document = documentRef && page.getContent<Document>(documentRef);
+  const documentRef = component?.getModels<DocumentModels>().document;
+  const document = documentRef && page?.getContent<Document>(documentRef);
 
-  if (!document) {
+  if (!document || !page) {
     return null;
   }
 

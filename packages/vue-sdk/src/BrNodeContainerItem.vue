@@ -1,5 +1,5 @@
 <!--
-  Copyright 2020-2021 Bloomreach
+  Copyright 2020-2022 Bloomreach
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -47,7 +47,7 @@ import BrContainerItemUndefined from './BrContainerItemUndefined.vue';
       return this.mapping$();
     },
     page(this: BrNodeContainerItem) {
-      return this.page$();
+      return this.page$?.();
     },
   },
   data: () => ({
@@ -61,7 +61,7 @@ export default class BrNodeContainerItem extends Vue {
 
   @Inject() private mapping$!: () => Record<string, Vue.Component>;
 
-  @Inject() private page$!: () => Page;
+  @Inject() private page$?: () => Page;
 
   private page!: Page;
 

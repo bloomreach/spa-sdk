@@ -92,9 +92,9 @@ export function NewsListPagination({
 }
 
 export function NewsList({ component, page }: BrProps): JSX.Element | null {
-  const { pageable } = component.getModels<PageableModels>();
+  const pageable = component?.getModels<PageableModels>().pageable;
 
-  if (!pageable) {
+  if (!pageable || !page) {
     return null;
   }
 

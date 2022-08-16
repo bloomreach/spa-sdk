@@ -5,7 +5,7 @@ set -e
 APP_TYPE=$2;
 APP_NAME=$3;
 APP_VERSION=$4;
-NAME="${APP_NAME}-${APP_TYPE}-${APP_VERSION}";
+NAME=$5 || "${APP_NAME}-${APP_TYPE}-${APP_VERSION}";
 
 if [[ $APP_NAME = "ng" ]]
 then
@@ -24,7 +24,9 @@ then
   APP_PATH="examples/react"
 fi
 
-echo "Deploying ${NAME} app using path ${APP_PATH}";
+APP_PACKAGE=$(node -p -e "require('./$APP_PATH/package.json').name")
+
+echo "Deploying ${APP_PACKAGE} as ${NAME} app using path ${APP_PATH}";
 echo '-----------------------------------------------------------------------------'
 
 heroku plugins:install buildpack-registry
@@ -49,7 +51,7 @@ fi
 # Set common config options
 heroku config:set --app=$NAME PROJECT_PATH=$APP_PATH
 heroku config:set --app=$NAME PROCFILE=$APP_PATH/Procfile
-
+heroku config:set --app=$NAME PACKAGE=$APP_PACKAGE
 
 # Set project specific config options
 if [[ $APP_TYPE = "ssr" ]] && [[ $APP_NAME = "ng" ]]

@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 Bloomreach
+ * Copyright 2019-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
+import { Configuration, destroy, initialize, Page, PageModel } from '@bloomreach/spa-sdk';
 import React from 'react';
-import { Configuration, PageModel, Page, destroy, initialize } from '@bloomreach/spa-sdk';
 import { BrMappingContext, BrNode } from '../component';
 import { BrPageContext } from './BrPageContext';
 
@@ -121,17 +121,13 @@ export class BrPage extends React.Component<BrPageProps, BrPageState> {
 
   render(): JSX.Element | null {
     const { page } = this.state;
-
-    if (!page) {
-      return null;
-    }
-
-    const { mapping, children } = this.props;
+    const { configuration, mapping, children } = this.props;
 
     return (
       <BrPageContext.Provider value={page}>
         <BrMappingContext.Provider value={mapping}>
-          <BrNode component={page.getComponent()}>{children}</BrNode>
+          {!page && !configuration.NBRMode && null}
+          {(page || configuration.NBRMode) && <BrNode component={page?.getComponent()}>{children}</BrNode>}
         </BrMappingContext.Provider>
       </BrPageContext.Provider>
     );

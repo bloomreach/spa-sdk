@@ -20,19 +20,19 @@ import { Document, ImageSet } from '@bloomreach/spa-sdk';
 import { BrManageContentButton, BrProps } from '@bloomreach/react-sdk';
 
 export function Banner(props: BrProps): JSX.Element | null {
-  const { document: documentRef } = props.component.getModels();
-  const document = !!documentRef && props.page.getContent(documentRef);
+  const documentRef = props.component?.getModels().document;
+  const document = !!documentRef && props.page?.getContent(documentRef);
 
   if (!document) {
     return null;
   }
 
   const { content, image: imageRef, link: linkRef, title } = document.getData<DocumentData>();
-  const image = imageRef && props.page.getContent<ImageSet>(imageRef);
-  const link = linkRef && props.page.getContent<Document>(linkRef);
+  const image = imageRef && props.page?.getContent<ImageSet>(imageRef);
+  const link = linkRef && props.page?.getContent<Document>(linkRef);
 
   return (
-    <div className={`jumbotron mb-3 ${props.page.isPreview() ? 'has-edit-button' : ''}`}>
+    <div className={`jumbotron mb-3 ${props.page?.isPreview() ? 'has-edit-button' : ''}`}>
       <BrManageContentButton
         content={document}
         documentTemplateQuery="new-banner-document"
@@ -45,7 +45,7 @@ export function Banner(props: BrProps): JSX.Element | null {
       {title && <h1>{title}</h1>}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       {image && <img className="img-fluid" src={image.getOriginal()?.getUrl()} alt={title} />}
-      {content && (
+      {content && props.page && (
         <div dangerouslySetInnerHTML={{ __html: props.page.rewriteLinks(props.page.sanitize(content.value)) }} />
       )}
       {link && (

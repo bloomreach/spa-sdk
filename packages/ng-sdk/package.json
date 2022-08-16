@@ -1,6 +1,6 @@
 {
   "name": "@bloomreach/ng-sdk",
-  "version": "15.5.0",
+  "version": "16.0.0",
   "description": "Bloomreach SPA SDK for Angular",
   "keywords": [
     "bloomreach",
@@ -20,6 +20,7 @@
   },
   "scripts": {
     "build": "ng build",
+    "dev": "npm run build -- --watch",
     "lint": "ng lint",
     "ng": "ng",
     "prepack": "$npm_execpath run build && rm dist/package.json dist/README.md",
@@ -41,7 +42,7 @@
     "dist/bloomreach-ng-sdk.metadata.json"
   ],
   "dependencies": {
-    "@bloomreach/spa-sdk": "15.5.0",
+    "@bloomreach/spa-sdk": "16.0.0",
     "tslib": "2.3.0"
   },
   "peerDependencies": {

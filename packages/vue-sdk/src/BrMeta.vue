@@ -1,5 +1,5 @@
 <!--
-  Copyright 2020 Bloomreach
+  Copyright 2020-2022 Bloomreach
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ import { Fragment } from 'vue-fragment';
 
 @Component
 export default class BrMeta extends Vue {
-  @Prop() meta!: MetaCollection;
+  @Prop() meta?: MetaCollection;
 
   private clear?: ReturnType<MetaCollection['render']>;
 
@@ -42,7 +42,7 @@ export default class BrMeta extends Vue {
   }
 
   private inject() {
-    this.clear = this.$vnode.elm && this.meta.render(this.$vnode.elm, this.$vnode.elm);
+    this.clear = this.$vnode.elm && this.meta?.render(this.$vnode.elm, this.$vnode.elm);
   }
 
   @Watch('meta', { deep: false })

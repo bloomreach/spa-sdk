@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2021 Bloomreach
+ * Copyright 2019-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,31 +19,31 @@
  * @module index
  */
 
-import 'reflect-metadata';
 import { Container } from 'inversify';
-import { SpaModule, SpaService, Spa, ApiOptionsToken } from './spa';
-import { CmsService, Cms, CmsModule, PostMessageService, PostMessage } from './cms';
-import { PageModel, PageModule09, PageModule, Page, isPage } from './page';
+import 'reflect-metadata';
+import { Cms, CmsModule, CmsService, PostMessage, PostMessageService } from './cms';
 import {
   Configuration,
-  ConfigurationWithProxy,
   ConfigurationWithJwt09,
   ConfigurationWithJwt10,
+  ConfigurationWithProxy,
   isConfigurationWithJwt09,
   isConfigurationWithProxy,
 } from './configuration';
-import { LoggerModule, Logger, Level } from './logger';
+import { Level, Logger, LoggerModule } from './logger';
+import { isPage, Page, PageModel, PageModule, PageModule09 } from './page';
+import { Campaign } from './services/campaign';
+import { Segmentation } from './services/segmentation';
+import { ApiOptionsToken, Spa, SpaModule, SpaService } from './spa';
 import {
-  UrlModule09,
-  UrlModule,
-  UrlBuilderOptionsToken,
   appendSearchParams,
   extractSearchParams,
   isMatched,
   parseUrl,
+  UrlBuilderOptionsToken,
+  UrlModule,
+  UrlModule09,
 } from './url';
-import { Campaign } from './services/campaign';
-import { Segmentation } from './services/segmentation';
 
 const DEFAULT_AUTHORIZATION_PARAMETER = 'token';
 const DEFAULT_SERVER_ID_PARAMETER = 'server-id';
@@ -90,8 +90,13 @@ function initializeWithProxy(
 
   logger.info(`Using ${options === configuration.options.preview ? 'preview' : 'live'} configuration.`);
 
+  const config = {
+    ...configuration,
+    NBRMode: configuration.NBRMode || false,
+  };
+
   scope.load(PageModule09(), SpaModule(), UrlModule09());
-  scope.bind(ApiOptionsToken).toConstantValue(configuration);
+  scope.bind(ApiOptionsToken).toConstantValue(config);
   scope.bind(UrlBuilderOptionsToken).toConstantValue(options);
   scope.getNamed<Cms>(CmsService, 'cms14').initialize(configuration);
 
@@ -127,6 +132,7 @@ function initializeWithJwt09(
     ...configuration,
     origin: configuration.origin ?? parseUrl(configuration.apiBaseUrl ?? configuration.cmsBaseUrl ?? '').origin,
     spaBaseUrl: appendSearchParams(configuration.spaBaseUrl ?? '', searchParams),
+    NBRMode: configuration.NBRMode || false,
   };
 
   if (authorizationToken) {
@@ -216,6 +222,7 @@ function initializeWithJwt10(
     endpoint: endpointUrl,
     baseUrl: appendSearchParams(configuration.baseUrl ?? '', searchParams),
     origin: configuration.origin ?? parseUrl(configuration.endpoint ?? endpoint ?? '').origin,
+    NBRMode: configuration.NBRMode || false,
   };
 
   if (authorizationToken) {

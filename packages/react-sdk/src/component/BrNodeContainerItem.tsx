@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2021 Bloomreach
+ * Copyright 2019-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,22 +27,22 @@ export class BrNodeContainerItem extends BrNodeComponent<ContainerItem> {
   }
 
   componentDidMount(): void {
-    this.props.component.on('update', this.onUpdate);
+    this.props.component?.on('update', this.onUpdate);
   }
 
   componentDidUpdate(prevProps: BrProps<ContainerItem>): void {
     if (this.props.component !== prevProps.component) {
-      prevProps.component.off('update', this.onUpdate);
-      this.props.component.on('update', this.onUpdate);
+      prevProps.component?.off('update', this.onUpdate);
+      this.props.component?.on('update', this.onUpdate);
     }
   }
 
   componentWillUnmount(): void {
-    this.props.component.off('update', this.onUpdate);
+    this.props.component?.off('update', this.onUpdate);
   }
 
   protected getMapping(): React.ComponentType<BrProps> {
-    const type = this.props.component.getType();
+    const type = this.props.component?.getType();
 
     if (type && type in this.context) {
       return this.context[type] as React.ComponentType<BrProps>;
@@ -54,6 +54,6 @@ export class BrNodeContainerItem extends BrNodeComponent<ContainerItem> {
   }
 
   protected onUpdate(): void {
-    this.forceUpdate(() => this.props.page.sync());
+    this.forceUpdate(() => this.props.page?.sync());
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Bloomreach
+ * Copyright 2019-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,5 +19,5 @@ import { ContainerItem } from '@bloomreach/spa-sdk';
 import { BrProps } from '../component';
 
 export function BrContainerItemUndefined({ component }: React.PropsWithChildren<BrProps<ContainerItem>>): JSX.Element {
-  return <div>{`Component "${component.getType()}" is not defined.`}</div>;
+  return <div>{`Component "${component?.getType()}" is not defined.`}</div>;
 }

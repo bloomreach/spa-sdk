@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Bloomreach
+ * Copyright 2020-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -153,6 +153,14 @@ describe('PageImpl', () => {
       page.getMeta(testModel);
 
       expect(metaFactory).toHaveBeenCalledWith(testModel);
+    });
+  });
+
+  describe('getLocale', () => {
+    it('should throw an error', () => {
+      const page = createPage();
+
+      expect(() => page.getLocale()).toThrowError();
     });
   });
 

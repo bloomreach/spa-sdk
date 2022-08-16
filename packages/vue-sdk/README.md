@@ -112,6 +112,52 @@ Finally, in the `Banner` component, it can consume the component data via the
 </script>
 ```
 
+### Non-blocking render mode (NBRMode)
+
+Non-blocking rendering mode can be used to decrease the time for your application to load fully on the client side. By
+default the NBRMode configuration is `false` to avoid breaking existing setups. Setting it to `true` will enable
+non-blocking render mode. When the mode is active the children of the BrPage component will start mounting while the
+Page Model is being fetched. These children might contain logic themselves that queries some external API and using
+non-blocking render mode would allow this to be executed in parallel to requesting the Page Model.
+
+```html
+<template>
+  Hello
+</template>
+
+<script>
+  export default {
+    name: 'MyComponent',
+    async mounted() {
+      // This will run in parallel to fetching the PageModel from the Delivery API
+      await fetch('https://yourapi.com');
+    }
+  };
+</script>
+```
+```html
+<template>
+  <br-page :configuration="configuration" :mapping="mapping">
+    <my-component></my-component>
+    <template v-slot:default="props">
+      ...
+  </br-page>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        configuration: {
+          /* ... */
+          NBRMode: true,
+        },
+        mapping: { ... },
+      };
+    },
+  };
+</script>
+```
 ### Configuration
 
 The `br-page` component supports several options you may use to customize page

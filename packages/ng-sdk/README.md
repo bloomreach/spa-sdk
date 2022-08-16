@@ -74,6 +74,7 @@ import { BannerComponent } from "./banner/banner.component";
   selector: "app-root",
   template: `
     <br-page [configuration]="configuration" [mapping]="mapping">
+      <!-- note that wrapping the <br-page> child template with a <ng-template> is required -->
       <ng-template let-page="page">
         <header>
           <a [href]="page.getUrl('/')">Home</a>
@@ -119,6 +120,50 @@ import { Component as BrComponent } from "@bloomreach/spa-sdk";
 })
 export class BannerComponent {
   @Input() component!: BrComponent;
+}
+```
+
+### Non-blocking render mode (NBRMode)
+
+Non-blocking rendering mode can be used to decrease the time for your application to load fully on the client side. By
+default the NBRMode configuration is `false` to avoid breaking existing setups. Setting it to `true` will enable
+non-blocking render mode. When the mode is active the children of the BrPage component will start mounting while the
+Page Model is being fetched. These children might contain logic themselves that queries some external API and using
+non-blocking render mode would allow this to be executed in parallel to requesting the Page Model.
+
+```typescript
+@Component({
+  selector: 'my-component',
+  template: '<div>Hello</div>',
+})
+class MyComponent implements OnInit {
+  async ngOnInit(): Promise<void> {
+    // This will run in parallel to fetching the PageModel from the Delivery API
+    const data = await fetch('https://yourapi.com');
+  }
+}
+
+@Component({
+  selector: "app-root",
+  template: `
+    <br-page [configuration]="configuration" [mapping]="mapping">
+      <!-- note that wrapping the <br-page> child template with a <ng-template> is required -->
+      <ng-template let-page="page">
+        <my-component>
+      </ng-template>
+    </br-page>
+  `,
+})
+export class AppComponent {
+  configuration: Configuration;
+  mapping = { ... };
+
+  constructor(location: Location) {
+    this.configuration = {
+      /* ... */
+      NBRMode: true,
+    };
+  }
 }
 ```
 

@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import React from 'react';
-import Link from 'next/link';
-import { Document } from '@bloomreach/spa-sdk';
 import { BrManageContentButton, BrPageContext, BrProps } from '@bloomreach/react-sdk';
+import { Document } from '@bloomreach/spa-sdk';
+import Link from 'next/link';
+import React from 'react';
 
 interface NewsListItemProps {
   item: Document;
@@ -84,7 +84,7 @@ export function NewsListPagination(props: Pageable): JSX.Element | null {
 }
 
 export function NewsList(props: BrProps): JSX.Element | null {
-  const { pageable } = props.component.getModels<PageableModels>();
+  const pageable = props.component?.getModels<PageableModels>().pageable;
 
   if (!pageable) {
     return null;
@@ -92,10 +92,10 @@ export function NewsList(props: BrProps): JSX.Element | null {
 
   return (
     <div>
-      {pageable.items.map((reference, key) => (
-        <NewsListItem key={key} item={props.page.getContent<Document>(reference)!} />
-      ))}
-      {props.page.isPreview() && (
+      {pageable.items.map(
+        (reference, key) => props.page && <NewsListItem key={key} item={props.page.getContent<Document>(reference)!} />,
+      )}
+      {props.page?.isPreview() && (
         <div className="has-edit-button float-right">
           <BrManageContentButton
             documentTemplateQuery="new-news-document"

@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Bloomreach
+ * Copyright 2019-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,10 +23,10 @@ export interface BrProps<T extends Component = Component> {
   /**
    * The mapped component.
    */
-  component: T;
+  component?: T;
 
   /**
    * The current page.
    */
-  page: Page;
+  page?: Page;
 }
