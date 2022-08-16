@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Bloomreach
+ * Copyright 2020-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -73,22 +73,6 @@ describe('BrPageComponent', () => {
   });
 
   describe('context', () => {
-    it('should be undefined when the state is not set', () => {
-      expect(component.context).toBeUndefined();
-    });
-
-    it('should be undefined when there is no root component', () => {
-      component.state.next(page);
-
-      expect(component.context).toBeUndefined();
-    });
-
-    it('should be undefined when there is no root component', () => {
-      component.state.next(page);
-
-      expect(component.context).toBeUndefined();
-    });
-
     it('should contain a root component', () => {
       const root = {} as Component;
       page.getComponent.mockReturnValue(root);

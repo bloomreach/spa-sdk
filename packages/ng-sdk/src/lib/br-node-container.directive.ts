@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Bloomreach
+ * Copyright 2020-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,7 +36,7 @@ import { BrProps } from './br-props.model';
 })
 export class BrNodeContainerDirective extends BrNodeComponentDirective<Container> {
   protected getMapping(): Type<BrProps> | undefined {
-    const type = this.component.getType();
+    const type = this.component?.getType();
 
     if (type && type in this.page.mapping) {
       return this.page.mapping[type];

@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Bloomreach
+ * Copyright 2019-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,9 +19,9 @@ import { BrProps } from '../component';
 
 export function BrContainerOrderedList({ page, children }: React.PropsWithChildren<BrProps>): JSX.Element {
   return (
-    <ol className={page.isPreview() ? 'hst-container' : undefined}>
+    <ol className={page?.isPreview() ? 'hst-container' : undefined}>
       {React.Children.map(children, (child) => (
-        <li className={page.isPreview() ? 'hst-container-item' : undefined}>{child}</li>
+        <li className={page?.isPreview() ? 'hst-container-item' : undefined}>{child}</li>
       ))}
     </ol>
   );

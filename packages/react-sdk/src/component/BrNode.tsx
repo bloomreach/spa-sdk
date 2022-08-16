@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 Bloomreach
+ * Copyright 2019-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ import { BrNodeContainerItem } from './BrNodeContainerItem';
 import { BrNodeComponent } from './BrNodeComponent';
 
 interface BrNodeProps {
-  component: Component;
+  component?: Component;
 }
 
 export class BrNode extends React.Component<BrNodeProps> {
@@ -36,11 +36,11 @@ export class BrNode extends React.Component<BrNodeProps> {
     const { children, component } = this.props;
 
     if (React.Children.count(children)) {
-      return <BrMeta meta={component.getMeta()}>{children}</BrMeta>;
+      return <BrMeta meta={component?.getMeta()}>{children}</BrMeta>;
     }
 
     // eslint-disable-next-line react/no-array-index-key
-    const childrenList = component.getChildren().map((child, index) => <BrNode key={index} component={child} />);
+    const childrenList = component?.getChildren().map((child, index) => <BrNode key={index} component={child} />);
 
     if (isContainer(component)) {
       return (

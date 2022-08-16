@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Bloomreach
+ * Copyright 2019-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import React from 'react';
-import { mocked } from 'ts-jest/utils';
+import { destroy, initialize, Page, PageModel } from '@bloomreach/spa-sdk';
 import { mount, shallow, ShallowWrapper } from 'enzyme';
-import { PageModel, Page, destroy, initialize } from '@bloomreach/spa-sdk';
+import React, { useEffect } from 'react';
+import { mocked } from 'ts-jest/utils';
 import { BrNode, BrProps } from '../component';
 import { BrPage } from './BrPage';
 
@@ -121,10 +121,67 @@ describe('BrPage', () => {
   });
 
   describe('render', () => {
-    it('should render nothing if there is no page', () => {
-      wrapper.setState({ page: undefined });
+    it('should render children', () => {
+      expect(wrapper.contains(children)).toBe(true);
+    });
 
-      expect(wrapper.isEmptyRender()).toBe(true);
+    it('should not render children if there is no page and NBR mode is false', () => {
+      wrapper.setState({ page: undefined });
+      wrapper.setProps({ configuration: { ...config, NBRMode: false } });
+
+      expect(wrapper.contains(children)).toBe(false);
+    });
+
+    it('should render children if there is no page and NBR mode is true', () => {
+      wrapper.setState({ page: undefined });
+      wrapper.setProps({ configuration: { ...config, NBRMode: true } });
+
+      expect(wrapper.contains(children)).toBe(true);
+    });
+
+    it('should run child component effects while retrieving Page model when NBR mode is true', () => {
+      jest.useFakeTimers();
+
+      const initializeDone = jest.fn();
+      const someEffect = jest.fn();
+
+      function MyComponent(): JSX.Element {
+        useEffect(() => someEffect());
+        return <></>;
+      }
+
+      const page = initialize(config);
+      mocked(initialize).mockClear();
+      mocked(initialize).mockImplementationOnce(() => {
+        setTimeout(initializeDone, 1000);
+        return page;
+      });
+
+      mount(
+        <BrPage configuration={{ ...config, NBRMode: true }} mapping={mapping}>
+          <MyComponent />
+        </BrPage>,
+      );
+
+      jest.runAllTimers();
+      const someEffectOrder = someEffect.mock.invocationCallOrder[0];
+      const initializeDoneOrder = initializeDone.mock.invocationCallOrder[0];
+      expect(someEffectOrder).toBeLessThan(initializeDoneOrder);
+
+      jest.useRealTimers();
+    });
+
+    it('should mount children if there is no page and NBR mode is true', () => {});
+
+    it('should keep children mounted as page becomes available if there is no page and NBR mode is true', () => {});
+
+    it('should render BrPageContext.provider', () => {
+      const page = wrapper.state('page')!;
+      expect(wrapper.find('ContextProvider').first().prop('value')).toEqual(page);
+    });
+
+    it('should render BrMappingContext.provider', () => {
+      expect(wrapper.find('ContextProvider').last().prop('value')).toEqual(mapping);
     });
 
     it('should render nothing if there is an error loading the page', async () => {
@@ -140,25 +197,12 @@ describe('BrPage', () => {
       expect(setState.mock.calls[0][0]).toThrowError(error);
     });
 
-    it('should render BrPageContext.provider', () => {
-      const page = wrapper.state('page')!;
-      expect(wrapper.find('ContextProvider').first().prop('value')).toEqual(page);
-    });
-
-    it('should render BrMappingContext.provider', () => {
-      expect(wrapper.find('ContextProvider').last().prop('value')).toEqual(mapping);
-    });
-
     it('should render root component', () => {
       const node = wrapper.find(BrNode);
       const root = wrapper.state('page')!.getComponent();
 
       expect(node.exists()).toBe(true);
       expect(node.prop('component')).toBe(root);
-    });
-
-    it('should render children', () => {
-      expect(wrapper.contains(children)).toBe(true);
     });
   });
 });

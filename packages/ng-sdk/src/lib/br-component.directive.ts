@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Bloomreach
+ * Copyright 2020-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,17 +36,17 @@ export interface BrComponentContext {
   /**
    * The implicit value of the context is pointing to the current component.
    */
-  $implicit: Component;
+  $implicit?: Component;
 
   /**
    * The current component.
    */
-  component: Component;
+  component?: Component;
 
   /**
    * The current page.
    */
-  page: Page;
+  page?: Page;
 }
 
 /**

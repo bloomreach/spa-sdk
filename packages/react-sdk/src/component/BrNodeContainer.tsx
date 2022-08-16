@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2021 Bloomreach
+ * Copyright 2019-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ import {
 
 export class BrNodeContainer extends BrNodeComponent<Container> {
   protected getMapping(): React.ComponentType<BrProps> {
-    const type = this.props.component.getType();
+    const type = this.props.component?.getType();
 
     if (type && type in this.context) {
       return this.context[type] as React.ComponentType<BrProps>;

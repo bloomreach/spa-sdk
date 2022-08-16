@@ -1,5 +1,5 @@
 /*
- * Copyright 2020-2021 Bloomreach
+ * Copyright 2020-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -59,11 +59,11 @@ export class BrNodeContainerItemDirective
 
     super.ngOnChanges(changes);
 
-    this.component.on('update', this.onUpdate);
+    this.component?.on('update', this.onUpdate);
   }
 
   ngOnDestroy(): void {
-    this.component.off('update', this.onUpdate);
+    this.component?.off('update', this.onUpdate);
   }
 
   private onUpdate(): void {
@@ -73,7 +73,7 @@ export class BrNodeContainerItemDirective
   }
 
   protected getMapping(): Type<BrProps> | undefined {
-    const type = this.component.getType();
+    const type = this.component?.getType();
 
     if (type && type in this.page.mapping) {
       return this.page.mapping[type];

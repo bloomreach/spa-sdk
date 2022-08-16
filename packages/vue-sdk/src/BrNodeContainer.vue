@@ -1,5 +1,5 @@
 <!--
-  Copyright 2020 Bloomreach
+  Copyright 2020-2022 Bloomreach
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -83,13 +83,13 @@ import BrContainerUnorderedList from './BrContainerUnorderedList.vue';
   },
   computed: {
     component(this: BrNodeContainer) {
-      return this.component$();
+      return this.component$?.();
     },
     mapping(this: BrNodeContainer) {
       return this.mapping$();
     },
     page(this: BrNodeContainer) {
-      return this.page$();
+      return this.page$?.();
     },
   },
   data: () => ({
@@ -100,10 +100,10 @@ import BrContainerUnorderedList from './BrContainerUnorderedList.vue';
   }),
 })
 export default class BrNodeContainer extends Vue {
-  @Inject() private component$!: () => Container;
+  @Inject() private component$?: () => Container;
 
   @Inject() private mapping$!: () => Record<string, Vue.Component>;
 
-  @Inject() private page$!: () => Page;
+  @Inject() private page$?: () => Page;
 }
 </script>

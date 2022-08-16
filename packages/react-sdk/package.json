@@ -1,6 +1,6 @@
 {
   "name": "@bloomreach/react-sdk",
-  "version": "15.5.0",
+  "version": "16.0.0-alpha.0",
   "description": "Bloomreach SPA SDK for React",
   "keywords": [
     "bloomreach",
@@ -28,6 +28,7 @@
   ],
   "scripts": {
     "build": "rollup -c rollup.config.js",
+    "dev": "npm run build -- --watch",
     "lint": "eslint --ext js,ts,tsx src",
     "prepack": "$npm_execpath run build",
     "test": "jest --coverage"
@@ -39,7 +40,7 @@
     "last 1 edge version"
   ],
   "dependencies": {
-    "@bloomreach/spa-sdk": "15.5.0"
+    "@bloomreach/spa-sdk": "16.0.0-alpha.0"
   },
   "peerDependencies": {
     "react": "^16.14 || ^17.0"
@@ -72,6 +73,9 @@
   },
   "eslintConfig": {
     "extends": "@bloomreach/eslint-config-react",
+    "rules": {
+      "react/require-default-props": "off"
+    },
     "overrides": [
       {
         "files": "*.spec.tsx",

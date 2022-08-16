@@ -19,8 +19,8 @@ import { Document, ImageSet } from '@bloomreach/spa-sdk';
 import { BrManageContentButton, BrProps } from '@bloomreach/react-sdk';
 
 export function Content(props: BrProps): JSX.Element | null {
-  const { document: documentRef } = props.component.getModels<DocumentModels>();
-  const document = documentRef && props.page.getContent<Document>(documentRef);
+  const documentRef = props.component?.getModels<DocumentModels>().document;
+  const document = documentRef && props.page?.getContent<Document>(documentRef);
 
   if (!document) {
     return null;
@@ -34,17 +34,17 @@ export function Content(props: BrProps): JSX.Element | null {
     image: imageRef,
     title,
   } = document.getData<DocumentData>();
-  const image = imageRef && props.page.getContent<ImageSet>(imageRef);
+  const image = imageRef && props.page?.getContent<ImageSet>(imageRef);
 
   return (
-    <div className={props.page.isPreview() ? 'has-edit-button' : ''}>
+    <div className={props.page?.isPreview() ? 'has-edit-button' : ''}>
       <BrManageContentButton content={document} />
       {/* eslint-disable-next-line @next/next/no-img-element */}
       {image && <img className="img-fluid mb-3" src={image.getOriginal()?.getUrl()} alt={title} />}
       {title && <h1>{title}</h1>}
       {author && <p className="mb-3 text-muted">{author}</p>}
       {date && <p className="mb-3 small text-muted">{new Date(date).toDateString()}</p>}
-      {content && (
+      {content && props.page && (
         <div dangerouslySetInnerHTML={{ __html: props.page.rewriteLinks(props.page.sanitize(content.value)) }} />
       )}
     </div>

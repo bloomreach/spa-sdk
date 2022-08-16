@@ -1,6 +1,6 @@
 {
   "name": "@bloomreach/spa-sdk",
-  "version": "15.5.0",
+  "version": "16.0.0-alpha.0",
   "description": "Bloomreach SPA SDK",
   "keywords": [
     "bloomreach",
@@ -28,6 +28,7 @@
   ],
   "scripts": {
     "build": "rollup -c rollup.config.js",
+    "dev": "npm run build -- --watch",
     "docs": "typedoc",
     "lint": "eslint --ext js,ts src",
     "prepack": "$npm_execpath run build",
