@@ -23,12 +23,7 @@
         <br-node-component v-for="(component, key) in children" :key="key" :component="component" />
       </br-node-container>
 
-      <component
-        v-else-if="name in mapping"
-        :is="mapping[name]"
-        :component="component"
-        :page="page"
-      />
+      <component v-else-if="name in mapping" :is="mapping[name]" :component="component" :page="page" />
 
       <br-node-component v-else v-for="(component, key) in children" :key="key" :component="component" />
     </slot>
