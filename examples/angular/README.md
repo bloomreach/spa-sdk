@@ -95,7 +95,6 @@ export class IndexComponent implements OnInit {
     this.configuration = {
       endpoint,
       request,
-      endpointQueryParameter: 'endpoint',
       path: router.url,
       // Provide authorization token and server id if they exist to the SPA-SDK initialization method.
       ...(authorizationToken ? { authorizationToken } : {}),

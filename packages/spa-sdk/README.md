@@ -120,7 +120,6 @@ The `initialize` function supports several options you may use to customize page
 | **`authorizationHeader`** <br> Authorization header for the Page Model API. <br><br> Required: no <br> Default: `"Authorization"` |
 | **`authorizationQueryParameter`** <br> The query string parameter used to pass authorization header value. <br><br> Required: no <br> Default: `"token"` |
 | **`authorizationToken`** <br> Authorization token for the Page Model API. By default, the SDK will try to extract the token from the request query string using `authorizationQueryParameter` option. <br><br> Required: no <br> Default: _none_ |
-| **`endpointQueryParameter`** <br> The query string parameter used as the brXM endpoint (`cmsBaseUrl`). The option will be ignored if the `cmsBaseUrl` option is not empty. In case when this option is used, the `apiBaseUrl` will be prepended with the value from the query parameter. This option should be used only for testing or debugging. By default, the option is disabled. <br><br> Required: no <br> Default: _none_ |
 | **`serverId`** <br> Cluster node identifier. By default, the SDK will try to extract the value from the request query string using `serverIdQueryParameter` option. <br><br> Required: no <br> Default: _none_ |
 | **`serverIdHeader`** <br> Header identifying the current cluster node. <br><br> Required: no <br> Default: `"Server-Id"` |
 | **`serverIdQueryParameter`** <br> The query string parameter used to pass a cluster node identifier. <br><br> Required: no <br> Default: `"server-id"` |

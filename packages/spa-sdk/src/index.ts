@@ -176,7 +176,6 @@ function initializeWithJwt10(
   logger.info('Using Page Model API 1.0.');
 
   const authorizationParameter = configuration.authorizationQueryParameter ?? DEFAULT_AUTHORIZATION_PARAMETER;
-  const endpointParameter = configuration.endpointQueryParameter ?? '';
   const serverIdParameter = configuration.serverIdQueryParameter ?? DEFAULT_SERVER_ID_PARAMETER;
   const campaignParameter = DEFAULT_CAMPAIGN_VARIANT_PARAMETER_URL;
   const segmentParameter = DEFAULT_SEGMENT_PARAMETER_URL;
@@ -184,24 +183,16 @@ function initializeWithJwt10(
 
   const { url: path, searchParams } = extractSearchParams(
     configuration.path ?? configuration.request?.path ?? '/',
-    [
-      authorizationParameter,
-      serverIdParameter,
-      endpointParameter,
-      campaignParameter,
-      segmentParameter,
-      ttlParameter,
-    ].filter(Boolean),
+    [authorizationParameter, serverIdParameter, campaignParameter, segmentParameter, ttlParameter].filter(Boolean),
   );
 
   const authorizationToken = searchParams.get(authorizationParameter) ?? undefined;
-  const endpoint = searchParams.get(endpointParameter) ?? undefined;
   const serverId = searchParams.get(serverIdParameter) ?? undefined;
   const campaignId = searchParams.get(campaignParameter) ?? undefined;
   const segmentId = searchParams.get(segmentParameter) ?? undefined;
   const ttl = searchParams.get(ttlParameter) ?? undefined;
 
-  let endpointUrl = configuration.endpoint ?? endpoint;
+  let endpointUrl = configuration.endpoint;
 
   const campaignVariantId = Campaign.GET_VARIANT_ID(campaignId, segmentId, ttl, configuration.request);
   const segmentIds = Segmentation.GET_SEGMENT_IDS(configuration.request);
@@ -221,7 +212,7 @@ function initializeWithJwt10(
     apiVersion: '1.0',
     endpoint: endpointUrl,
     baseUrl: appendSearchParams(configuration.baseUrl ?? '', searchParams),
-    origin: configuration.origin ?? parseUrl(configuration.endpoint ?? endpoint ?? '').origin,
+    origin: configuration.origin ?? parseUrl(configuration.endpoint ?? '').origin,
     NBRMode: configuration.NBRMode || false,
   };
 

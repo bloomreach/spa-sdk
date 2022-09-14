@@ -23,7 +23,6 @@ import { Banner, Content, Menu, NewsList, CookieConsent } from './components';
 export default function App({ location }: RouteComponentProps): JSX.Element {
   const configuration = {
     endpoint: process.env.REACT_APP_BRXM_ENDPOINT,
-    endpointQueryParameter: 'endpoint',
     httpClient: axios,
     path: `${location.pathname}${location.search}`,
     debug: true,

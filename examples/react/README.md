@@ -85,7 +85,6 @@ export default function App({ location }: RouteComponentProps): JSX.Element {
 
   const configuration = {
     endpoint: process.env.REACT_APP_BRXM_ENDPOINT,
-    endpointQueryParameter: 'endpoint',
     httpClient: axios,
     path: `${location.pathname}${location.search}`,
     // Provide authorization token and server id if they exist to the SPA-SDK initialization method.
