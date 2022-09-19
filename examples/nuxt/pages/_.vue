@@ -63,7 +63,6 @@ import CookieConsent from '~/components/BrCookieConsent.vue';
     const configuration = {
       baseUrl: process.env.BASE_URL !== '/' ? process.env.BASE_URL : '',
       endpoint: process.env.VUE_APP_BRXM_ENDPOINT,
-      endpointQueryParameter: 'endpoint',
       path: context.route.fullPath,
       visitor: context.nuxtState?.visitor,
       debug: true,

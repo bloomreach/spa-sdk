@@ -87,8 +87,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   const configuration = {
     path,
-    endpoint: process.env.BRXM_ENDPOINT ?? null,
-    endpointQueryParameter: 'endpoint',
+    endpoint: process.env.BRXM_ENDPOINT,
     // Provide authorization token and server id if they exist to the SPA-SDK initialization method.
     ...(authorizationToken ? { authorizationToken } : {}),
     ...(serverId ? { serverId } : {}),
