@@ -1,7 +1,7 @@
 {
   "name": "@bloomreach/example-vue",
   "description": "Example Vue.js SPA for Bloomreach Experience",
-  "version": "16.0.0",
+  "version": "17.0.0",
   "private": true,
   "scripts": {
     "build": "vue-cli-service build",
@@ -18,8 +18,8 @@
   ],
   "dependencies": {
     "@bloomreach/segmentation": "0.0.13",
-    "@bloomreach/spa-sdk": "16.0.0",
-    "@bloomreach/vue-sdk": "16.0.0",
+    "@bloomreach/spa-sdk": "17.0.0",
+    "@bloomreach/vue-sdk": "17.0.0",
     "axios": "0.26.1",
     "core-js": "3.16.0",
     "vue": "2.6.14",

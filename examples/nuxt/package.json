@@ -1,6 +1,6 @@
 {
   "name": "@bloomreach/example-nuxt",
-  "version": "16.0.0",
+  "version": "17.0.0",
   "description": "Example Nuxt.js SPA for Bloomreach Experience",
   "private": true,
   "scripts": {
@@ -12,8 +12,8 @@
   },
   "dependencies": {
     "@bloomreach/segmentation": "0.0.13",
-    "@bloomreach/spa-sdk": "16.0.0",
-    "@bloomreach/vue-sdk": "16.0.0",
+    "@bloomreach/spa-sdk": "17.0.0",
+    "@bloomreach/vue-sdk": "17.0.0",
     "@nuxtjs/axios": "5.13.6",
     "@nuxtjs/dotenv": "1.4.1",
     "consola": "2.15.3",
