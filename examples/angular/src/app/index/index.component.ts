@@ -50,7 +50,6 @@ export class IndexComponent implements OnInit {
     this.configuration = {
       endpoint,
       request,
-      endpointQueryParameter: 'endpoint',
       path: router.url,
       debug: true,
     } as IndexComponent['configuration'];

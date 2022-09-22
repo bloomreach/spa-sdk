@@ -7,7 +7,7 @@ HEROKU_TEAM="bloomreach"
 APP_TYPE=$2;
 APP_NAME=$3;
 APP_VERSION=$4;
-NAME=$5 || "${APP_NAME}-${APP_TYPE}-${APP_VERSION}";
+NAME=${5:-"${APP_NAME}-${APP_TYPE}-${APP_VERSION}"};
 
 if [[ $APP_NAME = "ng" ]]
 then

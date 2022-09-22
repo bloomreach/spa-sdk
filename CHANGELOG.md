@@ -2,10 +2,20 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### [v16.0.0](https://github.com/bloomreach/spa-sdk/compare/v15.5.1...v16.0.0)
+#### [17.0.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-16.0.0...17.0.0)
+
+- SPASDK-129 Remove endpointQueryParameter [`#85`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/85)
+- SPASDK-129 Fix lint warnings in vue-sdk and ng-sdk [`#SPASDK-129`](https://issues.onehippo.com/browse/SPASDK-129)
+- SPASDK-129 Remove endpointQueryParameter [`#SPASDK-129`](https://issues.onehippo.com/browse/SPASDK-129)
+- TRIVIAL Fix bash name substitution in heroku deploy script [`721b468`](https://github.com/bloomreach/spa-sdk/commit/721b46871e938630f3f3a51ca9343425868f8c49)
+
+### [spa-sdk-16.0.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.5.0...spa-sdk-16.0.0)
+
+> 16 August 2022
 
 - SPASDK-123 Add getLocale to Page object [`#81`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/81)
 - SPASDK-119 Improve heroku deploy speed by using lerna filter flags [`#80`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/80)
+- SPASDK-128 Bumping versions to 16.0.0 [`#SPASDK-128`](https://issues.onehippo.com/browse/SPASDK-128)
 - SPASDK-124 Merge branch 'feature/SPADSK-124-nbr-react' into 'development' [`#SPASDK-124`](https://issues.onehippo.com/browse/SPASDK-124)
 - SPASDK-124 Set debug mode to true by default on example apps [`#SPASDK-124`](https://issues.onehippo.com/browse/SPASDK-124)
 - SPASDK-124 Update copyright on files [`#SPASDK-124`](https://issues.onehippo.com/browse/SPASDK-124)
@@ -19,12 +29,6 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-124 Add 'dev' script to all packages for easy development start [`#SPASDK-124`](https://issues.onehippo.com/browse/SPASDK-124)
 - SPASDK-123 Add getLocale to Page object [`#SPASDK-123`](https://issues.onehippo.com/browse/SPASDK-123)
 - SPASDK-119 Improve heroku deploy speed by using lerna filter flags [`#SPASDK-119`](https://issues.onehippo.com/browse/SPASDK-119)
-
-#### [v15.5.1](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.5.0...v15.5.1)
-
-> 24 June 2022
-
-- TRIVIAL Bump versions to 15.5.1 [`94d2699`](https://github.com/bloomreach/spa-sdk/commit/94d26991ce5e8d4f2916aa6756b0c927b721a25e)
 
 #### [spa-sdk-15.5.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.4.6...spa-sdk-15.5.0)
 

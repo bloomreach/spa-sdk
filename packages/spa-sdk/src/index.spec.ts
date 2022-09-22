@@ -54,20 +54,6 @@ describe('initialize', () => {
     document.cookie = '__br__ttl=; Max-Age=0;';
   });
 
-  it('should initialize using endpoint from the query string', async () => {
-    httpClient.mockClear();
-
-    const page = await initialize({
-      httpClient,
-      endpointQueryParameter: 'endpoint',
-      request: { path: '/?endpoint=http://example.com/api' },
-    });
-    destroy(page);
-
-    expect(httpClient).toBeCalled();
-    expect(httpClient.mock.calls[0]).toMatchSnapshot();
-  });
-
   it('should be a page entity', () => {
     expect(defaultPage.getTitle()).toBe('Homepage');
   });
@@ -233,19 +219,6 @@ describe('initialize', () => {
     await defaultPage.sync();
 
     expect(postMessageSpy).toBeCalledWith(expect.anything(), 'http://localhost:8080');
-  });
-
-  it('should use an origin from the endpoint parameter', async () => {
-    const page = await initialize({
-      httpClient,
-      endpointQueryParameter: 'endpoint',
-      request: { path: '/?endpoint=https://api.example.com/api' },
-    });
-    const postMessageSpy = spyOn(window.parent, 'postMessage').and.callThrough();
-    await page.sync();
-    destroy(page);
-
-    expect(postMessageSpy).toBeCalledWith(expect.anything(), 'https://api.example.com');
   });
 
   it('should use a custom origin', async () => {

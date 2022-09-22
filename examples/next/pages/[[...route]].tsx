@@ -28,8 +28,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req: request, res
 
   const configuration = {
     path,
-    endpoint: process.env.BRXM_ENDPOINT ?? null,
-    endpointQueryParameter: 'endpoint',
+    endpoint: process.env.BRXM_ENDPOINT,
     debug: true,
   };
   const page = await initialize({ ...configuration, request, httpClient: axios });

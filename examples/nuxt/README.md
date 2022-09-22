@@ -88,7 +88,6 @@ Add `cookie-universal-nuxt` to `nuxt.config.js`:
     const configuration = {
       baseUrl: process.env.BASE_URL !== '/' ? process.env.BASE_URL : '',
       endpoint: process.env.VUE_APP_BRXM_ENDPOINT,
-      endpointQueryParameter: 'endpoint',
       path: context.route.fullPath,
       visitor: context.nuxtState?.visitor,
       // Provide authorization token and server id if they exist to the SPA-SDK initialization method.
