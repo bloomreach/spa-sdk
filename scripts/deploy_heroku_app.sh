@@ -2,6 +2,7 @@
 
 set -e
 
+HEROKU_TEAM="bloomreach"
 APP_TYPE=$2;
 APP_NAME=$3;
 APP_VERSION=$4;
@@ -42,7 +43,7 @@ heroku buildpacks:set --app=$NAME heroku/nodejs
 if [[ $APP_TYPE = "csr" ]]
 then
   heroku buildpacks:add --app=$NAME https://github.com/timanovsky/subdir-heroku-buildpack.git
-  heroku buildpacks:add --app=$NAME https://github.com/heroku/heroku-buildpack-static.git
+  heroku buildpacks:add --app=$NAME https://github.com/heroku/heroku-buildpack-nginx.git
 elif [[ $APP_TYPE = "ssr" ]]
 then
   heroku buildpacks:add --app=$NAME https://github.com/heroku/heroku-buildpack-multi-procfile
@@ -50,8 +51,8 @@ fi
 
 # Set common config options
 heroku config:set --app=$NAME PROJECT_PATH=$APP_PATH
-heroku config:set --app=$NAME PROCFILE=$APP_PATH/Procfile
 heroku config:set --app=$NAME PACKAGE=$APP_PACKAGE
+heroku config:set --app=$NAME PROCFILE=$APP_PATH/Procfile
 
 # Set project specific config options
 if [[ $APP_TYPE = "ssr" ]] && [[ $APP_NAME = "ng" ]]
