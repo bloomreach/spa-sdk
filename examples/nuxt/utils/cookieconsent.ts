@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Bloomreach
+ * Copyright 2021-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 /* eslint-disable max-len */
 import { initializePersonalization, initializeCampaignPersonalization } from '@bloomreach/segmentation';
+import { NUXT_APP_EXPONEA_API_URL, NUXT_APP_EXPONEA_PROJECT_TOKEN } from '~/utils/constants';
 
 declare global {
   interface Window {
@@ -43,8 +44,8 @@ declare global {
 
 const COOKIE_CONSENTS_EXPIRATION_VALUE = 28; // Days
 
-const exponeaProjectToken = process.env.NUXT_APP_EXPONEA_PROJECT_TOKEN;
-const exponeaApiUrl = process.env.NUXT_APP_EXPONEA_API_URL;
+const exponeaProjectToken = NUXT_APP_EXPONEA_PROJECT_TOKEN;
+const exponeaApiUrl = NUXT_APP_EXPONEA_API_URL;
 
 const injectScript = (scriptContent: string): void => {
   const scriptTag = document.createElement('script');
