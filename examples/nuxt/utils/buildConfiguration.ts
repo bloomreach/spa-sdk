@@ -34,6 +34,7 @@ export function buildConfiguration(
   const configuration: ConfigurationBuilder = {
     path,
   };
+  configuration.baseUrl = baseUrl;
   if (endpoint) {
     configuration.endpoint = endpoint;
     // The else statement below is needed for multi-tenant support
@@ -42,8 +43,8 @@ export function buildConfiguration(
   } else if (hasMultiTenantSupport) {
     const endpointQueryParameter = 'endpoint';
     configuration.endpoint = query[endpointQueryParameter];
+    configuration.baseUrl = `?${endpointQueryParameter}=${query[endpointQueryParameter]}`;
   }
-  configuration.baseUrl = baseUrl;
   configuration.debug = true;
   return configuration;
 }

@@ -21,6 +21,7 @@ import { BR_MULTI_TENANT_SUPPORT, BRXM_ENDPOINT } from './constants';
 
 type BuildConfigurationOptions = {
   endpoint: string | (string | null)[];
+  baseUrl: string;
 };
 
 type ConfigurationBuilder = Omit<Configuration & Partial<BuildConfigurationOptions>, 'httpClient'>;
@@ -43,6 +44,7 @@ export function buildConfiguration(
   } else if (hasMultiTenantSupport) {
     const endpointQueryParameter = 'endpoint';
     configuration.endpoint = query[endpointQueryParameter];
+    configuration.baseUrl = `?${endpointQueryParameter}=${query[endpointQueryParameter]}`;
   }
   if (request) {
     configuration.request = request;
