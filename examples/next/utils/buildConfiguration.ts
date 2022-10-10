@@ -14,8 +14,7 @@
  * limitations under the License.
  */
 
-import { ParsedUrlQuery } from 'querystring';
-import { Configuration } from '@bloomreach/spa-sdk';
+import { Configuration, extractSearchParams } from '@bloomreach/spa-sdk';
 import { NEXT_PUBLIC_BR_MULTI_TENANT_SUPPORT, BRXM_ENDPOINT } from './constants';
 
 type BuildConfigurationOptions = {
@@ -27,7 +26,6 @@ type ConfigurationBuilder = Omit<Configuration & Partial<BuildConfigurationOptio
 
 export function buildConfiguration(
   path: string,
-  query: ParsedUrlQuery,
   endpoint: string = BRXM_ENDPOINT,
   hasMultiTenantSupport: boolean = NEXT_PUBLIC_BR_MULTI_TENANT_SUPPORT,
 ): ConfigurationBuilder {
@@ -41,8 +39,11 @@ export function buildConfiguration(
     // It's used mainly by BloomReach and is not needed for most customers
   } else if (hasMultiTenantSupport) {
     const endpointQueryParameter = 'endpoint';
-    configuration.endpoint = query[endpointQueryParameter];
-    configuration.baseUrl = `?${endpointQueryParameter}=${query[endpointQueryParameter]}`;
+    const { url, searchParams } = extractSearchParams(path, [endpointQueryParameter].filter(Boolean));
+
+    configuration.endpoint = searchParams.get(endpointQueryParameter) ?? '';
+    configuration.baseUrl = `?${endpointQueryParameter}=${searchParams.get(endpointQueryParameter)}`;
+    configuration.path = url;
   }
   configuration.debug = true;
   return configuration;

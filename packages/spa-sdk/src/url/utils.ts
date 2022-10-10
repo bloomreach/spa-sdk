@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Bloomreach
+ * Copyright 2020-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -71,6 +71,12 @@ export function appendSearchParams(url: string, params: URLSearchParams): string
   return buildUrl({ hash, origin, pathname, searchParams: mergeSearchParams(searchParams, params) });
 }
 
+/**
+ * Extracts query parameters from URL and returns URL object that contains URL path and extracted parameters
+ *
+ * @param url The URL of the page.
+ * @param params Parameters to extract.
+ */
 export function extractSearchParams(
   url: string,
   params: string[],

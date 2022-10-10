@@ -24,15 +24,10 @@ import { relevance } from '@bloomreach/spa-sdk/lib/express';
 import { Banner, Content, Menu, NewsList, CookieConsent } from '../components';
 import { buildConfiguration } from '../utils/buildConfiguration';
 
-export const getServerSideProps: GetServerSideProps = async ({
-  req: request,
-  res: response,
-  resolvedUrl: path,
-  query,
-}) => {
+export const getServerSideProps: GetServerSideProps = async ({ req: request, res: response, resolvedUrl: path }) => {
   relevance(request, response);
 
-  const configuration = buildConfiguration(path ?? '/', query);
+  const configuration = buildConfiguration(path ?? '/');
   const page = await initialize({ ...configuration, request, httpClient: axios });
 
   return { props: { configuration, page: page.toJSON() } };

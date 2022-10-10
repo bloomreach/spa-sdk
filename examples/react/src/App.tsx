@@ -22,8 +22,7 @@ import { Banner, Content, Menu, NewsList, CookieConsent } from './components';
 import { buildConfiguration } from './utils/buildConfiguration';
 
 export default function App({ location }: RouteComponentProps): JSX.Element {
-  const params = new URLSearchParams(location.search);
-  const configuration = buildConfiguration(`${location.pathname}${location.search}`, params, axios);
+  const configuration = buildConfiguration(`${location.pathname}${location.search}`, axios);
   const mapping = { Banner, Content, 'News List': NewsList, 'Simple Content': Content };
 
   return (

@@ -363,3 +363,4 @@ export {
   TYPE_MANAGE_CONTENT_BUTTON,
   TYPE_MANAGE_MENU_BUTTON,
 } from './page';
+export { extractSearchParams } from './url/utils';

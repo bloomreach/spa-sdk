@@ -65,7 +65,7 @@ import { buildConfiguration } from '@/utils/buildConfiguration';
 @Component({
   components: { 'br-cookie-consent': CookieConsent },
   data(this: App) {
-    const configuration = buildConfiguration(this.$route.fullPath, this.$route.query, axios);
+    const configuration = buildConfiguration(this.$route.fullPath, axios);
     return {
       configuration,
       mapping: {

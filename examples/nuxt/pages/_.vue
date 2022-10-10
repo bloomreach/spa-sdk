@@ -61,7 +61,7 @@ import { buildConfiguration } from '~/utils/buildConfiguration';
 @Component({
   components: { 'br-cookie-consent': CookieConsent },
   async asyncData(context) {
-    const configuration = buildConfiguration(context.route.fullPath, context.route.query);
+    const configuration = buildConfiguration(context.route.fullPath);
 
     const page = await initialize({
       ...configuration,

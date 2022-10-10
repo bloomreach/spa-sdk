@@ -15,7 +15,7 @@
  */
 
 import { Component, InjectionToken, Inject, OnInit, Optional } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { REQUEST } from '@nguniversal/express-engine/tokens';
 import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -48,13 +48,8 @@ export class IndexComponent implements OnInit {
 
   private navigationEnd: Observable<NavigationEnd>;
 
-  constructor(
-    router: Router,
-    activatedRoute: ActivatedRoute,
-    @Inject(ENDPOINT) endpoint?: string,
-    @Inject(REQUEST) @Optional() request?: Request,
-  ) {
-    this.configuration = buildConfiguration(router.url, activatedRoute.snapshot.queryParams, request, endpoint);
+  constructor(router: Router, @Inject(ENDPOINT) endpoint?: string, @Inject(REQUEST) @Optional() request?: Request) {
+    this.configuration = buildConfiguration(router.url, request, endpoint);
 
     this.navigationEnd = router.events.pipe(
       filter((event) => event instanceof NavigationEnd),
