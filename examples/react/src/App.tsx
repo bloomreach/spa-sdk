@@ -19,14 +19,10 @@ import axios from 'axios';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { BrComponent, BrPage, BrPageContext } from '@bloomreach/react-sdk';
 import { Banner, Content, Menu, NewsList, CookieConsent } from './components';
+import { buildConfiguration } from './utils/buildConfiguration';
 
 export default function App({ location }: RouteComponentProps): JSX.Element {
-  const configuration = {
-    endpoint: process.env.REACT_APP_BRXM_ENDPOINT,
-    httpClient: axios,
-    path: `${location.pathname}${location.search}`,
-    debug: true,
-  };
+  const configuration = buildConfiguration(`${location.pathname}${location.search}`, axios);
   const mapping = { Banner, Content, 'News List': NewsList, 'Simple Content': Content };
 
   return (
@@ -63,7 +59,7 @@ export default function App({ location }: RouteComponentProps): JSX.Element {
         </div>
       </footer>
       <BrPageContext.Consumer>
-        {(page) => <CookieConsent isPreview={!!page?.isPreview()} path={configuration.path} />}
+        {(page) => <CookieConsent isPreview={!!page?.isPreview()} path={configuration.path ?? ''} />}
       </BrPageContext.Consumer>
     </BrPage>
   );

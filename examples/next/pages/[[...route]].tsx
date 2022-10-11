@@ -22,15 +22,12 @@ import { BrComponent, BrPage, BrPageContext } from '@bloomreach/react-sdk';
 import { initialize } from '@bloomreach/spa-sdk';
 import { relevance } from '@bloomreach/spa-sdk/lib/express';
 import { Banner, Content, Menu, NewsList, CookieConsent } from '../components';
+import { buildConfiguration } from '../utils/buildConfiguration';
 
 export const getServerSideProps: GetServerSideProps = async ({ req: request, res: response, resolvedUrl: path }) => {
   relevance(request, response);
 
-  const configuration = {
-    path,
-    endpoint: process.env.BRXM_ENDPOINT,
-    debug: true,
-  };
+  const configuration = buildConfiguration(path ?? '/');
   const page = await initialize({ ...configuration, request, httpClient: axios });
 
   return { props: { configuration, page: page.toJSON() } };

@@ -12,7 +12,8 @@
     "lint": "ng lint",
     "dev:ssr": "ng run example-angular:serve-ssr",
     "start:ssr": "node dist/server/main.js",
-    "prerender": "ng run example-angular:prerender"
+    "prerender": "ng run example-angular:prerender",
+    "prebuild:custom": "node pre-build.js"
   },
   "dependencies": {
     "@angular/animations": "11.2.14",
@@ -48,13 +49,15 @@
     "@types/jest": "26.0.24",
     "jest": "26.6.3",
     "ts-node": "10.1.0",
-    "typescript": "4.1.6"
+    "typescript": "4.1.6",
+    "dotenv": "16.0.3"
   },
   "eslintConfig": {
     "extends": [
       "@bloomreach/eslint-config-angular"
     ],
     "parserOptions": {
+      "ecmaVersion": 6,
       "project": [
         "tsconfig.json",
         "tsconfig.spec.json"

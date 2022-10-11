@@ -27,8 +27,10 @@ import { BannerComponent } from '../banner/banner.component';
 import { ContentComponent } from '../content/content.component';
 import { MenuComponent } from '../menu/menu.component';
 import { NewsListComponent } from '../news-list/news-list.component';
+import { buildConfiguration } from '../utils/buildConfiguration';
 
 export const ENDPOINT = new InjectionToken<string>('brXM API endpoint');
+
 @Component({
   selector: 'br-index',
   templateUrl: './index.component.html',
@@ -47,12 +49,7 @@ export class IndexComponent implements OnInit {
   private navigationEnd: Observable<NavigationEnd>;
 
   constructor(router: Router, @Inject(ENDPOINT) endpoint?: string, @Inject(REQUEST) @Optional() request?: Request) {
-    this.configuration = {
-      endpoint,
-      request,
-      path: router.url,
-      debug: true,
-    } as IndexComponent['configuration'];
+    this.configuration = buildConfiguration(router.url, request, endpoint);
 
     this.navigationEnd = router.events.pipe(
       filter((event) => event instanceof NavigationEnd),
