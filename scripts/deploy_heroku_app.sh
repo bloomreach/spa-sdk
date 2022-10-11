@@ -61,6 +61,27 @@ then
 elif [[ $APP_TYPE = "ssr" ]] && [[ $APP_NAME = "vue" ]]
 then
   heroku config:set --app=$NAME HOST=0.0.0.0
+  heroku config:set --app=$NAME NUXT_APP_BR_MULTI_TENANT_SUPPORT=true
+fi
+
+if [[ $APP_NAME = "ng" ]]
+then
+  heroku config:set --app=$NAME BR_MULTI_TENANT_SUPPORT=true
+fi
+
+if [[ $APP_TYPE = "csr" ]] && [[ $APP_NAME = "react" ]]
+then
+  heroku config:set --app=$NAME REACT_APP_BR_MULTI_TENANT_SUPPORT=true
+fi
+
+if [[ $APP_TYPE = "ssr" ]] && [[ $APP_NAME = "react" ]]
+then
+  heroku config:set --app=$NAME NEXT_PUBLIC_BR_MULTI_TENANT_SUPPORT=true
+fi
+
+if [[ $APP_TYPE = "csr" ]] && [[ $APP_NAME = "vue" ]]
+then
+  heroku config:set --app=$NAME VUE_APP_BR_MULTI_TENANT_SUPPORT=true
 fi
 
 git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/$NAME.git HEAD:refs/heads/main
