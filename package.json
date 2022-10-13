@@ -36,7 +36,7 @@
     "changelog": "auto-changelog",
     "docs": "lerna run docs",
     "deploy-to-heroku": "./scripts/deploy_heroku_app.sh ${0} ${1} ${2}",
-    "heroku-postbuild": "npm run build -- --scope $PACKAGE --include-dependencies && cd ${PROJECT_PATH:-.}",
+    "heroku-postbuild": "npm run prebuild:custom && npm run build -- --scope $PACKAGE --include-dependencies && cd ${PROJECT_PATH:-.}",
     "lint": "lerna run lint",
     "release": "lerna publish from-package",
     "test": "lerna run test"
