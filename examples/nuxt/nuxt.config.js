@@ -50,6 +50,11 @@ module.exports = {
   },
   env: {
     VUE_APP_CMS_BASE_URL: process.env.VUE_APP_CMS_BASE_URL,
+    NUXT_APP_BR_MULTI_TENANT_SUPPORT: process.env.NUXT_APP_BR_MULTI_TENANT_SUPPORT,
+    VUE_APP_BRXM_ENDPOINT: process.env.VUE_APP_BRXM_ENDPOINT,
+    BASE_URL: process.env.BASE_URL,
+    NUXT_APP_EXPONEA_PROJECT_TOKEN: process.env.NUXT_APP_EXPONEA_PROJECT_TOKEN,
+    NUXT_APP_EXPONEA_API_URL: process.env.NUXT_APP_EXPONEA_API_URL,
   },
   loading: { color: '#fff' },
   buildModules: ['@nuxt/typescript-build'],
