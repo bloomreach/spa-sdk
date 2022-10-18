@@ -2,9 +2,37 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### [17.0.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-16.0.0...17.0.0)
+#### [17.0.1](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-17.0.0...17.0.1)
+
+- SPASDK-129 Set environment variables for nuxt example app [`#90`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/90)
+- Resolve SPASDK-129 "Feature/ deploy heroku" [`#89`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/89)
+- Resolve SPASDK-129 "Feature/ multi tenant support" [`#88`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/88)
+- SPASDK-133 Heroku 22 support [`#87`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/87)
+- SPASDK-129 Set environment variables for nuxt example app [`#SPASDK-129`](https://issues.onehippo.com/browse/SPASDK-129)
+- SPASDK-129 Add prebuild command for Heroku [`#SPASDK-129`](https://issues.onehippo.com/browse/SPASDK-129)
+- SPASDK-129 Set environment variables for Heroku to use multitenant [`#SPASDK-129`](https://issues.onehippo.com/browse/SPASDK-129)
+- SPASDK-129 Export util function for extracting params from URL [`#SPASDK-129`](https://issues.onehippo.com/browse/SPASDK-129)
+- SPASDK-129 Persist endpoint query parameter in URL [`#SPASDK-129`](https://issues.onehippo.com/browse/SPASDK-129)
+- SPASDK-129 Add multi-tenant support for example apps [`#SPASDK-129`](https://issues.onehippo.com/browse/SPASDK-129)
+- SPASDK-133 License headers [`#SPASDK-133`](https://issues.onehippo.com/browse/SPASDK-133)
+- SPASDK-133 Remove angular package-lock [`#SPASDK-133`](https://issues.onehippo.com/browse/SPASDK-133)
+- SPASDK-133 Remove test token and port [`#SPASDK-133`](https://issues.onehippo.com/browse/SPASDK-133)
+- SPASDK-133 Heroku 22 support [`#SPASDK-133`](https://issues.onehippo.com/browse/SPASDK-133)
+- SPASDK-128 Merge branch 'development' into 'main' [`#SPASDK-128`](https://issues.onehippo.com/browse/SPASDK-128)
+- SPASDK-118 Add changelog for 15.5.0 [`#SPASDK-118`](https://issues.onehippo.com/browse/SPASDK-118)
+- SPASDK-118 Release 15.5.0 [`#SPASDK-118`](https://issues.onehippo.com/browse/SPASDK-118)
+- SPASDK-116 Release 15.4.6 [`#SPASDK-116`](https://issues.onehippo.com/browse/SPASDK-116)
+- TRIVIAL Merge branch 'main' into development [`c48825e`](https://github.com/bloomreach/spa-sdk/commit/c48825e35c7536354718ad2168971517da7f80dd)
+- TRIVIAL Merge branch 'development' into 'main' [`bd4ba15`](https://github.com/bloomreach/spa-sdk/commit/bd4ba15a2d771d208db3f7a0f88773b2384cc4d2)
+- TRIVIAL Merge branch 'development' into 'main' [`a540e23`](https://github.com/bloomreach/spa-sdk/commit/a540e23ddc5ee23d8dc82c60d969b1039dc656f9)
+- TRIVIAL Merge branch 'development' into 'main' [`3d91af7`](https://github.com/bloomreach/spa-sdk/commit/3d91af742fcb528c062fc2fd284e10611469dd91)
+
+### [spa-sdk-17.0.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-16.0.0...spa-sdk-17.0.0)
+
+> 19 September 2022
 
 - SPASDK-129 Remove endpointQueryParameter [`#85`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/85)
+- SPASDK-129 Bumping versions to 17.0.0 [`#SPASDK-129`](https://issues.onehippo.com/browse/SPASDK-129)
 - SPASDK-129 Fix lint warnings in vue-sdk and ng-sdk [`#SPASDK-129`](https://issues.onehippo.com/browse/SPASDK-129)
 - SPASDK-129 Remove endpointQueryParameter [`#SPASDK-129`](https://issues.onehippo.com/browse/SPASDK-129)
 - TRIVIAL Fix bash name substitution in heroku deploy script [`721b468`](https://github.com/bloomreach/spa-sdk/commit/721b46871e938630f3f3a51ca9343425868f8c49)
