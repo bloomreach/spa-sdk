@@ -60,19 +60,14 @@ import Content from './components/BrContent.vue';
 import Menu from './components/BrMenu.vue';
 import NewsList from './components/BrNewsList.vue';
 import CookieConsent from './components/BrCookieConsent.vue';
+import { buildConfiguration } from '@/utils/buildConfiguration';
 
 @Component({
   components: { 'br-cookie-consent': CookieConsent },
   data(this: App) {
+    const configuration = buildConfiguration(this.$route.fullPath, axios);
     return {
-      configuration: {
-        baseUrl: process.env.BASE_URL !== '/' ? process.env.BASE_URL : '',
-        endpoint: process.env.VUE_APP_BRXM_ENDPOINT,
-        endpointQueryParameter: 'endpoint',
-        httpClient: axios,
-        path: this.$route.fullPath,
-        debug: true,
-      },
+      configuration,
       mapping: {
         Banner,
         Content,

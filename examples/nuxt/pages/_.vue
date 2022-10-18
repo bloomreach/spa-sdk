@@ -56,21 +56,16 @@ import Content from '~/components/BrContent.vue';
 import Menu from '~/components/BrMenu.vue';
 import NewsList from '~/components/BrNewsList.vue';
 import CookieConsent from '~/components/BrCookieConsent.vue';
+import { buildConfiguration } from '~/utils/buildConfiguration';
 
 @Component({
   components: { 'br-cookie-consent': CookieConsent },
   async asyncData(context) {
-    const configuration = {
-      baseUrl: process.env.BASE_URL !== '/' ? process.env.BASE_URL : '',
-      endpoint: process.env.VUE_APP_BRXM_ENDPOINT,
-      endpointQueryParameter: 'endpoint',
-      path: context.route.fullPath,
-      visitor: context.nuxtState?.visitor,
-      debug: true,
-    };
+    const configuration = buildConfiguration(context.route.fullPath);
 
     const page = await initialize({
       ...configuration,
+      visitor: context.nuxtState?.visitor,
       httpClient: context.$axios,
       request: context.req,
     });

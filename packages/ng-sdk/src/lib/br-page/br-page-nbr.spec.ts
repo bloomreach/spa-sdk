@@ -16,7 +16,7 @@
 
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { Component, NO_ERRORS_SCHEMA, OnInit } from '@angular/core';
-import { ComponentFixture, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, flush, TestBed } from '@angular/core/testing';
 import { Component as BrComponent, initialize, Page } from '@bloomreach/spa-sdk';
 import { mocked } from 'ts-jest/utils';
 import { BrSdkModule } from '../br-sdk.module';

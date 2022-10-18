@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Bloomreach
+ * Copyright 2021-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 
 /* eslint-disable max-len */
 import { initializePersonalization, initializeCampaignPersonalization } from '@bloomreach/segmentation';
-import { environment } from '../../environments/environment';
+import { EXPONEA_API_URL, EXPONEA_PROJECT_TOKEN } from './constants';
 
 declare global {
   interface Window {
@@ -44,7 +44,8 @@ declare global {
 
 const COOKIE_CONSENTS_EXPIRATION_VALUE = 28; // Days
 
-const { exponeaProjectToken, exponeaApiUrl } = environment;
+const exponeaProjectToken = EXPONEA_PROJECT_TOKEN;
+const exponeaApiUrl = EXPONEA_API_URL;
 
 const injectScript = (scriptContent: string): void => {
   const scriptTag = document.createElement('script');

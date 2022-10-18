@@ -71,7 +71,6 @@ import cookie from 'cookie';
       configuration: {
         baseUrl: process.env.BASE_URL !== '/' ? process.env.BASE_URL : '',
         endpoint: process.env.VUE_APP_BRXM_ENDPOINT,
-        endpointQueryParameter: 'endpoint',
         httpClient: axios,
         path: this.$route.fullPath,
         // Provide authorization token and server id if they exist to the SPA-SDK initialization method.

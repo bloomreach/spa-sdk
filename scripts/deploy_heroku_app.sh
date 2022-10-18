@@ -2,10 +2,11 @@
 
 set -e
 
+HEROKU_TEAM="bloomreach"
 APP_TYPE=$2;
 APP_NAME=$3;
 APP_VERSION=$4;
-NAME=$5 || "${APP_NAME}-${APP_TYPE}-${APP_VERSION}";
+NAME=${5:-"${APP_NAME}-${APP_TYPE}-${APP_VERSION}"};
 
 if [[ $APP_NAME = "ng" ]]
 then
@@ -42,7 +43,7 @@ heroku buildpacks:set --app=$NAME heroku/nodejs
 if [[ $APP_TYPE = "csr" ]]
 then
   heroku buildpacks:add --app=$NAME https://github.com/timanovsky/subdir-heroku-buildpack.git
-  heroku buildpacks:add --app=$NAME https://github.com/heroku/heroku-buildpack-static.git
+  heroku buildpacks:add --app=$NAME https://github.com/heroku/heroku-buildpack-nginx.git
 elif [[ $APP_TYPE = "ssr" ]]
 then
   heroku buildpacks:add --app=$NAME https://github.com/heroku/heroku-buildpack-multi-procfile
@@ -50,8 +51,8 @@ fi
 
 # Set common config options
 heroku config:set --app=$NAME PROJECT_PATH=$APP_PATH
-heroku config:set --app=$NAME PROCFILE=$APP_PATH/Procfile
 heroku config:set --app=$NAME PACKAGE=$APP_PACKAGE
+heroku config:set --app=$NAME PROCFILE=$APP_PATH/Procfile
 
 # Set project specific config options
 if [[ $APP_TYPE = "ssr" ]] && [[ $APP_NAME = "ng" ]]
@@ -60,6 +61,27 @@ then
 elif [[ $APP_TYPE = "ssr" ]] && [[ $APP_NAME = "vue" ]]
 then
   heroku config:set --app=$NAME HOST=0.0.0.0
+  heroku config:set --app=$NAME NUXT_APP_BR_MULTI_TENANT_SUPPORT=true
+fi
+
+if [[ $APP_NAME = "ng" ]]
+then
+  heroku config:set --app=$NAME BR_MULTI_TENANT_SUPPORT=true
+fi
+
+if [[ $APP_TYPE = "csr" ]] && [[ $APP_NAME = "react" ]]
+then
+  heroku config:set --app=$NAME REACT_APP_BR_MULTI_TENANT_SUPPORT=true
+fi
+
+if [[ $APP_TYPE = "ssr" ]] && [[ $APP_NAME = "react" ]]
+then
+  heroku config:set --app=$NAME NEXT_PUBLIC_BR_MULTI_TENANT_SUPPORT=true
+fi
+
+if [[ $APP_TYPE = "csr" ]] && [[ $APP_NAME = "vue" ]]
+then
+  heroku config:set --app=$NAME VUE_APP_BR_MULTI_TENANT_SUPPORT=true
 fi
 
 git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/$NAME.git HEAD:refs/heads/main

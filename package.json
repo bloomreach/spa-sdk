@@ -1,6 +1,6 @@
 {
   "private": true,
-  "version": "16.0.0",
+  "version": "17.0.1",
   "description": "Bloomreach SPA SDK",
   "name": "spa-sdk-workspace",
   "keywords": [
@@ -28,6 +28,7 @@
   },
   "scripts": {
     "audit": "lerna exec 'npm audit --omit=dev --audit-level=critical' --no-private --stream",
+    "prebuild:custom": "lerna exec 'npm run prebuild:custom' --scope @bloomreach/example-angular",
     "build": "lerna run build --stream",
     "dev": "npm run build -- --watch",
     "bump": "lerna version --exact --no-push --no-git-tag-version --yes --force-publish",
@@ -35,7 +36,7 @@
     "changelog": "auto-changelog",
     "docs": "lerna run docs",
     "deploy-to-heroku": "./scripts/deploy_heroku_app.sh ${0} ${1} ${2}",
-    "heroku-postbuild": "npm run build -- --scope $PACKAGE --include-dependencies && cd ${PROJECT_PATH:-.}",
+    "heroku-postbuild": "npm run prebuild:custom && npm run build -- --scope $PACKAGE --include-dependencies && cd ${PROJECT_PATH:-.}",
     "lint": "lerna run lint",
     "release": "lerna publish from-package",
     "test": "lerna run test"
