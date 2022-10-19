@@ -43,7 +43,7 @@
     "@bloomreach/spa-sdk": "17.0.1"
   },
   "peerDependencies": {
-    "react": "^16.14 || ^17.0"
+    "react": "^16.14 || ^17.0 || ^18.0"
   },
   "devDependencies": {
     "@babel/core": "7.14.8",
