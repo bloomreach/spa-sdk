@@ -20,7 +20,7 @@ import { BrMeta } from '../meta';
 import { BrMappingContext } from './BrMappingContext';
 import { BrProps } from './BrProps';
 
-export class BrNodeComponent<T extends Component> extends React.Component<BrProps<T>> {
+export class BrNodeComponent<T extends Component> extends React.Component<React.PropsWithChildren<BrProps<T>>> {
   static contextType = BrMappingContext;
 
   context!: React.ContextType<typeof BrMappingContext>;

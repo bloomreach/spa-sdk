@@ -17,7 +17,7 @@
 import React from 'react';
 import { isContainer, isContainerItem, Component } from '@bloomreach/spa-sdk';
 import { BrMeta } from '../meta';
-import { BrPageContext } from '../page/BrPageContext';
+import { BrPageContext } from '../page';
 import { BrComponentContext } from './BrComponentContext';
 import { BrNodeContainer } from './BrNodeContainer';
 import { BrNodeContainerItem } from './BrNodeContainerItem';
@@ -27,7 +27,7 @@ interface BrNodeProps {
   component?: Component;
 }
 
-export class BrNode extends React.Component<BrNodeProps> {
+export class BrNode extends React.Component<React.PropsWithChildren<BrNodeProps>> {
   static contextType = BrPageContext;
 
   context: React.ContextType<typeof BrPageContext>;

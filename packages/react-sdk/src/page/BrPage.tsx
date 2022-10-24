@@ -54,7 +54,7 @@ interface BrPageState {
 /**
  * The brXM page.
  */
-export class BrPage extends React.Component<BrPageProps, BrPageState> {
+export class BrPage extends React.Component<React.PropsWithChildren<BrPageProps>, BrPageState> {
   /**
    * @param props {BrPageProps}
    */
