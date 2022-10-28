@@ -2,12 +2,25 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### [17.0.1](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-17.0.0...17.0.1)
+#### [17.1.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-17.0.1...17.1.0)
+
+- SPASDK-142 Bump @xmldom/xmldom to patched 0.7.6 [`#92`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/92)
+- SPASDK-143 Remove debug mode from example apps [`#93`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/93)
+- SPASDK-137 Support React 18 [`#91`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/91)
+- SPASDK-143 Remove debug mode from example apps [`#SPASDK-143`](https://issues.onehippo.com/browse/SPASDK-143)
+- SPASDK-142 Bump @xmldom/xmldom to patched 0.7.6 [`#SPASDK-142`](https://issues.onehippo.com/browse/SPASDK-142)
+- SPASDK-137 Explicitly set children to component properties interface [`#SPASDK-137`](https://issues.onehippo.com/browse/SPASDK-137)
+- SPASDK-137 Support React 18 [`#SPASDK-137`](https://issues.onehippo.com/browse/SPASDK-137)
+
+#### [spa-sdk-17.0.1](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-17.0.0...spa-sdk-17.0.1)
+
+> 18 October 2022
 
 - SPASDK-129 Set environment variables for nuxt example app [`#90`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/90)
 - Resolve SPASDK-129 "Feature/ deploy heroku" [`#89`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/89)
 - Resolve SPASDK-129 "Feature/ multi tenant support" [`#88`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/88)
 - SPASDK-133 Heroku 22 support [`#87`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/87)
+- SPASDK-129 Bumping versions to 17.0.1 [`#SPASDK-129`](https://issues.onehippo.com/browse/SPASDK-129)
 - SPASDK-129 Set environment variables for nuxt example app [`#SPASDK-129`](https://issues.onehippo.com/browse/SPASDK-129)
 - SPASDK-129 Add prebuild command for Heroku [`#SPASDK-129`](https://issues.onehippo.com/browse/SPASDK-129)
 - SPASDK-129 Set environment variables for Heroku to use multitenant [`#SPASDK-129`](https://issues.onehippo.com/browse/SPASDK-129)
