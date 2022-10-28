@@ -47,6 +47,5 @@ export function buildConfiguration(
     configuration.baseUrl = `?${endpointQueryParameter}=${searchParams.get(endpointQueryParameter)}`;
     configuration.path = url;
   }
-  configuration.debug = true;
   return configuration;
 }
