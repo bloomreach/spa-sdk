@@ -377,7 +377,7 @@ describe('PageImpl', () => {
   });
 
   describe('sanitize', () => {
-    it('should sanitize html', () => {
+    it('should sanitize html', async () => {
       const page = createPage();
       const html = `
         <div>
@@ -385,9 +385,11 @@ describe('PageImpl', () => {
           <p>Sanitize before <a href="https://www.example.com/" name="use">use</a></p>
           <div><script>alert(1);</script></div>
         </div>`;
-      expect(page.sanitize(html)).toMatchSnapshot();
+      const sanitized = await page.sanitize(html);
+      expect(sanitized).toMatchSnapshot();
     });
-    it('should keep rel, data-type, title, target, name and href attributes in anchor', () => {
+
+    it('should keep rel, data-type, title, target, name and href attributes in anchor', async () => {
       const page = createPage();
       const html = `
         <div>
@@ -396,7 +398,9 @@ describe('PageImpl', () => {
             href="https://www.example.com/" name="use">use</a>
           <div><script>alert(1);</script></div>
         </div>`;
-      expect(page.sanitize(html)).toMatchSnapshot();
+
+      const sanitized = await page.sanitize(html);
+      expect(sanitized).toMatchSnapshot();
     });
   });
 });

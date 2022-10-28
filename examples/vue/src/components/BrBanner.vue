@@ -62,7 +62,8 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
   async mounted(this: BrBanner): Promise<void> {
     const content = this.document?.getData<DocumentData>().content;
     if (content) {
-      this.html = await this.page.rewriteLinks(this.page.sanitize(content.value));
+      const sanitized = await this.page.sanitize(content.value);
+      this.html = await this.page.rewriteLinks(sanitized);
     }
   },
 })

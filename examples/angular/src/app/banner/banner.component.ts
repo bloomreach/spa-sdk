@@ -30,7 +30,8 @@ export class BannerComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     const content = this.document?.getData<DocumentData>().content;
-    this.safeHTML = await this.page.rewriteLinks(this.page.sanitize(content!.value));
+    const sanitized = await this.page.sanitize(content!.value);
+    this.safeHTML = await this.page.rewriteLinks(sanitized);
   }
 
   get document(): Document | undefined {

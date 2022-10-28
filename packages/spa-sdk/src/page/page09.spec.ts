@@ -340,7 +340,7 @@ describe('PageImpl', () => {
   });
 
   describe('sanitize', () => {
-    it('should sanitize html', () => {
+    it('should sanitize html', async () => {
       const page = createPage();
       const html = `
         <div>
@@ -348,14 +348,16 @@ describe('PageImpl', () => {
           <p>Sanitize before <a href="https://www.example.com/" name="use">use</a></p>
           <div><script>alert(1);</script></div>
         </div>`;
-      expect(page.sanitize(html)).toBe(`
+
+      const sanitized = await page.sanitize(html);
+      expect(sanitized).toBe(`
         <div>
           <h1>Hello, World!</h1>
           <p>Sanitize before <a href="https://www.example.com/" name="use">use</a></p>
           <div></div>
         </div>`);
     });
-    it('should keep data-type, title, target, name and href attributes in anchor', () => {
+    it('should keep data-type, title, target, name and href attributes in anchor', async () => {
       const page = createPage();
       const html = `
         <div>
@@ -363,7 +365,9 @@ describe('PageImpl', () => {
           <a data-type="internal" title="foo" target="_blank" href="https://www.example.com/" name="use">use</a>
           <div><script>alert(1);</script></div>
         </div>`;
-      expect(page.sanitize(html)).toBe(`
+
+      const sanitized = await page.sanitize(html);
+      expect(sanitized).toBe(`
         <div>
           <h1>Hello, World!</h1>
           <a data-type="internal" title="foo" target="_blank" href="https://www.example.com/" name="use">use</a>

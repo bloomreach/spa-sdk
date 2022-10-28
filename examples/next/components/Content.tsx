@@ -31,7 +31,8 @@ export function Content(props: BrProps): JSX.Element | null {
       }
 
       const { content } = document.getData<DocumentData>();
-      const html = await props.page.rewriteLinks(props.page.sanitize(content.value));
+      const sanitized = await props.page.sanitize(content.value);
+      const html = await props.page.rewriteLinks(sanitized);
       setSafeHTML(html);
     }
 

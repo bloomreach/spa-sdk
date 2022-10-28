@@ -15,7 +15,6 @@
  */
 
 import { inject, injectable, optional } from 'inversify';
-import sanitizeHtml from 'sanitize-html';
 import { ButtonFactory } from './button-factory';
 import { ComponentFactory } from './component-factory09';
 import { ComponentMeta, Component } from './component';
@@ -168,8 +167,9 @@ export class PageImpl implements Page {
     return this.model;
   }
 
-  sanitize(content: string): string {
-    return sanitizeHtml(content, { allowedAttributes: { a: ['href', 'name', 'target', 'title', 'data-type'] } });
+  async sanitize(content: string): Promise<string> {
+    const { default: sanitizeHtml } = await import('sanitize-html');
+    return sanitizeHtml(content, { allowedAttributes: { a: ['href', 'name', 'target', 'title', 'data-type', 'rel'] } });
   }
 }
 

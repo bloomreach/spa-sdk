@@ -15,7 +15,6 @@
  */
 
 import { inject, injectable, optional } from 'inversify';
-import sanitizeHtml from 'sanitize-html';
 import { EventBus as CmsEventBus, EventBusService as CmsEventBusService } from '../cms';
 import { isAbsoluteUrl, resolveUrl } from '../url';
 import { ButtonFactory } from './button-factory';
@@ -262,7 +261,7 @@ export interface Page {
    * Sanitize HTML content to allow only safe HTML markups.
    * @param content The HTML content to sanitize.
    */
-  sanitize(content: string): string;
+  sanitize(content: string): Promise<string>;
 }
 
 @injectable()
@@ -383,7 +382,8 @@ export class PageImpl implements Page {
     return this.model;
   }
 
-  sanitize(content: string): string {
+  async sanitize(content: string): Promise<string> {
+    const { default: sanitizeHtml } = await import('sanitize-html');
     return sanitizeHtml(content, { allowedAttributes: { a: ['href', 'name', 'target', 'title', 'data-type', 'rel'] } });
   }
 }
