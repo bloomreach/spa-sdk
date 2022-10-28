@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Bloomreach
+ * Copyright 2019-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,14 +15,14 @@
  */
 
 module.exports = {
-  presets: [
-    "@babel/preset-env",
-    "@babel/preset-react",
-  ],
+  presets: ['@babel/preset-env', '@babel/preset-react'],
   plugins: [
-    "@babel/plugin-proposal-object-rest-spread",
-    ["babel-plugin-transform-async-to-promises", {
-      "inlineHelpers": true
-    }]
+    '@babel/plugin-proposal-object-rest-spread',
+    [
+      'babel-plugin-transform-async-to-promises',
+      {
+        inlineHelpers: true,
+      },
+    ],
   ],
 };
