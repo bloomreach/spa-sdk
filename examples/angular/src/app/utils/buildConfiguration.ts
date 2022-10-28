@@ -50,6 +50,5 @@ export function buildConfiguration(
   if (request) {
     configuration.request = request;
   }
-  configuration.debug = true;
   return configuration;
 }

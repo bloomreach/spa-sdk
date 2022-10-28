@@ -33,7 +33,7 @@ interface BrComponentProps {
 /**
  * The brXM component.
  */
-export class BrComponent extends React.Component<BrComponentProps> {
+export class BrComponent extends React.Component<React.PropsWithChildren<BrComponentProps>> {
   static contextType = BrComponentContext;
 
   context: React.ContextType<typeof BrComponentContext>;
