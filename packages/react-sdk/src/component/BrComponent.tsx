@@ -44,7 +44,7 @@ export class BrComponent extends React.Component<React.PropsWithChildren<BrCompo
       props: { path },
     } = this;
 
-    if (!context) {
+    if (!context || Object.keys(context).length === 0) {
       return [];
     }
     if (!path) {

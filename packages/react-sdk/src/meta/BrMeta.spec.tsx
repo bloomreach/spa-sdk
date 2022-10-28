@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 Bloomreach
+ * Copyright 2019-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,8 +15,8 @@
  */
 
 import React from 'react';
-import { mount } from 'enzyme';
 import { MetaCollection } from '@bloomreach/spa-sdk';
+import { render } from '@testing-library/react';
 import { BrMeta } from './BrMeta';
 
 describe('BrMeta', () => {
@@ -30,7 +30,7 @@ describe('BrMeta', () => {
   });
 
   it('should render meta-data surrounding children', () => {
-    mount(
+    render(
       <div>
         <BrMeta meta={meta}>
           <a />
@@ -51,15 +51,18 @@ describe('BrMeta', () => {
     const clear = jest.fn();
     meta.render.mockReturnValueOnce(clear);
 
-    const container = document.createElement('div');
-    const wrapper = mount(
-      <BrMeta meta={meta}>
+    const element = render(
+      <BrMeta meta={meta as MetaCollection}>
         <a />
       </BrMeta>,
-      { attachTo: container },
     );
-    const newMeta = { length: 1, render: jest.fn() };
-    wrapper.setProps({ meta: newMeta });
+    const newMeta = { length: 1, render: jest.fn() } as unknown as jest.Mocked<MetaCollection>;
+
+    element.rerender(
+      <BrMeta meta={newMeta as MetaCollection}>
+        <a />
+      </BrMeta>,
+    );
 
     expect(clear).toBeCalled();
     expect(newMeta.render).toBeCalled();
@@ -69,14 +72,12 @@ describe('BrMeta', () => {
     const clear = jest.fn();
     meta.render.mockReturnValueOnce(clear);
 
-    const container = document.createElement('div');
-    const wrapper = mount(
+    const element = render(
       <div>
-        <BrMeta meta={meta} />
+        <BrMeta meta={meta as MetaCollection} />
       </div>,
-      { attachTo: container },
     );
-    wrapper.detach();
+    element.unmount();
 
     expect(clear).toBeCalled();
   });
@@ -84,15 +85,15 @@ describe('BrMeta', () => {
   it('should render only children if there is no meta', () => {
     meta.length = 0;
 
-    const wrapper = mount(
+    const element = render(
       <div>
-        <BrMeta meta={meta}>
+        <BrMeta meta={meta as MetaCollection}>
           <a />
           <b />
         </BrMeta>
       </div>,
     );
 
-    expect(wrapper.html()).toMatchSnapshot();
+    expect(element.asFragment()).toMatchSnapshot();
   });
 });

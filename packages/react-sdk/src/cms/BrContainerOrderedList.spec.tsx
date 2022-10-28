@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Bloomreach
+ * Copyright 2019-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,8 +15,8 @@
  */
 
 import React from 'react';
-import { shallow } from 'enzyme';
 import { Container, Page } from '@bloomreach/spa-sdk';
+import { render } from '@testing-library/react';
 import { BrContainerOrderedList } from './BrContainerOrderedList';
 
 describe('BrContainerOrderedList', () => {
@@ -30,54 +30,36 @@ describe('BrContainerOrderedList', () => {
   });
 
   it('should render itself as ol element', () => {
-    const wrapper = shallow(<BrContainerOrderedList {...props} />);
+    const element = render(<BrContainerOrderedList {...props} />);
 
-    expect(wrapper.equals(<ol />)).toBe(true);
+    expect(element.container?.firstChild?.nodeName).toBe('OL');
+    expect(element.asFragment()).toMatchSnapshot();
   });
 
   it('should render children as li elements', () => {
-    const wrapper = shallow(
+    const element = render(
       <BrContainerOrderedList {...props}>
         <a />
         <b />
       </BrContainerOrderedList>,
     );
 
-    expect(
-      wrapper.equals(
-        <ol>
-          <li>
-            <a />
-          </li>
-          <li>
-            <b />
-          </li>
-        </ol>,
-      ),
-    ).toBe(true);
+    expect(element.container.querySelector('ol')?.firstChild?.nodeName).toBe('LI');
+    expect(element.asFragment()).toMatchSnapshot();
   });
 
   it('should render preview classes', () => {
     props.page.isPreview.mockReturnValue(true);
 
-    const wrapper = shallow(
+    const element = render(
       <BrContainerOrderedList {...props}>
         <a />
         <b />
       </BrContainerOrderedList>,
     );
 
-    expect(
-      wrapper.equals(
-        <ol className="hst-container">
-          <li className="hst-container-item">
-            <a />
-          </li>
-          <li className="hst-container-item">
-            <b />
-          </li>
-        </ol>,
-      ),
-    ).toBe(true);
+    expect(element.container.querySelector('.hst-container')?.nodeName).toBe('OL');
+    expect(element.container.querySelector('.hst-container-item')?.nodeName).toBe('LI');
+    expect(element.asFragment()).toMatchSnapshot();
   });
 });

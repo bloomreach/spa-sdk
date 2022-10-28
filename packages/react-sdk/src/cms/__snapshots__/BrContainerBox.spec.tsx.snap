@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BrContainerBox should render children as div elements 1`] = `
+<DocumentFragment>
+  <div>
+    <div>
+      <a />
+    </div>
+    <div>
+      <b />
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`BrContainerBox should render itself as div element 1`] = `
+<DocumentFragment>
+  <div />
+</DocumentFragment>
+`;

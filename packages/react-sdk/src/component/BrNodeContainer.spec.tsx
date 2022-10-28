@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2021 Bloomreach
+ * Copyright 2019-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  */
 
 import React from 'react';
-import { mount, shallow } from 'enzyme';
 import {
   Container,
   MetaCollection,
@@ -26,6 +25,7 @@ import {
   TYPE_CONTAINER_ORDERED_LIST,
   TYPE_CONTAINER_UNORDERED_LIST,
 } from '@bloomreach/spa-sdk';
+import { render } from '@testing-library/react';
 import {
   BrContainerBox,
   BrContainerInline,
@@ -36,11 +36,12 @@ import {
 import { BrNodeComponent } from './BrNodeComponent';
 import { BrNodeContainer } from './BrNodeContainer';
 import { BrMeta } from '../meta';
+import { withContextProvider } from '../utils/withContextProvider';
 
 describe('BrNodeContainer', () => {
   const props = {
     component: { getType: jest.fn(), getMeta: jest.fn() } as unknown as jest.Mocked<Container>,
-    page: {} as jest.Mocked<Page>,
+    page: { isPreview: jest.fn(() => false) } as unknown as jest.Mocked<Page>,
   };
 
   const emptyMeta = {} as MetaCollection;
@@ -53,139 +54,143 @@ describe('BrNodeContainer', () => {
 
   describe('getMapping', () => {
     beforeEach(() => {
-      // @see https://github.com/airbnb/enzyme/issues/1553
-      /// @ts-ignore
-      BrNodeContainer.contextTypes = { test: () => null };
+      (BrNodeContainer as any).contextTypes = { test: () => null };
       delete (BrNodeComponent as Partial<typeof BrNodeComponent>).contextType;
     });
 
     it('should use container type for mapping', () => {
-      shallow(<BrNodeContainer {...props} />);
+      render(<BrNodeContainer {...props} />);
 
       expect(props.component.getType).toBeCalled();
     });
 
     it('should render a mapped container', () => {
       props.component.getType.mockReturnValue('test' as ReturnType<Container['getType']>);
-      const wrapper = mount(
-        <BrNodeContainer {...props}>
-          <a />
-        </BrNodeContainer>,
-        {
-          context: {
+      const element = render(
+        withContextProvider(
+          {
             test: ({ children }: React.PropsWithChildren<typeof props>) => <div>{children}</div>,
           },
-        },
+          <BrNodeContainer {...props}>
+            <a />
+          </BrNodeContainer>,
+        ),
       );
 
-      expect(wrapper.html()).toBe('<div><a></a></div>');
+      expect(element.asFragment()).toMatchSnapshot();
     });
 
     it('should render inline container', () => {
       props.component.getType.mockReturnValue(TYPE_CONTAINER_INLINE);
-      const wrapper = shallow(
+      const element = render(
         <BrNodeContainer {...props}>
           <a />
         </BrNodeContainer>,
       );
 
-      expect(
-        wrapper.equals(
-          <BrMeta meta={emptyMeta}>
-            <BrContainerInline {...props}>
-              <a />
-            </BrContainerInline>
-          </BrMeta>,
-        ),
-      ).toBe(true);
+      const nodeMeta = render(
+        <BrMeta meta={emptyMeta}>
+          <BrContainerInline {...props}>
+            <a />
+          </BrContainerInline>
+        </BrMeta>,
+      );
+
+      expect(element.container.isEqualNode(nodeMeta.container)).toBe(true);
+      expect(element.asFragment()).toMatchSnapshot();
     });
 
     it('should render no markup container', () => {
       props.component.getType.mockReturnValue(TYPE_CONTAINER_NO_MARKUP);
-      const wrapper = shallow(
+      const element = render(
         <BrNodeContainer {...props}>
           <a />
         </BrNodeContainer>,
       );
 
-      expect(
-        wrapper.equals(
-          <BrMeta meta={emptyMeta}>
-            <BrContainerNoMarkup {...props}>
-              <a />
-            </BrContainerNoMarkup>
-          </BrMeta>,
-        ),
-      ).toBe(true);
+      const nodeMeta = render(
+        <BrMeta meta={emptyMeta}>
+          <BrContainerNoMarkup {...props}>
+            <a />
+          </BrContainerNoMarkup>
+        </BrMeta>,
+      );
+
+      expect(element.container.isEqualNode(nodeMeta.container)).toBe(true);
+      expect(element.asFragment()).toMatchSnapshot();
     });
 
     it('should render ordered list container', () => {
       props.component.getType.mockReturnValue(TYPE_CONTAINER_ORDERED_LIST);
-      const wrapper = shallow(
+      const element = render(
         <BrNodeContainer {...props}>
           <a />
         </BrNodeContainer>,
       );
 
-      expect(
-        wrapper.equals(
-          <BrMeta meta={emptyMeta}>
-            <BrContainerOrderedList {...props}>
-              <a />
-            </BrContainerOrderedList>
-          </BrMeta>,
-        ),
-      ).toBe(true);
+      const nodeMeta = render(
+        <BrMeta meta={emptyMeta}>
+          <BrContainerOrderedList {...props}>
+            <a />
+          </BrContainerOrderedList>
+        </BrMeta>,
+      );
+
+      expect(element.container.isEqualNode(nodeMeta.container)).toBe(true);
+      expect(element.asFragment()).toMatchSnapshot();
     });
 
     it('should render unordered list container', () => {
       props.component.getType.mockReturnValue(TYPE_CONTAINER_UNORDERED_LIST);
-      const wrapper = shallow(
+      const element = render(
         <BrNodeContainer {...props}>
           <a />
         </BrNodeContainer>,
       );
 
-      expect(
-        wrapper.equals(
-          <BrMeta meta={emptyMeta}>
-            <BrContainerUnorderedList {...props}>
-              <a />
-            </BrContainerUnorderedList>
-          </BrMeta>,
-        ),
-      ).toBe(true);
+      const nodeMeta = render(
+        <BrMeta meta={emptyMeta}>
+          <BrContainerUnorderedList {...props}>
+            <a />
+          </BrContainerUnorderedList>
+        </BrMeta>,
+      );
+
+      expect(element.container.isEqualNode(nodeMeta.container)).toBe(true);
+      expect(element.asFragment()).toMatchSnapshot();
     });
 
     it('should render box container', () => {
       props.component.getType.mockReturnValue(TYPE_CONTAINER_BOX);
-      const wrapper = shallow(
+      const element = render(
         <BrNodeContainer {...props}>
           <a />
         </BrNodeContainer>,
       );
 
-      expect(
-        wrapper.equals(
-          <BrMeta meta={emptyMeta}>
-            <BrContainerBox {...props}>
-              <a />
-            </BrContainerBox>
-          </BrMeta>,
-        ),
-      ).toBe(true);
+      const nodeMeta = render(
+        <BrMeta meta={emptyMeta}>
+          <BrContainerBox {...props}>
+            <a />
+          </BrContainerBox>
+        </BrMeta>,
+      );
+
+      expect(element.container.isEqualNode(nodeMeta.container)).toBe(true);
+      expect(element.asFragment()).toMatchSnapshot();
     });
 
     it('should render box container on an unknown type', () => {
-      const wrapper = shallow(<BrNodeContainer {...props} />);
+      const element = render(<BrNodeContainer {...props} />);
 
-      expect(
-        wrapper.equals(
-          <BrMeta meta={emptyMeta}>
-            <BrContainerBox {...props} />
-          </BrMeta>,
-        ),
-      ).toBe(true);
+      const nodeMeta = render(
+        <BrMeta meta={emptyMeta}>
+          <BrContainerBox {...props} />
+        </BrMeta>,
+      );
+
+      expect(element.container.isEqualNode(nodeMeta.container)).toBe(true);
+      expect(element.asFragment()).toMatchSnapshot();
     });
   });
 });

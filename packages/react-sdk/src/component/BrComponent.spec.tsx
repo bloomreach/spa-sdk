@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Bloomreach
+ * Copyright 2019-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,78 +15,100 @@
  */
 
 import React from 'react';
-import { shallow } from 'enzyme';
 import { Component } from '@bloomreach/spa-sdk';
+import { render } from '@testing-library/react';
 import { BrComponent } from './BrComponent';
 import { BrNode } from './BrNode';
+import { withContextProvider } from '../utils/withContextProvider';
 
 jest.mock('@bloomreach/spa-sdk');
 
 describe('BrComponent', () => {
   const context = {
     getChildren: jest.fn(() => []),
+    getMeta: jest.fn(),
     getComponent: jest.fn(),
   } as unknown as jest.Mocked<Component>;
+  const component = {
+    getChildren: jest.fn(() => []),
+    getMeta: jest.fn(),
+    getName: jest.fn(),
+  } as unknown as Component;
 
   beforeEach(() => {
     jest.restoreAllMocks();
 
-    // @see https://github.com/airbnb/enzyme/issues/1553
-    /// @ts-ignore
-    BrComponent.contextTypes = {
+    (BrComponent as any).contextTypes = {
       getChildren: () => null,
+      getMeta: () => null,
       getComponent: () => null,
     };
     delete (BrComponent as Partial<typeof BrComponent>).contextType;
   });
 
+  it('should render nothing if there is no context', () => {
+    delete (BrComponent as any).contextTypes;
+    const element = render(<BrComponent />);
+
+    expect(element.container.firstChild).toBe(null);
+  });
+
   it('should render children if path is not set', () => {
-    const component1 = {} as Component;
-    const component2 = {} as Component;
+    const component1 = { ...component } as Component;
+    const component2 = { ...component } as Component;
     context.getChildren.mockReturnValueOnce([component1, component2]);
-    const wrapper = shallow(<BrComponent />, { context });
+    const element = render(withContextProvider(context, <BrComponent />));
 
     expect(context.getChildren).toBeCalled();
-    expect(wrapper.contains(<BrNode component={component1} />)).toBe(true);
-    expect(wrapper.contains(<BrNode component={component2} />)).toBe(true);
+
+    const node1 = render(withContextProvider(context, <BrNode component={component1} />));
+    const node2 = render(withContextProvider(context, <BrNode component={component2} />));
+
+    expect(element.container).toContainHTML(node1.container.innerHTML);
+    expect(element.container).toContainHTML(node2.container.innerHTML);
   });
 
   it('should split path by slashes', () => {
-    shallow(<BrComponent path="a/b" />, { context });
+    render(withContextProvider(context, <BrComponent path="a/b" />));
 
     expect(context.getComponent).toBeCalledWith('a', 'b');
   });
 
   it('should render nothing if no component found', () => {
-    const wrapper = shallow(<BrComponent path="a/b" />, { context });
+    const element = render(withContextProvider(context, <BrComponent path="a/b" />));
 
-    expect(wrapper.equals(<></>)).toBe(true);
+    expect(element.container.firstChild).toBe(null);
+    expect(element.asFragment()).toMatchSnapshot();
   });
 
   it('should render found component', () => {
-    const component = {} as Component;
     context.getComponent.mockReturnValueOnce(component);
-    const wrapper = shallow(<BrComponent path="a/b" />, { context });
+    const element = render(withContextProvider(context, <BrComponent path="a/b" />));
 
-    expect(wrapper.contains(<BrNode component={component} />)).toBe(true);
+    const node = render(withContextProvider(context, <BrNode component={component} />));
+
+    expect(element.container).toContainHTML(node.container.innerHTML);
   });
 
   it('should pass children down', () => {
-    const component = {} as Component;
     context.getComponent.mockReturnValueOnce(component);
-    const wrapper = shallow(
-      <BrComponent path="a/b">
-        <a />
-      </BrComponent>,
-      { context },
+    const element = render(
+      withContextProvider(
+        context,
+        <BrComponent path="a/b">
+          <a />
+        </BrComponent>,
+      ),
     );
-
-    expect(
-      wrapper.contains(
+    const node = render(
+      withContextProvider(
+        context,
         <BrNode component={component}>
           <a />
         </BrNode>,
       ),
-    ).toBe(true);
+    );
+
+    expect(element.container).toContainHTML(node.container.innerHTML);
   });
 });

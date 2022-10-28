@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-import { destroy, initialize, Page, PageModel } from '@bloomreach/spa-sdk';
-import { mount, shallow, ShallowWrapper } from 'enzyme';
 import React, { useEffect } from 'react';
+import { destroy, initialize, Page, PageModel } from '@bloomreach/spa-sdk';
+import { act, render, RenderResult } from '@testing-library/react';
 import { mocked } from 'ts-jest/utils';
-import { BrNode, BrProps } from '../component';
+import { BrProps } from '../component';
 import { BrPage } from './BrPage';
 
 jest.mock('@bloomreach/spa-sdk');
@@ -38,65 +38,83 @@ const config = {
     },
   },
 };
+
+const page = {
+  isPreview: jest.fn(),
+  getButton: jest.fn(),
+  getComponent: () => ({
+    getName: jest.fn(),
+    getChildren: jest.fn(() => []),
+    getMeta: jest.fn(),
+  }),
+  sync: jest.fn(),
+} as unknown as Page;
 const mapping = { TestComponent };
 
 describe('BrPage', () => {
   const children = <div />;
-  let wrapper: ShallowWrapper<React.ComponentProps<typeof BrPage>, { page?: Page }>;
+  let element: RenderResult;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     jest.clearAllMocks();
+    mocked(initialize).mockReturnValue(Promise.resolve(page));
 
-    wrapper = shallow(
-      <BrPage configuration={config} mapping={mapping}>
-        {children}
-      </BrPage>,
-    );
+    await act(async () => {
+      element = render(<BrPage configuration={config} mapping={mapping} />);
+    });
   });
 
   describe('componentDidMount', () => {
     it('should initialize the SPA SDK and sync the CMS', () => {
       expect(initialize).toHaveBeenCalledWith(config);
 
-      const page = wrapper.state('page');
       expect(page).toBeDefined();
       expect(page!.sync).toHaveBeenCalled();
     });
 
-    it('should use a page model from props', () => {
-      mocked(initialize).mockClear();
+    it('should use a page model from props', async () => {
+      mocked(initialize as unknown as () => Page).mockReturnValue(page);
+      const newPage = {} as PageModel;
 
-      const page = {} as PageModel;
-      shallow(<BrPage configuration={config} mapping={mapping} page={page} />);
+      await act(async () => {
+        render(<BrPage configuration={config} mapping={mapping} page={newPage} />);
+      });
 
-      expect(initialize).toBeCalledWith(config, page);
+      expect(initialize).toBeCalledWith(config, newPage);
     });
   });
 
   describe('componentDidUpdate', () => {
-    let page: Page;
+    beforeEach(async () => {
+      mocked(initialize as unknown as () => Page).mockReturnValue(page);
 
-    beforeEach(() => {
-      page = wrapper.state('page')!;
-      wrapper = shallow(<BrPage configuration={config} mapping={mapping} page={page} />);
-
-      mocked(initialize).mockClear();
+      await act(async () => {
+        element = render(<BrPage configuration={config} mapping={mapping} page={page} />);
+      });
     });
 
-    it('should use a page instance from props when it is updated', () => {
+    it('should use a page instance from props when it is updated', async () => {
       const newPage = { ...page } as Page;
       const configuration = { ...config };
 
       mocked(initialize as unknown as () => Page).mockReturnValueOnce(newPage);
-      wrapper.setProps({ configuration, page: newPage });
+      await act(async () => {
+        render(<BrPage configuration={configuration} mapping={mapping} page={newPage} />, {
+          container: element.container,
+        });
+      });
 
-      expect(wrapper.state('page')).toBe(newPage);
       expect(initialize).toBeCalledWith(configuration, newPage);
     });
 
-    it('should initialize page on props update when page from props is not updated', () => {
+    it('should initialize page on props update when page from props is not updated', async () => {
       const configuration = { ...config };
-      wrapper.setProps({ configuration });
+
+      await act(async () => {
+        render(<BrPage configuration={configuration} mapping={mapping} page={page} />, {
+          container: element.container,
+        });
+      });
 
       expect(destroy).toHaveBeenCalledWith(page);
       expect(initialize).toBeCalledWith(configuration);
@@ -106,40 +124,89 @@ describe('BrPage', () => {
 
   describe('componentWillUnmount', () => {
     it('should destroy the page when unmounting', () => {
-      const page = wrapper.state('page')!;
-
-      wrapper.unmount();
-      expect(destroy).toHaveBeenCalledWith(page);
+      element.unmount();
+      expect(destroy).toHaveBeenCalledWith(page as Page);
     });
 
-    it('should not destroy an empty page when unmounting', () => {
-      wrapper.setState({ page: undefined });
+    it('should not destroy an empty page when unmounting', async () => {
+      mocked(initialize as unknown as () => Page).mockReturnValueOnce(undefined as unknown as Page);
 
-      wrapper.unmount();
+      await act(async () => {
+        element = render(<BrPage configuration={config} mapping={mapping} />);
+      });
+
+      element.unmount();
       expect(destroy).not.toHaveBeenCalled();
     });
   });
 
   describe('render', () => {
-    it('should render children', () => {
-      expect(wrapper.contains(children)).toBe(true);
+    it('should render children', async () => {
+      await act(async () => {
+        element = render(
+          <BrPage configuration={config} mapping={mapping}>
+            {children}
+          </BrPage>,
+          {
+            container: element.container,
+          },
+        );
+      });
+
+      expect(element.asFragment()).toMatchSnapshot();
     });
 
-    it('should not render children if there is no page and NBR mode is false', () => {
-      wrapper.setState({ page: undefined });
-      wrapper.setProps({ configuration: { ...config, NBRMode: false } });
+    it('should not render children if there is no page and NBR mode is false', async () => {
+      mocked(initialize as unknown as () => Page).mockReturnValueOnce(undefined as unknown as Page);
 
-      expect(wrapper.contains(children)).toBe(false);
+      await act(async () => {
+        element = render(
+          <BrPage configuration={{ ...config, NBRMode: false }} mapping={mapping}>
+            {children}
+          </BrPage>,
+          {
+            container: element.container,
+          },
+        );
+      });
+
+      expect(element.asFragment()).toMatchSnapshot();
     });
 
-    it('should render children if there is no page and NBR mode is true', () => {
-      wrapper.setState({ page: undefined });
-      wrapper.setProps({ configuration: { ...config, NBRMode: true } });
+    it('should render children if there is no page and NBR mode is true', async () => {
+      mocked(initialize as unknown as () => Page).mockReturnValueOnce(undefined as unknown as Page);
 
-      expect(wrapper.contains(children)).toBe(true);
+      await act(async () => {
+        element = render(
+          <BrPage configuration={{ ...config, NBRMode: true }} mapping={mapping}>
+            {children}
+          </BrPage>,
+          {
+            container: element.container,
+          },
+        );
+      });
+
+      expect(element.asFragment()).toMatchSnapshot();
     });
 
-    it('should run child component effects while retrieving Page model when NBR mode is true', () => {
+    it('should render nothing if there is an error loading the page', async () => {
+      const error = new Error('error-loading-page');
+      mocked(initialize).mockRejectedValueOnce(error);
+
+      const setState = jest.spyOn(BrPage.prototype, 'setState').mockImplementationOnce(() => {});
+
+      await act(async () => {
+        render(<BrPage configuration={config} mapping={mapping} />);
+      });
+
+      await new Promise(process.nextTick);
+
+      expect(setState).toHaveBeenCalledWith(expect.any(Function));
+      expect(setState.mock.calls[0][0]).toThrowError(error);
+    });
+
+    it('should run child component effects while retrieving Page model when NBR mode is true', async () => {
       jest.useFakeTimers();
 
       const initializeDone = jest.fn();
@@ -150,18 +217,20 @@ describe('BrPage', () => {
         return <></>;
       }
 
-      const page = initialize(config);
+      const pageInit = initialize(config);
       mocked(initialize).mockClear();
       mocked(initialize).mockImplementationOnce(() => {
         setTimeout(initializeDone, 1000);
-        return page;
+        return pageInit;
       });
 
-      mount(
-        <BrPage configuration={{ ...config, NBRMode: true }} mapping={mapping}>
-          <MyComponent />
-        </BrPage>,
-      );
+      await act(async () => {
+        render(
+          <BrPage configuration={{ ...config, NBRMode: true }} mapping={mapping}>
+            <MyComponent />
+          </BrPage>,
+        );
+      });
 
       jest.runAllTimers();
       const someEffectOrder = someEffect.mock.invocationCallOrder[0];
@@ -169,40 +238,6 @@ describe('BrPage', () => {
       expect(someEffectOrder).toBeLessThan(initializeDoneOrder);
 
       jest.useRealTimers();
-    });
-
-    it('should mount children if there is no page and NBR mode is true', () => {});
-
-    it('should keep children mounted as page becomes available if there is no page and NBR mode is true', () => {});
-
-    it('should render BrPageContext.provider', () => {
-      const page = wrapper.state('page')!;
-      expect(wrapper.find('ContextProvider').first().prop('value')).toEqual(page);
-    });
-
-    it('should render BrMappingContext.provider', () => {
-      expect(wrapper.find('ContextProvider').last().prop('value')).toEqual(mapping);
-    });
-
-    it('should render nothing if there is an error loading the page', async () => {
-      const error = new Error('error-loading-page');
-      mocked(initialize).mockRejectedValueOnce(error);
-
-      const setState = jest.spyOn(BrPage.prototype, 'setState').mockImplementationOnce(() => {});
-
-      mount(<BrPage configuration={config} mapping={mapping} />);
-      await new Promise(process.nextTick);
-
-      expect(setState).toHaveBeenCalledWith(expect.any(Function));
-      expect(setState.mock.calls[0][0]).toThrowError(error);
-    });
-
-    it('should render root component', () => {
-      const node = wrapper.find(BrNode);
-      const root = wrapper.state('page')!.getComponent();
-
-      expect(node.exists()).toBe(true);
-      expect(node.prop('component')).toBe(root);
     });
   });
 });

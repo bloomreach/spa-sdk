@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BrContainerItemUndefined should render a message 1`] = `
+<DocumentFragment>
+  <div>
+    Component "something" is not defined.
+  </div>
+</DocumentFragment>
+`;
+
+exports[`BrContainerItemUndefined should render a message if component is not defined 1`] = `
+<DocumentFragment>
+  <div>
+    Component "undefined" is not defined.
+  </div>
+</DocumentFragment>
+`;

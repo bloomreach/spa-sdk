@@ -16,12 +16,14 @@
 
 import React from 'react';
 import axios from 'axios';
-import { Link, RouteComponentProps } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { BrComponent, BrPage, BrPageContext } from '@bloomreach/react-sdk';
 import { Banner, Content, Menu, NewsList, CookieConsent } from './components';
 import { buildConfiguration } from './utils/buildConfiguration';
 
-export default function App({ location }: RouteComponentProps): JSX.Element {
+export default function App(): JSX.Element {
+  const location = useLocation();
+
   const configuration = buildConfiguration(`${location.pathname}${location.search}`, axios);
   const mapping = { Banner, Content, 'News List': NewsList, 'Simple Content': Content };
 
