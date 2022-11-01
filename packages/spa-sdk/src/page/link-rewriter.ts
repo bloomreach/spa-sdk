@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 Bloomreach
+ * Copyright 2019-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,13 +15,13 @@
  */
 
 import { DOMParser, XMLSerializer } from '@xmldom/xmldom';
-import { injectable, inject } from 'inversify';
-import { LinkFactory } from './link-factory';
+import { inject, injectable } from 'inversify';
 import { Link, TYPE_LINK_RESOURCE } from './link';
+import { LinkFactory } from './link-factory';
 
-export const DomParserService = Symbol.for('DomParserService');
+export const DomParserServiceProvider = Symbol.for('DomParserService');
 export const LinkRewriterService = Symbol.for('LinkRewriterService');
-export const XmlSerializerService = Symbol.for('XmlSerializerService');
+export const XmlSerializerServiceProvider = Symbol.for('XmlSerializerService');
 
 const BODY_CONTENTS = /^<body.*?>(.*)<\/body>$/s;
 
@@ -31,24 +31,26 @@ export interface LinkRewriter {
    * @param content The HTML content to rewrite links.
    * @param type The content type.
    */
-  rewrite(content: string, type?: string): string;
+  rewrite(content: string, type?: string): Promise<string>;
 }
 
 @injectable()
 export class LinkRewriterImpl implements LinkRewriter {
   constructor(
     @inject(LinkFactory) private linkFactory: LinkFactory,
-    @inject(DomParserService) private domParser: DOMParser,
-    @inject(XmlSerializerService) private xmlSerializer: XMLSerializer,
+    @inject(DomParserServiceProvider) private domParserProvider: () => Promise<DOMParser>,
+    @inject(XmlSerializerServiceProvider) private xmlSerializerProvider: () => Promise<XMLSerializer>,
   ) {}
 
-  rewrite(content: string, type = 'text/html'): string {
-    const document = this.domParser.parseFromString(`<body>${content}</body>`, type);
+  async rewrite(content: string, type = 'text/html'): Promise<string> {
+    const domParser = await this.domParserProvider();
+    const document = domParser.parseFromString(`<body>${content}</body>`, type);
 
     this.rewriteAnchors(document);
     this.rewriteImages(document);
 
-    const body = this.xmlSerializer.serializeToString(document);
+    const xmlSerializer = await this.xmlSerializerProvider();
+    const body = xmlSerializer.serializeToString(document);
 
     return body.replace(BODY_CONTENTS, '$1');
   }

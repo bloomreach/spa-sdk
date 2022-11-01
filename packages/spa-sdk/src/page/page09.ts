@@ -1,5 +1,5 @@
 /*
- * Copyright 2020-2022 Bloomreach
+ * Copyright 2019-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -156,7 +156,7 @@ export class PageImpl implements Page {
     return !!this.model._meta.preview;
   }
 
-  rewriteLinks(content: string, type = 'text/html'): string {
+  async rewriteLinks(content: string, type = 'text/html'): Promise<string> {
     return this.linkRewriter.rewrite(content, type);
   }
 

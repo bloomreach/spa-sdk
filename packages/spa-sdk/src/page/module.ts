@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Bloomreach
+ * Copyright 2019-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-import { ContainerModule } from 'inversify';
-import { DOMParser, XMLSerializer } from '@xmldom/xmldom';
 import { Typed } from 'emittery';
+import { ContainerModule } from 'inversify';
+import { UrlBuilder, UrlBuilderService } from '../url';
 
 import { ButtonFactory } from './button-factory';
-import { ComponentFactory } from './component-factory';
+import { createManageContentButton, TYPE_MANAGE_CONTENT_BUTTON } from './button-manage-content';
 import {
   ComponentChildrenToken,
   ComponentImpl,
@@ -28,34 +28,38 @@ import {
   TYPE_COMPONENT_CONTAINER,
   TYPE_COMPONENT_CONTAINER_ITEM,
 } from './component';
+import { ComponentFactory } from './component-factory';
 import { ContainerImpl } from './container';
 import { ContainerItemImpl } from './container-item';
 import { ContentFactory } from './content-factory';
 import { DocumentImpl, DocumentModelToken, TYPE_DOCUMENT } from './document';
-import { DomParserService, LinkRewriterImpl, LinkRewriterService, XmlSerializerService } from './link-rewriter';
 import { EventBusService } from './events';
-import { ImageFactory, ImageImpl, ImageModelToken, ImageModel } from './image';
+import { ImageFactory, ImageImpl, ImageModel, ImageModelToken } from './image';
 import { ImageSetImpl, ImageSetModelToken, TYPE_IMAGE_SET } from './image-set';
+import { TYPE_LINK_INTERNAL } from './link';
 import { LinkFactory } from './link-factory';
-import { MenuImpl, MenuModelToken, Menu, TYPE_MANAGE_MENU_BUTTON, TYPE_MENU } from './menu';
-import { MenuItemFactory, MenuItemImpl, MenuItemModelToken, MenuItemModel } from './menu-item';
+import {
+  DomParserServiceProvider,
+  LinkRewriterImpl,
+  LinkRewriterService,
+  XmlSerializerServiceProvider,
+} from './link-rewriter';
+import { Menu, MenuImpl, MenuModelToken, TYPE_MANAGE_MENU_BUTTON, TYPE_MENU } from './menu';
+import { MenuItemFactory, MenuItemImpl, MenuItemModel, MenuItemModelToken } from './menu-item';
+import { TYPE_META_COMMENT } from './meta';
+import { MetaCollectionImpl, MetaCollectionModel, MetaCollectionModelToken } from './meta-collection';
 import { MetaCollectionFactory } from './meta-collection-factory';
-import { MetaCollectionImpl, MetaCollectionModelToken, MetaCollectionModel } from './meta-collection';
 import { MetaCommentImpl } from './meta-comment';
 import { MetaFactory } from './meta-factory';
+import { PageImpl, PageModel, PageModelToken } from './page';
 import { PageFactory } from './page-factory';
-import { PageImpl, PageModelToken, PageModel } from './page';
 import { PaginationImpl, PaginationModelToken, TYPE_PAGINATION } from './pagination';
 import {
   PaginationItemFactory,
   PaginationItemImpl,
-  PaginationItemModelToken,
   PaginationItemModel,
+  PaginationItemModelToken,
 } from './pagination-item';
-import { TYPE_LINK_INTERNAL } from './link';
-import { TYPE_MANAGE_CONTENT_BUTTON, createManageContentButton } from './button-manage-content';
-import { TYPE_META_COMMENT } from './meta';
-import { UrlBuilderService, UrlBuilder } from '../url';
 
 export function PageModule(): ContainerModule {
   return new ContainerModule((bind) => {
@@ -64,8 +68,14 @@ export function PageModule(): ContainerModule {
       .inSingletonScope()
       .when(() => typeof window !== 'undefined');
     bind(LinkRewriterService).to(LinkRewriterImpl).inSingletonScope();
-    bind(DomParserService).toConstantValue(new DOMParser());
-    bind(XmlSerializerService).toConstantValue(new XMLSerializer());
+    bind(DomParserServiceProvider).toProvider(() => async () => {
+      const { DOMParser } = await import('@xmldom/xmldom');
+      return new DOMParser();
+    });
+    bind(XmlSerializerServiceProvider).toProvider(() => async () => {
+      const { XMLSerializer } = await import('@xmldom/xmldom');
+      return new XMLSerializer();
+    });
 
     bind(ButtonFactory)
       .toSelf()

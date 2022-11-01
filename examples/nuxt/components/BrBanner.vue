@@ -1,5 +1,5 @@
 <!--
-  Copyright 2020-2021 Bloomreach
+  Copyright 2020-2022 Bloomreach
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@
     />
     <h1 v-if="data.title">{{ data.title }}</h1>
     <img v-if="image" class="img-fluid" :src="image.getOriginal().getUrl()" :alt="data.title" />
-    <div v-if="data.content" v-html="page.rewriteLinks(page.sanitize(data.content.value))" />
+    <div v-if="data.content" v-html="html" />
     <p v-if="link" className="lead">
       <nuxt-link :to="link.getUrl()" class="btn btn-primary btn-lg" role="button">Learn more</nuxt-link>
     </p>
@@ -39,6 +39,10 @@ import { ContainerItem, Document, ImageSet, Page } from '@bloomreach/spa-sdk';
 import { Component, Prop, Vue } from 'nuxt-property-decorator';
 
 @Component({
+  name: 'br-banner',
+  data: {
+    html: null,
+  },
   computed: {
     data(this: BrBanner) {
       return this.document?.getData<DocumentData>();
@@ -58,7 +62,12 @@ import { Component, Prop, Vue } from 'nuxt-property-decorator';
       return this.data?.link && this.page.getContent<Document>(this.data.link);
     },
   },
-  name: 'br-banner',
+  async mounted(this: BrBanner): Promise<void> {
+    const content = this.document?.getData<DocumentData>().content;
+    if (content) {
+      this.html = await this.page.rewriteLinks(this.page.sanitize(content.value));
+    }
+  },
 })
 export default class BrBanner extends Vue {
   @Prop() component!: ContainerItem;
@@ -72,5 +81,7 @@ export default class BrBanner extends Vue {
   image?: ImageSet;
 
   link?: Document;
+
+  html?: string;
 }
 </script>

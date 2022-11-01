@@ -11,7 +11,7 @@
       "dom",
       "dom.iterable"
     ],
-    "module": "es6",
+    "module": "es2020",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "sourceMap": true,

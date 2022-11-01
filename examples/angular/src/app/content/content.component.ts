@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Bloomreach
+ * Copyright 2020-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,17 +14,24 @@
  * limitations under the License.
  */
 
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Component as BrComponent, Document, ImageSet, Page } from '@bloomreach/spa-sdk';
 
 @Component({
   selector: 'br-content',
   templateUrl: './content.component.html',
 })
-export class ContentComponent {
+export class ContentComponent implements OnInit {
   @Input() component!: BrComponent;
 
   @Input() page!: Page;
+
+  safeHTML?: string;
+
+  async ngOnInit(): Promise<void> {
+    const content = this.document?.getData<DocumentData>().content;
+    this.safeHTML = await this.page.rewriteLinks(this.page.sanitize(content!.value));
+  }
 
   get document(): Document | undefined {
     const { document } = this.component.getModels<DocumentModels>();

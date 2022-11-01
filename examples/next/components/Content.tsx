@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 Bloomreach
+ * Copyright 2019-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,29 @@
  * limitations under the License.
  */
 
-import React from 'react';
-import { Document, ImageSet } from '@bloomreach/spa-sdk';
 import { BrManageContentButton, BrProps } from '@bloomreach/react-sdk';
+import { Document, ImageSet } from '@bloomreach/spa-sdk';
+import React, { useEffect, useState } from 'react';
 
 export function Content(props: BrProps): JSX.Element | null {
   const documentRef = props.component?.getModels<DocumentModels>().document;
   const document = documentRef && props.page?.getContent<Document>(documentRef);
+
+  const [safeHTML, setSafeHTML] = useState('');
+
+  useEffect(() => {
+    async function rewriteLinksAndSanitize(): Promise<void> {
+      if (!document || !props.page) {
+        return;
+      }
+
+      const { content } = document.getData<DocumentData>();
+      const html = await props.page.rewriteLinks(props.page.sanitize(content.value));
+      setSafeHTML(html);
+    }
+
+    rewriteLinksAndSanitize();
+  });
 
   if (!document) {
     return null;
@@ -44,9 +60,7 @@ export function Content(props: BrProps): JSX.Element | null {
       {title && <h1>{title}</h1>}
       {author && <p className="mb-3 text-muted">{author}</p>}
       {date && <p className="mb-3 small text-muted">{new Date(date).toDateString()}</p>}
-      {content && props.page && (
-        <div dangerouslySetInnerHTML={{ __html: props.page.rewriteLinks(props.page.sanitize(content.value)) }} />
-      )}
+      {content && props.page && <div dangerouslySetInnerHTML={{ __html: safeHTML }} />}
     </div>
   );
 }

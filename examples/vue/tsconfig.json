@@ -10,7 +10,7 @@
       "dom.iterable",
       "scripthost"
     ],
-    "module": "es6",
+    "module": "es2020",
     "moduleResolution": "node",
     "paths": {
       "@/*": ["src/*"]

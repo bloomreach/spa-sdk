@@ -1,5 +1,5 @@
 <!--
-  Copyright 2020 Bloomreach
+  Copyright 2020-2022 Bloomreach
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@
     <h1 v-if="data.title">{{ data.title }}</h1>
     <p v-if="data.author" class="mb-3 text-muted">{{ data.author }}</p>
     <p v-if="date" class="mb-3 small text-muted">{{ formatDate(date) }}</p>
-    <div v-if="data.content" v-html="page.rewriteLinks(page.sanitize(data.content.value))" />
+    <div v-if="data.content" v-html="html" />
   </div>
 </template>
 
@@ -30,6 +30,7 @@ import { ContainerItem, Document, ImageSet, Page } from '@bloomreach/spa-sdk';
 import { Component, Prop, Vue } from 'nuxt-property-decorator';
 
 @Component({
+  name: 'br-content',
   computed: {
     data(this: BrContent) {
       return this.document?.getData<DocumentData>();
@@ -54,7 +55,12 @@ import { Component, Prop, Vue } from 'nuxt-property-decorator';
       return new Date(date).toDateString();
     },
   },
-  name: 'br-content',
+  async mounted(this: BrContent): Promise<void> {
+    const content = this.document?.getData<DocumentData>().content;
+    if (content) {
+      this.html = await this.page.rewriteLinks(this.page.sanitize(content.value));
+    }
+  },
 })
 export default class BrContent extends Vue {
   @Prop() component!: ContainerItem;
@@ -68,5 +74,7 @@ export default class BrContent extends Vue {
   document?: Document;
 
   image?: ImageSet;
+
+  html?: string;
 }
 </script>

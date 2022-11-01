@@ -16,26 +16,26 @@
 
 import { inject, injectable, optional } from 'inversify';
 import sanitizeHtml from 'sanitize-html';
+import { EventBus as CmsEventBus, EventBusService as CmsEventBusService } from '../cms';
+import { isAbsoluteUrl, resolveUrl } from '../url';
 import { ButtonFactory } from './button-factory';
+import { ManageContentButton, TYPE_MANAGE_CONTENT_BUTTON } from './button-manage-content';
+import { Component, ComponentMeta, ComponentModel } from './component';
 import { ComponentFactory } from './component-factory';
-import { ComponentMeta, ComponentModel, Component } from './component';
-import { ContainerItemModel } from './container-item';
 import { ContainerModel } from './container';
-import { ContentFactory } from './content-factory';
+import { ContainerItemModel } from './container-item';
 import { ContentModel } from './content';
+import { ContentFactory } from './content-factory';
 import { Content } from './content09';
-import { EventBusService as CmsEventBusService, EventBus as CmsEventBus } from '../cms';
-import { EventBusService, EventBus, PageUpdateEvent } from './events';
+import { EventBus, EventBusService, PageUpdateEvent } from './events';
+import { isLink, Link } from './link';
 import { LinkFactory } from './link-factory';
 import { LinkRewriter, LinkRewriterService } from './link-rewriter';
-import { Link, isLink } from './link';
-import { ManageContentButton, TYPE_MANAGE_CONTENT_BUTTON } from './button-manage-content';
 import { Menu, TYPE_MANAGE_MENU_BUTTON } from './menu';
+import { MetaCollection, MetaCollectionModel } from './meta-collection';
 import { MetaCollectionFactory } from './meta-collection-factory';
-import { MetaCollectionModel, MetaCollection } from './meta-collection';
-import { Reference, isReference, resolve } from './reference';
-import { Visitor, Visit } from './relevance';
-import { isAbsoluteUrl, resolveUrl } from '../url';
+import { isReference, Reference, resolve } from './reference';
+import { Visit, Visitor } from './relevance';
 
 export const PageModelToken = Symbol.for('PageModelToken');
 
@@ -246,7 +246,7 @@ export interface Page {
    * @param content The HTML content to rewrite links.
    * @param type The content type.
    */
-  rewriteLinks(content: string, type?: string): string;
+  rewriteLinks(content: string, type?: string): Promise<string>;
 
   /**
    * Synchronizes the CMS integration state.
@@ -371,7 +371,7 @@ export class PageImpl implements Page {
     return !!this.model.meta.preview;
   }
 
-  rewriteLinks(content: string, type = 'text/html'): string {
+  async rewriteLinks(content: string, type = 'text/html'): Promise<string> {
     return this.linkRewriter.rewrite(content, type);
   }
 

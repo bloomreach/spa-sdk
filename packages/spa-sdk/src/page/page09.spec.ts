@@ -1,5 +1,5 @@
 /*
- * Copyright 2020-2022 Bloomreach
+ * Copyright 2019-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -72,7 +72,7 @@ beforeEach(() => {
   cmsEventBus = new Typed();
   eventBus = new Typed();
   linkFactory = { create: jest.fn() } as unknown as typeof linkFactory;
-  linkRewriter = { rewrite: jest.fn() } as unknown as jest.Mocked<LinkRewriter>;
+  linkRewriter = { rewrite: jest.fn(() => Promise.resolve('rewritten')) } as unknown as jest.Mocked<LinkRewriter>;
   metaFactory = jest.fn();
   root = { getComponent: jest.fn() } as unknown as jest.Mocked<Component>;
 });
@@ -309,12 +309,13 @@ describe('PageImpl', () => {
   });
 
   describe('rewriteLinks', () => {
-    it('should pass a call to the link rewriter', () => {
-      linkRewriter.rewrite.mockReturnValueOnce('rewritten');
+    it('should pass a call to the link rewriter', async () => {
+      linkRewriter.rewrite.mockResolvedValueOnce('rewritten');
 
       const page = createPage();
+      const rewritten = await page.rewriteLinks('something', 'text/html');
 
-      expect(page.rewriteLinks('something', 'text/html')).toBe('rewritten');
+      expect(rewritten).toBe('rewritten');
       expect(linkRewriter.rewrite).toBeCalledWith('something', 'text/html');
     });
   });

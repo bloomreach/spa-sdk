@@ -15,18 +15,18 @@
  */
 
 import { Typed } from 'emittery';
+import { EventBus as CmsEventBus } from '../cms';
 import { ButtonFactory } from './button-factory';
 import { Component, TYPE_COMPONENT } from './component';
 import { ComponentFactory } from './component-factory';
-import { ContentFactory } from './content-factory';
 import { ContentModel } from './content';
-import { EventBus as CmsEventBus } from '../cms';
+import { ContentFactory } from './content-factory';
 import { EventBus } from './events';
+import { isLink, Link, TYPE_LINK_EXTERNAL, TYPE_LINK_INTERNAL } from './link';
 import { LinkFactory } from './link-factory';
 import { LinkRewriter } from './link-rewriter';
-import { Link, TYPE_LINK_INTERNAL, TYPE_LINK_EXTERNAL, isLink } from './link';
 import { MetaCollectionFactory } from './meta-collection-factory';
-import { PageImpl, PageModel, Page, isPage } from './page';
+import { isPage, Page, PageImpl, PageModel } from './page';
 
 let buttonFactory: jest.Mocked<ButtonFactory>;
 let componentFactory: jest.Mocked<ComponentFactory>;
@@ -78,7 +78,7 @@ beforeEach(() => {
   cmsEventBus = new Typed();
   eventBus = new Typed();
   linkFactory = { create: jest.fn() } as unknown as typeof linkFactory;
-  linkRewriter = { rewrite: jest.fn() } as unknown as jest.Mocked<LinkRewriter>;
+  linkRewriter = { rewrite: jest.fn(() => Promise.resolve('rewritten')) } as unknown as jest.Mocked<LinkRewriter>;
   metaFactory = jest.fn();
   root = { getComponent: jest.fn() } as unknown as jest.Mocked<Component>;
 });
@@ -346,12 +346,13 @@ describe('PageImpl', () => {
   });
 
   describe('rewriteLinks', () => {
-    it('should pass a call to the link rewriter', () => {
-      linkRewriter.rewrite.mockReturnValueOnce('rewritten');
+    it('should pass a call to the link rewriter', async () => {
+      linkRewriter.rewrite.mockResolvedValueOnce('rewritten');
 
       const page = createPage();
+      const rewritten = await page.rewriteLinks('something', 'text/html');
 
-      expect(page.rewriteLinks('something', 'text/html')).toBe('rewritten');
+      expect(rewritten).toBe('rewritten');
       expect(linkRewriter.rewrite).toBeCalledWith('something', 'text/html');
     });
   });
