@@ -15,26 +15,27 @@
  */
 
 import { Typed } from 'emittery';
+import { EventBus as CmsEventBus, EventBusProvider as CmsEventBusProvider } from '../cms';
 import { ButtonFactory } from './button-factory';
 import { Component } from './component';
 import { ComponentFactory } from './component-factory09';
+import { TYPE_COMPONENT } from './component09';
 import { ContentFactory } from './content-factory09';
-import { ContentModel, Content } from './content09';
-import { EventBus as CmsEventBus } from '../cms';
+import { Content, ContentModel } from './content09';
 import { EventBus } from './events09';
+import { TYPE_LINK_INTERNAL } from './link';
 import { LinkFactory } from './link-factory';
 import { LinkRewriter } from './link-rewriter';
-import { TYPE_COMPONENT } from './component09';
-import { TYPE_LINK_INTERNAL } from './link';
 import { MetaCollectionFactory } from './meta-collection-factory';
-import { PageImpl, PageModel, isPage } from './page09';
 import { Page } from './page';
+import { isPage, PageImpl, PageModel } from './page09';
 
 let buttonFactory: jest.Mocked<ButtonFactory>;
 let componentFactory: jest.Mocked<ComponentFactory>;
 let content: Content;
 let contentFactory: jest.MockedFunction<ContentFactory>;
 let cmsEventBus: CmsEventBus;
+let cmsEventBusProvider: CmsEventBusProvider;
 let eventBus: EventBus;
 let linkFactory: jest.Mocked<LinkFactory>;
 let linkRewriter: jest.Mocked<LinkRewriter>;
@@ -59,7 +60,7 @@ function createPage(pageModel = model) {
     linkFactory,
     linkRewriter,
     metaFactory,
-    cmsEventBus,
+    cmsEventBusProvider,
     eventBus,
   );
 }
@@ -70,6 +71,7 @@ beforeEach(() => {
   content = {} as jest.Mocked<Content>;
   contentFactory = jest.fn(() => content) as unknown as typeof contentFactory;
   cmsEventBus = new Typed();
+  cmsEventBusProvider = () => Promise.resolve(cmsEventBus);
   eventBus = new Typed();
   linkFactory = { create: jest.fn() } as unknown as typeof linkFactory;
   linkRewriter = { rewrite: jest.fn(() => Promise.resolve('rewritten')) } as unknown as jest.Mocked<LinkRewriter>;
@@ -321,11 +323,16 @@ describe('PageImpl', () => {
   });
 
   describe('sync', () => {
-    it('should emit page.ready event', () => {
+    it('should emit page.ready event', async () => {
       spyOn(cmsEventBus, 'emit');
 
-      const page = createPage();
-      page.sync();
+      const page = createPage({
+        ...model,
+        _meta: {
+          preview: true,
+        },
+      });
+      await page.sync();
 
       expect(cmsEventBus.emit).toBeCalledWith('page.ready', {});
     });

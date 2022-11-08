@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Bloomreach
+ * Copyright 2020-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,8 +18,6 @@ import { injectable, inject, optional } from 'inversify';
 import { isMatched } from '../url';
 import { Events, Message, Procedures, Rpc } from './rpc';
 import { Logger } from '../logger';
-
-export const PostMessageService = Symbol.for('PostMessageService');
 
 const GLOBAL_WINDOW = typeof window === 'undefined' ? undefined : window;
 

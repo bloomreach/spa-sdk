@@ -23,7 +23,7 @@ import { ContainerItemModel } from './container-item09';
 import { ContainerModel } from './container09';
 import { ContentFactory } from './content-factory09';
 import { ContentModel, Content } from './content09';
-import { EventBusService as CmsEventBusService, EventBus as CmsEventBus } from '../cms';
+import { EventBusServiceProvider as CmsEventBusServiceProvider, EventBusProvider as CmsEventBusProvider } from '../cms';
 import { EventBusService } from './events';
 import { EventBus, PageUpdateEvent } from './events09';
 import { LinkFactory } from './link-factory';
@@ -74,7 +74,7 @@ export class PageImpl implements Page {
     @inject(LinkFactory) private linkFactory: LinkFactory,
     @inject(LinkRewriterService) private linkRewriter: LinkRewriter,
     @inject(MetaCollectionFactory) private metaFactory: MetaCollectionFactory,
-    @inject(CmsEventBusService) @optional() private cmsEventBus?: CmsEventBus,
+    @inject(CmsEventBusServiceProvider) private cmsEventBusProvider: CmsEventBusProvider,
     @inject(EventBusService) @optional() eventBus?: EventBus,
   ) {
     eventBus?.on('page.update', this.onPageUpdate.bind(this));
@@ -159,8 +159,11 @@ export class PageImpl implements Page {
     return this.linkRewriter.rewrite(content, type);
   }
 
-  sync(): void {
-    this.cmsEventBus?.emit('page.ready', {});
+  async sync(): Promise<void> {
+    if (this.isPreview()) {
+      const cmsEventBus = await this.cmsEventBusProvider();
+      cmsEventBus?.emit('page.ready', {});
+    }
   }
 
   toJSON(): PageModel {
