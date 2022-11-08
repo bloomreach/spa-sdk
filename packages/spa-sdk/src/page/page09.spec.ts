@@ -326,12 +326,7 @@ describe('PageImpl', () => {
     it('should emit page.ready event', async () => {
       spyOn(cmsEventBus, 'emit');
 
-      const page = createPage({
-        ...model,
-        _meta: {
-          preview: true,
-        },
-      });
+      const page = createPage();
       await page.sync();
 
       expect(cmsEventBus.emit).toBeCalledWith('page.ready', {});

@@ -160,10 +160,8 @@ export class PageImpl implements Page {
   }
 
   async sync(): Promise<void> {
-    if (this.isPreview()) {
-      const cmsEventBus = await this.cmsEventBusProvider();
-      cmsEventBus?.emit('page.ready', {});
-    }
+    const cmsEventBus = await this.cmsEventBusProvider();
+    cmsEventBus?.emit('page.ready', {});
   }
 
   toJSON(): PageModel {
