@@ -60,8 +60,10 @@ export function PageModule(): ContainerModule {
       .inSingletonScope()
       .when(() => typeof window !== 'undefined');
 
-    // Its necessary to use a async provider here because we can only get the CmsEventBus once the module is installed,
-    // if the page is in preview mode
+    /*
+     Its necessary to use a async provider here because we can only get the CmsEventBus once the module is installed,
+     if the page is in preview mode
+    */
     bind(CmsEventBusServiceProvider).toProvider<CmsEventBus | undefined>(
       (context) => () =>
         new Promise<CmsEventBus | undefined>((resolve) => {
