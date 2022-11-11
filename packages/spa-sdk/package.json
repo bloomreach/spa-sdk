@@ -1,6 +1,6 @@
 {
   "name": "@bloomreach/spa-sdk",
-  "version": "17.1.0",
+  "version": "17.1.1",
   "description": "Bloomreach SPA SDK",
   "keywords": [
     "bloomreach",
@@ -87,7 +87,7 @@
     "typescript": "4.1.6"
   },
   "dependencies": {
-    "@xmldom/xmldom": "0.7.6",
+    "@xmldom/xmldom": "0.7.9",
     "cookie": "0.4.1",
     "emittery": "0.7.2",
     "inversify": "5.1.1",

@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Bloomreach
+ * Copyright 2019-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,8 +15,8 @@
  */
 
 import React from 'react';
-import { shallow } from 'enzyme';
 import { Container, Page } from '@bloomreach/spa-sdk';
+import { render } from '@testing-library/react';
 import { BrContainerUnorderedList } from './BrContainerUnorderedList';
 
 describe('BrContainerUnorderedList', () => {
@@ -30,54 +30,36 @@ describe('BrContainerUnorderedList', () => {
   });
 
   it('should render itself as ul element', () => {
-    const wrapper = shallow(<BrContainerUnorderedList {...props} />);
+    const element = render(<BrContainerUnorderedList {...props} />);
 
-    expect(wrapper.equals(<ul />)).toBe(true);
+    expect(element.container?.firstChild?.nodeName).toBe('UL');
+    expect(element.asFragment()).toMatchSnapshot();
   });
 
   it('should render children as li elements', () => {
-    const wrapper = shallow(
+    const element = render(
       <BrContainerUnorderedList {...props}>
         <a />
         <b />
       </BrContainerUnorderedList>,
     );
 
-    expect(
-      wrapper.equals(
-        <ul>
-          <li>
-            <a />
-          </li>
-          <li>
-            <b />
-          </li>
-        </ul>,
-      ),
-    ).toBe(true);
+    expect(element.container.querySelector('ul')?.firstChild?.nodeName).toBe('LI');
+    expect(element.asFragment()).toMatchSnapshot();
   });
 
   it('should render preview classes', () => {
     props.page.isPreview.mockReturnValue(true);
 
-    const wrapper = shallow(
+    const element = render(
       <BrContainerUnorderedList {...props}>
         <a />
         <b />
       </BrContainerUnorderedList>,
     );
 
-    expect(
-      wrapper.equals(
-        <ul className="hst-container">
-          <li className="hst-container-item">
-            <a />
-          </li>
-          <li className="hst-container-item">
-            <b />
-          </li>
-        </ul>,
-      ),
-    ).toBe(true);
+    expect(element.container.querySelector('.hst-container')?.nodeName).toBe('UL');
+    expect(element.container.querySelector('.hst-container-item')?.nodeName).toBe('LI');
+    expect(element.asFragment()).toMatchSnapshot();
   });
 });

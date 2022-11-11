@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Bloomreach
+ * Copyright 2019-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,8 +15,8 @@
  */
 
 import React from 'react';
-import { shallow } from 'enzyme';
 import { Container, Page } from '@bloomreach/spa-sdk';
+import { render } from '@testing-library/react';
 import { BrContainerNoMarkup } from './BrContainerNoMarkup';
 
 describe('BrContainerNoMarkup', () => {
@@ -30,26 +30,25 @@ describe('BrContainerNoMarkup', () => {
   });
 
   it('should not render itself', () => {
-    const wrapper = shallow(<BrContainerNoMarkup {...props} />);
+    const element = render(<BrContainerNoMarkup {...props} />);
 
-    expect(wrapper.equals(<></>)).toBe(true);
+    expect(element.container.firstChild).toBe(null);
+    expect(element.asFragment()).toMatchSnapshot();
   });
 
   it('should render children as they are', () => {
-    const wrapper = shallow(
+    const element = render(
       <BrContainerNoMarkup {...props}>
         <a />
         <b />
       </BrContainerNoMarkup>,
     );
 
-    expect(
-      wrapper.equals(
-        <>
-          <a />
-          <b />
-        </>,
-      ),
-    ).toBe(true);
+    const a = element.container.querySelector('a');
+    const b = element.container.querySelector('b');
+
+    expect(element.container.childNodes.item(0).isEqualNode(a)).toBe(true);
+    expect(element.container.childNodes.item(1).isEqualNode(b)).toBe(true);
+    expect(element.asFragment()).toMatchSnapshot();
   });
 });

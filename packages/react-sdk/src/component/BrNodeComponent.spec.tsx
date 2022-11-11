@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2021 Bloomreach
+ * Copyright 2019-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,11 @@
  */
 
 import React from 'react';
-import { mount, shallow } from 'enzyme';
 import { Component, MetaCollection, Page } from '@bloomreach/spa-sdk';
+import { render } from '@testing-library/react';
 import { BrNodeComponent } from './BrNodeComponent';
 import { BrMeta } from '../meta';
+import { withContextProvider } from '../utils/withContextProvider';
 
 describe('BrNodeComponent', () => {
   const context = {
@@ -39,7 +40,7 @@ describe('BrNodeComponent', () => {
 
   describe('getMapping', () => {
     it('should use component name for mapping', () => {
-      shallow(<BrNodeComponent {...props} />);
+      render(<BrNodeComponent {...props} />);
 
       expect(props.component.getName).toBeCalled();
     });
@@ -47,56 +48,59 @@ describe('BrNodeComponent', () => {
 
   describe('render', () => {
     beforeEach(() => {
-      // @see https://github.com/airbnb/enzyme/issues/1553
-      /// @ts-ignore
-      BrNodeComponent.contextTypes = { test: () => null };
+      (BrNodeComponent as any).contextTypes = { test: () => null };
       delete (BrNodeComponent as Partial<typeof BrNodeComponent>).contextType;
     });
 
     it('should fallback when there is no mapping', () => {
       props.component.getName.mockReturnValue('something');
-      const wrapper = shallow(
-        <BrNodeComponent {...props}>
-          <b />
-        </BrNodeComponent>,
-        { context },
+      const element = render(
+        withContextProvider(
+          context,
+          <BrNodeComponent {...props}>
+            <b />
+          </BrNodeComponent>,
+        ),
       );
 
-      expect(
-        wrapper.equals(
-          <BrMeta meta={emptyMeta}>
-            <b />
-          </BrMeta>,
-        ),
-      ).toBe(true);
+      const nodeMeta = render(
+        <BrMeta meta={emptyMeta}>
+          <b />
+        </BrMeta>,
+      );
+
+      expect(element.container.isEqualNode(nodeMeta.container)).toBe(true);
     });
 
     it('should render a mapped component', () => {
       props.component.getName.mockReturnValue('test');
-      const wrapper = mount(
-        <BrNodeComponent {...props}>
-          <b />
-        </BrNodeComponent>,
-        { context },
+      const element = render(
+        withContextProvider(
+          context,
+          <BrNodeComponent {...props}>
+            <b />
+          </BrNodeComponent>,
+        ),
       );
 
-      expect(wrapper.html()).toBe('<a><b></b></a>');
+      expect(element.asFragment()).toMatchSnapshot();
     });
 
     it('should render children on a fallback', () => {
-      const wrapper = shallow(
+      const element = render(
         <BrNodeComponent {...props}>
           <b />
         </BrNodeComponent>,
       );
 
-      expect(
-        wrapper.equals(
-          <BrMeta meta={emptyMeta}>
-            <b />
-          </BrMeta>,
-        ),
-      ).toBe(true);
+      const nodeMeta = render(
+        <BrMeta meta={emptyMeta}>
+          <b />
+        </BrMeta>,
+      );
+
+      expect(element.container.isEqualNode(nodeMeta.container)).toBe(true);
+      expect(element.asFragment()).toMatchSnapshot();
     });
   });
 });

@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BrNode should render a component 1`] = `<DocumentFragment />`;
+
+exports[`BrNode should render a component meta-data 1`] = `<DocumentFragment />`;
+
+exports[`BrNode should render a container 1`] = `
+<DocumentFragment>
+  <div />
+</DocumentFragment>
+`;
+
+exports[`BrNode should render a container item 1`] = `
+<DocumentFragment>
+  <div>
+    Component "undefined" is not defined.
+  </div>
+</DocumentFragment>
+`;
+
+exports[`BrNode should render children if present 1`] = `
+<DocumentFragment>
+  <a />
+  <b />
+</DocumentFragment>
+`;
+
+exports[`BrNode should render model children if component children are not present 1`] = `<DocumentFragment />`;

@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BrContainerUnorderedList should render children as li elements 1`] = `
+<DocumentFragment>
+  <ul>
+    <li>
+      <a />
+    </li>
+    <li>
+      <b />
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`BrContainerUnorderedList should render itself as ul element 1`] = `
+<DocumentFragment>
+  <ul />
+</DocumentFragment>
+`;
+
+exports[`BrContainerUnorderedList should render preview classes 1`] = `
+<DocumentFragment>
+  <ul
+    class="hst-container"
+  >
+    <li
+      class="hst-container-item"
+    >
+      <a />
+    </li>
+    <li
+      class="hst-container-item"
+    >
+      <b />
+    </li>
+  </ul>
+</DocumentFragment>
+`;

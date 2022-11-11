@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BrComponent should render nothing if no component found 1`] = `<DocumentFragment />`;

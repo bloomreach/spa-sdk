@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 Bloomreach
+ * Copyright 2019-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,10 @@
  */
 
 import React from 'react';
-import { shallow } from 'enzyme';
 import { Menu, MetaCollection, Page } from '@bloomreach/spa-sdk';
+import { render } from '@testing-library/react';
 import { BrManageMenuButton } from './BrManageMenuButton';
-import { BrMeta } from '../meta';
+import { withContextProvider } from '../utils/withContextProvider';
 
 describe('BrManageMenuButton', () => {
   const context = {
@@ -32,9 +32,7 @@ describe('BrManageMenuButton', () => {
 
     props = { menu: {} as Menu };
 
-    // @see https://github.com/airbnb/enzyme/issues/1553
-    /// @ts-ignore
-    BrManageMenuButton.contextTypes = {
+    (BrManageMenuButton as any).contextTypes = {
       isPreview: () => null,
       getButton: () => null,
     };
@@ -43,18 +41,18 @@ describe('BrManageMenuButton', () => {
 
   it('should only render in preview mode', () => {
     context.isPreview.mockReturnValueOnce(false);
-    const wrapper = shallow(<BrManageMenuButton {...props} />, { context });
+    const element = render(withContextProvider(context, <BrManageMenuButton {...props} />));
 
-    expect(wrapper.html()).toBe(null);
+    expect(element.container.firstChild).toBe(null);
   });
 
   it('should render a menu-button meta-data', () => {
     const meta = {} as MetaCollection;
-    props.menu = {} as Menu;
+    (props as any).menu = {} as Menu;
     context.isPreview.mockReturnValueOnce(true);
     context.getButton.mockReturnValueOnce(meta);
-    const wrapper = shallow(<BrManageMenuButton {...props} />, { context });
+    render(withContextProvider(context, <BrManageMenuButton {...props} />));
 
-    expect(wrapper.find(BrMeta).first().prop('meta')).toBe(meta);
+    expect(context.getButton).toBeCalledWith(expect.any(String), props.menu);
   });
 });

@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BrContainerOrderedList should render children as li elements 1`] = `
+<DocumentFragment>
+  <ol>
+    <li>
+      <a />
+    </li>
+    <li>
+      <b />
+    </li>
+  </ol>
+</DocumentFragment>
+`;
+
+exports[`BrContainerOrderedList should render itself as ol element 1`] = `
+<DocumentFragment>
+  <ol />
+</DocumentFragment>
+`;
+
+exports[`BrContainerOrderedList should render preview classes 1`] = `
+<DocumentFragment>
+  <ol
+    class="hst-container"
+  >
+    <li
+      class="hst-container-item"
+    >
+      <a />
+    </li>
+    <li
+      class="hst-container-item"
+    >
+      <b />
+    </li>
+  </ol>
+</DocumentFragment>
+`;
