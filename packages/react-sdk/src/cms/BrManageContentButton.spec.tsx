@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 Bloomreach
+ * Copyright 2019-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,10 @@
  */
 
 import React from 'react';
-import { shallow } from 'enzyme';
 import { Content, MetaCollection, Page } from '@bloomreach/spa-sdk';
+import { render } from '@testing-library/react';
 import { BrManageContentButton } from './BrManageContentButton';
-import { BrMeta } from '../meta';
+import { withContextProvider } from '../utils/withContextProvider';
 
 describe('BrManageContentButton', () => {
   const context = {
@@ -29,9 +29,7 @@ describe('BrManageContentButton', () => {
   beforeEach(() => {
     jest.restoreAllMocks();
 
-    // @see https://github.com/airbnb/enzyme/issues/1553
-    /// @ts-ignore
-    BrManageContentButton.contextTypes = {
+    (BrManageContentButton as any).contextTypes = {
       isPreview: () => null,
       getButton: () => null,
     };
@@ -40,9 +38,9 @@ describe('BrManageContentButton', () => {
 
   it('should only render in preview mode', () => {
     context.isPreview.mockReturnValueOnce(false);
-    const wrapper = shallow(<BrManageContentButton />, { context });
+    const element = render(withContextProvider(context, <BrManageContentButton />));
 
-    expect(wrapper.html()).toBe(null);
+    expect(element.container.firstChild).toBe(null);
   });
 
   it('should render manage-content-button meta-data', () => {
@@ -51,9 +49,8 @@ describe('BrManageContentButton', () => {
 
     context.isPreview.mockReturnValueOnce(true);
     context.getButton.mockReturnValueOnce(meta);
-    const wrapper = shallow(<BrManageContentButton content={content} root="content" />, { context });
+    render(withContextProvider(context, <BrManageContentButton content={content} root="content" />));
 
     expect(context.getButton).toBeCalledWith(expect.any(String), { content, root: 'content' });
-    expect(wrapper.find(BrMeta).first().prop('meta')).toBe(meta);
   });
 });

@@ -15,18 +15,19 @@
  */
 
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 import './index.css';
 import App from './App';
 
-ReactDOM.render(
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+
+root.render(
   <BrowserRouter>
-    <Switch>
-      <Route path="/(.*)" component={App} />
-      <Redirect to="/" />
-    </Switch>
+    <Routes>
+      <Route path="/*" element={<App />} />
+      <Route element={<Navigate to="/" replace />} />
+    </Routes>
   </BrowserRouter>,
-  document.getElementById('root'),
 );

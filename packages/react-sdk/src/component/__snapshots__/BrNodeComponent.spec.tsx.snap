@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BrNodeComponent render should render a mapped component 1`] = `
+<DocumentFragment>
+  <a>
+    <b />
+  </a>
+</DocumentFragment>
+`;
+
+exports[`BrNodeComponent render should render children on a fallback 1`] = `
+<DocumentFragment>
+  <b />
+</DocumentFragment>
+`;

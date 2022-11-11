@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Bloomreach
+ * Copyright 2019-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,8 +15,8 @@
  */
 
 import React from 'react';
-import { mount } from 'enzyme';
 import { ContainerItem, Page } from '@bloomreach/spa-sdk';
+import { render } from '@testing-library/react';
 import { BrContainerItemUndefined } from './BrContainerItemUndefined';
 
 describe('BrContainerItemUndefined', () => {
@@ -26,8 +26,17 @@ describe('BrContainerItemUndefined', () => {
   };
 
   it('should render a message', () => {
-    const wrapper = mount(<BrContainerItemUndefined {...props} />);
+    const element = render(<BrContainerItemUndefined {...props} />);
 
-    expect(wrapper.html()).toBe('<div>Component "something" is not defined.</div>');
+    expect(element.getByText('Component "something" is not defined.')).toBeInTheDocument();
+    expect(element.asFragment()).toMatchSnapshot();
+  });
+
+  it('should render a message if component is not defined', () => {
+    const customProps = { ...props, component: undefined };
+    const element = render(<BrContainerItemUndefined {...customProps} />);
+
+    expect(element.getByText('Component "undefined" is not defined.')).toBeInTheDocument();
+    expect(element.asFragment()).toMatchSnapshot();
   });
 });

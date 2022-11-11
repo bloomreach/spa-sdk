@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Bloomreach
+ * Copyright 2019-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,8 +15,8 @@
  */
 
 import React from 'react';
-import { shallow } from 'enzyme';
 import { Container, Page } from '@bloomreach/spa-sdk';
+import { render } from '@testing-library/react';
 import { BrContainerBox } from './BrContainerBox';
 
 describe('BrContainerBox', () => {
@@ -30,54 +30,34 @@ describe('BrContainerBox', () => {
   });
 
   it('should render itself as div element', () => {
-    const wrapper = shallow(<BrContainerBox {...props} />);
+    const element = render(<BrContainerBox {...props} />);
 
-    expect(wrapper.equals(<div />)).toBe(true);
+    expect(element.container?.firstChild?.nodeName).toBe('DIV');
+    expect(element.asFragment()).toMatchSnapshot();
   });
 
   it('should render children as div elements', () => {
-    const wrapper = shallow(
+    const element = render(
       <BrContainerBox {...props}>
         <a />
         <b />
       </BrContainerBox>,
     );
 
-    expect(
-      wrapper.equals(
-        <div>
-          <div>
-            <a />
-          </div>
-          <div>
-            <b />
-          </div>
-        </div>,
-      ),
-    ).toBe(true);
+    expect(element.asFragment()).toMatchSnapshot();
   });
 
   it('should render preview classes', () => {
     props.page.isPreview.mockReturnValue(true);
 
-    const wrapper = shallow(
+    const element = render(
       <BrContainerBox {...props}>
         <a />
         <b />
       </BrContainerBox>,
     );
 
-    expect(
-      wrapper.equals(
-        <div className="hst-container">
-          <div className="hst-container-item">
-            <a />
-          </div>
-          <div className="hst-container-item">
-            <b />
-          </div>
-        </div>,
-      ),
-    ).toBe(true);
+    expect(element.container.querySelector('.hst-container')).toBeInTheDocument();
+    expect(element.container.querySelector('.hst-container-item')).toBeInTheDocument();
   });
 });

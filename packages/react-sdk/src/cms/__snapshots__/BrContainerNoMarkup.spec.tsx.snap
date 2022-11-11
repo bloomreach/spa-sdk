@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BrContainerNoMarkup should not render itself 1`] = `<DocumentFragment />`;
+
+exports[`BrContainerNoMarkup should render children as they are 1`] = `
+<DocumentFragment>
+  <a />
+  <b />
+</DocumentFragment>
+`;

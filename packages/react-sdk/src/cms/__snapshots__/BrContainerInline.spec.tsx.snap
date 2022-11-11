@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BrContainerInline should render children as span elements 1`] = `
+<DocumentFragment>
+  <div>
+    <span>
+      <a />
+    </span>
+    <span>
+      <b />
+    </span>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`BrContainerInline should render itself as div element 1`] = `
+<DocumentFragment>
+  <div />
+</DocumentFragment>
+`;
+
+exports[`BrContainerInline should render preview classes 1`] = `
+<DocumentFragment>
+  <div
+    class="hst-container"
+  >
+    <span
+      class="hst-container-item"
+    >
+      <a />
+    </span>
+    <span
+      class="hst-container-item"
+    >
+      <b />
+    </span>
+  </div>
+</DocumentFragment>
+`;

@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Bloomreach
+ * Copyright 2019-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,8 +15,8 @@
  */
 
 import React from 'react';
-import { shallow } from 'enzyme';
 import { Container, Page } from '@bloomreach/spa-sdk';
+import { render } from '@testing-library/react';
 import { BrContainerInline } from './BrContainerInline';
 
 describe('BrContainerInline', () => {
@@ -30,54 +30,36 @@ describe('BrContainerInline', () => {
   });
 
   it('should render itself as div element', () => {
-    const wrapper = shallow(<BrContainerInline {...props} />);
+    const element = render(<BrContainerInline {...props} />);
 
-    expect(wrapper.equals(<div />)).toBe(true);
+    expect(element.container?.firstChild?.nodeName).toBe('DIV');
+    expect(element.asFragment()).toMatchSnapshot();
   });
 
   it('should render children as span elements', () => {
-    const wrapper = shallow(
+    const element = render(
       <BrContainerInline {...props}>
         <a />
         <b />
       </BrContainerInline>,
     );
 
-    expect(
-      wrapper.equals(
-        <div>
-          <span>
-            <a />
-          </span>
-          <span>
-            <b />
-          </span>
-        </div>,
-      ),
-    ).toBe(true);
+    expect(element.container.querySelector('div')?.firstChild?.nodeName).toBe('SPAN');
+    expect(element.asFragment()).toMatchSnapshot();
   });
 
   it('should render preview classes', () => {
     props.page.isPreview.mockReturnValue(true);
 
-    const wrapper = shallow(
+    const element = render(
       <BrContainerInline {...props}>
         <a />
         <b />
       </BrContainerInline>,
     );
 
-    expect(
-      wrapper.equals(
-        <div className="hst-container">
-          <span className="hst-container-item">
-            <a />
-          </span>
-          <span className="hst-container-item">
-            <b />
-          </span>
-        </div>,
-      ),
-    ).toBe(true);
+    expect(element.container.querySelector('.hst-container')?.nodeName).toBe('DIV');
+    expect(element.container.querySelector('.hst-container-item')?.nodeName).toBe('SPAN');
+    expect(element.asFragment()).toMatchSnapshot();
   });
 });
