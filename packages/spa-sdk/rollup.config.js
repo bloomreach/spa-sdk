@@ -27,7 +27,7 @@ export default [
     output: [
       {
         dir: 'lib',
-        entryFileNames: '[name].js',
+        entryFileNames: '[name].umd.js',
         exports: 'named',
         format: 'umd',
         name: 'BloomreachSpaSdk',
@@ -35,15 +35,11 @@ export default [
         sourcemapExcludeSources: true,
         inlineDynamicImports: true,
         globals: {
+          cookie: 'cookie',
           inversify: 'inversify',
           emittery: 'emiterry',
           xmldom: 'xmldom',
         },
-      },
-      {
-        dir: 'lib',
-        entryFileNames: '[name].mjs',
-        format: 'esm',
       },
     ],
     external: [...Object.keys(pkg.dependencies || {}), ...Object.keys(pkg.peerDependencies || {})],
@@ -59,8 +55,8 @@ export default [
     output: [
       {
         dir: 'lib',
-        entryFileNames: '[name].es6.js',
-        format: 'esm',
+        entryFileNames: '[name].js',
+        format: 'es',
       },
     ],
     external: [...Object.keys(pkg.dependencies || {}), ...Object.keys(pkg.peerDependencies || {})],
@@ -86,14 +82,7 @@ export default [
       {
         dir: 'lib/express',
         entryFileNames: '[name].js',
-        exports: 'auto',
-        format: 'cjs',
-        preserveModules: true,
-      },
-      {
-        dir: 'lib/express',
-        entryFileNames: '[name].mjs',
-        format: 'esm',
+        format: 'es',
         preserveModules: true,
       },
     ],
@@ -106,7 +95,7 @@ export default [
           compilerOptions: {
             declaration: true,
             declarationDir: 'lib',
-            target: 'es2018',
+            target: 'es6',
           },
         },
         useTsconfigDeclarationDir: true,

@@ -18,10 +18,10 @@
   "bugs": {
     "url": "https://issues.onehippo.com/projects/SPASDK/issues"
   },
-  "main": "lib/index.js",
+  "main": "lib/index.umd.js",
   "browser": "lib/index.js",
-  "module": "lib/index.mjs",
-  "es2015": "lib/index.es6.js",
+  "module": "lib/index.js",
+  "es2015": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
     "lib/"
