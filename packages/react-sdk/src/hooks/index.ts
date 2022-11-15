@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2022 Bloomreach
+ * Copyright 2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,4 @@
  * limitations under the License.
  */
 
-export { BrComponent, BrComponentContext, BrProps } from './component';
-export { BrManageContentButton, BrManageMenuButton } from './cms';
-export { BrPage, BrPageContext } from './page';
-export { useHTML } from './hooks';
+export * from './useHTML';

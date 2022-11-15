@@ -15,24 +15,24 @@
  */
 
 import { inject, injectable, optional } from 'inversify';
+import { EventBusProvider as CmsEventBusProvider, EventBusServiceProvider as CmsEventBusServiceProvider } from '../cms';
 import { ButtonFactory } from './button-factory';
+import { Component, ComponentMeta } from './component';
 import { ComponentFactory } from './component-factory09';
-import { ComponentMeta, Component } from './component';
 import { ComponentModel } from './component09';
 import { ContainerItemModel } from './container-item09';
 import { ContainerModel } from './container09';
 import { ContentFactory } from './content-factory09';
-import { ContentModel, Content } from './content09';
-import { EventBusServiceProvider as CmsEventBusServiceProvider, EventBusProvider as CmsEventBusProvider } from '../cms';
+import { Content, ContentModel } from './content09';
 import { EventBusService } from './events';
 import { EventBus, PageUpdateEvent } from './events09';
+import { Link, TYPE_LINK_INTERNAL } from './link';
 import { LinkFactory } from './link-factory';
 import { LinkRewriter, LinkRewriterService } from './link-rewriter';
-import { Link, TYPE_LINK_INTERNAL } from './link';
-import { MetaCollectionFactory } from './meta-collection-factory';
 import { MetaCollection, MetaCollectionModel } from './meta-collection';
-import { PageModelToken, PageModel as PageModel10, Page } from './page';
-import { Reference, isReference } from './reference';
+import { MetaCollectionFactory } from './meta-collection-factory';
+import { Page, PageModel as PageModel10, PageModelToken } from './page';
+import { isReference, Reference } from './reference';
 import { Visit, Visitor } from './relevance';
 
 /**
@@ -171,6 +171,21 @@ export class PageImpl implements Page {
   async sanitize(content: string): Promise<string> {
     const { default: sanitizeHtml } = await import('sanitize-html');
     return sanitizeHtml(content, { allowedAttributes: { a: ['href', 'name', 'target', 'title', 'data-type', 'rel'] } });
+  }
+
+  async prepareHTML(documentRef?: Reference, dataFieldName?: string): Promise<string> {
+    const document = documentRef && this.getContent(documentRef);
+    if (!document) {
+      throw new Error(`Document reference ${documentRef} not found in page model`);
+    }
+
+    const data = document.getData();
+    const htmlContent = dataFieldName && data?.[dataFieldName];
+    if (!htmlContent) {
+      throw new Error(`Data field name ${dataFieldName} not found in document data model`);
+    }
+
+    return this.rewriteLinks(await this.sanitize(htmlContent.value));
   }
 }
 

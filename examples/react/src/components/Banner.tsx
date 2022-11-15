@@ -14,31 +14,16 @@
  * limitations under the License.
  */
 
-import { BrManageContentButton, BrProps } from '@bloomreach/react-sdk';
+import { BrManageContentButton, BrProps, useHTML } from '@bloomreach/react-sdk';
 import { Document, ImageSet } from '@bloomreach/spa-sdk';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 export function Banner({ component, page }: BrProps): JSX.Element | null {
   const documentRef = component?.getModels().document;
   const document = !!documentRef && page?.getContent(documentRef);
 
-  const [safeHTML, setSafeHTML] = useState('');
-
-  useEffect(() => {
-    async function rewriteLinksAndSanitize(): Promise<void> {
-      if (!document || !page) {
-        return;
-      }
-
-      const { content } = document.getData<DocumentData>();
-      const sanitized = await page.sanitize(content.value);
-      const html = await page.rewriteLinks(sanitized);
-      setSafeHTML(html);
-    }
-
-    rewriteLinksAndSanitize();
-  });
+  const safeHTML = useHTML(page, documentRef, 'content');
 
   if (!document || !page) {
     return null;

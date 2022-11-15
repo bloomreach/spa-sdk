@@ -26,6 +26,7 @@ import { ContainerItemModel } from './container-item';
 import { ContentModel } from './content';
 import { ContentFactory } from './content-factory';
 import { Content } from './content09';
+import { Document } from './document';
 import { EventBus, EventBusService, PageUpdateEvent } from './events';
 import { isLink, Link } from './link';
 import { LinkFactory } from './link-factory';
@@ -262,6 +263,13 @@ export interface Page {
    * @param content The HTML content to sanitize.
    */
   sanitize(content: string): Promise<string>;
+
+  /**
+   * Prepare HTML blob by sanitizing it and rewriting links
+   * @param documentRef The reference to the document
+   * @param dataFieldName The name of the property on the document data object
+   */
+  prepareHTML(documentRef?: Reference, dataFieldName?: string): Promise<string>;
 }
 
 @injectable()
@@ -386,6 +394,21 @@ export class PageImpl implements Page {
   async sanitize(content: string): Promise<string> {
     const { default: sanitizeHtml } = await import('sanitize-html');
     return sanitizeHtml(content, { allowedAttributes: { a: ['href', 'name', 'target', 'title', 'data-type', 'rel'] } });
+  }
+
+  async prepareHTML(documentRef?: Reference, dataFieldName?: string): Promise<string> {
+    const document = documentRef && this.getContent<Document>(documentRef);
+    if (!document) {
+      throw new Error(`Document reference ${documentRef} not found in page model`);
+    }
+
+    const data = document.getData();
+    const htmlContent = dataFieldName && data?.[dataFieldName];
+    if (!htmlContent) {
+      throw new Error(`Data field name ${dataFieldName} not found in document data model`);
+    }
+
+    return this.rewriteLinks(await this.sanitize(htmlContent.value));
   }
 }
 

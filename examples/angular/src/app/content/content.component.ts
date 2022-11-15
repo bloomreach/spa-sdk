@@ -29,9 +29,8 @@ export class ContentComponent implements OnInit {
   safeHTML?: string;
 
   async ngOnInit(): Promise<void> {
-    const content = this.document?.getData<DocumentData>().content;
-    const sanitized = await this.page.sanitize(content!.value);
-    this.safeHTML = await this.page.rewriteLinks(sanitized);
+    const ref = this.component.getModels<DocumentModels>().document;
+    this.safeHTML = await this.page.prepareHTML(ref, 'content');
   }
 
   get document(): Document | undefined {

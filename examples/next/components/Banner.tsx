@@ -14,31 +14,16 @@
  * limitations under the License.
  */
 
-import { BrManageContentButton, BrProps } from '@bloomreach/react-sdk';
+import { BrManageContentButton, BrProps, useHTML } from '@bloomreach/react-sdk';
 import { Document, ImageSet } from '@bloomreach/spa-sdk';
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 export function Banner(props: BrProps): JSX.Element | null {
   const documentRef = props.component?.getModels().document;
   const document = !!documentRef && props.page?.getContent(documentRef);
 
-  const [safeHTML, setSafeHTML] = useState('');
-
-  useEffect(() => {
-    async function rewriteLinksAndSanitize(): Promise<void> {
-      if (!document || !props.page) {
-        return;
-      }
-
-      const { content } = document.getData<DocumentData>();
-      const sanitized = await props.page.sanitize(content.value);
-      const html = await props.page.rewriteLinks(sanitized);
-      setSafeHTML(html);
-    }
-
-    rewriteLinksAndSanitize();
-  });
+  const safeHTML = useHTML(props.page, documentRef, 'content');
 
   if (!document) {
     return null;
@@ -61,8 +46,8 @@ export function Banner(props: BrProps): JSX.Element | null {
       />
       {title && <h1>{title}</h1>}
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      {image && <img className="img-fluid" src={image.getOriginal()?.getUrl()} alt={title} />}
-      {content && props.page && <div dangerouslySetInnerHTML={{ __html: safeHTML }} />}
+      {image && <img className="img-fluid" src={image.getOriginal()?.getUrl()} alt={title}/>}
+      {content && props.page && <div dangerouslySetInnerHTML={{ __html: safeHTML }}/>}
       {link && (
         <p className="lead">
           <Link href={link.getUrl() ?? '/'}>
