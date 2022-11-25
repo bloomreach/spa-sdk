@@ -1,17 +1,17 @@
 <!--
-  Copyright 2020-2021 Bloomreach
-
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
+  - Copyright 2020-2022 Bloomreach
+  -
+  - Licensed under the Apache License, Version 2.0 (the "License");
+  - you may not use this file except in compliance with the License.
+  - You may obtain a copy of the License at
+  -
+  -   http://www.apache.org/licenses/LICENSE-2.0
+  -
+  - Unless required by applicable law or agreed to in writing, software
+  - distributed under the License is distributed on an "AS IS" BASIS,
+  - WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  - See the License for the specific language governing permissions and
+  - limitations under the License.
   -->
 
 <template>
@@ -27,7 +27,7 @@
     />
     <h1 v-if="data.title">{{ data.title }}</h1>
     <img v-if="image" class="img-fluid" :src="image.getOriginal().getUrl()" :alt="data.title" />
-    <div v-if="data.content" v-html="page.rewriteLinks(page.sanitize(data.content.value))" />
+    <div v-if="data.content" v-html="html" />
     <p v-if="link" className="lead">
       <router-link :to="link.getUrl()" class="btn btn-primary btn-lg" role="button">Learn more</router-link>
     </p>
@@ -35,7 +35,7 @@
 </template>
 
 <script lang="ts">
-import { ContainerItem, Document, ImageSet, Page } from '@bloomreach/spa-sdk';
+import { ContainerItem, Document, ImageSet, Page, Reference } from '@bloomreach/spa-sdk';
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
 @Component({
@@ -44,10 +44,13 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
       return this.document?.getData<DocumentData>();
     },
 
-    document(this: BrBanner) {
+    documentRef(this: BrBanner) {
       const { document } = this.component.getModels<DocumentModels>();
+      return document;
+    },
 
-      return document && this.page.getContent<Document>(document);
+    document(this: BrBanner) {
+      return this.documentRef && this.page.getContent<Document>(this.documentRef);
     },
 
     image(this: BrBanner) {
@@ -59,6 +62,9 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
     },
   },
   name: 'br-banner',
+  async mounted(this: BrBanner): Promise<void> {
+    this.html = await this.page.prepareHTML(this.documentRef, 'content');
+  },
 })
 export default class BrBanner extends Vue {
   @Prop() component!: ContainerItem;
@@ -67,10 +73,14 @@ export default class BrBanner extends Vue {
 
   data?: DocumentData;
 
+  documentRef?: Reference;
+
   document?: Document;
 
   image?: ImageSet;
 
   link?: Document;
+
+  html?: string;
 }
 </script>

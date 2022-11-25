@@ -60,7 +60,7 @@ const DEFAULT_SEGMENT_IDS_PARAMETER_API = `${BR_PREFIX}segmentIds`;
 const container = new Container({ skipBaseClassChecks: true });
 const pages = new WeakMap<Page, Container>();
 
-container.load(CmsModule(), LoggerModule(), UrlModule());
+container.load(LoggerModule(), UrlModule());
 
 function onReady<T>(value: T | Promise<T>, callback: (cbValue: T) => unknown): T | Promise<T> {
   // eslint-disable-next-line no-sequences
@@ -98,11 +98,13 @@ function initializeWithProxy(
   scope.load(PageModule09(), SpaModule(), UrlModule09());
   scope.bind(ApiOptionsToken).toConstantValue(config);
   scope.bind(UrlBuilderOptionsToken).toConstantValue(options);
-  scope.getNamed<Cms>(CmsService, 'cms14').initialize(configuration);
 
   return onReady(
     scope.get<Spa>(SpaService).initialize(model ?? configuration.path ?? configuration.request?.path ?? '/'),
-    () => {
+    async () => {
+      if (!scope.parent?.isBound(CmsService)) {
+        await scope.parent?.loadAsync(CmsModule());
+      }
       scope.unbind(ApiOptionsToken);
       scope.unbind(UrlBuilderOptionsToken);
     },
@@ -151,11 +153,17 @@ function initializeWithJwt09(
   scope.bind(ApiOptionsToken).toConstantValue({ authorizationToken, serverId, ...config });
   scope.bind(UrlBuilderOptionsToken).toConstantValue(config);
 
-  return onReady(scope.get<Spa>(SpaService).initialize(model ?? path), (page) => {
+  return onReady(scope.get<Spa>(SpaService).initialize(model ?? path), async (page) => {
     if (page.isPreview() && config.cmsBaseUrl) {
       logger.info('Running in preview mode.');
+
+      if (!scope.parent?.isBound(CmsService)) {
+        await scope.parent?.loadAsync(CmsModule());
+      }
+
       scope.get<PostMessage>(PostMessageService).initialize(config);
       scope.get<Cms>(CmsService).initialize(config);
+      await page.sync();
     } else {
       logger.info('Running in live mode.');
     }
@@ -249,11 +257,17 @@ function initializeWithJwt10(
   scope.bind(ApiOptionsToken).toConstantValue({ authorizationToken, serverId, ...config });
   scope.bind(UrlBuilderOptionsToken).toConstantValue(config);
 
-  return onReady(scope.get<Spa>(SpaService).initialize(model ?? path), (page) => {
+  return onReady(scope.get<Spa>(SpaService).initialize(model ?? path), async (page) => {
     if (page.isPreview() && config.endpoint) {
       logger.info('Running in preview mode.');
+
+      if (!scope.parent?.isBound(CmsService)) {
+        await scope.parent?.loadAsync(CmsModule());
+      }
+
       scope.get<PostMessage>(PostMessageService).initialize(config);
       scope.get<Cms>(CmsService).initialize(config);
+      await page.sync();
     } else {
       logger.info('Running in live mode.');
     }
@@ -311,7 +325,7 @@ export function destroy(page: Page): void {
   const scope = pages.get(page);
   pages.delete(page);
 
-  return scope?.get<Spa>(SpaService).destroy();
+  scope?.get<Spa>(SpaService).destroy();
 }
 
 export { Configuration } from './configuration';

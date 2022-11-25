@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Bloomreach
+ * Copyright 2020-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,9 +15,10 @@
  */
 
 import { injectable, inject, optional } from 'inversify';
-import { EventBusService, EventBus } from './events';
+import { EventBus } from './events';
 import { CmsOptions, Cms } from './cms';
 import { Logger } from '../logger';
+import { EventBusService } from './index';
 
 const GLOBAL_WINDOW = typeof window === 'undefined' ? undefined : window;
 

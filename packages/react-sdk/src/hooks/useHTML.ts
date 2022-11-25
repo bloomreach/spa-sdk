@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2022 Bloomreach
+ * Copyright 2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,6 +14,23 @@
  * limitations under the License.
  */
 
-module.exports = {
-  presets: ['@babel/preset-env', '@babel/preset-react'],
-};
+import { Page, Reference } from '@bloomreach/spa-sdk';
+import { useEffect, useState } from 'react';
+
+export function useHTML(page?: Page, documentRef?: Reference, dataFieldName?: string): string {
+  const [safeHTML, setSafeHTML] = useState('');
+
+  useEffect(() => {
+    async function rewriteLinksAndSanitize(): Promise<void> {
+      setSafeHTML(await page!.prepareHTML(documentRef, dataFieldName));
+    }
+
+    if (!page) {
+      return;
+    }
+
+    rewriteLinksAndSanitize();
+  });
+
+  return safeHTML;
+}
