@@ -250,7 +250,7 @@ describe('initialize', () => {
     });
 
     expect(httpClient).toBeCalledWith({
-      headers: { 'Accept-Version': '1.0' },
+      headers: {},
       method: 'GET',
       url: 'http://localhost:8080/site/my-spa/resourceapi/?__br__campaignVariant=12345%3Asilver',
     });
@@ -270,7 +270,7 @@ describe('initialize', () => {
     });
 
     expect(httpClient).toBeCalledWith({
-      headers: { 'Accept-Version': '1.0' },
+      headers: {},
       method: 'GET',
       url: 'http://localhost:8080/site/my-spa/resourceapi/?__br__campaignVariant=12345%3Agold',
     });
@@ -291,7 +291,7 @@ describe('initialize', () => {
     });
 
     expect(httpClient).toBeCalledWith({
-      headers: { 'Accept-Version': '1.0' },
+      headers: {},
       method: 'GET',
       url: 'http://localhost:8080/site/my-spa/resourceapi/?__br__campaignVariant=foo%3Abar',
     });
@@ -312,7 +312,7 @@ describe('initialize', () => {
     });
 
     expect(httpClient).toBeCalledWith({
-      headers: { 'Accept-Version': '1.0' },
+      headers: {},
       method: 'GET',
       url: 'http://localhost:8080/site/my-spa/resourceapi/?__br__campaignVariant=foo%3Abar',
     });
@@ -328,7 +328,7 @@ describe('initialize', () => {
     });
 
     expect(httpClient).toBeCalledWith({
-      headers: { 'Accept-Version': '1.0' },
+      headers: {},
       method: 'GET',
       url: 'http://localhost:8080/site/my-spa/resourceapi/',
     });
@@ -349,7 +349,7 @@ describe('initialize', () => {
     });
 
     expect(httpClient).toBeCalledWith({
-      headers: { 'Accept-Version': '1.0' },
+      headers: {},
       method: 'GET',
       url: 'http://localhost:8080/site/my-spa/resourceapi/',
     });
@@ -371,7 +371,7 @@ describe('initialize', () => {
     });
 
     expect(httpClient).toBeCalledWith({
-      headers: { 'Accept-Version': '1.0' },
+      headers: {},
       method: 'GET',
       url: 'http://localhost:8080/site/my-spa/resourceapi/',
     });
@@ -392,7 +392,7 @@ describe('initialize', () => {
     });
 
     expect(httpClient).toBeCalledWith({
-      headers: { 'Accept-Version': '1.0' },
+      headers: {},
       method: 'GET',
       url:
         'http://localhost:8080/site/my-spa/resourceapi/' +
@@ -415,7 +415,7 @@ describe('initialize', () => {
     });
 
     expect(httpClient).toBeCalledWith({
-      headers: { 'Accept-Version': '1.0' },
+      headers: {},
       method: 'GET',
       url: 'http://localhost:8080/site/my-spa/resourceapi/?__br__segmentIds=foo%2Cbar',
     });
@@ -436,7 +436,7 @@ describe('initialize', () => {
     });
 
     expect(httpClient).toBeCalledWith({
-      headers: { 'Accept-Version': '1.0' },
+      headers: {},
       method: 'GET',
       url: 'http://localhost:8080/site/my-spa/resourceapi/',
     });
