@@ -2,10 +2,35 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### [17.1.1](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-17.1.0...17.1.1)
+#### [18.0.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-17.2.0...18.0.0)
+
+- SPASDK-126 Merge branch 'feature/SPASDK-126-sdk-split-bundles' into 'development' [`#SPASDK-126`](https://issues.onehippo.com/browse/SPASDK-126)
+- SPASDK-141 Fix the package-lock file versions [`#SPASDK-141`](https://issues.onehippo.com/browse/SPASDK-141)
+- SPASDK-126 Provide preparation of HTML content as page method [`#SPASDK-126`](https://issues.onehippo.com/browse/SPASDK-126)
+- SPASDK-126 Change to rollup and ts configs to support ES modules [`#SPASDK-126`](https://issues.onehippo.com/browse/SPASDK-126)
+- SPASDK-126 Change comments to multiline [`#SPASDK-126`](https://issues.onehippo.com/browse/SPASDK-126)
+- SPASDK-126 Remove check for preview before attempting to send the ready event [`#SPASDK-126`](https://issues.onehippo.com/browse/SPASDK-126)
+- SPASDK-126 Split preview code into separate chunk [`#SPASDK-126`](https://issues.onehippo.com/browse/SPASDK-126)
+- SPASDK-126 Load the html sanitizer dynamically [`#SPASDK-126`](https://issues.onehippo.com/browse/SPASDK-126)
+- SPASDK-126 Split DomParser and XMLDom dependencies from main bundle [`#SPASDK-126`](https://issues.onehippo.com/browse/SPASDK-126)
+
+#### [spa-sdk-17.2.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-17.1.1...spa-sdk-17.2.0)
+
+> 24 November 2022
+
+- SPASDK-141 Move SKIP_PREFLIGHT_CHECK from react-scripts to the environment file [`#100`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/100)
+- SPASDK-141 Bumping versions to 17.2.0 [`#SPASDK-141`](https://issues.onehippo.com/browse/SPASDK-141)
+- SPASDK-141 Use cross-env npm package instead of .env file [`#SPASDK-141`](https://issues.onehippo.com/browse/SPASDK-141)
+- SPASDK-141 Add global environment file [`#SPASDK-141`](https://issues.onehippo.com/browse/SPASDK-141)
+- SPASDK-141 Move SKIP_PREFLIGHT_CHECK from react-scripts to the environment file [`#SPASDK-141`](https://issues.onehippo.com/browse/SPASDK-141)
+
+#### [spa-sdk-17.1.1](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-17.1.0...spa-sdk-17.1.1)
+
+> 11 November 2022
 
 - SPASDK-144 Bump @xmldom/xmldom to patched 0.7.9 [`#98`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/98)
 - SPASDK-138 Upgrade next, react examples to react 18 [`#97`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/97)
+- SPASDK-144 Bumping versions to 17.1.1 [`#SPASDK-144`](https://issues.onehippo.com/browse/SPASDK-144)
 - SPASDK-144 Bump @xmldom/xmldom to patched 0.7.9 [`#SPASDK-144`](https://issues.onehippo.com/browse/SPASDK-144)
 - SPASDK-138 Upgrade next, react examples to react 18 [`#SPASDK-138`](https://issues.onehippo.com/browse/SPASDK-138)
 - TRIVIAL Merge branch 'TRIVIAL/heroku-cleanup-scrip' into 'development' [`1ecf2e0`](https://github.com/bloomreach/spa-sdk/commit/1ecf2e0d78069f3634a8a5cf1f169012f820c52d)
@@ -63,7 +88,7 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-129 Remove endpointQueryParameter [`#SPASDK-129`](https://issues.onehippo.com/browse/SPASDK-129)
 - TRIVIAL Fix bash name substitution in heroku deploy script [`721b468`](https://github.com/bloomreach/spa-sdk/commit/721b46871e938630f3f3a51ca9343425868f8c49)
 
-### [spa-sdk-16.0.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.5.0...spa-sdk-16.0.0)
+### [spa-sdk-16.0.0](https://github.com/bloomreach/spa-sdk/compare/v15.5.1...spa-sdk-16.0.0)
 
 > 16 August 2022
 
@@ -83,6 +108,12 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-124 Add 'dev' script to all packages for easy development start [`#SPASDK-124`](https://issues.onehippo.com/browse/SPASDK-124)
 - SPASDK-123 Add getLocale to Page object [`#SPASDK-123`](https://issues.onehippo.com/browse/SPASDK-123)
 - SPASDK-119 Improve heroku deploy speed by using lerna filter flags [`#SPASDK-119`](https://issues.onehippo.com/browse/SPASDK-119)
+
+#### [v15.5.1](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.5.0...v15.5.1)
+
+> 24 June 2022
+
+- TRIVIAL Bump versions to 15.5.1 [`94d2699`](https://github.com/bloomreach/spa-sdk/commit/94d26991ce5e8d4f2916aa6756b0c927b721a25e)
 
 #### [spa-sdk-15.5.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.4.6...spa-sdk-15.5.0)
 
