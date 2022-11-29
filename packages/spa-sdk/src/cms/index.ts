@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Bloomreach
+ * Copyright 2020-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,16 +14,23 @@
  * limitations under the License.
  */
 
-import { ContainerModule } from 'inversify';
-import { Typed } from 'emittery';
-import { CmsImpl, CmsService } from './cms';
-import { Cms14Impl } from './cms14';
-import { EventBusService } from './events';
-import { PostMessageService, PostMessage } from './post-message';
-import { RpcClientService, RpcServerService } from './rpc';
+import { AsyncContainerModule } from 'inversify';
+import { EventBus } from './events';
 
-export function CmsModule(): ContainerModule {
-  return new ContainerModule((bind) => {
+export const CmsService = Symbol.for('CmsService');
+export const EventBusService = Symbol('EventBusService');
+export const EventBusServiceProvider = Symbol('EventBusServiceProvider');
+export const PostMessageService = Symbol.for('PostMessageService');
+export const RpcClientService = Symbol.for('RpcClientService');
+export const RpcServerService = Symbol.for('RpcServerService');
+
+export function CmsModule(): AsyncContainerModule {
+  return new AsyncContainerModule(async (bind) => {
+    const { Typed } = await import('emittery');
+    const { CmsImpl } = await import('./cms');
+    const { Cms14Impl } = await import('./cms14');
+    const { PostMessage } = await import('./post-message');
+
     bind(EventBusService)
       .toDynamicValue(() => new Typed())
       .inSingletonScope()
@@ -36,7 +43,8 @@ export function CmsModule(): ContainerModule {
   });
 }
 
-export { CmsOptions, CmsService, Cms } from './cms';
-export { CmsUpdateEvent, EventBusService, EventBus } from './events';
-export { PostMessageOptions, PostMessageService, PostMessage } from './post-message';
-export { RpcClientService, RpcClient, RpcServerService, RpcServer } from './rpc';
+export type EventBusProvider = () => Promise<EventBus | undefined>;
+export { CmsOptions, Cms } from './cms';
+export { CmsUpdateEvent, EventBus } from './events';
+export { PostMessageOptions, PostMessage } from './post-message';
+export { RpcClient, RpcServer } from './rpc';

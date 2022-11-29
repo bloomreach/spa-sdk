@@ -15,27 +15,27 @@
  */
 
 import { inject, injectable, optional } from 'inversify';
-import sanitizeHtml from 'sanitize-html';
+import { EventBusProvider as CmsEventBusProvider, EventBusServiceProvider as CmsEventBusServiceProvider } from '../cms';
+import { isAbsoluteUrl, resolveUrl } from '../url';
 import { ButtonFactory } from './button-factory';
+import { ManageContentButton, TYPE_MANAGE_CONTENT_BUTTON } from './button-manage-content';
+import { Component, ComponentMeta, ComponentModel } from './component';
 import { ComponentFactory } from './component-factory';
-import { ComponentMeta, ComponentModel, Component } from './component';
-import { ContainerItemModel } from './container-item';
 import { ContainerModel } from './container';
-import { ContentFactory } from './content-factory';
+import { ContainerItemModel } from './container-item';
 import { ContentModel } from './content';
+import { ContentFactory } from './content-factory';
 import { Content } from './content09';
-import { EventBusService as CmsEventBusService, EventBus as CmsEventBus } from '../cms';
-import { EventBusService, EventBus, PageUpdateEvent } from './events';
+import { Document } from './document';
+import { EventBus, EventBusService, PageUpdateEvent } from './events';
+import { isLink, Link } from './link';
 import { LinkFactory } from './link-factory';
 import { LinkRewriter, LinkRewriterService } from './link-rewriter';
-import { Link, isLink } from './link';
-import { ManageContentButton, TYPE_MANAGE_CONTENT_BUTTON } from './button-manage-content';
 import { Menu, TYPE_MANAGE_MENU_BUTTON } from './menu';
+import { MetaCollection, MetaCollectionModel } from './meta-collection';
 import { MetaCollectionFactory } from './meta-collection-factory';
-import { MetaCollectionModel, MetaCollection } from './meta-collection';
-import { Reference, isReference, resolve } from './reference';
-import { Visitor, Visit } from './relevance';
-import { isAbsoluteUrl, resolveUrl } from '../url';
+import { isReference, Reference, resolve } from './reference';
+import { Visit, Visitor } from './relevance';
 
 export const PageModelToken = Symbol.for('PageModelToken');
 
@@ -246,12 +246,12 @@ export interface Page {
    * @param content The HTML content to rewrite links.
    * @param type The content type.
    */
-  rewriteLinks(content: string, type?: string): string;
+  rewriteLinks(content: string, type?: string): Promise<string>;
 
   /**
    * Synchronizes the CMS integration state.
    */
-  sync(): void;
+  sync(): Promise<void>;
 
   /**
    * @return A plain JavaScript object of the page model.
@@ -262,7 +262,14 @@ export interface Page {
    * Sanitize HTML content to allow only safe HTML markups.
    * @param content The HTML content to sanitize.
    */
-  sanitize(content: string): string;
+  sanitize(content: string): Promise<string>;
+
+  /**
+   * Prepare HTML blob by sanitizing it and rewriting links
+   * @param documentRef The reference to the document
+   * @param dataFieldName The name of the property on the document data object
+   */
+  prepareHTML(documentRef?: Reference, dataFieldName?: string): Promise<string>;
 }
 
 @injectable()
@@ -279,7 +286,7 @@ export class PageImpl implements Page {
     @inject(LinkFactory) private linkFactory: LinkFactory,
     @inject(LinkRewriterService) private linkRewriter: LinkRewriter,
     @inject(MetaCollectionFactory) private metaFactory: MetaCollectionFactory,
-    @inject(CmsEventBusService) @optional() private cmsEventBus?: CmsEventBus,
+    @inject(CmsEventBusServiceProvider) private cmsEventBusProvider: CmsEventBusProvider,
     @inject(EventBusService) @optional() eventBus?: EventBus,
   ) {
     eventBus?.on('page.update', this.onPageUpdate.bind(this));
@@ -371,20 +378,37 @@ export class PageImpl implements Page {
     return !!this.model.meta.preview;
   }
 
-  rewriteLinks(content: string, type = 'text/html'): string {
+  async rewriteLinks(content: string, type = 'text/html'): Promise<string> {
     return this.linkRewriter.rewrite(content, type);
   }
 
-  sync(): void {
-    this.cmsEventBus?.emit('page.ready', {});
+  async sync(): Promise<void> {
+    const cmsEventBus = await this.cmsEventBusProvider();
+    cmsEventBus?.emit('page.ready', {});
   }
 
   toJSON(): PageModel {
     return this.model;
   }
 
-  sanitize(content: string): string {
+  async sanitize(content: string): Promise<string> {
+    const { default: sanitizeHtml } = await import('sanitize-html');
     return sanitizeHtml(content, { allowedAttributes: { a: ['href', 'name', 'target', 'title', 'data-type', 'rel'] } });
+  }
+
+  async prepareHTML(documentRef?: Reference, dataFieldName?: string): Promise<string> {
+    const document = documentRef && this.getContent<Document>(documentRef);
+    if (!document) {
+      throw new Error(`Document reference ${documentRef} not found in page model`);
+    }
+
+    const data = document.getData();
+    const htmlContent = dataFieldName && data?.[dataFieldName];
+    if (!htmlContent) {
+      throw new Error(`Data field name ${dataFieldName} not found in document data model`);
+    }
+
+    return this.rewriteLinks(await this.sanitize(htmlContent.value));
   }
 }
 

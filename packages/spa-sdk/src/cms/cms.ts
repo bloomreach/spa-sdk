@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 Bloomreach
+ * Copyright 2019-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,10 +16,9 @@
 
 import { inject, injectable, optional } from 'inversify';
 import { Logger } from '../logger';
-import { EventBus, EventBusService, CmsUpdateEvent } from './events';
-import { RpcClient, RpcClientService, RpcServer, RpcServerService, Procedures } from './rpc';
-
-export const CmsService = Symbol.for('CmsService');
+import { EventBus, CmsUpdateEvent } from './events';
+import { EventBusService, RpcClientService, RpcServerService } from './index';
+import { RpcClient, RpcServer, Procedures } from './rpc';
 
 const GLOBAL_WINDOW = typeof window === 'undefined' ? undefined : window;
 

@@ -15,24 +15,25 @@
  */
 
 import { Typed } from 'emittery';
+import { EventBus as CmsEventBus, EventBusProvider as CmsEventBusProvider } from '../cms';
 import { ButtonFactory } from './button-factory';
 import { Component, TYPE_COMPONENT } from './component';
 import { ComponentFactory } from './component-factory';
-import { ContentFactory } from './content-factory';
 import { ContentModel } from './content';
-import { EventBus as CmsEventBus } from '../cms';
+import { ContentFactory } from './content-factory';
 import { EventBus } from './events';
+import { isLink, Link, TYPE_LINK_EXTERNAL, TYPE_LINK_INTERNAL } from './link';
 import { LinkFactory } from './link-factory';
 import { LinkRewriter } from './link-rewriter';
-import { Link, TYPE_LINK_INTERNAL, TYPE_LINK_EXTERNAL, isLink } from './link';
 import { MetaCollectionFactory } from './meta-collection-factory';
-import { PageImpl, PageModel, Page, isPage } from './page';
+import { isPage, Page, PageImpl, PageModel } from './page';
 
 let buttonFactory: jest.Mocked<ButtonFactory>;
 let componentFactory: jest.Mocked<ComponentFactory>;
 let content: unknown;
 let contentFactory: jest.Mocked<ContentFactory>;
 let cmsEventBus: CmsEventBus;
+let cmsEventBusProvider: CmsEventBusProvider;
 let eventBus: EventBus;
 let linkFactory: jest.Mocked<LinkFactory>;
 let linkRewriter: jest.Mocked<LinkRewriter>;
@@ -65,7 +66,7 @@ function createPage(pageModel = model) {
     linkFactory,
     linkRewriter,
     metaFactory,
-    cmsEventBus,
+    cmsEventBusProvider,
     eventBus,
   );
 }
@@ -76,9 +77,10 @@ beforeEach(() => {
   content = {};
   contentFactory = { create: jest.fn(() => content) } as unknown as typeof contentFactory;
   cmsEventBus = new Typed();
+  cmsEventBusProvider = () => Promise.resolve(cmsEventBus);
   eventBus = new Typed();
   linkFactory = { create: jest.fn() } as unknown as typeof linkFactory;
-  linkRewriter = { rewrite: jest.fn() } as unknown as jest.Mocked<LinkRewriter>;
+  linkRewriter = { rewrite: jest.fn(() => Promise.resolve('rewritten')) } as unknown as jest.Mocked<LinkRewriter>;
   metaFactory = jest.fn();
   root = { getComponent: jest.fn() } as unknown as jest.Mocked<Component>;
 });
@@ -346,22 +348,23 @@ describe('PageImpl', () => {
   });
 
   describe('rewriteLinks', () => {
-    it('should pass a call to the link rewriter', () => {
-      linkRewriter.rewrite.mockReturnValueOnce('rewritten');
+    it('should pass a call to the link rewriter', async () => {
+      linkRewriter.rewrite.mockResolvedValueOnce('rewritten');
 
       const page = createPage();
+      const rewritten = await page.rewriteLinks('something', 'text/html');
 
-      expect(page.rewriteLinks('something', 'text/html')).toBe('rewritten');
+      expect(rewritten).toBe('rewritten');
       expect(linkRewriter.rewrite).toBeCalledWith('something', 'text/html');
     });
   });
 
   describe('sync', () => {
-    it('should emit page.ready event', () => {
+    it('should emit page.ready event', async () => {
       spyOn(cmsEventBus, 'emit');
 
       const page = createPage();
-      page.sync();
+      await page.sync();
 
       expect(cmsEventBus.emit).toBeCalledWith('page.ready', {});
     });
@@ -376,7 +379,7 @@ describe('PageImpl', () => {
   });
 
   describe('sanitize', () => {
-    it('should sanitize html', () => {
+    it('should sanitize html', async () => {
       const page = createPage();
       const html = `
         <div>
@@ -384,9 +387,11 @@ describe('PageImpl', () => {
           <p>Sanitize before <a href="https://www.example.com/" name="use">use</a></p>
           <div><script>alert(1);</script></div>
         </div>`;
-      expect(page.sanitize(html)).toMatchSnapshot();
+      const sanitized = await page.sanitize(html);
+      expect(sanitized).toMatchSnapshot();
     });
-    it('should keep rel, data-type, title, target, name and href attributes in anchor', () => {
+
+    it('should keep rel, data-type, title, target, name and href attributes in anchor', async () => {
       const page = createPage();
       const html = `
         <div>
@@ -395,7 +400,9 @@ describe('PageImpl', () => {
             href="https://www.example.com/" name="use">use</a>
           <div><script>alert(1);</script></div>
         </div>`;
-      expect(page.sanitize(html)).toMatchSnapshot();
+
+      const sanitized = await page.sanitize(html);
+      expect(sanitized).toMatchSnapshot();
     });
   });
 });

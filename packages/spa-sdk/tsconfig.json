@@ -6,12 +6,11 @@
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
     "lib": [
-      "es6",
-      "es2019.object",
+      "es2020",
       "dom",
       "dom.iterable"
     ],
-    "module": "es6",
+    "module": "es2020",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "sourceMap": true,

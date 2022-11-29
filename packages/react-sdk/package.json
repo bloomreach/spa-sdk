@@ -1,6 +1,6 @@
 {
   "name": "@bloomreach/react-sdk",
-  "version": "17.1.1",
+  "version": "18.0.0",
   "description": "Bloomreach SPA SDK for React",
   "keywords": [
     "bloomreach",
@@ -18,10 +18,10 @@
   "bugs": {
     "url": "https://issues.onehippo.com/projects/SPASDK/issues"
   },
-  "main": "dist/index.js",
+  "main": "dist/index.umd.js",
   "browser": "dist/index.js",
-  "module": "dist/index.mjs",
-  "es2015": "dist/index.es6.mjs",
+  "module": "dist/index.js",
+  "es2015": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist/"
@@ -40,7 +40,7 @@
     "last 1 edge version"
   ],
   "dependencies": {
-    "@bloomreach/spa-sdk": "17.1.1"
+    "@bloomreach/spa-sdk": "18.0.0"
   },
   "peerDependencies": {
     "react": "^16.14 || ^17.0 || ^18.0"

@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 Bloomreach
+ * Copyright 2019-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,15 @@
  * limitations under the License.
  */
 
-import React from 'react';
+import { BrManageContentButton, BrProps, useHTML } from '@bloomreach/react-sdk';
 import { Document, ImageSet } from '@bloomreach/spa-sdk';
-import { BrManageContentButton, BrProps } from '@bloomreach/react-sdk';
+import React from 'react';
 
 export function Content({ component, page }: BrProps): JSX.Element | null {
   const documentRef = component?.getModels<DocumentModels>().document;
   const document = documentRef && page?.getContent<Document>(documentRef);
+
+  const safeHTML = useHTML(page, documentRef, 'content');
 
   if (!document || !page) {
     return null;
@@ -44,7 +46,7 @@ export function Content({ component, page }: BrProps): JSX.Element | null {
       {author && <p className="mb-3 text-muted">{author}</p>}
       {date && <p className="mb-3 small text-muted">{new Date(date).toDateString()}</p>}
       {/* eslint-disable-next-line react/no-danger */}
-      {content && <div dangerouslySetInnerHTML={{ __html: page.rewriteLinks(page.sanitize(content.value)) }} />}
+      {content && <div dangerouslySetInnerHTML={{ __html: safeHTML }} />}
     </div>
   );
 }

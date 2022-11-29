@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 Bloomreach
+ * Copyright 2019-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,8 +15,8 @@
  */
 
 import { Typed } from 'emittery';
-import { Component, EventBus, PageFactory, PageModel, Page, TYPE_COMPONENT } from '../page';
-import { EventBus as CmsEventBus } from '../cms';
+import { EventBusProvider as CmsEventBusProvider, EventBus as CmsEventBus } from '../cms';
+import { Component, EventBus, Page, PageFactory, PageModel, TYPE_COMPONENT } from '../page';
 import { Api } from './api';
 import { Spa } from './spa';
 
@@ -43,14 +43,17 @@ const config = {
 describe('Spa', () => {
   let api: jest.Mocked<Api>;
   let cmsEventBus: CmsEventBus;
+  let cmsEventBusProvider: CmsEventBusProvider;
   let eventBus: EventBus;
   let page: jest.Mocked<Page>;
   let pageFactory: jest.MockedFunction<PageFactory>;
   let spa: Spa;
 
   beforeEach(() => {
+    cmsEventBus = new Typed() as CmsEventBus;
+    cmsEventBusProvider = () => Promise.resolve(cmsEventBus);
+
     eventBus = new Typed();
-    cmsEventBus = new Typed();
     api = {
       initialize: jest.fn(),
       getPage: jest.fn(async () => model),
@@ -64,7 +67,7 @@ describe('Spa', () => {
 
     spyOn(cmsEventBus, 'on').and.callThrough();
     pageFactory.mockReturnValue(page);
-    spa = new Spa(api, pageFactory, cmsEventBus, eventBus);
+    spa = new Spa(api, pageFactory, cmsEventBusProvider, eventBus);
   });
 
   describe('initialize', () => {
@@ -154,7 +157,7 @@ describe('Spa', () => {
     it('should unsubscribe from cms.update event', async () => {
       spyOn(cmsEventBus, 'off');
 
-      spa.destroy();
+      await spa.destroy();
 
       expect(cmsEventBus.off).toBeCalledWith('cms.update', expect.any(Function));
     });
@@ -162,7 +165,7 @@ describe('Spa', () => {
     it('should remove all page events', async () => {
       spyOn(eventBus, 'clearListeners');
 
-      spa.destroy();
+      await spa.destroy();
 
       expect(eventBus.clearListeners).toBeCalled();
     });

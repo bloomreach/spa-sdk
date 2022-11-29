@@ -61,6 +61,7 @@ describe('BrPageComponent', () => {
     sync: jest.fn(),
     toJSON: jest.fn(),
     sanitize: jest.fn(),
+    prepareHTML: jest.fn(),
   };
 
   @Component({

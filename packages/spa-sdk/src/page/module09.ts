@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Bloomreach
+ * Copyright 2019-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,34 +14,44 @@
  * limitations under the License.
  */
 
-import { ContainerModule } from 'inversify';
-import { DOMParser, XMLSerializer } from '@xmldom/xmldom';
 import { Typed } from 'emittery';
+import { ContainerModule } from 'inversify';
+
+import {
+  EventBus as CmsEventBus,
+  EventBusService as CmsEventBusService,
+  EventBusServiceProvider as CmsEventBusServiceProvider,
+} from '../cms';
+import { UrlBuilder, UrlBuilderService } from '../url';
 
 import { ButtonFactory } from './button-factory';
+import { createManageContentButton, TYPE_MANAGE_CONTENT_BUTTON } from './button-manage-content';
+import { ComponentChildrenToken, ComponentModelToken } from './component';
 import { ComponentFactory } from './component-factory09';
 import { ComponentImpl, TYPE_COMPONENT, TYPE_COMPONENT_CONTAINER, TYPE_COMPONENT_CONTAINER_ITEM } from './component09';
-import { ComponentChildrenToken, ComponentModelToken } from './component';
-import { ContainerImpl } from './container09';
 import { ContainerItemImpl } from './container-item09';
+import { ContainerImpl } from './container09';
 import { ContentFactory } from './content-factory09';
-import { ContentImpl, ContentModelToken, ContentModel } from './content09';
-import { DomParserService, LinkRewriterImpl, LinkRewriterService, XmlSerializerService } from './link-rewriter';
+import { ContentImpl, ContentModel, ContentModelToken } from './content09';
 import { EventBusService } from './events';
+import { TYPE_LINK_INTERNAL } from './link';
 import { LinkFactory } from './link-factory';
+import {
+  DomParserServiceProvider,
+  LinkRewriterImpl,
+  LinkRewriterService,
+  XmlSerializerServiceProvider,
+} from './link-rewriter';
+import { TYPE_MANAGE_MENU_BUTTON } from './menu';
 import { Menu } from './menu09';
+import { TYPE_META_COMMENT } from './meta';
+import { MetaCollectionImpl, MetaCollectionModel, MetaCollectionModelToken } from './meta-collection';
 import { MetaCollectionFactory } from './meta-collection-factory';
-import { MetaCollectionImpl, MetaCollectionModelToken, MetaCollectionModel } from './meta-collection';
 import { MetaCommentImpl } from './meta-comment';
 import { MetaFactory } from './meta-factory';
+import { PageModelToken } from './page';
 import { PageFactory } from './page-factory';
 import { PageImpl, PageModel } from './page09';
-import { PageModelToken } from './page';
-import { TYPE_LINK_INTERNAL } from './link';
-import { TYPE_MANAGE_CONTENT_BUTTON, createManageContentButton } from './button-manage-content';
-import { TYPE_MANAGE_MENU_BUTTON } from './menu';
-import { TYPE_META_COMMENT } from './meta';
-import { UrlBuilderService, UrlBuilder } from '../url';
 
 export function PageModule(): ContainerModule {
   return new ContainerModule((bind) => {
@@ -49,9 +59,33 @@ export function PageModule(): ContainerModule {
       .toDynamicValue(() => new Typed())
       .inSingletonScope()
       .when(() => typeof window !== 'undefined');
+
+    /*
+     Its necessary to use a async provider here because we can only get the CmsEventBus once the module is installed,
+     if the page is in preview mode
+    */
+    bind(CmsEventBusServiceProvider).toProvider<CmsEventBus | undefined>(
+      (context) => () =>
+        new Promise<CmsEventBus | undefined>((resolve) => {
+          let cmsEventBus;
+
+          if (context.container.isBound(CmsEventBusService)) {
+            cmsEventBus = context.container.get<CmsEventBus>(CmsEventBusService);
+          }
+
+          resolve(cmsEventBus);
+        }),
+    );
+
     bind(LinkRewriterService).to(LinkRewriterImpl).inSingletonScope();
-    bind(DomParserService).toConstantValue(new DOMParser());
-    bind(XmlSerializerService).toConstantValue(new XMLSerializer());
+    bind(DomParserServiceProvider).toProvider(() => async () => {
+      const { DOMParser } = await import('@xmldom/xmldom');
+      return new DOMParser();
+    });
+    bind(XmlSerializerServiceProvider).toProvider(() => async () => {
+      const { XMLSerializer } = await import('@xmldom/xmldom');
+      return new XMLSerializer();
+    });
 
     bind(ButtonFactory)
       .toSelf()

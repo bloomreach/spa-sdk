@@ -1,11 +1,11 @@
 /*
- * Copyright 2019-2020 Bloomreach
+ * Copyright 2019-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *  http://www.apache.org/licenses/LICENSE-2.0
+ *   http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -27,28 +27,22 @@ export default [
     output: [
       {
         dir: 'lib',
-        entryFileNames: '[name].js',
+        entryFileNames: '[name].umd.js',
         exports: 'named',
         format: 'umd',
         name: 'BloomreachSpaSdk',
         sourcemap: true,
         sourcemapExcludeSources: true,
+        inlineDynamicImports: true,
         globals: {
+          cookie: 'cookie',
           inversify: 'inversify',
           emittery: 'emiterry',
           xmldom: 'xmldom',
         },
       },
-      {
-        dir: 'lib',
-        entryFileNames: '[name].mjs',
-        format: 'esm',
-      },
     ],
-    external: [
-      ...Object.keys(pkg.dependencies || {}),
-      ...Object.keys(pkg.peerDependencies || {}),
-    ],
+    external: [...Object.keys(pkg.dependencies || {}), ...Object.keys(pkg.peerDependencies || {})],
     plugins: [
       typescript({ clean: true }),
       babel({ babelHelpers: 'bundled', extensions: ['.ts'] }),
@@ -58,35 +52,28 @@ export default [
 
   {
     input: 'src/index.ts',
-    output: [{
-      dir: 'lib',
-      entryFileNames: '[name].es6.js',
-      format: 'esm',
-    }],
-    external: [
-      ...Object.keys(pkg.dependencies || {}),
-      ...Object.keys(pkg.peerDependencies || {}),
+    output: [
+      {
+        dir: 'lib',
+        entryFileNames: '[name].js',
+        format: 'es',
+      },
     ],
-    plugins: [
-      typescript({ clean: true }),
-      terser(terserOptions),
-    ],
+    external: [...Object.keys(pkg.dependencies || {}), ...Object.keys(pkg.peerDependencies || {})],
+    plugins: [typescript({ clean: true }), terser(terserOptions)],
   },
 
   {
     input: 'src/index.ts',
-    output: [{
-      dir: 'lib',
-      entryFileNames: '[name].d.ts',
-      format: 'es',
-    }],
-    external: [
-      ...Object.keys(pkg.dependencies || {}),
-      ...Object.keys(pkg.peerDependencies || {}),
+    output: [
+      {
+        dir: 'lib',
+        entryFileNames: '[name].d.ts',
+        format: 'es',
+      },
     ],
-    plugins: [
-      dts(),
-    ],
+    external: [...Object.keys(pkg.dependencies || {}), ...Object.keys(pkg.peerDependencies || {})],
+    plugins: [dts()],
   },
 
   {
@@ -95,21 +82,11 @@ export default [
       {
         dir: 'lib/express',
         entryFileNames: '[name].js',
-        exports: 'auto',
-        format: 'cjs',
-        preserveModules: true,
-      },
-      {
-        dir: 'lib/express',
-        entryFileNames: '[name].mjs',
-        format: 'esm',
+        format: 'es',
         preserveModules: true,
       },
     ],
-    external: [
-      ...Object.keys(pkg.dependencies || {}),
-      ...Object.keys(pkg.peerDependencies || {}),
-    ],
+    external: [...Object.keys(pkg.dependencies || {}), ...Object.keys(pkg.peerDependencies || {})],
     plugins: [
       typescript({
         clean: true,
@@ -118,7 +95,7 @@ export default [
           compilerOptions: {
             declaration: true,
             declarationDir: 'lib',
-            target: 'es2018',
+            target: 'es6',
           },
         },
         useTsconfigDeclarationDir: true,

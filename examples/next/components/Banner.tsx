@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2021 Bloomreach
+ * Copyright 2019-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,14 +14,16 @@
  * limitations under the License.
  */
 
-import React from 'react';
-import Link from 'next/link';
+import { BrManageContentButton, BrProps, useHTML } from '@bloomreach/react-sdk';
 import { Document, ImageSet } from '@bloomreach/spa-sdk';
-import { BrManageContentButton, BrProps } from '@bloomreach/react-sdk';
+import Link from 'next/link';
+import React from 'react';
 
 export function Banner(props: BrProps): JSX.Element | null {
   const documentRef = props.component?.getModels().document;
   const document = !!documentRef && props.page?.getContent(documentRef);
+
+  const safeHTML = useHTML(props.page, documentRef, 'content');
 
   if (!document) {
     return null;
@@ -44,10 +46,8 @@ export function Banner(props: BrProps): JSX.Element | null {
       />
       {title && <h1>{title}</h1>}
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      {image && <img className="img-fluid" src={image.getOriginal()?.getUrl()} alt={title} />}
-      {content && props.page && (
-        <div dangerouslySetInnerHTML={{ __html: props.page.rewriteLinks(props.page.sanitize(content.value)) }} />
-      )}
+      {image && <img className="img-fluid" src={image.getOriginal()?.getUrl()} alt={title}/>}
+      {content && props.page && <div dangerouslySetInnerHTML={{ __html: safeHTML }}/>}
       {link && (
         <p className="lead">
           <Link href={link.getUrl() ?? '/'}>

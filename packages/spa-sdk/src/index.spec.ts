@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2021 Bloomreach
+ * Copyright 2019-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -166,12 +166,13 @@ describe('initialize', () => {
     expect(document1!.getUrl()).toBe('//example.com/banner2.html?token=something');
   });
 
-  it('should rewrite links in the HTML blob', () => {
+  it('should rewrite links in the HTML blob', async () => {
     const banner = defaultPage.getComponent('main', 'banner');
     const document = defaultPage.getContent(banner!.getModels().document);
     const { content } = document!.getData<{ content: any }>();
+    const rewritten = await defaultPage.rewriteLinks(content.value);
 
-    expect(defaultPage.rewriteLinks(content.value)).toMatchSnapshot();
+    expect(rewritten).toMatchSnapshot();
   });
 
   it('should react on a component rendering', async () => {

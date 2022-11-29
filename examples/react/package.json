@@ -1,21 +1,21 @@
 {
   "name": "@bloomreach/example-react",
   "description": "Example React SPA for Bloomreach Experience",
-  "version": "17.1.1",
+  "version": "18.0.0",
   "private": true,
   "dependencies": {
-    "@bloomreach/react-sdk": "17.1.1",
+    "@bloomreach/react-sdk": "18.0.0",
     "@bloomreach/segmentation": "0.0.13",
-    "@bloomreach/spa-sdk": "17.1.1",
+    "@bloomreach/spa-sdk": "18.0.0",
     "axios": "0.26.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-router-dom": "6.4.2"
   },
   "scripts": {
-    "build": "SKIP_PREFLIGHT_CHECK=true react-scripts build",
+    "build": "cross-env SKIP_PREFLIGHT_CHECK=true react-scripts build",
     "lint": "eslint --ext js,ts,tsx src",
-    "start": "SKIP_PREFLIGHT_CHECK=true react-scripts start",
+    "start": "cross-env SKIP_PREFLIGHT_CHECK=true react-scripts start",
     "dev": "npm run start"
   },
   "eslintConfig": {
@@ -40,6 +40,7 @@
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.8",
     "@types/react-router-dom": "5.3.3",
+    "cross-env": "7.0.3",
     "eslint": "7.32.0",
     "react-scripts": "4.0.3",
     "typescript": "4.1.6"

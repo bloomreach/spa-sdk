@@ -1,5 +1,5 @@
 <!--
-  Copyright 2020 Bloomreach
+  Copyright 2020-2022 Bloomreach
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -25,8 +25,5 @@
   <h1 *ngIf="data?.title">{{ data!.title }}</h1>
   <p *ngIf="data?.author" class="mb-3 text-muted">{{ data!.author }}</p>
   <p *ngIf="date" class="mb-3 small text-muted">{{ date | date }}</p>
-  <div
-    *ngIf="data?.content"
-    [innerHTML]="page.rewriteLinks(page.sanitize(data!.content!.value))"
-  ></div>
+  <div *ngIf="data?.content" [innerHTML]="safeHTML"></div>
 </div>
