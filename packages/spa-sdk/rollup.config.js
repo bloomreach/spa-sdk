@@ -57,6 +57,7 @@ export default [
         dir: 'lib',
         entryFileNames: '[name].js',
         format: 'es',
+        sourcemap: true,
       },
     ],
     external: [...Object.keys(pkg.dependencies || {}), ...Object.keys(pkg.peerDependencies || {})],
