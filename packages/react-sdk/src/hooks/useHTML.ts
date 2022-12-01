@@ -17,8 +17,8 @@
 import { Page, Reference } from '@bloomreach/spa-sdk';
 import { useEffect, useState } from 'react';
 
-export function useHTML(page?: Page, documentRef?: Reference, dataFieldName?: string): string {
-  const [safeHTML, setSafeHTML] = useState('');
+export function useHTML(page?: Page, documentRef?: Reference, dataFieldName?: string): string | null {
+  const [safeHTML, setSafeHTML] = useState<string | null>(null);
 
   useEffect(() => {
     async function rewriteLinksAndSanitize(): Promise<void> {

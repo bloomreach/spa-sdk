@@ -46,7 +46,7 @@ export function Content(props: BrProps): JSX.Element | null {
       {title && <h1>{title}</h1>}
       {author && <p className="mb-3 text-muted">{author}</p>}
       {date && <p className="mb-3 small text-muted">{new Date(date).toDateString()}</p>}
-      {content && props.page && <div dangerouslySetInnerHTML={{ __html: safeHTML }}/>}
+      {safeHTML && <div dangerouslySetInnerHTML={{ __html: safeHTML }}/>}
     </div>
   );
 }

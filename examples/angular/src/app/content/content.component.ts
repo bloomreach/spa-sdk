@@ -26,7 +26,7 @@ export class ContentComponent implements OnInit {
 
   @Input() page!: Page;
 
-  safeHTML?: string;
+  safeHTML?: string | null;
 
   async ngOnInit(): Promise<void> {
     const ref = this.component.getModels<DocumentModels>().document;

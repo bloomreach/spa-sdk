@@ -16,6 +16,7 @@
 
 import { inject, injectable, optional } from 'inversify';
 import { EventBusProvider as CmsEventBusProvider, EventBusServiceProvider as CmsEventBusServiceProvider } from '../cms';
+import { Logger } from '../logger';
 import { ButtonFactory } from './button-factory';
 import { Component, ComponentMeta } from './component';
 import { ComponentFactory } from './component-factory09';
@@ -75,6 +76,7 @@ export class PageImpl implements Page {
     @inject(LinkRewriterService) private linkRewriter: LinkRewriter,
     @inject(MetaCollectionFactory) private metaFactory: MetaCollectionFactory,
     @inject(CmsEventBusServiceProvider) private cmsEventBusProvider: CmsEventBusProvider,
+    @inject(Logger) @optional() private logger?: Logger,
     @inject(EventBusService) @optional() eventBus?: EventBus,
   ) {
     eventBus?.on('page.update', this.onPageUpdate.bind(this));
@@ -173,16 +175,18 @@ export class PageImpl implements Page {
     return sanitizeHtml(content, { allowedAttributes: { a: ['href', 'name', 'target', 'title', 'data-type', 'rel'] } });
   }
 
-  async prepareHTML(documentRef?: Reference, dataFieldName?: string): Promise<string> {
+  async prepareHTML(documentRef?: Reference, dataFieldName?: string): Promise<string | null> {
     const document = documentRef && this.getContent(documentRef);
     if (!document) {
-      throw new Error(`Document reference ${documentRef} not found in page model`);
+      this.logger?.warn(`Document reference "${documentRef}" not found in page model`);
+      return null;
     }
 
     const data = document.getData();
     const htmlContent = dataFieldName && data?.[dataFieldName];
     if (!htmlContent) {
-      throw new Error(`Data field name ${dataFieldName} not found in document data model`);
+      this.logger?.warn(`Data field name "${dataFieldName}" not found in document data model`);
+      return null;
     }
 
     return this.rewriteLinks(await this.sanitize(htmlContent.value));
