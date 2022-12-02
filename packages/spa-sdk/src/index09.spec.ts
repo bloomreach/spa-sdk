@@ -19,7 +19,6 @@ import {
   destroy,
   initialize,
   Container,
-  ContainerItem,
   Page,
   META_POSITION_BEGIN,
   META_POSITION_END,
