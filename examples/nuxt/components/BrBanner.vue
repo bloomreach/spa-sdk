@@ -27,7 +27,7 @@
     />
     <h1 v-if="data.title">{{ data.title }}</h1>
     <img v-if="image" class="img-fluid" :src="image.getOriginal().getUrl()" :alt="data.title" />
-    <div v-if="data.content" v-html="html" />
+    <div v-if="html" v-html="html" />
     <p v-if="link" className="lead">
       <nuxt-link :to="link.getUrl()" class="btn btn-primary btn-lg" role="button">Learn more</nuxt-link>
     </p>
@@ -84,6 +84,6 @@ export default class BrBanner extends Vue {
 
   link?: Document;
 
-  html?: string;
+  html?: string | null;
 }
 </script>

@@ -47,7 +47,7 @@ export function Banner(props: BrProps): JSX.Element | null {
       {title && <h1>{title}</h1>}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       {image && <img className="img-fluid" src={image.getOriginal()?.getUrl()} alt={title}/>}
-      {content && props.page && <div dangerouslySetInnerHTML={{ __html: safeHTML }}/>}
+      {safeHTML && <div dangerouslySetInnerHTML={{ __html: safeHTML }}/>}
       {link && (
         <p className="lead">
           <Link href={link.getUrl() ?? '/'}>

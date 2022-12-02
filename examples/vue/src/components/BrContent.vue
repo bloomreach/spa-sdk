@@ -21,7 +21,7 @@
     <h1 v-if="data.title">{{ data.title }}</h1>
     <p v-if="data.author" class="mb-3 text-muted">{{ data.author }}</p>
     <p v-if="date" class="mb-3 small text-muted">{{ formatDate(date) }}</p>
-    <div v-if="data.content" v-html="html" />
+    <div v-if="html" v-html="html" />
   </div>
 </template>
 
@@ -77,6 +77,6 @@ export default class BrContent extends Vue {
 
   image?: ImageSet;
 
-  html?: string;
+  html?: string | null;
 }
 </script>

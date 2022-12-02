@@ -16,6 +16,7 @@
 
 import { inject, injectable, optional } from 'inversify';
 import { EventBusProvider as CmsEventBusProvider, EventBusServiceProvider as CmsEventBusServiceProvider } from '../cms';
+import { Logger } from '../logger';
 import { isAbsoluteUrl, resolveUrl } from '../url';
 import { ButtonFactory } from './button-factory';
 import { ManageContentButton, TYPE_MANAGE_CONTENT_BUTTON } from './button-manage-content';
@@ -269,7 +270,7 @@ export interface Page {
    * @param documentRef The reference to the document
    * @param dataFieldName The name of the property on the document data object
    */
-  prepareHTML(documentRef?: Reference, dataFieldName?: string): Promise<string>;
+  prepareHTML(documentRef?: Reference, dataFieldName?: string): Promise<string | null>;
 }
 
 @injectable()
@@ -288,6 +289,7 @@ export class PageImpl implements Page {
     @inject(MetaCollectionFactory) private metaFactory: MetaCollectionFactory,
     @inject(CmsEventBusServiceProvider) private cmsEventBusProvider: CmsEventBusProvider,
     @inject(EventBusService) @optional() eventBus?: EventBus,
+    @inject(Logger) @optional() private logger?: Logger,
   ) {
     eventBus?.on('page.update', this.onPageUpdate.bind(this));
 
@@ -396,16 +398,18 @@ export class PageImpl implements Page {
     return sanitizeHtml(content, { allowedAttributes: { a: ['href', 'name', 'target', 'title', 'data-type', 'rel'] } });
   }
 
-  async prepareHTML(documentRef?: Reference, dataFieldName?: string): Promise<string> {
+  async prepareHTML(documentRef?: Reference, dataFieldName?: string): Promise<string | null> {
     const document = documentRef && this.getContent<Document>(documentRef);
     if (!document) {
-      throw new Error(`Document reference ${documentRef} not found in page model`);
+      this.logger?.warn(`Document reference "${documentRef}" not found in page model`);
+      return null;
     }
 
     const data = document.getData();
     const htmlContent = dataFieldName && data?.[dataFieldName];
     if (!htmlContent) {
-      throw new Error(`Data field name ${dataFieldName} not found in document data model`);
+      this.logger?.warn(`Data field name "${dataFieldName}" not found in document data model`);
+      return null;
     }
 
     return this.rewriteLinks(await this.sanitize(htmlContent.value));

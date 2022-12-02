@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Bloomreach
+ * Copyright 2020-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,8 +15,9 @@
  */
 
 import { Typed } from 'emittery';
-import { EventBus, Events } from './events';
+import { Spa } from '../spa';
 import { CmsImpl } from './cms';
+import { EventBus, Events } from './events';
 import { RpcClient, RpcServer } from './rpc';
 
 describe('CmsImpl', () => {
@@ -24,6 +25,7 @@ describe('CmsImpl', () => {
   let eventBus: EventBus;
   let rpcClient: jest.Mocked<RpcClient<any, any>>;
   let rpcServer: jest.Mocked<RpcServer<any, any>>;
+  let spa: Spa;
 
   beforeEach(() => {
     eventBus = new Typed<Events>();
@@ -36,7 +38,11 @@ describe('CmsImpl', () => {
       register: jest.fn(),
       trigger: jest.fn(),
     };
-    cms = new CmsImpl(rpcClient, rpcServer, eventBus);
+    spa = {
+      onCmsUpdate: jest.fn(() => Promise.resolve()),
+    } as unknown as Spa;
+
+    cms = new CmsImpl(rpcClient, rpcServer, spa, eventBus);
   });
 
   describe('initialize', () => {
@@ -109,10 +115,9 @@ describe('CmsImpl', () => {
 
       const [, onUpdate] = rpcClient.on.mock.calls.pop()!;
       const event = { id: 'id', properties: { a: 'b' } };
-      const emitSpy = spyOn(eventBus, 'emit');
       onUpdate(event);
 
-      expect(emitSpy).toHaveBeenCalledWith('cms.update', event);
+      expect(spa.onCmsUpdate).toHaveBeenCalledWith(event);
     });
   });
 

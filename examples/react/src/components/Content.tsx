@@ -28,14 +28,7 @@ export function Content({ component, page }: BrProps): JSX.Element | null {
     return null;
   }
 
-  const {
-    author,
-    content,
-    publicationDate,
-    date = publicationDate,
-    image: imageRef,
-    title,
-  } = document.getData<DocumentData>();
+  const { author, publicationDate, date = publicationDate, image: imageRef, title } = document.getData<DocumentData>();
   const image = imageRef && page.getContent<ImageSet>(imageRef);
 
   return (
@@ -46,7 +39,7 @@ export function Content({ component, page }: BrProps): JSX.Element | null {
       {author && <p className="mb-3 text-muted">{author}</p>}
       {date && <p className="mb-3 small text-muted">{new Date(date).toDateString()}</p>}
       {/* eslint-disable-next-line react/no-danger */}
-      {content && <div dangerouslySetInnerHTML={{ __html: safeHTML }} />}
+      {safeHTML && <div dangerouslySetInnerHTML={{ __html: safeHTML }} />}
     </div>
   );
 }
