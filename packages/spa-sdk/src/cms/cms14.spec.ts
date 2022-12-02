@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 Bloomreach
+ * Copyright 2019-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,19 +15,25 @@
  */
 
 import { Typed } from 'emittery';
-import { EventBus, Events } from './events';
+import { Spa } from '../spa';
 import { Cms14Impl } from './cms14';
+import { EventBus, Events } from './events';
 
 describe('Cms', () => {
   let cms: Cms14Impl;
   let eventBus: EventBus;
   let window: Window;
+  let spaService: Spa;
 
   beforeEach(() => {
     eventBus = new Typed<Events>();
     window = {} as Window;
 
-    cms = new Cms14Impl(eventBus);
+    spaService = {
+      onCmsUpdate: jest.fn(),
+    } as unknown as Spa;
+
+    cms = new Cms14Impl(spaService, eventBus);
   });
 
   describe('initialize', () => {
@@ -71,7 +77,7 @@ describe('Cms', () => {
       spyOn(eventBus, 'emit');
       window.SPA!.renderComponent('some-id', { property: 'value' });
 
-      expect(eventBus.emit).toHaveBeenCalledWith('cms.update', {
+      expect(spaService.onCmsUpdate).toHaveBeenCalledWith({
         id: 'some-id',
         properties: { property: 'value' },
       });

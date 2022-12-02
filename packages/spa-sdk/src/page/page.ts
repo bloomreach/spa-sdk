@@ -288,8 +288,8 @@ export class PageImpl implements Page {
     @inject(LinkRewriterService) private linkRewriter: LinkRewriter,
     @inject(MetaCollectionFactory) private metaFactory: MetaCollectionFactory,
     @inject(CmsEventBusServiceProvider) private cmsEventBusProvider: CmsEventBusProvider,
-    @inject(Logger) @optional() private logger?: Logger,
     @inject(EventBusService) @optional() eventBus?: EventBus,
+    @inject(Logger) @optional() private logger?: Logger,
   ) {
     eventBus?.on('page.update', this.onPageUpdate.bind(this));
 
