@@ -87,7 +87,7 @@ export {
 } from './container';
 export { Content, isContent } from './content09';
 export { Document, TYPE_DOCUMENT, isDocument } from './document';
-export { EventBusService } from './events';
+export { PageEventBusService } from './page-events';
 export { getContainerItemContent } from './container-item';
 export { ImageSet, TYPE_IMAGE_SET, isImageSet } from './image-set';
 export { Image } from './image';

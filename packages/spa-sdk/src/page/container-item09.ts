@@ -19,7 +19,7 @@ import { ComponentImpl, ComponentModel, TYPE_COMPONENT_CONTAINER_ITEM } from './
 import { ComponentModelToken } from './component';
 import { ContainerItemEvents, ContainerItemMeta, ContainerItem } from './container-item';
 import { EmitterMixin } from '../emitter';
-import { EventBusService } from './events';
+import { PageEventBusService } from './page-events';
 import { EventBus, PageUpdateEvent } from './events09';
 import { Logger } from '../logger';
 import { MetaCollectionFactory } from './meta-collection-factory';
@@ -45,7 +45,7 @@ export class ContainerItemImpl
     @inject(ComponentModelToken) protected model: ContainerItemModel,
     @inject(MetaCollectionFactory) private metaFactory: MetaCollectionFactory,
     @inject(UrlBuilderService) urlBuilder: UrlBuilder,
-    @inject(EventBusService) @optional() eventBus?: EventBus,
+    @inject(PageEventBusService) @optional() eventBus?: EventBus,
     @inject(Logger) @optional() private logger?: Logger,
   ) {
     super(model, [], metaFactory, urlBuilder);

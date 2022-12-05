@@ -17,7 +17,7 @@
 import { inject, injectable, optional } from 'inversify';
 import { CmsUpdateEvent } from '../cms';
 import { Logger } from '../logger';
-import { EventBus, EventBusService, Page, PageFactory, PageModel } from '../page';
+import { EventBus, PageEventBusService, Page, PageFactory, PageModel } from '../page';
 import { Api, ApiService } from './api';
 
 export const SpaService = Symbol.for('SpaService');
@@ -37,7 +37,7 @@ export class Spa {
   constructor(
     @inject(ApiService) private api: Api,
     @inject(PageFactory) private pageFactory: PageFactory,
-    @inject(EventBusService) @optional() private eventBus?: EventBus,
+    @inject(PageEventBusService) @optional() private eventBus?: EventBus,
     @inject(Logger) @optional() private logger?: Logger,
   ) {}
 

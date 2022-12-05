@@ -17,16 +17,16 @@
 import { Typed } from 'emittery';
 import { Spa } from '../spa';
 import { Cms14Impl } from './cms14';
-import { EventBus, Events } from './events';
+import { CmsEventBus, CmsEvents } from './cms-events';
 
 describe('Cms', () => {
   let cms: Cms14Impl;
-  let eventBus: EventBus;
+  let eventBus: CmsEventBus;
   let window: Window;
   let spaService: Spa;
 
   beforeEach(() => {
-    eventBus = new Typed<Events>();
+    eventBus = new Typed<CmsEvents>();
     window = {} as Window;
 
     spaService = {

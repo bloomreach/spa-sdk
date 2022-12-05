@@ -15,11 +15,11 @@
  */
 
 import { AsyncContainerModule } from 'inversify';
-import { EventBus } from './events';
+import { CmsEventBus } from './cms-events';
 
 export const CmsService = Symbol.for('CmsService');
-export const EventBusService = Symbol('EventBusService');
-export const EventBusServiceProvider = Symbol('EventBusServiceProvider');
+export const CmsEventBusService = Symbol('CmsEventBusService');
+export const CmsEventBusServiceProvider = Symbol('CmsEventBusServiceProvider');
 export const PostMessageService = Symbol.for('PostMessageService');
 export const RpcClientService = Symbol.for('RpcClientService');
 export const RpcServerService = Symbol.for('RpcServerService');
@@ -31,7 +31,7 @@ export function CmsModule(): AsyncContainerModule {
     const { Cms14Impl } = await import('./cms14');
     const { PostMessage } = await import('./post-message');
 
-    bind(EventBusService)
+    bind(CmsEventBusService)
       .toDynamicValue(() => new Typed())
       .inSingletonScope()
       .when(() => typeof window !== 'undefined');
@@ -43,8 +43,8 @@ export function CmsModule(): AsyncContainerModule {
   });
 }
 
-export type EventBusProvider = () => Promise<EventBus | undefined>;
+export type CmsEventBusProvider = () => Promise<CmsEventBus | undefined>;
 export { CmsOptions, Cms } from './cms';
-export { CmsUpdateEvent, EventBus } from './events';
+export { CmsUpdateEvent, CmsEventBus } from './cms-events';
 export { PostMessageOptions, PostMessage } from './post-message';
 export { RpcClient, RpcServer } from './rpc';

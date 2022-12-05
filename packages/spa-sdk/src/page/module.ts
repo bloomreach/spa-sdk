@@ -17,11 +17,7 @@
 import { Typed } from 'emittery';
 import { ContainerModule } from 'inversify';
 
-import {
-  EventBus as CmsEventBus,
-  EventBusService as CmsEventBusService,
-  EventBusServiceProvider as CmsEventBusServiceProvider,
-} from '../cms';
+import { CmsEventBus, CmsEventBusService, CmsEventBusServiceProvider } from '../cms';
 import { UrlBuilder, UrlBuilderService } from '../url';
 
 import { ButtonFactory } from './button-factory';
@@ -39,7 +35,7 @@ import { ContainerImpl } from './container';
 import { ContainerItemImpl } from './container-item';
 import { ContentFactory } from './content-factory';
 import { DocumentImpl, DocumentModelToken, TYPE_DOCUMENT } from './document';
-import { EventBusService } from './events';
+import { PageEventBusService } from './page-events';
 import { ImageFactory, ImageImpl, ImageModel, ImageModelToken } from './image';
 import { ImageSetImpl, ImageSetModelToken, TYPE_IMAGE_SET } from './image-set';
 import { TYPE_LINK_INTERNAL } from './link';
@@ -69,7 +65,7 @@ import {
 
 export function PageModule(): ContainerModule {
   return new ContainerModule((bind) => {
-    bind(EventBusService)
+    bind(PageEventBusService)
       .toDynamicValue(() => new Typed())
       .inSingletonScope()
       .when(() => typeof window !== 'undefined');
