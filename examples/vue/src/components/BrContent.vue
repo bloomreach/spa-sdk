@@ -30,6 +30,12 @@ import { ContainerItem, Document, ImageSet, Page, Reference } from '@bloomreach/
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
 @Component({
+  name: 'br-content',
+  data() {
+    return {
+      html: null,
+    };
+  },
   computed: {
     data(this: BrContent) {
       return this.document?.getData<DocumentData>();
@@ -57,7 +63,6 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
       return new Date(date).toDateString();
     },
   },
-  name: 'br-content',
   async mounted(this: BrContent): Promise<void> {
     this.html = await this.page.prepareHTML(this.documentRef, 'content');
   },
