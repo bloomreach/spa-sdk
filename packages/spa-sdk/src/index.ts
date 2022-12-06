@@ -62,18 +62,11 @@ const pages = new WeakMap<Page, Container>();
 
 container.load(LoggerModule(), UrlModule());
 
-function onReady<T>(value: T | Promise<T>, callback: (cbValue: T) => unknown): T | Promise<T> {
-  // eslint-disable-next-line no-sequences
-  const wrapper = (result: T): T => (callback(result), result);
-
-  return value instanceof Promise ? value.then(wrapper) : wrapper(value);
-}
-
-function initializeWithProxy(
+async function initializeWithProxy(
   scope: Container,
   configuration: ConfigurationWithProxy,
   model?: PageModel,
-): Page | Promise<Page> {
+): Promise<Page> {
   const logger = scope.get(Logger);
 
   logger.info('Enabled reverse-proxy based setup.');
@@ -99,23 +92,24 @@ function initializeWithProxy(
   scope.bind(ApiOptionsToken).toConstantValue(config);
   scope.bind(UrlBuilderOptionsToken).toConstantValue(options);
 
-  return onReady(
-    scope.get<Spa>(SpaService).initialize(model ?? configuration.path ?? configuration.request?.path ?? '/'),
-    async () => {
-      if (!scope.parent?.isBound(CmsService)) {
-        await scope.parent?.loadAsync(CmsModule());
-      }
-      scope.unbind(ApiOptionsToken);
-      scope.unbind(UrlBuilderOptionsToken);
-    },
-  );
+  const page = await scope
+    .get<Spa>(SpaService)
+    .initialize(model ?? configuration.path ?? configuration.request?.path ?? '/');
+
+  if (!scope.parent?.isBound(CmsService)) {
+    await scope.parent?.loadAsync(CmsModule);
+  }
+  scope.unbind(ApiOptionsToken);
+  scope.unbind(UrlBuilderOptionsToken);
+
+  return page;
 }
 
-function initializeWithJwt09(
+async function initializeWithJwt09(
   scope: Container,
   configuration: ConfigurationWithJwt09,
   model?: PageModel,
-): Page | Promise<Page> {
+): Promise<Page> {
   const logger = scope.get(Logger);
 
   logger.info('Enabled token-based setup.');
@@ -153,31 +147,33 @@ function initializeWithJwt09(
   scope.bind(ApiOptionsToken).toConstantValue({ authorizationToken, serverId, ...config });
   scope.bind(UrlBuilderOptionsToken).toConstantValue(config);
 
-  return onReady(scope.get<Spa>(SpaService).initialize(model ?? path), async (page) => {
-    if (page.isPreview() && config.cmsBaseUrl) {
-      logger.info('Running in preview mode.');
+  const page = await scope.get<Spa>(SpaService).initialize(model ?? path);
 
-      if (!scope.parent?.isBound(CmsService)) {
-        await scope.parent?.loadAsync(CmsModule());
-      }
+  if (page.isPreview() && config.cmsBaseUrl) {
+    logger.info('Running in preview mode.');
 
-      scope.get<PostMessage>(PostMessageService).initialize(config);
-      scope.get<Cms>(CmsService).initialize(config);
-      await page.sync();
-    } else {
-      logger.info('Running in live mode.');
+    if (!scope.parent?.isBound(CmsService)) {
+      await scope.parent?.loadAsync(CmsModule);
     }
 
-    scope.unbind(ApiOptionsToken);
-    scope.unbind(UrlBuilderOptionsToken);
-  });
+    scope.get<PostMessage>(PostMessageService).initialize(config);
+    scope.get<Cms>(CmsService).initialize(config);
+    await page.sync();
+  } else {
+    logger.info('Running in live mode.');
+  }
+
+  scope.unbind(ApiOptionsToken);
+  scope.unbind(UrlBuilderOptionsToken);
+
+  return page;
 }
 
-function initializeWithJwt10(
+async function initializeWithJwt10(
   scope: Container,
   configuration: ConfigurationWithJwt10,
   model?: PageModel,
-): Page | Promise<Page> {
+): Promise<Page> {
   const logger = scope.get(Logger);
 
   logger.info('Enabled token-based setup.');
@@ -257,42 +253,34 @@ function initializeWithJwt10(
   scope.bind(ApiOptionsToken).toConstantValue({ authorizationToken, serverId, ...config });
   scope.bind(UrlBuilderOptionsToken).toConstantValue(config);
 
-  return onReady(scope.get<Spa>(SpaService).initialize(model ?? path), async (page) => {
-    if (page.isPreview() && config.endpoint) {
-      logger.info('Running in preview mode.');
+  const page = await scope.get<Spa>(SpaService).initialize(model ?? path);
 
-      if (!scope.parent?.isBound(CmsService)) {
-        await scope.parent?.loadAsync(CmsModule());
-      }
+  if (page.isPreview() && config.endpoint) {
+    logger.info('Running in preview mode.');
 
-      scope.get<PostMessage>(PostMessageService).initialize(config);
-      scope.get<Cms>(CmsService).initialize(config);
-      await page.sync();
-    } else {
-      logger.info('Running in live mode.');
+    if (!scope.parent?.isBound(CmsService)) {
+      await scope.parent?.loadAsync(CmsModule);
     }
 
-    scope.unbind(ApiOptionsToken);
-    scope.unbind(UrlBuilderOptionsToken);
-  });
+    scope.get<PostMessage>(PostMessageService).initialize(config);
+    scope.get<Cms>(CmsService).initialize(config);
+  } else {
+    logger.info('Running in live mode.');
+  }
+
+  scope.unbind(ApiOptionsToken);
+  scope.unbind(UrlBuilderOptionsToken);
+
+  return page;
 }
 
 /**
  * Initializes the page model.
  *
  * @param configuration Configuration of the SPA integration with brXM.
- * @param model Preloaded page model.
+ * @param [model] Preloaded page model.
  */
-export function initialize(configuration: Configuration, model: Page | PageModel): Page;
-
-/**
- * Initializes the page model.
- *
- * @param configuration Configuration of the SPA integration with brXM.
- */
-export async function initialize(configuration: Configuration): Promise<Page>;
-
-export function initialize(configuration: Configuration, model?: Page | PageModel): Page | Promise<Page> {
+export async function initialize(configuration: Configuration, model?: Page | PageModel): Promise<Page> {
   if (isPage(model)) {
     return model;
   }
@@ -303,18 +291,17 @@ export function initialize(configuration: Configuration, model?: Page | PageMode
   logger.level = configuration.debug ? Level.Debug : Level.Error;
   logger.debug('Configuration:', configuration);
 
-  return onReady(
-    // eslint-disable-next-line no-nested-ternary
-    isConfigurationWithProxy(configuration)
-      ? initializeWithProxy(scope, configuration, model)
-      : isConfigurationWithJwt09(configuration)
-      ? initializeWithJwt09(scope, configuration, model)
-      : initializeWithJwt10(scope, configuration, model),
-    (page) => {
-      pages.set(page, scope);
-      configuration.request?.emit?.('br:spa:initialized', page);
-    },
-  );
+  // eslint-disable-next-line no-nested-ternary
+  const page: Page = isConfigurationWithProxy(configuration)
+    ? await initializeWithProxy(scope, configuration, model)
+    : isConfigurationWithJwt09(configuration)
+    ? await initializeWithJwt09(scope, configuration, model)
+    : await initializeWithJwt10(scope, configuration, model);
+
+  pages.set(page, scope);
+  configuration.request?.emit?.('br:spa:initialized', page);
+
+  return page;
 }
 
 /**

@@ -77,13 +77,14 @@ export function PageModule(): ContainerModule {
     bind(CmsEventBusServiceProvider).toProvider<CmsEventBus | undefined>(
       (context) => () =>
         new Promise<CmsEventBus | undefined>((resolve) => {
-          let cmsEventBus;
-
-          if (context.container.isBound(CmsEventBusService)) {
-            cmsEventBus = context.container.get<CmsEventBus>(CmsEventBusService);
+          try {
+            if (context.container.isBound(CmsEventBusService)) {
+              const cmsEventBus = context.container.get<CmsEventBus>(CmsEventBusService);
+              resolve(cmsEventBus);
+            }
+          } catch (e) {
+            resolve(undefined);
           }
-
-          resolve(cmsEventBus);
         }),
     );
 

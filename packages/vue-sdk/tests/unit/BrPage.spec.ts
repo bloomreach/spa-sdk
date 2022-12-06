@@ -168,7 +168,7 @@ describe('BrPage', () => {
     it('should destroy a page upon component destruction', async () => {
       mocked(initialize as unknown as () => Page).mockReturnValueOnce(page);
 
-      const wrapper = shallowMount(BrPage, { propsData: { page } });
+      const wrapper = shallowMount(BrPage, { propsData: { configuration: {}, page } });
       await wrapper.vm.$nextTick();
       wrapper.destroy();
 
@@ -178,9 +178,10 @@ describe('BrPage', () => {
 
   describe('mounted', () => {
     it('should sync a page on mount', async () => {
-      mocked(initialize as unknown as () => Page).mockReturnValueOnce(page);
+      mocked(initialize).mockResolvedValueOnce(page);
 
-      const wrapper = shallowMount(BrPage, { propsData: { page } });
+      const wrapper = shallowMount(BrPage, { propsData: { configuration: {}, page } });
+      await wrapper.vm.$nextTick();
       await wrapper.vm.$nextTick();
 
       expect(page.sync).toBeCalled();

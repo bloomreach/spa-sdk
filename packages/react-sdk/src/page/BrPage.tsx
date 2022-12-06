@@ -60,27 +60,22 @@ export class BrPage extends React.Component<React.PropsWithChildren<BrPageProps>
    */
   constructor(props: BrPageProps) {
     super(props);
-
-    this.state = { page: props.page && initialize(props.configuration, props.page) };
+    this.state = { page: undefined };
   }
 
-  componentDidMount(): void {
-    const { page } = this.props;
-
-    if (!page) {
-      this.initialize();
-    }
+  async componentDidMount(): Promise<void> {
+    await this.initialize();
 
     const { page: pageInState } = this.state;
     pageInState?.sync();
   }
 
-  componentDidUpdate(prevProps: BrPageProps, prevState: BrPageState): void {
+  async componentDidUpdate(prevProps: BrPageProps, prevState: BrPageState): Promise<void> {
     const { configuration, page } = this.props;
 
     if (configuration !== prevProps.configuration || page !== prevProps.page) {
       this.destroy();
-      this.initialize(page === prevProps.page);
+      await this.initialize();
     }
 
     const { page: pageInState } = this.state;
@@ -94,13 +89,12 @@ export class BrPage extends React.Component<React.PropsWithChildren<BrPageProps>
     this.destroy();
   }
 
-  private async initialize(force = false): Promise<void> {
+  private async initialize(): Promise<void> {
     const { page, configuration } = this.props;
-    const model = force ? undefined : page;
 
     try {
       this.setState({
-        page: model ? initialize(configuration, model) : await initialize(configuration),
+        page: page ? await initialize(configuration, page) : await initialize(configuration),
       });
     } catch (error) {
       this.setState(() => {
