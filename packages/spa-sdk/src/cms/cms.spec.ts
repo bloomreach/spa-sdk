@@ -17,18 +17,18 @@
 import { Typed } from 'emittery';
 import { Spa } from '../spa';
 import { CmsImpl } from './cms';
-import { EventBus, Events } from './events';
+import { CmsEventBus, CmsEvents } from './cms-events';
 import { RpcClient, RpcServer } from './rpc';
 
 describe('CmsImpl', () => {
   let cms: CmsImpl;
-  let eventBus: EventBus;
+  let eventBus: CmsEventBus;
   let rpcClient: jest.Mocked<RpcClient<any, any>>;
   let rpcServer: jest.Mocked<RpcServer<any, any>>;
   let spa: Spa;
 
   beforeEach(() => {
-    eventBus = new Typed<Events>();
+    eventBus = new Typed<CmsEvents>();
     rpcClient = {
       call: jest.fn(),
       on: jest.fn(),

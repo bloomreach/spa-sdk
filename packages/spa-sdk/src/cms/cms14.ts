@@ -16,10 +16,10 @@
 
 import { injectable, inject, optional } from 'inversify';
 import { Spa, SpaService } from '../spa';
-import { EventBus } from './events';
+import { CmsEventBus } from './cms-events';
 import { CmsOptions, Cms } from './cms';
 import { Logger } from '../logger';
-import { EventBusService } from './index';
+import { CmsEventBusService } from './index';
 
 const GLOBAL_WINDOW = typeof window === 'undefined' ? undefined : window;
 
@@ -47,7 +47,7 @@ export class Cms14Impl implements Cms {
 
   constructor(
     @inject(SpaService) private spa: Spa,
-    @inject(EventBusService) @optional() protected eventBus?: EventBus,
+    @inject(CmsEventBusService) @optional() protected eventBus?: CmsEventBus,
     @inject(Logger) @optional() private logger?: Logger,
   ) {}
 

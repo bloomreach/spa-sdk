@@ -40,8 +40,10 @@ import { Component, Prop, Vue } from 'nuxt-property-decorator';
 
 @Component({
   name: 'br-banner',
-  data: {
-    html: null,
+  data() {
+    return {
+      html: null,
+    };
   },
   computed: {
     data(this: BrBanner) {

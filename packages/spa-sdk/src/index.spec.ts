@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
-import model from './index.fixture.json';
 import {
+  Container,
   destroy,
   initialize,
-  Container,
-  Page,
   META_POSITION_BEGIN,
   META_POSITION_END,
+  Page,
   TYPE_CONTAINER_BOX,
 } from './index';
-import { PageModel, TYPE_LINK_RESOURCE, TYPE_LINK_EXTERNAL, TYPE_LINK_INTERNAL } from './page';
+import model from './index.fixture.json';
+import { PageModel, TYPE_LINK_EXTERNAL, TYPE_LINK_INTERNAL, TYPE_LINK_RESOURCE } from './page';
 import { HttpRequest } from './spa/http';
 
 describe('initialize', () => {

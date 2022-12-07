@@ -57,7 +57,7 @@ describe('BrPage', () => {
 
   beforeEach(async () => {
     jest.clearAllMocks();
-    mocked(initialize).mockReturnValue(Promise.resolve(page));
+    mocked(initialize).mockResolvedValue(page);
 
     await act(async () => {
       element = render(<BrPage configuration={config} mapping={mapping} />);
@@ -73,7 +73,6 @@ describe('BrPage', () => {
     });
 
     it('should use a page model from props', async () => {
-      mocked(initialize as unknown as () => Page).mockReturnValue(page);
       const newPage = {} as PageModel;
 
       await act(async () => {
@@ -86,8 +85,6 @@ describe('BrPage', () => {
 
   describe('componentDidUpdate', () => {
     beforeEach(async () => {
-      mocked(initialize as unknown as () => Page).mockReturnValue(page);
-
       await act(async () => {
         element = render(<BrPage configuration={config} mapping={mapping} page={page} />);
       });
@@ -97,7 +94,6 @@ describe('BrPage', () => {
       const newPage = { ...page } as Page;
       const configuration = { ...config };
 
-      mocked(initialize as unknown as () => Page).mockReturnValueOnce(newPage);
       await act(async () => {
         render(<BrPage configuration={configuration} mapping={mapping} page={newPage} />, {
           container: element.container,
@@ -129,7 +125,7 @@ describe('BrPage', () => {
     });
 
     it('should not destroy an empty page when unmounting', async () => {
-      mocked(initialize as unknown as () => Page).mockReturnValueOnce(undefined as unknown as Page);
+      mocked(initialize).mockResolvedValueOnce(undefined as unknown as Page);
 
       await act(async () => {
         element = render(<BrPage configuration={config} mapping={mapping} />);
@@ -157,7 +153,7 @@ describe('BrPage', () => {
     });
 
     it('should not render children if there is no page and NBR mode is false', async () => {
-      mocked(initialize as unknown as () => Page).mockReturnValueOnce(undefined as unknown as Page);
+      mocked(initialize).mockResolvedValueOnce(undefined as unknown as Page);
 
       await act(async () => {
         element = render(
@@ -174,7 +170,7 @@ describe('BrPage', () => {
     });
 
     it('should render children if there is no page and NBR mode is true', async () => {
-      mocked(initialize as unknown as () => Page).mockReturnValueOnce(undefined as unknown as Page);
+      mocked(initialize).mockResolvedValueOnce(undefined as unknown as Page);
 
       await act(async () => {
         element = render(

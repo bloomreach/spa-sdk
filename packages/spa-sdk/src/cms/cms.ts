@@ -17,8 +17,8 @@
 import { inject, injectable, optional } from 'inversify';
 import { Logger } from '../logger';
 import { Spa, SpaService } from '../spa';
-import { EventBus, CmsUpdateEvent } from './events';
-import { EventBusService, RpcClientService, RpcServerService } from './index';
+import { CmsEventBus, CmsUpdateEvent } from './cms-events';
+import { CmsEventBusService, RpcClientService, RpcServerService } from './index';
 import { RpcClient, RpcServer, Procedures } from './rpc';
 
 const GLOBAL_WINDOW = typeof window === 'undefined' ? undefined : window;
@@ -64,7 +64,7 @@ export class CmsImpl implements Cms {
     @inject(RpcClientService) protected rpcClient: RpcClient<CmsProcedures, CmsEvents>,
     @inject(RpcServerService) protected rpcServer: RpcServer<SpaProcedures, SpaEvents>,
     @inject(SpaService) private spa: Spa,
-    @inject(EventBusService) @optional() protected eventBus?: EventBus,
+    @inject(CmsEventBusService) @optional() protected eventBus?: CmsEventBus,
     @inject(Logger) @optional() private logger?: Logger,
   ) {
     this.onStateChange = this.onStateChange.bind(this);

@@ -15,7 +15,7 @@
  */
 
 import { inject, injectable, optional } from 'inversify';
-import { EventBusProvider as CmsEventBusProvider, EventBusServiceProvider as CmsEventBusServiceProvider } from '../cms';
+import { CmsEventBusProvider, CmsEventBusServiceProvider } from '../cms';
 import { Logger } from '../logger';
 import { isAbsoluteUrl, resolveUrl } from '../url';
 import { ButtonFactory } from './button-factory';
@@ -28,13 +28,13 @@ import { ContentModel } from './content';
 import { ContentFactory } from './content-factory';
 import { Content } from './content09';
 import { Document } from './document';
-import { EventBus, EventBusService, PageUpdateEvent } from './events';
 import { isLink, Link } from './link';
 import { LinkFactory } from './link-factory';
 import { LinkRewriter, LinkRewriterService } from './link-rewriter';
 import { Menu, TYPE_MANAGE_MENU_BUTTON } from './menu';
 import { MetaCollection, MetaCollectionModel } from './meta-collection';
 import { MetaCollectionFactory } from './meta-collection-factory';
+import { PageEventBus, PageEventBusService, PageUpdateEvent } from './page-events';
 import { isReference, Reference, resolve } from './reference';
 import { Visit, Visitor } from './relevance';
 
@@ -288,7 +288,7 @@ export class PageImpl implements Page {
     @inject(LinkRewriterService) private linkRewriter: LinkRewriter,
     @inject(MetaCollectionFactory) private metaFactory: MetaCollectionFactory,
     @inject(CmsEventBusServiceProvider) private cmsEventBusProvider: CmsEventBusProvider,
-    @inject(EventBusService) @optional() eventBus?: EventBus,
+    @inject(PageEventBusService) @optional() eventBus?: PageEventBus,
     @inject(Logger) @optional() private logger?: Logger,
   ) {
     eventBus?.on('page.update', this.onPageUpdate.bind(this));

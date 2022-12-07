@@ -39,6 +39,12 @@ import { ContainerItem, Document, ImageSet, Page, Reference } from '@bloomreach/
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
 @Component({
+  name: 'br-banner',
+  data() {
+    return {
+      html: null,
+    };
+  },
   computed: {
     data(this: BrBanner) {
       return this.document?.getData<DocumentData>();
@@ -61,7 +67,6 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
       return this.data?.link && this.page.getContent<Document>(this.data.link);
     },
   },
-  name: 'br-banner',
   async mounted(this: BrBanner): Promise<void> {
     this.html = await this.page.prepareHTML(this.documentRef, 'content');
   },

@@ -17,7 +17,7 @@
 import { inject, injectable, optional } from 'inversify';
 import { CmsUpdateEvent } from '../cms';
 import { Logger } from '../logger';
-import { EventBus, EventBusService, Page, PageFactory, PageModel } from '../page';
+import { EventBus, Page, PageEventBusService, PageFactory, PageModel } from '../page';
 import { Api, ApiService } from './api';
 
 export const SpaService = Symbol.for('SpaService');
@@ -37,7 +37,7 @@ export class Spa {
   constructor(
     @inject(ApiService) private api: Api,
     @inject(PageFactory) private pageFactory: PageFactory,
-    @inject(EventBusService) @optional() private eventBus?: EventBus,
+    @inject(PageEventBusService) @optional() private eventBus?: EventBus,
     @inject(Logger) @optional() private logger?: Logger,
   ) {}
 
@@ -63,21 +63,22 @@ export class Spa {
 
   /**
    * Initializes the SPA.
-   * @param model A preloaded page model or URL to a page model.
+   * @param modelOrPath A preloaded page model or URL to a page model.
    */
-  initialize(model: PageModel | string): Page | Promise<Page> {
-    if (typeof model === 'string') {
+  async initialize(modelOrPath: PageModel | string): Promise<Page> {
+    if (typeof modelOrPath === 'string') {
       this.logger?.debug('Trying to request the page model.');
 
-      return this.api.getPage(model).then(this.hydrate.bind(this));
+      const pageModel = await this.api.getPage(modelOrPath);
+      return this.hydrate(pageModel);
     }
 
     this.logger?.debug('Received dehydrated model.');
 
-    return this.hydrate(model);
+    return this.hydrate(modelOrPath);
   }
 
-  private hydrate(model: PageModel): Page {
+  private async hydrate(model: PageModel): Promise<Page> {
     this.logger?.debug('Model:', model);
     this.logger?.debug('Hydrating.');
 

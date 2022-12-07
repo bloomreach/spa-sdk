@@ -25,7 +25,7 @@ import {
   TYPE_COMPONENT_CONTAINER_ITEM_CONTENT,
 } from './component';
 import { EmitterMixin, Emitter } from '../emitter';
-import { EventBusService, EventBus, PageUpdateEvent } from './events';
+import { PageEventBusService, PageEventBus, PageUpdateEvent } from './page-events';
 import { LinkFactory } from './link-factory';
 import { Logger } from '../logger';
 import { MetaCollectionFactory } from './meta-collection-factory';
@@ -153,7 +153,7 @@ export class ContainerItemImpl
     @inject(ComponentModelToken) protected model: ContainerItemModel,
     @inject(LinkFactory) linkFactory: LinkFactory,
     @inject(MetaCollectionFactory) private metaFactory: MetaCollectionFactory,
-    @inject(EventBusService) @optional() eventBus?: EventBus,
+    @inject(PageEventBusService) @optional() eventBus?: PageEventBus,
     @inject(Logger) @optional() private logger?: Logger,
   ) {
     super(model, [], linkFactory, metaFactory);

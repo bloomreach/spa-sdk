@@ -31,6 +31,11 @@ import { Component, Prop, Vue } from 'nuxt-property-decorator';
 
 @Component({
   name: 'br-content',
+  data() {
+    return {
+      html: null,
+    };
+  },
   computed: {
     data(this: BrContent) {
       return this.document?.getData<DocumentData>();
