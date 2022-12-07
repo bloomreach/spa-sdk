@@ -15,7 +15,6 @@
  */
 
 import { Typed } from 'emittery';
-import { Spa } from '../spa';
 import { CmsImpl } from './cms';
 import { CmsEventBus, CmsEvents } from './cms-events';
 import { RpcClient, RpcServer } from './rpc';
@@ -25,7 +24,6 @@ describe('CmsImpl', () => {
   let eventBus: CmsEventBus;
   let rpcClient: jest.Mocked<RpcClient<any, any>>;
   let rpcServer: jest.Mocked<RpcServer<any, any>>;
-  let spa: Spa;
 
   beforeEach(() => {
     eventBus = new Typed<CmsEvents>();
@@ -38,11 +36,7 @@ describe('CmsImpl', () => {
       register: jest.fn(),
       trigger: jest.fn(),
     };
-    spa = {
-      onCmsUpdate: jest.fn(() => Promise.resolve()),
-    } as unknown as Spa;
-
-    cms = new CmsImpl(rpcClient, rpcServer, spa, eventBus);
+    cms = new CmsImpl(rpcClient, rpcServer, eventBus);
   });
 
   describe('initialize', () => {
@@ -115,9 +109,10 @@ describe('CmsImpl', () => {
 
       const [, onUpdate] = rpcClient.on.mock.calls.pop()!;
       const event = { id: 'id', properties: { a: 'b' } };
+      const emitSpy = spyOn(eventBus, 'emit');
       onUpdate(event);
 
-      expect(spa.onCmsUpdate).toHaveBeenCalledWith(event);
+      expect(emitSpy).toHaveBeenCalledWith('cms.update', event);
     });
   });
 

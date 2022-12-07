@@ -48,4 +48,19 @@ Object {
 }
 `;
 
+exports[`initialize should react on a component rendering 1`] = `
+Array [
+  Object {
+    "data": "some=value",
+    "headers": Object {
+      "Accept-Version": "1.0",
+      "Authorization": "Bearer something",
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    "method": "POST",
+    "url": "http://127.0.0.1/site/my-spa/resourceapi?_hn:type=component-rendering&_hn:ref=r1_r1_r1&org.hippoecm.hst.container.render_host=127.0.0.1",
+  },
+]
+`;
+
 exports[`initialize should rewrite links in the HTML blob 1`] = `"Some text containing <a href=\\"//example.com/news?token=something\\" data-type=\\"internal\\">link1</a>, <a href=\\"//example.com/about?token=something\\" data-type=\\"internal\\">link2</a>, <a href=\\"https://example.com\\">link3</a>, and the image: <img src=\\"http://127.0.0.1/binaries/image.jpg\\"/>"`;

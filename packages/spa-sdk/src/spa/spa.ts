@@ -15,7 +15,7 @@
  */
 
 import { inject, injectable, optional } from 'inversify';
-import { CmsUpdateEvent } from '../cms';
+import { CmsEventBusProvider, CmsEventBusServiceProvider, CmsUpdateEvent } from '../cms';
 import { Logger } from '../logger';
 import { EventBus, Page, PageEventBusService, PageFactory, PageModel } from '../page';
 import { Api, ApiService } from './api';
@@ -31,18 +31,22 @@ export class Spa {
 
   /**
    * @param eventBus Event bus to exchange data between submodules.
+   * @param cmsEventBusProvider Event bus provider to inject event bus to communicate between cms submodules
    * @param api Api client.
    * @param pageFactory Factory to produce page instances.
    */
   constructor(
     @inject(ApiService) private api: Api,
     @inject(PageFactory) private pageFactory: PageFactory,
+    @inject(CmsEventBusServiceProvider) private cmsEventBusProvider: CmsEventBusProvider,
     @inject(PageEventBusService) @optional() private eventBus?: EventBus,
     @inject(Logger) @optional() private logger?: Logger,
-  ) {}
+  ) {
+    this.onCmsUpdate = this.onCmsUpdate.bind(this);
+  }
 
-  async onCmsUpdate(event: CmsUpdateEvent): Promise<void> {
-    this.logger?.debug('Received CMS update event.');
+  protected async onCmsUpdate(event: CmsUpdateEvent): Promise<void> {
+    this.logger?.debug('Recieved CMS update event.');
     this.logger?.debug('Event:', event);
 
     const root = this.page!.getComponent();
@@ -84,6 +88,12 @@ export class Spa {
 
     this.page = this.pageFactory(model);
 
+    if (this.page.isPreview()) {
+      this.cmsEventBusProvider().then((cmsEventBus) => {
+        cmsEventBus?.on('cms.update', this.onCmsUpdate);
+      });
+    }
+
     return this.page;
   }
 
@@ -91,6 +101,9 @@ export class Spa {
    * Destroys the integration with the SPA page.
    */
   async destroy(): Promise<void> {
+    const cmsEventBus = await this.cmsEventBusProvider();
+    cmsEventBus?.off('cms.update', this.onCmsUpdate);
+
     this.eventBus?.clearListeners();
     delete this.page;
 

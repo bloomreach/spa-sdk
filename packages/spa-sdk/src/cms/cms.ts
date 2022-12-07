@@ -16,7 +16,6 @@
 
 import { inject, injectable, optional } from 'inversify';
 import { Logger } from '../logger';
-import { Spa, SpaService } from '../spa';
 import { CmsEventBus, CmsUpdateEvent } from './cms-events';
 import { CmsEventBusService, RpcClientService, RpcServerService } from './index';
 import { RpcClient, RpcServer, Procedures } from './rpc';
@@ -63,7 +62,6 @@ export class CmsImpl implements Cms {
   constructor(
     @inject(RpcClientService) protected rpcClient: RpcClient<CmsProcedures, CmsEvents>,
     @inject(RpcServerService) protected rpcServer: RpcServer<SpaProcedures, SpaEvents>,
-    @inject(SpaService) private spa: Spa,
     @inject(CmsEventBusService) @optional() protected eventBus?: CmsEventBus,
     @inject(Logger) @optional() private logger?: Logger,
   ) {
@@ -114,7 +112,7 @@ export class CmsImpl implements Cms {
     this.logger?.debug('Received update event.');
     this.logger?.debug('Event:', event);
 
-    this.spa.onCmsUpdate(event);
+    this.eventBus?.emit('cms.update', event);
   }
 
   protected inject(resource: string): Promise<void> {

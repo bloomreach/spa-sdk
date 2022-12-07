@@ -15,7 +15,6 @@
  */
 
 import { injectable, inject, optional } from 'inversify';
-import { Spa, SpaService } from '../spa';
 import { CmsEventBus } from './cms-events';
 import { CmsOptions, Cms } from './cms';
 import { Logger } from '../logger';
@@ -46,7 +45,6 @@ export class Cms14Impl implements Cms {
   private postponed: Function[] = [];
 
   constructor(
-    @inject(SpaService) private spa: Spa,
     @inject(CmsEventBusService) @optional() protected eventBus?: CmsEventBus,
     @inject(Logger) @optional() private logger?: Logger,
   ) {}
@@ -93,7 +91,7 @@ export class Cms14Impl implements Cms {
     this.logger?.debug('Component:', id);
     this.logger?.debug('Properties', properties);
 
-    this.spa.onCmsUpdate({ id, properties });
+    this.eventBus?.emit('cms.update', { id, properties });
   }
 
   protected sync(): void {
