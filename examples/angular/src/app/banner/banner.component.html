@@ -36,7 +36,7 @@
     [src]="image.getOriginal()?.getUrl()"
     [alt]="data?.title || ''"
   />
-  <div *ngIf="data?.content" [innerHTML]="safeHTML"></div>
+  <div *ngIf="data?.content" [innerHTML]="safeHTML | async"></div>
   <p *ngIf="link" class="lead">
     <a
       class="btn btn-primary btn-lg"
