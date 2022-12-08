@@ -15,15 +15,17 @@
  */
 
 import { Typed } from 'emittery';
-import { Spa } from '../spa';
-import { Cms14Impl } from './cms14';
+import { Container } from 'inversify';
+import { Spa, SpaService } from '../spa';
 import { CmsEventBus, CmsEvents } from './cms-events';
+import { Cms14Impl } from './cms14';
 
 describe('Cms', () => {
   let cms: Cms14Impl;
   let eventBus: CmsEventBus;
   let window: Window;
   let spaService: Spa;
+  let scope: Container;
 
   beforeEach(() => {
     eventBus = new Typed<CmsEvents>();
@@ -33,24 +35,27 @@ describe('Cms', () => {
       onCmsUpdate: jest.fn(),
     } as unknown as Spa;
 
-    cms = new Cms14Impl(spaService, eventBus);
+    scope = new Container();
+    scope.bind<Spa>(SpaService).toConstantValue(spaService);
+
+    cms = new Cms14Impl(eventBus);
   });
 
   describe('initialize', () => {
     it('should not fail if there is no window object', () => {
-      expect(() => cms.initialize({})).not.toThrow();
+      expect(() => cms.initialize({}, scope)).not.toThrow();
     });
 
     it('should not initialize an SPA object if there is already one', () => {
       const spa: any = {};
       const windowWithSpa = { SPA: spa } as Window;
-      cms.initialize({ window: windowWithSpa });
+      cms.initialize({ window: windowWithSpa }, scope);
 
       expect(windowWithSpa.SPA).toBe(spa);
     });
 
     it('should initialize an SPA object', () => {
-      cms.initialize({ window });
+      cms.initialize({ window }, scope);
 
       expect(window.SPA).toBeDefined();
       expect(window.SPA).toHaveProperty('init');
@@ -61,7 +66,7 @@ describe('Cms', () => {
   describe('onInit', () => {
     it('should process postponed events on initialization', async () => {
       const sync = jest.fn();
-      cms.initialize({ window });
+      cms.initialize({ window }, scope);
       await eventBus.emit('page.ready', {});
 
       expect.assertions(2);
@@ -73,7 +78,7 @@ describe('Cms', () => {
 
   describe('onRenderComponent', () => {
     it('should emit cms.update on render component call', () => {
-      cms.initialize({ window });
+      cms.initialize({ window }, scope);
       spyOn(eventBus, 'emit');
       window.SPA!.renderComponent('some-id', { property: 'value' });
 
@@ -87,7 +92,7 @@ describe('Cms', () => {
   describe('sync', () => {
     it('should call sync on page.ready event', async () => {
       const sync = jest.fn();
-      cms.initialize({ window });
+      cms.initialize({ window }, scope);
       window.SPA!.init({ sync });
       await eventBus.emit('page.ready', {});
 

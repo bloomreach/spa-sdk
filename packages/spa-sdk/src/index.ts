@@ -157,7 +157,7 @@ async function initializeWithJwt09(
     }
 
     scope.get<PostMessage>(PostMessageService).initialize(config);
-    scope.get<Cms>(CmsService).initialize(config);
+    scope.get<Cms>(CmsService).initialize(config, scope);
     await page.sync();
   } else {
     logger.info('Running in live mode.');
@@ -263,7 +263,7 @@ async function initializeWithJwt10(
     }
 
     scope.get<PostMessage>(PostMessageService).initialize(config);
-    scope.get<Cms>(CmsService).initialize(config);
+    scope.get<Cms>(CmsService).initialize(config, scope);
   } else {
     logger.info('Running in live mode.');
   }
