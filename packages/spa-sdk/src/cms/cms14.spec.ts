@@ -15,6 +15,7 @@
  */
 
 import { Typed } from 'emittery';
+import { Spa } from '../spa';
 import { Cms14Impl } from './cms14';
 import { CmsEventBus, CmsEvents } from './cms-events';
 
@@ -22,12 +23,17 @@ describe('Cms', () => {
   let cms: Cms14Impl;
   let eventBus: CmsEventBus;
   let window: Window;
+  let spaService: Spa;
 
   beforeEach(() => {
     eventBus = new Typed<CmsEvents>();
     window = {} as Window;
 
-    cms = new Cms14Impl(eventBus);
+    spaService = {
+      onCmsUpdate: jest.fn(),
+    } as unknown as Spa;
+
+    cms = new Cms14Impl(spaService, eventBus);
   });
 
   describe('initialize', () => {
@@ -71,7 +77,7 @@ describe('Cms', () => {
       spyOn(eventBus, 'emit');
       window.SPA!.renderComponent('some-id', { property: 'value' });
 
-      expect(eventBus.emit).toHaveBeenCalledWith('cms.update', {
+      expect(spaService.onCmsUpdate).toHaveBeenCalledWith({
         id: 'some-id',
         properties: { property: 'value' },
       });
