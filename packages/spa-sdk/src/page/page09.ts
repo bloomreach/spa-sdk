@@ -15,7 +15,8 @@
  */
 
 import { inject, injectable, optional } from 'inversify';
-import { EventBusProvider as CmsEventBusProvider, EventBusServiceProvider as CmsEventBusServiceProvider } from '../cms';
+import { CmsEventBusProvider, CmsEventBusServiceProvider } from '../cms';
+import { Logger } from '../logger';
 import { ButtonFactory } from './button-factory';
 import { Component, ComponentMeta } from './component';
 import { ComponentFactory } from './component-factory09';
@@ -24,7 +25,7 @@ import { ContainerItemModel } from './container-item09';
 import { ContainerModel } from './container09';
 import { ContentFactory } from './content-factory09';
 import { Content, ContentModel } from './content09';
-import { EventBusService } from './events';
+import { PageEventBusService } from './page-events';
 import { EventBus, PageUpdateEvent } from './events09';
 import { Link, TYPE_LINK_INTERNAL } from './link';
 import { LinkFactory } from './link-factory';
@@ -75,7 +76,8 @@ export class PageImpl implements Page {
     @inject(LinkRewriterService) private linkRewriter: LinkRewriter,
     @inject(MetaCollectionFactory) private metaFactory: MetaCollectionFactory,
     @inject(CmsEventBusServiceProvider) private cmsEventBusProvider: CmsEventBusProvider,
-    @inject(EventBusService) @optional() eventBus?: EventBus,
+    @inject(PageEventBusService) @optional() eventBus?: EventBus,
+    @inject(Logger) @optional() private logger?: Logger,
   ) {
     eventBus?.on('page.update', this.onPageUpdate.bind(this));
 
@@ -173,16 +175,18 @@ export class PageImpl implements Page {
     return sanitizeHtml(content, { allowedAttributes: { a: ['href', 'name', 'target', 'title', 'data-type', 'rel'] } });
   }
 
-  async prepareHTML(documentRef?: Reference, dataFieldName?: string): Promise<string> {
+  async prepareHTML(documentRef?: Reference, dataFieldName?: string): Promise<string | null> {
     const document = documentRef && this.getContent(documentRef);
     if (!document) {
-      throw new Error(`Document reference ${documentRef} not found in page model`);
+      this.logger?.warn(`Document reference "${documentRef}" not found in page model`);
+      return null;
     }
 
     const data = document.getData();
     const htmlContent = dataFieldName && data?.[dataFieldName];
     if (!htmlContent) {
-      throw new Error(`Data field name ${dataFieldName} not found in document data model`);
+      this.logger?.warn(`Data field name "${dataFieldName}" not found in document data model`);
+      return null;
     }
 
     return this.rewriteLinks(await this.sanitize(htmlContent.value));

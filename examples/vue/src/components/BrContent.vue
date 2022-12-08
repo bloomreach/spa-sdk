@@ -21,7 +21,7 @@
     <h1 v-if="data.title">{{ data.title }}</h1>
     <p v-if="data.author" class="mb-3 text-muted">{{ data.author }}</p>
     <p v-if="date" class="mb-3 small text-muted">{{ formatDate(date) }}</p>
-    <div v-if="data.content" v-html="html" />
+    <div v-if="html" v-html="html" />
   </div>
 </template>
 
@@ -30,6 +30,12 @@ import { ContainerItem, Document, ImageSet, Page, Reference } from '@bloomreach/
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
 @Component({
+  name: 'br-content',
+  data() {
+    return {
+      html: null,
+    };
+  },
   computed: {
     data(this: BrContent) {
       return this.document?.getData<DocumentData>();
@@ -57,7 +63,6 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
       return new Date(date).toDateString();
     },
   },
-  name: 'br-content',
   async mounted(this: BrContent): Promise<void> {
     this.html = await this.page.prepareHTML(this.documentRef, 'content');
   },
@@ -77,6 +82,6 @@ export default class BrContent extends Vue {
 
   image?: ImageSet;
 
-  html?: string;
+  html?: string | null;
 }
 </script>

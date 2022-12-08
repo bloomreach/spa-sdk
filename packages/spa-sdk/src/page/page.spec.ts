@@ -15,13 +15,13 @@
  */
 
 import { Typed } from 'emittery';
-import { EventBus as CmsEventBus, EventBusProvider as CmsEventBusProvider } from '../cms';
+import { CmsEventBus, CmsEventBusProvider } from '../cms';
 import { ButtonFactory } from './button-factory';
 import { Component, TYPE_COMPONENT } from './component';
 import { ComponentFactory } from './component-factory';
 import { ContentModel } from './content';
 import { ContentFactory } from './content-factory';
-import { EventBus } from './events';
+import { PageEventBus } from './page-events';
 import { isLink, Link, TYPE_LINK_EXTERNAL, TYPE_LINK_INTERNAL } from './link';
 import { LinkFactory } from './link-factory';
 import { LinkRewriter } from './link-rewriter';
@@ -34,7 +34,7 @@ let content: unknown;
 let contentFactory: jest.Mocked<ContentFactory>;
 let cmsEventBus: CmsEventBus;
 let cmsEventBusProvider: CmsEventBusProvider;
-let eventBus: EventBus;
+let eventBus: PageEventBus;
 let linkFactory: jest.Mocked<LinkFactory>;
 let linkRewriter: jest.Mocked<LinkRewriter>;
 let metaFactory: jest.MockedFunction<MetaCollectionFactory>;

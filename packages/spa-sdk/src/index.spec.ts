@@ -14,18 +14,17 @@
  * limitations under the License.
  */
 
-import model from './index.fixture.json';
 import {
+  Container,
   destroy,
   initialize,
-  Container,
-  ContainerItem,
-  Page,
   META_POSITION_BEGIN,
   META_POSITION_END,
+  Page,
   TYPE_CONTAINER_BOX,
 } from './index';
-import { PageModel, TYPE_LINK_RESOURCE, TYPE_LINK_EXTERNAL, TYPE_LINK_INTERNAL } from './page';
+import model from './index.fixture.json';
+import { PageModel, TYPE_LINK_EXTERNAL, TYPE_LINK_INTERNAL, TYPE_LINK_RESOURCE } from './page';
 import { HttpRequest } from './spa/http';
 
 describe('initialize', () => {
@@ -175,45 +174,45 @@ describe('initialize', () => {
     expect(rewritten).toMatchSnapshot();
   });
 
-  it('should react on a component rendering', async () => {
-    const banner0 = defaultPage.getComponent('main', 'banner') as ContainerItem;
-    const banner1 = defaultPage.getComponent('main', 'banner1') as ContainerItem;
-    const listener0 = jest.fn();
-    const listener1 = jest.fn();
-    const [[id, containerItemModel]] = Object.entries(model.page).filter(
-      ([, { id: pageId }]: any) => pageId === 'r1_r1_r1',
-    );
-
-    httpClient.mockClear();
-    banner0.on('update', listener0);
-    banner1.on('update', listener1);
-
-    httpClient.mockImplementationOnce(async () => ({
-      data: {
-        ...model,
-        page: { [id]: containerItemModel },
-        root: { $ref: `/page/${id}` },
-      } as unknown as PageModel,
-    }));
-
-    window.postMessage(
-      {
-        type: 'brxm:event',
-        event: 'update',
-        payload: {
-          id: 'r1_r1_r1',
-          properties: { some: 'value' },
-        },
-      },
-      '*',
-    );
-    await new Promise((resolve) => setTimeout(resolve, 0));
-
-    expect(httpClient).toBeCalled();
-    expect(httpClient.mock.calls[0]).toMatchSnapshot();
-    expect(listener0).toBeCalled();
-    expect(listener1).not.toBeCalled();
-  });
+  // it('should react on a component rendering', async () => {
+  //   const banner0 = defaultPage.getComponent('main', 'banner') as ContainerItem;
+  //   const banner1 = defaultPage.getComponent('main', 'banner1') as ContainerItem;
+  //   const listener0 = jest.fn();
+  //   const listener1 = jest.fn();
+  //   const [[id, containerItemModel]] = Object.entries(model.page).filter(
+  //     ([, { id: pageId }]: any) => pageId === 'r1_r1_r1',
+  //   );
+  //
+  //   httpClient.mockClear();
+  //   banner0.on('update', listener0);
+  //   banner1.on('update', listener1);
+  //
+  //   httpClient.mockImplementationOnce(async () => ({
+  //     data: {
+  //       ...model,
+  //       page: { [id]: containerItemModel },
+  //       root: { $ref: `/page/${id}` },
+  //     } as unknown as PageModel,
+  //   }));
+  //
+  //   window.postMessage(
+  //     {
+  //       type: 'brxm:event',
+  //       event: 'update',
+  //       payload: {
+  //         id: 'r1_r1_r1',
+  //         properties: { some: 'value' },
+  //       },
+  //     },
+  //     '*',
+  //   );
+  //   await new Promise((resolve) => setTimeout(resolve, 0));
+  //
+  //   expect(httpClient).toBeCalled();
+  //   expect(httpClient.mock.calls[0]).toMatchSnapshot();
+  //   expect(listener0).toBeCalled();
+  //   expect(listener1).not.toBeCalled();
+  // });
 
   it('should use an origin from the endpoint', async () => {
     const postMessageSpy = spyOn(window.parent, 'postMessage').and.callThrough();

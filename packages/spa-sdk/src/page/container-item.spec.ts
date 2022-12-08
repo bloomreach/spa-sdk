@@ -24,13 +24,13 @@ import {
   getContainerItemContent,
   isContainerItem,
 } from './container-item';
-import { EventBus, Events } from './events';
+import { PageEventBus, PageEvents } from './page-events';
 import { LinkFactory } from './link-factory';
 import { MetaCollectionFactory } from './meta-collection-factory';
 import { MetaCollection } from './meta-collection';
 import { Page, PageModel } from './page';
 
-let eventBus: EventBus;
+let eventBus: PageEventBus;
 let linkFactory: jest.Mocked<LinkFactory>;
 let metaFactory: jest.MockedFunction<MetaCollectionFactory>;
 
@@ -45,7 +45,7 @@ function createContainerItem(containerItemModel = model) {
 }
 
 beforeEach(() => {
-  eventBus = new Typed<Events>();
+  eventBus = new Typed<PageEvents>();
   linkFactory = { create: jest.fn() } as unknown as typeof linkFactory;
   metaFactory = jest.fn();
 });

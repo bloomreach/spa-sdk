@@ -26,11 +26,11 @@ export class BannerComponent implements OnInit {
 
   @Input() page!: Page;
 
-  safeHTML?: string;
+  safeHTML?: Promise<string | null>;
 
   async ngOnInit(): Promise<void> {
     const ref = this.component.getModels<DocumentModels>().document;
-    this.safeHTML = await this.page.prepareHTML(ref, 'content');
+    this.safeHTML = this.page.prepareHTML(ref, 'content');
   }
 
   get document(): Document | undefined {

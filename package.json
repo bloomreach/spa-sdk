@@ -1,6 +1,6 @@
 {
   "private": true,
-  "version": "18.0.0",
+  "version": "18.0.1",
   "description": "Bloomreach SPA SDK",
   "name": "spa-sdk-workspace",
   "keywords": [
@@ -39,7 +39,7 @@
     "heroku-postbuild": "npm run prebuild:custom && npm run build -- --scope $PACKAGE --include-dependencies && cd ${PROJECT_PATH:-.}",
     "lint": "lerna run lint",
     "release": "lerna publish from-package",
-    "test": "lerna run test"
+    "test": "lerna run test --concurrency 4"
   },
   "overrides": {
     "@oclif/color": ">=0.1.0"

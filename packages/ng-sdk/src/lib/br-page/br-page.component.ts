@@ -139,9 +139,9 @@ export class BrPageComponent implements AfterContentChecked, OnChanges, OnDestro
     };
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  async ngOnChanges(changes: SimpleChanges): Promise<void> {
     if (changes.configuration || changes.page) {
-      this.initialize(changes.page?.currentValue);
+      await this.initialize(changes.page?.currentValue);
     }
 
     if (changes.stateKey?.previousValue && isPlatformServer(this.platform)) {
@@ -166,14 +166,14 @@ export class BrPageComponent implements AfterContentChecked, OnChanges, OnDestro
     this.afterContentChecked$.complete();
   }
 
-  private initialize(page: Page | PageModel | undefined): void {
+  private async initialize(page: Page | PageModel | undefined): Promise<void> {
     if (this.stateKey && isPlatformBrowser(this.platform) && this.transferState?.hasKey(this.stateKey)) {
       page = page ?? this.transferState?.get(this.stateKey, undefined);
       this.transferState?.remove(this.stateKey);
     }
 
     const configuration = { httpClient: this.request, ...this.configuration } as Configuration;
-    const observable = page ? of(initialize(configuration, page)) : from(initialize(configuration));
+    const observable = page ? from(initialize(configuration, page)) : from(initialize(configuration));
 
     observable.subscribe((state) => {
       this.state.next(state);

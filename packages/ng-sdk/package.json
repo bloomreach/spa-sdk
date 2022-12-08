@@ -1,6 +1,6 @@
 {
   "name": "@bloomreach/ng-sdk",
-  "version": "18.0.0",
+  "version": "18.0.1",
   "description": "Bloomreach SPA SDK for Angular",
   "keywords": [
     "bloomreach",
@@ -42,7 +42,7 @@
     "dist/bloomreach-ng-sdk.metadata.json"
   ],
   "dependencies": {
-    "@bloomreach/spa-sdk": "18.0.0",
+    "@bloomreach/spa-sdk": "18.0.1",
     "tslib": "2.3.0"
   },
   "peerDependencies": {

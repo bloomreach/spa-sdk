@@ -2,8 +2,34 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### [18.0.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-17.2.0...18.0.0)
+#### [18.0.1](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-19.0.0...18.0.1)
 
+- SPASDK-149 Retrieve spa service from correct container [`#SPASDK-149`](https://issues.onehippo.com/browse/SPASDK-149)
+- SPASDK-149 Revert "SPASDK-149 Revert "SPASDK-148 Set cms update listener after loading the cms module"" [`#SPASDK-149`](https://issues.onehippo.com/browse/SPASDK-149)
+- SPASDK-149 Revert "SPASDK-148 Set cms update listener after loading the cms module" [`#SPASDK-149`](https://issues.onehippo.com/browse/SPASDK-149)
+- SPASDK-149 Display rich text in Banner and Content components [`#SPASDK-149`](https://issues.onehippo.com/browse/SPASDK-149)
+- SPASDK-149 Merge branch 'bugfix/SPASDK-149-ssr' into development [`#SPASDK-149`](https://issues.onehippo.com/browse/SPASDK-149)
+- SPASDK-149 Initialize now always returns a Promise&lt;Page&gt; [`#SPASDK-149`](https://issues.onehippo.com/browse/SPASDK-149)
+- SPASDK-149 Fix data object in vue components [`#SPASDK-149`](https://issues.onehippo.com/browse/SPASDK-149)
+- SPASDK-149 Clarify event origins in classes and modules [`#SPASDK-149`](https://issues.onehippo.com/browse/SPASDK-149)
+- SPASDK-149 Prevent tests from hogging all the CPU resources and crashing the system [`#SPASDK-149`](https://issues.onehippo.com/browse/SPASDK-149)
+
+### [spa-sdk-19.0.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-18.0.0...spa-sdk-19.0.0)
+
+> 2 December 2022
+
+- SPASDK-148 Update component in preview when editing [`#103`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/103)
+- SPASDK-146 Bumping versions to 19.0.0 [`#SPASDK-146`](https://issues.onehippo.com/browse/SPASDK-146)
+- SPASDK-148 Disable failing test for now [`#SPASDK-148`](https://issues.onehippo.com/browse/SPASDK-148)
+- SPASDK-148 Set cms update listener after loading the cms module [`#SPASDK-148`](https://issues.onehippo.com/browse/SPASDK-148)
+- SPASDK-148 Output sourcemaps for ES modules [`#SPASDK-148`](https://issues.onehippo.com/browse/SPASDK-148)
+- SPASDK-148 Allow field to be null [`#SPASDK-148`](https://issues.onehippo.com/browse/SPASDK-148)
+
+### [spa-sdk-18.0.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-17.2.0...spa-sdk-18.0.0)
+
+> 28 November 2022
+
+- SPASDK-147 Bumping versions to 18.0.0 [`#SPASDK-147`](https://issues.onehippo.com/browse/SPASDK-147)
 - SPASDK-126 Merge branch 'feature/SPASDK-126-sdk-split-bundles' into 'development' [`#SPASDK-126`](https://issues.onehippo.com/browse/SPASDK-126)
 - SPASDK-141 Fix the package-lock file versions [`#SPASDK-141`](https://issues.onehippo.com/browse/SPASDK-141)
 - SPASDK-126 Provide preparation of HTML content as page method [`#SPASDK-126`](https://issues.onehippo.com/browse/SPASDK-126)

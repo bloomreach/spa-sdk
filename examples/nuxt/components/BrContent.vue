@@ -21,16 +21,21 @@
     <h1 v-if="data.title">{{ data.title }}</h1>
     <p v-if="data.author" class="mb-3 text-muted">{{ data.author }}</p>
     <p v-if="date" class="mb-3 small text-muted">{{ formatDate(date) }}</p>
-    <div v-if="data.content" v-html="html" />
+    <div v-if="html" v-html="html" />
   </div>
 </template>
 
 <script lang="ts">
-import { ContainerItem, Document, ImageSet, Page } from '@bloomreach/spa-sdk';
+import { ContainerItem, Document, ImageSet, Page, Reference } from '@bloomreach/spa-sdk';
 import { Component, Prop, Vue } from 'nuxt-property-decorator';
 
 @Component({
   name: 'br-content',
+  data() {
+    return {
+      html: null,
+    };
+  },
   computed: {
     data(this: BrContent) {
       return this.document?.getData<DocumentData>();
@@ -77,6 +82,6 @@ export default class BrContent extends Vue {
 
   image?: ImageSet;
 
-  html?: string;
+  html?: string | null;
 }
 </script>

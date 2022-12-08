@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 
-import { injectable, inject, optional } from 'inversify';
-import { EventBus } from './events';
-import { CmsOptions, Cms } from './cms';
+import { Container, inject, injectable, optional } from 'inversify';
 import { Logger } from '../logger';
-import { EventBusService } from './index';
+import { Spa, SpaService } from '../spa';
+import { Cms, CmsOptions } from './cms';
+import { CmsEventBus } from './cms-events';
+import { CmsEventBusService } from './index';
 
 const GLOBAL_WINDOW = typeof window === 'undefined' ? undefined : window;
 
@@ -28,6 +29,7 @@ interface CmsApi {
 
 interface SpaApi {
   init(api: CmsApi): void;
+
   renderComponent(id: string, properties: Record<string, unknown>): void;
 }
 
@@ -41,11 +43,13 @@ declare global {
 export class Cms14Impl implements Cms {
   private api?: CmsApi;
 
+  private scope?: Container;
+
   // eslint-disable-next-line @typescript-eslint/ban-types
   private postponed: Function[] = [];
 
   constructor(
-    @inject(EventBusService) @optional() protected eventBus?: EventBus,
+    @inject(CmsEventBusService) @optional() protected eventBus?: CmsEventBus,
     @inject(Logger) @optional() private logger?: Logger,
   ) {}
 
@@ -65,7 +69,9 @@ export class Cms14Impl implements Cms {
     };
   }
 
-  initialize({ window = GLOBAL_WINDOW }: CmsOptions): void {
+  initialize({ window = GLOBAL_WINDOW }: CmsOptions, scope: Container): void {
+    this.scope = scope;
+
     if (this.api || !window || window.SPA) {
       return;
     }
@@ -91,7 +97,8 @@ export class Cms14Impl implements Cms {
     this.logger?.debug('Component:', id);
     this.logger?.debug('Properties', properties);
 
-    this.eventBus?.emit('cms.update', { id, properties });
+    const spa = this.scope?.get<Spa>(SpaService);
+    spa?.onCmsUpdate({ id, properties });
   }
 
   protected sync(): void {

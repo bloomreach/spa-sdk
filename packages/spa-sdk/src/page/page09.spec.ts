@@ -15,7 +15,7 @@
  */
 
 import { Typed } from 'emittery';
-import { EventBus as CmsEventBus, EventBusProvider as CmsEventBusProvider } from '../cms';
+import { CmsEventBus, CmsEventBusProvider } from '../cms';
 import { ButtonFactory } from './button-factory';
 import { Component } from './component';
 import { ComponentFactory } from './component-factory09';

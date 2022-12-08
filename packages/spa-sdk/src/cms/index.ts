@@ -15,36 +15,35 @@
  */
 
 import { AsyncContainerModule } from 'inversify';
-import { EventBus } from './events';
+import { CmsEventBus } from './cms-events';
 
 export const CmsService = Symbol.for('CmsService');
-export const EventBusService = Symbol('EventBusService');
-export const EventBusServiceProvider = Symbol('EventBusServiceProvider');
+export const CmsEventBusService = Symbol('CmsEventBusService');
+export const CmsEventBusServiceProvider = Symbol('CmsEventBusServiceProvider');
 export const PostMessageService = Symbol.for('PostMessageService');
 export const RpcClientService = Symbol.for('RpcClientService');
 export const RpcServerService = Symbol.for('RpcServerService');
 
-export function CmsModule(): AsyncContainerModule {
-  return new AsyncContainerModule(async (bind) => {
-    const { Typed } = await import('emittery');
-    const { CmsImpl } = await import('./cms');
-    const { Cms14Impl } = await import('./cms14');
-    const { PostMessage } = await import('./post-message');
+export const CmsModule = new AsyncContainerModule(async (bind) => {
+  // Had to use default export because *Next.js* requires it this way
+  const { default: Emittery } = await import('emittery');
+  const { CmsImpl } = await import('./cms');
+  const { Cms14Impl } = await import('./cms14');
+  const { PostMessage } = await import('./post-message');
 
-    bind(EventBusService)
-      .toDynamicValue(() => new Typed())
-      .inSingletonScope()
-      .when(() => typeof window !== 'undefined');
-    bind(PostMessageService).to(PostMessage).inSingletonScope();
-    bind(RpcClientService).toService(PostMessageService);
-    bind(RpcServerService).toService(PostMessageService);
-    bind(CmsService).to(CmsImpl).inSingletonScope().whenTargetIsDefault();
-    bind(CmsService).to(Cms14Impl).inSingletonScope().whenTargetNamed('cms14');
-  });
-}
+  bind(CmsEventBusService)
+    .toDynamicValue(() => new Emittery.Typed())
+    .inSingletonScope()
+    .when(() => typeof window !== 'undefined');
+  bind(PostMessageService).to(PostMessage).inSingletonScope();
+  bind(RpcClientService).toService(PostMessageService);
+  bind(RpcServerService).toService(PostMessageService);
+  bind(CmsService).to(CmsImpl).inSingletonScope().whenTargetIsDefault();
+  bind(CmsService).to(Cms14Impl).inSingletonScope().whenTargetNamed('cms14');
+});
 
-export type EventBusProvider = () => Promise<EventBus | undefined>;
+export type CmsEventBusProvider = () => Promise<CmsEventBus | undefined>;
 export { CmsOptions, Cms } from './cms';
-export { CmsUpdateEvent, EventBus } from './events';
+export { CmsUpdateEvent, CmsEventBus } from './cms-events';
 export { PostMessageOptions, PostMessage } from './post-message';
 export { RpcClient, RpcServer } from './rpc';

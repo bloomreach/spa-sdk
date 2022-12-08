@@ -19,5 +19,5 @@ export const environment = {
   exponeaProjectToken: undefined,
   exponeaApiUrl: '',
   production: false,
-  hasMultiTenantSupport: undefined,
+  hasMultiTenantSupport: 'true',
 };

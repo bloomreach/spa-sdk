@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 
-import { inject, injectable, optional } from 'inversify';
+import { inject, injectable, optional, Container } from 'inversify';
 import { Logger } from '../logger';
-import { EventBus, CmsUpdateEvent } from './events';
-import { EventBusService, RpcClientService, RpcServerService } from './index';
+import { Spa, SpaService } from '../spa';
+import { CmsEventBus, CmsUpdateEvent } from './cms-events';
+import { CmsEventBusService, RpcClientService, RpcServerService } from './index';
 import { RpcClient, RpcServer, Procedures } from './rpc';
 
 const GLOBAL_WINDOW = typeof window === 'undefined' ? undefined : window;
@@ -37,8 +38,9 @@ export interface Cms {
   /**
    * Initializes integration with the CMS.
    * @param options The CMS integration options.
+   * @param scope Current initialized inversify container with bindings
    */
-  initialize(options: CmsOptions): void;
+  initialize(options: CmsOptions, scope: Container): void;
 }
 
 interface CmsProcedures extends Procedures {
@@ -59,10 +61,12 @@ interface SpaEvents {
 export class CmsImpl implements Cms {
   private window?: Window;
 
+  private scope?: Container;
+
   constructor(
     @inject(RpcClientService) protected rpcClient: RpcClient<CmsProcedures, CmsEvents>,
     @inject(RpcServerService) protected rpcServer: RpcServer<SpaProcedures, SpaEvents>,
-    @inject(EventBusService) @optional() protected eventBus?: EventBus,
+    @inject(CmsEventBusService) @optional() protected eventBus?: CmsEventBus,
     @inject(Logger) @optional() private logger?: Logger,
   ) {
     this.onStateChange = this.onStateChange.bind(this);
@@ -71,7 +75,9 @@ export class CmsImpl implements Cms {
     this.rpcServer.register('inject', this.inject.bind(this));
   }
 
-  initialize({ window = GLOBAL_WINDOW }: CmsOptions): void {
+  initialize({ window = GLOBAL_WINDOW }: CmsOptions, scope: Container): void {
+    this.scope = scope;
+
     if (this.window === window) {
       return;
     }
@@ -112,7 +118,8 @@ export class CmsImpl implements Cms {
     this.logger?.debug('Received update event.');
     this.logger?.debug('Event:', event);
 
-    this.eventBus?.emit('cms.update', event);
+    const spa = this.scope?.get<Spa>(SpaService);
+    spa?.onCmsUpdate(event);
   }
 
   protected inject(resource: string): Promise<void> {

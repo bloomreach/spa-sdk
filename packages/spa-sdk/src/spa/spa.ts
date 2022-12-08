@@ -15,13 +15,9 @@
  */
 
 import { inject, injectable, optional } from 'inversify';
-import {
-  CmsUpdateEvent,
-  EventBusProvider as CmsEventBusProvider,
-  EventBusServiceProvider as CmsEventBusServiceProvider,
-} from '../cms';
+import { CmsUpdateEvent } from '../cms';
 import { Logger } from '../logger';
-import { EventBus, EventBusService, Page, PageFactory, PageModel } from '../page';
+import { EventBus, Page, PageEventBusService, PageFactory, PageModel } from '../page';
 import { Api, ApiService } from './api';
 
 export const SpaService = Symbol.for('SpaService');
@@ -35,22 +31,18 @@ export class Spa {
 
   /**
    * @param eventBus Event bus to exchange data between submodules.
-   * @param cmsEventBusProvider Event bus provider to inject event bus to communicate between cms submodules
    * @param api Api client.
    * @param pageFactory Factory to produce page instances.
    */
   constructor(
     @inject(ApiService) private api: Api,
     @inject(PageFactory) private pageFactory: PageFactory,
-    @inject(CmsEventBusServiceProvider) private cmsEventBusProvider: CmsEventBusProvider,
-    @inject(EventBusService) @optional() private eventBus?: EventBus,
+    @inject(PageEventBusService) @optional() private eventBus?: EventBus,
     @inject(Logger) @optional() private logger?: Logger,
-  ) {
-    this.onCmsUpdate = this.onCmsUpdate.bind(this);
-  }
+  ) {}
 
-  protected async onCmsUpdate(event: CmsUpdateEvent): Promise<void> {
-    this.logger?.debug('Recieved CMS update event.');
+  async onCmsUpdate(event: CmsUpdateEvent): Promise<void> {
+    this.logger?.debug('Received CMS update event.');
     this.logger?.debug('Event:', event);
 
     const root = this.page!.getComponent();
@@ -71,31 +63,26 @@ export class Spa {
 
   /**
    * Initializes the SPA.
-   * @param model A preloaded page model or URL to a page model.
+   * @param modelOrPath A preloaded page model or URL to a page model.
    */
-  initialize(model: PageModel | string): Page | Promise<Page> {
-    if (typeof model === 'string') {
+  async initialize(modelOrPath: PageModel | string): Promise<Page> {
+    if (typeof modelOrPath === 'string') {
       this.logger?.debug('Trying to request the page model.');
 
-      return this.api.getPage(model).then(this.hydrate.bind(this));
+      const pageModel = await this.api.getPage(modelOrPath);
+      return this.hydrate(pageModel);
     }
 
     this.logger?.debug('Received dehydrated model.');
 
-    return this.hydrate(model);
+    return this.hydrate(modelOrPath);
   }
 
-  private hydrate(model: PageModel): Page {
+  private async hydrate(model: PageModel): Promise<Page> {
     this.logger?.debug('Model:', model);
     this.logger?.debug('Hydrating.');
 
     this.page = this.pageFactory(model);
-
-    if (this.page.isPreview()) {
-      this.cmsEventBusProvider().then((cmsEventBus) => {
-        cmsEventBus?.on('cms.update', this.onCmsUpdate);
-      });
-    }
 
     return this.page;
   }
@@ -104,9 +91,6 @@ export class Spa {
    * Destroys the integration with the SPA page.
    */
   async destroy(): Promise<void> {
-    const cmsEventBus = await this.cmsEventBusProvider();
-    cmsEventBus?.off('cms.update', this.onCmsUpdate);
-
     this.eventBus?.clearListeners();
     delete this.page;
 

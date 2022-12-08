@@ -37,9 +37,9 @@ export interface CmsUpdateEvent {
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface PageReadyEvent {}
 
-export interface Events {
+export interface CmsEvents {
   'cms.update': CmsUpdateEvent;
   'page.ready': PageReadyEvent;
 }
 
-export type EventBus = Typed<Events>;
+export type CmsEventBus = Typed<CmsEvents>;

@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 Bloomreach
+ * Copyright 2019-2022 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,36 +15,47 @@
  */
 
 import { Typed } from 'emittery';
-import { EventBus, Events } from './events';
+import { Container } from 'inversify';
+import { Spa, SpaService } from '../spa';
+import { CmsEventBus, CmsEvents } from './cms-events';
 import { Cms14Impl } from './cms14';
 
 describe('Cms', () => {
   let cms: Cms14Impl;
-  let eventBus: EventBus;
+  let eventBus: CmsEventBus;
   let window: Window;
+  let spaService: Spa;
+  let scope: Container;
 
   beforeEach(() => {
-    eventBus = new Typed<Events>();
+    eventBus = new Typed<CmsEvents>();
     window = {} as Window;
+
+    spaService = {
+      onCmsUpdate: jest.fn(),
+    } as unknown as Spa;
+
+    scope = new Container();
+    scope.bind<Spa>(SpaService).toConstantValue(spaService);
 
     cms = new Cms14Impl(eventBus);
   });
 
   describe('initialize', () => {
     it('should not fail if there is no window object', () => {
-      expect(() => cms.initialize({})).not.toThrow();
+      expect(() => cms.initialize({}, scope)).not.toThrow();
     });
 
     it('should not initialize an SPA object if there is already one', () => {
       const spa: any = {};
       const windowWithSpa = { SPA: spa } as Window;
-      cms.initialize({ window: windowWithSpa });
+      cms.initialize({ window: windowWithSpa }, scope);
 
       expect(windowWithSpa.SPA).toBe(spa);
     });
 
     it('should initialize an SPA object', () => {
-      cms.initialize({ window });
+      cms.initialize({ window }, scope);
 
       expect(window.SPA).toBeDefined();
       expect(window.SPA).toHaveProperty('init');
@@ -55,7 +66,7 @@ describe('Cms', () => {
   describe('onInit', () => {
     it('should process postponed events on initialization', async () => {
       const sync = jest.fn();
-      cms.initialize({ window });
+      cms.initialize({ window }, scope);
       await eventBus.emit('page.ready', {});
 
       expect.assertions(2);
@@ -67,11 +78,11 @@ describe('Cms', () => {
 
   describe('onRenderComponent', () => {
     it('should emit cms.update on render component call', () => {
-      cms.initialize({ window });
+      cms.initialize({ window }, scope);
       spyOn(eventBus, 'emit');
       window.SPA!.renderComponent('some-id', { property: 'value' });
 
-      expect(eventBus.emit).toHaveBeenCalledWith('cms.update', {
+      expect(spaService.onCmsUpdate).toHaveBeenCalledWith({
         id: 'some-id',
         properties: { property: 'value' },
       });
@@ -81,7 +92,7 @@ describe('Cms', () => {
   describe('sync', () => {
     it('should call sync on page.ready event', async () => {
       const sync = jest.fn();
-      cms.initialize({ window });
+      cms.initialize({ window }, scope);
       window.SPA!.init({ sync });
       await eventBus.emit('page.ready', {});
 
