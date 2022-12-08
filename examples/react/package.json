@@ -1,12 +1,12 @@
 {
   "name": "@bloomreach/example-react",
   "description": "Example React SPA for Bloomreach Experience",
-  "version": "18.0.0",
+  "version": "18.0.1",
   "private": true,
   "dependencies": {
-    "@bloomreach/react-sdk": "18.0.0",
+    "@bloomreach/react-sdk": "18.0.1",
     "@bloomreach/segmentation": "0.0.13",
-    "@bloomreach/spa-sdk": "18.0.0",
+    "@bloomreach/spa-sdk": "18.0.1",
     "axios": "0.26.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
