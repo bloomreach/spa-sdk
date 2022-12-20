@@ -213,7 +213,6 @@ async function initializeWithJwt10(
 
   const config = {
     ...configuration,
-    apiVersion: '1.0',
     endpoint: endpointUrl,
     baseUrl: appendSearchParams(configuration.baseUrl ?? '', searchParams),
     origin: configuration.origin ?? parseUrl(configuration.endpoint ?? '').origin,
