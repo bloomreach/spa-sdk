@@ -1,5 +1,5 @@
 {
-  "$schema": "./node_modules/ng-packagr/package.schema.json",
+  "$schema": "./node_modules/ng-packagr/ng-package.schema.json",
   "dest": "./dist",
   "lib": {
     "entryFile": "src/public-api.ts",
@@ -7,7 +7,7 @@
       "@bloomreach/spa-sdk": "BloomreachSpaSdk"
     }
   },
-  "whitelistedNonPeerDependencies": [
+  "allowedNonPeerDependencies": [
     "@bloomreach/spa-sdk"
   ]
 }
