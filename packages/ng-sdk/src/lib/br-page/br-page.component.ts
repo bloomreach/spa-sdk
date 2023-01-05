@@ -38,7 +38,7 @@ import {
 } from '@angular/core';
 import { makeStateKey, StateKey, TransferState } from '@angular/platform-browser';
 import { Configuration, destroy, initialize, isPage, Page, PageModel } from '@bloomreach/spa-sdk';
-import { BehaviorSubject, from, of, Subject } from 'rxjs';
+import { BehaviorSubject, from, Subject } from 'rxjs';
 import { filter, map, mapTo, pairwise, pluck, switchMap, take } from 'rxjs/operators';
 import { BrComponentContext } from '../br-component.directive';
 import { BrProps } from '../br-props.model';

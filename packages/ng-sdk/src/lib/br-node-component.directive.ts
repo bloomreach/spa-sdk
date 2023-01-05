@@ -91,13 +91,13 @@ export class BrNodeComponentDirective<T extends Component> implements OnChanges,
   private renderChildren(): { head: any; tail: any } {
     const nodes = this.component
       ?.getChildren()
-      ?.map((component) =>
-        this.container.createEmbeddedView(this.page.node, {
+      ?.map((component) => this.container.createEmbeddedView(
+        this.page.node, {
           component,
           $implicit: component,
           page: this.page.state.getValue()!,
-        }),
-      )
+        },
+      ))
       .flatMap((view) => view.rootNodes);
 
     const head = nodes?.[0] ?? this.container.element.nativeElement;

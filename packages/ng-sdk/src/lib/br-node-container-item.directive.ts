@@ -39,8 +39,7 @@ import { BrProps } from './br-props.model';
 })
 export class BrNodeContainerItemDirective
   extends BrNodeComponentDirective<ContainerItem>
-  implements OnChanges, OnDestroy
-{
+  implements OnChanges, OnDestroy {
   constructor(
     container: ViewContainerRef,
     injector: Injector,

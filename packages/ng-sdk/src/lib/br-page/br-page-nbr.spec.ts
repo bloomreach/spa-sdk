@@ -102,12 +102,11 @@ describe('BrPageComponent', () => {
     });
 
     mocked(initialize).mockImplementation(
-      () =>
-        new Promise((resolve) => {
-          setTimeout(() => {
-            resolve(page);
-          }, 1000);
-        }),
+      () => new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(page);
+        }, 1000);
+      }),
     );
 
     fixture = TestBed.createComponent(WrapperComponent);

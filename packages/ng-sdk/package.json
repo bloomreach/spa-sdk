@@ -24,7 +24,7 @@
     "lint": "ng lint",
     "ng": "ng",
     "prepack": "$npm_execpath run build && rm dist/package.json dist/README.md",
-    "test": "ng test --passWithNoTests"
+    "test": "ng test --pass-with-no-tests"
   },
   "main": "dist/bundles/bloomreach-ng-sdk.umd.js",
   "module": "dist/fesm5/bloomreach-ng-sdk.js",
@@ -46,39 +46,32 @@
     "tslib": "2.3.0"
   },
   "peerDependencies": {
-    "@angular/common": "^11.0",
-    "@angular/core": "^11.0",
-    "@angular/platform-browser": "^11.0",
+    "@angular/common": "^11.0.0 || ^12.0.0",
+    "@angular/core": "^11.0.0 || ^12.0.0",
+    "@angular/platform-browser": "^11.0.0 || ^12.0.0",
     "rxjs": "^6.6"
   },
   "devDependencies": {
-    "@angular-builders/jest": "11.2.0",
-    "@angular-devkit/build-angular": "0.1102.14",
-    "@angular-eslint/builder": "4.3.0",
-    "@angular-eslint/eslint-plugin": "4.3.0",
-    "@angular-eslint/eslint-plugin-template": "4.3.0",
-    "@angular-eslint/template-parser": "4.3.0",
-    "@angular/cli": "11.2.14",
-    "@angular/common": "11.2.14",
-    "@angular/compiler": "11.2.14",
-    "@angular/compiler-cli": "11.2.14",
-    "@angular/core": "11.2.14",
-    "@angular/language-service": "11.2.14",
-    "@angular/platform-browser": "11.2.14",
-    "@angular/platform-browser-dynamic": "11.2.14",
-    "@bloomreach/eslint-config-angular": "1.0.1",
+    "@angular-builders/jest": "12.1.2",
+    "@angular-devkit/build-angular": "12.2.18",
+    "@angular-eslint/builder": "12.7.0",
+    "@angular-eslint/eslint-plugin": "12.7.0",
+    "@angular-eslint/eslint-plugin-template": "12.7.0",
+    "@angular-eslint/template-parser": "12.7.0",
+    "@angular/cli": "12.2.18",
+    "@angular/compiler": "12.2.17",
+    "@angular/compiler-cli": "12.2.17",
+    "@angular/language-service": "12.2.17",
+    "@angular/platform-browser-dynamic": "12.2.17",
+    "@bloomreach/eslint-config-angular": "12.1.4",
     "@types/jest": "26.0.24",
-    "jest": "26.6.3",
-    "jest-junit": "12.2.0",
-    "ng-packagr": "11.2.4",
+    "jest": "27.5.1",
+    "jest-junit": "12.3.0",
+    "ng-packagr": "12.2.7",
     "rxjs": "6.6.7",
     "ts-node": "10.1.0",
-    "typescript": "4.1.6",
-    "zone.js": "0.11.4"
-  },
-  "jest-junit": {
-    "outputDirectory": "coverage",
-    "outputName": "TEST-ng-sdk.xml"
+    "typescript": "4.3.5",
+    "zone.js": "~0.11.4"
   },
   "eslintConfig": {
     "extends": [
@@ -90,6 +83,9 @@
         "tsconfig.spec.json"
       ],
       "createDefaultProgram": true
+    },
+    "rules": {
+      "import/no-cycle": "off"
     }
   }
 }

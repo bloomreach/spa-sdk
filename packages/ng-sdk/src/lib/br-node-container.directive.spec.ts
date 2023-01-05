@@ -40,7 +40,7 @@ Component({ selector: 'br-container-unordered-list', template: '' })(BrContainer
 
 @Component({
   selector: 'br-container-test',
-  template: `<a></a>`,
+  template: '<a></a>',
 })
 class ContainerTestComponent {}
 
