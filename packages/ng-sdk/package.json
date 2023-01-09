@@ -86,9 +86,6 @@
         "tsconfig.spec.json"
       ],
       "createDefaultProgram": true
-    },
-    "rules": {
-      "import/no-cycle": "off"
     }
   }
 }

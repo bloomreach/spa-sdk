@@ -16,7 +16,7 @@
 
 import { Directive, Input, TemplateRef } from '@angular/core';
 import { Component } from '@bloomreach/spa-sdk';
-import { BrComponentContext } from './br-component.directive';
+import type { BrComponentContext } from './br-component.directive';
 
 @Directive({
   selector: '[brNode]',
