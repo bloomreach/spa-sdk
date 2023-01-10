@@ -21,7 +21,7 @@ import { BehaviorSubject } from 'rxjs';
 import { BrComponentContext } from './br-component.directive';
 import { BrNodeComponentDirective } from './br-node-component.directive';
 import { BrNodeDirective } from './br-node.directive';
-import { BrPageComponent } from './br-page/br-page.component';
+import { BrPageService } from './br-page/br-page.service';
 
 @Component({
   selector: 'br-component-test',
@@ -67,7 +67,7 @@ describe('BrNodeComponentDirective', () => {
   let component: jest.Mocked<SpaComponent>;
   let meta: jest.Mocked<MetaCollection>;
   let node: BrNodeDirective;
-  let page: BrPageComponent;
+  let page: BrPageService;
   let template: TemplateRef<BrComponentContext>;
   let fixture: ComponentFixture<TestComponent>;
 
@@ -93,7 +93,7 @@ describe('BrNodeComponentDirective', () => {
         imports: [TestModule],
         providers: [
           { provide: BrNodeDirective, useFactory: () => node },
-          { provide: BrPageComponent, useFactory: () => page },
+          { provide: BrPageService, useFactory: () => page },
         ],
       }).compileComponents();
     }),

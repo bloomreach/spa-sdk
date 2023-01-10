@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Bloomreach
+ * Copyright 2020-2023 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ import { BehaviorSubject } from 'rxjs';
 import { Component as SpaComponent, Page, isComponent } from '@bloomreach/spa-sdk';
 import { BrComponentContext, BrComponentDirective } from './br-component.directive';
 import { BrNodeDirective } from './br-node.directive';
-import { BrPageComponent } from './br-page/br-page.component';
+import { BrPageService } from './br-page/br-page.service';
 
 jest.mock('@bloomreach/spa-sdk');
 
@@ -69,7 +69,7 @@ describe('BrComponentDirective', () => {
       TestBed.configureTestingModule({
         declarations: [BrComponentDirective, TemplateComponent, TestComponent],
         providers: [
-          { provide: BrPageComponent, useFactory: () => ({ node: template, state: new BehaviorSubject(page) }) },
+          { provide: BrPageService, useFactory: () => ({ node: template, state: new BehaviorSubject(page) }) },
           { provide: TemplateRef, useValue: 'Some Template' },
         ],
       }).compileComponents();
@@ -110,7 +110,7 @@ describe('BrComponentDirective', () => {
 
   describe('ngOnInit', () => {
     it('should render nothing if the page component is not ready', () => {
-      fixture.debugElement.injector.get(BrPageComponent).state.next(undefined);
+      fixture.debugElement.injector.get(BrPageService).state.next(undefined);
       fixture.detectChanges();
 
       expect(fixture.nativeElement).toMatchSnapshot();
@@ -164,7 +164,7 @@ describe('BrComponentDirective', () => {
         declarations: [BrComponentDirective, TemplateComponent, TestComponent],
         providers: [
           { provide: BrNodeDirective, useValue: { component } },
-          { provide: BrPageComponent, useValue: { node: template, state: new BehaviorSubject(page) } },
+          { provide: BrPageService, useValue: { node: template, state: new BehaviorSubject(page) } },
           { provide: TemplateRef, useValue: 'Some Template' },
         ],
       }).compileComponents();

@@ -1,5 +1,5 @@
 /*
- * Copyright 2020-2022 Bloomreach
+ * Copyright 2020-2023 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,14 +38,11 @@ import {
 } from '@angular/core';
 import { makeStateKey, StateKey, TransferState } from '@angular/platform-browser';
 import { Configuration, destroy, initialize, isPage, Page, PageModel } from '@bloomreach/spa-sdk';
-import { BehaviorSubject, from, Subject } from 'rxjs';
+import { from, Subject } from 'rxjs';
 import { filter, map, mapTo, pairwise, pluck, switchMap, take } from 'rxjs/operators';
 import type { BrComponentContext } from '../br-component.directive';
 import { BrProps } from '../br-props.model';
-
-interface BrNodeContext extends BrComponentContext {
-  template?: TemplateRef<BrComponentContext>;
-}
+import { BrNodeContext, BrPageService } from './br-page.service';
 
 /**
  * The brXM page.
@@ -83,7 +80,7 @@ export class BrPageComponent implements AfterContentChecked, OnChanges, OnDestro
   /**
    * The current state of the page component.
    */
-  @Output() state = new BehaviorSubject<Page | undefined>(undefined);
+  @Output() state = this.pageService.state;
 
   /**
    * Http error handling
@@ -99,6 +96,7 @@ export class BrPageComponent implements AfterContentChecked, OnChanges, OnDestro
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
     private httpClient: HttpClient,
+    private pageService: BrPageService,
     zone: NgZone,
     @Inject(PLATFORM_ID) private platform: any,
     @Optional() private transferState?: TransferState,
@@ -120,6 +118,14 @@ export class BrPageComponent implements AfterContentChecked, OnChanges, OnDestro
         filter(isPage),
       )
       .subscribe((page) => this.stateKey && this.transferState?.set(this.stateKey, page.toJSON()));
+
+    if (this.mapping) {
+      this.pageService.mapping = this.mapping;
+    }
+
+    if (this.node) {
+      this.pageService.node = this.node;
+    }
   }
 
   get context(): BrNodeContext {
@@ -142,6 +148,14 @@ export class BrPageComponent implements AfterContentChecked, OnChanges, OnDestro
   async ngOnChanges(changes: SimpleChanges): Promise<void> {
     if (changes.configuration || changes.page) {
       await this.initialize(changes.page?.currentValue);
+    }
+
+    if (changes.mapping?.currentValue !== this.pageService.mapping) {
+      this.pageService.mapping = this.mapping;
+    }
+
+    if (changes.node?.currentValue !== this.pageService.node) {
+      this.pageService.node = this.node;
     }
 
     if (changes.stateKey?.previousValue && isPlatformServer(this.platform)) {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Bloomreach
+ * Copyright 2020-2023 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,4 +19,5 @@ export * from './lib/br-component.directive';
 export * from './lib/br-manage-content-button.directive';
 export * from './lib/br-manage-menu-button.directive';
 export * from './lib/br-page/br-page.component';
+export * from './lib/br-page/br-page.service';
 export * from './lib/br-props.model';

@@ -22,7 +22,7 @@ import { ContainerItem, TYPE_CONTAINER_ITEM_UNDEFINED } from '@bloomreach/spa-sd
 import { BrContainerItemUndefinedComponent } from './br-container-item-undefined/br-container-item-undefined.component';
 import { BrNodeContainerItemDirective } from './br-node-container-item.directive';
 import { BrNodeDirective } from './br-node.directive';
-import { BrPageComponent } from './br-page/br-page.component';
+import { BrPageService } from './br-page/br-page.service';
 
 Component({
   selector: 'br-container-item-undefined',
@@ -49,7 +49,7 @@ class TestComponent {
 describe('BrNodeContainerItemDirective', () => {
   let containerItem: ContainerItem;
   let node: BrNodeDirective;
-  let page: BrPageComponent;
+  let page: BrPageService;
   let component: TestComponent;
   let fixture: ComponentFixture<TestComponent>;
 
@@ -78,7 +78,7 @@ describe('BrNodeContainerItemDirective', () => {
         imports: [TestModule],
         providers: [
           { provide: BrNodeDirective, useFactory: () => node },
-          { provide: BrPageComponent, useFactory: () => page },
+          { provide: BrPageService, useFactory: () => page },
         ],
       }).compileComponents();
     }),

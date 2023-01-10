@@ -8,7 +8,7 @@
     "start": "ng serve",
     "build": "ng build --prod && ng run example-angular:server:production",
     "dev": "ng serve",
-    "test": "ng test  --passWithNoTests",
+    "test": "ng test  --pass-with-no-tests",
     "lint": "ng lint",
     "dev:ssr": "ng run example-angular:serve-ssr",
     "start:ssr": "node dist/server/main.js",

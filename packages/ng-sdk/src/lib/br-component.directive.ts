@@ -1,5 +1,5 @@
 /*
- * Copyright 2020-2022 Bloomreach
+ * Copyright 2020-2023 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ import {
 } from '@angular/core';
 import { isComponent, Component, Page } from '@bloomreach/spa-sdk';
 import { BrNodeDirective } from './br-node.directive';
-import { BrPageComponent } from './br-page/br-page.component';
+import { BrPageService } from './br-page/br-page.service';
 
 /**
  * The template context holding the current brXM Component.
@@ -66,7 +66,7 @@ export class BrComponentDirective implements OnChanges, OnDestroy, OnInit {
     private container: ViewContainerRef,
     @Optional() private template?: TemplateRef<BrComponentContext>,
     @Optional() private node?: BrNodeDirective,
-    @Optional() private page?: BrPageComponent,
+    @Optional() private page?: BrPageService,
   ) {}
 
   ngOnChanges(changes: SimpleChanges): void {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2020-2022 Bloomreach
+ * Copyright 2020-2023 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ import {
 } from '@angular/core';
 import { Component, MetaCollection } from '@bloomreach/spa-sdk';
 import { BrNodeDirective } from './br-node.directive';
-import { BrPageComponent } from './br-page/br-page.component';
+import { BrPageService } from './br-page/br-page.service';
 import { BrProps } from './br-props.model';
 
 @Directive({
@@ -44,7 +44,7 @@ export class BrNodeComponentDirective<T extends Component> implements OnChanges,
     private injector: Injector,
     private componentFactoryResolver: ComponentFactoryResolver,
     private node: BrNodeDirective,
-    protected page: BrPageComponent,
+    protected page: BrPageService,
   ) {}
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
