@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import { mocked } from 'ts-jest/utils';
 import { Component, Input, TemplateRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { BehaviorSubject } from 'rxjs';
@@ -86,7 +85,7 @@ describe('BrComponentDirective', () => {
 
   describe('ngOnDestroy', () => {
     it('should clear the container', () => {
-      mocked(isComponent).mockReturnValue(true);
+      jest.mocked(isComponent).mockReturnValue(true);
       fixture.componentInstance.component = component;
       fixture.detectChanges();
       fixture.destroy();
@@ -97,7 +96,7 @@ describe('BrComponentDirective', () => {
 
   describe('ngOnChanges', () => {
     it('should rerender a component on change', () => {
-      mocked(isComponent).mockReturnValue(true);
+      jest.mocked(isComponent).mockReturnValue(true);
       fixture.componentInstance.component = component;
       fixture.detectChanges();
 
@@ -117,7 +116,7 @@ describe('BrComponentDirective', () => {
     });
 
     it('should render a component', () => {
-      mocked(isComponent).mockReturnValue(true);
+      jest.mocked(isComponent).mockReturnValue(true);
       fixture.componentInstance.component = component;
       fixture.detectChanges();
 

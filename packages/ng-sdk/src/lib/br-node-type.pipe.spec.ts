@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import { mocked } from 'ts-jest/utils';
 import { isContainer, isContainerItem, Component, Container, ContainerItem } from '@bloomreach/spa-sdk';
 import { BrNodeTypePipe } from './br-node-type.pipe';
 
@@ -29,13 +28,13 @@ describe('BrNodeTypePipe', () => {
     const pipe = new BrNodeTypePipe();
 
     it('should return "container-item" for the container item node', () => {
-      mocked(isContainerItem).mockReturnValueOnce(true);
+      jest.mocked(isContainerItem).mockReturnValueOnce(true);
 
       expect(pipe.transform({} as ContainerItem)).toBe('container-item');
     });
 
     it('should return "container" for the container node', () => {
-      mocked(isContainer).mockReturnValueOnce(true);
+      jest.mocked(isContainer).mockReturnValueOnce(true);
 
       expect(pipe.transform({} as Container)).toBe('container');
     });

@@ -5,8 +5,10 @@
     "emitDecoratorMetadata": true,
     "esModuleInterop": true,
     "outDir": "./dist/out-tsc/spec",
+    "target": "es2015",
     "types": [
-      "jest"
+      "jest",
+      "node"
     ]
   },
   "include": [

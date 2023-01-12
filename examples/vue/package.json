@@ -40,11 +40,16 @@
     "@vue/eslint-config-prettier": "6.0.0",
     "@vue/eslint-config-typescript": "7.0.0",
     "@vue/test-utils": "1.2.2",
+    "css-loader": "5.2.7",
     "eslint": "7.32.0",
     "eslint-plugin-prettier": "3.4.0",
+    "postcss-loader": "4.3.0",
     "prettier": "2.3.2",
+    "sass-loader": "10.4.1",
     "typescript": "4.1.6",
-    "vue-template-compiler": "2.6.14"
+    "vue-server-renderer": "2.6.14",
+    "vue-template-compiler": "2.6.14",
+    "webpack": "4.46.0"
   },
   "jest": {
     "preset": "@vue/cli-plugin-unit-jest/presets/typescript-and-babel"

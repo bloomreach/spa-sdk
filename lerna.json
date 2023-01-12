@@ -9,6 +9,5 @@
     "version": {
       "message": "TRIVIAL Bump versions to %v"
     }
-  },
-  "useWorkspaces": true
+  }
 }

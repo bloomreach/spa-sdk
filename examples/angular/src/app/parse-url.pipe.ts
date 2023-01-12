@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Bloomreach
+ * Copyright 2020-2023 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
  */
 
 import { Pipe, PipeTransform } from '@angular/core';
+import { Params } from '@angular/router';
 
 declare global {
   interface URLSearchParams {
@@ -24,13 +25,8 @@ declare global {
 
 @Pipe({ name: 'parseUrl' })
 export class ParseUrlPipe implements PipeTransform {
-  transform(url: string, property: keyof URL): string | (() => string) | Record<string, string> {
-    const value = new URL(url, 'http://example.com')[property];
-
-    if (value instanceof URLSearchParams) {
-      return Object.fromEntries([...value.entries()]);
-    }
-
-    return value;
+  transform(url: string): URL & { queryParams: Params } {
+    const value = new URL(url, 'https://example.com');
+    return { ...value, ...{ queryParams: Object.fromEntries([...value.searchParams.entries()]) } };
   }
 }

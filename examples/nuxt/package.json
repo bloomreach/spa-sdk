@@ -41,6 +41,10 @@
   "eslintConfig": {
     "extends": [
       "@bloomreach/eslint-config-nuxt"
-    ]
+    ],
+    "rules": {
+      "vue/html-self-closing": "off",
+      "vue/singleline-html-element-content-newline": "off"
+    }
   }
 }

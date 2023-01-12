@@ -18,7 +18,6 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { Component, NO_ERRORS_SCHEMA, OnInit } from '@angular/core';
 import { ComponentFixture, fakeAsync, flush, TestBed } from '@angular/core/testing';
 import { Component as BrComponent, initialize, Page } from '@bloomreach/spa-sdk';
-import { mocked } from 'ts-jest/utils';
 import { BrSdkModule } from '../br-sdk.module';
 import { BrPageComponent } from './br-page.component';
 
@@ -101,7 +100,7 @@ describe('BrPageComponent', () => {
       schemas: [NO_ERRORS_SCHEMA],
     });
 
-    mocked(initialize).mockImplementation(
+    jest.mocked(initialize).mockImplementation(
       () => new Promise((resolve) => {
         setTimeout(() => {
           resolve(page);

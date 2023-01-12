@@ -1,5 +1,5 @@
 <!--
-  Copyright 2020 Bloomreach
+  Copyright 2020-2023 Bloomreach
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -38,8 +38,8 @@
     <a
       *ngIf="item.getLink() | isInternalLink"
       class="nav-link text-capitalize"
-      [routerLink]="item.getUrl() | parseUrl: 'pathname'"
-      [queryParams]="item.getUrl() | parseUrl: 'searchParams'"
+      [routerLink]="(item.getUrl()! | parseUrl).pathname"
+      [queryParams]="(item.getUrl()! | parseUrl).queryParams"
     >
       {{ item.getName() }}
     </a>

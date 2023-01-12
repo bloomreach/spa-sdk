@@ -13,12 +13,12 @@
     "resolveJsonModule": true,
     "sourceMap": true,
     "strict": true,
-    "target": "es6"
+    "target": "es6",
+    "useDefineForClassFields": false
   },
   "exclude": [
     "dist",
-    "node_modules",
-    "src/**/*.spec.tsx"
+    "node_modules"
   ],
   "include": [
     "src"

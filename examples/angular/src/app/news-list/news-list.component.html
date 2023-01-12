@@ -1,5 +1,5 @@
 <!--
-  Copyright 2020 Bloomreach
+  Copyright 2020-2023 Bloomreach
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 <ng-template [ngIf]="pagination">
   <br-news-item
     *ngFor="let reference of pagination.items"
-    [item]="page.getContent(reference)"
+    [item]="page.getContent(reference)!"
   ></br-news-item>
 
   <div *ngIf="page.isPreview()" class="has-edit-button float-right">

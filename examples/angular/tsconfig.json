@@ -9,8 +9,7 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "lib": [
-      "es2019",
-      "es2018",
+      "es2020",
       "dom"
     ],
     "module": "es2020",
@@ -18,11 +17,12 @@
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "strict": true,
-    "target": "es2015"
+    "target": "es2020"
   },
   "angularCompilerOptions": {
-    "enableIvy": false,
-    "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
   }
 }

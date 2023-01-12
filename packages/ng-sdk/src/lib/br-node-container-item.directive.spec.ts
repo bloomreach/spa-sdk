@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import { mocked } from 'ts-jest/utils';
 import { Component, Input, NgModule } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { BehaviorSubject } from 'rxjs';
@@ -99,7 +98,7 @@ describe('BrNodeContainerItemDirective', () => {
     });
 
     it('should render undefined container item', () => {
-      mocked(containerItem.getType).mockReturnValueOnce('undefined');
+      jest.mocked(containerItem.getType).mockReturnValueOnce('undefined');
       component.containerItem = { ...containerItem };
       fixture.detectChanges();
 
@@ -108,7 +107,7 @@ describe('BrNodeContainerItemDirective', () => {
 
     it('should override undefined container item', () => {
       page.mapping[TYPE_CONTAINER_ITEM_UNDEFINED as any] = ContainerItemTestComponent;
-      mocked(containerItem.getType).mockReturnValueOnce('undefined');
+      jest.mocked(containerItem.getType).mockReturnValueOnce('undefined');
       component.containerItem = { ...containerItem };
       fixture.detectChanges();
 
@@ -118,8 +117,8 @@ describe('BrNodeContainerItemDirective', () => {
 
   describe('ngOnChanges', () => {
     it('should react on update evants', () => {
-      mocked(containerItem.getModels).mockReturnValue({ data: 'updated' });
-      const [[, onUpdate]] = mocked(containerItem.on).mock.calls;
+      jest.mocked(containerItem.getModels).mockReturnValue({ data: 'updated' });
+      const [[, onUpdate]] = jest.mocked(containerItem.on).mock.calls;
       onUpdate({});
       fixture.detectChanges();
 
@@ -128,7 +127,7 @@ describe('BrNodeContainerItemDirective', () => {
     });
 
     it('should unsubscribe from the old container item', () => {
-      const [[, onUpdate]] = mocked(containerItem.on).mock.calls;
+      const [[, onUpdate]] = jest.mocked(containerItem.on).mock.calls;
       component.containerItem = { ...containerItem };
       fixture.detectChanges();
 
@@ -138,7 +137,7 @@ describe('BrNodeContainerItemDirective', () => {
 
   describe('ngOnDestroy', () => {
     it('should stop reacting on update events after destruction', () => {
-      const [[, onUpdate]] = mocked(containerItem.on).mock.calls;
+      const [[, onUpdate]] = jest.mocked(containerItem.on).mock.calls;
       fixture.destroy();
 
       expect(containerItem.off).toBeCalledWith('update', onUpdate);

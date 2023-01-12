@@ -13,11 +13,10 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "inlineSources": true,
-    "target": "es2015",
+    "target": "es2020",
     "types": [],
     "lib": [
-      "es2018",
-      "es2019.array",
+      "es2020",
       "dom"
     ]
   },

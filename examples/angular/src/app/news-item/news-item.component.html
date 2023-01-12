@@ -1,5 +1,5 @@
 <!--
-  Copyright 2020 Bloomreach
+  Copyright 2020-2023 Bloomreach
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -20,8 +20,8 @@
   <div class="card-body">
     <h2 *ngIf="data?.title" class="card-title">
       <a
-        [routerLink]="item.getUrl()! | parseUrl: 'pathname'"
-        [queryParams]="item.getUrl()! | parseUrl: 'searchParams'"
+        [routerLink]="(item.getUrl()! | parseUrl).pathname"
+        [queryParams]="(item.getUrl()! | parseUrl).queryParams"
       >
         {{ data!.title }}
       </a>
