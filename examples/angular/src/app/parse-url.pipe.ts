@@ -23,10 +23,40 @@ declare global {
   }
 }
 
+export interface ParseUrlProperties {
+  hash: string;
+  host: string;
+  hostname: string;
+  href: string;
+  origin: string;
+  password: string;
+  pathname: string;
+  port: string;
+  protocol: string;
+  queryParams: Params;
+  search: string;
+  searchParams: URLSearchParams;
+  username: string;
+}
+
 @Pipe({ name: 'parseUrl' })
 export class ParseUrlPipe implements PipeTransform {
-  transform(url: string): URL & { queryParams: Params } {
+  transform(url: string): ParseUrlProperties {
     const value = new URL(url, 'https://example.com');
-    return { ...value, ...{ queryParams: Object.fromEntries([...value.searchParams.entries()]) } };
+    return {
+      hash: value.hash,
+      host: value.host,
+      hostname: value.hostname,
+      href: value.href,
+      origin: value.origin,
+      password: value.password,
+      pathname: value.pathname,
+      port: value.port,
+      protocol: value.protocol,
+      queryParams: Object.fromEntries([...value.searchParams.entries()]),
+      search: value.search,
+      searchParams: value.searchParams,
+      username: value.username,
+    };
   }
 }
