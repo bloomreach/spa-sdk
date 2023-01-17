@@ -18,6 +18,7 @@ import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import {
   AfterContentChecked,
+  AfterContentInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -52,7 +53,7 @@ import { BrNodeContext, BrPageService } from './br-page.service';
   selector: 'br-page',
   templateUrl: './br-page.component.html',
 })
-export class BrPageComponent implements AfterContentChecked, OnChanges, OnDestroy {
+export class BrPageComponent implements AfterContentChecked, AfterContentInit, OnChanges, OnDestroy {
   /**
    * The configuration of the SPA SDK.
    * @see https://www.npmjs.com/package/@bloomreach/spa-sdk#configuration
@@ -118,14 +119,6 @@ export class BrPageComponent implements AfterContentChecked, OnChanges, OnDestro
         filter(isPage),
       )
       .subscribe((page) => this.stateKey && this.transferState?.set(this.stateKey, page.toJSON()));
-
-    if (this.mapping) {
-      this.pageService.mapping = this.mapping;
-    }
-
-    if (this.node) {
-      this.pageService.node = this.node;
-    }
   }
 
   get context(): BrNodeContext {
@@ -154,10 +147,6 @@ export class BrPageComponent implements AfterContentChecked, OnChanges, OnDestro
       this.pageService.mapping = this.mapping;
     }
 
-    if (changes.node?.currentValue !== this.pageService.node) {
-      this.pageService.node = this.node;
-    }
-
     if (changes.stateKey?.previousValue && isPlatformServer(this.platform)) {
       if (changes.stateKey.currentValue && this.transferState?.hasKey(changes.stateKey.previousValue)) {
         this.transferState?.set(
@@ -172,6 +161,10 @@ export class BrPageComponent implements AfterContentChecked, OnChanges, OnDestro
 
   ngAfterContentChecked(): void {
     this.afterContentChecked$.next();
+  }
+
+  ngAfterContentInit(): void {
+    this.pageService.node = this.node;
   }
 
   ngOnDestroy(): void {
@@ -189,7 +182,7 @@ export class BrPageComponent implements AfterContentChecked, OnChanges, OnDestro
     const configuration = { httpClient: this.request, ...this.configuration } as Configuration;
     const observable = page ? from(initialize(configuration, page)) : from(initialize(configuration));
 
-    observable.subscribe((state) => {
+    observable.pipe(take(1)).subscribe((state) => {
       this.state.next(state);
       this.changeDetectorRef.detectChanges();
     });
