@@ -50,13 +50,6 @@ import { BrPageComponent } from './br-page/br-page.component';
     BrNodeTypePipe,
     BrPageComponent,
   ],
-  entryComponents: [
-    BrContainerBoxComponent,
-    BrContainerInlineComponent,
-    BrContainerOrderedListComponent,
-    BrContainerUnorderedListComponent,
-    BrContainerItemUndefinedComponent,
-  ],
   exports: [BrComponentDirective, BrManageContentButtonDirective, BrManageMenuButtonDirective, BrPageComponent],
   imports: [CommonModule, HttpClientModule],
 })

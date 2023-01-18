@@ -2,10 +2,7 @@
   "$schema": "./node_modules/ng-packagr/ng-package.schema.json",
   "dest": "./dist",
   "lib": {
-    "entryFile": "src/public-api.ts",
-    "umdModuleIds": {
-      "@bloomreach/spa-sdk": "BloomreachSpaSdk"
-    }
+    "entryFile": "src/public-api.ts"
   },
   "allowedNonPeerDependencies": [
     "@bloomreach/spa-sdk"
