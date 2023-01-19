@@ -4,7 +4,6 @@ exports[`BrNodeComponentDirective ngOnChanges should render a mapped component 1
 <div
   id="root7"
 >
-  
   <br-component-test>
     <span>
       Component: something
@@ -13,6 +12,7 @@ exports[`BrNodeComponentDirective ngOnChanges should render a mapped component 1
       Page: Some Page
     </span>
   </br-component-test>
+  
 </div>
 `;
 
@@ -20,7 +20,6 @@ exports[`BrNodeComponentDirective ngOnChanges should render a node template 1`] 
 <div
   id="root1"
 >
-  
   <span
     class="head"
   >
@@ -34,6 +33,7 @@ exports[`BrNodeComponentDirective ngOnChanges should render a node template 1`] 
   >
     Page: Some Page
   </span>
+  
 </div>
 `;
 
@@ -41,7 +41,6 @@ exports[`BrNodeComponentDirective ngOnChanges should render children when there 
 <div
   id="root3"
 >
-  
   <span
     class="head"
   >
@@ -68,6 +67,7 @@ exports[`BrNodeComponentDirective ngOnChanges should render children when there 
   >
     Page: Some Page
   </span>
+  
 </div>
 `;
 

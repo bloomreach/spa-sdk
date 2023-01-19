@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./dist/out-tsc/lib",
+    "target": "es2020",
+    "declaration": true,
+    "declarationMap": true,
+    "inlineSources": true,
+    "types": [
+      "node"
+    ]
+  },
+  "exclude": [
+    "**/*.spec.ts"
+  ]
+}

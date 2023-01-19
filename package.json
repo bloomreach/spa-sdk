@@ -9,8 +9,8 @@
     "sdk"
   ],
   "engines": {
-    "node": "14.x.x || 16.x.x",
-    "npm": "8"
+    "node": "^14.0.0 || ^16.0.0",
+    "npm": "^8.0.0 || ^9.0.0"
   },
   "workspaces": [
     "packages/*",

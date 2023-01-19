@@ -4,6 +4,9 @@
     "allowSyntheticDefaultImports": true,
     "baseUrl": "./src",
     "outDir": "./dist/out-tsc",
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "strict": true,
     "declaration": false,
@@ -12,25 +15,16 @@
     "module": "es2020",
     "moduleResolution": "node",
     "importHelpers": true,
-    "inlineSources": true,
     "target": "es2020",
-    "types": [],
     "lib": [
       "es2020",
       "dom"
     ]
   },
   "angularCompilerOptions": {
-    "compilationMode": "partial",
-    "skipTemplateCodegen": true,
+    "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
-    "strictMetadataEmit": true,
-    "enableResourceInlining": true
-  },
-  "include": [
-    "src"
-  ],
-  "exclude": [
-    "**/*.spec.ts"
-  ]
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
 }

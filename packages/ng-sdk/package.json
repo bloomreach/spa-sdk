@@ -20,33 +20,24 @@
   },
   "scripts": {
     "build": "ng build",
-    "dev": "npm run build -- --watch",
+    "dev": "ng build --watch --configuration development",
     "lint": "ng lint",
     "ng": "ng",
     "prepack": "$npm_execpath run build && rm dist/package.json dist/README.md",
-    "test": "ng test --pass-with-no-tests"
+    "test": "ng test"
   },
-  "esm2020": "dist/esm2020/bloomreach-ng-sdk.mjs",
-  "fesm2015": "dist/fesm2015/bloomreach-ng-sdk.mjs",
-  "fesm2020": "dist/fesm2020/bloomreach-ng-sdk.mjs",
-  "typings": "dist/bloomreach-ng-sdk.d.ts",
-  "sideEffects": false,
-  "files": [
-    "dist/*/**",
-    "dist/**/*.d.ts"
-  ],
   "dependencies": {
     "@bloomreach/spa-sdk": "18.0.1",
-    "tslib": "2.3.0"
+    "tslib": "^2.3.0"
   },
   "peerDependencies": {
-    "@angular/common": "^13.0.0",
-    "@angular/core": "^13.0.0",
-    "@angular/platform-browser": "^13.0.0",
-    "rxjs": "^6.6"
+    "@angular/common": "^12.0.0 || ^13.0.0",
+    "@angular/core": "^12.0.0 || ^13.0.0",
+    "@angular/platform-browser": "^12.0.0 || ^13.0.0",
+    "rxjs": "^6.6.7"
   },
   "devDependencies": {
-    "@angular-builders/jest": "12.1.2",
+    "@angular-builders/jest": "13.0.4",
     "@angular-devkit/build-angular": "13.3.10",
     "@angular-eslint/builder": "12.7.0",
     "@angular-eslint/eslint-plugin": "12.7.0",
@@ -65,7 +56,7 @@
     "@types/node": "16.18.11",
     "jest": "27.5.1",
     "jest-environment-jsdom": "27.5.1",
-    "jest-junit": "12.3.0",
+    "jest-junit": "13.2.0",
     "ng-packagr": "13.3.1",
     "rxjs": "6.6.7",
     "ts-node": "10.1.0",
