@@ -47,7 +47,6 @@ import { NewsItemComponent } from './news-item/news-item.component';
     NewsListComponent,
     ParseUrlPipe,
   ],
-  entryComponents: [BannerComponent, CookieConsentComponent, ContentComponent, MenuComponent, NewsListComponent],
   imports: [
     BrowserModule.withServerTransition({ appId: 'brxm-angular-spa' }),
     BrowserTransferStateModule,

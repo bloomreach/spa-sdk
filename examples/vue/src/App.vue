@@ -55,12 +55,12 @@ import { Configuration } from '@bloomreach/spa-sdk';
 import { Component, Vue, Watch } from 'vue-property-decorator';
 import { Route } from 'vue-router';
 
+import { buildConfiguration } from '@/utils/buildConfiguration';
 import Banner from './components/BrBanner.vue';
 import Content from './components/BrContent.vue';
 import Menu from './components/BrMenu.vue';
 import NewsList from './components/BrNewsList.vue';
 import CookieConsent from './components/BrCookieConsent.vue';
-import { buildConfiguration } from '@/utils/buildConfiguration';
 
 @Component({
   components: { 'br-cookie-consent': CookieConsent },

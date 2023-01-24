@@ -16,12 +16,12 @@
 
 import { Component, InjectionToken, Inject, OnInit, Optional } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { BrPageComponent } from '@bloomreach/ng-sdk';
+import { Page } from '@bloomreach/spa-sdk';
 import { REQUEST } from '@nguniversal/express-engine/tokens';
 import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { Request } from 'express';
-import { BrPageComponent } from '@bloomreach/ng-sdk';
-import { Page } from '@bloomreach/spa-sdk';
 
 import { BannerComponent } from '../banner/banner.component';
 import { ContentComponent } from '../content/content.component';

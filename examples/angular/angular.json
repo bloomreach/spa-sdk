@@ -16,7 +16,6 @@
             "outputPath": "dist/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "preserveSymlinks": true,
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
@@ -89,7 +88,6 @@
         "test": {
           "builder": "@angular-builders/jest:run",
           "options": {
-            "preserveSymlinks": true,
             "tsConfig": "tsconfig.spec.json"
           }
         },
@@ -107,7 +105,6 @@
           "options": {
             "outputPath": "dist/server",
             "main": "server.ts",
-            "preserveSymlinks": true,
             "tsConfig": "tsconfig.server.json",
             "sourceMap": true,
             "optimization": false

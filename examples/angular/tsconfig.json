@@ -15,6 +15,11 @@
     "module": "es2020",
     "moduleResolution": "node",
     "outDir": "./dist/out-tsc",
+    "paths": {
+      "@bloomreach/ng-sdk": [
+        "../../packages/ng-sdk/dist"
+      ]
+    },
     "sourceMap": true,
     "strict": true,
     "target": "es2020"
