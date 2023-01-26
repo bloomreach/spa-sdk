@@ -16,9 +16,9 @@
 
 import {
   ChangeDetectorRef,
-  ComponentFactoryResolver,
   Directive,
   Injector,
+  Input,
   OnChanges,
   OnDestroy,
   SimpleChanges,
@@ -34,24 +34,21 @@ import { BrProps } from './br-props.model';
 
 @Directive({
   selector: '[brNodeContainerItem]',
-  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['component:brNodeContainerItem'],
 })
-export class BrNodeContainerItemDirective
-  extends BrNodeComponentDirective<ContainerItem>
-  implements OnChanges, OnDestroy {
+export class BrNodeContainerItemDirective extends BrNodeComponentDirective implements OnChanges, OnDestroy {
   constructor(
     container: ViewContainerRef,
     injector: Injector,
-    componentFactoryResolver: ComponentFactoryResolver,
     node: BrNodeDirective,
     page: BrPageService,
     private changeDetectorRef: ChangeDetectorRef,
   ) {
-    super(container, injector, componentFactoryResolver, node, page);
+    super(container, injector, node, page);
 
     this.onUpdate = this.onUpdate.bind(this);
   }
+
+  @Input('brNodeContainerItem') component?: ContainerItem;
 
   ngOnChanges(changes: SimpleChanges): void {
     changes.component?.previousValue?.off('update', this.onUpdate);

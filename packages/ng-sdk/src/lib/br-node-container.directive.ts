@@ -1,5 +1,5 @@
 /*
- * Copyright 2020-2022 Bloomreach
+ * Copyright 2020-2023 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { Directive, Type } from '@angular/core';
+import { Directive, Input, Type } from '@angular/core';
 import {
   Container,
   TYPE_CONTAINER_INLINE,
@@ -31,10 +31,10 @@ import { BrProps } from './br-props.model';
 
 @Directive({
   selector: '[brNodeContainer]',
-  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['component:brNodeContainer'],
 })
-export class BrNodeContainerDirective extends BrNodeComponentDirective<Container> {
+export class BrNodeContainerDirective extends BrNodeComponentDirective {
+  @Input('brNodeContainer') component?: Container;
+
   protected getMapping(): Type<BrProps> | undefined {
     const type = this.component?.getType();
 

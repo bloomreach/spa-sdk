@@ -115,7 +115,7 @@ describe('BrNodeContainerItemDirective', () => {
   });
 
   describe('ngOnChanges', () => {
-    it('should react on update evants', () => {
+    it('should react on update events', () => {
       jest.mocked(containerItem.getModels).mockReturnValue({ data: 'updated' });
       const [[, onUpdate]] = jest.mocked(containerItem.on).mock.calls;
       onUpdate({});

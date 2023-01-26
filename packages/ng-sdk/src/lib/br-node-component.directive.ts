@@ -14,16 +14,7 @@
  * limitations under the License.
  */
 
-import {
-  ComponentFactoryResolver,
-  Directive,
-  Injector,
-  OnChanges,
-  OnDestroy,
-  SimpleChanges,
-  Type,
-  ViewContainerRef,
-} from '@angular/core';
+import { Directive, Injector, Input, OnChanges, OnDestroy, SimpleChanges, Type, ViewContainerRef } from '@angular/core';
 import { Component, MetaCollection } from '@bloomreach/spa-sdk';
 import { BrNodeDirective } from './br-node.directive';
 import { BrPageService } from './br-page/br-page.service';
@@ -31,18 +22,15 @@ import { BrProps } from './br-props.model';
 
 @Directive({
   selector: '[brNodeComponent]',
-  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['component:brNodeComponent'],
 })
-export class BrNodeComponentDirective<T extends Component> implements OnChanges, OnDestroy {
-  component?: T;
+export class BrNodeComponentDirective implements OnChanges, OnDestroy {
+  @Input('brNodeComponent') component?: Component;
 
   private clear?: ReturnType<MetaCollection['render']>;
 
   constructor(
     private container: ViewContainerRef,
     private injector: Injector,
-    private componentFactoryResolver: ComponentFactoryResolver,
     private node: BrNodeDirective,
     protected page: BrPageService,
   ) {}
@@ -107,8 +95,7 @@ export class BrNodeComponentDirective<T extends Component> implements OnChanges,
   }
 
   private renderMapping(component: Type<BrProps>): { head: any; tail: any } {
-    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(component);
-    const componentRef = this.container.createComponent(componentFactory, undefined, this.injector);
+    const componentRef = this.container.createComponent(component);
 
     componentRef.instance.component = this.component;
     componentRef.instance.page = this.page.state.getValue();

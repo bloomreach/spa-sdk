@@ -35,7 +35,7 @@ exports[`BrNodeContainerItemDirective getMapping should render undefined contain
 </div>
 `;
 
-exports[`BrNodeContainerItemDirective ngOnChanges should react on update evants 1`] = `
+exports[`BrNodeContainerItemDirective ngOnChanges should react on update events 1`] = `
 <div
   id="root3"
 >

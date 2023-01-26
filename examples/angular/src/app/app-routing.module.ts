@@ -21,7 +21,7 @@ import { IndexComponent } from './index/index.component';
 const routes: Routes = [{ path: '**', component: IndexComponent }];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { initialNavigation: 'enabled' })],
+  imports: [RouterModule.forRoot(routes, { initialNavigation: 'enabledBlocking' })],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
