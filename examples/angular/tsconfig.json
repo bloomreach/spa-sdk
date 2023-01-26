@@ -9,10 +9,10 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "lib": [
-      "es2020",
+      "esnext",
       "dom"
     ],
-    "module": "es2020",
+    "module": "esnext",
     "moduleResolution": "node",
     "outDir": "./dist/out-tsc",
     "paths": {
@@ -22,7 +22,8 @@
     },
     "sourceMap": true,
     "strict": true,
-    "target": "es2020"
+    "target": "esnext",
+    "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

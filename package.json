@@ -46,25 +46,27 @@
     "@angular-devkit/build-angular": "15.1.3",
     "@angular/compiler@>=12.0.0 <13.0.0": "15.1.2",
     "@angular-eslint/builder@15.2.0": {
-      "typescript": "4.6.4"
+      "typescript": "4.9.4"
     },
     "@angular-eslint/eslint-plugin@15.2.0": {
-      "typescript": "4.6.4"
+      "typescript": "4.9.4"
     },
     "@angular-eslint/eslint-plugin-template@15.2.0": {
-      "typescript": "4.6.4"
+      "typescript": "4.9.4"
     },
     "@angular-eslint/template-parser@15.2.0": {
-      "typescript": "4.6.4"
+      "typescript": "4.9.4"
     },
     "@bloomreach/eslint-config-angular@12.1.4": {
-      "typescript": "4.6.4"
+      "@typescript-eslint/eslint-plugin": "5.49.0",
+      "@typescript-eslint/parser": "5.49.0",
+      "typescript": "4.9.4"
     },
     "@oclif/color": ">=0.1.0",
-    "eslint@>=1.6.0 <7.0.0": "7.32.0",
     "@vue/cli-plugin-typescript": {
       "typescript": "4.3.5"
     },
+    "eslint@>=1.6.0 <7.0.0": "7.32.0",
     "rollup-plugin-typescript2@0.30.0": {
       "typescript": "4.3.5"
     }

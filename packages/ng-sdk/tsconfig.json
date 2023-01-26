@@ -12,12 +12,12 @@
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
-    "module": "ES2022",
+    "module": "esnext",
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "ES2022",
+    "target": "esnext",
     "lib": [
-      "ES2022",
+      "esnext",
       "dom"
     ],
     "useDefineForClassFields": false
