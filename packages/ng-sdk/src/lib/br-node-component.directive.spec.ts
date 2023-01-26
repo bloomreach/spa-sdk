@@ -38,7 +38,6 @@ class ComponentTestComponent {
 
 @NgModule({
   declarations: [ComponentTestComponent],
-  entryComponents: [ComponentTestComponent],
 })
 class TestModule {}
 

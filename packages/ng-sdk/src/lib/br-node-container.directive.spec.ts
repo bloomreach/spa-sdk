@@ -52,13 +52,6 @@ class ContainerTestComponent {}
     BrContainerUnorderedListComponent,
     ContainerTestComponent,
   ],
-  entryComponents: [
-    BrContainerBoxComponent,
-    BrContainerInlineComponent,
-    BrContainerOrderedListComponent,
-    BrContainerUnorderedListComponent,
-    ContainerTestComponent,
-  ],
 })
 class TestModule {}
 

@@ -36,7 +36,6 @@ class ContainerItemTestComponent {}
 
 @NgModule({
   declarations: [BrContainerItemUndefinedComponent, ContainerItemTestComponent],
-  entryComponents: [BrContainerItemUndefinedComponent, ContainerItemTestComponent],
 })
 class TestModule {}
 

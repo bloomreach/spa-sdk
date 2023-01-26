@@ -41,6 +41,5 @@
         }
       }
     }
-  },
-  "defaultProject": "ng-sdk"
+  }
 }
