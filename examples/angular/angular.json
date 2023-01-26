@@ -151,6 +151,6 @@
           }
         }
       }
-    }},
-  "defaultProject": "example-angular"
+    }
+  }
 }
