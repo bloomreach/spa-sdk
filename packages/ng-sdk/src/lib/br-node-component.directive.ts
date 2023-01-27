@@ -63,13 +63,11 @@ export class BrNodeComponentDirective implements OnChanges, OnDestroy {
   }
 
   private renderTemplate(): { head: any; tail: any } {
-    // tslint:disable: no-non-null-assertion
     const embeddedViewRef = this.container.createEmbeddedView(this.node.template!, {
       $implicit: this.component,
       component: this.component,
       page: this.page.state.getValue(),
     });
-    // tslint:enable: no-non-null-assertion
     const [head] = embeddedViewRef.rootNodes;
     const [tail] = embeddedViewRef.rootNodes.slice(-1);
 
