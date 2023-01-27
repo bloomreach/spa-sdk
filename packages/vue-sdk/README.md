@@ -494,7 +494,7 @@ See detailed guide how to setup it in framework specific examples, [nuxtjs](http
 
 ## License
 
-Published under [Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0)
+Published under [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0)
 license.
 
 ## Reference

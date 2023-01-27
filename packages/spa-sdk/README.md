@@ -94,7 +94,7 @@ The same principle may apply in other frameworks. e.g, `v-html` in Vue.js or `[i
 
 ## License
 
-Published under [Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0) license.
+Published under [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) license.
 
 ## Reference
 
