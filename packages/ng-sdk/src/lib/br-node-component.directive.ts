@@ -80,7 +80,8 @@ export class BrNodeComponentDirective implements OnChanges, OnDestroy {
     const nodes = this.component
       ?.getChildren()
       ?.map((component) => this.container.createEmbeddedView(
-        this.page.node, {
+        this.page.node,
+        {
           component,
           $implicit: component,
           page: this.page.state.getValue()!,

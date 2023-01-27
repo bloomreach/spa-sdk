@@ -89,15 +89,14 @@ export class BrComponentDirective implements OnChanges, OnDestroy, OnInit {
       return;
     }
 
-    // tslint:disable: no-non-null-assertion
-    this.components?.forEach((component) => this.container.createEmbeddedView(
-      this.page!.node, {
+    this.components?.forEach((component) => {
+      this.container.createEmbeddedView(this.page!.node, {
         component,
         page,
         $implicit: component,
         template: this.template,
-      },
-    ));
+      });
+    });
   }
 
   private get context(): Component | undefined {

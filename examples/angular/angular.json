@@ -20,7 +20,9 @@
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "allowedCommonJsDependencies": [
-              "@bloomreach/spa-sdk"
+              "cookie",
+              "emittery",
+              "inversify"
             ],
             "assets": [
               "src/favicon.ico",

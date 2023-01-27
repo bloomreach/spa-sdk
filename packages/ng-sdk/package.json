@@ -51,7 +51,7 @@
     "@angular/language-service": "15.1.2",
     "@angular/platform-browser": "15.1.2",
     "@angular/platform-browser-dynamic": "15.1.2",
-    "@bloomreach/eslint-config-angular": "12.1.4",
+    "@bloomreach/eslint-config-angular": "15.0.0",
     "@types/jest": "28.1.8",
     "@types/node": "16.18.11",
     "jest": "28.1.3",
