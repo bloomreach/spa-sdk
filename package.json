@@ -47,10 +47,7 @@
     "@vue/cli-plugin-typescript": {
       "typescript": "4.3.5"
     },
-    "eslint@>=1.6.0 <7.0.0": "7.32.0",
-    "rollup-plugin-typescript2": {
-      "typescript": "4.3.5"
-    }
+    "eslint@>=1.6.0 <7.0.0": "7.32.0"
   },
   "devDependencies": {
     "@lerna-lite/cli": "1.14.2",

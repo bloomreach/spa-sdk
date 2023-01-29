@@ -105,7 +105,7 @@ describe('Spa', () => {
 
       page.getComponent.mockReturnValue(root);
       page.isPreview.mockReturnValue(true);
-      spyOn(eventBus, 'emit');
+      jest.spyOn(eventBus, 'emit');
       await spa.initialize(config.request.path);
 
       jest.clearAllMocks();
@@ -141,7 +141,7 @@ describe('Spa', () => {
     beforeEach(() => spa.initialize(config.request.path));
 
     it('should remove all page events', async () => {
-      spyOn(eventBus, 'clearListeners');
+      jest.spyOn(eventBus, 'clearListeners');
 
       await spa.destroy();
 

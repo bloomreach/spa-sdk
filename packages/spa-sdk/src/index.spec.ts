@@ -21,10 +21,13 @@ import {
   META_POSITION_BEGIN,
   META_POSITION_END,
   Page,
+  PageModel,
   TYPE_CONTAINER_BOX,
+  TYPE_LINK_EXTERNAL,
+  TYPE_LINK_INTERNAL,
+  TYPE_LINK_RESOURCE,
 } from './index';
 import model from './index.fixture.json';
-import { PageModel, TYPE_LINK_EXTERNAL, TYPE_LINK_INTERNAL, TYPE_LINK_RESOURCE } from './page';
 import { HttpRequest } from './spa/http';
 
 describe('initialize', () => {
@@ -215,7 +218,7 @@ describe('initialize', () => {
   // });
 
   it('should use an origin from the endpoint', async () => {
-    const postMessageSpy = spyOn(window.parent, 'postMessage').and.callThrough();
+    const postMessageSpy = jest.spyOn(window.parent, 'postMessage');
     await defaultPage.sync();
 
     expect(postMessageSpy).toBeCalledWith(expect.anything(), 'http://localhost:8080');
@@ -227,9 +230,9 @@ describe('initialize', () => {
       window,
       endpoint: 'http://localhost:8080/site/my-spa/resourceapi',
       origin: 'http://localhost:12345',
-      request: { path: '/?token=something' },
+      path: '/?token=something',
     });
-    const postMessageSpy = spyOn(window.parent, 'postMessage').and.callThrough();
+    const postMessageSpy = jest.spyOn(window.parent, 'postMessage');
     await page.sync();
     destroy(page);
 
@@ -246,7 +249,7 @@ describe('initialize', () => {
       window,
       endpoint: 'http://localhost:8080/site/my-spa/resourceapi',
       origin: 'http://localhost:12345',
-      request: { path: '/?btm_campaign_id=12345&btm_segment=silver' },
+      path: '/?btm_campaign_id=12345&btm_segment=silver',
     });
 
     expect(httpClient).toBeCalledWith({
@@ -360,7 +363,6 @@ describe('initialize', () => {
   it('should omit campaign variant id if url query params contain ttl equal zero', async () => {
     const request: HttpRequest = {
       headers: undefined,
-      path: '/?btm_campaign_id=12345&btm_segment=silver&btm_ttl=0',
     };
 
     const page = await initialize({
@@ -368,6 +370,7 @@ describe('initialize', () => {
       request,
       endpoint: 'http://localhost:8080/site/my-spa/resourceapi',
       origin: 'http://localhost:12345',
+      path: '/?btm_campaign_id=12345&btm_segment=silver&btm_ttl=0',
     });
 
     expect(httpClient).toBeCalledWith({

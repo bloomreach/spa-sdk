@@ -79,7 +79,7 @@ describe('Cms', () => {
   describe('onRenderComponent', () => {
     it('should emit cms.update on render component call', () => {
       cms.initialize({ window }, scope);
-      spyOn(eventBus, 'emit');
+      jest.spyOn(eventBus, 'emit');
       window.SPA!.renderComponent('some-id', { property: 'value' });
 
       expect(spaService.onCmsUpdate).toHaveBeenCalledWith({

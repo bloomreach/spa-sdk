@@ -324,7 +324,7 @@ describe('PageImpl', () => {
 
   describe('sync', () => {
     it('should emit page.ready event', async () => {
-      spyOn(cmsEventBus, 'emit');
+      jest.spyOn(cmsEventBus, 'emit');
 
       const page = createPage();
       await page.sync();

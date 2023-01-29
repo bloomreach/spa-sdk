@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import { mocked } from 'ts-jest/utils';
 import { isMatched } from '../url';
 import { PostMessage } from './post-message';
 
@@ -22,15 +21,15 @@ jest.mock('../url');
 
 describe('PostMessage', () => {
   let postMessage: PostMessage;
-  let processSpy: jasmine.Spy;
+  let processSpy: jest.SpyInstance;
 
   beforeAll(() => {
     postMessage = new PostMessage();
-    processSpy = spyOn(postMessage, 'process');
+    processSpy = jest.spyOn(postMessage, 'process');
   });
 
   afterEach(() => {
-    processSpy.calls.reset();
+    processSpy.mockReset();
   });
 
   describe('initialize', () => {
@@ -43,8 +42,8 @@ describe('PostMessage', () => {
     });
 
     it('should process a message', async () => {
-      postMessage.initialize({ window, origin: 'http://example.com' });
-      mocked(isMatched).mockReturnValueOnce(true);
+      postMessage.initialize({ window, origin: 'https://example.com' });
+      jest.mocked(isMatched).mockReturnValueOnce(true);
       window.postMessage({ some: 'data' }, '*');
 
       await new Promise((resolve) => setTimeout(resolve, 0));
@@ -54,7 +53,7 @@ describe('PostMessage', () => {
 
     it('should process a message in case of wildcard origin', async () => {
       postMessage.initialize({ window, origin: '*' });
-      mocked(isMatched).mockReturnValueOnce(true);
+      jest.mocked(isMatched).mockReturnValueOnce(true);
       window.postMessage({ some: 'data' }, '*');
 
       await new Promise((resolve) => setTimeout(resolve, 0));
@@ -64,8 +63,8 @@ describe('PostMessage', () => {
     });
 
     it('should not process a message if the origin is not matching', async () => {
-      postMessage.initialize({ window, origin: 'http://example.com' });
-      mocked(isMatched).mockReturnValueOnce(false);
+      postMessage.initialize({ window, origin: 'https://example.com' });
+      jest.mocked(isMatched).mockReturnValueOnce(false);
       window.postMessage({ some: 'data' }, '*');
 
       await new Promise((resolve) => setTimeout(resolve, 0));
@@ -74,8 +73,8 @@ describe('PostMessage', () => {
     });
 
     it('should not process a message without data', async () => {
-      postMessage.initialize({ window, origin: 'http://example.com' });
-      mocked(isMatched).mockReturnValueOnce(true);
+      postMessage.initialize({ window, origin: 'https://example.com' });
+      jest.mocked(isMatched).mockReturnValueOnce(true);
       window.postMessage(undefined, '*');
 
       await new Promise((resolve) => setTimeout(resolve, 0));
@@ -86,13 +85,13 @@ describe('PostMessage', () => {
 
   describe('send', () => {
     it('should send a message to a parent frame', () => {
-      const postMessageSpy = spyOn(window.parent, 'postMessage');
-      postMessage.initialize({ window, origin: 'http://example.com' });
+      const postMessageSpy = jest.spyOn(window.parent, 'postMessage');
+      postMessage.initialize({ window, origin: 'https://example.com' });
       postMessage.call('command');
 
       expect(postMessageSpy).toHaveBeenCalledWith(
         expect.objectContaining({ command: 'command' }),
-        'http://example.com',
+        'https://example.com',
       );
     });
   });

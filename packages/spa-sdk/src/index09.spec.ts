@@ -16,15 +16,18 @@
 
 import model from './index09.fixture.json';
 import {
+  Container,
   destroy,
   initialize,
-  Container,
   Page,
+  PageModel,
   META_POSITION_BEGIN,
   META_POSITION_END,
   TYPE_CONTAINER_BOX,
+  TYPE_LINK_EXTERNAL,
+  TYPE_LINK_INTERNAL,
+  TYPE_LINK_RESOURCE,
 } from './index';
-import { PageModel, TYPE_LINK_RESOURCE, TYPE_LINK_EXTERNAL, TYPE_LINK_INTERNAL } from './page';
 
 describe('initialize', () => {
   let page: Page;
@@ -36,7 +39,7 @@ describe('initialize', () => {
       httpClient,
       window,
       cmsBaseUrl: 'http://localhost:8080/site/my-spa',
-      request: { path: '/?token=something' },
+      path: '/?token=something',
       spaBaseUrl: '//example.com',
     });
   });
@@ -49,7 +52,7 @@ describe('initialize', () => {
     const pageWithReverseProxy = await initialize({
       httpClient,
       window,
-      request: { path: '/?bloomreach-preview=true' },
+      path: '/?bloomreach-preview=true',
       options: {
         live: {
           cmsBaseUrl: 'http://localhost:8080/site/my-spa',
@@ -223,7 +226,7 @@ describe('initialize', () => {
   // });
 
   it('should use an origin from the CMS base URL', async () => {
-    const postMessageSpy = spyOn(window.parent, 'postMessage').and.callThrough();
+    const postMessageSpy = jest.spyOn(window.parent, 'postMessage');
     await page.sync();
 
     expect(postMessageSpy).toBeCalledWith(expect.anything(), 'http://localhost:8080');
@@ -235,9 +238,9 @@ describe('initialize', () => {
       window,
       apiBaseUrl: 'https://api.example.com/site/my-spa/resourceapi',
       cmsBaseUrl: 'http://localhost:8080/site/my-spa',
-      request: { path: '' },
+      path: '',
     });
-    const postMessageSpy = spyOn(window.parent, 'postMessage').and.callThrough();
+    const postMessageSpy = jest.spyOn(window.parent, 'postMessage');
     await pageWithApiBaseUrl.sync();
     destroy(pageWithApiBaseUrl);
 
@@ -250,9 +253,9 @@ describe('initialize', () => {
       window,
       cmsBaseUrl: 'http://localhost:8080/site/my-spa',
       origin: 'http://localhost:12345',
-      request: { path: '' },
+      path: '',
     });
-    const postMessageSpy = spyOn(window.parent, 'postMessage').and.callThrough();
+    const postMessageSpy = jest.spyOn(window.parent, 'postMessage');
     await pageWithCustomOrigin.sync();
     destroy(pageWithCustomOrigin);
 

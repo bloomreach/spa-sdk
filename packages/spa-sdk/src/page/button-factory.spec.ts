@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import { mocked } from 'ts-jest/utils';
 import { ButtonFactory } from './button-factory';
 import { MetaCollectionFactory } from './meta-collection-factory';
 import { MetaCollection, isMetaCollection } from './meta-collection';
@@ -58,7 +57,7 @@ describe('ButtonFactory', () => {
     it('should create a meta-collection instance', () => {
       const button = {} as MetaCollection;
 
-      mocked(isMetaCollection).mockReturnValueOnce(false);
+      jest.mocked(isMetaCollection).mockReturnValueOnce(false);
       metaCollectionFactory.mockReturnValueOnce(button);
 
       factory.create('type1', { id: 'id1' });
@@ -69,7 +68,7 @@ describe('ButtonFactory', () => {
     it('should create a meta-collection instance', () => {
       const button = {} as MetaCollection;
 
-      mocked(isMetaCollection).mockReturnValueOnce(true);
+      jest.mocked(isMetaCollection).mockReturnValueOnce(true);
       builder1.mockReturnValueOnce(button);
 
       expect(factory.create('type1', { id: 'id1' })).toBe(button);

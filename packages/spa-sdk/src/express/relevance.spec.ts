@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import { mocked } from 'ts-jest/utils';
 import { parse, serialize } from 'cookie';
 import { IncomingMessage, OutgoingMessage } from 'http';
 
@@ -26,7 +25,7 @@ jest.mock('cookie');
 describe('relevance', () => {
   describe('request handling', () => {
     it('should parse current visitor from cookies', () => {
-      mocked(parse).mockReturnValueOnce({ visitor: JSON.stringify({ id: 'some-id', header: 'visitor-header' }) });
+      jest.mocked(parse).mockReturnValueOnce({ visitor: JSON.stringify({ id: 'some-id', header: 'visitor-header' }) });
       const request: Partial<IncomingMessage> = { headers: { cookie: 'something' } };
       const response = {};
 
@@ -37,7 +36,7 @@ describe('relevance', () => {
     });
 
     it('should not fail on invalid JSON', () => {
-      mocked(parse).mockReturnValueOnce({ visitor: 'invalid' });
+      jest.mocked(parse).mockReturnValueOnce({ visitor: 'invalid' });
       const request: Partial<IncomingMessage> = {};
       const response = {};
 
@@ -46,7 +45,7 @@ describe('relevance', () => {
     });
 
     it('should not fail on empty visitor', () => {
-      mocked(parse).mockReturnValueOnce({});
+      jest.mocked(parse).mockReturnValueOnce({});
       const request: Partial<IncomingMessage> = {};
       const response = {};
 
@@ -70,7 +69,7 @@ describe('relevance', () => {
       } as unknown as typeof request;
       response = { getHeader: jest.fn(), setHeader: jest.fn() };
 
-      mocked(parse).mockReturnValueOnce({});
+      jest.mocked(parse).mockReturnValueOnce({});
     });
 
     it('should not proceed if there is no visitor', () => {
@@ -80,7 +79,7 @@ describe('relevance', () => {
     });
 
     it('should serialize returned visitor', () => {
-      mocked(serialize).mockReturnValueOnce('visitor=something');
+      jest.mocked(serialize).mockReturnValueOnce('visitor=something');
       page.getVisitor.mockReturnValueOnce({ id: 'some-id', header: 'some-header', new: true });
 
       relevance.withOptions({
@@ -103,7 +102,7 @@ describe('relevance', () => {
     });
 
     it('should append to other Set-Cookie headers', () => {
-      mocked(serialize).mockReturnValueOnce('visitor=something');
+      jest.mocked(serialize).mockReturnValueOnce('visitor=something');
       page.getVisitor.mockReturnValueOnce({ id: 'some-id', header: 'some-header', new: true });
       response.getHeader.mockReturnValueOnce(['cookie=value']);
 
@@ -113,7 +112,7 @@ describe('relevance', () => {
     });
 
     it('should append to another Set-Cookie header', () => {
-      mocked(serialize).mockReturnValueOnce('visitor=something');
+      jest.mocked(serialize).mockReturnValueOnce('visitor=something');
       page.getVisitor.mockReturnValueOnce({ id: 'some-id', header: 'some-header', new: true });
       response.getHeader.mockReturnValueOnce('cookie=value');
 
@@ -124,7 +123,7 @@ describe('relevance', () => {
   });
 
   it('should call the next request handler', () => {
-    mocked(parse).mockReturnValueOnce({});
+    jest.mocked(parse).mockReturnValueOnce({});
 
     const next = jest.fn();
     relevance({}, {}, next);

@@ -148,7 +148,7 @@ describe('PageImpl', () => {
         document: { $ref: 'something' },
       });
 
-      spyOn(page, 'getContent').and.returnValue('document');
+      jest.spyOn(page, 'getContent').mockReturnValue('document');
 
       expect(page.getDocument()).toBe('document');
       expect(page.getContent).toHaveBeenCalledWith({ $ref: 'something' });
@@ -361,7 +361,7 @@ describe('PageImpl', () => {
 
   describe('sync', () => {
     it('should emit page.ready event', async () => {
-      spyOn(cmsEventBus, 'emit');
+      jest.spyOn(cmsEventBus, 'emit');
 
       const page = createPage();
       await page.sync();

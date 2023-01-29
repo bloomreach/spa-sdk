@@ -65,7 +65,7 @@ describe('Rpc', () => {
     });
 
     it('should emit an event', () => {
-      spyOn(rpc, 'emit');
+      jest.spyOn(rpc, 'emit');
       rpc.process({ type: 'brxm:event', event: 'something', payload: { a: 'b' } });
 
       expect(rpc.emit).toHaveBeenCalledWith('something', { a: 'b' });

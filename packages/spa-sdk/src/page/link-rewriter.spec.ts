@@ -87,7 +87,7 @@ describe('LinkRewriterImpl', () => {
     });
 
     it('should pass a content type to the DOM parser', async () => {
-      spyOn(domParser, 'parseFromString').and.callThrough();
+      jest.spyOn(domParser, 'parseFromString');
       await linkRewriter.rewrite('something', 'text/html');
 
       expect(domParser.parseFromString).toBeCalledWith(expect.stringContaining('something'), 'text/html');
