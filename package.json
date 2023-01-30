@@ -32,7 +32,7 @@
     "build": "lerna run build --stream",
     "dev": "npm run build -- --watch",
     "bump": "lerna version --exact --no-push --no-git-tag-version --yes --force-publish",
-    "postbump": "npm run lerna-version && npm install --legacy-peer-deps --package-lock-only && npm run changelog",
+    "postbump": "npm run lerna-version && npm install --package-lock-only && npm run changelog",
     "lerna-version": "node -e \"require('child_process').execSync('npm version ' + require('./lerna.json').version + ' --no-git-tag-version')\"",
     "changelog": "auto-changelog",
     "docs": "lerna run docs",
