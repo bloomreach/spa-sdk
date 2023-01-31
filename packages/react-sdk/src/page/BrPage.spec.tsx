@@ -1,11 +1,11 @@
 /*
- * Copyright 2019-2022 Bloomreach
+ * Copyright 2019-2023 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ *   https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,7 +17,6 @@
 import React, { useEffect } from 'react';
 import { destroy, initialize, Page, PageModel } from '@bloomreach/spa-sdk';
 import { act, render, RenderResult } from '@testing-library/react';
-import { mocked } from 'ts-jest/utils';
 import { BrProps } from '../component';
 import { BrPage } from './BrPage';
 
@@ -57,7 +56,7 @@ describe('BrPage', () => {
 
   beforeEach(async () => {
     jest.clearAllMocks();
-    mocked(initialize).mockResolvedValue(page);
+    jest.mocked(initialize).mockResolvedValue(page);
 
     await act(async () => {
       element = render(<BrPage configuration={config} mapping={mapping} />);
@@ -125,7 +124,7 @@ describe('BrPage', () => {
     });
 
     it('should not destroy an empty page when unmounting', async () => {
-      mocked(initialize).mockResolvedValueOnce(undefined as unknown as Page);
+      jest.mocked(initialize).mockResolvedValueOnce(undefined as unknown as Page);
 
       await act(async () => {
         element = render(<BrPage configuration={config} mapping={mapping} />);
@@ -153,7 +152,7 @@ describe('BrPage', () => {
     });
 
     it('should not render children if there is no page and NBR mode is false', async () => {
-      mocked(initialize).mockResolvedValueOnce(undefined as unknown as Page);
+      jest.mocked(initialize).mockResolvedValueOnce(undefined as unknown as Page);
 
       await act(async () => {
         element = render(
@@ -170,7 +169,7 @@ describe('BrPage', () => {
     });
 
     it('should render children if there is no page and NBR mode is true', async () => {
-      mocked(initialize).mockResolvedValueOnce(undefined as unknown as Page);
+      jest.mocked(initialize).mockResolvedValueOnce(undefined as unknown as Page);
 
       await act(async () => {
         element = render(
@@ -188,7 +187,7 @@ describe('BrPage', () => {
 
     it('should render nothing if there is an error loading the page', async () => {
       const error = new Error('error-loading-page');
-      mocked(initialize).mockRejectedValueOnce(error);
+      jest.mocked(initialize).mockRejectedValueOnce(error);
 
       const setState = jest.spyOn(BrPage.prototype, 'setState').mockImplementationOnce(() => {});
 
@@ -214,8 +213,8 @@ describe('BrPage', () => {
       }
 
       const pageInit = initialize(config);
-      mocked(initialize).mockClear();
-      mocked(initialize).mockImplementationOnce(() => {
+      jest.mocked(initialize).mockClear();
+      jest.mocked(initialize).mockImplementationOnce(() => {
         setTimeout(initializeDone, 1000);
         return pageInit;
       });

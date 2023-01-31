@@ -4,7 +4,6 @@ exports[`BrComponentDirective ngOnChanges should rerender a component on change 
 <div
   id="root3"
 >
-  
   <span>
     Implicit: updated
   </span>
@@ -15,8 +14,9 @@ exports[`BrComponentDirective ngOnChanges should rerender a component on change 
     Page: Some Page
   </span>
   <span>
-    Template: Some Template
+    Template: 
   </span>
+  
 </div>
 `;
 
@@ -32,7 +32,6 @@ exports[`BrComponentDirective ngOnInit should render a component 1`] = `
 <div
   id="root7"
 >
-  
   <span>
     Implicit: something
   </span>
@@ -43,8 +42,9 @@ exports[`BrComponentDirective ngOnInit should render a component 1`] = `
     Page: Some Page
   </span>
   <span>
-    Template: Some Template
+    Template: 
   </span>
+  
 </div>
 `;
 
@@ -52,7 +52,6 @@ exports[`BrComponentDirective ngOnInit should render a component using path 1`] 
 <div
   id="root13"
 >
-  
   <span>
     Implicit: child
   </span>
@@ -63,8 +62,9 @@ exports[`BrComponentDirective ngOnInit should render a component using path 1`] 
     Page: Some Page
   </span>
   <span>
-    Template: Some Template
+    Template: 
   </span>
+  
 </div>
 `;
 
@@ -72,7 +72,6 @@ exports[`BrComponentDirective ngOnInit should render current node children if th
 <div
   id="root18"
 >
-  
   <span>
     Implicit: child1
   </span>
@@ -83,7 +82,7 @@ exports[`BrComponentDirective ngOnInit should render current node children if th
     Page: Some Page
   </span>
   <span>
-    Template: Some Template
+    Template: 
   </span>
   <span>
     Implicit: child2
@@ -95,8 +94,9 @@ exports[`BrComponentDirective ngOnInit should render current node children if th
     Page: Some Page
   </span>
   <span>
-    Template: Some Template
+    Template: 
   </span>
+  
 </div>
 `;
 
@@ -128,7 +128,6 @@ exports[`BrComponentDirective ngOnInit should render root node children if the c
 <div
   id="root9"
 >
-  
   <span>
     Implicit: child1
   </span>
@@ -139,7 +138,7 @@ exports[`BrComponentDirective ngOnInit should render root node children if the c
     Page: Some Page
   </span>
   <span>
-    Template: Some Template
+    Template: 
   </span>
   <span>
     Implicit: child2
@@ -151,7 +150,8 @@ exports[`BrComponentDirective ngOnInit should render root node children if the c
     Page: Some Page
   </span>
   <span>
-    Template: Some Template
+    Template: 
   </span>
+  
 </div>
 `;

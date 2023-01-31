@@ -1,11 +1,11 @@
 /*
- * Copyright 2020-2021 Bloomreach
+ * Copyright 2020-2023 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ *   https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import { mocked } from 'ts-jest/utils';
 import { Component, Input, NgModule } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { BehaviorSubject } from 'rxjs';
@@ -22,7 +21,7 @@ import { ContainerItem, TYPE_CONTAINER_ITEM_UNDEFINED } from '@bloomreach/spa-sd
 import { BrContainerItemUndefinedComponent } from './br-container-item-undefined/br-container-item-undefined.component';
 import { BrNodeContainerItemDirective } from './br-node-container-item.directive';
 import { BrNodeDirective } from './br-node.directive';
-import { BrPageComponent } from './br-page/br-page.component';
+import { BrPageService } from './br-page/br-page.service';
 
 Component({
   selector: 'br-container-item-undefined',
@@ -37,7 +36,6 @@ class ContainerItemTestComponent {}
 
 @NgModule({
   declarations: [BrContainerItemUndefinedComponent, ContainerItemTestComponent],
-  entryComponents: [BrContainerItemUndefinedComponent, ContainerItemTestComponent],
 })
 class TestModule {}
 
@@ -49,7 +47,7 @@ class TestComponent {
 describe('BrNodeContainerItemDirective', () => {
   let containerItem: ContainerItem;
   let node: BrNodeDirective;
-  let page: BrPageComponent;
+  let page: BrPageService;
   let component: TestComponent;
   let fixture: ComponentFixture<TestComponent>;
 
@@ -78,7 +76,7 @@ describe('BrNodeContainerItemDirective', () => {
         imports: [TestModule],
         providers: [
           { provide: BrNodeDirective, useFactory: () => node },
-          { provide: BrPageComponent, useFactory: () => page },
+          { provide: BrPageService, useFactory: () => page },
         ],
       }).compileComponents();
     }),
@@ -99,7 +97,7 @@ describe('BrNodeContainerItemDirective', () => {
     });
 
     it('should render undefined container item', () => {
-      mocked(containerItem.getType).mockReturnValueOnce('undefined');
+      jest.mocked(containerItem.getType).mockReturnValueOnce('undefined');
       component.containerItem = { ...containerItem };
       fixture.detectChanges();
 
@@ -108,7 +106,7 @@ describe('BrNodeContainerItemDirective', () => {
 
     it('should override undefined container item', () => {
       page.mapping[TYPE_CONTAINER_ITEM_UNDEFINED as any] = ContainerItemTestComponent;
-      mocked(containerItem.getType).mockReturnValueOnce('undefined');
+      jest.mocked(containerItem.getType).mockReturnValueOnce('undefined');
       component.containerItem = { ...containerItem };
       fixture.detectChanges();
 
@@ -117,9 +115,9 @@ describe('BrNodeContainerItemDirective', () => {
   });
 
   describe('ngOnChanges', () => {
-    it('should react on update evants', () => {
-      mocked(containerItem.getModels).mockReturnValue({ data: 'updated' });
-      const [[, onUpdate]] = mocked(containerItem.on).mock.calls;
+    it('should react on update events', () => {
+      jest.mocked(containerItem.getModels).mockReturnValue({ data: 'updated' });
+      const [[, onUpdate]] = jest.mocked(containerItem.on).mock.calls;
       onUpdate({});
       fixture.detectChanges();
 
@@ -128,7 +126,7 @@ describe('BrNodeContainerItemDirective', () => {
     });
 
     it('should unsubscribe from the old container item', () => {
-      const [[, onUpdate]] = mocked(containerItem.on).mock.calls;
+      const [[, onUpdate]] = jest.mocked(containerItem.on).mock.calls;
       component.containerItem = { ...containerItem };
       fixture.detectChanges();
 
@@ -138,7 +136,7 @@ describe('BrNodeContainerItemDirective', () => {
 
   describe('ngOnDestroy', () => {
     it('should stop reacting on update events after destruction', () => {
-      const [[, onUpdate]] = mocked(containerItem.on).mock.calls;
+      const [[, onUpdate]] = jest.mocked(containerItem.on).mock.calls;
       fixture.destroy();
 
       expect(containerItem.off).toBeCalledWith('update', onUpdate);

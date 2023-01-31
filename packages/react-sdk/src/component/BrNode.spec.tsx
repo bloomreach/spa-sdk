@@ -1,11 +1,11 @@
 /*
- * Copyright 2019-2022 Bloomreach
+ * Copyright 2019-2023 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ *   https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,7 +15,6 @@
  */
 
 import React from 'react';
-import { mocked } from 'ts-jest/utils';
 import { isContainer, isContainerItem, Component, MetaCollection, Page } from '@bloomreach/spa-sdk';
 import { render } from '@testing-library/react';
 import { BrNode } from './BrNode';
@@ -72,7 +71,7 @@ describe('BrNode', () => {
   });
 
   it('should render a container', () => {
-    mocked(isContainer).mockReturnValueOnce(true);
+    jest.mocked(isContainer).mockReturnValueOnce(true);
     const element = render(withContextProvider(context, <BrNode {...props} />));
 
     const nodeContainer = render(<BrNodeContainer page={context} component={props.component as any} />);
@@ -82,7 +81,7 @@ describe('BrNode', () => {
   });
 
   it('should render a container item', () => {
-    mocked(isContainerItem).mockReturnValueOnce(true);
+    jest.mocked(isContainerItem).mockReturnValueOnce(true);
     const element = render(withContextProvider(context, <BrNode {...props} />));
 
     const nodeContainerItem = render(<BrNodeContainerItem page={context} component={props.component as any} />);

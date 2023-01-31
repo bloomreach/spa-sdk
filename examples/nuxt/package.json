@@ -36,11 +36,16 @@
     "eslint-plugin-nuxt": "2.0.0",
     "eslint-plugin-prettier": "3.4.0",
     "nodemon": "2.0.12",
-    "prettier": "2.3.2"
+    "prettier": "2.3.2",
+    "ts-loader": "^8.0.17"
   },
   "eslintConfig": {
     "extends": [
       "@bloomreach/eslint-config-nuxt"
-    ]
+    ],
+    "rules": {
+      "vue/html-self-closing": "off",
+      "vue/singleline-html-element-content-newline": "off"
+    }
   }
 }

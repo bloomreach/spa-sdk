@@ -4,6 +4,7 @@
     "emitDecoratorMetadata": true,
     "esModuleInterop": true,
     "outDir": "./out-tsc/spec",
+    "target": "es2015",
     "types": [
       "jest"
     ]

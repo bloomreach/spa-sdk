@@ -9,20 +9,26 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "lib": [
-      "es2019",
-      "es2018",
+      "esnext",
       "dom"
     ],
-    "module": "es2020",
+    "module": "esnext",
     "moduleResolution": "node",
     "outDir": "./dist/out-tsc",
+    "paths": {
+      "@bloomreach/ng-sdk": [
+        "../../packages/ng-sdk/dist"
+      ]
+    },
     "sourceMap": true,
     "strict": true,
-    "target": "es2015"
+    "target": "esnext",
+    "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
-    "enableIvy": false,
-    "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
   }
 }

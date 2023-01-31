@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Bloomreach
+ * Copyright 2020-2023 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ *   https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,7 +16,7 @@
 
 import { Directive, Input, TemplateRef } from '@angular/core';
 import { Component } from '@bloomreach/spa-sdk';
-import { BrComponentContext } from './br-component.directive';
+import type { BrComponentContext } from './br-component.directive';
 
 @Directive({
   selector: '[brNode]',

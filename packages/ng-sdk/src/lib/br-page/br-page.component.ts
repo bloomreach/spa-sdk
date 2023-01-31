@@ -1,11 +1,11 @@
 /*
- * Copyright 2020-2022 Bloomreach
+ * Copyright 2020-2023 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ *   https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,6 +18,7 @@ import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import {
   AfterContentChecked,
+  AfterContentInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -38,14 +39,11 @@ import {
 } from '@angular/core';
 import { makeStateKey, StateKey, TransferState } from '@angular/platform-browser';
 import { Configuration, destroy, initialize, isPage, Page, PageModel } from '@bloomreach/spa-sdk';
-import { BehaviorSubject, from, of, Subject } from 'rxjs';
+import { from, Subject } from 'rxjs';
 import { filter, map, mapTo, pairwise, pluck, switchMap, take } from 'rxjs/operators';
-import { BrComponentContext } from '../br-component.directive';
+import type { BrComponentContext } from '../br-component.directive';
 import { BrProps } from '../br-props.model';
-
-interface BrNodeContext extends BrComponentContext {
-  template?: TemplateRef<BrComponentContext>;
-}
+import { BrNodeContext, BrPageService } from './br-page.service';
 
 /**
  * The brXM page.
@@ -55,7 +53,7 @@ interface BrNodeContext extends BrComponentContext {
   selector: 'br-page',
   templateUrl: './br-page.component.html',
 })
-export class BrPageComponent implements AfterContentChecked, OnChanges, OnDestroy {
+export class BrPageComponent implements AfterContentChecked, AfterContentInit, OnChanges, OnDestroy {
   /**
    * The configuration of the SPA SDK.
    * @see https://www.npmjs.com/package/@bloomreach/spa-sdk#configuration
@@ -83,7 +81,7 @@ export class BrPageComponent implements AfterContentChecked, OnChanges, OnDestro
   /**
    * The current state of the page component.
    */
-  @Output() state = new BehaviorSubject<Page | undefined>(undefined);
+  @Output() state = this.pageService.state;
 
   /**
    * Http error handling
@@ -99,6 +97,7 @@ export class BrPageComponent implements AfterContentChecked, OnChanges, OnDestro
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
     private httpClient: HttpClient,
+    private pageService: BrPageService,
     zone: NgZone,
     @Inject(PLATFORM_ID) private platform: any,
     @Optional() private transferState?: TransferState,
@@ -144,6 +143,10 @@ export class BrPageComponent implements AfterContentChecked, OnChanges, OnDestro
       await this.initialize(changes.page?.currentValue);
     }
 
+    if (changes.mapping?.currentValue !== this.pageService.mapping) {
+      this.pageService.mapping = this.mapping;
+    }
+
     if (changes.stateKey?.previousValue && isPlatformServer(this.platform)) {
       if (changes.stateKey.currentValue && this.transferState?.hasKey(changes.stateKey.previousValue)) {
         this.transferState?.set(
@@ -158,6 +161,10 @@ export class BrPageComponent implements AfterContentChecked, OnChanges, OnDestro
 
   ngAfterContentChecked(): void {
     this.afterContentChecked$.next();
+  }
+
+  ngAfterContentInit(): void {
+    this.pageService.node = this.node;
   }
 
   ngOnDestroy(): void {
@@ -175,7 +182,7 @@ export class BrPageComponent implements AfterContentChecked, OnChanges, OnDestro
     const configuration = { httpClient: this.request, ...this.configuration } as Configuration;
     const observable = page ? from(initialize(configuration, page)) : from(initialize(configuration));
 
-    observable.subscribe((state) => {
+    observable.pipe(take(1)).subscribe((state) => {
       this.state.next(state);
       this.changeDetectorRef.detectChanges();
     });

@@ -4,34 +4,28 @@
     "allowSyntheticDefaultImports": true,
     "baseUrl": "./src",
     "outDir": "./dist/out-tsc",
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "strict": true,
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
-    "module": "es2020",
+    "module": "esnext",
     "moduleResolution": "node",
     "importHelpers": true,
-    "inlineSources": true,
-    "target": "es2015",
-    "types": [],
+    "target": "esnext",
     "lib": [
-      "es2018",
-      "es2019.array",
+      "esnext",
       "dom"
-    ]
+    ],
+    "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
-    "enableIvy": false,
-    "skipTemplateCodegen": true,
+    "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
-    "strictMetadataEmit": true,
-    "enableResourceInlining": true
-  },
-  "include": [
-    "src"
-  ],
-  "exclude": [
-    "**/*.spec.ts"
-  ]
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
 }

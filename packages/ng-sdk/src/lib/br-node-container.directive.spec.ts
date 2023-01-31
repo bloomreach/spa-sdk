@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Bloomreach
+ * Copyright 2020-2023 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ *   https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -31,7 +31,7 @@ import { BrContainerOrderedListComponent } from './br-container-ordered-list/br-
 import { BrContainerUnorderedListComponent } from './br-container-unordered-list/br-container-unordered-list.component';
 import { BrNodeContainerDirective } from './br-node-container.directive';
 import { BrNodeDirective } from './br-node.directive';
-import { BrPageComponent } from './br-page/br-page.component';
+import { BrPageService } from './br-page/br-page.service';
 
 Component({ selector: 'br-container-box', template: '' })(BrContainerBoxComponent);
 Component({ selector: 'br-container-inline', template: '' })(BrContainerInlineComponent);
@@ -40,19 +40,12 @@ Component({ selector: 'br-container-unordered-list', template: '' })(BrContainer
 
 @Component({
   selector: 'br-container-test',
-  template: `<a></a>`,
+  template: '<a></a>',
 })
 class ContainerTestComponent {}
 
 @NgModule({
   declarations: [
-    BrContainerBoxComponent,
-    BrContainerInlineComponent,
-    BrContainerOrderedListComponent,
-    BrContainerUnorderedListComponent,
-    ContainerTestComponent,
-  ],
-  entryComponents: [
     BrContainerBoxComponent,
     BrContainerInlineComponent,
     BrContainerOrderedListComponent,
@@ -70,7 +63,7 @@ class TestComponent {
 describe('BrNodeContainerDirective', () => {
   let container: jest.Mocked<Container>;
   let node: BrNodeDirective;
-  let page: BrPageComponent;
+  let page: BrPageService;
   let component: TestComponent;
   let fixture: ComponentFixture<TestComponent>;
 
@@ -97,7 +90,7 @@ describe('BrNodeContainerDirective', () => {
         imports: [TestModule],
         providers: [
           { provide: BrNodeDirective, useFactory: () => node },
-          { provide: BrPageComponent, useFactory: () => page },
+          { provide: BrPageService, useFactory: () => page },
         ],
       }).compileComponents();
     }),

@@ -3,11 +3,9 @@
   "dest": "./dist",
   "lib": {
     "entryFile": "src/public-api.ts",
-    "umdModuleIds": {
-      "@bloomreach/spa-sdk": "BloomreachSpaSdk"
-    }
+    "flatModuleFile": "index"
   },
-  "whitelistedNonPeerDependencies": [
+  "allowedNonPeerDependencies": [
     "@bloomreach/spa-sdk"
   ]
 }
