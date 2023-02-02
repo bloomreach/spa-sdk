@@ -14,31 +14,10 @@
  * limitations under the License.
  */
 
-import { App, Component } from 'vue';
+import type { Component, Page } from '@bloomreach/spa-sdk';
+import type { InjectionKey, Ref } from 'vue';
+import type { BrMapping } from '../typings';
 
-/**
- * The brXM SDK plugin.
- */
-export declare function BrSdk(vue: App): void;
-
-/**
- * The button component that opens for editing a content.
- */
-export declare const BrManageContentButton: App;
-
-/**
- * The button component that opens a menu editor.
- */
-export declare const BrManageMenuButton: App;
-
-/**
- * The brXM component.
- */
-export declare const BrComponent: App;
-
-/**
- * The brXM page.
- */
-export declare const BrPage: App;
-
-export type BrMapping = Record<keyof any, Component | string>
+export const page$: InjectionKey<Ref<Page>> = Symbol('page$');
+export const mapping$: InjectionKey<BrMapping> = Symbol('mapping$');
+export const component$: InjectionKey<Component> = Symbol('component$');
