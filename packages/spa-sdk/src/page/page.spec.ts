@@ -1,11 +1,11 @@
 /*
- * Copyright 2019-2022 Bloomreach
+ * Copyright 2019-2023 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ *   https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -148,7 +148,7 @@ describe('PageImpl', () => {
         document: { $ref: 'something' },
       });
 
-      spyOn(page, 'getContent').and.returnValue('document');
+      jest.spyOn(page, 'getContent').mockReturnValue('document');
 
       expect(page.getDocument()).toBe('document');
       expect(page.getContent).toHaveBeenCalledWith({ $ref: 'something' });
@@ -361,7 +361,7 @@ describe('PageImpl', () => {
 
   describe('sync', () => {
     it('should emit page.ready event', async () => {
-      spyOn(cmsEventBus, 'emit');
+      jest.spyOn(cmsEventBus, 'emit');
 
       const page = createPage();
       await page.sync();

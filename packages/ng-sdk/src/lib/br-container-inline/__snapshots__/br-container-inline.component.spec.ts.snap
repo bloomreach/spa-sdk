@@ -2,34 +2,33 @@
 
 exports[`BrContainerInlineComponent isPreview should add "hst-container-*" classes in preview 1`] = `
 <div
-  class="br-container-inline hst-container"
+  class="hst-container"
   id="root1"
 >
+  <span
+    class="hst-container-item"
+  >
+    
+  </span>
+  <span
+    class="hst-container-item"
+  >
+    
+  </span>
   
-  <span
-    class="hst-container-item"
-  >
-    
-  </span>
-  <span
-    class="hst-container-item"
-  >
-    
-  </span>
 </div>
 `;
 
 exports[`BrContainerInlineComponent should render a container 1`] = `
 <div
-  class="br-container-inline"
   id="root0"
 >
+  <span>
+    
+  </span>
+  <span>
+    
+  </span>
   
-  <span>
-    
-  </span>
-  <span>
-    
-  </span>
 </div>
 `;

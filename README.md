@@ -132,7 +132,7 @@ Pre release actions:
 * Check out the `development` branch and make sure your local branch its up to date and the pipeline for `development` is green
 
 Release actions:
-* Run `npm run bump -- [new version]` in the workspace root to update the versions in all package files
+* Run `npm run bump` in the workspace root to update the versions in all package files
 * Commit these version changes with `git commit -am "[your Jira issue] Bumping versions to [new version]"`
 * Create a new _annotated_ tag on the `development` branch using `git tag -a spa-sdk-[new-version]`
 * Push to `origin` with `git push --follow-tags`

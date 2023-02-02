@@ -1,6 +1,6 @@
 {
   "name": "@bloomreach/vue-sdk",
-  "version": "18.0.1",
+  "version": "19.0.0",
   "description": "Bloomreach SPA SDK for Vue.js",
   "keywords": [
     "bloomreach",
@@ -39,7 +39,7 @@
     "last 1 edge version"
   ],
   "dependencies": {
-    "@bloomreach/spa-sdk": "18.0.1",
+    "@bloomreach/spa-sdk": "19.0.0",
     "vue-class-component": "7.2.6",
     "vue-fragment": "1.5.1",
     "vue-property-decorator": "9.1.2"
@@ -58,13 +58,15 @@
     "@vue/cli-service": "4.5.13",
     "@vue/test-utils": "1.2.2",
     "core-js": "3.16.0",
-    "eslint": "7.31.0",
+    "eslint": "7.32.0",
     "jest-junit": "12.2.0",
     "prettier": "2.3.2",
     "ts-jest": "26.5.6",
-    "typescript": "4.1.6",
+    "typescript": "4.3.5",
     "vue": "2.6.14",
-    "vue-template-compiler": "2.6.14"
+    "vue-server-renderer": "2.6.14",
+    "vue-template-compiler": "2.6.14",
+    "webpack": "4.46.0"
   },
   "eslintConfig": {
     "extends": [

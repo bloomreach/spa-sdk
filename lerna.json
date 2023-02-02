@@ -1,13 +1,14 @@
 {
-  "version": "18.0.1",
+  "version": "19.0.0",
   "npmClient": "npm",
   "packages": [
-    "examples/*",
-    "packages/*"
+    "packages/*",
+    "examples/*"
   ],
   "command": {
     "version": {
       "message": "TRIVIAL Bump versions to %v"
     }
-  }
+  },
+  "useWorkspaces": true
 }

@@ -22,17 +22,14 @@ exports[`BrPageComponent template render should render children if there is no p
       
       
       
-      
-      
-      
-      
-      
-      
       <br-my-component>
         <div>
           Hello World
         </div>
       </br-my-component>
+      
+      
+      
       
       
       

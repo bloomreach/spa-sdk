@@ -4,12 +4,12 @@ exports[`BrNodeContainerItemDirective getMapping should override undefined conta
 <div
   id="root2"
 >
-  
   <br-container-item-test>
     <a>
       something
     </a>
   </br-container-item-test>
+  
 </div>
 `;
 
@@ -17,12 +17,12 @@ exports[`BrNodeContainerItemDirective getMapping should render a mapped containe
 <div
   id="root0"
 >
-  
   <br-container-item-test>
     <a>
       something
     </a>
   </br-container-item-test>
+  
 </div>
 `;
 
@@ -30,20 +30,20 @@ exports[`BrNodeContainerItemDirective getMapping should render undefined contain
 <div
   id="root1"
 >
-  
   <br-container-item-undefined />
+  
 </div>
 `;
 
-exports[`BrNodeContainerItemDirective ngOnChanges should react on update evants 1`] = `
+exports[`BrNodeContainerItemDirective ngOnChanges should react on update events 1`] = `
 <div
   id="root3"
 >
-  
   <br-container-item-test>
     <a>
       updated
     </a>
   </br-container-item-test>
+  
 </div>
 `;

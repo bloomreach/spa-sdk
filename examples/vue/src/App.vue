@@ -1,11 +1,11 @@
 <!--
-  Copyright 2020-2022 Bloomreach
+  Copyright 2020-2023 Bloomreach
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
   You may obtain a copy of the License at
 
-   http://www.apache.org/licenses/LICENSE-2.0
+   https://www.apache.org/licenses/LICENSE-2.0
 
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
@@ -55,12 +55,12 @@ import { Configuration } from '@bloomreach/spa-sdk';
 import { Component, Vue, Watch } from 'vue-property-decorator';
 import { Route } from 'vue-router';
 
+import { buildConfiguration } from '@/utils/buildConfiguration';
 import Banner from './components/BrBanner.vue';
 import Content from './components/BrContent.vue';
 import Menu from './components/BrMenu.vue';
 import NewsList from './components/BrNewsList.vue';
 import CookieConsent from './components/BrCookieConsent.vue';
-import { buildConfiguration } from '@/utils/buildConfiguration';
 
 @Component({
   components: { 'br-cookie-consent': CookieConsent },

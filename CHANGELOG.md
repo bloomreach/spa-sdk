@@ -2,8 +2,58 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### [18.0.1](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-19.0.0...18.0.1)
+#### [19.0.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-19.0.0...19.0.0)
 
+- SPASDK-151 Upgrade the angular SDK and the example app to Angular 15 [`#106`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/106)
+- SPASDK-122 Remove default apiVersion header value from PDA request [`#102`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/102)
+- SPASDK-151 Remove unneeded npm flag [`#SPASDK-151`](https://issues.onehippo.com/browse/SPASDK-151)
+- SPASDK-151 Fix spa-sdk tests hanging and some deprecation errors [`#SPASDK-151`](https://issues.onehippo.com/browse/SPASDK-151)
+- SPASDK-151 Update licences [`#SPASDK-151`](https://issues.onehippo.com/browse/SPASDK-151)
+- SPASDK-151 Remove obsolete tslint comment [`#SPASDK-151`](https://issues.onehippo.com/browse/SPASDK-151)
+- SPASDK-151 Update @bloomreach/eslint-config-angular to v15 [`#SPASDK-151`](https://issues.onehippo.com/browse/SPASDK-151)
+- SPASDK-151 Change ng-sdk supported Angular versions [`#SPASDK-151`](https://issues.onehippo.com/browse/SPASDK-151)
+- SPASDK-151 Upgrade example/angular to Angular 15 [`#SPASDK-151`](https://issues.onehippo.com/browse/SPASDK-151)
+- SPASDK-151 Upgrade ng-sdk to Angular 15 [`#SPASDK-151`](https://issues.onehippo.com/browse/SPASDK-151)
+- SPASDK-151 Fix npm dependencies and remove deprecated functionality [`#SPASDK-151`](https://issues.onehippo.com/browse/SPASDK-151)
+- SPASDK-151 Upgrade example/angular to Angular 14 [`#SPASDK-151`](https://issues.onehippo.com/browse/SPASDK-151)
+- SPASDK-151 Upgrade ng-sdk to Angular 14 [`#SPASDK-151`](https://issues.onehippo.com/browse/SPASDK-151)
+- SPASDK-151 Upgrade example/angular to Angular 13 [`#SPASDK-151`](https://issues.onehippo.com/browse/SPASDK-151)
+- SPASDK-151 Fix several building issues and unit tests [`#SPASDK-151`](https://issues.onehippo.com/browse/SPASDK-151)
+- SPASDK-151 Upgrade ng-sdk to angular 13 [`#SPASDK-151`](https://issues.onehippo.com/browse/SPASDK-151)
+- SPASDK-151 Fix wrong url properties [`#SPASDK-151`](https://issues.onehippo.com/browse/SPASDK-151)
+- SPASDK-151 Fix node undefined and memory leak [`#SPASDK-151`](https://issues.onehippo.com/browse/SPASDK-151)
+- SPASDK-151 Upgrade angular example app to Angular 12 [`#SPASDK-151`](https://issues.onehippo.com/browse/SPASDK-151)
+- SPASDK-151 Fix Ivy compilation mode [`#SPASDK-151`](https://issues.onehippo.com/browse/SPASDK-151)
+- SPASDK-151 Fix linting errors [`#SPASDK-151`](https://issues.onehippo.com/browse/SPASDK-151)
+- SPASDK-151 Add angular fixed dev dependencies [`#SPASDK-151`](https://issues.onehippo.com/browse/SPASDK-151)
+- SPASDK-151 Delete unused tslint file and fix ng-packagr configuration [`#SPASDK-151`](https://issues.onehippo.com/browse/SPASDK-151)
+- SPASDK-151 Upgrade ng-sdk to Angular 12 [`#SPASDK-151`](https://issues.onehippo.com/browse/SPASDK-151)
+- SPASDK-151 Fix npm scripts to work on Windows [`#SPASDK-151`](https://issues.onehippo.com/browse/SPASDK-151)
+- SPASDK-149 Bumping versions to 18.0.1 [`#SPASDK-149`](https://issues.onehippo.com/browse/SPASDK-149)
+- SPASDK-149 Retrieve spa service from correct container [`#SPASDK-149`](https://issues.onehippo.com/browse/SPASDK-149)
+- SPASDK-149 Revert "SPASDK-149 Revert "SPASDK-148 Set cms update listener after loading the cms module"" [`#SPASDK-149`](https://issues.onehippo.com/browse/SPASDK-149)
+- SPASDK-149 Revert "SPASDK-148 Set cms update listener after loading the cms module" [`#SPASDK-149`](https://issues.onehippo.com/browse/SPASDK-149)
+- SPASDK-149 Display rich text in Banner and Content components [`#SPASDK-149`](https://issues.onehippo.com/browse/SPASDK-149)
+- SPASDK-122 Remove default apiVersion header value from PDA request [`#SPASDK-122`](https://issues.onehippo.com/browse/SPASDK-122)
+- SPASDK-122 Adjust bump script for cross-env [`#SPASDK-122`](https://issues.onehippo.com/browse/SPASDK-122)
+- SPASDK-149 Merge branch 'bugfix/SPASDK-149-ssr' into development [`#SPASDK-149`](https://issues.onehippo.com/browse/SPASDK-149)
+- SPASDK-149 Initialize now always returns a Promise&lt;Page&gt; [`#SPASDK-149`](https://issues.onehippo.com/browse/SPASDK-149)
+- SPASDK-149 Fix data object in vue components [`#SPASDK-149`](https://issues.onehippo.com/browse/SPASDK-149)
+- SPASDK-149 Clarify event origins in classes and modules [`#SPASDK-149`](https://issues.onehippo.com/browse/SPASDK-149)
+- SPASDK-149 Prevent tests from hogging all the CPU resources and crashing the system [`#SPASDK-149`](https://issues.onehippo.com/browse/SPASDK-149)
+
+### [spa-sdk-19.0.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-18.0.1...spa-sdk-19.0.0)
+
+> 2 December 2022
+
+- SPASDK-146 Bumping versions to 19.0.0 [`#SPASDK-146`](https://issues.onehippo.com/browse/SPASDK-146)
+
+#### [spa-sdk-18.0.1](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-18.0.0...spa-sdk-18.0.1)
+
+> 7 December 2022
+
+- SPASDK-148 Update component in preview when editing [`#103`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/103)
+- SPASDK-149 Bumping versions to 18.0.1 [`#SPASDK-149`](https://issues.onehippo.com/browse/SPASDK-149)
 - SPASDK-149 Retrieve spa service from correct container [`#SPASDK-149`](https://issues.onehippo.com/browse/SPASDK-149)
 - SPASDK-149 Revert "SPASDK-149 Revert "SPASDK-148 Set cms update listener after loading the cms module"" [`#SPASDK-149`](https://issues.onehippo.com/browse/SPASDK-149)
 - SPASDK-149 Revert "SPASDK-148 Set cms update listener after loading the cms module" [`#SPASDK-149`](https://issues.onehippo.com/browse/SPASDK-149)
@@ -13,13 +63,6 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-149 Fix data object in vue components [`#SPASDK-149`](https://issues.onehippo.com/browse/SPASDK-149)
 - SPASDK-149 Clarify event origins in classes and modules [`#SPASDK-149`](https://issues.onehippo.com/browse/SPASDK-149)
 - SPASDK-149 Prevent tests from hogging all the CPU resources and crashing the system [`#SPASDK-149`](https://issues.onehippo.com/browse/SPASDK-149)
-
-### [spa-sdk-19.0.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-18.0.0...spa-sdk-19.0.0)
-
-> 2 December 2022
-
-- SPASDK-148 Update component in preview when editing [`#103`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/103)
-- SPASDK-146 Bumping versions to 19.0.0 [`#SPASDK-146`](https://issues.onehippo.com/browse/SPASDK-146)
 - SPASDK-148 Disable failing test for now [`#SPASDK-148`](https://issues.onehippo.com/browse/SPASDK-148)
 - SPASDK-148 Set cms update listener after loading the cms module [`#SPASDK-148`](https://issues.onehippo.com/browse/SPASDK-148)
 - SPASDK-148 Output sourcemaps for ES modules [`#SPASDK-148`](https://issues.onehippo.com/browse/SPASDK-148)

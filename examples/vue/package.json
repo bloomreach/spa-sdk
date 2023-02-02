@@ -1,14 +1,14 @@
 {
   "name": "@bloomreach/example-vue",
   "description": "Example Vue.js SPA for Bloomreach Experience",
-  "version": "18.0.1",
+  "version": "19.0.0",
   "private": true,
   "scripts": {
     "build": "vue-cli-service build",
     "dev": "npm run serve",
     "lint": "vue-cli-service lint --no-fix",
     "serve": "vue-cli-service serve",
-    "test": "vue-cli-service test:unit --passWithNoTests"
+    "test": "vue-cli-service test:unit --pass-with-no-tests"
   },
   "browserslist": [
     "last 1 chrome version",
@@ -18,8 +18,8 @@
   ],
   "dependencies": {
     "@bloomreach/segmentation": "0.0.13",
-    "@bloomreach/spa-sdk": "18.0.1",
-    "@bloomreach/vue-sdk": "18.0.1",
+    "@bloomreach/spa-sdk": "19.0.0",
+    "@bloomreach/vue-sdk": "19.0.0",
     "axios": "0.26.1",
     "core-js": "3.16.0",
     "vue": "2.6.14",
@@ -40,11 +40,16 @@
     "@vue/eslint-config-prettier": "6.0.0",
     "@vue/eslint-config-typescript": "7.0.0",
     "@vue/test-utils": "1.2.2",
+    "css-loader": "5.2.7",
     "eslint": "7.32.0",
     "eslint-plugin-prettier": "3.4.0",
+    "postcss-loader": "4.3.0",
     "prettier": "2.3.2",
-    "typescript": "4.1.6",
-    "vue-template-compiler": "2.6.14"
+    "sass-loader": "10.4.1",
+    "typescript": "4.3.5",
+    "vue-server-renderer": "2.6.14",
+    "vue-template-compiler": "2.6.14",
+    "webpack": "4.46.0"
   },
   "jest": {
     "preset": "@vue/cli-plugin-unit-jest/presets/typescript-and-babel"

@@ -1,11 +1,11 @@
 /*
- * Copyright 2020-2022 Bloomreach
+ * Copyright 2020-2023 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ *   https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,9 +16,9 @@
 
 import {
   ChangeDetectorRef,
-  ComponentFactoryResolver,
   Directive,
   Injector,
+  Input,
   OnChanges,
   OnDestroy,
   SimpleChanges,
@@ -29,30 +29,26 @@ import { ContainerItem, TYPE_CONTAINER_ITEM_UNDEFINED } from '@bloomreach/spa-sd
 import { BrContainerItemUndefinedComponent } from './br-container-item-undefined/br-container-item-undefined.component';
 import { BrNodeComponentDirective } from './br-node-component.directive';
 import { BrNodeDirective } from './br-node.directive';
-import { BrPageComponent } from './br-page/br-page.component';
+import { BrPageService } from './br-page/br-page.service';
 import { BrProps } from './br-props.model';
 
 @Directive({
   selector: '[brNodeContainerItem]',
-  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['component:brNodeContainerItem'],
 })
-export class BrNodeContainerItemDirective
-  extends BrNodeComponentDirective<ContainerItem>
-  implements OnChanges, OnDestroy
-{
+export class BrNodeContainerItemDirective extends BrNodeComponentDirective implements OnChanges, OnDestroy {
   constructor(
     container: ViewContainerRef,
     injector: Injector,
-    componentFactoryResolver: ComponentFactoryResolver,
     node: BrNodeDirective,
-    page: BrPageComponent,
+    page: BrPageService,
     private changeDetectorRef: ChangeDetectorRef,
   ) {
-    super(container, injector, componentFactoryResolver, node, page);
+    super(container, injector, node, page);
 
     this.onUpdate = this.onUpdate.bind(this);
   }
+
+  @Input('brNodeContainerItem') component?: ContainerItem;
 
   ngOnChanges(changes: SimpleChanges): void {
     changes.component?.previousValue?.off('update', this.onUpdate);

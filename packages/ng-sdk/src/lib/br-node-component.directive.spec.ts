@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Bloomreach
+ * Copyright 2020-2023 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ *   https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,7 +21,7 @@ import { BehaviorSubject } from 'rxjs';
 import { BrComponentContext } from './br-component.directive';
 import { BrNodeComponentDirective } from './br-node-component.directive';
 import { BrNodeDirective } from './br-node.directive';
-import { BrPageComponent } from './br-page/br-page.component';
+import { BrPageService } from './br-page/br-page.service';
 
 @Component({
   selector: 'br-component-test',
@@ -38,7 +38,6 @@ class ComponentTestComponent {
 
 @NgModule({
   declarations: [ComponentTestComponent],
-  entryComponents: [ComponentTestComponent],
 })
 class TestModule {}
 
@@ -67,7 +66,7 @@ describe('BrNodeComponentDirective', () => {
   let component: jest.Mocked<SpaComponent>;
   let meta: jest.Mocked<MetaCollection>;
   let node: BrNodeDirective;
-  let page: BrPageComponent;
+  let page: BrPageService;
   let template: TemplateRef<BrComponentContext>;
   let fixture: ComponentFixture<TestComponent>;
 
@@ -93,7 +92,7 @@ describe('BrNodeComponentDirective', () => {
         imports: [TestModule],
         providers: [
           { provide: BrNodeDirective, useFactory: () => node },
-          { provide: BrPageComponent, useFactory: () => page },
+          { provide: BrPageService, useFactory: () => page },
         ],
       }).compileComponents();
     }),

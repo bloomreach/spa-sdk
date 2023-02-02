@@ -1,6 +1,6 @@
 {
   "private": true,
-  "version": "18.0.1",
+  "version": "19.0.0",
   "description": "Bloomreach SPA SDK",
   "name": "spa-sdk-workspace",
   "keywords": [
@@ -9,8 +9,8 @@
     "sdk"
   ],
   "engines": {
-    "node": "14.x.x || 16.x.x",
-    "npm": "8"
+    "node": "^14.0.0 || ^16.0.0",
+    "npm": "^8.0.0 || ^9.0.0"
   },
   "workspaces": [
     "packages/*",
@@ -27,12 +27,13 @@
     "url": "https://issues.onehippo.com/projects/SPASDK/issues"
   },
   "scripts": {
-    "audit": "lerna exec 'npm audit --omit=dev --audit-level=critical' --no-private --stream",
-    "prebuild:custom": "lerna exec 'npm run prebuild:custom' --scope @bloomreach/example-angular",
+    "audit": "lerna exec --no-private --stream -- \"npm audit --omit=dev --audit-level=critical\"",
+    "prebuild:custom": "lerna exec --scope @bloomreach/example-angular -- \"npm run prebuild:custom\"",
     "build": "lerna run build --stream",
     "dev": "npm run build -- --watch",
     "bump": "lerna version --exact --no-push --no-git-tag-version --yes --force-publish",
-    "postbump": "npm version $(node -p -e \"require('./lerna.json').version\") --no-git-tag-version && npm install --legacy-peer-deps --package-lock-only && npm run changelog",
+    "postbump": "npm run lerna-version && npm install --package-lock-only && npm run changelog",
+    "lerna-version": "node -e \"require('child_process').execSync('npm version ' + require('./lerna.json').version + ' --no-git-tag-version')\"",
     "changelog": "auto-changelog",
     "docs": "lerna run docs",
     "deploy-to-heroku": "./scripts/deploy_heroku_app.sh ${0} ${1} ${2}",
@@ -42,16 +43,22 @@
     "test": "lerna run test --concurrency 4"
   },
   "overrides": {
-    "@oclif/color": ">=0.1.0"
+    "@oclif/color": ">=0.1.0",
+    "@vue/cli-plugin-typescript": {
+      "typescript": "4.3.5"
+    },
+    "eslint@>=1.6.0 <7.0.0": "7.32.0"
   },
   "devDependencies": {
-    "@lerna-lite/cli": "1.5.1",
-    "@lerna-lite/exec": "1.5.1",
-    "@lerna-lite/publish": "1.5.1",
-    "@lerna-lite/run": "1.5.1",
+    "@lerna-lite/cli": "1.14.2",
+    "@lerna-lite/exec": "1.14.2",
+    "@lerna-lite/publish": "1.14.2",
+    "@lerna-lite/run": "1.14.2",
     "auto-changelog": "2.3.0",
     "heroku": "7.60.2",
-    "serve": "13.0.2"
+    "serve": "13.0.2",
+    "typescript": "4.3.5",
+    "webpack": "4.46.0"
   },
   "auto-changelog": {
     "hideCredit": true,

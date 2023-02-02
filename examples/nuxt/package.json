@@ -1,6 +1,6 @@
 {
   "name": "@bloomreach/example-nuxt",
-  "version": "18.0.1",
+  "version": "19.0.0",
   "description": "Example Nuxt.js SPA for Bloomreach Experience",
   "private": true,
   "scripts": {
@@ -12,8 +12,8 @@
   },
   "dependencies": {
     "@bloomreach/segmentation": "0.0.13",
-    "@bloomreach/spa-sdk": "18.0.1",
-    "@bloomreach/vue-sdk": "18.0.1",
+    "@bloomreach/spa-sdk": "19.0.0",
+    "@bloomreach/vue-sdk": "19.0.0",
     "@nuxtjs/axios": "5.13.6",
     "@nuxtjs/dotenv": "1.4.1",
     "consola": "2.15.3",
@@ -36,11 +36,16 @@
     "eslint-plugin-nuxt": "2.0.0",
     "eslint-plugin-prettier": "3.4.0",
     "nodemon": "2.0.12",
-    "prettier": "2.3.2"
+    "prettier": "2.3.2",
+    "ts-loader": "^8.0.17"
   },
   "eslintConfig": {
     "extends": [
       "@bloomreach/eslint-config-nuxt"
-    ]
+    ],
+    "rules": {
+      "vue/html-self-closing": "off",
+      "vue/singleline-html-element-content-newline": "off"
+    }
   }
 }
