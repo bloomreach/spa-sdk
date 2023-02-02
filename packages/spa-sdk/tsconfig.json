@@ -16,20 +16,19 @@
     "sourceMap": true,
     "strict": true,
     "target": "es6",
-    "useDefineForClassFields": false
+    "useDefineForClassFields": false,
+    "skipLibCheck": true
   },
   "typedocOptions": {
     "disableSources": true,
     "excludePrivate": true,
     "excludeProtected": true,
     "exclude": "!lib/**/*",
-    "external-modulemap": ".*\/lib\/([\\w\\-_]+)",
+    "external-modulemap": [".*\/lib\/([\\w\\-_]+)", ".*\/lib\/([\\w\\-_]+)\/"],
     "hideGenerator": true,
-    "ignoreCompilerErrors": true,
-    "includeDeclarations": true,
     "includeVersion": true,
-    "inputFiles": ["lib/index.d.ts", "lib/express/index.d.ts"],
-    "mode": "modules",
+    "entryPoints": ["lib/index.d.ts", "lib/express/index.d.ts"],
+
     "out": "docs"
   }
 }
