@@ -22,8 +22,8 @@ describe('UrlBuilderImpl', () => {
     const options2 = { ...options1, apiBaseUrl: 'http://127.0.0.1/resourceapi' };
     const options3 = { ...options1, apiBaseUrl: 'http://localhost:8080/site/spa/resourceapi?param=value' };
     const options4 = { ...options1, spaBaseUrl: '/news' };
-    const options5 = { ...options1, spaBaseUrl: '//example.com/news' };
-    const options6 = { ...options1, spaBaseUrl: 'https://example.com/news' };
+    const options5 = { ...options1, spaBaseUrl: '//example-domain.com/news' };
+    const options6 = { ...options1, spaBaseUrl: 'https://example-domain.com/news' };
 
     /* eslint-disable max-len */
     it.each`
@@ -67,7 +67,7 @@ describe('UrlBuilderImpl', () => {
 
   describe('getSpaUrl', () => {
     const options1 = { cmsBaseUrl: 'http://localhost:8080/site/spa' };
-    const options2 = { ...options1, spaBaseUrl: '//example.com/something' };
+    const options2 = { ...options1, spaBaseUrl: '//example-domain.com/something' };
     const options3 = { ...options1, spaBaseUrl: '' };
     const options4 = { ...options1, spaBaseUrl: '/something?param=value#header' };
 
@@ -79,8 +79,8 @@ describe('UrlBuilderImpl', () => {
       ${options1} | ${'/site/spa/news/'}      | ${'/news/'}
       ${options1} | ${'/site/spa/news?a=b'}   | ${'/news?a=b'}
       ${options1} | ${'/site/spa/news?a=b#h'} | ${'/news?a=b#h'}
-      ${options2} | ${'/site/spa/about'}      | ${'//example.com/something/about'}
-      ${options2} | ${'//host/site/spa/news'} | ${'//example.com/something/news'}
+      ${options2} | ${'/site/spa/about'}      | ${'//example-domain.com/something/about'}
+      ${options2} | ${'//host/site/spa/news'} | ${'//example-domain.com/something/news'}
       ${options3} | ${'//host/site/spa'}      | ${'/'}
       ${options4} | ${'/site/spa/news?a=b'}   | ${'/something/news?a=b&param=value#header'}
       ${options4} | ${'/site/spa/news#hash'}  | ${'/something/news?param=value#hash'}

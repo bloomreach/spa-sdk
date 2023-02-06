@@ -41,7 +41,7 @@ describe('initialize', () => {
     defaultPage = await initialize({
       httpClient,
       window,
-      baseUrl: '//example.com',
+      baseUrl: '//example-domain.com',
       endpoint: 'http://localhost:8080/site/my-spa/resourceapi',
       path: '/?token=something',
       request: { emit },
@@ -81,11 +81,11 @@ describe('initialize', () => {
   /* eslint-disable max-len */
   it.each`
     link                                                                   | expected
-    ${''}                                                                  | ${'//example.com/?token=something'}
-    ${'/news'}                                                             | ${'//example.com/news?token=something'}
+    ${''}                                                                  | ${'//example-domain.com/?token=something'}
+    ${'/news'}                                                             | ${'//example-domain.com/news?token=something'}
     ${{ href: 'http://127.0.0.1/news?a=b', type: TYPE_LINK_EXTERNAL }}     | ${'http://127.0.0.1/news?a=b'}
-    ${{ href: '/news?a=b', type: TYPE_LINK_INTERNAL }}                     | ${'//example.com/news?a=b&token=something'}
-    ${{ href: 'news#hash', type: TYPE_LINK_INTERNAL }}                     | ${'//example.com/news?token=something#hash'}
+    ${{ href: '/news?a=b', type: TYPE_LINK_INTERNAL }}                     | ${'//example-domain.com/news?a=b&token=something'}
+    ${{ href: 'news#hash', type: TYPE_LINK_INTERNAL }}                     | ${'//example-domain.com/news?token=something#hash'}
     ${{ href: 'http://127.0.0.1/resource.jpg', type: TYPE_LINK_RESOURCE }} | ${'http://127.0.0.1/resource.jpg'}
   `('should create a URL "$expected" for link "$link"', ({ link, expected }) => {
     expect(defaultPage.getUrl(link)).toBe(expected);
@@ -165,7 +165,7 @@ describe('initialize', () => {
     const document1 = defaultPage.getContent(banner1!.getModels().document);
 
     expect(document0!.getUrl()).toBe('http://127.0.0.1/site/another-spa/banner1.html');
-    expect(document1!.getUrl()).toBe('//example.com/banner2.html?token=something');
+    expect(document1!.getUrl()).toBe('//example-domain.com/banner2.html?token=something');
   });
 
   it('should rewrite links in the HTML blob', async () => {
