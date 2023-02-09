@@ -29,6 +29,7 @@ export default defineConfig({
         // for externalized deps
         globals: {
           vue: 'Vue',
+          '@bloomreach/spa-sdk': 'BloomreachSpaSdk'
         },
       },
     },

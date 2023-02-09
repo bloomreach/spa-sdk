@@ -29,7 +29,7 @@
     :page="page"
   />
 
-  <br-container-item-undefined v-else-if="component" :component="component" :page="page"/>
+  <br-container-item-undefined v-else-if="component" :component="component"/>
 </template>
 
 <script setup lang="ts">

@@ -15,7 +15,11 @@
   -->
 
 <template>
-  <render />
+  <template v-for="component in components">
+    <br-node-component :component="component">
+      <slot :component="component" :page="page"></slot>
+    </br-node-component>
+  </template>
 </template>
 
 <script setup lang="ts">
@@ -49,16 +53,5 @@ const { component } = defineProps<{ component?: Component | string }>();
 const page = inject(page$);
 const parent = inject(component$);
 const slots = useSlots();
-
-const render = () => {
-  const components = getComponents(parent, component).map((component) => {
-    h(
-      BrNodeComponent,
-      { props: { component } },
-      slots.default?.({ component, page }),
-    );
-  });
-
-  return components.length > 1 ? h(components) : components[0];
-};
+const components = getComponents(parent, component);
 </script>

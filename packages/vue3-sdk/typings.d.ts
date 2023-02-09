@@ -14,31 +14,31 @@
  * limitations under the License.
  */
 
-import { App, Component } from 'vue';
+import { App, Component, Plugin } from 'vue';
 
 /**
  * The brXM SDK plugin.
  */
-export declare function BrSdk(vue: App): void;
+export declare const BrSdk: Plugin;
 
 /**
  * The button component that opens for editing a content.
  */
-export declare const BrManageContentButton: App;
+export declare const BrManageContentButton: Component;
 
 /**
  * The button component that opens a menu editor.
  */
-export declare const BrManageMenuButton: App;
+export declare const BrManageMenuButton: Component;
 
 /**
  * The brXM component.
  */
-export declare const BrComponent: App;
+export declare const BrComponent: Component;
 
 /**
  * The brXM page.
  */
-export declare const BrPage: App;
+export declare const BrPage: Component;
 
-export type BrMapping = Record<keyof any, Component | string>
+export declare type BrMapping = Record<keyof any, Component | string>

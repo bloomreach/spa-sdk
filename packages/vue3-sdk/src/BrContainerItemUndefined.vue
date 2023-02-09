@@ -15,7 +15,7 @@
   -->
 
 <template>
-  <div>{{ `Component "${component?.getType()}" is not defined.` }}</div>
+  <div>{{ `Component "${component.getType()}" is not defined.` }}</div>
 </template>
 
 <script setup lang="ts">

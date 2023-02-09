@@ -35,13 +35,13 @@ import BrMeta from '@/BrMeta.vue';
 import BrNodeContainer from '@/BrNodeContainer.vue';
 import BrNodeContainerItem from '@/BrNodeContainerItem.vue';
 import { component$, mapping$, page$ } from '@/providerKeys';
-import type { Component } from '@bloomreach/spa-sdk';
+import type { Component, Page } from '@bloomreach/spa-sdk';
 import { isContainer, isContainerItem } from '@bloomreach/spa-sdk';
 import { defineProps, inject, provide } from 'vue';
+import type { Ref } from 'vue';
 
 const { component } = defineProps<{ component?: Component }>();
-
-const page = inject(page$);
+const page = inject(page$, {} as Ref<Page>);
 const mapping = inject(mapping$, {});
 const children = component?.getChildren();
 const meta = component?.getMeta();

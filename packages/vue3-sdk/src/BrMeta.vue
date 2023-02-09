@@ -15,7 +15,7 @@
   -->
 
 <template>
-  <slot></slot>
+  <slot />
 </template>
 
 <script setup lang="ts">
@@ -34,11 +34,13 @@ import {
 const { meta } = defineProps<{ meta?: MetaCollection }>();
 const metaRef = ref(meta);
 let clear: ReturnType<MetaCollection['render']> | undefined;
+
 const inject = () => {
   const { proxy } = getCurrentInstance()!;
   const el = proxy?.$el as Node;
   clear = el && meta?.render(el, el);
 };
+
 watch(metaRef, () => {
   const { proxy } = getCurrentInstance()!;
   proxy?.$forceUpdate();

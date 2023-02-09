@@ -18,12 +18,12 @@ import BrComponent from '@/BrComponent.vue';
 import BrManageContentButton from '@/BrManageContentButton.vue';
 import BrManageMenuButton from '@/BrManageMenuButton.vue';
 import BrPage from '@/BrPage.vue';
-import type { App } from 'vue';
+import type { App, Plugin } from 'vue';
 
 /**
  * The brXM SDK plugin.
  */
-export const BrSdk = {
+export const BrSdk: Plugin = {
   install(app: App): void {
     app.component('br-component', BrComponent);
     app.component('br-manage-content-button', BrManageContentButton);
