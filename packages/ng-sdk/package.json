@@ -1,6 +1,6 @@
 {
   "name": "@bloomreach/ng-sdk",
-  "version": "19.0.0",
+  "version": "19.0.1",
   "description": "Bloomreach SPA SDK for Angular",
   "keywords": [
     "bloomreach",
@@ -26,8 +26,18 @@
     "prepack": "$npm_execpath run build && rm dist/package.json dist/README.md",
     "test": "ng test"
   },
+  "module": "dist/fesm2015/index.mjs",
+  "es2020": "dist/fesm2020/index.mjs",
+  "esm2020": "dist/esm2020/index.mjs",
+  "fesm2020": "dist/fesm2020/index.mjs",
+  "fesm2015": "dist/fesm2015/index.mjs",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "sideEffects": false,
   "dependencies": {
-    "@bloomreach/spa-sdk": "19.0.0",
+    "@bloomreach/spa-sdk": "19.0.1",
     "tslib": "^2.3.0"
   },
   "peerDependencies": {
