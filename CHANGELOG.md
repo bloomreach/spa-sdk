@@ -2,10 +2,22 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### [19.0.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-19.0.0...19.0.0)
+#### [19.0.1](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-19.0.0...19.0.1)
+
+- feature/SPASDK-156 use a non-registrable domain to protect from link highjacking [`#111`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/111)
+- SPASDK-167 Restore ng-sdk package.json properties [`#SPASDK-167`](https://issues.onehippo.com/browse/SPASDK-167)
+- SPASDK-154 Merge branch 'typedoc-update' into 'development' [`#SPASDK-154`](https://issues.onehippo.com/browse/SPASDK-154)
+- SPASDK-154 Update typedoc to latest version supported by current typescript version 4.3.5 [`#SPASDK-154`](https://issues.onehippo.com/browse/SPASDK-154)
+- feature/SPASDK-156 update tests to no longer use 'example.com' as domain as that is used internally as a DUMMY [`ab0737f`](https://github.com/bloomreach/spa-sdk/commit/ab0737f4f4284606b4df66e6bed7ad3c09ed0f42)
+- feature/SPASDK-156 lint formating [`8f645dd`](https://github.com/bloomreach/spa-sdk/commit/8f645dd99d0f08d74aa2ceba3a27d5ff31749407)
+
+### [spa-sdk-19.0.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-18.0.1...spa-sdk-19.0.0)
+
+> 1 February 2023
 
 - SPASDK-151 Upgrade the angular SDK and the example app to Angular 15 [`#106`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/106)
 - SPASDK-122 Remove default apiVersion header value from PDA request [`#102`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/102)
+- SPASDK-154 Bumping versions to 19.0.0 [`#SPASDK-154`](https://issues.onehippo.com/browse/SPASDK-154)
 - SPASDK-151 Remove unneeded npm flag [`#SPASDK-151`](https://issues.onehippo.com/browse/SPASDK-151)
 - SPASDK-151 Fix spa-sdk tests hanging and some deprecation errors [`#SPASDK-151`](https://issues.onehippo.com/browse/SPASDK-151)
 - SPASDK-151 Update licences [`#SPASDK-151`](https://issues.onehippo.com/browse/SPASDK-151)
@@ -29,24 +41,8 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-151 Delete unused tslint file and fix ng-packagr configuration [`#SPASDK-151`](https://issues.onehippo.com/browse/SPASDK-151)
 - SPASDK-151 Upgrade ng-sdk to Angular 12 [`#SPASDK-151`](https://issues.onehippo.com/browse/SPASDK-151)
 - SPASDK-151 Fix npm scripts to work on Windows [`#SPASDK-151`](https://issues.onehippo.com/browse/SPASDK-151)
-- SPASDK-149 Bumping versions to 18.0.1 [`#SPASDK-149`](https://issues.onehippo.com/browse/SPASDK-149)
-- SPASDK-149 Retrieve spa service from correct container [`#SPASDK-149`](https://issues.onehippo.com/browse/SPASDK-149)
-- SPASDK-149 Revert "SPASDK-149 Revert "SPASDK-148 Set cms update listener after loading the cms module"" [`#SPASDK-149`](https://issues.onehippo.com/browse/SPASDK-149)
-- SPASDK-149 Revert "SPASDK-148 Set cms update listener after loading the cms module" [`#SPASDK-149`](https://issues.onehippo.com/browse/SPASDK-149)
-- SPASDK-149 Display rich text in Banner and Content components [`#SPASDK-149`](https://issues.onehippo.com/browse/SPASDK-149)
 - SPASDK-122 Remove default apiVersion header value from PDA request [`#SPASDK-122`](https://issues.onehippo.com/browse/SPASDK-122)
 - SPASDK-122 Adjust bump script for cross-env [`#SPASDK-122`](https://issues.onehippo.com/browse/SPASDK-122)
-- SPASDK-149 Merge branch 'bugfix/SPASDK-149-ssr' into development [`#SPASDK-149`](https://issues.onehippo.com/browse/SPASDK-149)
-- SPASDK-149 Initialize now always returns a Promise&lt;Page&gt; [`#SPASDK-149`](https://issues.onehippo.com/browse/SPASDK-149)
-- SPASDK-149 Fix data object in vue components [`#SPASDK-149`](https://issues.onehippo.com/browse/SPASDK-149)
-- SPASDK-149 Clarify event origins in classes and modules [`#SPASDK-149`](https://issues.onehippo.com/browse/SPASDK-149)
-- SPASDK-149 Prevent tests from hogging all the CPU resources and crashing the system [`#SPASDK-149`](https://issues.onehippo.com/browse/SPASDK-149)
-
-### [spa-sdk-19.0.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-18.0.1...spa-sdk-19.0.0)
-
-> 2 December 2022
-
-- SPASDK-146 Bumping versions to 19.0.0 [`#SPASDK-146`](https://issues.onehippo.com/browse/SPASDK-146)
 
 #### [spa-sdk-18.0.1](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-18.0.0...spa-sdk-18.0.1)
 
