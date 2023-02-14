@@ -21,8 +21,8 @@ describe('UrlBuilderImpl', () => {
     const options1 = { endpoint: 'http://localhost:8080/site/spa/resourceapi' };
     const options2 = { endpoint: 'http://localhost:8080/site/spa/resourceapi?param=value' };
     const options3 = { ...options1, baseUrl: '/news' };
-    const options4 = { ...options1, baseUrl: '//example.com/news' };
-    const options5 = { ...options1, baseUrl: 'https://example.com/news' };
+    const options4 = { ...options1, baseUrl: '//example-domain.com/news' };
+    const options5 = { ...options1, baseUrl: 'https://example-domain.com/news' };
 
     it.each`
       options     | path                     | expected
@@ -59,7 +59,7 @@ describe('UrlBuilderImpl', () => {
 
   describe('getSpaUrl', () => {
     const options1 = {};
-    const options2 = { baseUrl: '//example.com/something' };
+    const options2 = { baseUrl: '//example-domain.com/something' };
     const options3 = { baseUrl: '' };
     const options4 = { baseUrl: '/something?param=value#header' };
 
@@ -70,8 +70,8 @@ describe('UrlBuilderImpl', () => {
       ${options1} | ${'/news'}       | ${'/news'}
       ${options1} | ${'/news?a=b'}   | ${'/news?a=b'}
       ${options1} | ${'/news?a=b#h'} | ${'/news?a=b#h'}
-      ${options2} | ${'/about'}      | ${'//example.com/something/about'}
-      ${options2} | ${'//host/news'} | ${'//example.com/something/news'}
+      ${options2} | ${'/about'}      | ${'//example-domain.com/something/about'}
+      ${options2} | ${'//host/news'} | ${'//example-domain.com/something/news'}
       ${options3} | ${'//host/'}     | ${'/'}
       ${options4} | ${'/news?a=b'}   | ${'/something/news?a=b&param=value#header'}
       ${options4} | ${'/news#hash'}  | ${'/something/news?param=value#hash'}

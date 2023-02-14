@@ -40,7 +40,7 @@ describe('initialize', () => {
       window,
       cmsBaseUrl: 'http://localhost:8080/site/my-spa',
       path: '/?token=something',
-      spaBaseUrl: '//example.com',
+      spaBaseUrl: '//example-domain.com',
     });
   });
 
@@ -59,7 +59,7 @@ describe('initialize', () => {
         },
         preview: {
           cmsBaseUrl: 'http://localhost:8080/site/_cmsinternal/my-spa',
-          spaBaseUrl: '//example.com?bloomreach-preview=true',
+          spaBaseUrl: '//example-domain.com?bloomreach-preview=true',
         },
       },
     });
@@ -93,11 +93,11 @@ describe('initialize', () => {
   /* eslint-disable max-len */
   it.each`
     link                                                                   | expected
-    ${''}                                                                  | ${'//example.com/?token=something'}
-    ${'/site/my-spa/news'}                                                 | ${'//example.com/news?token=something'}
+    ${''}                                                                  | ${'//example-domain.com/?token=something'}
+    ${'/site/my-spa/news'}                                                 | ${'//example-domain.com/news?token=something'}
     ${{ href: 'http://127.0.0.1/news?a=b', type: TYPE_LINK_EXTERNAL }}     | ${'http://127.0.0.1/news?a=b'}
-    ${{ href: '/news?a=b', type: TYPE_LINK_INTERNAL }}                     | ${'//example.com/news?a=b&token=something'}
-    ${{ href: 'news#hash', type: TYPE_LINK_INTERNAL }}                     | ${'//example.com/news?token=something#hash'}
+    ${{ href: '/news?a=b', type: TYPE_LINK_INTERNAL }}                     | ${'//example-domain.com/news?a=b&token=something'}
+    ${{ href: 'news#hash', type: TYPE_LINK_INTERNAL }}                     | ${'//example-domain.com/news?token=something#hash'}
     ${{ href: 'http://127.0.0.1/resource.jpg', type: TYPE_LINK_RESOURCE }} | ${'http://127.0.0.1/resource.jpg'}
   `('should create a URL "$expected" for link "$link"', ({ link, expected }) => {
     expect(page.getUrl(link)).toBe(expected);
@@ -177,7 +177,7 @@ describe('initialize', () => {
     const document1 = page.getContent(banner1!.getModels().document);
 
     expect(document0!.getUrl()).toBe('http://127.0.0.1/site/another-spa/banner1.html');
-    expect(document1!.getUrl()).toBe('//example.com/banner2.html?token=something');
+    expect(document1!.getUrl()).toBe('//example-domain.com/banner2.html?token=something');
   });
 
   it('should rewrite links in the HTML blob', async () => {
@@ -236,7 +236,7 @@ describe('initialize', () => {
     const pageWithApiBaseUrl = await initialize({
       httpClient,
       window,
-      apiBaseUrl: 'https://api.example.com/site/my-spa/resourceapi',
+      apiBaseUrl: 'https://api.example-domain.com/site/my-spa/resourceapi',
       cmsBaseUrl: 'http://localhost:8080/site/my-spa',
       path: '',
     });
@@ -244,7 +244,7 @@ describe('initialize', () => {
     await pageWithApiBaseUrl.sync();
     destroy(pageWithApiBaseUrl);
 
-    expect(postMessageSpy).toBeCalledWith(expect.anything(), 'https://api.example.com');
+    expect(postMessageSpy).toBeCalledWith(expect.anything(), 'https://api.example-domain.com');
   });
 
   it('should use a custom origin', async () => {

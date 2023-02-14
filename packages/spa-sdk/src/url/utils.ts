@@ -28,7 +28,8 @@ export function parseUrl(url: string): Url {
   // to be able to resolve relative URLs.
   // The dummy URL have to be unique to avoid any intersection with a real URL
   // because we are using the origin property from parsed URL object.
-  const DUMMY_BASE_URL = 'http://zmfrzxvybc5jb20.com';
+  // we are using example.com as it is a domain which cannot be registered by anyone (like a malicious user)
+  const DUMMY_BASE_URL = 'http://example.com';
   const parsedUrl = new URL(url, DUMMY_BASE_URL);
   const { hash, search, searchParams } = parsedUrl;
 
