@@ -24,9 +24,7 @@ export interface BrNodeContext extends BrComponentContext {
   template?: TemplateRef<BrComponentContext>;
 }
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class BrPageService {
   private _mapping: Record<keyof any, Type<BrProps>> = {};
   private _node!: TemplateRef<BrNodeContext>;
