@@ -2,9 +2,18 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### [19.0.1](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-19.0.0...19.0.1)
+#### [19.0.2](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-19.0.1...19.0.2)
+
+- SPASDK-168 Change BrPageService to support multiple br-page components [`#116`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/116)
+- SPASDK-168 Change BrPageService to support multiple br-page components [`#SPASDK-168`](https://issues.onehippo.com/browse/SPASDK-168)
+
+#### [spa-sdk-19.0.1](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-19.0.0...spa-sdk-19.0.1)
+
+> 13 February 2023
 
 - feature/SPASDK-156 use a non-registrable domain to protect from link highjacking [`#111`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/111)
+- SPASDK-167 Merge branch 'bugfix/SPASDK-167-ng-sdk' into 'development' [`#SPASDK-167`](https://issues.onehippo.com/browse/SPASDK-167)
+- SPASDK-167 Bumping versions to 19.0.1 [`#SPASDK-167`](https://issues.onehippo.com/browse/SPASDK-167)
 - SPASDK-167 Restore ng-sdk package.json properties [`#SPASDK-167`](https://issues.onehippo.com/browse/SPASDK-167)
 - SPASDK-154 Merge branch 'typedoc-update' into 'development' [`#SPASDK-154`](https://issues.onehippo.com/browse/SPASDK-154)
 - SPASDK-154 Update typedoc to latest version supported by current typescript version 4.3.5 [`#SPASDK-154`](https://issues.onehippo.com/browse/SPASDK-154)
@@ -561,5 +570,6 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-2 Log warning for unsupported method "getContentReference" in v0.9 [`#SPASDK-2`](https://issues.onehippo.com/browse/SPASDK-2)
 - SPASDK-2 Add exported function "getContainerItemContent" [`#SPASDK-2`](https://issues.onehippo.com/browse/SPASDK-2)
 - SPASDK-1 Bump to use node 14 [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
+- SPASDK-1 Remove maven files and update Jenkinsfile [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
 - TRIVIAL Set branch name to 'main' in changesetBaseRefs [`4dacdcd`](https://github.com/bloomreach/spa-sdk/commit/4dacdcd2fdb0712e40dcb33b9809ae12786f9ab1)
 - TRIVIAL Skip telemetry check on nuxt startup [`15deb25`](https://github.com/bloomreach/spa-sdk/commit/15deb25b1edde3af3296d4dc34dba1483fe278f2)
