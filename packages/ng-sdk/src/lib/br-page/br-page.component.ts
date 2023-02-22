@@ -52,6 +52,7 @@ import { BrNodeContext, BrPageService } from './br-page.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'br-page',
   templateUrl: './br-page.component.html',
+  providers: [BrPageService],
 })
 export class BrPageComponent implements AfterContentChecked, AfterContentInit, OnChanges, OnDestroy {
   /**
