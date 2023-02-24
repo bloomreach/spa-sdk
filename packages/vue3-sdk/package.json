@@ -1,16 +1,31 @@
 {
-  "name": "vue3-sdk",
-  "version": "0.0.0",
+  "name": "@bloomreach/vue3-sdk",
+  "version": "19.0.2",
   "private": true,
   "type": "module",
+  "main": "./dist/index.umd.cjs",
+  "module": "./dist/index.js",
+  "types": "typings.d.ts",
+  "files": [
+    "dist",
+    "typings.d.ts"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.umd.cjs"
+    }
+  },
   "scripts": {
-    "dev": "vite",
+    "dev": "vite build --watch",
     "build": "run-p type-check build-only",
     "preview": "vite preview",
     "build-only": "vite build",
-    "type-check": "vue-tsc --noEmit"
+    "type-check": "vue-tsc --noEmit",
+    "type-check:watch": "vue-tsc --noEmit --watch"
   },
   "dependencies": {
+    "@bloomreach/spa-sdk": "19.0.2",
     "vue": "^3.2.45"
   },
   "devDependencies": {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Bloomreach
+ * Copyright 2023 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,11 +14,22 @@
  * limitations under the License.
  */
 
-import type { App } from 'vue';
+import BrComponent from '@/BrComponent.vue';
+import BrManageContentButton from '@/BrManageContentButton.vue';
+import BrManageMenuButton from '@/BrManageMenuButton.vue';
+import BrPage from '@/BrPage.vue';
+import type { App, Plugin } from 'vue';
 
 /**
  * The brXM SDK plugin.
  */
-export function BrSdk(vue: App): void {
-}
+export const BrSdk: Plugin = {
+  install(app: App): void {
+    app.component('br-component', BrComponent);
+    app.component('br-manage-content-button', BrManageContentButton);
+    app.component('br-manage-menu-button', BrManageMenuButton);
+    app.component('br-page', BrPage);
+  },
+};
 
+export { BrComponent, BrManageContentButton, BrManageMenuButton, BrPage };
