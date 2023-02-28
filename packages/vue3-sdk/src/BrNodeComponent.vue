@@ -37,7 +37,7 @@ import BrNodeContainerItem from '@/BrNodeContainerItem.vue';
 import { component$, mapping$, page$ } from '@/providerKeys';
 import type { Component, Page } from '@bloomreach/spa-sdk';
 import { isContainer, isContainerItem } from '@bloomreach/spa-sdk';
-import { defineProps, inject, provide } from 'vue';
+import { inject, provide } from 'vue';
 import type { Ref } from 'vue';
 
 const { component } = defineProps<{ component?: Component }>();

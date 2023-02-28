@@ -22,7 +22,7 @@
 import { page$ } from '@/providerKeys';
 import type { Menu, MetaCollection, Page } from '@bloomreach/spa-sdk';
 import { TYPE_MANAGE_MENU_BUTTON } from '@bloomreach/spa-sdk';
-import { computed, defineProps, inject } from 'vue';
+import { computed, inject } from 'vue';
 import BrMeta from './BrMeta.vue';
 
 const { menu } = defineProps<{ menu: Menu }>();

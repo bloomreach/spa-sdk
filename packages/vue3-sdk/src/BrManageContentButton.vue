@@ -22,7 +22,7 @@
 import { page$ } from '@/providerKeys';
 import type { ManageContentButton, Page } from '@bloomreach/spa-sdk';
 import { TYPE_MANAGE_CONTENT_BUTTON } from '@bloomreach/spa-sdk';
-import { computed, defineProps, inject } from 'vue';
+import { computed, inject } from 'vue';
 import BrMeta from './BrMeta.vue';
 
 const props = defineProps<{

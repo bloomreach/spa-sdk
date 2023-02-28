@@ -25,7 +25,7 @@ import BrNodeComponent from '@/BrNodeComponent.vue';
 import { mapping$, page$ } from '@/providerKeys';
 import type { Component, Configuration, Page, PageModel } from '@bloomreach/spa-sdk';
 import { destroy, initialize } from '@bloomreach/spa-sdk';
-import { computed, defineProps, onMounted, onServerPrefetch, onUnmounted, onUpdated, provide, ref, watch } from 'vue';
+import { computed, onMounted, onServerPrefetch, onUnmounted, onUpdated, provide, ref, watch } from 'vue';
 import type { BrMapping } from '../typings';
 
 function destroyPage() {

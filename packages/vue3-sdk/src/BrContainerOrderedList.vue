@@ -19,7 +19,7 @@
 
 <script setup lang="ts">
 import type { Page } from '@bloomreach/spa-sdk';
-import { defineProps, h, useSlots } from 'vue';
+import { h, useSlots } from 'vue';
 
 const { page } = defineProps<{ page?: Page }>();
 const slots = useSlots();

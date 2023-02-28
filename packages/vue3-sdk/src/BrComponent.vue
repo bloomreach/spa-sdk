@@ -27,7 +27,7 @@ import BrNodeComponent from '@/BrNodeComponent.vue';
 import { component$, page$ } from '@/providerKeys';
 import type { Component } from '@bloomreach/spa-sdk';
 import { isComponent } from '@bloomreach/spa-sdk';
-import { defineProps, h, inject, useSlots } from 'vue';
+import { h, inject, useSlots } from 'vue';
 
 function getComponents(
   parentComponent: Component | undefined,
