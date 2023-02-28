@@ -1,5 +1,5 @@
 <!--
-  Copyright 2023 Bloomreach
+  Copyright 2020-2023 Bloomreach
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -14,16 +14,24 @@
   limitations under the License.
   -->
 
-<template>
-  <div>Hello World</div>
-</template>
+<script lang="ts" setup>
+import CookieConsentInit, { isConsentReceived, runPersonalization } from '../utils/cookieconsent';
+import { onMounted, ref, watch } from 'vue';
 
-<script setup lang="ts">
-import { defineProps } from 'vue';
-import type { Component, Page } from '@bloomreach/spa-sdk';
+const { isPreview, path } = defineProps<{
+  isPreview: boolean,
+  path: string,
+}>();
 
-const { component, page } = defineProps<{
-  component?: Component,
-  page?: Page
-}>()
+onMounted(() => {
+  if (isPreview) {
+    CookieConsentInit();
+  }
+});
+
+watch(ref(path), () => {
+  if (!isPreview && isConsentReceived()) {
+    runPersonalization(path);
+  }
+});
 </script>

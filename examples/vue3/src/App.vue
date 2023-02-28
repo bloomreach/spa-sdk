@@ -15,7 +15,10 @@
   -->
 
 <script setup lang="ts">
-import HelloWorld from '@/components/HelloWorld.vue';
+import BrBanner from '@/components/BrBanner.vue';
+import BrContent from '@/components/BrContent.vue';
+import BrMenu from '@/components/BrMenu.vue';
+import BrNewsList from '@/components/BrNewsList.vue';
 import type { Configuration } from '@bloomreach/spa-sdk';
 import type { BrMapping } from '@bloomreach/vue3-sdk';
 import { BrComponent, BrPage } from '@bloomreach/vue3-sdk';
@@ -23,7 +26,11 @@ import axios from 'axios';
 import { ref } from 'vue';
 
 const mapping: BrMapping = {
-  'Banner': HelloWorld,
+  Banner: BrBanner,
+  Content: BrContent,
+  menu: BrMenu,
+  'News List': BrNewsList,
+  'Simple Content': BrContent,
 };
 
 const configuration = ref<Configuration>({
@@ -34,31 +41,38 @@ const configuration = ref<Configuration>({
 </script>
 
 <template>
-  <h1>BrPage</h1>
-  <br-page :configuration="configuration" :mapping="mapping">
-    <template #default="{ component, page }">
-     <template v-if="page">
-       <h1>This is a page with version {{ page.getVersion() }}</h1>
-       <div>
-         <h1>Menu</h1>
-         <br-component :component="'menu'"></br-component>
-       </div>
-       <div>
-         <h1>Main</h1>
-         <br-component :component="'main'">
-           <h1>Container</h1>
-           <br-component :component="'container'"></br-component>
-           <h1>Container2</h1>
-           <br-component :component="'container2'"></br-component>
-         </br-component>
-       </div>
-       <div>
-         <h1>Footer</h1>
-         <br-component :component="'bottom'"></br-component>
-       </div>
-     </template>
-    </template>
-  </br-page>
+  <div id="app" class="d-flex flex-column vh-100">
+    <br-page :configuration="configuration" :mapping="mapping">
+      <template v-slot:default="props">
+        <template v-if="props.page">
+          <header>
+            <nav class="navbar navbar-expand-sm navbar-dark sticky-top bg-dark" role="navigation">
+              <div class="container">
+                <router-link :to="props.page.getUrl('/')" class="navbar-brand">
+                  {{ props.page.getTitle() || 'brXM + Vue.js = ♥' }}
+                </router-link>
+                <div class="collapse navbar-collapse">
+                  <br-component component="menu" />
+                </div>
+              </div>
+            </nav>
+          </header>
+          <section class="container flex-fill pt-3">
+            <br-component component="main" />
+          </section>
+          <footer class="bg-dark text-light py-3">
+            <div class="container clearfix">
+              <div class="float-left pr-3">&copy; Bloomreach</div>
+              <div class="overflow-hidden">
+                <br-component component="footer" />
+              </div>
+            </div>
+          </footer>
+          <br-cookie-consent :isPreview="props.page.isPreview()" :path="configuration.path"></br-cookie-consent>
+        </template>
+      </template>
+    </br-page>
+  </div>
 </template>
 
 <style>
