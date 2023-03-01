@@ -27,7 +27,6 @@
 
 <script lang="ts" setup>
 import type { Component, Document, ImageSet, Page } from '@bloomreach/spa-sdk';
-import { onMounted } from 'vue';
 
 const { component, page } = defineProps<{
   component: Component,
@@ -40,9 +39,5 @@ const data = document?.getData<DocumentData>();
 const image = data?.image && page.getContent<ImageSet>(data.image);
 const date = data?.date ?? data?.publicationDate;
 const formatDate = (date: number) => (new Date(date).toDateString());
-let html: string | null;
-
-onMounted(async () => {
-  html = await page.prepareHTML(documentRef, 'content');
-});
+const html = await page.prepareHTML(documentRef, 'content');
 </script>
