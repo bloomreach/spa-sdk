@@ -5,7 +5,7 @@
   you may not use this file except in compliance with the License.
   You may obtain a copy of the License at
 
-   https://www.apache.org/licenses/LICENSE-2.0
+    https://www.apache.org/licenses/LICENSE-2.0
 
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,11 +22,11 @@
         {{ item.getName() }}
       </span>
 
-      <a v-else-if="item.getLink().type === TYPE_LINK_EXTERNAL" class="nav-link text-capitalize" :href="item.getUrl()">
+      <a v-else-if="item.getLink()?.type === TYPE_LINK_EXTERNAL" class="nav-link text-capitalize" :href="item.getUrl()">
         {{ item.getName() }}
       </a>
 
-      <router-link v-else :to="item.getUrl()" class="nav-link text-capitalize">
+      <router-link v-else :to="item.getUrl() || ''" class="nav-link text-capitalize">
         {{ item.getName() }}
       </router-link>
     </li>
@@ -34,19 +34,21 @@
 </template>
 
 <script setup lang="ts">
-import { TYPE_LINK_EXTERNAL, isMenu } from '@bloomreach/spa-sdk';
 import type { Component, Menu, Page } from '@bloomreach/spa-sdk';
-import { computed } from 'vue';
+import { isMenu, TYPE_LINK_EXTERNAL } from '@bloomreach/spa-sdk';
+import { computed, toRefs } from 'vue';
+import { RouterLink } from 'vue-router';
 
-const { component, page } = defineProps<{
+const props = defineProps<{
   component: Component,
   page: Page,
 }>();
+const { component, page } = toRefs(props);
 
 const menu = computed(() => {
-  const menuRef = component.getModels<MenuModels>()?.menu;
-  const menu = menuRef && page.getContent<Menu>(menuRef);
+  const menuRef = component.value.getModels<MenuModels>()?.menu;
+  const menu = menuRef && page.value.getContent<Menu>(menuRef);
 
   return isMenu(menu) ? menu : undefined;
-})
+});
 </script>

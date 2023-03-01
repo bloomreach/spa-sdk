@@ -37,14 +37,15 @@ import BrNodeContainerItem from '@/BrNodeContainerItem.vue';
 import { component$, mapping$, page$ } from '@/providerKeys';
 import type { Component } from '@bloomreach/spa-sdk';
 import { isContainer, isContainerItem } from '@bloomreach/spa-sdk';
-import { inject, provide } from 'vue';
+import { inject, provide, toRefs } from 'vue';
 
-const { component } = defineProps<{ component?: Component }>();
+const props = defineProps<{ component?: Component }>();
+const { component } = toRefs(props);
 const page = inject(page$);
 const mapping = inject(mapping$, {});
-const children = component?.getChildren();
-const meta = component?.getMeta();
-const name = component?.getName();
+const children = component?.value?.getChildren();
+const meta = component?.value?.getMeta();
+const name = component?.value?.getName();
 
-provide(component$, component);
+provide(component$, props.component);
 </script>

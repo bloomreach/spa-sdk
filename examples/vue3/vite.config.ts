@@ -26,8 +26,6 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
-      // Have to add this to remove warnings of 'source-map-js' imported by sanitize-html
-      'source-map-js': ''
     }
   },
 })

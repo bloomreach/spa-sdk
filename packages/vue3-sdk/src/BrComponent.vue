@@ -27,7 +27,7 @@ import BrNodeComponent from '@/BrNodeComponent.vue';
 import { component$, page$ } from '@/providerKeys';
 import type { Component } from '@bloomreach/spa-sdk';
 import { isComponent } from '@bloomreach/spa-sdk';
-import { inject, useSlots } from 'vue';
+import { inject, toRefs, useSlots } from 'vue';
 
 function getComponents(
   parentComponent: Component | undefined,
@@ -49,9 +49,10 @@ function getComponents(
   return parentComponents ? [parentComponents] : [];
 }
 
-const { component } = defineProps<{ component?: Component | string }>();
+const props = defineProps<{ component?: Component | string }>();
+const { component } = toRefs(props);
 const page = inject(page$);
 const parent = inject(component$);
 const slots = useSlots();
-const components = getComponents(parent, component);
+const components = getComponents(parent, component?.value);
 </script>

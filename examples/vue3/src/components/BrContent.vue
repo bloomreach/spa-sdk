@@ -17,9 +17,9 @@
 <template>
   <div v-if="document" :class="{ 'has-edit-button': page.isPreview() }">
     <br-manage-content-button :content="document" />
-    <img v-if="image" class="img-fluid mb-3" :src="image.getOriginal().getUrl()" :alt="data.title" />
-    <h1 v-if="data.title">{{ data.title }}</h1>
-    <p v-if="data.author" class="mb-3 text-muted">{{ data.author }}</p>
+    <img v-if="image" class="img-fluid mb-3" :src="image?.getOriginal()?.getUrl()" :alt="data?.title" />
+    <h1 v-if="data?.title">{{ data.title }}</h1>
+    <p v-if="data?.author" class="mb-3 text-muted">{{ data.author }}</p>
     <p v-if="date" class="mb-3 small text-muted">{{ formatDate(date) }}</p>
     <div v-if="html" v-html="html" />
   </div>
@@ -27,17 +27,19 @@
 
 <script lang="ts" setup>
 import type { Component, Document, ImageSet, Page } from '@bloomreach/spa-sdk';
+import { toRefs } from 'vue';
 
-const { component, page } = defineProps<{
+const props = defineProps<{
   component: Component,
   page: Page
 }>();
+const { component, page } = toRefs(props);
 
-const { document: documentRef } = component.getModels<DocumentModels>();
-const document = documentRef && page.getContent<Document>(documentRef);
+const { document: documentRef } = component.value.getModels<DocumentModels>();
+const document = documentRef && page.value.getContent<Document>(documentRef);
 const data = document?.getData<DocumentData>();
-const image = data?.image && page.getContent<ImageSet>(data.image);
+const image = data?.image && page.value.getContent<ImageSet>(data.image);
 const date = data?.date ?? data?.publicationDate;
 const formatDate = (date: number) => (new Date(date).toDateString());
-const html = await page.prepareHTML(documentRef, 'content');
+const html = await page.value.prepareHTML(documentRef, 'content');
 </script>

@@ -5,7 +5,7 @@
   you may not use this file except in compliance with the License.
   You may obtain a copy of the License at
 
-   https://www.apache.org/licenses/LICENSE-2.0
+    https://www.apache.org/licenses/LICENSE-2.0
 
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,16 +18,16 @@
   <div class="card mb-3">
     <div class="card-body">
       <br-manage-content-button :content="item" />
-      <h2 v-if="data.title" class="card-title">
-        <router-link :to="item.getUrl()">{{ data.title }}</router-link>
+      <h2 v-if="data?.title" class="card-title">
+        <router-link :to="item?.getUrl() || ''">{{ data.title }}</router-link>
       </h2>
-      <div v-if="data.author" class="card-subtitle mb-3 text-muted">
+      <div v-if="data?.author" class="card-subtitle mb-3 text-muted">
         {{ data.author }}
       </div>
-      <div v-if="data.date" class="card-subtitle mb-3 small text-muted">
+      <div v-if="data?.date" class="card-subtitle mb-3 small text-muted">
         {{ formatDate(data.date) }}
       </div>
-      <p v-if="data.introduction" class="card-text">
+      <p v-if="data?.introduction" class="card-text">
         {{ data.introduction }}
       </p>
     </div>
@@ -35,15 +35,15 @@
 </template>
 
 <script setup lang="ts">
-import type { Document, Page } from '@bloomreach/spa-sdk';
-import { computed } from 'vue';
+import type { Document } from '@bloomreach/spa-sdk';
+import { computed, toRefs } from 'vue';
 
 const formatDate = (date: number) => (new Date(date).toDateString());
 
-const { item, page } = defineProps<{
-  item: Document,
-  page: Page,
+const props = defineProps<{
+  item?: Document,
 }>();
+const { item } = toRefs(props);
 
-const data = computed(() => item.getData<DocumentData>());
+const data = computed(() => item?.value?.getData<DocumentData>());
 </script>

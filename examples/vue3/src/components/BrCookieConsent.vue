@@ -14,14 +14,17 @@
   limitations under the License.
   -->
 
-<script lang="ts" setup>
-import CookieConsentInit, { isConsentReceived, runPersonalization } from '../utils/cookieconsent';
-import { onMounted, ref, watch } from 'vue';
+<template></template>
 
-const { isPreview, path } = defineProps<{
+<script lang="ts" setup>
+import { onMounted, toRefs, watch } from 'vue';
+import CookieConsentInit, { isConsentReceived, runPersonalization } from '../utils/cookieconsent';
+
+const props = defineProps<{
   isPreview: boolean,
-  path: string,
+  path?: string,
 }>();
+const { isPreview, path } = toRefs(props);
 
 onMounted(() => {
   if (isPreview) {
@@ -29,9 +32,12 @@ onMounted(() => {
   }
 });
 
-watch(ref(path), () => {
-  if (!isPreview && isConsentReceived()) {
-    runPersonalization(path);
-  }
-});
+watch(
+  () => path,
+  () => {
+    if (path && !isPreview && isConsentReceived()) {
+      runPersonalization(path.value);
+    }
+  },
+);
 </script>

@@ -5,7 +5,7 @@
   you may not use this file except in compliance with the License.
   You may obtain a copy of the License at
 
-   https://www.apache.org/licenses/LICENSE-2.0
+    https://www.apache.org/licenses/LICENSE-2.0
 
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
@@ -30,14 +30,15 @@
 
 <script setup lang="ts">
 import type { Component, Page } from '@bloomreach/spa-sdk';
-import { computed } from 'vue';
+import { computed, toRefs } from 'vue';
 import BrNewsListItem from './BrNewsListItem.vue';
 import BrNewsListPagination from './BrNewsListPagination.vue';
 
-const { component, page } = defineProps<{
+const props = defineProps<{
   component: Component,
   page: Page,
 }>();
+const { component, page } = toRefs(props);
 
-const pageable = computed(() => component.getModels<PageableModels>().pageable);
+const pageable = computed(() => component.value.getModels<PageableModels>().pageable);
 </script>

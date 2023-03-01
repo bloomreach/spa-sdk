@@ -1,17 +1,17 @@
 <!--
-  - Copyright 2023 Bloomreach
-  -
-  - Licensed under the Apache License, Version 2.0 (the "License");
-  - you may not use this file except in compliance with the License.
-  - You may obtain a copy of the License at
-  -
-  -   http://www.apache.org/licenses/LICENSE-2.0
-  -
-  - Unless required by applicable law or agreed to in writing, software
-  - distributed under the License is distributed on an "AS IS" BASIS,
-  - WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  - See the License for the specific language governing permissions and
-  - limitations under the License.
+  Copyright 2023 Bloomreach
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+    https://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
   -->
 <template>
   <render />
@@ -19,17 +19,18 @@
 
 <script setup lang="ts">
 import type { Page } from '@bloomreach/spa-sdk';
-import { h, useSlots } from 'vue';
+import { h, toRefs, useSlots } from 'vue';
 
-const { page } = defineProps<{ page?: Page }>();
+const props = defineProps<{ page?: Page }>();
+const { page } = toRefs(props);
 const slots = useSlots();
 
 const render = () => h(
   'ol',
-  { class: { 'hst-container': page?.isPreview() } },
+  { class: { 'hst-container': page?.value?.isPreview() } },
   slots.default?.().map((node) => h(
     'li',
-    { class: { 'hst-container-item': page?.isPreview() } },
+    { class: { 'hst-container-item': page?.value?.isPreview() } },
     [node],
   )),
 );
