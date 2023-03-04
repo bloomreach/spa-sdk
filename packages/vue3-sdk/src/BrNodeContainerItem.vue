@@ -38,11 +38,13 @@
 import { component$, mapping$, page$ } from '@/providerKeys';
 import type { ContainerItem } from '@bloomreach/spa-sdk';
 import { TYPE_CONTAINER_ITEM_UNDEFINED } from '@bloomreach/spa-sdk';
+import type { Ref } from 'vue';
 import { computed, inject } from 'vue';
+import type { BrMapping } from '../typings';
 import BrContainerItemUndefined from './BrContainerItemUndefined.vue';
 
 const page = inject(page$);
-const mapping = inject(mapping$, {});
-const component = inject<ContainerItem>(component$);
-const componentType = computed(() => component?.getType());
+const mapping = inject(mapping$) as Ref<BrMapping>;
+const component = inject<Ref<ContainerItem>>(component$);
+const componentType = computed(() => component?.value?.getType());
 </script>

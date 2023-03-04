@@ -15,9 +15,9 @@
   -->
 
 <template>
-  <div v-if="document" :class="{ 'has-edit-button': page.isPreview() }">
+  <div v-if="document" :class="{ 'has-edit-button': isPreview }">
     <br-manage-content-button :content="document" />
-    <img v-if="image" class="img-fluid mb-3" :src="image?.getOriginal()?.getUrl()" :alt="data?.title" />
+    <img v-if="image" class="img-fluid mb-3" :src="image.getOriginal()?.getUrl()" :alt="data?.title" />
     <h1 v-if="data?.title">{{ data.title }}</h1>
     <p v-if="data?.author" class="mb-3 text-muted">{{ data.author }}</p>
     <p v-if="date" class="mb-3 small text-muted">{{ formatDate(date) }}</p>
@@ -27,19 +27,23 @@
 
 <script lang="ts" setup>
 import type { Component, Document, ImageSet, Page } from '@bloomreach/spa-sdk';
-import { toRefs } from 'vue';
+import { formatDate } from '@/utils/dates';
+import { computed, watch } from 'vue';
 
 const props = defineProps<{
   component: Component,
   page: Page
 }>();
-const { component, page } = toRefs(props);
 
-const { document: documentRef } = component.value.getModels<DocumentModels>();
-const document = documentRef && page.value.getContent<Document>(documentRef);
-const data = document?.getData<DocumentData>();
-const image = data?.image && page.value.getContent<ImageSet>(data.image);
-const date = data?.date ?? data?.publicationDate;
-const formatDate = (date: number) => (new Date(date).toDateString());
-const html = await page.value.prepareHTML(documentRef, 'content');
+const documentRef = computed(() => props.component.getModels<DocumentModels>().document);
+const document = computed(() => documentRef.value && props.page.getContent<Document>(documentRef.value));
+const data = computed(() => document.value?.getData<DocumentData>());
+const image = computed(() => data.value?.image && props.page.getContent<ImageSet>(data.value.image));
+const date = computed(() => data.value?.date ?? data.value?.publicationDate);
+const isPreview = computed(() => props.page.isPreview());
+
+let html: string | null;
+watch(documentRef, async () => {
+  html = await props.page.prepareHTML(documentRef.value, 'content');
+})
 </script>

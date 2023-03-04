@@ -17,9 +17,9 @@
 <template>
   <div class="card mb-3">
     <div class="card-body">
-      <br-manage-content-button :content="item" />
+      <br-manage-content-button :content="document" />
       <h2 v-if="data?.title" class="card-title">
-        <router-link :to="item?.getUrl() || ''">{{ data.title }}</router-link>
+        <router-link :to="document?.getUrl() || ''">{{ data.title }}</router-link>
       </h2>
       <div v-if="data?.author" class="card-subtitle mb-3 text-muted">
         {{ data.author }}
@@ -37,13 +37,11 @@
 <script setup lang="ts">
 import type { Document } from '@bloomreach/spa-sdk';
 import { computed, toRefs } from 'vue';
-
-const formatDate = (date: number) => (new Date(date).toDateString());
+import { formatDate } from '@/utils/dates';
 
 const props = defineProps<{
-  item?: Document,
+  document?: Document,
 }>();
-const { item } = toRefs(props);
-
-const data = computed(() => item?.value?.getData<DocumentData>());
+const { document } = toRefs(props);
+const data = computed(() => document?.value?.getData<DocumentData>());
 </script>

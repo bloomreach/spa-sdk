@@ -19,18 +19,18 @@
 
 <script setup lang="ts">
 import type { Page } from '@bloomreach/spa-sdk';
-import { h, toRefs, useSlots } from 'vue';
+import { computed, h, useSlots } from 'vue';
 
 const props = defineProps<{ page?: Page }>();
-const { page } = toRefs(props);
 const slots = useSlots();
+const isPreview = computed(() => props.page?.isPreview());
 
 const render = () => h(
   'div',
-  { class: { 'hst-container': page?.value?.isPreview() } },
+  { class: { 'hst-container': isPreview } },
   slots.default?.().map((node) => h(
     'div',
-    { class: { 'hst-container-item': page?.value?.isPreview() } },
+    { class: { 'hst-container-item': isPreview } },
     [node],
   )),
 );

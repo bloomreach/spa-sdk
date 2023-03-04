@@ -26,19 +26,18 @@ import {
   onBeforeUpdate,
   onMounted,
   onUpdated,
-  ref, toRefs,
+  ref,
   watch,
 } from 'vue';
 
 const props = defineProps<{ meta?: MetaCollection }>();
-const { meta } = toRefs(props);
-const metaRef = ref(meta);
+const metaRef = ref(props.meta);
 let clear: ReturnType<MetaCollection['render']> | undefined;
 
 const inject = () => {
   const { proxy } = getCurrentInstance()!;
   const el = proxy?.$el as Node;
-  clear = el && meta?.value?.render(el, el);
+  clear = el && metaRef?.value?.render(el, el);
 };
 
 watch(metaRef, () => {

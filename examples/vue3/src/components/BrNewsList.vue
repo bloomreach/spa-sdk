@@ -16,7 +16,7 @@
 
 <template>
   <div v-if="pageable">
-    <br-news-list-item v-for="(item, key) in pageable.items" :key="key" :item="page.getContent(item)" :page="page"/>
+    <br-news-list-item v-for="(item, key) in pageable.items" :key="key" :document="page.getContent(item)" :page="page"/>
     <div v-if="page.isPreview()" class="has-edit-button float-right">
       <br-manage-content-button
         document-template-query="new-news-document"
@@ -38,7 +38,6 @@ const props = defineProps<{
   component: Component,
   page: Page,
 }>();
-const { component, page } = toRefs(props);
-
-const pageable = computed(() => component.value.getModels<PageableModels>().pageable);
+const { page } = toRefs(props);
+const pageable = computed(() => props.component.getModels<PageableModels>().pageable);
 </script>

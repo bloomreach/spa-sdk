@@ -20,7 +20,7 @@
 
 <script setup lang="ts">
 import { page$ } from '@/providerKeys';
-import type { ManageContentButton, Page } from '@bloomreach/spa-sdk';
+import type { ManageContentButton, MetaCollection } from '@bloomreach/spa-sdk';
 import { TYPE_MANAGE_CONTENT_BUTTON } from '@bloomreach/spa-sdk';
 import { computed, inject } from 'vue';
 import BrMeta from './BrMeta.vue';
@@ -42,5 +42,5 @@ const props = defineProps<{
 }>();
 
 const page = inject(page$);
-const meta = computed(() => page?.value.getButton(TYPE_MANAGE_CONTENT_BUTTON, props));
+const meta = computed<MetaCollection | undefined>(() => page?.value.getButton(TYPE_MANAGE_CONTENT_BUTTON, props));
 </script>

@@ -15,7 +15,7 @@
   -->
 
 <template>
-  <div v-if="document" class="jumbotron mb-3" :class="{ 'has-edit-button': page.isPreview() }">
+  <div v-if="document" class="jumbotron mb-3" :class="{ 'has-edit-button': isPreview }">
     <br-manage-content-button
       :content="document"
       document-template-query="new-banner-document"
@@ -25,8 +25,8 @@
       picker-selectable-node-types="best:banner,hap:bannerdocument"
       :relative="true"
     />
-    <h1 v-if="data?.title">{{ data?.title }}</h1>
-    <img v-if="image" class="img-fluid" :src="image?.getOriginal()?.getUrl()" :alt="data?.title" />
+    <h1 v-if="data?.title">{{ data.title }}</h1>
+    <img v-if="image" class="img-fluid" :src="image.getOriginal()?.getUrl()" :alt="data?.title" />
     <div v-if="html" v-html="html" />
     <p v-if="link" className="lead">
       <router-link :to="link.getUrl()" class="btn btn-primary btn-lg" role="button">Learn more</router-link>
@@ -36,18 +36,22 @@
 
 <script lang="ts" setup>
 import type { Component, Document, ImageSet, Page } from '@bloomreach/spa-sdk';
-import { toRefs } from 'vue';
+import { computed, watch } from 'vue';
 
 const props = defineProps<{
   component: Component,
   page: Page
 }>();
-const { component, page } = toRefs(props);
 
-const { document: documentRef } = component.value.getModels<DocumentModels>();
-const document = documentRef && page.value.getContent<Document>(documentRef);
-const data = document?.getData<DocumentData>();
-const image = data?.image && page.value.getContent<ImageSet>(data.image);
-const link = data?.link && page.value.getContent<Document>(data.link);
-const html = await page.value.prepareHTML(documentRef, 'content');
+const documentRef = computed(() => props.component.getModels<DocumentModels>().document);
+const document = computed(() => documentRef.value && props.page.getContent<Document>(documentRef.value));
+const data = computed(() => document.value?.getData<DocumentData>());
+const image = computed(() => data.value?.image && props.page.getContent<ImageSet>(data.value?.image));
+const link = computed(() => data.value?.link && props.page.getContent<Document>(data.value?.link));
+const isPreview = computed(() => props.page.isPreview());
+
+let html: string | null;
+watch(documentRef, async () => {
+  html = await props.page.prepareHTML(documentRef.value, 'content');
+})
 </script>

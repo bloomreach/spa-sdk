@@ -17,26 +17,25 @@
 <template></template>
 
 <script lang="ts" setup>
-import { onMounted, toRefs, watch } from 'vue';
+import { onMounted, watch } from 'vue';
 import CookieConsentInit, { isConsentReceived, runPersonalization } from '../utils/cookieconsent';
 
 const props = defineProps<{
   isPreview: boolean,
   path?: string,
 }>();
-const { isPreview, path } = toRefs(props);
 
 onMounted(() => {
-  if (isPreview) {
+  if (props.isPreview) {
     CookieConsentInit();
   }
 });
 
 watch(
-  () => path,
+  () => props.path,
   () => {
-    if (path && !isPreview && isConsentReceived()) {
-      runPersonalization(path.value);
+    if (props.path && !props.isPreview && isConsentReceived()) {
+      runPersonalization(props.path);
     }
   },
 );

@@ -57,7 +57,7 @@ import type { Configuration } from '@bloomreach/spa-sdk';
 import type { BrMapping } from '@bloomreach/vue3-sdk';
 import { BrComponent, BrPage } from '@bloomreach/vue3-sdk';
 import axios from 'axios';
-import { reactive, watch } from 'vue';
+import { ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
 const route = useRoute();
@@ -69,14 +69,14 @@ const mapping: BrMapping = {
   'News List': BrNewsList,
   'Simple Content': BrContent,
 };
-const configuration = reactive<Configuration>({
+const configuration = ref<Configuration>({
   ...buildConfiguration(route.fullPath, axios),
   debug: true,
 });
 
 watch(
   () => route.fullPath,
-  (newPath) => (configuration.path = newPath),
+  (newPath) => (configuration.value.path = newPath),
 );
 </script>
 

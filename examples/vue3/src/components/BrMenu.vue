@@ -15,8 +15,9 @@
   -->
 
 <template>
-  <ul v-if="menu" class="navbar-nav col-12" :class="{ 'has-edit-button': page.isPreview() }">
+  <ul v-if="menu" class="navbar-nav col-12" :class="{ 'has-edit-button': isPreview }">
     <br-manage-menu-button :menu="menu" />
+
     <li v-for="(item, index) in menu.getItems()" :key="index" class="nav-item" :class="{ active: item.isSelected() }">
       <span v-if="!item.getUrl()" class="nav-link text-capitalize disabled">
         {{ item.getName() }}
@@ -36,19 +37,19 @@
 <script setup lang="ts">
 import type { Component, Menu, Page } from '@bloomreach/spa-sdk';
 import { isMenu, TYPE_LINK_EXTERNAL } from '@bloomreach/spa-sdk';
-import { computed, toRefs } from 'vue';
+import { computed } from 'vue';
 import { RouterLink } from 'vue-router';
 
 const props = defineProps<{
   component: Component,
   page: Page,
 }>();
-const { component, page } = toRefs(props);
 
 const menu = computed(() => {
-  const menuRef = component.value.getModels<MenuModels>()?.menu;
-  const menu = menuRef && page.value.getContent<Menu>(menuRef);
+  const menuRef = props.component.getModels<MenuModels>()?.menu;
+  const menu = menuRef && props.page.getContent<Menu>(menuRef);
 
   return isMenu(menu) ? menu : undefined;
 });
+const isPreview = computed(() => props.page.isPreview());
 </script>

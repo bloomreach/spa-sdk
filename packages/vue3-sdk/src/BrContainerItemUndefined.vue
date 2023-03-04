@@ -15,13 +15,13 @@
   -->
 
 <template>
-  <div>{{ `Component "${component.getType()}" is not defined.` }}</div>
+  <div>{{ `Component "${type}" is not defined.` }}</div>
 </template>
 
 <script setup lang="ts">
 import type { ContainerItem } from '@bloomreach/spa-sdk';
-import { defineProps, toRefs } from 'vue';
+import { computed } from 'vue';
 
 const props = defineProps<{ component: ContainerItem }>();
-const { component } = toRefs(props);
+const type = computed(() => props.component.getType());
 </script>

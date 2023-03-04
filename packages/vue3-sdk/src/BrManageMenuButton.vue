@@ -20,13 +20,12 @@
 
 <script setup lang="ts">
 import { page$ } from '@/providerKeys';
-import type { Menu, MetaCollection, Page } from '@bloomreach/spa-sdk';
+import type { Menu, MetaCollection } from '@bloomreach/spa-sdk';
 import { TYPE_MANAGE_MENU_BUTTON } from '@bloomreach/spa-sdk';
-import { computed, inject, toRefs } from 'vue';
+import { computed, inject } from 'vue';
 import BrMeta from './BrMeta.vue';
 
 const props = defineProps<{ menu: Menu }>();
-const { menu } = toRefs(props);
 const page = inject(page$);
-const meta = computed<MetaCollection | undefined>(() => page?.value.getButton(TYPE_MANAGE_MENU_BUTTON, menu));
+const meta = computed<MetaCollection | undefined>(() => page?.value.getButton(TYPE_MANAGE_MENU_BUTTON, props.menu));
 </script>
