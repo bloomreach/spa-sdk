@@ -14,9 +14,9 @@
   limitations under the License.
   -->
 <template>
-  <div id="app" class="d-flex flex-column vh-100">
-    <br-page :configuration="configuration" :mapping="mapping">
-      <template v-slot="{ page }">
+  <br-page :configuration="configuration" :mapping="mapping">
+    <template v-slot="{ page }">
+      <template v-if="page">
         <header>
           <nav class="navbar navbar-expand-sm navbar-dark sticky-top bg-dark" role="navigation">
             <div class="container">
@@ -42,8 +42,8 @@
         </footer>
         <br-cookie-consent :isPreview="page.isPreview()" :path="configuration.path"></br-cookie-consent>
       </template>
-    </br-page>
-  </div>
+    </template>
+  </br-page>
 </template>
 
 <script setup lang="ts">
@@ -71,7 +71,6 @@ const mapping: BrMapping = {
 };
 const configuration = ref<Configuration>({
   ...buildConfiguration(route.fullPath, axios),
-  debug: true,
 });
 
 watch(
