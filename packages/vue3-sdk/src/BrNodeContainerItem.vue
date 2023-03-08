@@ -15,23 +15,21 @@
   -->
 
 <template>
-  <Suspense>
-    <component
-      :is="mapping[componentType]"
-      v-if="componentType && componentType in mapping"
-      :component="component"
-      :page="page"
-    />
+  <component
+    :is="mapping[componentType]"
+    v-if="componentType && componentType in mapping"
+    :component="component"
+    :page="page"
+  />
 
-    <component
-      :is="mapping[TYPE_CONTAINER_ITEM_UNDEFINED]"
-      v-else-if="TYPE_CONTAINER_ITEM_UNDEFINED in mapping"
-      :component="component"
-      :page="page"
-    />
+  <component
+    :is="mapping[TYPE_CONTAINER_ITEM_UNDEFINED]"
+    v-else-if="TYPE_CONTAINER_ITEM_UNDEFINED in mapping"
+    :component="component"
+    :page="page"
+  />
 
-    <br-container-item-undefined v-else-if="component" :component="component"/>
-  </Suspense>
+  <br-container-item-undefined v-else-if="component" :component="component"/>
 </template>
 
 <script setup lang="ts">

@@ -16,42 +16,45 @@
 
 <template>
   <component
-    v-if="componentType && componentType in mapping"
-    :is="mapping[componentType]"
+    v-if="containerType && containerType in mapping"
+    :is="mapping[containerType]"
     :component="component"
     :page="page">
     <slot/>
   </component>
 
   <br-container-inline
-    v-else-if="componentType === TYPE_CONTAINER_INLINE"
+    v-else-if="containerType === TYPE_CONTAINER_INLINE"
     :component="component"
     :page="page">
     <slot/>
   </br-container-inline>
 
   <br-container-no-markup
-    v-else-if="componentType === TYPE_CONTAINER_NO_MARKUP"
+    v-else-if="containerType === TYPE_CONTAINER_NO_MARKUP"
     :component="component"
     :page="page">
     <slot/>
   </br-container-no-markup>
 
   <br-container-ordered-list
-    v-else-if="componentType === TYPE_CONTAINER_ORDERED_LIST"
+    v-else-if="containerType === TYPE_CONTAINER_ORDERED_LIST"
     :component="component"
     :page="page">
     <slot/>
   </br-container-ordered-list>
 
   <br-container-unordered-list
-    v-else-if="componentType === TYPE_CONTAINER_UNORDERED_LIST"
+    v-else-if="containerType === TYPE_CONTAINER_UNORDERED_LIST"
     :component="component"
     :page="page">
     <slot/>
   </br-container-unordered-list>
 
-  <br-container-box v-else :component="component" :page="page">
+  <br-container-box
+    v-else
+    :component="component"
+    :page="page">
     <slot/>
   </br-container-box>
 </template>
@@ -77,5 +80,5 @@ import BrContainerUnorderedList from './BrContainerUnorderedList.vue';
 const page = inject(page$);
 const component = inject<Ref<Container>>(component$);
 const mapping = inject(mapping$) as Ref<BrMapping>;
-const componentType = computed(() => component?.value?.getType());
+const containerType = computed(() => component?.value?.getType());
 </script>

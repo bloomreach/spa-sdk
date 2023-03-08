@@ -15,11 +15,9 @@
   -->
 
 <template>
-  <template v-for="component in components">
-    <br-node-component :component="component">
-      <slot :component="component" :page="page"></slot>
-    </br-node-component>
-  </template>
+  <br-node-component v-for="component in components" :component="component">
+    <slot :component="component" :page="page"></slot>
+  </br-node-component>
 </template>
 
 <script setup lang="ts">
