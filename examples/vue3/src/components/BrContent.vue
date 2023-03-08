@@ -16,19 +16,19 @@
 
 <template>
   <div v-if="document" :class="{ 'has-edit-button': isPreview }">
-    <br-manage-content-button :content="document" />
-    <img v-if="image" class="img-fluid mb-3" :src="image.getOriginal()?.getUrl()" :alt="data?.title" />
+    <br-manage-content-button :content="document"/>
+    <img v-if="image" class="img-fluid mb-3" :src="image.getOriginal()?.getUrl()" :alt="data?.title"/>
     <h1 v-if="data?.title">{{ data.title }}</h1>
     <p v-if="data?.author" class="mb-3 text-muted">{{ data.author }}</p>
     <p v-if="date" class="mb-3 small text-muted">{{ formatDate(date) }}</p>
-    <div v-if="html" v-html="html" />
+    <div v-if="html" v-html="html"/>
   </div>
 </template>
 
 <script lang="ts" setup>
-import type { Component, Document, ImageSet, Page } from '@bloomreach/spa-sdk';
 import { formatDate } from '@/utils/dates';
-import { computed, watch } from 'vue';
+import type { Component, Document, ImageSet, Page } from '@bloomreach/spa-sdk';
+import { computed, ref, watch } from 'vue';
 
 const props = defineProps<{
   component: Component,
@@ -41,9 +41,8 @@ const data = computed(() => document.value?.getData<DocumentData>());
 const image = computed(() => data.value?.image && props.page.getContent<ImageSet>(data.value.image));
 const date = computed(() => data.value?.date ?? data.value?.publicationDate);
 const isPreview = computed(() => props.page.isPreview());
-
-let html: string | null;
+const html = ref<string | null>();
 watch(documentRef, async () => {
-  html = await props.page.prepareHTML(documentRef.value, 'content');
-})
+  html.value = await props.page.prepareHTML(documentRef.value, 'content');
+}, { immediate: true });
 </script>
