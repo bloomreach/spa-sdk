@@ -13,25 +13,13 @@
   See the License for the specific language governing permissions and
   limitations under the License.
   -->
-<template>
-  <render />
-</template>
+<script lang="ts">
+import { useRenderContainer } from '@/render-container';
+import { defineComponent } from 'vue';
 
-<script setup lang="ts">
-import type { Page } from '@bloomreach/spa-sdk';
-import { computed, h, useSlots } from 'vue';
-
-const props = defineProps<{ page?: Page }>();
-const slots = useSlots();
-const isPreview = computed(() => props.page?.isPreview());
-
-const render = () => h(
-  'div',
-  { class: { 'hst-container': isPreview } },
-  slots.default?.().map((node) => h(
-    'span',
-    { class: { 'hst-container-item': isPreview } },
-    [node],
-  )),
-);
+export default defineComponent({
+  setup() {
+    return useRenderContainer('div', 'span');
+  },
+});
 </script>
