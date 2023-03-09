@@ -1,7 +1,6 @@
 {
   "name": "@bloomreach/vue3-sdk",
-  "version": "19.0.2",
-  "private": true,
+  "version": "19.0.2-beta.1",
   "type": "module",
   "main": "./dist/index.umd.cjs",
   "module": "./dist/index.js",
