@@ -14,70 +14,8 @@
   limitations under the License.
   -->
 <template>
-  <br-page :configuration="configuration" :mapping="mapping">
-    <template v-slot="{ page }">
-      <template v-if="page">
-        <header>
-          <nav class="navbar navbar-expand-sm navbar-dark sticky-top bg-dark" role="navigation">
-            <div class="container">
-              <router-link :to="page.getUrl('/')" class="navbar-brand">
-                {{ page.getTitle() || 'brXM + Vue.js = ♥' }}
-              </router-link>
-              <div class="collapse navbar-collapse">
-                <br-component component="menu"/>
-              </div>
-            </div>
-          </nav>
-        </header>
-        <section class="container flex-fill pt-3">
-          <br-component component="main"/>
-        </section>
-        <footer class="bg-dark text-light py-3">
-          <div class="container clearfix">
-            <div class="float-left pr-3">&copy; Bloomreach</div>
-            <div class="overflow-hidden">
-              <br-component component="bottom"/>
-            </div>
-          </div>
-        </footer>
-        <br-cookie-consent :isPreview="page.isPreview()" :path="configuration.path"></br-cookie-consent>
-      </template>
-    </template>
-  </br-page>
+  <router-view :key="$route.fullPath"></router-view>
 </template>
-
-<script setup lang="ts">
-import BrBanner from '@/components/BrBanner.vue';
-import BrContent from '@/components/BrContent.vue';
-import BrCookieConsent from '@/components/BrCookieConsent.vue';
-import BrMenu from '@/components/BrMenu.vue';
-import BrNewsList from '@/components/BrNewsList.vue';
-import { buildConfiguration } from '@/utils/buildConfiguration';
-import type { Configuration } from '@bloomreach/spa-sdk';
-import type { BrMapping } from '@bloomreach/vue3-sdk';
-import { BrComponent, BrPage } from '@bloomreach/vue3-sdk';
-import axios from 'axios';
-import { ref, watch } from 'vue';
-import { useRoute } from 'vue-router';
-
-const route = useRoute();
-
-const mapping: BrMapping = {
-  Banner: BrBanner,
-  Content: BrContent,
-  menu: BrMenu,
-  'News List': BrNewsList,
-  'Simple Content': BrContent,
-};
-const configuration = ref<Configuration>({
-  ...buildConfiguration(route.fullPath, axios),
-});
-
-watch(
-  () => route.fullPath,
-  (newPath) => (configuration.value.path = newPath),
-);
-</script>
 
 <style>
 #app {

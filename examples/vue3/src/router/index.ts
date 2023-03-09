@@ -15,9 +15,10 @@
  */
 
 import App from '@/App.vue';
+import Index from '@/router/Index.vue';
 import { createRouter, createWebHistory } from 'vue-router'
 
-const routes = [{ path: '/:catchAll(.*)', component: App }];
+const routes = [{ path: '/:pathMatch(.*)*', component: Index }];
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
