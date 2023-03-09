@@ -1,0 +1,5 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`BrContainerUnorderedList > render > should render container's children 1`] = `"<ul class=\\"hst-container\\"></ul>"`;
+
+exports[`BrContainerUnorderedList > render > should render preview classes 1`] = `"<ul class=\\"hst-container\\"></ul>"`;

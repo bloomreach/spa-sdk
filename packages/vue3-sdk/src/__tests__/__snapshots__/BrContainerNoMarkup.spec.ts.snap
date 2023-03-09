@@ -1,0 +1,6 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`BrContainerNoMarkup > render > should render container's children 1`] = `
+"<span id=\\"child1\\"></span>
+<span id=\\"child2\\"></span>"
+`;
