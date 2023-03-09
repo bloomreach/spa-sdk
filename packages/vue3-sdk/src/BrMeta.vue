@@ -15,38 +15,33 @@
   -->
 
 <template>
-  <slot />
+  <span v-if="meta && meta.length > 0" style="display: none;" ref="head"/>
+  <slot/>
+  <span v-if="meta && meta.length > 0" style="display: none;" ref="tail"/>
 </template>
 
 <script setup lang="ts">
 import type { MetaCollection } from '@bloomreach/spa-sdk';
-import {
-  getCurrentInstance,
-  onBeforeUnmount,
-  onBeforeUpdate,
-  onMounted,
-  onUpdated,
-  ref,
-  watch,
-} from 'vue';
+import { getCurrentInstance, onBeforeUnmount, onBeforeUpdate, onMounted, onUpdated, ref, watch } from 'vue';
 
 const props = defineProps<{ meta?: MetaCollection }>();
-const metaRef = ref(props.meta);
+const meta = ref(props.meta);
 let clear: ReturnType<MetaCollection['render']> | undefined;
 
+const head = ref<HTMLSpanElement>();
+const tail = ref<HTMLSpanElement>();
+
 const inject = () => {
-  const { proxy } = getCurrentInstance()!;
-  const el = proxy?.$el as Node;
-  clear = el && metaRef?.value?.render(el, el);
+  if (!head.value?.nextSibling || !tail.value) {
+    return;
+  }
+
+  clear = meta.value?.render(head.value.nextSibling, tail.value);
 };
 
-watch(metaRef, () => {
-  const { proxy } = getCurrentInstance()!;
-  proxy?.$forceUpdate();
-}, { deep: false });
-
+watch(meta, () => getCurrentInstance()?.proxy?.$forceUpdate(), { deep: false });
 onMounted(() => inject());
-onBeforeUpdate(() => clear?.());
 onUpdated(() => inject());
 onBeforeUnmount(() => clear?.());
+onBeforeUpdate(() => clear?.());
 </script>
