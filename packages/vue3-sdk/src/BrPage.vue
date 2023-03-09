@@ -15,22 +15,22 @@
   -->
 
 <template>
-  <br-node-component v-if="state || configuration.NBRMode" :component="root">
-    <slot :component="root" :page="state"/>
+  <br-node-component v-if="page || configuration.NBRMode" :component="root">
+    <slot :component="root" :page="page"/>
   </br-node-component>
 </template>
 
 <script setup lang="ts">
 import BrNodeComponent from '@/BrNodeComponent.vue';
 import { mapping$, page$ } from '@/providerKeys';
-import type { Component, Configuration, Page, PageModel } from '@bloomreach/spa-sdk';
+import type { Configuration, Page, PageModel } from '@bloomreach/spa-sdk';
 import { destroy, initialize } from '@bloomreach/spa-sdk';
 import { computed, onMounted, onServerPrefetch, onUnmounted, onUpdated, provide, ref, toRefs, watch } from 'vue';
 import type { BrMapping } from '../typings';
 
 function destroyPage() {
-  if (state.value) {
-    destroy(state.value);
+  if (page.value) {
+    destroy(page.value);
   }
 }
 
@@ -40,39 +40,27 @@ const props = defineProps<{
   mapping: BrMapping,
 }>();
 const { configuration, mapping } = toRefs(props);
-const state = ref<Page>();
+const page = ref<Page>();
+const root = computed(() => page.value?.getComponent());
 let loading: Promise<Page> | null = null;
 
-provide(page$, state);
+provide(page$, page);
 provide(mapping$, mapping);
 
 watch(configuration, async (current, previous) => {
   if (!previous && props.page) {
-    state.value = await initialize(current, props.page);
+    page.value = await initialize(current, props.page);
     return;
   }
 
   destroyPage();
   loading = initialize(current);
-  state.value = await loading;
+  page.value = await loading;
   loading = null;
 }, { deep: true, immediate: true });
 
-onUnmounted(() => {
-  destroyPage();
-});
-
-onMounted(() => {
-  state.value?.sync();
-});
-
-onUpdated(() => {
-  state.value?.sync();
-});
-
-onServerPrefetch(async () => {
-  await loading;
-});
-
-const root = computed<Component | undefined>(() => state.value?.getComponent());
+onMounted(() => page.value?.sync());
+onUpdated(() => page.value?.sync());
+onUnmounted(() => destroyPage());
+onServerPrefetch(async () => await loading);
 </script>
