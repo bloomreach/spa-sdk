@@ -24,4 +24,4 @@ const app = createApp(App)
 app.use(BrSdk)
 app.use(router)
 
-app.mount('#app')
+app.mount('#app');

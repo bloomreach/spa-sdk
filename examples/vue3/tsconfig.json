@@ -7,6 +7,9 @@
       "@/*": ["./src/*"]
     }
   },
+  "types": [
+    "node"
+  ],
 
   "references": [
     {

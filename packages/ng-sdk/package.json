@@ -48,6 +48,7 @@
   },
   "devDependencies": {
     "@angular-builders/jest": "15.0.0",
+    "@angular-devkit/architect": "0.1501.3",
     "@angular-devkit/build-angular": "15.1.3",
     "@angular-eslint/builder": "15.2.0",
     "@angular-eslint/eslint-plugin": "15.2.0",

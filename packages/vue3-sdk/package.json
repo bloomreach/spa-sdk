@@ -1,7 +1,23 @@
 {
   "name": "@bloomreach/vue3-sdk",
-  "version": "19.0.2",
-  "private": true,
+  "version": "19.0.2-beta.2",
+  "description": "Bloomreach SPA SDK for Vue 3",
+  "keywords": [
+    "bloomreach",
+    "sdk",
+    "vue"
+  ],
+  "author": "Bloomreach B.V.",
+  "license": "Apache-2.0",
+  "homepage": "https://www.bloomreach.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bloomreach/spa-sdk",
+    "directory": "packages/vue3-sdk"
+  },
+  "bugs": {
+    "url": "https://issues.onehippo.com/projects/SPASDK/issues"
+  },
   "type": "module",
   "main": "./dist/index.umd.cjs",
   "module": "./dist/index.js",
