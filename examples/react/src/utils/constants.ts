@@ -16,5 +16,3 @@
 
 export const BRXM_ENDPOINT = process.env.REACT_APP_BRXM_ENDPOINT ?? '';
 export const BR_MULTI_TENANT_SUPPORT = process.env.REACT_APP_BR_MULTI_TENANT_SUPPORT === 'true';
-export const REACT_APP_EXPONEA_API_URL = process.env.REACT_APP_EXPONEA_API_URL ?? '';
-export const REACT_APP_EXPONEA_PROJECT_TOKEN = process.env.REACT_APP_EXPONEA_PROJECT_TOKEN ?? '';

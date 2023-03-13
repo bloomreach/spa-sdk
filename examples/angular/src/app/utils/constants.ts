@@ -18,5 +18,3 @@ import { environment } from '../../environments/environment';
 
 export const BRXM_ENDPOINT = environment.endpoint ?? '';
 export const BR_MULTI_TENANT_SUPPORT = environment.hasMultiTenantSupport === 'true';
-export const EXPONEA_PROJECT_TOKEN = environment.exponeaProjectToken ?? '';
-export const EXPONEA_API_URL = environment.exponeaApiUrl ?? '';

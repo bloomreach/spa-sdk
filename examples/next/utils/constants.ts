@@ -16,5 +16,3 @@
 
 export const BRXM_ENDPOINT = process.env.BRXM_ENDPOINT ?? '';
 export const NEXT_PUBLIC_BR_MULTI_TENANT_SUPPORT = process.env.NEXT_PUBLIC_BR_MULTI_TENANT_SUPPORT === 'true';
-export const NEXT_PUBLIC_EXPONEA_PROJECT_TOKEN = process.env.NEXT_PUBLIC_EXPONEA_PROJECT_TOKEN ?? '';
-export const NEXT_PUBLIC_EXPONEA_API_URL = process.env.NEXT_PUBLIC_EXPONEA_API_URL ?? '';
