@@ -36,11 +36,18 @@ export type Sidebar = Record<
 >;
 export const SIDEBAR: Sidebar = {
 	en: {
-		'Section Header': [
-			{ text: 'Introduction', link: 'en/introduction' },
-			{ text: 'Page 2', link: 'en/page-2' },
-			{ text: 'Page 3', link: 'en/page-3' },
+		'Get started': [
+			{ text: 'Installation', link: 'en/introduction' },
+			{ text: 'SPA SDK', link: 'en/page-2' },
+			{ text: 'React SPA SDK', link: 'en/react' },
+			{ text: 'Angular SPA SDK', link: 'en/angular' },
+			{ text: 'Vue 2 SPA SDK', link: 'en/vue-2' },
+			{ text: 'Vue 3 SPA SDK', link: 'en/vue-3' }
 		],
-		'Another Section': [{ text: 'Page 4', link: 'en/page-4' }],
+		'Migration': [
+			{ text: 'v17', link: 'en/v17' },
+			{ text: 'v18', link: 'en/v18' },
+			{ text: 'v19', link: 'en/v19' }
+		],
 	},
 };
