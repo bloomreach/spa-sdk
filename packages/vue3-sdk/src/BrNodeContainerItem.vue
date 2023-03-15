@@ -37,7 +37,7 @@ import { component$, mapping$, page$ } from '@/providerKeys';
 import type { ContainerItem } from '@bloomreach/spa-sdk';
 import { TYPE_CONTAINER_ITEM_UNDEFINED } from '@bloomreach/spa-sdk';
 import type { Ref } from 'vue';
-import { computed, inject } from 'vue';
+import { computed, getCurrentInstance, inject, onUnmounted, onUpdated, watch } from 'vue';
 import type { BrMapping } from '../typings';
 import BrContainerItemUndefined from './BrContainerItemUndefined.vue';
 
@@ -45,4 +45,19 @@ const page = inject(page$);
 const mapping = inject(mapping$) as Ref<BrMapping>;
 const component = inject<Ref<ContainerItem>>(component$);
 const componentType = computed(() => component?.value?.getType());
+let unsubscribe: ReturnType<ContainerItem['on']>;
+
+const updateHook = () => {
+  page?.value.sync();
+};
+onUpdated(updateHook);
+onUnmounted(() => unsubscribe?.());
+
+watch(
+  () => component?.value,
+  () => {
+    unsubscribe?.();
+    unsubscribe = component!.value.on('update', updateHook);
+  }, { immediate: true },
+);
 </script>
