@@ -5,8 +5,8 @@ type Props = {
 };
 const { path } = Astro.props;
 const resolvedPath = `examples/docs/${path}`;
-const url = `https://api.github.com/repos/withastro/astro/commits?path=${resolvedPath}`;
-const commitsURL = `https://github.com/withastro/astro/commits/main/${resolvedPath}`;
+const url = `https://api.github.com/repos/bloomreach/spa-sdk/commits?path=${resolvedPath}`;
+const commitsURL = `https://github.com/bloomreach/spa-sdk/commits/main/${resolvedPath}`;
 
 type Commit = {
 	author: {
@@ -37,7 +37,7 @@ async function getCommits(url: string) {
 		if (!res.ok) {
 			throw new Error(
 				`Request to fetch commits failed. Reason: ${res.statusText}
-       Message: ${data.message}`
+				Message: ${data.message}`
 			);
 		}
 

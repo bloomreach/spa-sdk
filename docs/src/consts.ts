@@ -1,6 +1,6 @@
 export const SITE = {
-	title: 'Documentation',
-	description: 'Your website description.',
+	title: 'Bloomreach SPA SDKs',
+	description: `Bloomreach provides an SPA SDK for integrating SPAs and other Javascript front-end applications with Bloomreach Content's Delivery API and the preview and editing capabilities of the Experience manager application.`,
 	defaultLanguage: 'en-us',
 } as const;
 
@@ -36,18 +36,25 @@ export type Sidebar = Record<
 >;
 export const SIDEBAR: Sidebar = {
 	en: {
-		'Get started': [
-			{ text: 'Installation', link: 'en/introduction' },
-			{ text: 'SPA SDK', link: 'en/page-2' },
-			{ text: 'React SPA SDK', link: 'en/react' },
-			{ text: 'Angular SPA SDK', link: 'en/angular' },
-			{ text: 'Vue 2 SPA SDK', link: 'en/vue-2' },
-			{ text: 'Vue 3 SPA SDK', link: 'en/vue-3' }
+		'Content SaaS': [
+			{ text: 'Getting started', link: '/en/getting-started' },
+			{ text: 'Configuration', link: '/en/configuration' },
+			{ text: 'React SPA SDK', link: '/en/react' },
+			{ text: 'Angular SPA SDK', link: '/en/angular' },
+			{ text: 'Vue 2 SPA SDK', link: '/en/vue-2' },
+			{ text: 'Vue 3 SPA SDK', link: '/en/vue-3' },
+			{ text: 'Framework agnostic SPA SDK', link: '/en/spa-sdk' },
+			{ text: 'Internal reference', link: '/en/reference-saas' },
+		],
+		'Content PaaS': [
+			{ text: 'Relevance integration', link: '/en/relevance-integration' },
+			{ text: 'Internal reference', link: '/en/reference-paas' },
 		],
 		'Migration': [
-			{ text: 'v17', link: 'en/v17' },
-			{ text: 'v18', link: 'en/v18' },
-			{ text: 'v19', link: 'en/v19' }
+			{ text: 'v19', link: '/en/v19' },
+			{ text: 'v18', link: '/en/v18' },
+			{ text: 'v17', link: '/en/v17' },
+			{ text: 'v15', link: '/en/v15' },
 		],
 	},
 };

@@ -12,5 +12,7 @@ export default defineConfig({
     react(),
     mdx(),
   ],
-  site: `https://astro.build`,
+  site: `https://bloomreach.github.io/spa-sdk/docs`,
+  base: `spa-sdk/docs`,
+  trailingSlash: "ignore",
 });
