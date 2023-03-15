@@ -24,21 +24,24 @@ export function useRenderContainer(
 ) {
   const page = inject(page$);
   const isPreview = computed(() => page?.value?.isPreview());
-  const slots = useSlots();
-  const slotDefaultRootNode = slots.default!()[0];
-  const rootNodeChildren = slotDefaultRootNode.children as VNode[] | undefined;
-  const containerItems = rootNodeChildren?.[0]?.children;
 
-  const childNodes = (containerItems as VNode[] | undefined)
-    ?.map((node) => h(
-      containerItemTag,
-      { class: { 'hst-container-item': isPreview } },
-      [node],
-    ));
+  const getChildNodes = () => {
+    const slots = useSlots();
+    const slotDefaultRootNode = slots.default!()[0];
+    const rootNodeChildren = slotDefaultRootNode.children as VNode[] | undefined;
+    const containerItems = rootNodeChildren?.[0]?.children;
+
+    return (containerItems as VNode[] | undefined)
+      ?.map((node) => h(
+        containerItemTag,
+        { class: { 'hst-container-item': isPreview } },
+        [node],
+      ));
+  };
 
   return () => h(
     containerTag,
     { class: { 'hst-container': isPreview } },
-    childNodes,
+    getChildNodes(),
   );
 }
