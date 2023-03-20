@@ -21,7 +21,7 @@ import { isComponent } from '@bloomreach/spa-sdk';
 import { shallowMount } from '@vue/test-utils';
 import type { GlobalMountOptions } from '@vue/test-utils/dist/types';
 import type { Mocked } from 'vitest';
-import { beforeAll, describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { ref } from 'vue';
 import { component$, page$ } from '../providerKeys';
 
@@ -32,7 +32,7 @@ describe('BrComponent', () => {
   let page: Mocked<Page>;
   let global: GlobalMountOptions;
 
-  beforeAll(() => {
+  beforeEach(() => {
     parent = {
       getChildren: vi.fn(() => []),
       getComponent: vi.fn(),

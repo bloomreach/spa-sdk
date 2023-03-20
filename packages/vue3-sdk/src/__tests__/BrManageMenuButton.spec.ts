@@ -20,7 +20,7 @@ import type { MetaCollection, Page } from '@bloomreach/spa-sdk';
 import { shallowMount } from '@vue/test-utils';
 import type { GlobalMountOptions } from '@vue/test-utils/dist/types';
 import type { Mocked } from 'vitest';
-import { beforeAll, describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { ref } from 'vue';
 import { page$ } from '../providerKeys';
 
@@ -31,7 +31,7 @@ describe('BrManageMenuButton', () => {
   let page: Mocked<Page>;
   let global: GlobalMountOptions;
 
-  beforeAll(() => {
+  beforeEach(() => {
     page = {
       getButton: vi.fn(() => meta),
       isPreview: vi.fn(),

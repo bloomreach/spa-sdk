@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-import BrManageContentButton from '../BrManageContentButton.vue';
 import BrMeta from '@/BrMeta.vue';
 import type { MetaCollection, Page } from '@bloomreach/spa-sdk';
-import { mount, shallowMount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import type { GlobalMountOptions } from '@vue/test-utils/dist/types';
 import type { Mocked } from 'vitest';
-import { beforeAll, describe, expect, it, vi } from 'vitest';
-import { nextTick, ref } from 'vue';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { ref } from 'vue';
+import BrManageContentButton from '../BrManageContentButton.vue';
 import { page$ } from '../providerKeys';
 
 describe('BrManageContentButton', () => {
@@ -29,7 +29,7 @@ describe('BrManageContentButton', () => {
   let page: Mocked<Page>;
   let global: GlobalMountOptions;
 
-  beforeAll(() => {
+  beforeEach(() => {
     page = {
       getButton: vi.fn(() => meta),
       isPreview: vi.fn(),
