@@ -43,8 +43,9 @@ function getComponents(
     return parentComponent.getChildren();
   }
 
-  const parentComponents = parentComponent.getComponent(...propsComponent.split('/'));
-  return parentComponents ? [parentComponents] : [];
+  // else propsComponent is a string denoting a path in the page model tree
+  const componentInParent = parentComponent.getComponent(...propsComponent.split('/'));
+  return componentInParent ? [componentInParent] : [];
 }
 
 const props = defineProps<{ component?: Component | string }>();

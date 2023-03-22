@@ -39,14 +39,12 @@ import BrNodeContainerItem from '@/BrNodeContainerItem.vue';
 import { component$, mapping$, page$ } from '@/providerKeys';
 import type { Component } from '@bloomreach/spa-sdk';
 import { isContainer, isContainerItem } from '@bloomreach/spa-sdk';
-import type { Ref } from 'vue';
 import { computed, inject, provide, toRefs } from 'vue';
-import type { BrMapping } from '../typings';
 
 const props = defineProps<{ component?: Component }>();
 const { component } = toRefs(props);
 const page = inject(page$);
-const mapping = inject(mapping$) as Ref<BrMapping>;
+const mapping = inject(mapping$)!;
 
 const children = computed(() => component?.value?.getChildren());
 const meta = computed(() => component?.value?.getMeta());

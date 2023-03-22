@@ -18,46 +18,56 @@
   <component
     :is="mapping[componentType]"
     v-if="componentType && componentType in mapping"
-    :component="component"
+    :component="passedComponent"
     :page="page"
   />
 
   <component
     :is="mapping[TYPE_CONTAINER_ITEM_UNDEFINED]"
     v-else-if="TYPE_CONTAINER_ITEM_UNDEFINED in mapping"
-    :component="component"
+    :component="passedComponent"
     :page="page"
   />
 
-  <br-container-item-undefined v-else-if="component" :component="component"/>
+  <br-container-item-undefined v-else-if="passedComponent" :component="passedComponent"/>
 </template>
 
 <script setup lang="ts">
 import { component$, mapping$, page$ } from '@/providerKeys';
-import type { ContainerItem } from '@bloomreach/spa-sdk';
+import type { Component, ContainerItem } from '@bloomreach/spa-sdk';
 import { TYPE_CONTAINER_ITEM_UNDEFINED } from '@bloomreach/spa-sdk';
 import type { Ref } from 'vue';
-import { computed, getCurrentInstance, inject, onUnmounted, onUpdated, watch } from 'vue';
-import type { BrMapping } from '../typings';
+import { computed, inject, onUnmounted, ref, watch } from 'vue';
 import BrContainerItemUndefined from './BrContainerItemUndefined.vue';
 
-const page = inject(page$);
-const mapping = inject(mapping$) as Ref<BrMapping>;
-const component = inject<Ref<ContainerItem>>(component$);
-const componentType = computed(() => component?.value?.getType());
+const page = inject(page$)!;
+const mapping = inject(mapping$)!;
+const component = inject<Ref<ContainerItem>>(component$)!;
+const componentType = computed(() => component.value.getType());
 let unsubscribe: ReturnType<ContainerItem['on']>;
 
+function shallowClone(value: ContainerItem): ContainerItem {
+  const cloned = Object.create(Object.getPrototypeOf(value));
+  return Object.assign(cloned, value);
+}
+
+// Need to create a new object on every change of container item internals
+// or the unref`ed object reference in the template wont change and the 'component' props
+// will not trigger updates in child components
+// https://vuejs.org/guide/essentials/reactivity-fundamentals.html#ref-unwrapping-in-templates
+// https://vuejs.org/api/reactivity-utilities.html#unref
+const passedComponent = ref<ContainerItem>(component.value);
 const updateHook = () => {
-  page?.value.sync();
+  passedComponent.value = shallowClone(component.value);
+  page.value.sync();
 };
-onUpdated(updateHook);
 onUnmounted(() => unsubscribe?.());
 
 watch(
-  () => component?.value,
+  component,
   () => {
     unsubscribe?.();
-    unsubscribe = component!.value.on('update', updateHook);
-  }, { immediate: true },
+    unsubscribe = component.value.on('update', updateHook);
+  }, { immediate: true, deep: true },
 );
 </script>
