@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-us" class="initial astro-OUAMJN2I">
+	<head>
+		<!-- Global Metadata --><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<meta name="generator" content="Astro v2.1.3">
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+<link rel="sitemap" href="/sitemap.xml">
+
+<!-- Preload Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital@0;1&display=swap" rel="stylesheet">
+
+<!-- Scrollable a11y code helper -->
+<script src="/make-scrollable-code-focusable.js"></script>
+
+<!-- This is intentionally inlined to avoid FOUC -->
+<script>
+  const root = document.documentElement;
+  const theme = localStorage.getItem("theme");
+  if (
+    theme === "dark" ||
+    (!theme && window.matchMedia("(prefers-color-scheme: dark)").matches)
+  ) {
+    root.classList.add("theme-dark");
+  } else {
+    root.classList.remove("theme-dark");
+  }
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-TEL60V1WM9" is:inline></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-TEL60V1WM9');
+</script> -->
+		<!-- Page Metadata --><link rel="canonical" href="https://bloomreach.github.io/spa-sdk/docs/en/reference-saas/">
+
+<!-- OpenGraph Tags -->
+<meta property="og:title" content="Internal reference SaaS 🚀 Bloomreach SPA SDKs">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://bloomreach.github.io/spa-sdk/docs/en/reference-saas/">
+<meta property="og:locale" content="en-us">
+<meta property="og:image" content="https://github.com/withastro/astro/blob/main/assets/social/banner-minimal.png?raw=true">
+<meta property="og:image:alt" content="astro logo on a starry expanse of space, with a purple saturn-like planet floating in the right foreground">
+<meta name="description" property="og:description" content="Internal reference SaaS">
+<meta property="og:site_name" content="Bloomreach SPA SDKs">
+
+<!-- Twitter Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="astrodotbuild">
+<meta name="twitter:title" content="Internal reference SaaS 🚀 Bloomreach SPA SDKs">
+<meta name="twitter:description" content="Internal reference SaaS">
+<meta name="twitter:image" content="https://github.com/withastro/astro/blob/main/assets/social/banner-minimal.png?raw=true">
+<meta name="twitter:image:alt" content="astro logo on a starry expanse of space, with a purple saturn-like planet floating in the right foreground">
+
+<!--
+  TODO: Add json+ld data, maybe https://schema.org/APIReference makes sense?
+  Docs: https://developers.google.com/search/docs/advanced/structured-data/intro-structured-data
+  https://www.npmjs.com/package/schema-dts seems like a great resource for implementing this.
+  Even better, there's a React component that integrates with `schema-dts`: https://github.com/google/react-schemaorg
+-->
+		<title>
+			Internal reference SaaS 🚀 Bloomreach SPA SDKs
+		</title>
+		
+		
+	<link rel="stylesheet" href="/spa-sdk/docs/_astro/_...slug_.43822c6e.css" /></head>
+
+	<body class="astro-OUAMJN2I">
+		<header class="astro-2W66RQV5">
+	<a href="#article" class="sr-only focus:not-sr-only skiplink astro-DMGOOZ7Y"><span class="astro-DMGOOZ7Y">Skip to Content</span></a>
+	<nav class="nav-wrapper astro-2W66RQV5" title="Top Navigation">
+		<div class="menu-toggle astro-2W66RQV5">
+			<style>astro-island,astro-slot{display:contents}</style><script>(self.Astro=self.Astro||{}).idle=t=>{const e=async()=>{await(await t())()};"requestIdleCallback"in window?window.requestIdleCallback(e):setTimeout(e,200)},window.dispatchEvent(new Event("astro:idle"));var l;{const c={0:t=>t,1:t=>JSON.parse(t,o),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(JSON.parse(t,o)),5:t=>new Set(JSON.parse(t,o)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(JSON.parse(t)),9:t=>new Uint16Array(JSON.parse(t)),10:t=>new Uint32Array(JSON.parse(t))},o=(t,s)=>{if(t===""||!Array.isArray(s))return s;const[e,n]=s;return e in c?c[e](n):void 0};customElements.get("astro-island")||customElements.define("astro-island",(l=class extends HTMLElement{constructor(){super(...arguments);this.hydrate=()=>{if(!this.hydrator||this.parentElement&&this.parentElement.closest("astro-island[ssr]"))return;const s=this.querySelectorAll("astro-slot"),e={},n=this.querySelectorAll("template[data-astro-template]");for(const r of n){const i=r.closest(this.tagName);!i||!i.isSameNode(this)||(e[r.getAttribute("data-astro-template")||"default"]=r.innerHTML,r.remove())}for(const r of s){const i=r.closest(this.tagName);!i||!i.isSameNode(this)||(e[r.getAttribute("name")||"default"]=r.innerHTML)}const a=this.hasAttribute("props")?JSON.parse(this.getAttribute("props"),o):{};this.hydrator(this)(this.Component,a,e,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),window.removeEventListener("astro:hydrate",this.hydrate),window.dispatchEvent(new CustomEvent("astro:hydrate"))}}connectedCallback(){!this.hasAttribute("await-children")||this.firstChild?this.childrenConnectedCallback():new MutationObserver((s,e)=>{e.disconnect(),this.childrenConnectedCallback()}).observe(this,{childList:!0})}async childrenConnectedCallback(){window.addEventListener("astro:hydrate",this.hydrate);let s=this.getAttribute("before-hydration-url");s&&await import(s),this.start()}start(){const s=JSON.parse(this.getAttribute("opts")),e=this.getAttribute("client");if(Astro[e]===void 0){window.addEventListener(`astro:${e}`,()=>this.start(),{once:!0});return}Astro[e](async()=>{const n=this.getAttribute("renderer-url"),[a,{default:r}]=await Promise.all([import(this.getAttribute("component-url")),n?import(n):()=>()=>{}]),i=this.getAttribute("component-export")||"default";if(!i.includes("."))this.Component=a[i];else{this.Component=a;for(const d of i.split("."))this.Component=this.Component[d]}return this.hydrator=r,this.hydrate},s,this)}attributeChangedCallback(){this.hydrator&&this.hydrate()}},l.observedAttributes=["props"],l))}</script><astro-island uid="Z1H4b9J" component-url="/spa-sdk/docs/_astro/SidebarToggle.65a801f9.js" component-export="default" renderer-url="/spa-sdk/docs/_astro/client.a6d618ef.js" props="{&quot;class&quot;:[0,&quot;astro-2W66RQV5&quot;]}" ssr="" client="idle" opts="{&quot;name&quot;:&quot;SidebarToggle&quot;,&quot;value&quot;:true}" await-children=""><button type="button" aria-pressed="false" id="menu-toggle"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg><span class="sr-only">Toggle sidebar</span></button></astro-island>
+		</div>
+		<div class="logo flex astro-2W66RQV5">
+			<a href="/" class="astro-2W66RQV5">
+				<svg class="logo" width="48" height="48" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
+	<style>
+		#flame {
+			fill: var(--theme-text-accent);
+		}
+
+		#a {
+			fill: var(--theme-text-accent);
+		}
+	</style>
+	<title>Bloomreach SPA SDKs</title>
+	<defs>
+		<style>.cls-1{fill:#002840;}.cls-2{fill:#ffd500;}</style>
+	</defs>
+	<g id="Layer_2" data-name="Layer 2">
+		<g id="bloomreach-logo">
+			<circle class="cls-2" cx="35.94" cy="35.94" r="35.94"></circle>
+			<path class="cls-1" d="M43.22,28.47,41.46,33a6.6,6.6,0,0,1,3,5.64,6.38,6.38,0,1,1-12.76,0A6.36,6.36,0,0,1,37.83,32l1.65-4.6A11,11,0,0,0,26.71,38.29h0V49.84h5V48a11.7,11.7,0,0,0,6.38,1.82,11.26,11.26,0,0,0,5.11-21.37Z"></path>
+			<path class="cls-1" d="M26.69,27.92a15.51,15.51,0,0,1,5-3.41V17.27h-5Z"></path>
+		</g>
+	</g>
+</svg>
+				<h1 class="astro-2W66RQV5">Bloomreach SPA SDKs</h1>
+			</a>
+		</div>
+		<div style="flex-grow: 1;" class="astro-2W66RQV5"></div>
+		
+		<div class="search-item astro-2W66RQV5">
+			<astro-island uid="Zj7leo" component-url="/spa-sdk/docs/_astro/Search.c2d89e1c.js" component-export="default" renderer-url="/spa-sdk/docs/_astro/client.fd400d45.js" props="{}" ssr="" client="idle" opts="{&quot;name&quot;:&quot;Search&quot;,&quot;value&quot;:true}" await-children=""><button type="button" class="search-input"><svg width="24" height="24" fill="none"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Search</span><span class="search-hint"><span class="sr-only">Press </span><kbd>/</kbd><span class="sr-only"> to search</span></span></button></astro-island>
+		</div>
+	</nav>
+</header>
+		<main class="layout astro-OUAMJN2I">
+			<aside id="grid-left" class="grid-sidebar astro-OUAMJN2I" title="Site Navigation">
+				<nav aria-labelledby="grid-left" class="astro-KQNE5HRN">
+	<ul class="nav-groups astro-KQNE5HRN">
+		<li class="astro-KQNE5HRN">
+					<div class="nav-group astro-KQNE5HRN">
+						<h3 class="astro-KQNE5HRN">Content SaaS</h3>
+						<ul class="astro-KQNE5HRN">
+							<li class="nav-link astro-KQNE5HRN">
+										<a href="/spa-sdk/docs/en/getting-started" class="astro-KQNE5HRN">
+											Getting started
+										</a>
+									</li><li class="nav-link astro-KQNE5HRN">
+										<a href="/spa-sdk/docs/en/configuration" class="astro-KQNE5HRN">
+											Configuration
+										</a>
+									</li><li class="nav-link astro-KQNE5HRN">
+										<a href="/spa-sdk/docs/en/react" class="astro-KQNE5HRN">
+											React SPA SDK
+										</a>
+									</li><li class="nav-link astro-KQNE5HRN">
+										<a href="/spa-sdk/docs/en/angular" class="astro-KQNE5HRN">
+											Angular SPA SDK
+										</a>
+									</li><li class="nav-link astro-KQNE5HRN">
+										<a href="/spa-sdk/docs/en/vue-2" class="astro-KQNE5HRN">
+											Vue 2 SPA SDK
+										</a>
+									</li><li class="nav-link astro-KQNE5HRN">
+										<a href="/spa-sdk/docs/en/vue-3" class="astro-KQNE5HRN">
+											Vue 3 SPA SDK
+										</a>
+									</li><li class="nav-link astro-KQNE5HRN">
+										<a href="/spa-sdk/docs/en/spa-sdk" class="astro-KQNE5HRN">
+											Framework agnostic SPA SDK
+										</a>
+									</li><li class="nav-link astro-KQNE5HRN">
+										<a href="/spa-sdk/docs/en/reference-saas" class="astro-KQNE5HRN">
+											Internal reference
+										</a>
+									</li>
+						</ul>
+					</div>
+				</li><li class="astro-KQNE5HRN">
+					<div class="nav-group astro-KQNE5HRN">
+						<h3 class="astro-KQNE5HRN">Content PaaS</h3>
+						<ul class="astro-KQNE5HRN">
+							<li class="nav-link astro-KQNE5HRN">
+										<a href="/spa-sdk/docs/en/relevance-integration" class="astro-KQNE5HRN">
+											Relevance integration
+										</a>
+									</li><li class="nav-link astro-KQNE5HRN">
+										<a href="/spa-sdk/docs/en/reference-paas" class="astro-KQNE5HRN">
+											Internal reference
+										</a>
+									</li>
+						</ul>
+					</div>
+				</li><li class="astro-KQNE5HRN">
+					<div class="nav-group astro-KQNE5HRN">
+						<h3 class="astro-KQNE5HRN">Migration</h3>
+						<ul class="astro-KQNE5HRN">
+							<li class="nav-link astro-KQNE5HRN">
+										<a href="/spa-sdk/docs/en/v19" class="astro-KQNE5HRN">
+											v19
+										</a>
+									</li><li class="nav-link astro-KQNE5HRN">
+										<a href="/spa-sdk/docs/en/v18" class="astro-KQNE5HRN">
+											v18
+										</a>
+									</li><li class="nav-link astro-KQNE5HRN">
+										<a href="/spa-sdk/docs/en/v17" class="astro-KQNE5HRN">
+											v17
+										</a>
+									</li><li class="nav-link astro-KQNE5HRN">
+										<a href="/spa-sdk/docs/en/v15" class="astro-KQNE5HRN">
+											v15
+										</a>
+									</li>
+						</ul>
+					</div>
+				</li>
+	</ul>
+</nav>
+
+<script>
+	window.addEventListener('DOMContentLoaded', () => {
+		var target = document.querySelector('[aria-current="page"]');
+		if (target && target.offsetTop > window.innerHeight - 100) {
+			document.querySelector('.nav-groups').scrollTop = target.offsetTop;
+		}
+	});
+</script>
+			</aside>
+			<div id="grid-main" class="astro-OUAMJN2I">
+				<article id="article" class="content astro-J75B3YUS">
+	<section class="main-section astro-J75B3YUS">
+		<h1 class="content-title astro-J75B3YUS" id="overview">Internal reference SaaS</h1>
+		<nav class="block sm:hidden astro-J75B3YUS">
+			<script>(self.Astro=self.Astro||{}).media=(s,a)=>{const t=async()=>{await(await s())()};if(a.value){const e=matchMedia(a.value);e.matches?t():e.addEventListener("change",t,{once:!0})}},window.dispatchEvent(new Event("astro:media"));</script><astro-island uid="Z1hx5Dt" component-url="/spa-sdk/docs/_astro/TableOfContents.5d256489.js" component-export="default" renderer-url="/spa-sdk/docs/_astro/client.a6d618ef.js" props="{&quot;headings&quot;:[1,&quot;[[0,{\&quot;depth\&quot;:[0,2],\&quot;slug\&quot;:[0,\&quot;configuration\&quot;],\&quot;text\&quot;:[0,\&quot;Configuration\&quot;]}],[0,{\&quot;depth\&quot;:[0,2],\&quot;slug\&quot;:[0,\&quot;functions\&quot;],\&quot;text\&quot;:[0,\&quot;Functions\&quot;]}],[0,{\&quot;depth\&quot;:[0,2],\&quot;slug\&quot;:[0,\&quot;constants\&quot;],\&quot;text\&quot;:[0,\&quot;Constants\&quot;]}],[0,{\&quot;depth\&quot;:[0,2],\&quot;slug\&quot;:[0,\&quot;objects\&quot;],\&quot;text\&quot;:[0,\&quot;Objects\&quot;]}],[0,{\&quot;depth\&quot;:[0,3],\&quot;slug\&quot;:[0,\&quot;page\&quot;],\&quot;text\&quot;:[0,\&quot;Page\&quot;]}],[0,{\&quot;depth\&quot;:[0,3],\&quot;slug\&quot;:[0,\&quot;component\&quot;],\&quot;text\&quot;:[0,\&quot;Component\&quot;]}],[0,{\&quot;depth\&quot;:[0,3],\&quot;slug\&quot;:[0,\&quot;container\&quot;],\&quot;text\&quot;:[0,\&quot;Container\&quot;]}],[0,{\&quot;depth\&quot;:[0,3],\&quot;slug\&quot;:[0,\&quot;container-item\&quot;],\&quot;text\&quot;:[0,\&quot;Container Item\&quot;]}],[0,{\&quot;depth\&quot;:[0,3],\&quot;slug\&quot;:[0,\&quot;content\&quot;],\&quot;text\&quot;:[0,\&quot;Content\&quot;]}],[0,{\&quot;depth\&quot;:[0,3],\&quot;slug\&quot;:[0,\&quot;document\&quot;],\&quot;text\&quot;:[0,\&quot;Document\&quot;]}],[0,{\&quot;depth\&quot;:[0,3],\&quot;slug\&quot;:[0,\&quot;imageset\&quot;],\&quot;text\&quot;:[0,\&quot;ImageSet\&quot;]}],[0,{\&quot;depth\&quot;:[0,3],\&quot;slug\&quot;:[0,\&quot;image\&quot;],\&quot;text\&quot;:[0,\&quot;Image\&quot;]}],[0,{\&quot;depth\&quot;:[0,3],\&quot;slug\&quot;:[0,\&quot;menu\&quot;],\&quot;text\&quot;:[0,\&quot;Menu\&quot;]}],[0,{\&quot;depth\&quot;:[0,3],\&quot;slug\&quot;:[0,\&quot;menuitem\&quot;],\&quot;text\&quot;:[0,\&quot;MenuItem\&quot;]}],[0,{\&quot;depth\&quot;:[0,3],\&quot;slug\&quot;:[0,\&quot;metacollection\&quot;],\&quot;text\&quot;:[0,\&quot;MetaCollection\&quot;]}],[0,{\&quot;depth\&quot;:[0,3],\&quot;slug\&quot;:[0,\&quot;meta\&quot;],\&quot;text\&quot;:[0,\&quot;Meta\&quot;]}],[0,{\&quot;depth\&quot;:[0,3],\&quot;slug\&quot;:[0,\&quot;pagination\&quot;],\&quot;text\&quot;:[0,\&quot;Pagination\&quot;]}],[0,{\&quot;depth\&quot;:[0,3],\&quot;slug\&quot;:[0,\&quot;paginationitem\&quot;],\&quot;text\&quot;:[0,\&quot;PaginationItem\&quot;]}]]&quot;],&quot;class&quot;:[0,&quot;astro-J75B3YUS&quot;]}" ssr="" client="media" opts="{&quot;name&quot;:&quot;TableOfContents&quot;,&quot;value&quot;:&quot;(max-width: 50em)&quot;}" await-children=""><h2 id="on-this-page-heading" class="heading">On this page</h2><ul><li class="header-link depth-2"><a href="#configuration">Configuration</a></li><li class="header-link depth-2"><a href="#functions">Functions</a></li><li class="header-link depth-2"><a href="#constants">Constants</a></li><li class="header-link depth-2"><a href="#objects">Objects</a></li><li class="header-link depth-3"><a href="#page">Page</a></li><li class="header-link depth-3"><a href="#component">Component</a></li><li class="header-link depth-3"><a href="#container">Container</a></li><li class="header-link depth-3"><a href="#container-item">Container Item</a></li><li class="header-link depth-3"><a href="#content">Content</a></li><li class="header-link depth-3"><a href="#document">Document</a></li><li class="header-link depth-3"><a href="#imageset">ImageSet</a></li><li class="header-link depth-3"><a href="#image">Image</a></li><li class="header-link depth-3"><a href="#menu">Menu</a></li><li class="header-link depth-3"><a href="#menuitem">MenuItem</a></li><li class="header-link depth-3"><a href="#metacollection">MetaCollection</a></li><li class="header-link depth-3"><a href="#meta">Meta</a></li><li class="header-link depth-3"><a href="#pagination">Pagination</a></li><li class="header-link depth-3"><a href="#paginationitem">PaginationItem</a></li></ul></astro-island>
+		</nav>
+		<h2 id="configuration">Configuration</h2>
+<p>The <code>initialize</code> function supports several options you may use to customize page initialization.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Commonly used options</th></tr></thead><tbody><tr><td><strong><code>debug</code></strong> <br> The option enabling debug mode. <br><br> Required: no <br> Default: <code>false</code></td></tr><tr><td><strong><code>endpoint</code></strong> <br> Base URL of the Page Model API (e.g. <code>http://localhost:8080/delivery/site/v1/channels/brxsaas/pages</code> or <code>http://localhost:8080/site/channel/resourceapi</code>). This option is exclusive and should not be used together with <code>options</code> or <code>cmsBaseUrl</code> <br><br> Required: yes <br> Default: . <em>none</em></td></tr><tr><td><strong><code>httpClient</code></strong> <br> The HTTP client that will be used to fetch the page model. Signature is similar to <a href="https://github.com/axios/axios#axiosconfig">Axios</a> client. <br><br> Required: yes <br> Default: <em>none</em></td></tr><tr><td><strong><code>path</code></strong> <br> The path part of the URL, <strong>including a query string if present (e.g. <code>/path/to/page?foo=1</code></strong> <br><br> Required: no <br> Default: ) <code>/</code> .</td></tr><tr><td><strong><code>origin</code></strong> <br> The brXM origin to verify an integration with the Experience Manager. This option should be used when the brXM is accessible from a host other than the Page Model API. By default, the origin from the <code>apiBaseUrl</code> or <code>endpoint</code> parameters is used. <br><br> Required: no <br> Default: <em>none</em></td></tr><tr><td><strong><code>baseUrl</code></strong> <br> Base URL of the SPA (e.g. <code>/account</code> or <code>//www.example.com</code>). This option can only be used if <code>endpoint</code> is present. <br><br> Required: no <br> Default: <code>""</code></td></tr><tr><td><strong><code>apiBaseUrl</code></strong> <br> Base URL of the Page Model API (e.g. <code>http://localhost:8080/delivery/site/v1/channels/brxsaas/pages</code> or <code>http://localhost:8080/site/channel/resourceapi</code>). This option will be ignored if <code>options</code> is present. <br><br> Required: no <br> Default: <code>cmsBaseUrl</code> + <code>"/resourceapi"</code></td></tr><tr><td><strong><code>spaBaseUrl</code></strong> <br> Base URL of the SPA (e.g. <code>/account</code> or <code>//www.example.com</code>). This option will be ignored if <code>options</code> is present. <br><br> Required: no <br> Default: <code>""</code></td></tr></tbody></table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Extra options</th></tr></thead><tbody><tr><td><strong><code>apiVersion</code></strong> <br> Current API version. By default, the compatible with the current setup version will be chosen. <br><br> Required: no <br> Default: <em>none</em></td></tr><tr><td><strong><code>apiVersionHeader</code></strong> <br> API version header. <br><br> Required: <code>"Accept-Version"</code> <br> Default: <em>none</em></td></tr><tr><td><strong><code>authorizationHeader</code></strong> <br> Authorization header for the Page Model API. <br><br> Required: no <br> Default: <code>"Authorization"</code></td></tr><tr><td><strong><code>authorizationQueryParameter</code></strong> <br> The query string parameter used to pass authorization header value. <br><br> Required: no <br> Default: <code>"token"</code></td></tr><tr><td><strong><code>authorizationToken</code></strong> <br> Authorization token for the Page Model API. By default, the SDK will try to extract the token from the request query string using <code>authorizationQueryParameter</code> option. <br><br> Required: no <br> Default: <em>none</em></td></tr><tr><td><strong><code>serverId</code></strong> <br> Cluster node identifier. By default, the SDK will try to extract the value from the request query string using <code>serverIdQueryParameter</code> option. <br><br> Required: no <br> Default: <em>none</em></td></tr><tr><td><strong><code>serverIdHeader</code></strong> <br> Header identifying the current cluster node. <br><br> Required: no <br> Default: <code>"Server-Id"</code></td></tr><tr><td><strong><code>serverIdQueryParameter</code></strong> <br> The query string parameter used to pass a cluster node identifier. <br><br> Required: no <br> Default: <code>"server-id"</code></td></tr><tr><td><strong><code>window</code></strong> <br> A window object reference will be used to interact with brXM. It needs to be set when initialize is being called within an iframe or worker process. <br><br> Required: no <br> Default: <code>window</code></td></tr></tbody></table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Relevance options (PaaS-only)</th></tr></thead><tbody><tr><td><strong><code>visitor</code></strong> <br> An object holding information about the current visitor. The option takes precedence over <code>request.visitor</code> <br><br> Required: no <br> Default: . <em>none</em></td></tr><tr><td><strong><code>visitor.id</code></strong> <br> The current visitor identifier. <br><br> Required: yes <br> Default: <em>none</em></td></tr><tr><td><strong><code>visitor.header</code></strong> <br> An HTTP-header using to pass the visitor identifier to the Page Model API. <br><br> Required: yes <br> Default: <em>none</em></td></tr><tr><td><strong><code>request</code></strong> <br> Current user’s request. <br><br> Required: yes <br> Default: <em>none</em></td></tr><tr><td><strong><code>request.connection</code></strong> <br> Current request remote connection containing the remote address. This option is used in <a href="https://documentation.bloomreach.com/14/library/enterprise/enterprise-features/targeting/targeting.html">the Relevance Module</a> <br><br> Required: no <br> Default: . <em>none</em></td></tr><tr><td><strong><code>request.emit</code></strong> <br> Emits an event in the request scope. This option can be used in <a href="https://nodejs.org/api/stream.html#stream_readable_streams">Node.js integration</a> <br><br> Required: no <br> Default: . <em>none</em></td></tr><tr><td><strong><code>request.headers</code></strong> <br> An object holding request headers. It should contain a <code>Cookie</code> header if rendering is happening on the server-side in the UrlRewriter-based setup. <br><br> Required: no <br> Default: <code>{}</code></td></tr><tr><td><strong><code>request.path</code></strong> <br> The path part of the URL, including a query string if present (e.g. <code>/path/to/page?foo=1</code>). The option is <strong>deprecated</strong> in favor of <code>path</code> <br><br> Required: no <br> Default: . <code>/</code></td></tr><tr><td><strong><code>request.visitor</code></strong> <br> An object holding information about the current visitor. <br><br> Required: no <br> Default: <em>none</em></td></tr></tbody></table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>These options are deprecated and will be removed in the next major release</th></tr></thead><tbody><tr><td><strong><code>cmsBaseUrl</code></strong> <br> Base URL of the site (e.g. <code>http://localhost:8080/site</code> or <code>http://localhost:8080/site/channel</code>). This option is exclusive and should not be used together with <code>options</code> or <code>endpoint</code> <br><br> Required: <em>exclusive</em> <br> Default: . <em>none</em></td></tr><tr><td><strong><code>options</code></strong> <br> The CMS URL options. This option is exclusive and should not be used together with <code>cmsBaseUrl</code> or <code>endpoint</code>. Use this property to enable the UrlRewriter-based setup. <br><br> Required: <em>exclusive</em> <br> Default: <em>none</em></td></tr><tr><td><strong><code>options.live</code></strong> <br> The CMS URL options for the live site. <br><br> Required: yes <br> Default: <em>none</em></td></tr><tr><td><strong><code>options.live.apiBaseUrl</code></strong> <br> Base URL of the Page Model API for the live site (e.g. <code>http://localhost:8080/delivery/site/v1/channels/brxsaas/pages</code> or <code>http://localhost:8080/site/channel/resourceapi</code> <br><br> Required: no <br> Default: ) <code>options.live.cmsBaseUrl</code> + <code>"/resourceapi"</code> .</td></tr><tr><td><strong><code>options.live.cmsBaseUrl</code></strong> <br> Base URL of the live site (e.g. <code>http://localhost:8080/site</code> or <code>http://localhost:8080/site/channel</code> <br><br> Required: yes <br> Default: ) <em>none</em> .</td></tr><tr><td><strong><code>options.live.spaBaseUrl</code></strong> <br> Base URL of the live SPA (e.g. <code>/account</code> or <code>//www.example.com</code> <br><br> Required: no <br> Default: ) <code>""</code> .</td></tr><tr><td><strong><code>options.preview</code></strong> <br> The CMS URL options for the preview site. <br><br> Required: yes <br> Default: <em>none</em></td></tr><tr><td><strong><code>options.preview.apiBaseUrl</code></strong> <br> Base URL of the Page Model API for the preview site (e.g. <code>http://localhost:8080/site/_cmsinternal/resourceapi</code> or <code>http://localhost:8080/site/_cmsinternal/channel/resourceapi</code> <br><br> Required: no <br> Default: ) <code>options</code><br><code>.preview.cmsBaseUrl</code> <br>+ <code>"/resourceapi"</code> .</td></tr><tr><td><strong><code>options.preview.cmsBaseUrl</code></strong> <br> Base URL of the live site (e.g. <code>http://localhost:8080/site/_cmsinternal</code> or <code>http://localhost:8080/site/_cmsinternal/channel</code> <br><br> Required: yes <br> Default: ) <em>none</em> .</td></tr><tr><td><strong><code>options.preview.spaBaseUrl</code></strong> <br> Base URL of the live SPA (e.g. <code>/site/_cmsinternal?bloomreach-preview=true</code> or <code>/site/_cmsinternal/channel?bloomreach-preview=true</code>). This path and query string parameters will be used to detect whether it is a preview mode or not. <br><br> Required: no <br> Default: <code>""</code></td></tr></tbody></table>
+<h2 id="functions">Functions</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Function</th><th>Description</th></tr></thead><tbody><tr><td><code>initialize(config, model?): Promise&#x3C;Page></code></td><td>This function accepts a configuration object as an argument and returns a promisified JavaScript object representing the page model. In case, when the page model has already been fetched, you can pass this JSON blob as a second parameter.</td></tr><tr><td><code>destroy(page: Page): void</code></td><td>Destroys the integration with the SPA page object.</td></tr><tr><td><code>getContainerItemContent&#x3C;T>(component: ContainerItem, page: Page): T | null</code></td><td>Returns the content object that belongs to the container item, or null if not found.</td></tr><tr><td><code>isPage(value): boolean</code></td><td>Checks whether a value is a page.</td></tr><tr><td><code>isComponent(value): boolean</code></td><td>Checks whether a value is a page component.</td></tr><tr><td><code>isContainer(value): boolean</code></td><td>Checks whether a value is a page container.</td></tr><tr><td><code>isContainerItem(value): boolean</code></td><td>Checks whether a value is a page container item.</td></tr><tr><td><code>isContent(value): boolean</code></td><td>Checks whether a value is a content object.</td></tr><tr><td><code>isDocument(value): boolean</code></td><td>Checks whether a value is a document object.</td></tr><tr><td><code>isImageSet(value): boolean</code></td><td>Checks whether a value is an image set object.</td></tr><tr><td><code>isMenu(value): boolean</code></td><td>Checks whether a value is a menu object.</td></tr><tr><td><code>isMeta(value): boolean</code></td><td>Checks whether a value is a meta-data object.</td></tr><tr><td><code>isMetaComment(value): boolean</code></td><td>Checks whether a value is a meta-data comment.</td></tr><tr><td><code>isPagination(value): boolean</code></td><td>Checks whether a value is a pagination.</td></tr><tr><td><code>isLink(value): boolean</code></td><td>Checks whether a value is a link.</td></tr><tr><td><code>isReference(value): boolean</code></td><td>Checks whether a value is a content reference.</td></tr><tr><td><code>relevance(request: IncomingMessage, response: OutgoingMessage, next?: () => void): void</code></td><td>Express middleware for seamless integration with <a href="https://documentation.bloomreach.com/14/library/enterprise/enterprise-features/targeting/targeting.html">the Relevance Module</a>.</td></tr><tr><td><code>relevance.withOptions(options?: Options): Handler</code></td><td>Customizes Express middleware for <a href="https://documentation.bloomreach.com/14/library/enterprise/enterprise-features/targeting/targeting.html">the Relevance Module</a> integration.</td></tr></tbody></table>
+<h2 id="constants">Constants</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Constant</th><th>Description</th></tr></thead><tbody><tr><td><code>META_POSITION_BEGIN</code></td><td>Meta-data following before a page component.</td></tr><tr><td><code>META_POSITION_END</code></td><td>Meta-data following after a page component.</td></tr><tr><td><code>TYPE_CONTAINER_BOX</code></td><td>A blocked container with blocked items.</td></tr><tr><td><code>TYPE_CONTAINER_INLINE</code></td><td>A blocked container with inline items.</td></tr><tr><td><code>TYPE_CONTAINER_NO_MARKUP</code></td><td>A container without surrounding markup.</td></tr><tr><td><code>TYPE_CONTAINER_ORDERED_LIST</code></td><td>An ordered list container.</td></tr><tr><td><code>TYPE_CONTAINER_UNORDERED_LIST</code></td><td>An unordered list container.</td></tr><tr><td><code>TYPE_CONTAINER_ITEM_UNDEFINED</code></td><td>A container item without mapping.</td></tr><tr><td><code>TYPE_LINK_EXTERNAL</code></td><td>Link to a page outside the current application.</td></tr><tr><td><code>TYPE_LINK_INTERNAL</code></td><td>Link to a page inside the current application.</td></tr><tr><td><code>TYPE_LINK_RESOURCE</code></td><td>Link to a CMS resource.</td></tr><tr><td><code>TYPE_MANAGE_MENU_BUTTON</code></td><td>A manage menu button.</td></tr><tr><td><code>TYPE_MANAGE_CONTENT_BUTTON</code></td><td>A manage content button.</td></tr></tbody></table>
+<h2 id="objects">Objects</h2>
+<h3 id="page">Page</h3>
+<p>The <code>Page</code> class represents the brXM page to render. This is the main entry point to the page model.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Method</th><th>Description</th></tr></thead><tbody><tr><td><code>getButton(type: string, ...params: any[]): MetaCollection</code></td><td>Generates a meta-data collection for the Experience Manager buttons.</td></tr><tr><td><code>getChannelParameters(): object</code></td><td>Gets current channel parameters.</td></tr><tr><td><code>getComponent(…componentNames): Component | undefined</code></td><td>Gets a component in the page (e.g. <code>getComponent('main', 'right')</code>). If <code>componentNames</code> is omitted, then the page root component will be returned.</td></tr><tr><td><code>getContent<t>(reference: Reference | string): Content | T | undefined</t></code></td><td>Gets a content item used on the page.</td></tr><tr><td><code>getDocument<t>(): T | undefined</t></code></td><td>Gets the page root document. This option is available only along with the Experience Pages feature.</td></tr><tr><td><code>getMeta(meta): MetaCollection</code></td><td>Generates a meta-data collection from the provided <code>meta</code> model. The method is <strong>deprecated</strong> and will be removed in the next major release.</td></tr><tr><td><code>getTitle(): string | undefined</code></td><td>Gets the title of the page, or <code>undefined</code> if not configured.</td></tr><tr><td><code>getUrl(link?: Link): string</code></td><td>Generates a URL for a link object.<br> - If the link object type is internal, then it will prepend <code>spaBaseUrl</code> or <code>baseUrl</code>. In case when the link starts with the same path as in <code>cmsBaseUrl</code>, this part will be removed.<br> - If the link object type is unknown, then it will return <code>undefined</code>.<br> - If the link parameter is omitted, then the link to the current page will be returned.<br> - In other cases, the link will be returned as-is.</td></tr><tr><td><code>getUrl(path: string): string</code></td><td>Generates an SPA URL for the path.<br> - If it is a relative path and <code>cmsBaseUrl</code> is present, then it will prepend <code>spaBaseUrl</code>.<br> - If it is an absolute path and <code>cmsBaseUrl</code> is present, then the behavior will be similar to internal link generation.<br> - If it is a relative path and <code>endpoint</code> is present, then it will resolve this link relative to the current page URL.<br> - If it is an absolute path and <code>endpoint</code> is present, then it will resolve this link relative to the <code>baseUrl</code> option.</td></tr><tr><td><code> getVersion(): string | undefined</code></td><td>Returns the Page Model version.</td></tr><tr><td><code>getVisitor(): Visitor | undefined</code></td><td>Gets the current visitor information, or undefined if the <a href="https://documentation.bloomreach.com/library/enterprise/enterprise-features/targeting/targeting.html">Relevance Module</a> is not enabled. The <code>Visitor</code> object consists of the following properties:<br> - <code>id: string</code> - the current visitor identifier;<br> - <code>header: string</code> - an HTTP-header using to pass the visitor identifier to the Page Model API.</td></tr><tr><td><code>getVisit(): Visit | undefined</code></td><td>Gets the current visit information, or undefined if the <a href="https://documentation.bloomreach.com/library/enterprise/enterprise-features/targeting/targeting.html">Relevance Module</a> is not enabled. The <code>Visit</code> object consists of the following properties:<br> - <code>id: string</code> - the current visit identifier;<br> - <code>new: boolean</code> - a flag showing that this is a new visit.</td></tr><tr><td><code>isPreview(): boolean</code></td><td>Returns whether the page is in the preview mode.</td></tr><tr><td><code>rewriteLinks(content: string, type?: string): string</code></td><td>Rewrite links to pages and resources in the HTML content. This method looks up for <code>a</code> tags with <code>data-type</code> and <code>href</code> attributes and <code>img</code> tags with <code>src</code> attribute. Links will be updated according to the configuration used to initialize the page. The <code>type</code> parameter is similar to <code>mimeType</code> parameter of the <a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMParser">DOMParser</a>.</td></tr><tr><td><code>sync(): void</code></td><td>Synchronizes the brXM integration state (UI elements positions).</td></tr><tr><td><code>toJSON(): object</code></td><td>A plain JavaScript object of the page model.</td></tr></tbody></table>
+<h3 id="component">Component</h3>
+<p>The <code>Component</code> class corresponds to page nodes, and it may hold other components inside.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Method</th><th>Description</th></tr></thead><tbody><tr><td><code>getId(): string</code></td><td>Returns the component id.</td></tr><tr><td><code>getMeta(): MetaCollection</code></td><td>Returns the component meta-data collection.</td></tr><tr><td><code>getModels(): object</code></td><td>Returns the map of the component models.</td></tr><tr><td><code>getUrl(): string | undefined</code></td><td>Returns the link to the partial component model.</td></tr><tr><td><code>getName(): string</code></td><td>Returns the name of the component.</td></tr><tr><td><code>getParameters(): object</code></td><td>Returns the parameters of the component.</td></tr><tr><td><code>getProperties(): object</code></td><td>Alias for <code>getParameters</code> method.</td></tr><tr><td><code>getChildren(): Component[]</code></td><td>Returns the direct children of the component.</td></tr><tr><td><code>getComponent(…componentNames: string[]): Component | undefined</code></td><td>Looks up for a nested component.</td></tr><tr><td><code>getComponentById(id: string): Component | undefined</code></td><td>Looks up for a nested component by its id.</td></tr></tbody></table>
+<h3 id="container">Container</h3>
+<p>The <code>Container</code> class represents a page node that is actually present in the DOM but as an element surrounding its children. Container extends the Component class, and therefore, all the <a href="#component">Component methods</a> are applicable here.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Method</th><th>Description</th></tr></thead><tbody><tr><td><code>getType(): string | undefined</code></td><td>Returns the <a href="https://documentation.bloomreach.com/library/concepts/template-composer/channel-editor-containers.html">type</a> of a container.</td></tr></tbody></table>
+<h3 id="container-item">Container Item</h3>
+<p>The <code>ContainerItem</code> objects are usually visible on the page and interact with the user. Container Item extends the Component class, and therefore, all the <a href="#component">Component methods</a> are applicable here.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Method</th><th>Description</th></tr></thead><tbody><tr><td><code>getLabel(): string | undefined</code></td><td>Returns the label of a container item catalogue component.</td></tr><tr><td><code>getType(): string | undefined</code></td><td>Returns the type of a container item. The available types depend on which container items have been configured in the backend (e.g. “Banner”).</td></tr><tr><td><code>isHidden(): boolean</code></td><td>Returns whether the component should not render anything. Hiding components is only possible with the Relevance feature.</td></tr><tr><td><code>on(eventName: string, listener: Function): Function</code></td><td>Subscribes for an event and returns the unsubscribe function.</td></tr><tr><td><code>off(eventName: string, listener: Function): void</code></td><td>Unsubscribes from an event.</td></tr><tr><td><code>getContentReference(): Reference | undefined</code></td><td>Returns a <a href="https://tools.ietf.org/html/rfc6901">RFC-6901</a> JSON Pointer to the content of this container item.</td></tr><tr><td><code>getContent<t>(page: Page): T | null;</t></code></td><td>Returns the content of this component from the page that contains the content.</td></tr></tbody></table>
+<h3 id="content">Content</h3>
+<p>The <code>Content</code> object holds document data that is used by the page components.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Method</th><th>Description</th></tr></thead><tbody><tr><td><code>getId(): string</code></td><td>Returns the content id.</td></tr><tr><td><code>getLocale(): string | undefined</code></td><td>Returns the content locale.</td></tr><tr><td><code>getMeta(): MetaCollection</code></td><td>Returns the content meta-data collection.</td></tr><tr><td><code>getName(): string</code></td><td>Returns the content name.</td></tr><tr><td><code>getData(): object</code></td><td>Returns the content data as it is returned in the Page Model API.</td></tr><tr><td><code>getUrl(): string | undefined</code></td><td>Returns the link to the content.</td></tr></tbody></table>
+<h3 id="document">Document</h3>
+<p>The <code>Document</code> object holds document data that is used by the page components.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Method</th><th>Description</th></tr></thead><tbody><tr><td><code>getId(): string</code></td><td>Returns the document id.</td></tr><tr><td><code>getLocale(): string | undefined</code></td><td>Returns the document locale.</td></tr><tr><td><code>getMeta(): MetaCollection</code></td><td>Returns the document meta-data collection.</td></tr><tr><td><code>getName(): string</code></td><td>Returns the document name.</td></tr><tr><td><code>getData(): object</code></td><td>Returns the document data as it is returned in the Page Model API.</td></tr><tr><td><code>getUrl(): string | undefined</code></td><td>Returns the link to the content.</td></tr></tbody></table>
+<h3 id="imageset">ImageSet</h3>
+<p>The <code>ImageSet</code> object holds images collection that is used by the page components.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Method</th><th>Description</th></tr></thead><tbody><tr><td><code>getDescription(): string undefined;</code></td><td>Returns the image set description.</td></tr><tr><td><code>getDisplayName(): string</code></td><td>Returns the image set display name.</td></tr><tr><td><code>getId(): string</code></td><td>Returns the document id.</td></tr><tr><td><code>getFileName(): string</code></td><td>Returns the image set file name.</td></tr><tr><td><code>getId(): string</code></td><td>Returns the image set id.</td></tr><tr><td><code>getLocale(): string | undefined</code></td><td>Returns the image set locale.</td></tr><tr><td><code>getName(): string</code></td><td>Returns the image name.</td></tr><tr><td><code>getOriginal(): Image | undefined</code></td><td>Returns the original image.</td></tr><tr><td><code>getThumbnail(): Image | undefined</code></td><td>Returns the thumbnail.</td></tr></tbody></table>
+<h3 id="image">Image</h3>
+<p>The <code>Image</code> object holds an image object that is used by the <code>ImageSet</code> object.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Method</th><th>Description</th></tr></thead><tbody><tr><td><code>getDisplayName(): string</code></td><td>Returns the image display name.</td></tr><tr><td><code>getFileName(): string | undefined</code></td><td>Returns the image file name.</td></tr><tr><td><code>getHeight(): number</code></td><td>Returns the image height.</td></tr><tr><td><code>getMimeType(): string</code></td><td>Returns the image mime-type.</td></tr><tr><td><code>getName(): string</code></td><td>Returns the image name.</td></tr><tr><td><code>getSize(): number</code></td><td>Returns the image size.</td></tr><tr><td><code>getUrl(): string | undefined</code></td><td>Returns the image link.</td></tr><tr><td><code>getWidth(): number</code></td><td>Returns the image width.</td></tr></tbody></table>
+<h3 id="menu">Menu</h3>
+<p>The <code>Menu</code> object holds the page menu data with all the menu items.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Method</th><th>Description</th></tr></thead><tbody><tr><td><code>getItems(): MenuItem[]</code></td><td>Returns the menu items.</td></tr><tr><td><code>getMeta(): MetaCollection</code></td><td>Returns the menu meta-data collection.</td></tr><tr><td><code>getName(): string</code></td><td>Returns the menu name.</td></tr><tr><td><code>getSelected(): MenuItem | undefined</code></td><td>Returns the current menu item. The method is <strong>deprecated</strong> and will be removed in the next major release.</td></tr></tbody></table>
+<h3 id="menuitem">MenuItem</h3>
+<p>The <code>MenuItem</code> object holds a menu item that is used by the <code>Menu</code> object.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Method</th><th>Description</th></tr></thead><tbody><tr><td><code>getChildren(): MenuItem[]</code></td><td>Returns the child items.</td></tr><tr><td><code>getDepth(): number</code></td><td>Returns the menu item depth level.</td></tr><tr><td><code>getLink(): Link | undefined</code></td><td>Returns the menu item link.</td></tr><tr><td><code>getName(): string</code></td><td>Returns the menu item name.</td></tr><tr><td><code>getParameters(): object</code></td><td>Returns the menu item parameters.</td></tr><tr><td><code>getUrl(): string | undefined</code></td><td>Returns the menu item url.</td></tr><tr><td><code>isExpanded(): boolean</code></td><td>Returns whether the menu item is expanded.</td></tr><tr><td><code>isRepositoryBased(): boolean</code></td><td>Returns whether the menu item is repository based.</td></tr><tr><td><code>isSelected(): boolean</code></td><td>Returns whether the menu item is selected.</td></tr></tbody></table>
+<h3 id="metacollection">MetaCollection</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Method</th><th>Description</th></tr></thead><tbody><tr><td><code>clear(): void</code></td><td>Clears previously rendered meta-data objects.</td></tr><tr><td><code>render(head: HTMLElement, tail: HTMLElement): () => void;</code></td><td>Renders meta-data objects on the page and returns the callback clearing rendered objects.</td></tr></tbody></table>
+<h3 id="meta">Meta</h3>
+<p>The <code>Meta</code> objects are being used by the brXM to page and its components.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Method</th><th>Description</th></tr></thead><tbody><tr><td><code>getData(): string</code></td><td>Returns the meta-data.</td></tr><tr><td><code>getPosition(): string</code></td><td>Returns the meta-data position relative to the related element.</td></tr></tbody></table>
+<h3 id="pagination">Pagination</h3>
+<p>The <code>Pagination</code> object holds the pagination data with all the pagination items.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Method</th><th>Description</th></tr></thead><tbody><tr><td><code>getCurrent(): PaginationItem</code></td><td>Returns the current page.</td></tr><tr><td><code>getFirst(): PaginationItem</code></td><td>Returns the first page.</td></tr><tr><td><code>getItems(): Reference[]</code></td><td>Returns the current page items.</td></tr><tr><td><code>getLast(): PaginationItem</code></td><td>Returns the last page.</td></tr><tr><td><code>getNext(): PaginationItem | undefined</code></td><td>Returns the next page.</td></tr><tr><td><code>getOffset(): number</code></td><td>Returns the number of items before the current page.</td></tr><tr><td><code>getPages(): PaginationItem[]</code></td><td>Returns currently listed pages.</td></tr><tr><td><code>getPrevious(): PaginationItem | undefined</code></td><td>Returns the previous page.</td></tr><tr><td><code>getSize(): number</code></td><td>Returns the number of items listed on the current page.</td></tr><tr><td><code>getTotal(): number</code></td><td>Returns the total number of items.</td></tr><tr><td><code>isEnabled(): boolean</code></td><td>Returns whether the pagination is enabled.</td></tr></tbody></table>
+<h3 id="paginationitem">PaginationItem</h3>
+<p>The <code>PaginationItem</code> object holds a pagination item that is used by the <code>Pagination</code> object.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Method</th><th>Description</th></tr></thead><tbody><tr><td><code>getNumber(): number</code></td><td>Returns the page number.</td></tr><tr><td><code>getUrl(): string | undefined</code></td><td>Returns the page URL.</td></tr></tbody></table>
+	</section>
+	<nav class="block sm:hidden astro-J75B3YUS">
+		<h2 class="heading astro-BYIKQF6W">More</h2>
+<ul class="astro-BYIKQF6W">
+	<li class="header-link depth-2 astro-BYIKQF6W">
+				<a class="edit-on-github astro-BYIKQF6W" href="https://github.com/withastro/astro/tree/main/examples/docs/src/content/docs/spa-sdk/docs/en/reference-saas.md" target="_blank">
+					<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen" class="svg-inline--fa fa-pen fa-w-16 astro-BYIKQF6W" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="1em" width="1em">
+						<path fill="currentColor" d="M290.74 93.24l128.02 128.02-277.99 277.99-114.14 12.6C11.35 513.54-1.56 500.62.14 485.34l12.7-114.22 277.9-277.88zm207.2-19.06l-60.11-60.11c-18.75-18.75-49.16-18.75-67.91 0l-56.55 56.55 128.02 128.02 56.55-56.55c18.75-18.76 18.75-49.16 0-67.91z" class="astro-BYIKQF6W"></path>
+					</svg>
+					<span class="astro-BYIKQF6W">Edit this page</span>
+				</a>
+			</li>
+	<li class="header-link depth-2 astro-BYIKQF6W">
+				<a href="https://astro.build/chat" target="_blank" class="astro-BYIKQF6W">
+					<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="comment-alt" class="svg-inline--fa fa-comment-alt fa-w-16 astro-BYIKQF6W" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="1em" width="1em">
+						<path fill="currentColor" d="M448 0H64C28.7 0 0 28.7 0 64v288c0 35.3 28.7 64 64 64h96v84c0 9.8 11.2 15.5 19.1 9.7L304 416h144c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64z" class="astro-BYIKQF6W"></path>
+					</svg>
+					<span class="astro-BYIKQF6W">Join our community</span>
+				</a>
+			</li>
+</ul>
+<div style="margin: 2rem 0; text-align: center;" class="astro-BYIKQF6W">
+	<script>(self.Astro=self.Astro||{}).visible=(s,c,n)=>{const r=async()=>{await(await s())()};let i=new IntersectionObserver(e=>{for(const t of e)if(!!t.isIntersecting){i.disconnect(),r();break}});for(let e=0;e<n.children.length;e++){const t=n.children[e];i.observe(t)}},window.dispatchEvent(new Event("astro:visible"));</script><astro-island uid="1uwwwb" component-url="/spa-sdk/docs/_astro/ThemeToggleButton.7f5d5bf2.js" component-export="default" renderer-url="/spa-sdk/docs/_astro/client.a6d618ef.js" props="{&quot;class&quot;:[0,&quot;astro-BYIKQF6W&quot;]}" ssr="" client="visible" opts="{&quot;name&quot;:&quot;ThemeToggleButton&quot;,&quot;value&quot;:true}" await-children=""><div class="theme-toggle"><label class><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd"></path></svg><input type="radio" name="theme-toggle" value="light" title="Use light theme" aria-label="Use light theme" /></label><label class><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg><input type="radio" name="theme-toggle" value="dark" title="Use dark theme" aria-label="Use dark theme" /></label></div></astro-island>
+</div>
+	</nav>
+</article>
+			</div>
+			<aside id="grid-right" class="grid-sidebar astro-OUAMJN2I" title="Table of Contents">
+				<nav class="sidebar-nav astro-ROIVMLUZ" aria-labelledby="grid-right">
+	<div class="sidebar-nav-inner astro-ROIVMLUZ">
+		<astro-island uid="1rSyRf" component-url="/spa-sdk/docs/_astro/TableOfContents.5d256489.js" component-export="default" renderer-url="/spa-sdk/docs/_astro/client.a6d618ef.js" props="{&quot;headings&quot;:[1,&quot;[[0,{\&quot;depth\&quot;:[0,2],\&quot;slug\&quot;:[0,\&quot;configuration\&quot;],\&quot;text\&quot;:[0,\&quot;Configuration\&quot;]}],[0,{\&quot;depth\&quot;:[0,2],\&quot;slug\&quot;:[0,\&quot;functions\&quot;],\&quot;text\&quot;:[0,\&quot;Functions\&quot;]}],[0,{\&quot;depth\&quot;:[0,2],\&quot;slug\&quot;:[0,\&quot;constants\&quot;],\&quot;text\&quot;:[0,\&quot;Constants\&quot;]}],[0,{\&quot;depth\&quot;:[0,2],\&quot;slug\&quot;:[0,\&quot;objects\&quot;],\&quot;text\&quot;:[0,\&quot;Objects\&quot;]}],[0,{\&quot;depth\&quot;:[0,3],\&quot;slug\&quot;:[0,\&quot;page\&quot;],\&quot;text\&quot;:[0,\&quot;Page\&quot;]}],[0,{\&quot;depth\&quot;:[0,3],\&quot;slug\&quot;:[0,\&quot;component\&quot;],\&quot;text\&quot;:[0,\&quot;Component\&quot;]}],[0,{\&quot;depth\&quot;:[0,3],\&quot;slug\&quot;:[0,\&quot;container\&quot;],\&quot;text\&quot;:[0,\&quot;Container\&quot;]}],[0,{\&quot;depth\&quot;:[0,3],\&quot;slug\&quot;:[0,\&quot;container-item\&quot;],\&quot;text\&quot;:[0,\&quot;Container Item\&quot;]}],[0,{\&quot;depth\&quot;:[0,3],\&quot;slug\&quot;:[0,\&quot;content\&quot;],\&quot;text\&quot;:[0,\&quot;Content\&quot;]}],[0,{\&quot;depth\&quot;:[0,3],\&quot;slug\&quot;:[0,\&quot;document\&quot;],\&quot;text\&quot;:[0,\&quot;Document\&quot;]}],[0,{\&quot;depth\&quot;:[0,3],\&quot;slug\&quot;:[0,\&quot;imageset\&quot;],\&quot;text\&quot;:[0,\&quot;ImageSet\&quot;]}],[0,{\&quot;depth\&quot;:[0,3],\&quot;slug\&quot;:[0,\&quot;image\&quot;],\&quot;text\&quot;:[0,\&quot;Image\&quot;]}],[0,{\&quot;depth\&quot;:[0,3],\&quot;slug\&quot;:[0,\&quot;menu\&quot;],\&quot;text\&quot;:[0,\&quot;Menu\&quot;]}],[0,{\&quot;depth\&quot;:[0,3],\&quot;slug\&quot;:[0,\&quot;menuitem\&quot;],\&quot;text\&quot;:[0,\&quot;MenuItem\&quot;]}],[0,{\&quot;depth\&quot;:[0,3],\&quot;slug\&quot;:[0,\&quot;metacollection\&quot;],\&quot;text\&quot;:[0,\&quot;MetaCollection\&quot;]}],[0,{\&quot;depth\&quot;:[0,3],\&quot;slug\&quot;:[0,\&quot;meta\&quot;],\&quot;text\&quot;:[0,\&quot;Meta\&quot;]}],[0,{\&quot;depth\&quot;:[0,3],\&quot;slug\&quot;:[0,\&quot;pagination\&quot;],\&quot;text\&quot;:[0,\&quot;Pagination\&quot;]}],[0,{\&quot;depth\&quot;:[0,3],\&quot;slug\&quot;:[0,\&quot;paginationitem\&quot;],\&quot;text\&quot;:[0,\&quot;PaginationItem\&quot;]}]]&quot;],&quot;class&quot;:[0,&quot;astro-ROIVMLUZ&quot;]}" ssr="" client="media" opts="{&quot;name&quot;:&quot;TableOfContents&quot;,&quot;value&quot;:&quot;(min-width: 50em)&quot;}" await-children=""><h2 id="on-this-page-heading" class="heading">On this page</h2><ul><li class="header-link depth-2"><a href="#configuration">Configuration</a></li><li class="header-link depth-2"><a href="#functions">Functions</a></li><li class="header-link depth-2"><a href="#constants">Constants</a></li><li class="header-link depth-2"><a href="#objects">Objects</a></li><li class="header-link depth-3"><a href="#page">Page</a></li><li class="header-link depth-3"><a href="#component">Component</a></li><li class="header-link depth-3"><a href="#container">Container</a></li><li class="header-link depth-3"><a href="#container-item">Container Item</a></li><li class="header-link depth-3"><a href="#content">Content</a></li><li class="header-link depth-3"><a href="#document">Document</a></li><li class="header-link depth-3"><a href="#imageset">ImageSet</a></li><li class="header-link depth-3"><a href="#image">Image</a></li><li class="header-link depth-3"><a href="#menu">Menu</a></li><li class="header-link depth-3"><a href="#menuitem">MenuItem</a></li><li class="header-link depth-3"><a href="#metacollection">MetaCollection</a></li><li class="header-link depth-3"><a href="#meta">Meta</a></li><li class="header-link depth-3"><a href="#pagination">Pagination</a></li><li class="header-link depth-3"><a href="#paginationitem">PaginationItem</a></li></ul></astro-island>
+		<h2 class="heading astro-BYIKQF6W">More</h2>
+<ul class="astro-BYIKQF6W">
+	<li class="header-link depth-2 astro-BYIKQF6W">
+				<a class="edit-on-github astro-BYIKQF6W" href="https://github.com/withastro/astro/tree/main/examples/docs/src/content/docs/spa-sdk/docs/en/reference-saas.md" target="_blank">
+					<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen" class="svg-inline--fa fa-pen fa-w-16 astro-BYIKQF6W" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="1em" width="1em">
+						<path fill="currentColor" d="M290.74 93.24l128.02 128.02-277.99 277.99-114.14 12.6C11.35 513.54-1.56 500.62.14 485.34l12.7-114.22 277.9-277.88zm207.2-19.06l-60.11-60.11c-18.75-18.75-49.16-18.75-67.91 0l-56.55 56.55 128.02 128.02 56.55-56.55c18.75-18.76 18.75-49.16 0-67.91z" class="astro-BYIKQF6W"></path>
+					</svg>
+					<span class="astro-BYIKQF6W">Edit this page</span>
+				</a>
+			</li>
+	<li class="header-link depth-2 astro-BYIKQF6W">
+				<a href="https://astro.build/chat" target="_blank" class="astro-BYIKQF6W">
+					<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="comment-alt" class="svg-inline--fa fa-comment-alt fa-w-16 astro-BYIKQF6W" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="1em" width="1em">
+						<path fill="currentColor" d="M448 0H64C28.7 0 0 28.7 0 64v288c0 35.3 28.7 64 64 64h96v84c0 9.8 11.2 15.5 19.1 9.7L304 416h144c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64z" class="astro-BYIKQF6W"></path>
+					</svg>
+					<span class="astro-BYIKQF6W">Join our community</span>
+				</a>
+			</li>
+</ul>
+<div style="margin: 2rem 0; text-align: center;" class="astro-BYIKQF6W">
+	<astro-island uid="1uwwwb" component-url="/spa-sdk/docs/_astro/ThemeToggleButton.7f5d5bf2.js" component-export="default" renderer-url="/spa-sdk/docs/_astro/client.a6d618ef.js" props="{&quot;class&quot;:[0,&quot;astro-BYIKQF6W&quot;]}" ssr="" client="visible" opts="{&quot;name&quot;:&quot;ThemeToggleButton&quot;,&quot;value&quot;:true}" await-children=""><div class="theme-toggle"><label class><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd"></path></svg><input type="radio" name="theme-toggle" value="light" title="Use light theme" aria-label="Use light theme" /></label><label class><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg><input type="radio" name="theme-toggle" value="dark" title="Use dark theme" aria-label="Use dark theme" /></label></div></astro-island>
+</div>
+	</div>
+</nav>
+			</aside>
+		</main>
+		<footer class="astro-AK3UPACL">
+	<!-- Thanks to @5t3ph for https://smolcss.dev/#smol-avatar-list! --><div class="contributors astro-QVDSTM4S">
+	<ul class="avatar-list astro-QVDSTM4S" style="--avatar-count: 0">
+		
+	</ul>
+	
+	<a href="https://github.com/bloomreach/spa-sdk/commits/main/examples/docs/src/content/docs/spa-sdk/docs/en/reference-saas.md" class="astro-QVDSTM4S">Contributors</a>
+</div>
+</footer>
+	</body></html>
