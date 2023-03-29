@@ -37,18 +37,6 @@ npm run lint
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
 
-## Requesting & persisting user consent
-Personalization is handled via a separate package [npm package](https://www.npmjs.com/package/@bloomreach/segmentation) such that you can easily exclude it if you don't plan to use it.
-
-## Personalization
-Personalization requires an Exponea account. Once you have that set up, you can fetch a project id for which you can enable personalization.
-
-In order to initialize the personalization package, you will need to provide the *project id* as an *environment variable*:
-`NUXT_APP_EXPONEA_PROJECT_TOKEN` - with Exponea project token, and `NUXT_APP_EXPONEA_API_URL` - with Exponea API endpoint.
-
-If further customization is needed, please note that all logic regarding cookie consent popup and executing personalization is located in the `./utils/cookieconsent.ts` file.
-Simply inject `./components/BrCookieConsent.vue` into the application bootstrapping sequence in order to enable personalization. See `./pages/_.vue` for an example.
-
 ## Persist preview data for pages without SDK instance
 If you are using the SPA SDK selectively on certain pages, you will need to persist the preview related data when navigating between pages that have and those that don't have a SDK instance. The easiest way to achieve this result is by making use of the cookie storage as illustrated below.
 

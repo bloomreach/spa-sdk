@@ -17,7 +17,6 @@
     "last 1 edge version"
   ],
   "dependencies": {
-    "@bloomreach/segmentation": "0.0.13",
     "@bloomreach/spa-sdk": "19.0.2",
     "@bloomreach/vue-sdk": "19.0.2",
     "axios": "0.26.1",

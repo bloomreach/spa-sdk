@@ -41,7 +41,6 @@
             </div>
           </div>
         </footer>
-        <br-cookie-consent :isPreview="page.isPreview()" :path="configuration.path"></br-cookie-consent>
       </template>
     </template>
   </br-page>
@@ -50,7 +49,6 @@
 <script setup lang="ts">
 import BrBanner from '@/components/BrBanner.vue';
 import BrContent from '@/components/BrContent.vue';
-import BrCookieConsent from '@/components/BrCookieConsent.vue';
 import BrMenu from '@/components/BrMenu.vue';
 import BrNewsList from '@/components/BrNewsList.vue';
 import { buildConfiguration } from '@/utils/buildConfiguration';

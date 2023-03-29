@@ -41,7 +41,6 @@
             </div>
           </div>
         </footer>
-        <br-cookie-consent :is-preview="props.page.isPreview()" :path="configuration.path"></br-cookie-consent>
       </template>
     </template>
   </br-page>
@@ -55,11 +54,9 @@ import Banner from '~/components/BrBanner.vue';
 import Content from '~/components/BrContent.vue';
 import Menu from '~/components/BrMenu.vue';
 import NewsList from '~/components/BrNewsList.vue';
-import CookieConsent from '~/components/BrCookieConsent.vue';
 import { buildConfiguration } from '~/utils/buildConfiguration';
 
 @Component({
-  components: { 'br-cookie-consent': CookieConsent },
   async asyncData(context) {
     const configuration = buildConfiguration(context.route.fullPath);
 

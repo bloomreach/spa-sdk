@@ -16,6 +16,5 @@
 
 export * from './Banner';
 export * from './Content';
-export * from './CookieConsent';
 export * from './Menu';
 export * from './NewsList';

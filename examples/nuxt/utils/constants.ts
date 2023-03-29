@@ -17,5 +17,3 @@
 export const BRXM_ENDPOINT = process.env.VUE_APP_BRXM_ENDPOINT ?? '';
 export const BR_MULTI_TENANT_SUPPORT = process.env.NUXT_APP_BR_MULTI_TENANT_SUPPORT === 'true';
 export const BASE_URL = process.env.BASE_URL !== '/' ? process.env.BASE_URL ?? '' : '';
-export const NUXT_APP_EXPONEA_PROJECT_TOKEN = process.env.NUXT_APP_EXPONEA_PROJECT_TOKEN ?? '';
-export const NUXT_APP_EXPONEA_API_URL = process.env.NUXT_APP_EXPONEA_API_URL ?? '';
