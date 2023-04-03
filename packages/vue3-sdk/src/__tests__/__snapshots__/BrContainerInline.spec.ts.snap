@@ -1,0 +1,5 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`BrContainerInline > render > should render container's children 1`] = `"<div class=\\"hst-container\\"></div>"`;
+
+exports[`BrContainerInline > render > should render preview classes 1`] = `"<div class=\\"hst-container\\"></div>"`;

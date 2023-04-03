@@ -1,0 +1,5 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`BrPage > update > should render nothing if the page was not initialized and NBR mode is false 1`] = `"<!--v-if-->"`;
+
+exports[`BrPage > update > should render the children components if the page was not initialized and NBR mode is true 1`] = `"<br-node-component-stub></br-node-component-stub>"`;
