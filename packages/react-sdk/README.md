@@ -419,10 +419,6 @@ framework, but there are some of the best practices.
   }
   ```
 
-### Using the SPA SDK selectively on certain pages
-If you are navigating between pages that have and those that don't have a SDK instance you will need to persist the preview related data.
-See detailed guide how to setup it in framework specific examples, [nextjs](https://github.com/bloomreach/spa-sdk/tree/main/examples/next#persist-preview-data-for-pages-without-sdk-instance), [react](https://github.com/bloomreach/spa-sdk/tree/main/examples/react#persist-preview-data-for-pages-without-sdk-instance).
-
 ## License
 
 Published under [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0)

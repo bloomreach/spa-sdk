@@ -430,10 +430,6 @@ Add new content button can be placed inside a component using
 </script>
 ```
 
-### Using the SPA SDK selectively on certain pages
-If you are navigating between pages that have and those that don't have a SDK instance you will need to persist the preview related data.
-See detailed guide how to setup it in framework specific examples, [nuxtjs](https://github.com/bloomreach/spa-sdk/tree/main/examples/nuxt#persist-preview-data-for-pages-without-sdk-instance), [vue](https://github.com/bloomreach/spa-sdk/tree/main/examples/vue#persist-preview-data-for-pages-without-sdk-instance).
-
 ## License
 
 Published under [Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0)

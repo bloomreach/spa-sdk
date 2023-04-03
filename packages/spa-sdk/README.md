@@ -92,6 +92,59 @@ For example, in a React example, you may sanitize and render the HTML content wh
 
 The same principle may apply in other frameworks. e.g, `v-html` in Vue.js or `[innerHTML]` in Angular.
 
+## Persist preview data for pages without SDK instance
+If you are using the SPA SDK selectively on certain pages, you will need to persist the preview related data when navigating between pages that have and those that don't have a SDK instance. The easiest way to achieve this result is by making use of the cookie storage as illustrated below.
+
+The following snippet of the code shows the possible implementation of a function which builds a Configuration object to pass into the `initialize` function from the SPA SDK or directly to a `BrPage` component.
+It reads preview data from the query string and saves it to the cookies, restoring that data if it not available in a query string. To manage the cookies you could use `cookie` library or any other library.
+
+### Important notes
+* The preview site should be served on a separate domain compared to the live site to avoid saving preview related cookies for the live site.
+* In case, when the first page which is loading in preview doesn't use SPA SDK you should parse query parameters and save preview related data to the cookies by yourself.
+
+This is a generic example and you should adjust it to your specific framework.
+
+```typescript
+import axios from 'axios';
+import cookie from 'cookie';
+import { Configuration } from '@bloomreach/spa-sdk';
+
+export default function buildConfiguration(): Configuration {
+  const PREVIEW_TOKEN_KEY = 'token';
+  const PREVIEW_SERVER_ID_KEY = 'server-id';
+  // Read a token and server id from the query string
+  const searchParams = new URLSearchParams(window.location.search);
+  const queryToken = searchParams.get(PREVIEW_TOKEN_KEY);
+  const queryServerId = searchParams.get(PREVIEW_SERVER_ID_KEY);
+
+  const cookies = cookie.parse(document.cookie);
+
+  // Prioritize values from the query string because cookies might be outdated.
+  const authorizationToken = queryToken ?? cookies[PREVIEW_TOKEN_KEY];
+  const serverId = queryServerId ?? cookies[PREVIEW_SERVER_ID_KEY];
+
+  // Save the values from the query string to have ability to restore them when switch back from legacy page to the SPA-SDK rendered page.
+  if (queryToken) {
+    document.cookie = cookie.serialize(PREVIEW_TOKEN_KEY, queryToken);
+  }
+  
+  if (queryServerId) {
+    document.cookie = cookie.serialize(PREVIEW_SERVER_ID_KEY, queryServerId);
+  }
+
+  const configuration = {
+    endpoint: 'your-pda-endpoint',
+    httpClient: axios,
+    path: `${location.pathname}${location.search}`,
+    // Provide authorization token and server id if they exist to the SPA-SDK initialization method.
+    ...(authorizationToken ? { authorizationToken } : {}),
+    ...(serverId ? { serverId } : {}),
+  };
+  
+  return configuration;
+};
+
+```
 ## License
 
 Published under [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) license.
