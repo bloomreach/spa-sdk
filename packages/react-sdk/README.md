@@ -112,8 +112,8 @@ export default function App() {
 The `BrPage` component supports several options you may use to customize page
 initialization. These options will be passed to the `initialize` function from
 [`@bloomreach/spa-sdk`](https://www.npmjs.com/package/@bloomreach/spa-sdk). See
-[here](https://www.npmjs.com/package/@bloomreach/spa-sdk#configuration) for the
-full configuration documentation.
+[here](https://bloomreach.github.io/spa-sdk/modules/index.html#Configuration) for the
+full configuration documentation in the SPA SDK Typedocs.
 
 ### Mapping
 
