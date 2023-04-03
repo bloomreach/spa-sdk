@@ -1,6 +1,6 @@
-# Bloomreach Vue.js SDK
+# Bloomreach Vue 3 SDK
 
-Bloomreach Vue.js SDK provides simplified headless integration with [Bloomreach Experience Manager](https://www.bloomreach.com/en/products/experience-manager)
+Bloomreach Vue 3 SDK provides simplified headless integration with [Bloomreach Experience Manager](https://www.bloomreach.com/en/products/experience-manager)
 for Vue-based applications. This library interacts with the [Page Model API](https://documentation.bloomreach.com/api-reference/content/delivery/page-delivery-api/page-delivery-api.html)
 and [Bloomreach SPA SDK](https://www.npmjs.com/package/@bloomreach/spa-sdk) and
 exposes a simplified declarative Vue.js interface over the Page Model.
@@ -11,15 +11,8 @@ exposes a simplified declarative Vue.js interface over the Page Model.
 - Bloomreach Components Vue component;
 - Manage Content Button;
 - Manage Menu Button;
-- [Slots](https://vuejs.org/v2/guide/components-slots.html) support;
 - [Vue Server-Side Rendering](https://ssr.vuejs.org/) support;
 - [Nuxt.js](https://nuxtjs.org/) support;
-- [Vue Router](https://router.vuejs.org/) support;
-- [Jest](https://jestjs.io/) support.
-
-**Important notice**: Vue SDK does not work in combination with `nomarkup`
-xtype container components. (The xtype of a container component is described [here](https://documentation.bloomreach.com/api-reference/content/management/site-management-api/schemas.html) and [here](https://documentation.bloomreach.com/14/library/concepts/template-composer/channel-editor-containers.html))
-The problem is that Vue 2 does not support multi-root templates and the fragement libraries such as [Vue Fragment](https://www.npmjs.com/package/vue-fragment) that enable this for Vue 2 all add 'magic' parentNodes which is incompatible with some of the Bloomreach Experience Manager code constructs. We are looking into updating to Vue 3 when possible which [does support multi-root templates](https://v3.vuejs.org/guide/migration/fragments.html#_2-x-syntax) without extra magic.
 
 ## Get Started
 
@@ -28,13 +21,13 @@ The problem is that Vue 2 does not support multi-root templates and the fragemen
 To get the SDK into your project with [NPM](https://docs.npmjs.com/cli/npm):
 
 ```bash
-npm install @bloomreach/vue-sdk
+npm install @bloomreach/vue3-sdk
 ```
 
 And with [Yarn](https://yarnpkg.com):
 
 ```bash
-yarn add @bloomreach/vue-sdk
+yarn add @bloomreach/vue3-sdk
 ```
 
 ### Usage
@@ -49,9 +42,9 @@ In the app's entry file, it needs to import and
 [install](https://vuejs.org/v2/guide/plugins.html#Using-a-Plugin) the `BrSdk`
 plugin to make the SDK components available globally.
 
-```javascript
+```typescript
 import Vue from 'vue';
-import { BrSdk } from '@bloomreach/vue-sdk';
+import { BrSdk } from '@bloomreach/vue3-sdk';
 
 Vue.use(BrSdk);
 
@@ -60,13 +53,13 @@ Vue.use(BrSdk);
 
 #### `src/App.vue`
 
-In the `App` component, it needs to pass the configuration and brXM components
+In the `App` component, it needs to pass the configuration and Bloomreach Content components
 mapping into the `br-page` component inputs.
 
 ```html
 <template>
   <br-page :configuration="configuration" :mapping="mapping">
-    <template v-slot:default="props">
+    <template v-slot="props">
       <header>
         <a :href="props.page.getUrl('/')">Home</a>
         <br-component component="menu" />
@@ -81,19 +74,13 @@ mapping into the `br-page` component inputs.
   </br-page>
 </template>
 
-<script>
+<script lang="ts" setup>
   import Banner from './components/Banner.vue';
-
-  export default {
-    data() {
-      return {
-        configuration: {
-          /* ... */
-        },
-        mapping: { Banner },
-      };
-    },
+  
+  const configuration = {
+    /* ... */
   };
+  const mapping = { Banner };
 </script>
 ```
 
@@ -107,8 +94,11 @@ Finally, in the `Banner` component, it can consume the component data via the
   <div>Banner: {{ component.getName() }}</div>
 </template>
 
-<script>
-  export default { props: ['component'] };
+<script lang="ts" setup>
+  import { toRefs } from 'vue';
+  
+  const props = defineProps<{ component: Component }>();
+  const { component } = toRefs(props);
 </script>
 ```
 
@@ -121,18 +111,18 @@ Page Model is being fetched. These children might contain logic themselves that 
 non-blocking render mode would allow this to be executed in parallel to requesting the Page Model.
 
 ```html
+
 <template>
   Hello
 </template>
 
-<script>
-  export default {
-    name: 'MyComponent',
-    async mounted() {
-      // This will run in parallel to fetching the PageModel from the Delivery API
-      await fetch('https://yourapi.com');
-    }
-  };
+<script lang="ts" setup>
+  import { onMounted } from 'vue';
+  
+  onMounted(async () => {
+    // This will run in parallel to fetching the Page Model from the Delivery API
+    await fetch('https://yourapi.com');
+  });
 </script>
 ```
 ```html
@@ -144,18 +134,12 @@ non-blocking render mode would allow this to be executed in parallel to requesti
   </br-page>
 </template>
 
-<script>
-  export default {
-    data() {
-      return {
-        configuration: {
-          /* ... */
-          NBRMode: true,
-        },
-        mapping: { ... },
-      };
-    },
+<script lang="ts" setup>
+  const configuration = {
+    NBRMode: true,
+    /* ... */
   };
+  const mapping = { ... };
 </script>
 ```
 ### Configuration
@@ -168,7 +152,7 @@ full configuration documentation.
 
 ### Mapping
 
-The `br-page` component provides a way to link Vue components with the brXM
+The `br-page` component provides a way to link Vue components with the Bloomreach Content
 ones. It requires to pass the `mapping` property that maps the component type
 with its representation.
 
@@ -180,19 +164,13 @@ mapped by their labels.
   <br-page :configuration="configuration" :mapping="mapping" />
 </template>
 
-<script>
+<script lang="ts" setup>
   import NewsList from './components/NewsList.vue';
-
-  export default {
-    data() {
-      return {
-        configuration: {
-          /* ... */
-        },
-        mapping: { 'News List': NewsList },
-      };
-    },
+  
+  const configuration = {
+    /* ... */
   };
+  const mapping = { 'News List': NewsList };
 </script>
 ```
 
@@ -200,7 +178,7 @@ The [Containers](https://www.npmjs.com/package/@bloomreach/spa-sdk#container-ite
 can be only mapped by their [type](https://documentation.bloomreach.com/library/concepts/template-composer/channel-editor-containers.html),
 so you need to use [constants](https://www.npmjs.com/package/@bloomreach/spa-sdk#constants) from
 [`@bloomreach/spa-sdk`](www.npmjs.com/package/@bloomreach/spa-sdk). By default,
-the Vue.js SDK provides an implementation for all the container types as it is
+the Vue 3 SDK provides an implementation for all the container types as it is
 defined in the [documentation](https://documentation.bloomreach.com/library/concepts/template-composer/channel-editor-containers.html).
 
 ```html
@@ -208,20 +186,14 @@ defined in the [documentation](https://documentation.bloomreach.com/library/conc
   <br-page :configuration="configuration" :mapping="mapping" />
 </template>
 
-<script>
+<script lang="ts" setup>
   import { TYPE_CONTAINER_INLINE } from '@bloomreach/spa-sdk';
   import InlineContainer from './components/InlineContainer.vue';
-
-  export default {
-    data() {
-      return {
-        configuration: {
-          /* ... */
-        },
-        mapping: { [TYPE_CONTAINER_INLINE]: InlineContainer },
-      };
-    },
+  
+  const configuration = {
+    /* ... */
   };
+  const mapping = { [TYPE_CONTAINER_INLINE]: InlineContainer };
 </script>
 ```
 
@@ -237,22 +209,12 @@ From within the Container component, the Container Items can be accessed via the
   </div>
 </template>
 
-<script>
-  export default { props: ['component'] };
+<script lang="ts" setup>
+  import { toRefs } from 'vue';
+  
+  const props = defineProps<{ component: Component }>();
+  const { component } = toRefs(props);
 </script>
-```
-
-That is also possible to render children via the default slot.
-
-```javascript
-export default {
-  render(createElement) {
-    return createElement(
-      'div',
-      this.$slots.default.map((node) => createElement('span', [node])),
-    );
-  },
-};
 ```
 
 The [Components](https://www.npmjs.com/package/@bloomreach/spa-sdk#component)
@@ -263,19 +225,13 @@ can be mapped by their names. It is useful for a menu component mapping.
   <br-page :configuration="configuration" :mapping="mapping" />
 </template>
 
-<script>
+<script lang="ts" setup>
   import Menu from './components/Menu.vue';
 
-  export default {
-    data() {
-      return {
-        configuration: {
-          /* ... */
-        },
-        mapping: { menu: Menu },
-      };
-    },
+  const configuration = {
+    /* ... */
   };
+  const mapping = { menu: Menu };
 </script>
 ```
 
@@ -287,20 +243,14 @@ text. There is an option to override the fallback.
   <br-page :configuration="configuration" :mapping="mapping" />
 </template>
 
-<script>
+<script lang="ts" setup>
   import { TYPE_CONTAINER_ITEM_UNDEFINED } from '@bloomreach/spa-sdk';
   import Fallback from './components/Fallback.vue';
 
-  export default {
-    data() {
-      return {
-        configuration: {
-          /* ... */
-        },
-        mapping: { [TYPE_CONTAINER_ITEM_UNDEFINED]: Fallback },
-      };
-    },
+  const configuration = {
+    /* ... */
   };
+  const mapping = { [TYPE_CONTAINER_ITEM_UNDEFINED]: Fallback };
 </script>
 ```
 
@@ -316,7 +266,7 @@ component mapping.
     <template>
       <br-component component="menu">
         <template v-slot:default="{ component, page }">
-          <menu :component="component" :page="page" />
+          <Menu :component="component" :page="page" />
         </template>
       </br-component>
     </template>
@@ -325,17 +275,12 @@ component mapping.
 
 <script>
   import Menu from './components/Menu.vue';
-
-  export default {
-    components: { Menu },
-    data() {
-      return {
-        configuration: {
-          /* ... */
-        },
-        mapping: {},
-      };
-    },
+  
+  const configuration = {
+    /* ... */
+  };
+  const mapping = {
+    /* ... */
   };
 </script>
 ```
@@ -344,15 +289,20 @@ In a component it is also possible to point where the component's children are
 going to be placed.
 
 ```html
+
 <template>
   <div>
     @copy; Bloomreach
-    <br-component />
+    <br-component/>
   </div>
 </template>
 
-<script>
-  export default { props: ['component'] };
+<script lang="ts" setup>
+  import { Component } from '@bloomreach/spa-sdk';
+  import { toRefs } from 'vue';
+  
+  const props = defineProps < { component: Component } > ();
+  const { component } = toRefs(props);
 </script>
 ```
 
@@ -375,16 +325,12 @@ context.
   </br-page>
 </template>
 
-<script>
-  export default {
-    data() {
-      return {
-        configuration: {
-          /* ... */
-        },
-        mapping: {},
-      };
-    },
+<script lang="ts" setup>
+  const configuration = {
+    /* ... */
+  };
+  const mapping = {
+    /* ... */
   };
 </script>
 ```
@@ -406,23 +352,20 @@ Manage menu button can be placed inside a menu component using
   </ul>
 </template>
 
-<script>
-  import { Menu, Reference } from '@bloomreach/spa-sdk';
+<script lang="ts" setup>
+  import { toRefs, computed } from 'vue';
+  import { Menu, Reference, Component, Page } from '@bloomreach/spa-sdk';
 
   interface MenuModels {
     menu: Reference;
   }
-
-  export default {
-    computed: {
-      menu() {
-        const { menu: menuRef } = this.component.getModels<MenuModels>();
-
-        return menuRef && this.page.getContent<Menu>(menuRef);
-      },
-    },
-    props: ['component', 'page'],
-  };
+  
+  const props = defineProps<{ component: Component; page: Page }>();
+  const { component, page } = toRefs(props);
+  const menu = computed(() => {
+    const { menu: menuRef } = component.value.getModels<MenuModels>();
+    return menuRef && page.value.getContent<Menu>(menuRef);
+  });
 </script>
 ```
 
@@ -446,22 +389,20 @@ Manage content button can be placed inside a component using
 </template>
 
 <script>
-  import { Document, Reference } from '@bloomreach/spa-sdk';
+  import { toRefs, computed } from 'vue';
+  import { Document, Reference, Page, Component } from '@bloomreach/spa-sdk';
 
   interface BannerModels {
     document: Reference;
   }
-
-  export default {
-    computed: {
-      document() {
-        const { document: documentRef } = this.component.getModels<BannerModels>();
-
-        return documentRef && this.page.getContent<Document>(documentRef);
-      },
-    },
-    props: ['component', 'page'],
-  };
+  
+  const props = defineProps<{ component: Component; page: Page }>();
+  const { component, page } = toRefs(props);
+  
+  const document = computed(() => {
+    const { document: documentRef } = component.value.getModels<BannerModels>();
+    return documentRef && page.value.getContent<Document>(documentRef);
+  });
 </script>
 ```
 
@@ -481,10 +422,11 @@ Add new content button can be placed inside a component using
   </div>
 </template>
 
-<script>
-  export default {
-    props: ['component', 'page'],
-  };
+<script lang="ts" setup>
+  import { Component, Page } from '@bloomreach/spa-sdk';
+  
+  const props = defineProps<{ component: Component, page: Page }>();
+  const { component, page } = toRefs(props);
 </script>
 ```
 
@@ -499,8 +441,8 @@ license.
 
 ## Reference
 
-The Vue.js SDK is using [Bloomreach SPA SDK](https://www.npmjs.com/package/@bloomreach/spa-sdk#reference) to interact
-with the brXM.
+The Vue 3 SDK is using [Bloomreach SPA SDK](https://www.npmjs.com/package/@bloomreach/spa-sdk#reference) to interact
+with the Bloomreach Content instance.
 
 ### br-page
 
