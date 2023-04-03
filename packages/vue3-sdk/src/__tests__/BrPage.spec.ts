@@ -174,7 +174,6 @@ describe('BrPage', () => {
 
       const wrapper = shallowMount(BrPage, { propsData: { configuration: {}, page, mapping: {} } });
       await wrapper.vm.$nextTick();
-      await wrapper.vm.$nextTick();
 
       expect(page.sync).toBeCalled();
     });
