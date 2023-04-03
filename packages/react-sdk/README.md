@@ -1,6 +1,6 @@
 # Bloomreach React SDK
 
-Bloomreach React SDK provides simplified headless integration with [Bloomreach Experience Manager](https://www.bloomreach.com/en/products/experience-manager)
+Bloomreach React SDK provides simplified headless integration with [Bloomreach Content](https://www.bloomreach.com/en/products/content)
 for React-based applications. This library interacts with the [Page Model API](https://documentation.bloomreach.com/api-reference/content/delivery/page-delivery-api/page-delivery-api.html)
 and [Bloomreach SPA SDK](https://www.npmjs.com/package/@bloomreach/spa-sdk) and
 exposes a simplified declarative React interface over the Page Model.
@@ -121,7 +121,7 @@ The `BrPage` component provides a way to link React components with the brXM
 ones. It requires to pass the `mapping` property that maps the component type
 with its representation.
 
-The [Container Items](https://www.npmjs.com/package/@bloomreach/spa-sdk#container-item) can be
+The [Container Items](https://bloomreach.github.io/spa-sdk/interfaces/index.ContainerItem.html) can be
 mapped by their labels.
 
 ```jsx
@@ -130,9 +130,9 @@ import NewsList from "./components/NewsList";
 return <BrPage mapping={{ "News List": NewsList }} />;
 ```
 
-The [Containers](https://www.npmjs.com/package/@bloomreach/spa-sdk#container-item)
+The [Containers](https://bloomreach.github.io/spa-sdk/interfaces/index.ContainerItem.html)
 can be only mapped by their [type](https://documentation.bloomreach.com/library/concepts/template-composer/channel-editor-containers.html),
-so you need to use [constants](https://www.npmjs.com/package/@bloomreach/spa-sdk#constants) from
+so you need to use [constants](https://bloomreach.github.io/spa-sdk/modules/index.html#TYPE_CONTAINER_BOX) from
 [`@bloomreach/spa-sdk`](www.npmjs.com/package/@bloomreach/spa-sdk). By default,
 the React SDK provides an implementation for all the container types as it's
 defined in the [documentation](https://documentation.bloomreach.com/library/concepts/template-composer/channel-editor-containers.html).
@@ -159,7 +159,7 @@ export default function MyInlineContainer() {
 }
 ```
 
-The [Components](https://www.npmjs.com/package/@bloomreach/spa-sdk#component)
+The [Components](https://bloomreach.github.io/spa-sdk/interfaces/index.Component.html)
 can be mapped by their names. It is useful for a menu component mapping.
 
 ```jsx
@@ -426,8 +426,8 @@ license.
 
 ## Reference
 
-The React SDK is using [Bloomreach SPA SDK](https://www.npmjs.com/package/@bloomreach/spa-sdk#reference) to interact
-with the brXM.
+The React SDK is using [Bloomreach SPA SDK](https://www.npmjs.com/package/@bloomreach/spa-sdk) to interact
+with Bloomreach Content.
 
 ### BrPage
 
@@ -486,7 +486,7 @@ menu editor. The button will only be shown in preview mode.
 
 ### BrComponentContext
 
-The [React Context](https://reactjs.org/docs/context.html) holding the current brXM [Component](https://www.npmjs.com/package/@bloomreach/spa-sdk#component).
+The [React Context](https://reactjs.org/docs/context.html) holding the current brXM [Component](https://bloomreach.github.io/spa-sdk/interfaces/index.Component.html).
 
 ### BrPageContext
 

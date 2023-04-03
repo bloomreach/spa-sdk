@@ -1,6 +1,6 @@
 # Bloomreach Vue 3 SDK
 
-Bloomreach Vue 3 SDK provides simplified headless integration with [Bloomreach Experience Manager](https://www.bloomreach.com/en/products/experience-manager)
+Bloomreach Vue 3 SDK provides simplified headless integration with [Bloomreach Content](https://www.bloomreach.com/en/products/content)
 for Vue-based applications. This library interacts with the [Page Model API](https://documentation.bloomreach.com/api-reference/content/delivery/page-delivery-api/page-delivery-api.html)
 and [Bloomreach SPA SDK](https://www.npmjs.com/package/@bloomreach/spa-sdk) and
 exposes a simplified declarative Vue.js interface over the Page Model.
@@ -11,8 +11,6 @@ exposes a simplified declarative Vue.js interface over the Page Model.
 - Bloomreach Components Vue component;
 - Manage Content Button;
 - Manage Menu Button;
-- [Vue Server-Side Rendering](https://ssr.vuejs.org/) support;
-- [Nuxt.js](https://nuxtjs.org/) support;
 
 ## Get Started
 
@@ -39,16 +37,17 @@ component.
 #### `src/main.ts`
 
 In the app's entry file, it needs to import and
-[install](https://vuejs.org/v2/guide/plugins.html#Using-a-Plugin) the `BrSdk`
+[install](https://vuejs.org/guide/reusability/plugins.html) the `BrSdk`
 plugin to make the SDK components available globally.
 
 ```typescript
-import Vue from 'vue';
+import { createApp } from 'vue'
 import { BrSdk } from '@bloomreach/vue3-sdk';
 
-Vue.use(BrSdk);
+const app = createApp(/*... */);
+app.use(BrSdk);
 
-// ...
+/*... */
 ```
 
 #### `src/App.vue`
@@ -111,7 +110,7 @@ Page Model is being fetched. These children might contain logic themselves that 
 non-blocking render mode would allow this to be executed in parallel to requesting the Page Model.
 
 ```html
-
+<!-- MyComponent.vue -->
 <template>
   Hello
 </template>
@@ -139,7 +138,7 @@ non-blocking render mode would allow this to be executed in parallel to requesti
     NBRMode: true,
     /* ... */
   };
-  const mapping = { ... };
+  const mapping = {/* ... */};
 </script>
 ```
 ### Configuration
@@ -156,7 +155,7 @@ The `br-page` component provides a way to link Vue components with the Bloomreac
 ones. It requires to pass the `mapping` property that maps the component type
 with its representation.
 
-The [Container Items](https://www.npmjs.com/package/@bloomreach/spa-sdk#container-item) can be
+The [Container Items](https://bloomreach.github.io/spa-sdk/interfaces/index.ContainerItem.html) can be
 mapped by their labels.
 
 ```html
@@ -174,9 +173,9 @@ mapped by their labels.
 </script>
 ```
 
-The [Containers](https://www.npmjs.com/package/@bloomreach/spa-sdk#container-item)
+The [Containers](https://bloomreach.github.io/spa-sdk/interfaces/index.ContainerItem.html)
 can be only mapped by their [type](https://documentation.bloomreach.com/library/concepts/template-composer/channel-editor-containers.html),
-so you need to use [constants](https://www.npmjs.com/package/@bloomreach/spa-sdk#constants) from
+so you need to use [constants](https://bloomreach.github.io/spa-sdk/modules/index.html#TYPE_CONTAINER_BOX) from
 [`@bloomreach/spa-sdk`](www.npmjs.com/package/@bloomreach/spa-sdk). By default,
 the Vue 3 SDK provides an implementation for all the container types as it is
 defined in the [documentation](https://documentation.bloomreach.com/library/concepts/template-composer/channel-editor-containers.html).
@@ -217,7 +216,7 @@ From within the Container component, the Container Items can be accessed via the
 </script>
 ```
 
-The [Components](https://www.npmjs.com/package/@bloomreach/spa-sdk#component)
+The [Components](https://bloomreach.github.io/spa-sdk/interfaces/index.Component.html)
 can be mapped by their names. It is useful for a menu component mapping.
 
 ```html
@@ -437,8 +436,8 @@ license.
 
 ## Reference
 
-The Vue 3 SDK is using [Bloomreach SPA SDK](https://www.npmjs.com/package/@bloomreach/spa-sdk#reference) to interact
-with the Bloomreach Content instance.
+The Vue 3 SDK is using [Bloomreach SPA SDK](https://www.npmjs.com/package/@bloomreach/spa-sdk) to interact
+with Bloomreach Content.
 
 ### br-page
 

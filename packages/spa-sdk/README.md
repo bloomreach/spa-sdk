@@ -1,6 +1,6 @@
 # Bloomreach SPA SDK
 
-Bloomreach SPA SDK provides simplified headless integration with [Bloomreach Experience Manager](https://www.bloomreach.com/en/products/experience-manager)
+Bloomreach SPA SDK provides simplified headless integration with [Bloomreach Content](https://www.bloomreach.com/en/products/content)
 for JavaScript-based applications. This library interacts with the [Page Model API](https://documentation.bloomreach.com/library/concepts/page-model-api/introduction.html)
 and exposes a simplified and framework-agnostic interface over the page model.
 

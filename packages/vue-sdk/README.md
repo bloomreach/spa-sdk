@@ -1,6 +1,6 @@
 # Bloomreach Vue.js SDK
 
-Bloomreach Vue.js SDK provides simplified headless integration with [Bloomreach Experience Manager](https://www.bloomreach.com/en/products/experience-manager)
+Bloomreach Vue.js SDK provides simplified headless integration with [Bloomreach Content](https://www.bloomreach.com/en/products/content)
 for Vue-based applications. This library interacts with the [Page Model API](https://documentation.bloomreach.com/api-reference/content/delivery/page-delivery-api/page-delivery-api.html)
 and [Bloomreach SPA SDK](https://www.npmjs.com/package/@bloomreach/spa-sdk) and
 exposes a simplified declarative Vue.js interface over the Page Model.
@@ -172,7 +172,7 @@ The `br-page` component provides a way to link Vue components with the brXM
 ones. It requires to pass the `mapping` property that maps the component type
 with its representation.
 
-The [Container Items](https://www.npmjs.com/package/@bloomreach/spa-sdk#container-item) can be
+The [Container Items](https://bloomreach.github.io/spa-sdk/interfaces/index.ContainerItem.html) can be
 mapped by their labels.
 
 ```html
@@ -196,9 +196,9 @@ mapped by their labels.
 </script>
 ```
 
-The [Containers](https://www.npmjs.com/package/@bloomreach/spa-sdk#container-item)
+The [Containers](https://bloomreach.github.io/spa-sdk/interfaces/index.ContainerItem.html)
 can be only mapped by their [type](https://documentation.bloomreach.com/library/concepts/template-composer/channel-editor-containers.html),
-so you need to use [constants](https://www.npmjs.com/package/@bloomreach/spa-sdk#constants) from
+so you need to use [constants](https://bloomreach.github.io/spa-sdk/modules/index.html#TYPE_CONTAINER_BOX) from
 [`@bloomreach/spa-sdk`](www.npmjs.com/package/@bloomreach/spa-sdk). By default,
 the Vue.js SDK provides an implementation for all the container types as it is
 defined in the [documentation](https://documentation.bloomreach.com/library/concepts/template-composer/channel-editor-containers.html).
@@ -255,7 +255,7 @@ export default {
 };
 ```
 
-The [Components](https://www.npmjs.com/package/@bloomreach/spa-sdk#component)
+The [Components](https://bloomreach.github.io/spa-sdk/interfaces/index.Component.html)
 can be mapped by their names. It is useful for a menu component mapping.
 
 ```html
@@ -495,8 +495,8 @@ license.
 
 ## Reference
 
-The Vue.js SDK is using [Bloomreach SPA SDK](https://www.npmjs.com/package/@bloomreach/spa-sdk#reference) to interact
-with the brXM.
+The Vue.js SDK is using [Bloomreach SPA SDK](https://www.npmjs.com/package/@bloomreach/spa-sdk) to interact
+with Bloomreach Content.
 
 ### br-page
 
