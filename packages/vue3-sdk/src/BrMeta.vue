@@ -32,11 +32,11 @@ const head = ref<HTMLSpanElement>();
 const tail = ref<HTMLSpanElement>();
 
 const inject = () => {
-  if (!head.value?.nextSibling || !tail.value) {
+  if (!head.value?.nextElementSibling || !tail.value?.previousElementSibling) {
     return;
   }
 
-  clear = meta.value?.render(head.value.nextSibling, tail.value);
+  clear = meta.value?.render(head.value.nextElementSibling, tail.value?.previousElementSibling);
 };
 
 watch(meta, () => getCurrentInstance()?.proxy?.$forceUpdate(), { deep: false });
