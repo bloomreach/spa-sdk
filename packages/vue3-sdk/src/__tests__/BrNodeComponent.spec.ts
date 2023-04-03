@@ -49,6 +49,7 @@ describe('BrNodeComponent', () => {
 
   beforeEach(() => {
     component = {
+      getId: vi.fn(() => 'some-id'),
       getChildren: vi.fn(() => []),
       getMeta: vi.fn(),
       getName: vi.fn(() => someComponentName),

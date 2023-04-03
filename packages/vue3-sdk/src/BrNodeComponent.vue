@@ -15,16 +15,16 @@
   -->
 
 <template>
-  <br-meta :meta="meta">
+  <br-meta :meta="meta" :key="componentRef?.getId()">
     <slot>
       <Suspense>
-        <br-node-container-item v-if="isContainerItem(component)"/>
+        <br-node-container-item v-if="isContainerItem(componentRef)"/>
 
-        <br-node-container v-else-if="isContainer(component)">
+        <br-node-container v-else-if="isContainer(componentRef)">
           <br-node-component v-for="child in children" :key="child.getId()" :component="child"/>
         </br-node-container>
 
-        <component v-else-if="name && name in mapping" :is="mapping[name]" :component="component" :page="page"/>
+        <component v-else-if="name && name in mapping" :is="mapping[name]" :component="componentRef" :page="page"/>
 
         <br-node-component v-else v-for="child in children" :key="child.getId()" :component="child"/>
       </Suspense>
@@ -39,16 +39,16 @@ import BrNodeContainerItem from '@/BrNodeContainerItem.vue';
 import { component$, mapping$, page$ } from '@/providerKeys';
 import type { Component } from '@bloomreach/spa-sdk';
 import { isContainer, isContainerItem } from '@bloomreach/spa-sdk';
-import { computed, inject, provide, toRefs } from 'vue';
+import { computed, inject, onMounted, onUpdated, provide, toRefs } from 'vue';
 
 const props = defineProps<{ component?: Component }>();
-const { component } = toRefs(props);
+const { component: componentRef } = toRefs(props);
 const page = inject(page$);
 const mapping = inject(mapping$)!;
 
-const children = computed(() => component?.value?.getChildren());
-const meta = computed(() => component?.value?.getMeta());
-const name = computed(() => component?.value?.getName());
+const children = computed(() => componentRef?.value?.getChildren());
+const meta = computed(() => componentRef?.value?.getMeta());
+const name = computed(() => componentRef?.value?.getName());
 
-provide(component$, component);
+provide(component$, componentRef);
 </script>
