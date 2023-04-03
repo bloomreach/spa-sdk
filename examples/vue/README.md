@@ -3,10 +3,10 @@ Example Vue.js SPA using the Bloomreach Experience [Vue.js SDK](https://www.npmj
 generated with [Vue CLI](https://cli.vuejs.org/).
 
 ## Install and run
-```bash
-npm ci
-npm run serve --port=3000
-```
+
+This example is part of a monorepo and other packages will have to be build in order for this example to run. Read more
+in the [root README](../../README.md#development) on how to install, build and run the examples.
+
 
 ## Available scripts
 In the project directory, you can run:

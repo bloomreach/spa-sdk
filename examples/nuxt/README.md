@@ -3,10 +3,10 @@ Example Vue.js SPA using the Bloomreach Experience [Vue.js SDK](https://www.npmj
 generated with [create-nuxt-app](https://nuxtjs.org/guide/installation/).
 
 ## Install and run
-```bash
-npm ci
-npm run dev
-```
+
+This example is part of a monorepo and other packages will have to be build in order for this example to run. Read more
+in the [root README](../../README.md#development) on how to install, build and run the examples.
+
 ## Available scripts
 In the project directory, you can run:
 

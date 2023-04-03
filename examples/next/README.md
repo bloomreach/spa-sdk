@@ -5,10 +5,10 @@ unversal framework [Next.js](https://github.com/zeit/next.js) for creating
 isomorphic React applications.
 
 ## Install and run
-```bash
-npm ci
-npm run dev
-```
+
+This example is part of a monorepo and other packages will have to be build in order for this example to run. Read more
+in the [root README](../../README.md#development) on how to install, build and run the examples.
+
 
 ## Available scripts
 

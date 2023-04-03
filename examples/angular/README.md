@@ -4,10 +4,9 @@ Example Angular SPA using the Bloomreach Experience [Angular SDK](https://www.np
 generated with [Angular CLI](https://github.com/angular/angular-cli).
 
 ## Install and run
-```bash
-npm ci
-npm run start
-```
+
+This example is part of a monorepo and other packages will have to be build in order for this example to run. Read more
+in the [root README](../../README.md#development) on how to install, build and run the examples.
 
 ## Available scripts
 
