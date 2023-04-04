@@ -14,6 +14,7 @@ The SDKs:
 - [SPA SDK](./packages/spa-sdk/README.md)
 - [React SDK](./packages/react-sdk/README.md)
 - [Vue SDK](./packages/vue-sdk/README.md)
+- [Vue 3 SDK](./packages/vue3-sdk/README.md)
 - [Angular SDK](./packages/ng-sdk/README.md)
 
 The examples:
@@ -21,6 +22,7 @@ The examples:
 - [React CSR example](./examples/react/README.md)
 - [Next.js example](./examples/next/README.md)
 - [Vue CSR example](./examples/vue/README.md)
+- [Vue 3 CSR example](./examples/vue3/README.md)
 - [Nuxt.js example](./examples/nuxt/README.md)
 - [Angular CSR/Universal example](./examples/angular/README.md)
 
@@ -35,7 +37,7 @@ guides on the documentation website.
 The supported frameworks are currently:
 
 - React and Next.js
-- Vue and Nuxt.js
+- Vue (2 and 3) and Nuxt.js (2)
 - Angular and Angular Universal
 
 The versions of these frameworks that the SDKs currently is verified to work
