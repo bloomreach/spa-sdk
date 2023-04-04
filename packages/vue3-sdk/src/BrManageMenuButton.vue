@@ -23,7 +23,7 @@ import { page$ } from '@/providerKeys';
 import type { Menu, MetaCollection } from '@bloomreach/spa-sdk';
 import { TYPE_MANAGE_MENU_BUTTON } from '@bloomreach/spa-sdk';
 import { computed, inject } from 'vue';
-import BrMeta from './BrMeta.vue';
+import BrMeta from '@/BrMeta.vue';
 
 const props = defineProps<{ menu: Menu }>();
 const page = inject(page$);

@@ -14,15 +14,16 @@
  * limitations under the License.
  */
 
-import type { ContainerItem, Page } from '@bloomreach/spa-sdk';
-import { Component, TYPE_CONTAINER_ITEM_UNDEFINED } from '@bloomreach/spa-sdk';
+import type { Component, ContainerItem, Page } from '@bloomreach/spa-sdk';
+import { TYPE_CONTAINER_ITEM_UNDEFINED } from '@bloomreach/spa-sdk';
 import { shallowMount } from '@vue/test-utils';
 import type { GlobalMountOptions } from '@vue/test-utils/dist/types';
 import type { Mocked } from 'vitest';
 import { beforeAll, describe, expect, it, vi } from 'vitest';
-import { defineComponent, nextTick, PropType, Ref, ref } from 'vue';
+import type { PropType, Ref } from 'vue';
+import { defineComponent, nextTick, ref } from 'vue';
 import type { BrMapping } from '../../typings';
-import BrNodeContainerItem from '../BrNodeContainerItem.vue';
+import BrNodeContainerItem from '@/BrNodeContainerItem.vue';
 import { component$, mapping$, page$ } from '../providerKeys';
 
 describe('BrNodeContainerItem', () => {

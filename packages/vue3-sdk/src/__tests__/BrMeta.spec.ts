@@ -34,7 +34,7 @@ describe('BrMeta', () => {
   describe('render', () => {
     it('should surround multiple slots with span refs', async () => {
       const wrapper = shallowMount(BrMeta, {
-        propsData: { meta },
+        props: { meta },
         slots: { default: ['<div id="slot1" />', '<div id="slot2" />'] },
       });
       await nextTick();
@@ -43,7 +43,7 @@ describe('BrMeta', () => {
 
     it('should surround a single slot with span refs', async () => {
       const wrapper = shallowMount(BrMeta, {
-        propsData: { meta },
+        props: { meta },
         slots: { default: '<div />' },
       });
       await nextTick();
@@ -73,7 +73,7 @@ describe('BrMeta', () => {
       const clear = vi.fn();
       meta.render.mockReturnValueOnce(clear);
       const wrapper = shallowMount(BrMeta, {
-        propsData: { meta },
+        props: { meta },
         slots: { default: '<div />' },
       });
       await nextTick();

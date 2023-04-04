@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 
-import BrPage from '../BrPage.vue';
-import type { Configuration, Page } from '@bloomreach/spa-sdk';
-import { Component, destroy, initialize, PageModel } from '@bloomreach/spa-sdk';
+import BrPage from '@/BrPage.vue';
+import type { Component, Configuration, Page, PageModel } from '@bloomreach/spa-sdk';
+import { destroy, initialize } from '@bloomreach/spa-sdk';
 import { mount, shallowMount } from '@vue/test-utils';
 import type { Mocked } from 'vitest';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { defineComponent } from 'vue';
+import type { BrMapping } from '../../typings';
 
 vi.mock('@bloomreach/spa-sdk');
 
@@ -39,7 +40,7 @@ describe('BrPage', () => {
       const configuration = {
         NBRMode: false,
       } as Configuration;
-      const wrapper = shallowMount(BrPage, { propsData: { configuration, mapping: {} } });
+      const wrapper = shallowMount(BrPage, { props: { configuration, mapping: {} as BrMapping } });
 
       expect(wrapper.html()).toMatchSnapshot();
     });
@@ -48,7 +49,7 @@ describe('BrPage', () => {
       const configuration = {
         NBRMode: true,
       } as Configuration;
-      const wrapper = shallowMount(BrPage, { propsData: { configuration, mapping: {} } });
+      const wrapper = shallowMount(BrPage, { props: { configuration, mapping: {} as BrMapping } });
 
       expect(wrapper.html()).toMatchSnapshot();
     });
@@ -82,7 +83,7 @@ describe('BrPage', () => {
         data() {
           return {
             configuration,
-            mapping: {},
+            mapping: {} as BrMapping,
           };
         },
         template: `
@@ -105,13 +106,13 @@ describe('BrPage', () => {
       expect(someEffectOrder).toBeLessThan(initializeDoneOrder);
     });
 
-  it('should fetch a page model', async () => {
+    it('should fetch a page model', async () => {
       const component = {} as Component;
       const configuration = {} as Configuration;
       page.getComponent.mockReturnValue(component);
       vi.mocked(initialize).mockResolvedValueOnce(page);
 
-      const wrapper = shallowMount(BrPage, { propsData: { configuration, mapping: {} } });
+      const wrapper = shallowMount(BrPage, { props: { configuration, mapping: {} as BrMapping } });
       await new Promise(process.nextTick);
       const nodeComponent = wrapper.findComponent({ name: 'br-node-component' });
 
@@ -124,7 +125,7 @@ describe('BrPage', () => {
       const model = {} as PageModel;
       vi.mocked(initialize).mockResolvedValueOnce(page);
 
-      shallowMount(BrPage, { propsData: { configuration, page: model, mapping: {} } });
+      shallowMount(BrPage, { props: { configuration, page: model, mapping: {} as BrMapping } });
 
       expect(initialize).toBeCalledWith(configuration, model);
     });
@@ -133,10 +134,10 @@ describe('BrPage', () => {
       const configuration = { request: { path: 'a' } } as Configuration;
       vi.mocked(initialize).mockResolvedValueOnce(page);
 
-      const wrapper = shallowMount(BrPage, { propsData: { configuration, mapping: {} } });
+      const wrapper = shallowMount(BrPage, { props: { configuration, mapping: {} as BrMapping } });
       await new Promise(process.nextTick);
 
-      await wrapper.setProps({ configuration: { request: { path: 'b' } }, mapping: {} });
+      await wrapper.setProps({ configuration: { request: { path: 'b' } }, mapping: {} as BrMapping });
       await new Promise(process.nextTick);
 
       expect(initialize).toBeCalledWith({ request: { path: 'b' } });
@@ -146,10 +147,10 @@ describe('BrPage', () => {
       const configuration = {} as Configuration;
       vi.mocked(initialize).mockResolvedValueOnce(page);
 
-      const wrapper = shallowMount(BrPage, { propsData: { configuration, mapping: {} } });
+      const wrapper = shallowMount(BrPage, { props: { configuration, mapping: {} as BrMapping } });
       await new Promise(process.nextTick);
 
-      await wrapper.setProps({ configuration: { request: { path: 'b' }, mapping: {} } });
+      await wrapper.setProps({ configuration: { request: { path: 'b' }, mapping: {} as BrMapping } });
       await new Promise(process.nextTick);
 
       expect(destroy).toBeCalledWith(page);
@@ -160,7 +161,7 @@ describe('BrPage', () => {
     it('should destroy a page upon component destruction', async () => {
       vi.mocked(initialize as unknown as () => Page).mockReturnValueOnce(page);
 
-      const wrapper = shallowMount(BrPage, { propsData: { configuration: {}, page, mapping: {} } });
+      const wrapper = shallowMount(BrPage, { props: { configuration: {} as Configuration, mapping: {} as BrMapping } });
       await wrapper.vm.$nextTick();
       wrapper.unmount();
 
@@ -172,7 +173,7 @@ describe('BrPage', () => {
     it('should sync a page on mount', async () => {
       vi.mocked(initialize).mockResolvedValueOnce(page);
 
-      const wrapper = shallowMount(BrPage, { propsData: { configuration: {}, page, mapping: {} } });
+      const wrapper = shallowMount(BrPage, { props: { configuration: {} as Configuration, mapping: {} as BrMapping } });
       await wrapper.vm.$nextTick();
 
       expect(page.sync).toBeCalled();
@@ -181,7 +182,7 @@ describe('BrPage', () => {
 
   describe('updated', () => {
     it('should sync a page on update', async () => {
-      const wrapper = shallowMount(BrPage, { propsData: { configuration: {}, mapping: {} } });
+      const wrapper = shallowMount(BrPage, { props: { configuration: {} as Configuration, mapping: {} as BrMapping } });
       await new Promise(process.nextTick);
 
       vi.mocked(initialize).mockResolvedValue(page);

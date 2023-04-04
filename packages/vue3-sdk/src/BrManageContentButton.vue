@@ -23,7 +23,7 @@ import { page$ } from '@/providerKeys';
 import type { ManageContentButton, MetaCollection } from '@bloomreach/spa-sdk';
 import { TYPE_MANAGE_CONTENT_BUTTON } from '@bloomreach/spa-sdk';
 import { computed, inject } from 'vue';
-import BrMeta from './BrMeta.vue';
+import BrMeta from '@/BrMeta.vue';
 
 const props = defineProps<{
   content?: ManageContentButton['content'],

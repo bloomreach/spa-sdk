@@ -16,7 +16,7 @@
 
 import BrManageMenuButton from '@/BrManageMenuButton.vue';
 import BrMeta from '@/BrMeta.vue';
-import type { MetaCollection, Page } from '@bloomreach/spa-sdk';
+import type { Menu, MetaCollection, Page } from '@bloomreach/spa-sdk';
 import { shallowMount } from '@vue/test-utils';
 import type { GlobalMountOptions } from '@vue/test-utils/dist/types';
 import type { Mocked } from 'vitest';
@@ -46,16 +46,16 @@ describe('BrManageMenuButton', () => {
 
   describe('render', () => {
     it('should render nothing when it is not a preview', () => {
-      const menu = {};
-      const wrapper = shallowMount(BrManageMenuButton, { global, propsData: { menu } });
+      const menu = {} as Menu;
+      const wrapper = shallowMount(BrManageMenuButton, { global, props: { menu } });
 
       expect(wrapper.findComponent(BrMeta).exists()).toBe(false);
     });
 
     it('should render a menu button meta', () => {
       page.isPreview.mockReturnValueOnce(true);
-      const menu = {};
-      const wrapper = shallowMount(BrManageMenuButton, { global, propsData: { menu } });
+      const menu = {} as Menu;
+      const wrapper = shallowMount(BrManageMenuButton, { global, props: { menu } });
       const props = wrapper.findComponent(BrMeta).props();
 
       expect(props.meta).toBe(meta);

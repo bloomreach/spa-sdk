@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
+import BrManageContentButton from '@/BrManageContentButton.vue';
 import BrMeta from '@/BrMeta.vue';
-import type { MetaCollection, Page } from '@bloomreach/spa-sdk';
+import type { Content, MetaCollection, Page } from '@bloomreach/spa-sdk';
 import { shallowMount } from '@vue/test-utils';
 import type { GlobalMountOptions } from '@vue/test-utils/dist/types';
 import type { Mocked } from 'vitest';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { ref } from 'vue';
-import BrManageContentButton from '../BrManageContentButton.vue';
 import { page$ } from '../providerKeys';
 
 describe('BrManageContentButton', () => {
@@ -51,8 +51,8 @@ describe('BrManageContentButton', () => {
 
     it('should render a content button meta', () => {
       page.isPreview.mockReturnValue(true);
-      const content = {};
-      const wrapper = shallowMount(BrManageContentButton, { global, propsData: { content, path: 'content' } });
+      const content = {} as Content;
+      const wrapper = shallowMount(BrManageContentButton, { global, props: { content, path: 'content' } });
       const props = wrapper.findComponent(BrMeta).props();
 
       expect(page.getButton).toBeCalledWith(expect.any(String), { content, path: 'content' });

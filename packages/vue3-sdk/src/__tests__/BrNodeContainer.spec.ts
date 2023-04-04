@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-import type { Container, Page } from '@bloomreach/spa-sdk';
+import type { Component, Container, Page } from '@bloomreach/spa-sdk';
 import {
-  Component,
   TYPE_CONTAINER_BOX,
   TYPE_CONTAINER_INLINE,
   TYPE_CONTAINER_NO_MARKUP,
@@ -27,7 +26,8 @@ import { shallowMount } from '@vue/test-utils';
 import type { GlobalMountOptions } from '@vue/test-utils/dist/types';
 import type { Mocked } from 'vitest';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { defineComponent, nextTick, PropType, ref } from 'vue';
+import { defineComponent, nextTick, ref } from 'vue';
+import type { PropType } from 'vue';
 import type { BrMapping } from '../../typings';
 import BrNodeContainer from '../BrNodeContainer.vue';
 import { component$, mapping$, page$ } from '../providerKeys';

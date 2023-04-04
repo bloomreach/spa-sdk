@@ -38,7 +38,7 @@ import type { Component, ContainerItem } from '@bloomreach/spa-sdk';
 import { TYPE_CONTAINER_ITEM_UNDEFINED } from '@bloomreach/spa-sdk';
 import type { Ref } from 'vue';
 import { computed, inject, onUnmounted, ref, watch } from 'vue';
-import BrContainerItemUndefined from './BrContainerItemUndefined.vue';
+import BrContainerItemUndefined from '@/BrContainerItemUndefined.vue';
 
 const page = inject(page$)!;
 const mapping = inject(mapping$)!;

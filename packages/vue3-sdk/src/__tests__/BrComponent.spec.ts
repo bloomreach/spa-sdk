@@ -52,7 +52,7 @@ describe('BrComponent', () => {
       const component = 'some component';
       const wrapper = shallowMount(BrComponent, {
         global,
-        propsData: { component },
+        props: { component },
       });
       const props = wrapper.findComponent(BrNodeComponent).props();
 
@@ -78,7 +78,7 @@ describe('BrComponent', () => {
       parent.getComponent.mockReturnValueOnce(component);
       const wrapper = shallowMount(BrComponent, {
         global,
-        propsData: { component: 'a/b' },
+        props: { component: 'a/b' },
       });
       const props = wrapper.findComponent(BrNodeComponent).props();
 
@@ -89,7 +89,7 @@ describe('BrComponent', () => {
     it('should render nothing if no component found', () => {
       const wrapper = shallowMount(BrComponent, {
         global,
-        propsData: { component: 'a/b' },
+        props: { component: 'a/b' },
       });
 
       expect(wrapper.html()).toBe('');
