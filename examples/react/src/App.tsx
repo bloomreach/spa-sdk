@@ -18,7 +18,7 @@ import React from 'react';
 import axios from 'axios';
 import { Link, useLocation } from 'react-router-dom';
 import { BrComponent, BrPage, BrPageContext } from '@bloomreach/react-sdk';
-import { Banner, Content, Menu, NewsList, CookieConsent } from './components';
+import { Banner, Content, Menu, NewsList } from './components';
 import { buildConfiguration } from './utils/buildConfiguration';
 
 export default function App(): JSX.Element {
@@ -60,9 +60,6 @@ export default function App(): JSX.Element {
           </div>
         </div>
       </footer>
-      <BrPageContext.Consumer>
-        {(page) => <CookieConsent isPreview={!!page?.isPreview()} path={configuration.path ?? ''} />}
-      </BrPageContext.Consumer>
     </BrPage>
   );
 }

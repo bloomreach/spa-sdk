@@ -1,6 +1,6 @@
 # Bloomreach Angular SDK
 
-Bloomreach Angular SDK provides simplified headless integration with [Bloomreach Experience Manager](https://www.bloomreach.com/en/products/experience-manager)
+Bloomreach Angular SDK provides simplified headless integration with [Bloomreach Content](https://www.bloomreach.com/en/products/content)
 for Angular-based applications. This library interacts with the [Page Model API](https://documentation.bloomreach.com/api-reference/content/delivery/page-delivery-api/page-delivery-api.html)
 and [Bloomreach SPA SDK](https://www.npmjs.com/package/@bloomreach/spa-sdk) and
 exposes a simplified declarative Angular interface over the Page Model.
@@ -172,8 +172,8 @@ export class AppComponent {
 The `br-page` component supports several options you may use to customize page
 initialization. These options will be passed to the `initialize` function from
 [`@bloomreach/spa-sdk`](https://www.npmjs.com/package/@bloomreach/spa-sdk). See
-[here](https://www.npmjs.com/package/@bloomreach/spa-sdk#configuration) for the
-full configuration documentation.
+[here](https://bloomreach.github.io/spa-sdk/modules/index.html#Configuration) for the
+full configuration documentation in the SPA SDK Typedocs.
 
 ### Mapping
 
@@ -181,7 +181,7 @@ The `br-page` component provides a way to link Angular components with the brXM
 ones. It requires to pass the `mapping` property that maps the component type
 with its representation.
 
-The [Container Items](https://www.npmjs.com/package/@bloomreach/spa-sdk#container-item) can be
+The [Container Items](https://bloomreach.github.io/spa-sdk/interfaces/index.ContainerItem.html) can be
 mapped by their labels.
 
 ```typescript
@@ -194,9 +194,9 @@ export class AppComponent {
 }
 ```
 
-The [Containers](https://www.npmjs.com/package/@bloomreach/spa-sdk#container-item)
+The [Containers](https://bloomreach.github.io/spa-sdk/interfaces/index.ContainerItem.html)
 can be only mapped by their [type](https://documentation.bloomreach.com/library/concepts/template-composer/channel-editor-containers.html),
-so you need to use [constants](https://www.npmjs.com/package/@bloomreach/spa-sdk#constants) from
+so you need to use [constants](https://bloomreach.github.io/spa-sdk/modules/index.html#TYPE_CONTAINER_BOX) from
 [`@bloomreach/spa-sdk`](www.npmjs.com/package/@bloomreach/spa-sdk). By default,
 the Angular SDK provides an implementation for all the container types as it is
 defined in the [documentation](https://documentation.bloomreach.com/library/concepts/template-composer/channel-editor-containers.html).
@@ -234,7 +234,7 @@ export class InlineContainerComponent() {
 }
 ```
 
-The [Components](https://www.npmjs.com/package/@bloomreach/spa-sdk#component)
+The [Components](https://bloomreach.github.io/spa-sdk/interfaces/index.Component.html)
 can be mapped by their names. It is useful for a menu component mapping.
 
 ```typescript
@@ -473,18 +473,14 @@ export class AppComponent {
 }
 ```
 
-### Using the SPA SDK selectively on certain pages
-If you are navigating between pages that have and those that don't have a SDK instance you will need to persist the preview related data.
-See detailed guide how to setup it in framework specific examples, [angular universal](https://github.com/bloomreach/spa-sdk/tree/main/examples/angular#persist-preview-data-for-pages-without-sdk-instance)
-
 ## License
 
 Published under [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) license.
 
 ## Reference
 
-The Angular SDK is using [Bloomreach SPA SDK](https://www.npmjs.com/package/@bloomreach/spa-sdk#reference) to interact
-with the brXM.
+The Angular SDK is using [Bloomreach SPA SDK](https://www.npmjs.com/package/@bloomreach/spa-sdk) to interact
+with Bloomreach Content.
 
 ### br-page
 

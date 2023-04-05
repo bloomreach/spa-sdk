@@ -1,0 +1,14 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`BrMeta > render > should surround a single slot with span refs 1`] = `
+"<span style=\\"display: none;\\"></span>
+<div></div>
+<span style=\\"display: none;\\"></span>"
+`;
+
+exports[`BrMeta > render > should surround multiple slots with span refs 1`] = `
+"<span style=\\"display: none;\\"></span>
+<div id=\\"slot1\\"></div>
+<div id=\\"slot2\\"></div>
+<span style=\\"display: none;\\"></span>"
+`;

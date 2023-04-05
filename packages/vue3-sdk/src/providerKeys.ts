@@ -1,5 +1,5 @@
 /*
- * Copyright 2021-2023 Bloomreach
+ * Copyright 2023 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,26 +14,10 @@
  * limitations under the License.
  */
 
-import { useEffect } from 'react';
-import CookieConsentInit, { isConsentReceived, runPersonalization } from '../utils/cookieconsent';
+import type { Component, Page } from '@bloomreach/spa-sdk';
+import type { InjectionKey, Ref } from 'vue';
+import type { BrMapping } from '../typings';
 
-interface CookieConsentProps {
-  isPreview: boolean;
-  path: string;
-}
-
-export const CookieConsent = ({ isPreview, path }: CookieConsentProps): null => {
-  useEffect(() => {
-    if (!isPreview) {
-      CookieConsentInit();
-    }
-  }, [isPreview]);
-
-  useEffect(() => {
-    if (!isPreview && isConsentReceived()) {
-      runPersonalization(path);
-    }
-  }, [path, isPreview]);
-
-  return null;
-};
+export const page$: InjectionKey<Ref<Page>> = Symbol('page$');
+export const mapping$: InjectionKey<Ref<BrMapping>> = Symbol('mapping$');
+export const component$: InjectionKey<Ref<Component>> = Symbol('component$');

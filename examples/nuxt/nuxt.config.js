@@ -37,15 +37,6 @@ module.exports = {
         integrity: 'sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk',
         crossorigin: 'anonymous',
       },
-      {
-        rel: 'stylesheet',
-        href: 'https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css',
-      },
-    ],
-    script: [
-      {
-        src: 'https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js',
-      },
     ],
   },
   env: {
@@ -53,8 +44,6 @@ module.exports = {
     NUXT_APP_BR_MULTI_TENANT_SUPPORT: process.env.NUXT_APP_BR_MULTI_TENANT_SUPPORT,
     VUE_APP_BRXM_ENDPOINT: process.env.VUE_APP_BRXM_ENDPOINT,
     BASE_URL: process.env.BASE_URL,
-    NUXT_APP_EXPONEA_PROJECT_TOKEN: process.env.NUXT_APP_EXPONEA_PROJECT_TOKEN,
-    NUXT_APP_EXPONEA_API_URL: process.env.NUXT_APP_EXPONEA_API_URL,
   },
   loading: { color: '#fff' },
   buildModules: ['@nuxt/typescript-build'],

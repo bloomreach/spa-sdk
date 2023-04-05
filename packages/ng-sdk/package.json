@@ -1,6 +1,6 @@
 {
   "name": "@bloomreach/ng-sdk",
-  "version": "19.0.2",
+  "version": "20.0.0",
   "description": "Bloomreach SPA SDK for Angular",
   "keywords": [
     "bloomreach",
@@ -37,7 +37,7 @@
   ],
   "sideEffects": false,
   "dependencies": {
-    "@bloomreach/spa-sdk": "19.0.2",
+    "@bloomreach/spa-sdk": "20.0.0",
     "tslib": "^2.3.0"
   },
   "peerDependencies": {
@@ -48,6 +48,7 @@
   },
   "devDependencies": {
     "@angular-builders/jest": "15.0.0",
+    "@angular-devkit/architect": "0.1501.3",
     "@angular-devkit/build-angular": "15.1.3",
     "@angular-eslint/builder": "15.2.0",
     "@angular-eslint/eslint-plugin": "15.2.0",

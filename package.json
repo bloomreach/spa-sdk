@@ -1,6 +1,6 @@
 {
   "private": true,
-  "version": "19.0.2",
+  "version": "20.0.0",
   "description": "Bloomreach SPA SDK",
   "name": "spa-sdk-workspace",
   "keywords": [
@@ -58,7 +58,8 @@
     "heroku": "7.60.2",
     "serve": "13.0.2",
     "typescript": "4.3.5",
-    "webpack": "4.46.0"
+    "webpack": "4.46.0",
+    "vue-tsc": "0.40.13"
   },
   "auto-changelog": {
     "hideCredit": true,

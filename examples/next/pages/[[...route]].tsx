@@ -21,7 +21,7 @@ import Link from 'next/link';
 import { BrComponent, BrPage, BrPageContext } from '@bloomreach/react-sdk';
 import { initialize } from '@bloomreach/spa-sdk';
 import { relevance } from '@bloomreach/spa-sdk/lib/express';
-import { Banner, Content, Menu, NewsList, CookieConsent } from '../components';
+import { Banner, Content, Menu, NewsList } from '../components';
 import { buildConfiguration } from '../utils/buildConfiguration';
 
 export const getServerSideProps: GetServerSideProps = async ({ req: request, res: response, resolvedUrl: path }) => {
@@ -70,9 +70,6 @@ export default function Index({
           </div>
         </div>
       </footer>
-      <BrPageContext.Consumer>
-        {(p) => <CookieConsent isPreview={!!p?.isPreview()} path={configuration.path} />}
-      </BrPageContext.Consumer>
     </BrPage>
   );
 }

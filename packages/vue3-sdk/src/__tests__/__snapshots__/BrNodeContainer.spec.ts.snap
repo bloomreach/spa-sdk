@@ -1,0 +1,13 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`BrNodeContainer > render > should render a container based on the type 1`] = `"<br-container-box-stub component=\\"[object Object]\\" page=\\"[object Object]\\"></br-container-box-stub>"`;
+
+exports[`BrNodeContainer > render > should render a container based on the type 2`] = `"<br-container-inline-stub component=\\"[object Object]\\" page=\\"[object Object]\\"></br-container-inline-stub>"`;
+
+exports[`BrNodeContainer > render > should render a container based on the type 3`] = `"<br-container-no-markup-stub component=\\"[object Object]\\" page=\\"[object Object]\\"></br-container-no-markup-stub>"`;
+
+exports[`BrNodeContainer > render > should render a container based on the type 4`] = `"<br-container-ordered-list-stub component=\\"[object Object]\\" page=\\"[object Object]\\"></br-container-ordered-list-stub>"`;
+
+exports[`BrNodeContainer > render > should render a container based on the type 5`] = `"<br-container-unordered-list-stub component=\\"[object Object]\\" page=\\"[object Object]\\"></br-container-unordered-list-stub>"`;
+
+exports[`BrNodeContainer > render > should render a mapped container 1`] = `"<some-container-stub component=\\"[object Object]\\" page=\\"[object Object]\\"></some-container-stub>"`;

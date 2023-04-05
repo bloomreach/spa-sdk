@@ -25,7 +25,6 @@ import { IndexComponent, ENDPOINT } from './index/index.component';
 import { IsExternalLinkPipe } from './is-external-link.pipe';
 import { IsInternalLinkPipe } from './is-internal-link.pipe';
 import { BannerComponent } from './banner/banner.component';
-import { CookieConsentComponent } from './cookie-consent/cookie-consent.component';
 import { ContentComponent } from './content/content.component';
 import { MenuComponent } from './menu/menu.component';
 import { ParseUrlPipe } from './parse-url.pipe';
@@ -38,7 +37,6 @@ import { NewsItemComponent } from './news-item/news-item.component';
     AppComponent,
     IndexComponent,
     BannerComponent,
-    CookieConsentComponent,
     ContentComponent,
     IsExternalLinkPipe,
     IsInternalLinkPipe,
