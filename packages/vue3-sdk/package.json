@@ -1,6 +1,6 @@
 {
   "name": "@bloomreach/vue3-sdk",
-  "version": "19.0.2-beta.3",
+  "version": "20.0.0",
   "description": "Bloomreach SPA SDK for Vue 3",
   "keywords": [
     "bloomreach",
@@ -42,12 +42,12 @@
     "type-check:watch": "npm run type-check -- --watch"
   },
   "dependencies": {
-    "@bloomreach/spa-sdk": "19.0.2",
+    "@bloomreach/spa-sdk": "20.0.0",
     "vue": "^3.2.45"
   },
   "devDependencies": {
-    "@types/node": "^18.11.12",
     "@types/jsdom": "^21.1.0",
+    "@types/node": "^18.11.12",
     "@vitejs/plugin-vue": "^4.0.0",
     "@vitejs/plugin-vue-jsx": "^3.0.0",
     "@vue/test-utils": "^2.3.0",

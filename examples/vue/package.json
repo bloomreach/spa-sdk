@@ -1,7 +1,7 @@
 {
   "name": "@bloomreach/example-vue",
   "description": "Example Vue.js SPA for Bloomreach Experience",
-  "version": "19.0.2",
+  "version": "20.0.0",
   "private": true,
   "scripts": {
     "build": "vue-cli-service build",
@@ -17,8 +17,8 @@
     "last 1 edge version"
   ],
   "dependencies": {
-    "@bloomreach/spa-sdk": "19.0.2",
-    "@bloomreach/vue-sdk": "19.0.2",
+    "@bloomreach/spa-sdk": "20.0.0",
+    "@bloomreach/vue-sdk": "20.0.0",
     "axios": "0.26.1",
     "core-js": "3.16.0",
     "vue": "2.6.14",
