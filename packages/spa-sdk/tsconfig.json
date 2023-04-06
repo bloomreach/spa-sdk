@@ -24,11 +24,9 @@
     "excludePrivate": true,
     "excludeProtected": true,
     "exclude": "!lib/**/*",
-    "external-modulemap": [".*\/lib\/([\\w\\-_]+)", ".*\/lib\/([\\w\\-_]+)\/"],
     "hideGenerator": true,
     "includeVersion": true,
     "entryPoints": ["lib/index.d.ts", "lib/express/index.d.ts"],
-
     "out": "docs"
   }
 }
