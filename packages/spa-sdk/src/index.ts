@@ -60,6 +60,8 @@ const DEFAULT_SEGMENT_IDS_PARAMETER_API = `${BR_PREFIX}segmentIds`;
 const container = new Container({ skipBaseClassChecks: true });
 const pages = new WeakMap<Page, Container>();
 
+let cmsModuleHasLoaded: Promise<void> | undefined;
+
 container.load(LoggerModule(), UrlModule());
 
 async function initializeWithProxy(
@@ -152,10 +154,11 @@ async function initializeWithJwt09(
   if (page.isPreview() && config.cmsBaseUrl) {
     logger.info('Running in preview mode.');
 
-    if (!scope.parent?.isBound(CmsService)) {
-      await scope.parent?.loadAsync(CmsModule);
+    if (!cmsModuleHasLoaded) {
+      cmsModuleHasLoaded = scope.parent?.loadAsync(CmsModule);
     }
 
+    await cmsModuleHasLoaded;
     scope.get<PostMessage>(PostMessageService).initialize(config);
     scope.get<Cms>(CmsService).initialize(config, scope);
     await page.sync();
@@ -257,10 +260,11 @@ async function initializeWithJwt10(
   if (page.isPreview() && config.endpoint) {
     logger.info('Running in preview mode.');
 
-    if (!scope.parent?.isBound(CmsService)) {
-      await scope.parent?.loadAsync(CmsModule);
+    if (!cmsModuleHasLoaded) {
+      cmsModuleHasLoaded = scope.parent?.loadAsync(CmsModule);
     }
 
+    await cmsModuleHasLoaded;
     scope.get<PostMessage>(PostMessageService).initialize(config);
     scope.get<Cms>(CmsService).initialize(config, scope);
   } else {

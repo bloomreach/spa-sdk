@@ -447,3 +447,29 @@ describe('initialize', () => {
     destroy(page);
   });
 });
+
+describe('initialize twice', () => {
+  const httpClient = jest.fn(async () => ({ data: model as unknown as PageModel }));
+
+  beforeEach(async () => {
+    httpClient.mockClear();
+  });
+
+  it('should throw an error calling initialize twice before the first one has resolved', async () => {
+    function initializeTwice() {
+      initialize({
+        httpClient,
+        endpoint: 'http://localhost:8080/site/my-spa/resourceapi1',
+        path: '/',
+      });
+
+      initialize({
+        httpClient,
+        endpoint: 'http://localhost:8080/site/my-spa/resourceapi2',
+        path: '/',
+      });
+    }
+
+    await expect(() => initializeTwice()).not.toThrow();
+  });
+});

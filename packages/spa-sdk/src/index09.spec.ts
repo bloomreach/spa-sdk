@@ -262,3 +262,29 @@ describe('initialize', () => {
     expect(postMessageSpy).toBeCalledWith(expect.anything(), 'http://localhost:12345');
   });
 });
+
+describe('initialize twice', () => {
+  const httpClient = jest.fn(async () => ({ data: model as unknown as PageModel }));
+
+  beforeEach(async () => {
+    httpClient.mockClear();
+  });
+
+  it('should throw an error calling initialize twice before the first one has resolved', async () => {
+    function initializeTwice() {
+      initialize({
+        httpClient,
+        cmsBaseUrl: 'http://localhost:8080/site/my-spa',
+        path: '/',
+      });
+
+      initialize({
+        httpClient,
+        cmsBaseUrl: 'http://localhost:8080/site/my-spa',
+        path: '/',
+      });
+    }
+
+    await expect(() => initializeTwice()).not.toThrow();
+  });
+});
