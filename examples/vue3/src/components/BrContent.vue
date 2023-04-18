@@ -28,7 +28,7 @@
 <script lang="ts" setup>
 import { formatDate } from '@/utils/dates';
 import type { Component, Document, ImageSet, Page } from '@bloomreach/spa-sdk';
-import { computed, ref, watch } from 'vue';
+import { computed } from 'vue';
 
 const props = defineProps<{
   component: Component,
@@ -41,8 +41,5 @@ const data = computed(() => document.value?.getData<DocumentData>());
 const image = computed(() => data.value?.image && props.page.getContent<ImageSet>(data.value.image));
 const date = computed(() => data.value?.date ?? data.value?.publicationDate);
 const isPreview = computed(() => props.page.isPreview());
-const html = ref<string | null>();
-watch(documentRef, async () => {
-  html.value = await props.page.prepareHTML(documentRef.value, 'content');
-}, { immediate: true });
+const html = computed(() => props.page.prepareHTML(documentRef.value, 'content'));
 </script>

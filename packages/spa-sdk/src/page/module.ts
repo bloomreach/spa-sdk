@@ -15,6 +15,7 @@
  */
 
 import { Typed } from 'emittery';
+import { DOMParser, XMLSerializer } from '@xmldom/xmldom';
 import { ContainerModule } from 'inversify';
 
 import { CmsEventBus, CmsEventBusService, CmsEventBusServiceProvider } from '../cms';
@@ -35,17 +36,11 @@ import { ContainerImpl } from './container';
 import { ContainerItemImpl } from './container-item';
 import { ContentFactory } from './content-factory';
 import { DocumentImpl, DocumentModelToken, TYPE_DOCUMENT } from './document';
-import { PageEventBusService } from './page-events';
 import { ImageFactory, ImageImpl, ImageModel, ImageModelToken } from './image';
 import { ImageSetImpl, ImageSetModelToken, TYPE_IMAGE_SET } from './image-set';
 import { TYPE_LINK_INTERNAL } from './link';
 import { LinkFactory } from './link-factory';
-import {
-  DomParserServiceProvider,
-  LinkRewriterImpl,
-  LinkRewriterService,
-  XmlSerializerServiceProvider,
-} from './link-rewriter';
+import { DomParserService, LinkRewriterImpl, LinkRewriterService, XmlSerializerService } from './link-rewriter';
 import { Menu, MenuImpl, MenuModelToken, TYPE_MANAGE_MENU_BUTTON, TYPE_MENU } from './menu';
 import { MenuItemFactory, MenuItemImpl, MenuItemModel, MenuItemModelToken } from './menu-item';
 import { TYPE_META_COMMENT } from './meta';
@@ -54,6 +49,7 @@ import { MetaCollectionFactory } from './meta-collection-factory';
 import { MetaCommentImpl } from './meta-comment';
 import { MetaFactory } from './meta-factory';
 import { PageImpl, PageModel, PageModelToken } from './page';
+import { PageEventBusService } from './page-events';
 import { PageFactory } from './page-factory';
 import { PaginationImpl, PaginationModelToken, TYPE_PAGINATION } from './pagination';
 import {
@@ -89,14 +85,8 @@ export function PageModule(): ContainerModule {
     );
 
     bind(LinkRewriterService).to(LinkRewriterImpl).inSingletonScope();
-    bind(DomParserServiceProvider).toProvider(() => async () => {
-      const { DOMParser } = await import('@xmldom/xmldom');
-      return new DOMParser();
-    });
-    bind(XmlSerializerServiceProvider).toProvider(() => async () => {
-      const { XMLSerializer } = await import('@xmldom/xmldom');
-      return new XMLSerializer();
-    });
+    bind(DomParserService).toConstantValue(new DOMParser());
+    bind(XmlSerializerService).toConstantValue(new XMLSerializer());
 
     bind(ButtonFactory)
       .toSelf()

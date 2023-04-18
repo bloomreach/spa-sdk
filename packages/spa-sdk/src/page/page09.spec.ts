@@ -74,7 +74,7 @@ beforeEach(() => {
   cmsEventBusProvider = () => Promise.resolve(cmsEventBus);
   eventBus = new Typed();
   linkFactory = { create: jest.fn() } as unknown as typeof linkFactory;
-  linkRewriter = { rewrite: jest.fn(() => Promise.resolve('rewritten')) } as unknown as jest.Mocked<LinkRewriter>;
+  linkRewriter = { rewrite: jest.fn() } as unknown as jest.Mocked<LinkRewriter>;
   metaFactory = jest.fn();
   root = { getComponent: jest.fn() } as unknown as jest.Mocked<Component>;
 });
@@ -311,13 +311,12 @@ describe('PageImpl', () => {
   });
 
   describe('rewriteLinks', () => {
-    it('should pass a call to the link rewriter', async () => {
-      linkRewriter.rewrite.mockResolvedValueOnce('rewritten');
+    it('should pass a call to the link rewriter', () => {
+      linkRewriter.rewrite.mockReturnValueOnce('rewritten');
 
       const page = createPage();
-      const rewritten = await page.rewriteLinks('something', 'text/html');
 
-      expect(rewritten).toBe('rewritten');
+      expect(page.rewriteLinks('something', 'text/html')).toBe('rewritten');
       expect(linkRewriter.rewrite).toBeCalledWith('something', 'text/html');
     });
   });
@@ -342,7 +341,7 @@ describe('PageImpl', () => {
   });
 
   describe('sanitize', () => {
-    it('should sanitize html', async () => {
+    it('should sanitize html', () => {
       const page = createPage();
       const html = `
         <div>
@@ -350,16 +349,14 @@ describe('PageImpl', () => {
           <p>Sanitize before <a href="https://www.example.com/" name="use">use</a></p>
           <div><script>alert(1);</script></div>
         </div>`;
-
-      const sanitized = await page.sanitize(html);
-      expect(sanitized).toBe(`
+      expect(page.sanitize(html)).toBe(`
         <div>
           <h1>Hello, World!</h1>
           <p>Sanitize before <a href="https://www.example.com/" name="use">use</a></p>
           <div></div>
         </div>`);
     });
-    it('should keep data-type, title, target, name and href attributes in anchor', async () => {
+    it('should keep data-type, title, target, name and href attributes in anchor', () => {
       const page = createPage();
       const html = `
         <div>
@@ -367,9 +364,7 @@ describe('PageImpl', () => {
           <a data-type="internal" title="foo" target="_blank" href="https://www.example.com/" name="use">use</a>
           <div><script>alert(1);</script></div>
         </div>`;
-
-      const sanitized = await page.sanitize(html);
-      expect(sanitized).toBe(`
+      expect(page.sanitize(html)).toBe(`
         <div>
           <h1>Hello, World!</h1>
           <a data-type="internal" title="foo" target="_blank" href="https://www.example.com/" name="use">use</a>

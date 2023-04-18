@@ -26,9 +26,9 @@ export class BannerComponent implements OnInit {
 
   @Input() page!: Page;
 
-  safeHTML?: Promise<string | null>;
+  safeHTML?: string | null;
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
     const ref = this.component.getModels<DocumentModels>().document;
     this.safeHTML = this.page.prepareHTML(ref, 'content');
   }
