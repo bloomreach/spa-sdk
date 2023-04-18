@@ -15,7 +15,7 @@
  */
 
 import { Typed } from 'emittery';
-import { CmsEventBus, CmsEventBusProvider } from '../cms';
+import { CmsEventBus } from '../cms';
 import { ButtonFactory } from './button-factory';
 import { Component } from './component';
 import { ComponentFactory } from './component-factory09';
@@ -35,7 +35,6 @@ let componentFactory: jest.Mocked<ComponentFactory>;
 let content: Content;
 let contentFactory: jest.MockedFunction<ContentFactory>;
 let cmsEventBus: CmsEventBus;
-let cmsEventBusProvider: CmsEventBusProvider;
 let eventBus: EventBus;
 let linkFactory: jest.Mocked<LinkFactory>;
 let linkRewriter: jest.Mocked<LinkRewriter>;
@@ -60,7 +59,7 @@ function createPage(pageModel = model) {
     linkFactory,
     linkRewriter,
     metaFactory,
-    cmsEventBusProvider,
+    cmsEventBus,
     eventBus,
   );
 }
@@ -71,7 +70,6 @@ beforeEach(() => {
   content = {} as jest.Mocked<Content>;
   contentFactory = jest.fn(() => content) as unknown as typeof contentFactory;
   cmsEventBus = new Typed();
-  cmsEventBusProvider = () => Promise.resolve(cmsEventBus);
   eventBus = new Typed();
   linkFactory = { create: jest.fn() } as unknown as typeof linkFactory;
   linkRewriter = { rewrite: jest.fn() } as unknown as jest.Mocked<LinkRewriter>;
@@ -322,11 +320,11 @@ describe('PageImpl', () => {
   });
 
   describe('sync', () => {
-    it('should emit page.ready event', async () => {
+    it('should emit page.ready event', () => {
       jest.spyOn(cmsEventBus, 'emit');
 
       const page = createPage();
-      await page.sync();
+      page.sync();
 
       expect(cmsEventBus.emit).toBeCalledWith('page.ready', {});
     });

@@ -123,7 +123,7 @@ describe('BrPage', () => {
     it('should initialize a prefetched model', async () => {
       const configuration = {} as Configuration;
       const model = {} as PageModel;
-      vi.mocked(initialize).mockResolvedValueOnce(page);
+      vi.mocked(initialize as unknown as () => Page).mockReturnValueOnce(page);
 
       shallowMount(BrPage, { props: { configuration, page: model, mapping: {} as BrMapping } });
 

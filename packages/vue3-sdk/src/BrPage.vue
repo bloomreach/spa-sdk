@@ -49,7 +49,7 @@ provide(mapping$, mapping);
 
 watch(configuration, async (current, previous) => {
   if (!previous && props.page) {
-    page.value = await initialize(current, props.page);
+    page.value = initialize(current, props.page);
     return;
   }
 

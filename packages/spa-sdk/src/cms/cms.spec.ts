@@ -15,8 +15,6 @@
  */
 
 import { Typed } from 'emittery';
-import { Container } from 'inversify';
-import { Spa, SpaService } from '../spa';
 import { CmsImpl } from './cms';
 import { CmsEventBus, CmsEvents } from './cms-events';
 import { RpcClient, RpcServer } from './rpc';
@@ -26,8 +24,6 @@ describe('CmsImpl', () => {
   let eventBus: CmsEventBus;
   let rpcClient: jest.Mocked<RpcClient<any, any>>;
   let rpcServer: jest.Mocked<RpcServer<any, any>>;
-  let spa: Spa;
-  let scope: Container;
 
   beforeEach(() => {
     eventBus = new Typed<CmsEvents>();
@@ -40,12 +36,6 @@ describe('CmsImpl', () => {
       register: jest.fn(),
       trigger: jest.fn(),
     };
-    spa = {
-      onCmsUpdate: jest.fn(() => Promise.resolve()),
-    } as unknown as Spa;
-
-    scope = new Container();
-    scope.bind(SpaService).toConstantValue(spa);
 
     cms = new CmsImpl(rpcClient, rpcServer, eventBus);
   });
@@ -61,15 +51,15 @@ describe('CmsImpl', () => {
 
     it('should trigger ready event right away', () => {
       getReadyState.mockReturnValueOnce('interactive');
-      cms.initialize({ window }, scope);
+      cms.initialize({ window });
 
       expect(rpcServer.trigger).toHaveBeenCalledWith('ready', undefined);
     });
 
     it('should trigger ready event only once per window', () => {
       getReadyState.mockReturnValueOnce('interactive');
-      cms.initialize({ window }, scope);
-      cms.initialize({ window }, scope);
+      cms.initialize({ window });
+      cms.initialize({ window });
 
       expect(rpcServer.trigger).toHaveBeenCalledTimes(1);
     });
@@ -77,7 +67,7 @@ describe('CmsImpl', () => {
     it('should not trigger ready event on state change if the state is still loading', async () => {
       getReadyState.mockReturnValueOnce('loading');
       getReadyState.mockReturnValueOnce('loading');
-      cms.initialize({ window }, scope);
+      cms.initialize({ window });
 
       document.dispatchEvent(new ProgressEvent('readystatechange'));
       await new Promise((resolve) => setTimeout(resolve, 0));
@@ -88,7 +78,7 @@ describe('CmsImpl', () => {
     it('should trigger ready event on state change', async () => {
       getReadyState.mockReturnValueOnce('loading');
       getReadyState.mockReturnValueOnce('interactive');
-      cms.initialize({ window }, scope);
+      cms.initialize({ window });
 
       document.dispatchEvent(new ProgressEvent('readystatechange'));
       await new Promise((resolve) => setTimeout(resolve, 0));
@@ -97,7 +87,7 @@ describe('CmsImpl', () => {
     });
 
     it('should register inject procedure', async () => {
-      cms.initialize({ window }, scope);
+      cms.initialize({ window });
 
       expect(rpcServer.register).toHaveBeenCalledWith('inject', expect.any(Function));
     });
@@ -105,7 +95,7 @@ describe('CmsImpl', () => {
 
   describe('onPageReady', () => {
     it('should process postponed events on initialization', async () => {
-      cms.initialize({ window }, scope);
+      cms.initialize({ window });
       await eventBus.emit('page.ready', {});
 
       expect(rpcClient.call).toHaveBeenCalledWith('sync');
@@ -114,15 +104,16 @@ describe('CmsImpl', () => {
 
   describe('onUpdate', () => {
     it('should process postponed events on initialization', async () => {
-      cms.initialize({ window }, scope);
+      cms.initialize({ window });
 
       expect(rpcClient.on).toHaveBeenCalledWith('update', expect.any(Function));
 
       const [, onUpdate] = rpcClient.on.mock.calls.pop()!;
       const event = { id: 'id', properties: { a: 'b' } };
+      const emitSpy = jest.spyOn(eventBus, 'emit');
       onUpdate(event);
 
-      expect(spa.onCmsUpdate).toHaveBeenCalledWith(event);
+      expect(emitSpy).toHaveBeenCalledWith('cms.update', event);
     });
   });
 
@@ -133,7 +124,7 @@ describe('CmsImpl', () => {
 
     beforeEach(() => {
       [[, inject]] = rpcServer.register.mock.calls;
-      cms.initialize({ window }, scope);
+      cms.initialize({ window });
       Object.defineProperty(window, 'document', { get: getDocument });
     });
 

@@ -16,7 +16,7 @@
 
 import { inject, injectable, optional } from 'inversify';
 import sanitizeHtml from 'sanitize-html';
-import { CmsEventBusProvider, CmsEventBusServiceProvider } from '../cms';
+import { CmsEventBus, CmsEventBusService } from '../cms';
 import { Logger } from '../logger';
 import { isAbsoluteUrl, resolveUrl } from '../url';
 import { ButtonFactory } from './button-factory';
@@ -253,7 +253,7 @@ export interface Page {
   /**
    * Synchronizes the CMS integration state.
    */
-  sync(): Promise<void>;
+  sync(): void;
 
   /**
    * @return A plain JavaScript object of the page model.
@@ -288,7 +288,7 @@ export class PageImpl implements Page {
     @inject(LinkFactory) private linkFactory: LinkFactory,
     @inject(LinkRewriterService) private linkRewriter: LinkRewriter,
     @inject(MetaCollectionFactory) private metaFactory: MetaCollectionFactory,
-    @inject(CmsEventBusServiceProvider) private cmsEventBusProvider: CmsEventBusProvider,
+    @inject(CmsEventBusService) @optional() private cmsEventBus: CmsEventBus,
     @inject(PageEventBusService) @optional() eventBus?: PageEventBus,
     @inject(Logger) @optional() private logger?: Logger,
   ) {
@@ -385,9 +385,8 @@ export class PageImpl implements Page {
     return this.linkRewriter.rewrite(content, type);
   }
 
-  async sync(): Promise<void> {
-    const cmsEventBus = await this.cmsEventBusProvider();
-    cmsEventBus?.emit('page.ready', {});
+  sync(): void {
+    this.cmsEventBus?.emit('page.ready', {});
   }
 
   toJSON(): PageModel {

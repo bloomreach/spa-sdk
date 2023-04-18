@@ -17,8 +17,6 @@
 import { DOMParser, XMLSerializer } from '@xmldom/xmldom';
 import { Typed } from 'emittery';
 import { ContainerModule } from 'inversify';
-
-import { CmsEventBus, CmsEventBusService, CmsEventBusServiceProvider } from '../cms';
 import { UrlBuilder, UrlBuilderService } from '../url';
 
 import { ButtonFactory } from './button-factory';
@@ -51,24 +49,6 @@ export function PageModule(): ContainerModule {
       .toDynamicValue(() => new Typed())
       .inSingletonScope()
       .when(() => typeof window !== 'undefined');
-
-    /*
-     Its necessary to use a async provider here because we can only get the CmsEventBus once the module is installed,
-     if the page is in preview mode
-    */
-    bind(CmsEventBusServiceProvider).toProvider<CmsEventBus | undefined>(
-      (context) => () =>
-        new Promise<CmsEventBus | undefined>((resolve) => {
-          let cmsEventBus;
-
-          if (context.container.isBound(CmsEventBusService)) {
-            cmsEventBus = context.container.get<CmsEventBus>(CmsEventBusService);
-          }
-
-          resolve(cmsEventBus);
-        }),
-    );
-
     bind(LinkRewriterService).to(LinkRewriterImpl).inSingletonScope();
     bind(DomParserService).toConstantValue(new DOMParser());
     bind(XmlSerializerService).toConstantValue(new XMLSerializer());

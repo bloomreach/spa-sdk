@@ -87,7 +87,7 @@ export default class BrPage extends Vue {
   @Watch('configuration', { immediate: true, deep: true })
   private async update(current: Configuration, previous?: Configuration) {
     if (!previous && this.page) {
-      this.state = await initialize(this.configuration, this.page);
+      this.state = initialize(this.configuration, this.page);
 
       return;
     }
