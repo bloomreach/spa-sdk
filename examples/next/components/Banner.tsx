@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { BrManageContentButton, BrProps, useHTML } from '@bloomreach/react-sdk';
+import { BrManageContentButton, BrProps } from '@bloomreach/react-sdk';
 import { Document, ImageSet } from '@bloomreach/spa-sdk';
 import Link from 'next/link';
 import React from 'react';
@@ -22,8 +22,6 @@ import React from 'react';
 export function Banner(props: BrProps): JSX.Element | null {
   const documentRef = props.component?.getModels().document;
   const document = !!documentRef && props.page?.getContent(documentRef);
-
-  const safeHTML = useHTML(props.page, documentRef, 'content');
 
   if (!document) {
     return null;
@@ -47,7 +45,9 @@ export function Banner(props: BrProps): JSX.Element | null {
       {title && <h1>{title}</h1>}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       {image && <img className="img-fluid" src={image.getOriginal()?.getUrl()} alt={title}/>}
-      {safeHTML && <div dangerouslySetInnerHTML={{ __html: safeHTML }}/>}
+      {content && (
+        <div dangerouslySetInnerHTML={{ __html: props.page!.rewriteLinks(props.page!.sanitize(content.value)) }}/>
+      )}
       {link && (
         <p className="lead">
           <Link href={link.getUrl() ?? '/'}>

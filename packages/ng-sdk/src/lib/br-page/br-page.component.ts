@@ -127,10 +127,6 @@ export class BrPageComponent implements AfterContentChecked, AfterContentInit, O
     const component = page?.getComponent();
     const pageOrNBR = page || this.configuration?.NBRMode;
 
-    // if (!page || !component) {
-    //   return undefined;
-    // }
-
     return {
       component,
       page,
