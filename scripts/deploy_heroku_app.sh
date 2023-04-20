@@ -23,6 +23,14 @@ then
 elif [[ $APP_TYPE = "csr" ]] && [[ $APP_NAME = "react" ]]
 then
   APP_PATH="examples/react"
+elif [[ $APP_TYPE = "csr" ]] && [[ $APP_NAME = "vue3" ]]
+then
+  APP_PATH="examples/vue3"
+elif [[ $APP_TYPE = "ssr" ]] && [[ $APP_NAME = "vue3" ]]
+then
+# We don't have vue3 ssr app, but the deployment matrix is done in such a way that it will try to deploy the vue3 ssr
+# So we ignore this until we add ssr app to Heroku
+  exit 0
 fi
 
 APP_PACKAGE=$(node -p -e "require('./$APP_PATH/package.json').name")
@@ -82,6 +90,11 @@ fi
 if [[ $APP_TYPE = "csr" ]] && [[ $APP_NAME = "vue" ]]
 then
   heroku config:set --app=$NAME VUE_APP_BR_MULTI_TENANT_SUPPORT=true
+fi
+
+if [[ $APP_TYPE = "csr" ]] && [[ $APP_NAME = "vue3" ]]
+then
+  heroku config:set --app=$NAME VITE_MULTI_TENANT_SUPPORT=true
 fi
 
 git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/$NAME.git HEAD:refs/heads/main
