@@ -36,7 +36,7 @@
     "dev": "vite build --watch",
     "build": "run-p type-check build-only",
     "preview": "vite preview",
-    "test": "vitest",
+    "test": "vitest --watch=false",
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
     "type-check:watch": "npm run type-check -- --watch"

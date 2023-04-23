@@ -14,15 +14,13 @@
  * limitations under the License.
  */
 
-import { BrManageContentButton, BrProps, useHTML } from '@bloomreach/react-sdk';
+import { BrManageContentButton, BrProps } from '@bloomreach/react-sdk';
 import { Document, ImageSet } from '@bloomreach/spa-sdk';
 import React from 'react';
 
 export function Content(props: BrProps): JSX.Element | null {
   const documentRef = props.component?.getModels<DocumentModels>().document;
   const document = documentRef && props.page?.getContent<Document>(documentRef);
-
-  const safeHTML = useHTML(props.page, documentRef, 'content');
 
   if (!document) {
     return null;
@@ -46,7 +44,9 @@ export function Content(props: BrProps): JSX.Element | null {
       {title && <h1>{title}</h1>}
       {author && <p className="mb-3 text-muted">{author}</p>}
       {date && <p className="mb-3 small text-muted">{new Date(date).toDateString()}</p>}
-      {safeHTML && <div dangerouslySetInnerHTML={{ __html: safeHTML }}/>}
+      {content && (
+        <div dangerouslySetInnerHTML={{ __html: props.page!.rewriteLinks(props.page!.sanitize(content.value)) }}/>
+      )}
     </div>
   );
 }

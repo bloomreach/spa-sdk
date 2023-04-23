@@ -31,11 +31,6 @@ import { Component, Prop, Vue } from 'nuxt-property-decorator';
 
 @Component({
   name: 'br-content',
-  data() {
-    return {
-      html: null,
-    };
-  },
   computed: {
     data(this: BrContent) {
       return this.document?.getData<DocumentData>();
@@ -57,14 +52,14 @@ import { Component, Prop, Vue } from 'nuxt-property-decorator';
     date(this: BrContent) {
       return this.data?.date ?? this.data?.publicationDate;
     },
+    html(this: BrContent) {
+      return this.page.prepareHTML(this.documentRef, 'content');
+    },
   },
   methods: {
     formatDate(date: number) {
       return new Date(date).toDateString();
     },
-  },
-  async mounted(this: BrContent): Promise<void> {
-    this.html = await this.page.prepareHTML(this.documentRef, 'content');
   },
 })
 export default class BrContent extends Vue {

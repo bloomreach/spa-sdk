@@ -16,6 +16,8 @@
 
 import { Typed } from 'emittery';
 
+export const CmsEventBusService = Symbol('CmsEventBusService');
+
 /**
  * Channel Manager component update event.
  */

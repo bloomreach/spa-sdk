@@ -39,7 +39,7 @@ import {
 } from '@angular/core';
 import { makeStateKey, StateKey, TransferState } from '@angular/platform-browser';
 import { Configuration, destroy, initialize, isPage, Page, PageModel } from '@bloomreach/spa-sdk';
-import { from, Subject } from 'rxjs';
+import { from, of, Subject } from 'rxjs';
 import { filter, map, mapTo, pairwise, pluck, switchMap, take } from 'rxjs/operators';
 import type { BrComponentContext } from '../br-component.directive';
 import { BrProps } from '../br-props.model';
@@ -127,10 +127,6 @@ export class BrPageComponent implements AfterContentChecked, AfterContentInit, O
     const component = page?.getComponent();
     const pageOrNBR = page || this.configuration?.NBRMode;
 
-    // if (!page || !component) {
-    //   return undefined;
-    // }
-
     return {
       component,
       page,
@@ -139,9 +135,9 @@ export class BrPageComponent implements AfterContentChecked, AfterContentInit, O
     };
   }
 
-  async ngOnChanges(changes: SimpleChanges): Promise<void> {
+  ngOnChanges(changes: SimpleChanges): void {
     if (changes.configuration || changes.page) {
-      await this.initialize(changes.page?.currentValue);
+      this.initialize(changes.page?.currentValue);
     }
 
     if (changes.mapping?.currentValue !== this.pageService.mapping) {
@@ -174,18 +170,21 @@ export class BrPageComponent implements AfterContentChecked, AfterContentInit, O
     this.afterContentChecked$.complete();
   }
 
-  private async initialize(page: Page | PageModel | undefined): Promise<void> {
+  private initialize(page: Page | PageModel | undefined): void {
     if (this.stateKey && isPlatformBrowser(this.platform) && this.transferState?.hasKey(this.stateKey)) {
       page = page ?? this.transferState?.get(this.stateKey, undefined);
       this.transferState?.remove(this.stateKey);
     }
 
     const configuration = { httpClient: this.request, ...this.configuration } as Configuration;
-    const observable = page ? from(initialize(configuration, page)) : from(initialize(configuration));
+    const observable = page ? of(initialize(configuration, page)) : from(initialize(configuration));
 
     observable.pipe(take(1)).subscribe((state) => {
       this.state.next(state);
-      this.changeDetectorRef.detectChanges();
+
+      if (isPlatformBrowser(this.platform)) {
+        this.changeDetectorRef.detectChanges();
+      }
     });
   }
 

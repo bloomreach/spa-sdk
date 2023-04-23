@@ -25,5 +25,5 @@
   <h1 *ngIf="data?.title">{{ data!.title }}</h1>
   <p *ngIf="data?.author" class="mb-3 text-muted">{{ data!.author }}</p>
   <p *ngIf="date" class="mb-3 small text-muted">{{ date | date }}</p>
-  <div *ngIf="data?.content" [innerHTML]="safeHTML | async"></div>
+  <div *ngIf="data?.content" [innerHTML]="safeHTML"></div>
 </div>

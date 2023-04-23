@@ -15,7 +15,7 @@
  */
 
 import { inject, injectable, optional } from 'inversify';
-import { CmsUpdateEvent } from '../cms';
+import { CmsEventBus, CmsEventBusService, CmsUpdateEvent } from '../cms';
 import { Logger } from '../logger';
 import { EventBus, Page, PageEventBusService, PageFactory, PageModel } from '../page';
 import { Api, ApiService } from './api';
@@ -37,9 +37,12 @@ export class Spa {
   constructor(
     @inject(ApiService) private api: Api,
     @inject(PageFactory) private pageFactory: PageFactory,
+    @inject(CmsEventBusService) @optional() private cmsEventBus?: CmsEventBus,
     @inject(PageEventBusService) @optional() private eventBus?: EventBus,
     @inject(Logger) @optional() private logger?: Logger,
-  ) {}
+  ) {
+    this.onCmsUpdate = this.onCmsUpdate.bind(this);
+  }
 
   async onCmsUpdate(event: CmsUpdateEvent): Promise<void> {
     this.logger?.debug('Received CMS update event.');
@@ -65,12 +68,11 @@ export class Spa {
    * Initializes the SPA.
    * @param modelOrPath A preloaded page model or URL to a page model.
    */
-  async initialize(modelOrPath: PageModel | string): Promise<Page> {
+  initialize(modelOrPath: PageModel | string): Page | Promise<Page> {
     if (typeof modelOrPath === 'string') {
       this.logger?.debug('Trying to request the page model.');
 
-      const pageModel = await this.api.getPage(modelOrPath);
-      return this.hydrate(pageModel);
+      return this.api.getPage(modelOrPath).then(this.hydrate.bind(this));
     }
 
     this.logger?.debug('Received dehydrated model.');
@@ -78,11 +80,15 @@ export class Spa {
     return this.hydrate(modelOrPath);
   }
 
-  private async hydrate(model: PageModel): Promise<Page> {
+  private hydrate(model: PageModel): Page {
     this.logger?.debug('Model:', model);
     this.logger?.debug('Hydrating.');
 
     this.page = this.pageFactory(model);
+
+    if (this.page.isPreview()) {
+      this.cmsEventBus?.on('cms.update', this.onCmsUpdate);
+    }
 
     return this.page;
   }
@@ -90,7 +96,8 @@ export class Spa {
   /**
    * Destroys the integration with the SPA page.
    */
-  async destroy(): Promise<void> {
+  destroy(): void {
+    this.cmsEventBus?.off('cms.update', this.onCmsUpdate);
     this.eventBus?.clearListeners();
     delete this.page;
 

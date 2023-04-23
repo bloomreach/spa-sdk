@@ -15,7 +15,7 @@
  */
 
 import { Typed } from 'emittery';
-import { CmsEventBus, CmsEventBusProvider } from '../cms';
+import { CmsEventBus } from '../cms';
 import { ButtonFactory } from './button-factory';
 import { Component } from './component';
 import { ComponentFactory } from './component-factory09';
@@ -35,7 +35,6 @@ let componentFactory: jest.Mocked<ComponentFactory>;
 let content: Content;
 let contentFactory: jest.MockedFunction<ContentFactory>;
 let cmsEventBus: CmsEventBus;
-let cmsEventBusProvider: CmsEventBusProvider;
 let eventBus: EventBus;
 let linkFactory: jest.Mocked<LinkFactory>;
 let linkRewriter: jest.Mocked<LinkRewriter>;
@@ -60,7 +59,7 @@ function createPage(pageModel = model) {
     linkFactory,
     linkRewriter,
     metaFactory,
-    cmsEventBusProvider,
+    cmsEventBus,
     eventBus,
   );
 }
@@ -71,10 +70,9 @@ beforeEach(() => {
   content = {} as jest.Mocked<Content>;
   contentFactory = jest.fn(() => content) as unknown as typeof contentFactory;
   cmsEventBus = new Typed();
-  cmsEventBusProvider = () => Promise.resolve(cmsEventBus);
   eventBus = new Typed();
   linkFactory = { create: jest.fn() } as unknown as typeof linkFactory;
-  linkRewriter = { rewrite: jest.fn(() => Promise.resolve('rewritten')) } as unknown as jest.Mocked<LinkRewriter>;
+  linkRewriter = { rewrite: jest.fn() } as unknown as jest.Mocked<LinkRewriter>;
   metaFactory = jest.fn();
   root = { getComponent: jest.fn() } as unknown as jest.Mocked<Component>;
 });
@@ -311,23 +309,22 @@ describe('PageImpl', () => {
   });
 
   describe('rewriteLinks', () => {
-    it('should pass a call to the link rewriter', async () => {
-      linkRewriter.rewrite.mockResolvedValueOnce('rewritten');
+    it('should pass a call to the link rewriter', () => {
+      linkRewriter.rewrite.mockReturnValueOnce('rewritten');
 
       const page = createPage();
-      const rewritten = await page.rewriteLinks('something', 'text/html');
 
-      expect(rewritten).toBe('rewritten');
+      expect(page.rewriteLinks('something', 'text/html')).toBe('rewritten');
       expect(linkRewriter.rewrite).toBeCalledWith('something', 'text/html');
     });
   });
 
   describe('sync', () => {
-    it('should emit page.ready event', async () => {
+    it('should emit page.ready event', () => {
       jest.spyOn(cmsEventBus, 'emit');
 
       const page = createPage();
-      await page.sync();
+      page.sync();
 
       expect(cmsEventBus.emit).toBeCalledWith('page.ready', {});
     });
@@ -342,7 +339,7 @@ describe('PageImpl', () => {
   });
 
   describe('sanitize', () => {
-    it('should sanitize html', async () => {
+    it('should sanitize html', () => {
       const page = createPage();
       const html = `
         <div>
@@ -350,16 +347,14 @@ describe('PageImpl', () => {
           <p>Sanitize before <a href="https://www.example.com/" name="use">use</a></p>
           <div><script>alert(1);</script></div>
         </div>`;
-
-      const sanitized = await page.sanitize(html);
-      expect(sanitized).toBe(`
+      expect(page.sanitize(html)).toBe(`
         <div>
           <h1>Hello, World!</h1>
           <p>Sanitize before <a href="https://www.example.com/" name="use">use</a></p>
           <div></div>
         </div>`);
     });
-    it('should keep data-type, title, target, name and href attributes in anchor', async () => {
+    it('should keep data-type, title, target, name and href attributes in anchor', () => {
       const page = createPage();
       const html = `
         <div>
@@ -367,9 +362,7 @@ describe('PageImpl', () => {
           <a data-type="internal" title="foo" target="_blank" href="https://www.example.com/" name="use">use</a>
           <div><script>alert(1);</script></div>
         </div>`;
-
-      const sanitized = await page.sanitize(html);
-      expect(sanitized).toBe(`
+      expect(page.sanitize(html)).toBe(`
         <div>
           <h1>Hello, World!</h1>
           <a data-type="internal" title="foo" target="_blank" href="https://www.example.com/" name="use">use</a>

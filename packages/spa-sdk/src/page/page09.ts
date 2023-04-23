@@ -15,7 +15,8 @@
  */
 
 import { inject, injectable, optional } from 'inversify';
-import { CmsEventBusProvider, CmsEventBusServiceProvider } from '../cms';
+import sanitizeHtml from 'sanitize-html';
+import { CmsEventBus, CmsEventBusService } from '../cms';
 import { Logger } from '../logger';
 import { ButtonFactory } from './button-factory';
 import { Component, ComponentMeta } from './component';
@@ -25,7 +26,6 @@ import { ContainerItemModel } from './container-item09';
 import { ContainerModel } from './container09';
 import { ContentFactory } from './content-factory09';
 import { Content, ContentModel } from './content09';
-import { PageEventBusService } from './page-events';
 import { EventBus, PageUpdateEvent } from './events09';
 import { Link, TYPE_LINK_INTERNAL } from './link';
 import { LinkFactory } from './link-factory';
@@ -33,6 +33,7 @@ import { LinkRewriter, LinkRewriterService } from './link-rewriter';
 import { MetaCollection, MetaCollectionModel } from './meta-collection';
 import { MetaCollectionFactory } from './meta-collection-factory';
 import { Page, PageModel as PageModel10, PageModelToken } from './page';
+import { PageEventBusService } from './page-events';
 import { isReference, Reference } from './reference';
 import { Visit, Visitor } from './relevance';
 
@@ -75,7 +76,7 @@ export class PageImpl implements Page {
     @inject(LinkFactory) private linkFactory: LinkFactory,
     @inject(LinkRewriterService) private linkRewriter: LinkRewriter,
     @inject(MetaCollectionFactory) private metaFactory: MetaCollectionFactory,
-    @inject(CmsEventBusServiceProvider) private cmsEventBusProvider: CmsEventBusProvider,
+    @inject(CmsEventBusService) private cmsEventBus: CmsEventBus,
     @inject(PageEventBusService) @optional() eventBus?: EventBus,
     @inject(Logger) @optional() private logger?: Logger,
   ) {
@@ -157,25 +158,23 @@ export class PageImpl implements Page {
     return !!this.model._meta.preview;
   }
 
-  async rewriteLinks(content: string, type = 'text/html'): Promise<string> {
+  rewriteLinks(content: string, type = 'text/html'): string {
     return this.linkRewriter.rewrite(content, type);
   }
 
-  async sync(): Promise<void> {
-    const cmsEventBus = await this.cmsEventBusProvider();
-    cmsEventBus?.emit('page.ready', {});
+  sync(): void {
+    this.cmsEventBus?.emit('page.ready', {});
   }
 
   toJSON(): PageModel {
     return this.model;
   }
 
-  async sanitize(content: string): Promise<string> {
-    const { default: sanitizeHtml } = await import('sanitize-html');
-    return sanitizeHtml(content, { allowedAttributes: { a: ['href', 'name', 'target', 'title', 'data-type', 'rel'] } });
+  sanitize(content: string): string {
+    return sanitizeHtml(content, { allowedAttributes: { a: ['href', 'name', 'target', 'title', 'data-type'] } });
   }
 
-  async prepareHTML(documentRef?: Reference, dataFieldName?: string): Promise<string | null> {
+  prepareHTML(documentRef?: Reference, dataFieldName?: string): string | null {
     const document = documentRef && this.getContent(documentRef);
     if (!document) {
       this.logger?.warn(`Document reference "${documentRef}" not found in page model`);
@@ -189,7 +188,7 @@ export class PageImpl implements Page {
       return null;
     }
 
-    return this.rewriteLinks(await this.sanitize(htmlContent.value));
+    return this.rewriteLinks(this.sanitize(htmlContent.value));
   }
 }
 
