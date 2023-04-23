@@ -181,7 +181,10 @@ export class BrPageComponent implements AfterContentChecked, AfterContentInit, O
 
     observable.pipe(take(1)).subscribe((state) => {
       this.state.next(state);
-      this.changeDetectorRef.detectChanges();
+
+      if (isPlatformBrowser(this.platform)) {
+        this.changeDetectorRef.detectChanges();
+      }
     });
   }
 
