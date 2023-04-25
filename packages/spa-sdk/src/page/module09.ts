@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import { DOMParser, XMLSerializer } from '@xmldom/xmldom';
 import { Typed } from 'emittery';
 import { ContainerModule } from 'inversify';
 import { UrlBuilder, UrlBuilderService } from '../url';
@@ -30,7 +29,7 @@ import { ContentFactory } from './content-factory09';
 import { ContentImpl, ContentModel, ContentModelToken } from './content09';
 import { TYPE_LINK_INTERNAL } from './link';
 import { LinkFactory } from './link-factory';
-import { DomParserService, LinkRewriterImpl, LinkRewriterService, XmlSerializerService } from './link-rewriter';
+import { LinkRewriterImpl, LinkRewriterService } from './link-rewriter';
 import { TYPE_MANAGE_MENU_BUTTON } from './menu';
 import { Menu } from './menu09';
 import { TYPE_META_COMMENT } from './meta';
@@ -50,8 +49,6 @@ export function PageModule(): ContainerModule {
       .inSingletonScope()
       .when(() => typeof window !== 'undefined');
     bind(LinkRewriterService).to(LinkRewriterImpl).inSingletonScope();
-    bind(DomParserService).toConstantValue(new DOMParser());
-    bind(XmlSerializerService).toConstantValue(new XMLSerializer());
 
     bind(ButtonFactory)
       .toSelf()
