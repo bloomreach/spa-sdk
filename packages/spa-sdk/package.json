@@ -75,8 +75,7 @@
     "cookie": "0.4.1",
     "emittery": "0.7.2",
     "inversify": "5.1.1",
-    "reflect-metadata": "0.1.13",
-    "sanitize-html": "2.4.0"
+    "reflect-metadata": "0.1.13"
   },
   "eslintConfig": {
     "extends": "@bloomreach/eslint-config-base"
