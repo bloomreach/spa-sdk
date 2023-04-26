@@ -14,16 +14,15 @@
  * limitations under the License.
  */
 
-import { DOMParser, XMLSerializer } from '@xmldom/xmldom';
+import render from 'dom-serializer';
+import type { Document } from 'domhandler';
+import { getAttributeValue, getElementsByTagName, hasAttrib } from 'domutils';
+import { parseDocument } from 'htmlparser2';
 import { inject, injectable } from 'inversify';
 import { Link, TYPE_LINK_RESOURCE } from './link';
 import { LinkFactory } from './link-factory';
 
-export const DomParserService = Symbol.for('DomParserService');
 export const LinkRewriterService = Symbol.for('LinkRewriterService');
-export const XmlSerializerService = Symbol.for('XmlSerializerService');
-
-const BODY_CONTENTS = /^<body.*?>(.*)<\/body>$/s;
 
 export interface LinkRewriter {
   /**
@@ -36,49 +35,45 @@ export interface LinkRewriter {
 
 @injectable()
 export class LinkRewriterImpl implements LinkRewriter {
-  constructor(
-    @inject(LinkFactory) private linkFactory: LinkFactory,
-    @inject(DomParserService) private domParser: DOMParser,
-    @inject(XmlSerializerService) private xmlSerializer: XMLSerializer,
-  ) {}
+  constructor(@inject(LinkFactory) private linkFactory: LinkFactory) {}
 
   rewrite(content: string, type = 'text/html'): string {
-    const document = this.domParser.parseFromString(`<body>${content}</body>`, type);
+    const document = parseDocument(content, { xmlMode: type !== 'text/html' });
 
     this.rewriteAnchors(document);
     this.rewriteImages(document);
 
-    const body = this.xmlSerializer.serializeToString(document);
-
-    return body.replace(BODY_CONTENTS, '$1');
+    return render(document, { selfClosingTags: true });
   }
 
   private rewriteAnchors(document: Document): void {
-    Array.from(document.getElementsByTagName('a'))
-      .filter((element) => element.hasAttribute('href') && element.hasAttribute('data-type'))
+    Array.from(getElementsByTagName('a', document))
+      .filter((element) => hasAttrib(element, 'href') && hasAttrib(element, 'data-type'))
       .forEach((element) => {
         const url = this.linkFactory.create({
-          href: element.getAttribute('href') ?? undefined,
-          type: element.getAttribute('data-type'),
+          href: getAttributeValue(element, 'href'),
+          type: getAttributeValue(element, 'data-type'),
         } as Link);
 
         if (url) {
-          element.setAttribute('href', url);
+          element.attribs.href = url;
         }
+
+        return element;
       });
   }
 
   private rewriteImages(document: Document): void {
-    Array.from(document.getElementsByTagName('img'))
-      .filter((element) => element.hasAttribute('src'))
+    Array.from(getElementsByTagName('img', document))
+      .filter((element) => hasAttrib(element, 'src'))
       .forEach((element) => {
         const url = this.linkFactory.create({
-          href: element.getAttribute('src') ?? undefined,
+          href: getAttributeValue(element, 'src'),
           type: TYPE_LINK_RESOURCE,
         });
 
         if (url) {
-          element.setAttribute('src', url);
+          element.attribs.src = url;
         }
       });
   }

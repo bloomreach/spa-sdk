@@ -374,30 +374,6 @@ describe('PageImpl', () => {
       expect(page.toJSON()).toBe(model);
     });
   });
-
-  describe('sanitize', () => {
-    it('should sanitize html', () => {
-      const page = createPage();
-      const html = `
-        <div>
-          <h1>Hello, World!</h1>
-          <p>Sanitize before <a href="https://www.example.com/" name="use">use</a></p>
-          <div><script>alert(1);</script></div>
-        </div>`;
-      expect(page.sanitize(html)).toMatchSnapshot();
-    });
-    it('should keep rel, data-type, title, target, name and href attributes in anchor', () => {
-      const page = createPage();
-      const html = `
-        <div>
-          <h1>Hello, World!</h1>
-          <a rel="noopener" data-type="internal" title="foo" target="_blank"
-            href="https://www.example.com/" name="use">use</a>
-          <div><script>alert(1);</script></div>
-        </div>`;
-      expect(page.sanitize(html)).toMatchSnapshot();
-    });
-  });
 });
 
 describe('isPage', () => {

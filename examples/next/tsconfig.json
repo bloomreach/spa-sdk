@@ -24,6 +24,7 @@
     "node_modules"
   ],
   "include": [
+    "sanitize-html.d.ts",
     "next-env.d.ts",
     "components",
     "pages",

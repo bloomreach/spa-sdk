@@ -15,7 +15,6 @@
  */
 
 import { inject, injectable, optional } from 'inversify';
-import sanitizeHtml from 'sanitize-html';
 import { CmsEventBus, CmsEventBusService } from '../cms';
 import { Logger } from '../logger';
 import { ButtonFactory } from './button-factory';
@@ -168,27 +167,6 @@ export class PageImpl implements Page {
 
   toJSON(): PageModel {
     return this.model;
-  }
-
-  sanitize(content: string): string {
-    return sanitizeHtml(content, { allowedAttributes: { a: ['href', 'name', 'target', 'title', 'data-type'] } });
-  }
-
-  prepareHTML(documentRef?: Reference, dataFieldName?: string): string | null {
-    const document = documentRef && this.getContent(documentRef);
-    if (!document) {
-      this.logger?.warn(`Document reference "${documentRef}" not found in page model`);
-      return null;
-    }
-
-    const data = document.getData();
-    const htmlContent = dataFieldName && data?.[dataFieldName];
-    if (!htmlContent) {
-      this.logger?.warn(`Data field name "${dataFieldName}" not found in document data model`);
-      return null;
-    }
-
-    return this.rewriteLinks(this.sanitize(htmlContent.value));
   }
 }
 

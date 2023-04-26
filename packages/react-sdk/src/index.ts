@@ -17,4 +17,3 @@
 export { BrComponent, BrComponentContext, BrProps } from './component';
 export { BrManageContentButton, BrManageMenuButton } from './cms';
 export { BrPage, BrPageContext } from './page';
-export { useHTML } from './hooks';

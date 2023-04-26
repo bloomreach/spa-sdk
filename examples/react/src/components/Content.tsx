@@ -14,21 +14,27 @@
  * limitations under the License.
  */
 
-import { BrManageContentButton, BrProps, useHTML } from '@bloomreach/react-sdk';
+import { BrManageContentButton, BrProps } from '@bloomreach/react-sdk';
 import { Document, ImageSet } from '@bloomreach/spa-sdk';
 import React from 'react';
+import { sanitize } from '../utils/sanitize';
 
 export function Content({ component, page }: BrProps): JSX.Element | null {
   const documentRef = component?.getModels<DocumentModels>().document;
   const document = documentRef && page?.getContent<Document>(documentRef);
 
-  const safeHTML = useHTML(page, documentRef, 'content');
-
   if (!document || !page) {
     return null;
   }
 
-  const { author, publicationDate, date = publicationDate, image: imageRef, title } = document.getData<DocumentData>();
+  const {
+    author,
+    content,
+    publicationDate,
+    date = publicationDate,
+    image: imageRef,
+    title,
+  } = document.getData<DocumentData>();
   const image = imageRef && page.getContent<ImageSet>(imageRef);
 
   return (
@@ -39,7 +45,7 @@ export function Content({ component, page }: BrProps): JSX.Element | null {
       {author && <p className="mb-3 text-muted">{author}</p>}
       {date && <p className="mb-3 small text-muted">{new Date(date).toDateString()}</p>}
       {/* eslint-disable-next-line react/no-danger */}
-      {safeHTML && <div dangerouslySetInnerHTML={{ __html: safeHTML }} />}
+      {content && <div dangerouslySetInnerHTML={{ __html: page.rewriteLinks(sanitize(content.value)) }} />}
     </div>
   );
 }
