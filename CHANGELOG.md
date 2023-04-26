@@ -2,10 +2,35 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### [20.0.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-19.0.2...20.0.0)
+#### [21.0.0-alpha.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-20.0.0...21.0.0-alpha.0)
+
+- SPASDK-179 Deploy Vue3 CSR to Heroku [`#129`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/129)
+- SPASDK-181 Revert async implementation of rewriteLinks and sanitize [`#128`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/128)
+- SPASDK-174 Only load CmsModule once [`#125`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/125)
+- SPASDK-181 Fix infinite loop in Vue3 components [`#SPASDK-181`](https://issues.onehippo.com/browse/SPASDK-181)
+- SPASDK-181 Update snapshots [`#SPASDK-181`](https://issues.onehippo.com/browse/SPASDK-181)
+- SPASDK-181 Remove use of Suspense [`#SPASDK-181`](https://issues.onehippo.com/browse/SPASDK-181)
+- SPASDK-181 Call sync on original page object in Vue 3 SDK [`#SPASDK-181`](https://issues.onehippo.com/browse/SPASDK-181)
+- SPASDK-181 Remove manual changeDetection and its test [`#SPASDK-181`](https://issues.onehippo.com/browse/SPASDK-181)
+- SPASDK-179 Add configuration for starting Vue3 on Heroku [`#SPASDK-179`](https://issues.onehippo.com/browse/SPASDK-179)
+- SPASDK-179 Add a Procfile for Vue3 [`#SPASDK-179`](https://issues.onehippo.com/browse/SPASDK-179)
+- SPASDK-181 Correct order of rendering during Angular SSR [`#SPASDK-181`](https://issues.onehippo.com/browse/SPASDK-181)
+- SPASDK-181 Fully render next.js pages with rich text during SSR [`#SPASDK-181`](https://issues.onehippo.com/browse/SPASDK-181)
+- SPASDK-179 Deploy Vue3 CSR to Heroku [`#SPASDK-179`](https://issues.onehippo.com/browse/SPASDK-179)
+- SPASDK-181 Revert async initialize and lazy load of preview code [`#SPASDK-181`](https://issues.onehippo.com/browse/SPASDK-181)
+- SPASDK-181 Revert async implementation of rewriteLinks and sanitize [`#SPASDK-181`](https://issues.onehippo.com/browse/SPASDK-181)
+- SPASDK-174 Render example react app with StrictMode [`#SPASDK-174`](https://issues.onehippo.com/browse/SPASDK-174)
+- SPASDK-174 Only load CmsModule once [`#SPASDK-174`](https://issues.onehippo.com/browse/SPASDK-174)
+- SPASDK-174 Let jest run tests in parallel [`#SPASDK-174`](https://issues.onehippo.com/browse/SPASDK-174)
+- TRIVIAL Fix type docs generation by removing outdated dependency [`80c3b1e`](https://github.com/bloomreach/spa-sdk/commit/80c3b1e8940058050c19b447737a39d608a54ccd)
+
+### [spa-sdk-20.0.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-19.0.2...spa-sdk-20.0.0)
+
+> 5 April 2023
 
 - SPASDK-159 Port tests to vue 3 sdk [`#120`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/120)
 - Resolve SPASDK-172 "Feature/ remove personalization" [`#119`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/119)
+- SPASDK-178 Bumping versions to 20.0.0 [`#SPASDK-178`](https://issues.onehippo.com/browse/SPASDK-178)
 - SPASDK-157 Update vue 3 version in example package.json [`#SPASDK-157`](https://issues.onehippo.com/browse/SPASDK-157)
 - SPASDK-157 Update package-lock.json [`#SPASDK-157`](https://issues.onehippo.com/browse/SPASDK-157)
 - SPASDK-157 Bump vue3-sdk version in example vue3 [`#SPASDK-157`](https://issues.onehippo.com/browse/SPASDK-157)
@@ -633,5 +658,7 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-2 Log warning for unsupported method "getContentReference" in v0.9 [`#SPASDK-2`](https://issues.onehippo.com/browse/SPASDK-2)
 - SPASDK-2 Add exported function "getContainerItemContent" [`#SPASDK-2`](https://issues.onehippo.com/browse/SPASDK-2)
 - SPASDK-1 Bump to use node 14 [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
+- SPASDK-1 Remove maven files and update Jenkinsfile [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
+- SPASDK-1 Initial move from brxm monorepo [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
 - TRIVIAL Set branch name to 'main' in changesetBaseRefs [`4dacdcd`](https://github.com/bloomreach/spa-sdk/commit/4dacdcd2fdb0712e40dcb33b9809ae12786f9ab1)
 - TRIVIAL Skip telemetry check on nuxt startup [`15deb25`](https://github.com/bloomreach/spa-sdk/commit/15deb25b1edde3af3296d4dc34dba1483fe278f2)
