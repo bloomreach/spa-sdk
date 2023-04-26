@@ -27,7 +27,7 @@
     />
     <h1 v-if="data.title">{{ data.title }}</h1>
     <img v-if="image" class="img-fluid" :src="image.getOriginal().getUrl()" :alt="data.title" />
-    <div v-if="html" v-html="html" />
+    <div v-if="data.content" v-html="page.rewriteLinks(sanitize(data.content.value))" />
     <p v-if="link" className="lead">
       <nuxt-link :to="link.getUrl()" class="btn btn-primary btn-lg" role="button">Learn more</nuxt-link>
     </p>
@@ -37,9 +37,11 @@
 <script lang="ts">
 import { ContainerItem, Document, ImageSet, Page, Reference } from '@bloomreach/spa-sdk';
 import { Component, Prop, Vue } from 'nuxt-property-decorator';
+import { sanitize } from '~/utils/sanitize';
 
 @Component({
   name: 'br-banner',
+  methods: { sanitize },
   computed: {
     data(this: BrBanner) {
       return this.document?.getData<DocumentData>();
@@ -61,9 +63,6 @@ import { Component, Prop, Vue } from 'nuxt-property-decorator';
     link(this: BrBanner) {
       return this.data?.link && this.page.getContent<Document>(this.data.link);
     },
-    html(this: BrBanner) {
-      return this.page.prepareHTML(this.documentRef, 'content');
-    },
   },
 })
 export default class BrBanner extends Vue {
@@ -80,7 +79,5 @@ export default class BrBanner extends Vue {
   image?: ImageSet;
 
   link?: Document;
-
-  html?: string | null;
 }
 </script>

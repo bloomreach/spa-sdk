@@ -37,6 +37,7 @@
 <script lang="ts" setup>
 import type { Component, Document, ImageSet, Page } from '@bloomreach/spa-sdk';
 import { computed, ref, watch } from 'vue';
+import { sanitize } from "@/utils/sanitize";
 
 const props = defineProps<{
   component: Component,
@@ -51,6 +52,8 @@ const link = computed(() => data.value?.link && props.page.getContent<Document>(
 const isPreview = computed(() => props.page.isPreview());
 const html = ref<string | null>();
 watch(documentRef, () => {
-  html.value = props.page.prepareHTML(documentRef.value, 'content');
+  if (data.value?.content) {
+    html.value = props.page.rewriteLinks(sanitize(data.value.content.value));
+  }
 }, { immediate: true });
 </script>

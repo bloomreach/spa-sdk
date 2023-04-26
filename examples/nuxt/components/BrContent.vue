@@ -21,13 +21,14 @@
     <h1 v-if="data.title">{{ data.title }}</h1>
     <p v-if="data.author" class="mb-3 text-muted">{{ data.author }}</p>
     <p v-if="date" class="mb-3 small text-muted">{{ formatDate(date) }}</p>
-    <div v-if="html" v-html="html" />
+    <div v-if="data.content" v-html="page.rewriteLinks(sanitize(data.content.value))" />
   </div>
 </template>
 
 <script lang="ts">
 import { ContainerItem, Document, ImageSet, Page, Reference } from '@bloomreach/spa-sdk';
 import { Component, Prop, Vue } from 'nuxt-property-decorator';
+import { sanitize } from '~/utils/sanitize';
 
 @Component({
   name: 'br-content',
@@ -52,11 +53,9 @@ import { Component, Prop, Vue } from 'nuxt-property-decorator';
     date(this: BrContent) {
       return this.data?.date ?? this.data?.publicationDate;
     },
-    html(this: BrContent) {
-      return this.page.prepareHTML(this.documentRef, 'content');
-    },
   },
   methods: {
+    sanitize,
     formatDate(date: number) {
       return new Date(date).toDateString();
     },
@@ -76,7 +75,5 @@ export default class BrContent extends Vue {
   document?: Document;
 
   image?: ImageSet;
-
-  html?: string | null;
 }
 </script>

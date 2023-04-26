@@ -37,8 +37,10 @@ export default [
         globals: {
           cookie: 'cookie',
           inversify: 'inversify',
-          emittery: 'emiterry',
-          xmldom: 'xmldom',
+          emittery: 'emittery',
+          'dom-serializer': 'dom-serializer',
+          domutils: 'domutils',
+          htmlparser2: 'htmlparser2',
         },
       },
     ],

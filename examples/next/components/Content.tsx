@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-import { BrManageContentButton, BrProps } from '@bloomreach/react-sdk';
-import { Document, ImageSet } from '@bloomreach/spa-sdk';
+import {BrManageContentButton, BrProps} from '@bloomreach/react-sdk';
+import {Document, ImageSet} from '@bloomreach/spa-sdk';
 import React from 'react';
+import {sanitize} from "../utils/sanitize";
 
 export function Content(props: BrProps): JSX.Element | null {
   const documentRef = props.component?.getModels<DocumentModels>().document;
@@ -45,7 +46,7 @@ export function Content(props: BrProps): JSX.Element | null {
       {author && <p className="mb-3 text-muted">{author}</p>}
       {date && <p className="mb-3 small text-muted">{new Date(date).toDateString()}</p>}
       {content && (
-        <div dangerouslySetInnerHTML={{ __html: props.page!.rewriteLinks(props.page!.sanitize(content.value)) }}/>
+        <div dangerouslySetInnerHTML={{__html: props.page!.rewriteLinks(sanitize(content.value))}}/>
       )}
     </div>
   );
