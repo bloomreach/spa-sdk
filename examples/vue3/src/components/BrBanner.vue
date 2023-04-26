@@ -26,7 +26,7 @@
       :relative="true"
     />
     <h1 v-if="data?.title">{{ data.title }}</h1>
-    <img v-if="image" class="img-fluid" :src="image.getOriginal()?.getUrl()" :alt="data?.title"/>
+    <img v-if="image" class="img-fluid" :src="image.getOriginal()?.getUrl()" :alt="data?.title" />
     <div v-if="html" v-html="html"/>
     <p v-if="link" className="lead">
       <router-link :to="link.getUrl()" class="btn btn-primary btn-lg" role="button">Learn more</router-link>
@@ -36,7 +36,7 @@
 
 <script lang="ts" setup>
 import type { Component, Document, ImageSet, Page } from '@bloomreach/spa-sdk';
-import { computed } from 'vue';
+import { computed, ref, watch } from 'vue';
 
 const props = defineProps<{
   component: Component,
@@ -49,5 +49,8 @@ const data = computed(() => document.value?.getData<DocumentData>());
 const image = computed(() => data.value?.image && props.page.getContent<ImageSet>(data.value?.image));
 const link = computed(() => data.value?.link && props.page.getContent<Document>(data.value?.link));
 const isPreview = computed(() => props.page.isPreview());
-const html = computed(() => props.page.prepareHTML(documentRef.value, 'content'));
+const html = ref<string | null>();
+watch(documentRef, () => {
+  html.value = props.page.prepareHTML(documentRef.value, 'content');
+}, { immediate: true });
 </script>
