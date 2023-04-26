@@ -50,7 +50,7 @@ const image = computed(() => data.value?.image && props.page.getContent<ImageSet
 const link = computed(() => data.value?.link && props.page.getContent<Document>(data.value?.link));
 const isPreview = computed(() => props.page.isPreview());
 const html = ref<string | null>();
-watch(documentRef, async () => {
-  html.value = await props.page.prepareHTML(documentRef.value, 'content');
+watch(documentRef, () => {
+  html.value = props.page.prepareHTML(documentRef.value, 'content');
 }, { immediate: true });
 </script>

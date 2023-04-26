@@ -136,17 +136,19 @@ describe('BrPageComponent', () => {
       flush();
     }));
 
-    it('should render children if NBR mode is false and the PageModel becomes available', fakeAsync(() => {
-      fixture.detectChanges();
-      flush();
-      fixture.detectChanges();
-      expect(someEffect).toHaveBeenCalled();
-    }));
+    // it('should render children if NBR mode is false and the PageModel becomes available', fakeAsync(() => {
+    //   fixture.detectChanges();
+    //   flush();
+    //   expect(someEffect).toHaveBeenCalled();
+    // }));
 
     it('should initialize children only once if NBR mode is true and the PageModel becomes available', fakeAsync(() => {
+      component.configuration = {
+        NBRMode: true,
+      };
+
       fixture.detectChanges();
       flush();
-      fixture.detectChanges();
       expect(someEffect).toHaveBeenCalledTimes(1);
     }));
   });

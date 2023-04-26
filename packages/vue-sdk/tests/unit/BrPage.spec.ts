@@ -178,7 +178,7 @@ describe('BrPage', () => {
 
   describe('mounted', () => {
     it('should sync a page on mount', async () => {
-      mocked(initialize).mockResolvedValueOnce(page);
+      mocked(initialize as unknown as () => Page).mockReturnValueOnce(page);
 
       const wrapper = shallowMount(BrPage, { propsData: { configuration: {}, page } });
       await wrapper.vm.$nextTick();

@@ -19,9 +19,9 @@ import { inject, injectable } from 'inversify';
 import { Link, TYPE_LINK_RESOURCE } from './link';
 import { LinkFactory } from './link-factory';
 
-export const DomParserServiceProvider = Symbol.for('DomParserService');
+export const DomParserService = Symbol.for('DomParserService');
 export const LinkRewriterService = Symbol.for('LinkRewriterService');
-export const XmlSerializerServiceProvider = Symbol.for('XmlSerializerService');
+export const XmlSerializerService = Symbol.for('XmlSerializerService');
 
 const BODY_CONTENTS = /^<body.*?>(.*)<\/body>$/s;
 
@@ -31,26 +31,24 @@ export interface LinkRewriter {
    * @param content The HTML content to rewrite links.
    * @param type The content type.
    */
-  rewrite(content: string, type?: string): Promise<string>;
+  rewrite(content: string, type?: string): string;
 }
 
 @injectable()
 export class LinkRewriterImpl implements LinkRewriter {
   constructor(
     @inject(LinkFactory) private linkFactory: LinkFactory,
-    @inject(DomParserServiceProvider) private domParserProvider: () => Promise<DOMParser>,
-    @inject(XmlSerializerServiceProvider) private xmlSerializerProvider: () => Promise<XMLSerializer>,
+    @inject(DomParserService) private domParser: DOMParser,
+    @inject(XmlSerializerService) private xmlSerializer: XMLSerializer,
   ) {}
 
-  async rewrite(content: string, type = 'text/html'): Promise<string> {
-    const domParser = await this.domParserProvider();
-    const document = domParser.parseFromString(`<body>${content}</body>`, type);
+  rewrite(content: string, type = 'text/html'): string {
+    const document = this.domParser.parseFromString(`<body>${content}</body>`, type);
 
     this.rewriteAnchors(document);
     this.rewriteImages(document);
 
-    const xmlSerializer = await this.xmlSerializerProvider();
-    const body = xmlSerializer.serializeToString(document);
+    const body = this.xmlSerializer.serializeToString(document);
 
     return body.replace(BODY_CONTENTS, '$1');
   }

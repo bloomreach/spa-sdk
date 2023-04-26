@@ -25,7 +25,18 @@ import BrNodeComponent from '@/BrNodeComponent.vue';
 import { mapping$, page$ } from '@/providerKeys';
 import type { Component, Configuration, Page, PageModel } from '@bloomreach/spa-sdk';
 import { destroy, initialize } from '@bloomreach/spa-sdk';
-import { computed, onMounted, onServerPrefetch, onUnmounted, onUpdated, provide, ref, toRefs, watch } from 'vue';
+import {
+  computed,
+  onMounted,
+  onServerPrefetch,
+  onUnmounted,
+  onUpdated,
+  provide,
+  ref,
+  toRaw,
+  toRefs,
+  watch,
+} from 'vue';
 import type { BrMapping } from '../typings';
 
 function destroyPage() {
@@ -49,7 +60,7 @@ provide(mapping$, mapping);
 
 watch(configuration, async (current, previous) => {
   if (!previous && props.page) {
-    page.value = await initialize(current, props.page);
+    page.value = initialize(current, props.page);
     return;
   }
 
@@ -59,8 +70,14 @@ watch(configuration, async (current, previous) => {
   loading = null;
 }, { deep: true, immediate: true });
 
-onMounted(() => page.value?.sync());
-onUpdated(() => page.value?.sync());
+onMounted(() => {
+  const sdkPage = toRaw(page.value);
+  sdkPage?.sync();
+});
+onUpdated(() => {
+  const sdkPage = toRaw(page.value);
+  sdkPage?.sync();
+});
 onUnmounted(() => destroyPage());
 onServerPrefetch(async () => await loading);
 </script>

@@ -14,12 +14,10 @@
  * limitations under the License.
  */
 
-import { Container, inject, injectable, optional } from 'inversify';
+import { inject, injectable, optional } from 'inversify';
 import { Logger } from '../logger';
-import { Spa, SpaService } from '../spa';
 import { Cms, CmsOptions } from './cms';
-import { CmsEventBus } from './cms-events';
-import { CmsEventBusService } from './index';
+import { CmsEventBus, CmsEventBusService } from './cms-events';
 
 const GLOBAL_WINDOW = typeof window === 'undefined' ? undefined : window;
 
@@ -42,8 +40,6 @@ declare global {
 @injectable()
 export class Cms14Impl implements Cms {
   private api?: CmsApi;
-
-  private scope?: Container;
 
   // eslint-disable-next-line @typescript-eslint/ban-types
   private postponed: Function[] = [];
@@ -69,9 +65,7 @@ export class Cms14Impl implements Cms {
     };
   }
 
-  initialize({ window = GLOBAL_WINDOW }: CmsOptions, scope: Container): void {
-    this.scope = scope;
-
+  initialize({ window = GLOBAL_WINDOW }: CmsOptions): void {
     if (this.api || !window || window.SPA) {
       return;
     }
@@ -97,8 +91,7 @@ export class Cms14Impl implements Cms {
     this.logger?.debug('Component:', id);
     this.logger?.debug('Properties', properties);
 
-    const spa = this.scope?.get<Spa>(SpaService);
-    spa?.onCmsUpdate({ id, properties });
+    this.eventBus?.emit('cms.update', { id, properties });
   }
 
   protected sync(): void {

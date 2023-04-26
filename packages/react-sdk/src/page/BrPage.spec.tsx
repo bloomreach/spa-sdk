@@ -72,6 +72,7 @@ describe('BrPage', () => {
     });
 
     it('should use a page model from props', async () => {
+      jest.mocked(initialize as unknown as () => Page).mockReturnValue(page);
       const newPage = {} as PageModel;
 
       await act(async () => {
@@ -84,6 +85,8 @@ describe('BrPage', () => {
 
   describe('componentDidUpdate', () => {
     beforeEach(async () => {
+      jest.mocked(initialize as unknown as () => Page).mockReturnValueOnce(page);
+
       await act(async () => {
         element = render(<BrPage configuration={config} mapping={mapping} page={page} />);
       });
@@ -93,6 +96,7 @@ describe('BrPage', () => {
       const newPage = { ...page } as Page;
       const configuration = { ...config };
 
+      jest.mocked(initialize as unknown as () => Page).mockReturnValueOnce(newPage);
       await act(async () => {
         render(<BrPage configuration={configuration} mapping={mapping} page={newPage} />, {
           container: element.container,
@@ -124,7 +128,7 @@ describe('BrPage', () => {
     });
 
     it('should not destroy an empty page when unmounting', async () => {
-      jest.mocked(initialize).mockResolvedValueOnce(undefined as unknown as Page);
+      jest.mocked(initialize as unknown as () => Page).mockReturnValueOnce(undefined as unknown as Page);
 
       await act(async () => {
         element = render(<BrPage configuration={config} mapping={mapping} />);
@@ -152,7 +156,7 @@ describe('BrPage', () => {
     });
 
     it('should not render children if there is no page and NBR mode is false', async () => {
-      jest.mocked(initialize).mockResolvedValueOnce(undefined as unknown as Page);
+      jest.mocked(initialize as unknown as () => Page).mockReturnValueOnce(undefined as unknown as Page);
 
       await act(async () => {
         element = render(
@@ -169,7 +173,7 @@ describe('BrPage', () => {
     });
 
     it('should render children if there is no page and NBR mode is true', async () => {
-      jest.mocked(initialize).mockResolvedValueOnce(undefined as unknown as Page);
+      jest.mocked(initialize as unknown as () => Page).mockReturnValueOnce(undefined as unknown as Page);
 
       await act(async () => {
         element = render(

@@ -37,7 +37,7 @@ import { component$, mapping$, page$ } from '@/providerKeys';
 import type { Component, ContainerItem } from '@bloomreach/spa-sdk';
 import { TYPE_CONTAINER_ITEM_UNDEFINED } from '@bloomreach/spa-sdk';
 import type { Ref } from 'vue';
-import { computed, inject, onUnmounted, ref, watch } from 'vue';
+import { computed, inject, onUnmounted, ref, toRaw, watch } from 'vue';
 import BrContainerItemUndefined from '@/BrContainerItemUndefined.vue';
 
 const page = inject(page$)!;
@@ -59,7 +59,8 @@ function shallowClone(value: ContainerItem): ContainerItem {
 const passedComponent = ref<ContainerItem>(component.value);
 const updateHook = () => {
   passedComponent.value = shallowClone(component.value);
-  page.value.sync();
+  const sdkPage = toRaw(page.value);
+  sdkPage?.sync();
 };
 onUnmounted(() => unsubscribe?.());
 

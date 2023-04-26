@@ -21,8 +21,8 @@ export function useHTML(page?: Page, documentRef?: Reference, dataFieldName?: st
   const [safeHTML, setSafeHTML] = useState<string | null>(null);
 
   useEffect(() => {
-    async function rewriteLinksAndSanitize(): Promise<void> {
-      setSafeHTML(await page!.prepareHTML(documentRef, dataFieldName));
+    function rewriteLinksAndSanitize(): void {
+      setSafeHTML(page!.prepareHTML(documentRef, dataFieldName));
     }
 
     if (!page) {

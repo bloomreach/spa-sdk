@@ -17,17 +17,15 @@
 <template>
   <br-meta :meta="meta" :key="componentRef?.getId()">
     <slot>
-      <Suspense>
-        <br-node-container-item v-if="isContainerItem(componentRef)"/>
+      <br-node-container-item v-if="isContainerItem(componentRef)"/>
 
-        <br-node-container v-else-if="isContainer(componentRef)">
-          <br-node-component v-for="child in children" :key="child.getId()" :component="child"/>
-        </br-node-container>
+      <br-node-container v-else-if="isContainer(componentRef)">
+        <br-node-component v-for="child in children" :key="(child as Component).getId()" :component="child"/>
+      </br-node-container>
 
-        <component v-else-if="name && name in mapping" :is="mapping[name]" :component="componentRef" :page="page"/>
+      <component v-else-if="name && name in mapping" :is="mapping[name]" :component="componentRef" :page="page"/>
 
-        <br-node-component v-else v-for="child in children" :key="child.getId()" :component="child"/>
-      </Suspense>
+      <br-node-component v-else v-for="child in children" :key="(child as Component).getId()" :component="child"/>
     </slot>
   </br-meta>
 </template>
