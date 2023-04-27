@@ -2,11 +2,23 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### [21.0.0-alpha.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-20.0.0...21.0.0-alpha.0)
+#### [21.0.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-21.0.0-alpha.0...21.0.0)
+
+- SPASDK-163 Merge branch 'bugfix/SPASDK-163-next-relevance' into 'development' [`#SPASDK-163`](https://issues.onehippo.com/browse/SPASDK-163)
+- SPASDK-163 Output CJS bundle for the relevance express module [`#SPASDK-163`](https://issues.onehippo.com/browse/SPASDK-163)
+- SPASDK-182 Merge branch 'bugfix/SPASDK-182-bundle-size' into 'development' [`#SPASDK-182`](https://issues.onehippo.com/browse/SPASDK-182)
+- SPASDK-182 Add sanitize-html to the example apps [`#SPASDK-182`](https://issues.onehippo.com/browse/SPASDK-182)
+- SPASDK-182 Replace @xmldom/xmldom library with htmlparser2 [`#SPASDK-182`](https://issues.onehippo.com/browse/SPASDK-182)
+- SPASDK-182 Remove the `sanitize` method from the Page object [`#SPASDK-182`](https://issues.onehippo.com/browse/SPASDK-182)
+
+#### [spa-sdk-21.0.0-alpha.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-20.0.0...spa-sdk-21.0.0-alpha.0)
+
+> 26 April 2023
 
 - SPASDK-179 Deploy Vue3 CSR to Heroku [`#129`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/129)
 - SPASDK-181 Revert async implementation of rewriteLinks and sanitize [`#128`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/128)
 - SPASDK-174 Only load CmsModule once [`#125`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/125)
+- SPASDK-181 Bumping versions to 21.0.0-alpha.0 [`#SPASDK-181`](https://issues.onehippo.com/browse/SPASDK-181)
 - SPASDK-181 Fix infinite loop in Vue3 components [`#SPASDK-181`](https://issues.onehippo.com/browse/SPASDK-181)
 - SPASDK-181 Update snapshots [`#SPASDK-181`](https://issues.onehippo.com/browse/SPASDK-181)
 - SPASDK-181 Remove use of Suspense [`#SPASDK-181`](https://issues.onehippo.com/browse/SPASDK-181)
@@ -658,7 +670,5 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-2 Log warning for unsupported method "getContentReference" in v0.9 [`#SPASDK-2`](https://issues.onehippo.com/browse/SPASDK-2)
 - SPASDK-2 Add exported function "getContainerItemContent" [`#SPASDK-2`](https://issues.onehippo.com/browse/SPASDK-2)
 - SPASDK-1 Bump to use node 14 [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
-- SPASDK-1 Remove maven files and update Jenkinsfile [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
-- SPASDK-1 Initial move from brxm monorepo [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
 - TRIVIAL Set branch name to 'main' in changesetBaseRefs [`4dacdcd`](https://github.com/bloomreach/spa-sdk/commit/4dacdcd2fdb0712e40dcb33b9809ae12786f9ab1)
 - TRIVIAL Skip telemetry check on nuxt startup [`15deb25`](https://github.com/bloomreach/spa-sdk/commit/15deb25b1edde3af3296d4dc34dba1483fe278f2)

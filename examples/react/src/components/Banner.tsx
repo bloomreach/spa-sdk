@@ -14,22 +14,21 @@
  * limitations under the License.
  */
 
-import { BrManageContentButton, BrProps, useHTML } from '@bloomreach/react-sdk';
+import { BrManageContentButton, BrProps } from '@bloomreach/react-sdk';
 import { Document, ImageSet } from '@bloomreach/spa-sdk';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { sanitize } from '../utils/sanitize';
 
 export function Banner({ component, page }: BrProps): JSX.Element | null {
   const documentRef = component?.getModels().document;
   const document = !!documentRef && page?.getContent(documentRef);
 
-  const safeHTML = useHTML(page, documentRef, 'content');
-
   if (!document || !page) {
     return null;
   }
 
-  const { image: imageRef, link: linkRef, title } = document.getData<DocumentData>();
+  const { content, image: imageRef, link: linkRef, title } = document.getData<DocumentData>();
   const image = imageRef && page.getContent<ImageSet>(imageRef);
   const link = linkRef && page.getContent<Document>(linkRef);
 
@@ -47,7 +46,7 @@ export function Banner({ component, page }: BrProps): JSX.Element | null {
       {title && <h1>{title}</h1>}
       {image && <img className="img-fluid" src={image.getOriginal()?.getUrl()} alt={title} />}
       {/* eslint-disable-next-line react/no-danger */}
-      {safeHTML && <div dangerouslySetInnerHTML={{ __html: safeHTML }} />}
+      {content && page && <div dangerouslySetInnerHTML={{ __html: page.rewriteLinks(sanitize(content.value)) }} />}
       {link && (
         <p className="lead">
           <Link to={link.getUrl()!} className="btn btn-primary btn-lg" role="button">

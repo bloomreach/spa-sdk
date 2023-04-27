@@ -58,6 +58,7 @@ module.exports = {
   },
   telemetry: false,
   build: {
+    transpile: ['htmlparser2'],
     babel: {
       presets({ isServer }) {
         return [

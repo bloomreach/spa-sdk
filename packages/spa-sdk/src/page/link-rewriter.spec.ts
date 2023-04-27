@@ -14,23 +14,18 @@
  * limitations under the License.
  */
 
-import { DOMParser, XMLSerializer } from '@xmldom/xmldom';
 import { TYPE_LINK_INTERNAL, TYPE_LINK_RESOURCE } from './link';
 import { LinkFactory } from './link-factory';
 import { LinkRewriter, LinkRewriterImpl } from './link-rewriter';
 
 describe('LinkRewriterImpl', () => {
-  let domParser: DOMParser;
   let linkFactory: jest.Mocked<LinkFactory>;
   let linkRewriter: LinkRewriter;
-  let xmlSerializer: XMLSerializer;
 
   beforeEach(() => {
-    domParser = new DOMParser();
     linkFactory = { create: jest.fn() } as unknown as typeof linkFactory;
-    xmlSerializer = new XMLSerializer();
 
-    linkRewriter = new LinkRewriterImpl(linkFactory, domParser, xmlSerializer);
+    linkRewriter = new LinkRewriterImpl(linkFactory);
   });
 
   describe('rewrite', () => {
@@ -69,7 +64,7 @@ describe('LinkRewriterImpl', () => {
     });
 
     it('should ignore images without src attribute', () => {
-      const html = '<img alt="something"/>';
+      const html = '<img alt="something" />';
 
       expect(linkRewriter.rewrite(html)).toBe(html);
       expect(linkFactory.create).not.toBeCalled();
@@ -78,15 +73,10 @@ describe('LinkRewriterImpl', () => {
     it('should rewrite images links', () => {
       linkFactory.create.mockReturnValueOnce('url');
 
-      expect(linkRewriter.rewrite('<img src="/some/path" alt="something"/>')).toBe('<img src="url" alt="something"/>');
+      expect(linkRewriter.rewrite('<img src="/some/path" alt="something" />')).toBe(
+        '<img src="url" alt="something" />',
+      );
       expect(linkFactory.create).toBeCalledWith({ href: '/some/path', type: TYPE_LINK_RESOURCE });
-    });
-
-    it('should pass a content type to the DOM parser', () => {
-      jest.spyOn(domParser, 'parseFromString');
-      linkRewriter.rewrite('something', 'text/html');
-
-      expect(domParser.parseFromString).toBeCalledWith(expect.stringContaining('something'), 'text/html');
     });
   });
 });

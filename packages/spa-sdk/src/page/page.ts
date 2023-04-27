@@ -15,7 +15,6 @@
  */
 
 import { inject, injectable, optional } from 'inversify';
-import sanitizeHtml from 'sanitize-html';
 import { CmsEventBus, CmsEventBusService } from '../cms';
 import { Logger } from '../logger';
 import { isAbsoluteUrl, resolveUrl } from '../url';
@@ -28,7 +27,6 @@ import { ContainerItemModel } from './container-item';
 import { ContentModel } from './content';
 import { ContentFactory } from './content-factory';
 import { Content } from './content09';
-import { Document } from './document';
 import { isLink, Link } from './link';
 import { LinkFactory } from './link-factory';
 import { LinkRewriter, LinkRewriterService } from './link-rewriter';
@@ -259,19 +257,6 @@ export interface Page {
    * @return A plain JavaScript object of the page model.
    */
   toJSON(): any;
-
-  /**
-   * Sanitize HTML content to allow only safe HTML markups.
-   * @param content The HTML content to sanitize.
-   */
-  sanitize(content: string): string;
-
-  /**
-   * Prepare HTML blob by sanitizing it and rewriting links
-   * @param documentRef The reference to the document
-   * @param dataFieldName The name of the property on the document data object
-   */
-  prepareHTML(documentRef?: Reference, dataFieldName?: string): string | null;
 }
 
 @injectable()
@@ -391,27 +376,6 @@ export class PageImpl implements Page {
 
   toJSON(): PageModel {
     return this.model;
-  }
-
-  sanitize(content: string): string {
-    return sanitizeHtml(content, { allowedAttributes: { a: ['href', 'name', 'target', 'title', 'data-type', 'rel'] } });
-  }
-
-  prepareHTML(documentRef?: Reference, dataFieldName?: string): string | null {
-    const document = documentRef && this.getContent<Document>(documentRef);
-    if (!document) {
-      this.logger?.warn(`Document reference "${documentRef}" not found in page model`);
-      return null;
-    }
-
-    const data = document.getData();
-    const htmlContent = dataFieldName && data?.[dataFieldName];
-    if (!htmlContent) {
-      this.logger?.warn(`Data field name "${dataFieldName}" not found in document data model`);
-      return null;
-    }
-
-    return this.rewriteLinks(this.sanitize(htmlContent.value));
   }
 }
 

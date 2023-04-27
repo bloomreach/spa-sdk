@@ -1,5 +1,5 @@
 /*
- * Copyright 2022-2023 Bloomreach
+ * Copyright 2023 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,23 +14,4 @@
  * limitations under the License.
  */
 
-import { Page, Reference } from '@bloomreach/spa-sdk';
-import { useEffect, useState } from 'react';
-
-export function useHTML(page?: Page, documentRef?: Reference, dataFieldName?: string): string | null {
-  const [safeHTML, setSafeHTML] = useState<string | null>(null);
-
-  useEffect(() => {
-    function rewriteLinksAndSanitize(): void {
-      setSafeHTML(page!.prepareHTML(documentRef, dataFieldName));
-    }
-
-    if (!page) {
-      return;
-    }
-
-    rewriteLinksAndSanitize();
-  });
-
-  return safeHTML;
-}
+declare module 'sanitize-html';

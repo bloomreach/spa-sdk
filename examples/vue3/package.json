@@ -1,6 +1,6 @@
 {
   "name": "@bloomreach/example-vue3",
-  "version": "21.0.0-alpha.0",
+  "version": "21.0.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -12,9 +12,10 @@
     "type-check:watch": "vue-tsc --noEmit --watch"
   },
   "dependencies": {
-    "@bloomreach/spa-sdk": "21.0.0-alpha.0",
-    "@bloomreach/vue3-sdk": "21.0.0-alpha.0",
+    "@bloomreach/spa-sdk": "21.0.0",
+    "@bloomreach/vue3-sdk": "21.0.0",
     "axios": "1.3.2",
+    "sanitize-html": "2.10.0",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6"
   },

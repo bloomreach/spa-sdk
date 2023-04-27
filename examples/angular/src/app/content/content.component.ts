@@ -16,6 +16,7 @@
 
 import { Component, Input, OnInit } from '@angular/core';
 import { Component as BrComponent, Document, ImageSet, Page } from '@bloomreach/spa-sdk';
+import { sanitize } from '../utils/sanitize';
 
 @Component({
   selector: 'br-content',
@@ -29,8 +30,9 @@ export class ContentComponent implements OnInit {
   safeHTML?: string | null;
 
   async ngOnInit(): Promise<void> {
-    const ref = this.component.getModels<DocumentModels>().document;
-    this.safeHTML = this.page.prepareHTML(ref, 'content');
+    const content = this.document?.getData<DocumentData>().content;
+    const sanitized = sanitize(content!.value);
+    this.safeHTML = this.page.rewriteLinks(sanitized);
   }
 
   get document(): Document | undefined {
