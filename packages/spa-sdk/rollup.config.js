@@ -88,6 +88,13 @@ export default [
         format: 'es',
         preserveModules: true,
       },
+      {
+        dir: 'lib/express',
+        entryFileNames: '[name].cjs',
+        exports: 'auto',
+        format: 'cjs',
+        preserveModules: true,
+      },
     ],
     external: [...Object.keys(pkg.dependencies || {}), ...Object.keys(pkg.peerDependencies || {})],
     plugins: [
