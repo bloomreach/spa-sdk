@@ -1,6 +1,6 @@
 {
   "private": true,
-  "version": "21.0.0-alpha.0",
+  "version": "21.0.0",
   "description": "Bloomreach SPA SDK",
   "name": "spa-sdk-workspace",
   "keywords": [
