@@ -132,6 +132,7 @@ Pre release actions:
 * Check if all issues in the upcoming release are closed, any open issues must be moved to a different release, or the
     release must be postponed
 * Check out the `development` branch and make sure your local branch its up to date and the pipeline for `development` is green
+* Make sure that running `npm run docs` can be done succesfully
 
 Release actions:
 * Run `npm run bump` in the workspace root to update the versions in all package files
