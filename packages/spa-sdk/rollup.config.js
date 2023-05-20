@@ -84,13 +84,13 @@ export default [
     output: [
       {
         dir: 'lib/express',
-        entryFileNames: '[name].js',
+        entryFileNames: '[name].mjs',
         format: 'es',
         preserveModules: true,
       },
       {
         dir: 'lib/express',
-        entryFileNames: '[name].cjs',
+        entryFileNames: '[name].js',
         exports: 'auto',
         format: 'cjs',
         preserveModules: true,
