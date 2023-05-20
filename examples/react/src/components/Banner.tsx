@@ -49,7 +49,7 @@ export function Banner({ component, page }: BrProps): JSX.Element | null {
       {content && page && <div dangerouslySetInnerHTML={{ __html: page.rewriteLinks(sanitize(content.value)) }} />}
       {link && (
         <p className="lead">
-          <Link to={link.getUrl()!} className="btn btn-primary btn-lg" role="button">
+          <Link to={link.getUrl()} className="btn btn-primary btn-lg" role="button">
             Learn more
           </Link>
         </p>

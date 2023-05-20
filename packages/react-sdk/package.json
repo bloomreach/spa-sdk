@@ -39,10 +39,9 @@
     "last 1 safari version",
     "last 1 edge version"
   ],
-  "dependencies": {
-    "@bloomreach/spa-sdk": "21.0.0"
-  },
+  "dependencies": {},
   "peerDependencies": {
+    "@bloomreach/spa-sdk": "21.0.0",
     "react": "^16.14 || ^17.0 || ^18.0"
   },
   "devDependencies": {

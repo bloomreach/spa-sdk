@@ -36,8 +36,8 @@ export default function App(): JSX.Element {
               <BrPageContext.Consumer>
                 {(page) =>
                   page && (
-                    <Link to={page!.getUrl('/')} className="navbar-brand">
-                      {page!.getTitle() || 'brXM + React = ♥️'}
+                    <Link to={page.getUrl('/')} className="navbar-brand">
+                      {page.getTitle() || 'brXM + React = ♥️'}
                     </Link>
                     // eslint-disable-next-line prettier/prettier
                   )}
