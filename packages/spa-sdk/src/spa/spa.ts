@@ -30,7 +30,7 @@ export class Spa {
   private page?: Page;
 
   /**
-   * @param eventBus Event bus to exchange data between submodules.
+   * @param pageEventBus Event bus to exchange data between submodules.
    * @param api Api client.
    * @param pageFactory Factory to produce page instances.
    */
@@ -38,7 +38,7 @@ export class Spa {
     @inject(ApiService) private api: Api,
     @inject(PageFactory) private pageFactory: PageFactory,
     @inject(CmsEventBusService) @optional() private cmsEventBus?: CmsEventBus,
-    @inject(PageEventBusService) @optional() private eventBus?: EventBus,
+    @inject(PageEventBusService) @optional() private pageEventBus?: EventBus,
     @inject(Logger) @optional() private logger?: Logger,
   ) {
     this.onCmsUpdate = this.onCmsUpdate.bind(this);
@@ -61,7 +61,7 @@ export class Spa {
     const model = await this.api.getComponent(url, event.properties);
     this.logger?.debug('Model:', model);
 
-    this.eventBus?.emit('page.update', { page: model });
+    this.pageEventBus?.emit('page.update', { page: model });
   }
 
   /**
@@ -98,7 +98,7 @@ export class Spa {
    */
   destroy(): void {
     this.cmsEventBus?.off('cms.update', this.onCmsUpdate);
-    this.eventBus?.clearListeners();
+    this.pageEventBus?.clearListeners();
     delete this.page;
 
     this.logger?.debug('Destroyed page.');

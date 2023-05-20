@@ -63,11 +63,11 @@ export class CmsImpl implements Cms {
   constructor(
     @inject(RpcClientService) protected rpcClient: RpcClient<CmsProcedures, CmsEvents>,
     @inject(RpcServerService) protected rpcServer: RpcServer<SpaProcedures, SpaEvents>,
-    @inject(CmsEventBusService) @optional() protected eventBus?: CmsEventBus,
+    @inject(CmsEventBusService) @optional() protected cmsEventBus?: CmsEventBus,
     @inject(Logger) @optional() private logger?: Logger,
   ) {
     this.onStateChange = this.onStateChange.bind(this);
-    this.eventBus?.on('page.ready', this.onPageReady.bind(this));
+    this.cmsEventBus?.on('page.ready', this.onPageReady.bind(this));
     this.rpcClient.on('update', this.onUpdate.bind(this));
     this.rpcServer.register('inject', this.inject.bind(this));
   }
@@ -113,7 +113,7 @@ export class CmsImpl implements Cms {
     this.logger?.debug('Received update event.');
     this.logger?.debug('Event:', event);
 
-    this.eventBus?.emit('cms.update', event);
+    this.cmsEventBus?.emit('cms.update', event);
   }
 
   protected inject(resource: string): Promise<void> {
