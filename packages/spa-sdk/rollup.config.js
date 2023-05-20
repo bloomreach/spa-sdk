@@ -26,7 +26,7 @@ export default [
     input: 'src/index.ts',
     output: [
       {
-        dir: 'lib',
+        dir: 'dist',
         entryFileNames: '[name].umd.js',
         exports: 'named',
         format: 'umd',
@@ -56,7 +56,7 @@ export default [
     input: 'src/index.ts',
     output: [
       {
-        dir: 'lib',
+        dir: 'dist',
         entryFileNames: '[name].js',
         format: 'es',
         sourcemap: true,
@@ -70,7 +70,7 @@ export default [
     input: 'src/index.ts',
     output: [
       {
-        dir: 'lib',
+        dir: 'dist',
         entryFileNames: '[name].d.ts',
         format: 'es',
       },
@@ -83,13 +83,13 @@ export default [
     input: 'src/express/index.ts',
     output: [
       {
-        dir: 'lib/express',
+        dir: 'dist/express',
         entryFileNames: '[name].mjs',
         format: 'es',
         preserveModules: true,
       },
       {
-        dir: 'lib/express',
+        dir: 'dist/express',
         entryFileNames: '[name].js',
         exports: 'auto',
         format: 'cjs',
@@ -104,7 +104,7 @@ export default [
           include: ['src/express/**/*'],
           compilerOptions: {
             declaration: true,
-            declarationDir: 'lib',
+            declarationDir: 'dist',
             target: 'es6',
           },
         },

@@ -20,7 +20,7 @@ import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import Link from 'next/link';
 import { BrComponent, BrPage, BrPageContext } from '@bloomreach/react-sdk';
 import { initialize } from '@bloomreach/spa-sdk';
-import { relevance } from '@bloomreach/spa-sdk/lib/express';
+import { relevance } from '@bloomreach/spa-sdk/dist/express';
 import { Banner, Content, Menu, NewsList } from '../components';
 import { buildConfiguration } from '../utils/buildConfiguration';
 

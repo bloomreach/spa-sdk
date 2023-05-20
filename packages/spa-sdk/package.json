@@ -18,13 +18,13 @@
   "bugs": {
     "url": "https://issues.onehippo.com/projects/SPASDK/issues"
   },
-  "main": "lib/index.umd.js",
-  "browser": "lib/index.js",
-  "module": "lib/index.js",
-  "es2015": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "dist/index.umd.js",
+  "browser": "dist/index.js",
+  "module": "dist/index.js",
+  "es2015": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
-    "lib/"
+    "dist/"
   ],
   "scripts": {
     "build": "rollup -c rollup.config.js",
