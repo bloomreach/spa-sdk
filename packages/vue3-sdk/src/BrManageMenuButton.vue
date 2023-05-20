@@ -27,5 +27,5 @@ import BrMeta from '@/BrMeta.vue';
 
 const props = defineProps<{ menu: Menu }>();
 const page = inject(page$);
-const meta = computed<MetaCollection | undefined>(() => page?.value.getButton(TYPE_MANAGE_MENU_BUTTON, props.menu));
+const meta = computed<MetaCollection | undefined>(() => page?.value?.getButton(TYPE_MANAGE_MENU_BUTTON, props.menu));
 </script>

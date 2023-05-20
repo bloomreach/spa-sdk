@@ -23,7 +23,7 @@
 <script setup lang="ts">
 import BrNodeComponent from '@/BrNodeComponent.vue';
 import { mapping$, page$ } from '@/providerKeys';
-import type { Component, Configuration, Page, PageModel } from '@bloomreach/spa-sdk';
+import type { Configuration, Page, PageModel } from '@bloomreach/spa-sdk';
 import { destroy, initialize } from '@bloomreach/spa-sdk';
 import {
   computed,
@@ -51,8 +51,8 @@ const props = defineProps<{
   mapping: BrMapping,
 }>();
 const { configuration, mapping } = toRefs(props);
-const page = ref<Page>();
-const root = computed<Component | undefined>(() => page.value?.getComponent());
+const page = ref<Page | undefined>();
+const root = computed(() => page.value?.getComponent());
 let loading: Promise<Page> | null = null;
 
 provide(page$, page);
