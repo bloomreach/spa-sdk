@@ -40,6 +40,15 @@
     "last 1 safari version",
     "last 1 edge version"
   ],
+  "dependencies": {
+    "cookie": "0.4.1",
+    "dom-serializer": "2.0.0",
+    "domutils": "3.0.1",
+    "emittery": "0.7.2",
+    "htmlparser2": "8.0.2",
+    "inversify": "5.1.1",
+    "reflect-metadata": "0.1.13"
+  },
   "devDependencies": {
     "@babel/core": "7.14.8",
     "@babel/plugin-proposal-class-properties": "7.14.5",
@@ -67,15 +76,6 @@
     "typedoc": "0.22.18",
     "typedoc-plugin-missing-exports": "1.0.0",
     "typescript": "4.5.5"
-  },
-  "dependencies": {
-    "cookie": "0.4.1",
-    "dom-serializer": "2.0.0",
-    "domutils": "3.0.1",
-    "emittery": "0.7.2",
-    "htmlparser2": "8.0.2",
-    "inversify": "5.1.1",
-    "reflect-metadata": "0.1.13"
   },
   "eslintConfig": {
     "extends": "@bloomreach/eslint-config-base"

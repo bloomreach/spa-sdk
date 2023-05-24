@@ -3,3 +3,5 @@
 .vscode
 .history
 .env
+.yalc
+yalc.lock
