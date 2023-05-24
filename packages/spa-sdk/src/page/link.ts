@@ -54,9 +54,9 @@ export interface Link {
  */
 export function isLink(value: any): value is Link {
   return (
-    !!value &&
-    (Object.prototype.hasOwnProperty.call(value, 'href') ||
-      (Object.prototype.hasOwnProperty.call(value, 'type') &&
-        [TYPE_LINK_EXTERNAL, TYPE_LINK_INTERNAL, TYPE_LINK_RESOURCE, TYPE_LINK_UNKNOWN].includes(value.type)))
+    !!value
+    && (Object.prototype.hasOwnProperty.call(value, 'href')
+      || (Object.prototype.hasOwnProperty.call(value, 'type')
+        && [TYPE_LINK_EXTERNAL, TYPE_LINK_INTERNAL, TYPE_LINK_RESOURCE, TYPE_LINK_UNKNOWN].includes(value.type)))
   );
 }

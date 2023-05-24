@@ -221,8 +221,9 @@ describe('PageImpl', () => {
           site: { ...model.links.site, href: base },
         },
       });
-      linkFactory.create.mockImplementationOnce(((mockLink?: Link | string) =>
-        isLink(mockLink) ? mockLink.href : mockLink) as typeof linkFactory.create);
+      linkFactory.create.mockImplementationOnce(
+        ((mockLink?: Link | string) => (isLink(mockLink) ? mockLink.href : mockLink)) as typeof linkFactory.create,
+      );
 
       expect(page.getUrl(link)).toBe(expected);
     });

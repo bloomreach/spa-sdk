@@ -132,9 +132,9 @@ export function isMatched(link: string, base = ''): boolean {
   const baseUrl = parseUrl(base);
 
   return (
-    isMatchedOrigin(linkUrl.origin, baseUrl.origin) &&
-    isMatchedPathname(linkUrl.pathname, baseUrl.pathname) &&
-    isMatchedQuery(linkUrl.searchParams, baseUrl.searchParams)
+    isMatchedOrigin(linkUrl.origin, baseUrl.origin)
+    && isMatchedPathname(linkUrl.pathname, baseUrl.pathname)
+    && isMatchedQuery(linkUrl.searchParams, baseUrl.searchParams)
   );
 }
 

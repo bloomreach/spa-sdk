@@ -26,7 +26,7 @@ describe('BrContainerItemUndefined', () => {
   });
 
   describe('render', () => {
-    it(`should render an undefined container item`, async () => {
+    it('should render an undefined container item', async () => {
       const wrapper = shallowMount(BrContainerItemUndefined, { propsData: { component } });
       await wrapper.vm.$nextTick();
       const fragment = wrapper.findComponent({ name: 'br-container-item-undefined' });

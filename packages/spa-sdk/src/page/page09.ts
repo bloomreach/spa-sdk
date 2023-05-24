@@ -57,7 +57,7 @@ export interface PageModel {
   _links: PageModel10['links'];
   _meta: PageModel10['meta'];
   channel?: PageModel10['channel'];
-  content?: { [reference: string]: ContentModel };
+  content?: { [reference: string]: ContentModel; };
   page: (ComponentModel | ContainerItemModel | ContainerModel) & PageRootModel;
 }
 
@@ -86,9 +86,9 @@ export class PageImpl implements Page {
   }
 
   protected onPageUpdate(event: PageUpdateEvent): void {
-    Object.entries((event.page as PageModel).content || {}).forEach(([alias, model]) =>
-      this.content.set(alias, this.contentFactory(model)),
-    );
+    Object
+      .entries((event.page as PageModel).content || {})
+      .forEach(([alias, model]) => this.content.set(alias, this.contentFactory(model)));
   }
 
   private static getContentReference(reference: Reference): string {

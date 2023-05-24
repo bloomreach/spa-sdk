@@ -70,13 +70,11 @@ export default class BrComponent extends Vue {
   }
 
   render(createElement: Vue.CreateElement): Vue.VNode {
-    const components = this.getComponents().map((component) =>
-      createElement(
-        BrNodeComponent,
-        { props: { component } },
-        this.$scopedSlots.default?.({ component, page: this.page }),
-      ),
-    );
+    const components = this.getComponents().map((component) => createElement(
+      BrNodeComponent,
+      { props: { component } },
+      this.$scopedSlots.default?.({ component, page: this.page }),
+    ));
 
     return components.length > 1 ? createElement(Fragment, components) : components[0];
   }

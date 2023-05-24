@@ -147,8 +147,7 @@ export function getContainerItemContent<T>(component: ContainerItem, page: Page)
 @injectable()
 export class ContainerItemImpl
   extends EmitterMixin<typeof ComponentImpl, ContainerItemEvents>(ComponentImpl)
-  implements ContainerItem
-{
+  implements ContainerItem {
   constructor(
     @inject(ComponentModelToken) protected model: ContainerItemModel,
     @inject(LinkFactory) linkFactory: LinkFactory,

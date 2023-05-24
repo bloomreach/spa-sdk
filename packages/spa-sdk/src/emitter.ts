@@ -50,7 +50,7 @@ export interface Emitter<T> {
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function EmitterMixin<T extends Constructor, U extends Events>(Super: T) {
-  // eslint-disable-next-line no-shadow
+  // eslint-disable-next-line @typescript-eslint/no-shadow
   return class EmitterMixin extends Super implements Emitter<U> {
     /**
      * @todo should be private

@@ -67,11 +67,9 @@ export function PageModule(): ContainerModule {
     bind(ButtonFactory)
       .toSelf()
       .inSingletonScope()
-      .onActivation((context, factory) =>
-        factory
-          .register(TYPE_MANAGE_CONTENT_BUTTON, createManageContentButton)
-          .register(TYPE_MANAGE_MENU_BUTTON, (menu: Menu) => menu.getMeta()),
-      );
+      .onActivation((context, factory) => factory
+        .register(TYPE_MANAGE_CONTENT_BUTTON, createManageContentButton)
+        .register(TYPE_MANAGE_MENU_BUTTON, (menu: Menu) => menu.getMeta()));
 
     bind(LinkFactory)
       .toSelf()
@@ -93,9 +91,8 @@ export function PageModule(): ContainerModule {
     bind(MetaFactory)
       .toSelf()
       .inSingletonScope()
-      .onActivation((context, factory) =>
-        factory.register(TYPE_META_COMMENT, (model, position) => new MetaCommentImpl(model, position)),
-      );
+      .onActivation((context, factory) => factory
+        .register(TYPE_META_COMMENT, (model, position) => new MetaCommentImpl(model, position)));
 
     bind(MenuItemFactory).toFactory(({ container }) => (model: MenuItemModel) => {
       const scope = container.createChild();
@@ -124,67 +121,63 @@ export function PageModule(): ContainerModule {
     bind(ContentFactory)
       .toSelf()
       .inSingletonScope()
-      .onActivation(({ container }, factory) =>
-        factory
-          .register(TYPE_DOCUMENT, (model) => {
-            const scope = container.createChild();
-            scope.bind(DocumentImpl).toSelf();
-            scope.bind(DocumentModelToken).toConstantValue(model);
+      .onActivation(({ container }, factory) => factory
+        .register(TYPE_DOCUMENT, (model) => {
+          const scope = container.createChild();
+          scope.bind(DocumentImpl).toSelf();
+          scope.bind(DocumentModelToken).toConstantValue(model);
 
-            return scope.get(DocumentImpl);
-          })
-          .register(TYPE_IMAGE_SET, (model) => {
-            const scope = container.createChild();
-            scope.bind(ImageSetImpl).toSelf();
-            scope.bind(ImageSetModelToken).toConstantValue(model);
+          return scope.get(DocumentImpl);
+        })
+        .register(TYPE_IMAGE_SET, (model) => {
+          const scope = container.createChild();
+          scope.bind(ImageSetImpl).toSelf();
+          scope.bind(ImageSetModelToken).toConstantValue(model);
 
-            return scope.get(ImageSetImpl);
-          })
-          .register(TYPE_MENU, (model) => {
-            const scope = container.createChild();
-            scope.bind(MenuImpl).toSelf();
-            scope.bind(MenuModelToken).toConstantValue(model);
+          return scope.get(ImageSetImpl);
+        })
+        .register(TYPE_MENU, (model) => {
+          const scope = container.createChild();
+          scope.bind(MenuImpl).toSelf();
+          scope.bind(MenuModelToken).toConstantValue(model);
 
-            return scope.get(MenuImpl);
-          })
-          .register(TYPE_PAGINATION, (model) => {
-            const scope = container.createChild();
-            scope.bind(PaginationImpl).toSelf();
-            scope.bind(PaginationModelToken).toConstantValue(model);
+          return scope.get(MenuImpl);
+        })
+        .register(TYPE_PAGINATION, (model) => {
+          const scope = container.createChild();
+          scope.bind(PaginationImpl).toSelf();
+          scope.bind(PaginationModelToken).toConstantValue(model);
 
-            return scope.get(PaginationImpl);
-          }),
-      );
+          return scope.get(PaginationImpl);
+        }));
 
     bind(ComponentFactory)
       .toSelf()
       .inSingletonScope()
-      .onActivation(({ container }, factory) =>
-        factory
-          .register(TYPE_COMPONENT, (model, children) => {
-            const scope = container.createChild();
-            scope.bind(ComponentImpl).toSelf();
-            scope.bind(ComponentModelToken).toConstantValue(model);
-            scope.bind(ComponentChildrenToken).toConstantValue(children);
+      .onActivation(({ container }, factory) => factory
+        .register(TYPE_COMPONENT, (model, children) => {
+          const scope = container.createChild();
+          scope.bind(ComponentImpl).toSelf();
+          scope.bind(ComponentModelToken).toConstantValue(model);
+          scope.bind(ComponentChildrenToken).toConstantValue(children);
 
-            return scope.get(ComponentImpl);
-          })
-          .register(TYPE_COMPONENT_CONTAINER, (model, children) => {
-            const scope = container.createChild();
-            scope.bind(ContainerImpl).toSelf();
-            scope.bind(ComponentModelToken).toConstantValue(model);
-            scope.bind(ComponentChildrenToken).toConstantValue(children);
+          return scope.get(ComponentImpl);
+        })
+        .register(TYPE_COMPONENT_CONTAINER, (model, children) => {
+          const scope = container.createChild();
+          scope.bind(ContainerImpl).toSelf();
+          scope.bind(ComponentModelToken).toConstantValue(model);
+          scope.bind(ComponentChildrenToken).toConstantValue(children);
 
-            return scope.get(ContainerImpl);
-          })
-          .register(TYPE_COMPONENT_CONTAINER_ITEM, (model) => {
-            const scope = container.createChild();
-            scope.bind(ContainerItemImpl).toSelf();
-            scope.bind(ComponentModelToken).toConstantValue(model);
+          return scope.get(ContainerImpl);
+        })
+        .register(TYPE_COMPONENT_CONTAINER_ITEM, (model) => {
+          const scope = container.createChild();
+          scope.bind(ContainerItemImpl).toSelf();
+          scope.bind(ComponentModelToken).toConstantValue(model);
 
-            return scope.get(ContainerItemImpl);
-          }),
-      );
+          return scope.get(ContainerItemImpl);
+        }));
 
     bind(PageFactory).toFactory(({ container }) => (model: PageModel) => {
       const scope = container.createChild();

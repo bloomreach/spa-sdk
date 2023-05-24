@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 import React, { ReactElement } from 'react';
 
 export const withContextProvider = (context?: Record<string, any>, children?: ReactElement): React.ReactElement => {
-  const childContextTypes = (): Record<string, string> | undefined =>
-    context &&
-    Object.keys(context).reduce((obj: Record<string, any>, key: string) => {
+  const childContextTypes = (): Record<string, string> | undefined => context
+    && Object.keys(context).reduce((obj: Record<string, any>, key: string) => {
       obj[key] = PropTypes.any;
       return obj;
     }, {});

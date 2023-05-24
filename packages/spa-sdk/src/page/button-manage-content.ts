@@ -128,11 +128,10 @@ export function createManageContentButton(params: ManageContentButton): MetaColl
     };
   }
 
-  const merge = (item: Meta): MetaModel =>
-    ({
-      type: TYPE_META_COMMENT,
-      data: JSON.stringify(Object.assign(JSON.parse(item.getData()), model)),
-    } as MetaModel);
+  const merge = (item: Meta): MetaModel => ({
+    type: TYPE_META_COMMENT,
+    data: JSON.stringify(Object.assign(JSON.parse(item.getData()), model)),
+  } as MetaModel);
 
   return {
     beginNodeSpan: meta.filter((item) => item.getPosition() === META_POSITION_BEGIN).map(merge),

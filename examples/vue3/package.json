@@ -8,8 +8,8 @@
     "build": "run-p type-check build-only",
     "preview": "vite preview",
     "build-only": "vite build",
-    "type-check": "vue-tsc --noEmit",
-    "type-check:watch": "vue-tsc --noEmit --watch"
+    "type-check": "vue-tsc --noEmit --composite false",
+    "type-check:watch": "npm run type-check -- --watch"
   },
   "dependencies": {
     "@bloomreach/spa-sdk": "21.0.0",

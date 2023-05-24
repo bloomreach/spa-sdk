@@ -70,7 +70,7 @@ describe('CmsImpl', () => {
       cms.initialize({ window });
 
       document.dispatchEvent(new ProgressEvent('readystatechange'));
-      await new Promise((resolve) => setTimeout(resolve, 0));
+      await new Promise((resolve) => { setTimeout(resolve, 0); });
 
       expect(rpcServer.trigger).not.toHaveBeenCalled();
     });
@@ -81,7 +81,7 @@ describe('CmsImpl', () => {
       cms.initialize({ window });
 
       document.dispatchEvent(new ProgressEvent('readystatechange'));
-      await new Promise((resolve) => setTimeout(resolve, 0));
+      await new Promise((resolve) => { setTimeout(resolve, 0); });
 
       expect(rpcServer.trigger).toHaveBeenCalledWith('ready', undefined);
     });

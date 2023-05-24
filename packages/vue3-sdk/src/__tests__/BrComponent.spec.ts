@@ -49,7 +49,7 @@ describe('BrComponent', () => {
   describe('render', () => {
     it('should render a single component', () => {
       vi.mocked(isComponent).mockReturnValueOnce(true);
-      const component = 'some component';
+      const component = {} as Component;
       const wrapper = shallowMount(BrComponent, {
         global,
         props: { component },
