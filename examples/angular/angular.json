@@ -22,7 +22,8 @@
             "allowedCommonJsDependencies": [
               "cookie",
               "emittery",
-              "inversify"
+              "inversify",
+              "sanitize-html"
             ],
             "assets": [
               "src/favicon.ico",

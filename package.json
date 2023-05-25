@@ -29,7 +29,7 @@
     "postinstall": "lerna exec --stream --parallel -- 'npm ci'",
     "yalcLink": "lerna exec --stream --ignore '@bloomreach/example-*' -- 'yalc publish --no-scripts' && node yalcLink.js",
     "build:sdks" : "lerna exec --stream --ignore '@bloomreach/example-*' -- 'npm run build && yalc push --no-scripts'",
-    "build:apps" : "lerna exec --stream --ignore '@bloomreach/*-sdk' -- 'npm run build'",
+    "build:apps" : "lerna exec --stream --ignore '@bloomreach/*-sdk' --ignore '@bloomreach/example-angular' -- 'npm run build' && npm --prefix ./examples/angular run build",
     "build": "npm run yalcLink && npm run build:sdks && npm run build:apps",
     "lint": "lerna run lint --parallel",
     "test": "lerna run test --concurrency 1",
