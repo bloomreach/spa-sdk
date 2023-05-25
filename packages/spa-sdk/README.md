@@ -93,7 +93,13 @@ following example:
 import sanitize from 'sanitize-html';
   
 function sanitizeRichContent(content: string): string {
-  return sanitize(content, { allowedAttributes: { a: ['href', 'name', 'target', 'title', 'data-type', 'rel'] } });
+  return sanitize(content, {
+    allowedAttributes: {
+      a: ['href', 'name', 'target', 'title', 'data-type', 'rel'],
+      img: ['src', 'srcset', 'alt', 'title', 'width', 'height', 'loading'],
+    },
+    allowedTags: sanitizeHTML.defaults.allowedTags.concat(['img']),
+  });
 }
 /* ... */
 
