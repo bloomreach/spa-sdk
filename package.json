@@ -46,7 +46,7 @@
     "auto-changelog": "2.3.0",
     "glob": "10.2.6",
     "heroku": "7.60.2",
-    "lerna": "^6.6.2",
+    "lerna": "6.6.2",
     "yalc": "1.0.0-pre.53"
   },
   "auto-changelog": {
