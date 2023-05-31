@@ -17,7 +17,7 @@
 import 'zone.js/node';
 
 import { APP_BASE_HREF } from '@angular/common';
-import { relevance } from '@bloomreach/spa-sdk/lib/express';
+import { relevance } from '@bloomreach/spa-sdk/dist/express';
 import { ngExpressEngine } from '@nguniversal/express-engine';
 import express, { Express } from 'express';
 import { existsSync } from 'fs';

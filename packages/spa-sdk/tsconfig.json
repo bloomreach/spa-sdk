@@ -23,10 +23,10 @@
     "disableSources": true,
     "excludePrivate": true,
     "excludeProtected": true,
-    "exclude": "!lib/**/*",
+    "exclude": "!dist/**/*",
     "hideGenerator": true,
     "includeVersion": true,
-    "entryPoints": ["lib/index.d.ts", "lib/express/index.d.ts"],
+    "entryPoints": ["dist/index.d.ts", "dist/express/index.d.ts"],
     "out": "docs"
   }
 }

@@ -65,7 +65,7 @@ with [the Relevance Module](https://documentation.bloomreach.com/14/library/ente
 
 ```javascript
 import express from "express";
-import { relevance } from "@bloomreach/spa-sdk/lib/express";
+import { relevance } from "@bloomreach/spa-sdk/dist/express";
 
 const app = express();
 
