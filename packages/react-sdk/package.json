@@ -30,7 +30,7 @@
     "build": "rollup -c rollup.config.js",
     "dev": "npm run build -- --watch",
     "lint": "eslint --ext js,ts,tsx src",
-    "prepack": "$npm_execpath run build",
+    "prepack": "npm run build",
     "test": "jest --coverage"
   },
   "browserslist": [

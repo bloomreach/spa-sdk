@@ -41,7 +41,7 @@
     "type-check": "vue-tsc --noEmit -p tsconfig.app.json --composite false",
     "type-check:tests": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
     "type-check:watch": "npm run type-check -- --watch",
-    "prepack": "$npm_execpath run build"
+    "prepack": "npm run build"
   },
   "dependencies": {
     "@bloomreach/spa-sdk": "21.0.0"

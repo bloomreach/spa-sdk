@@ -31,7 +31,7 @@
     "dev": "npm run build -- --watch",
     "docs": "typedoc",
     "lint": "eslint --ext js,ts src",
-    "prepack": "$npm_execpath run build",
+    "prepack": "npm run build",
     "test": "jest"
   },
   "browserslist": [

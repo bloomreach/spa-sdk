@@ -28,9 +28,10 @@
     "prebuild:custom": "lerna exec --scope @bloomreach/example-angular -- \"npm run prebuild:custom\"",
     "postinstall": "lerna exec --stream --parallel -- 'npm ci'",
     "yalcLink": "lerna exec --stream --ignore '@bloomreach/example-*' -- 'yalc publish --no-scripts' && node yalcLink.js",
-    "build:sdks" : "lerna exec --stream --ignore '@bloomreach/example-*' -- 'npm run build && yalc push --no-scripts'",
-    "build:apps" : "lerna exec --stream --ignore '@bloomreach/*-sdk' -- 'npm run build'",
+    "build:sdks": "lerna exec --stream --ignore '@bloomreach/example-*' -- 'npm run build && yalc push --no-scripts'",
+    "build:apps": "lerna exec --stream --ignore '@bloomreach/*-sdk' -- 'npm run build'",
     "build": "npm run yalcLink && npm run build:sdks && npm run build:apps",
+    "dev": "lerna watch --ignore '@bloomreach/example-*' --glob='src' -- lerna exec --scope=\\$LERNA_PACKAGE_NAME -- 'npm run build && yalc push --no-scripts'",
     "lint": "lerna run lint --parallel",
     "test": "lerna run test --concurrency 1",
     "bump": "lerna version --exact --no-push --no-git-tag-version --yes --force-publish",
@@ -43,10 +44,14 @@
     "release": "lerna publish from-package"
   },
   "devDependencies": {
+    "@lerna-lite/cli": "2.4.0",
+    "@lerna-lite/exec": "2.4.0",
+    "@lerna-lite/publish": "2.4.0",
+    "@lerna-lite/run": "2.4.0",
+    "@lerna-lite/watch": "2.4.0",
     "auto-changelog": "2.3.0",
     "glob": "10.2.6",
     "heroku": "7.60.2",
-    "lerna": "6.6.2",
     "yalc": "1.0.0-pre.53"
   },
   "auto-changelog": {

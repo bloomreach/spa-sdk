@@ -23,7 +23,7 @@
     "dev": "ng build --watch --configuration development",
     "lint": "ng lint",
     "ng": "ng",
-    "prepack": "$npm_execpath run build && rm dist/package.json dist/README.md",
+    "prepack": "npm run build && rm dist/package.json dist/README.md",
     "test": "ng test"
   },
   "module": "dist/fesm2015/index.mjs",
