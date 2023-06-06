@@ -12,4 +12,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-web: npm run start --workspace @bloomreach/example-nuxt
+web: npx lerna run start --scope @bloomreach/example-nuxt

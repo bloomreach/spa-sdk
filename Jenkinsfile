@@ -104,7 +104,7 @@ pipeline {
           stages {
             stage('Generate SPA SDK TypeDoc') {
               steps {
-                sh 'npm run docs --workspace @bloomreach/spa-sdk'
+                sh 'npx lerna run docs --scope @bloomreach/spa-sdk'
               }
             }
             stage('Clone github pages with TypeDoc') {

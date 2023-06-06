@@ -26,7 +26,7 @@
   "scripts": {
     "audit": "lerna exec --no-private --stream -- \"npm audit --omit=dev --audit-level=critical\"",
     "prebuild:custom": "lerna exec --scope @bloomreach/example-angular -- \"npm run prebuild:custom\"",
-    "postinstall": "lerna exec --stream --parallel -- 'npm ci'",
+    "postinstall": "lerna exec --stream --parallel --scope ${PACKAGE:-''} --include-dependencies -- 'npm ci'",
     "yalcLink": "lerna exec --stream --ignore '@bloomreach/example-*' -- 'yalc publish --no-scripts' && node yalcLink.js",
     "build:sdks": "lerna exec --stream --ignore '@bloomreach/example-*' -- 'npm run build && yalc push --no-scripts'",
     "build:apps": "lerna exec --stream --ignore '@bloomreach/*-sdk' -- 'npm run build'",
@@ -40,7 +40,7 @@
     "changelog": "auto-changelog",
     "docs": "lerna run docs",
     "deploy-to-heroku": "./scripts/deploy_heroku_app.sh ${0} ${1} ${2}",
-    "heroku-postbuild": "npm run prebuild:custom && npm run build -- --scope $PACKAGE --include-dependencies && cd ${PROJECT_PATH:-.}",
+    "heroku-postbuild": "npm run prebuild:custom && npm run build && cd ${PROJECT_PATH:-.}",
     "release": "lerna publish from-package"
   },
   "devDependencies": {
