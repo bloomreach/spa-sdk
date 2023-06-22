@@ -15,8 +15,8 @@
   "scripts": {
     "build": "cross-env SKIP_PREFLIGHT_CHECK=true react-scripts build",
     "lint": "eslint --ext js,ts,tsx src",
-    "start": "cross-env SKIP_PREFLIGHT_CHECK=true react-scripts start",
-    "dev": "npm run start"
+    "start": "serve build -sn",
+    "dev": "cross-env SKIP_PREFLIGHT_CHECK=true react-scripts start"
   },
   "eslintConfig": {
     "extends": "@bloomreach/eslint-config-react"
@@ -42,6 +42,7 @@
     "eslint": "7.32.0",
     "eslint-import-resolver-typescript": "3.5.5",
     "react-scripts": "4.0.3",
+    "serve": "14.2.0",
     "typescript": "4.1.6"
   }
 }
