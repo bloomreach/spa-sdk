@@ -91,6 +91,7 @@ export default class App extends Vue {
 
   beforeMount() {
     this.configuration.httpClient = this.$axios;
+    this.configuration.debug = true;
   }
 
   beforeUpdate() {
