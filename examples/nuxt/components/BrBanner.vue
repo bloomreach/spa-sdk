@@ -34,11 +34,11 @@
          v-html="page.rewriteLinks(sanitize(data.content.value))" />
     <p v-if="link"
        className="lead">
-      <nuxt-link :to="link.getUrl()"
+      <a :href="link.getUrl()"
                  class="btn btn-primary btn-lg"
                  role="button">
         Learn more
-      </nuxt-link>
+      </a>
     </p>
   </div>
 </template>
