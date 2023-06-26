@@ -1,6 +1,5 @@
 {
   "private": true,
-  "version": "21.0.0",
   "description": "Bloomreach SPA SDK",
   "name": "spa-sdk-workspace",
   "type": "module",
@@ -35,8 +34,7 @@
     "lint": "lerna run lint --parallel",
     "test": "lerna run test --concurrency 1",
     "bump": "lerna version --exact --no-push --no-git-tag-version --yes --force-publish",
-    "postbump": "npm run lerna-version && npm install --package-lock-only && npm run changelog",
-    "lerna-version": "node -e \"require('child_process').execSync('npm version ' + require('./lerna.json').version + ' --no-git-tag-version')\"",
+    "postbump": "npm run changelog",
     "changelog": "auto-changelog",
     "docs": "lerna run docs",
     "deploy-to-heroku": "./scripts/deploy_heroku_app.sh ${0} ${1} ${2}",
