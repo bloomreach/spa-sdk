@@ -23,7 +23,7 @@
     "dev": "ng build --watch --configuration development",
     "lint": "ng lint",
     "ng": "ng",
-    "prepack": "npm run build && rm dist/package.json dist/README.md",
+    "prepack": "rm dist/package.json dist/README.md",
     "test": "ng test",
     "yalcAdd": "yalc add @bloomreach/spa-sdk",
     "yalcPush": "yalc push --replace --no-scripts",

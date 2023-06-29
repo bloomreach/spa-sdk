@@ -31,7 +31,6 @@
     "dev": "npm run build -- --watch",
     "docs": "typedoc",
     "lint": "eslint --ext js,ts src",
-    "prepack": "npm run build",
     "test": "jest",
     "yalcPush": "yalc push --replace --no-scripts"
   },
