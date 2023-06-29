@@ -74,7 +74,7 @@ pipeline {
 
       environment {
         GIT_SSH_COMMAND='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
-        VERSION = sh(script: "node -p -e \"require('./package.json').version\"", returnStdout: true).trim()
+        VERSION = sh(script: "node -p -e \"require('./lerna.json').version\"", returnStdout: true).trim()
       }
 
       stages {
