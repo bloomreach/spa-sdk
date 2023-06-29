@@ -1,6 +1,6 @@
 {
   "name": "@bloomreach/react-sdk",
-  "version": "21.0.0",
+  "version": "22.0.0",
   "description": "Bloomreach SPA SDK for React",
   "keywords": [
     "bloomreach",
@@ -43,9 +43,6 @@
     "last 1 safari version",
     "last 1 edge version"
   ],
-  "dependencies": {
-    "@bloomreach/spa-sdk": "file:.yalc/@bloomreach/spa-sdk"
-  },
   "peerDependencies": {
     "react": "^16.14 || ^17.0 || ^18.0"
   },
@@ -117,5 +114,8 @@
   "jest-junit": {
     "outputDirectory": "coverage",
     "outputName": "TEST-react-sdk.xml"
+  },
+  "dependencies": {
+    "@bloomreach/spa-sdk": "file:.yalc/@bloomreach/spa-sdk"
   }
 }
