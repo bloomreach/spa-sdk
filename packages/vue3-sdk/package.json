@@ -41,7 +41,6 @@
     "type-check": "vue-tsc --noEmit -p tsconfig.app.json --composite false",
     "type-check:tests": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
     "type-check:watch": "npm run type-check -- --watch",
-    "prepack": "npm run build",
     "yalcAdd": "yalc add @bloomreach/spa-sdk",
     "yalcPush": "yalc push --replace --no-scripts",
     "yalcRetreat": "yalc retreat --all",

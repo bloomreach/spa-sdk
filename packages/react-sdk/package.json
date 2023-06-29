@@ -30,7 +30,6 @@
     "build": "rollup -c rollup.config.js",
     "dev": "npm run build -- --watch",
     "lint": "eslint --ext js,ts,tsx src",
-    "prepack": "npm run build",
     "test": "jest --coverage",
     "yalcAdd": "yalc add @bloomreach/spa-sdk",
     "yalcPush": "yalc push --replace --no-scripts",
