@@ -15,15 +15,20 @@
   -->
 
 <template>
-  <br-page :configuration="configuration" :mapping="mapping" :page="page">
+  <br-page class="d-flex flex-column vh-100"
+           :configuration="configuration"
+           :mapping="mapping"
+           :page="page">
     <template #default="props">
       <template v-if="props.page">
         <header>
-          <nav class="navbar navbar-expand-sm navbar-dark sticky-top bg-dark" role="navigation">
+          <nav class="navbar navbar-expand-sm navbar-dark sticky-top bg-dark"
+               role="navigation">
             <div class="container">
-              <nuxt-link :to="props.page.getUrl('/')" class="navbar-brand">
+              <a :href="props.page.getUrl('/')"
+                         class="navbar-brand">
                 {{ props.page.getTitle() || 'brXM + Nuxt.js = ♥' }}
-              </nuxt-link>
+              </a>
               <div class="collapse navbar-collapse">
                 <br-component component="menu" />
               </div>
@@ -91,6 +96,7 @@ export default class App extends Vue {
 
   beforeMount() {
     this.configuration.httpClient = this.$axios;
+    this.configuration.debug = true;
   }
 
   beforeUpdate() {
@@ -103,3 +109,14 @@ export default class App extends Vue {
   }
 }
 </script>
+
+<style>
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.has-edit-button {
+  position: relative;
+}
+</style>

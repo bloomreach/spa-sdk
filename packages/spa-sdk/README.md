@@ -65,7 +65,7 @@ with [the Relevance Module](https://documentation.bloomreach.com/14/library/ente
 
 ```javascript
 import express from "express";
-import { relevance } from "@bloomreach/spa-sdk/lib/express";
+import { relevance } from "@bloomreach/spa-sdk/dist/express";
 
 const app = express();
 
@@ -93,7 +93,13 @@ following example:
 import sanitize from 'sanitize-html';
   
 function sanitizeRichContent(content: string): string {
-  return sanitize(content, { allowedAttributes: { a: ['href', 'name', 'target', 'title', 'data-type', 'rel'] } });
+  return sanitize(content, {
+    allowedAttributes: {
+      a: ['href', 'name', 'target', 'title', 'data-type', 'rel'],
+      img: ['src', 'srcset', 'alt', 'title', 'width', 'height', 'loading'],
+    },
+    allowedTags: sanitizeHTML.defaults.allowedTags.concat(['img']),
+  });
 }
 /* ... */
 

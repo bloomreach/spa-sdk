@@ -18,10 +18,10 @@
   <nav aria-label="News List Pagination">
     <ul class="pagination">
       <li class="page-item" :class="{ disabled: !pageable.previous }">
-        <nuxt-link :to="previousUrl" class="page-link" aria-label="Previous">
+        <a :href="previousUrl" class="page-link" aria-label="Previous">
           <span aria-hidden="true">&laquo;</span>
           <span class="sr-only">Previous</span>
-        </nuxt-link>
+        </a>
       </li>
       <li
         v-for="(pageNumber, key) in pageable.pageNumbersArray"
@@ -29,13 +29,13 @@
         class="page-item"
         :class="{ active: pageNumber === pageable.currentPage }"
       >
-        <nuxt-link :to="page.getUrl(`?page=${pageNumber}`)" class="page-link">{{ pageNumber }}</nuxt-link>
+        <a :href="page.getUrl(`?page=${pageNumber}`)" class="page-link">{{ pageNumber }}</a>
       </li>
       <li class="page-item" :class="{ disabled: !pageable.next }">
-        <nuxt-link :to="nextUrl" class="page-link" aria-label="Next">
+        <a :href="nextUrl" class="page-link" aria-label="Next">
           <span aria-hidden="true">&raquo;</span>
           <span class="sr-only">Next</span>
-        </nuxt-link>
+        </a>
       </li>
     </ul>
   </nav>

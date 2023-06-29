@@ -53,7 +53,7 @@ export class Cms14Impl implements Cms {
     this.postponed.splice(0).forEach((task) => task());
   }
 
-  private postpone<T extends (...args: any[]) => any>(task: T) {
+  private postpone<T extends(...args: any[]) => any>(task: T) {
     return (...args: Parameters<T>) => {
       if (this.api) {
         return task.apply(this, args);

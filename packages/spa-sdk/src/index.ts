@@ -294,8 +294,8 @@ export function initialize(configuration: Configuration, model?: Page | PageMode
     isConfigurationWithProxy(configuration)
       ? initializeWithProxy(scope, configuration, model)
       : isConfigurationWithJwt09(configuration)
-      ? initializeWithJwt09(scope, configuration, model)
-      : initializeWithJwt10(scope, configuration, model),
+        ? initializeWithJwt09(scope, configuration, model)
+        : initializeWithJwt10(scope, configuration, model),
     (page) => {
       pages.set(page, scope);
       configuration.request?.emit?.('br:spa:initialized', page);

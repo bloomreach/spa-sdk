@@ -39,8 +39,7 @@ export interface ContainerItemModel extends ComponentModel {
 @injectable()
 export class ContainerItemImpl
   extends EmitterMixin<typeof ComponentImpl, ContainerItemEvents>(ComponentImpl)
-  implements ContainerItem
-{
+  implements ContainerItem {
   constructor(
     @inject(ComponentModelToken) protected model: ContainerItemModel,
     @inject(MetaCollectionFactory) private metaFactory: MetaCollectionFactory,

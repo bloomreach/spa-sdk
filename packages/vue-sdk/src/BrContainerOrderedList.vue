@@ -26,9 +26,7 @@ export default class BrContainerOrderedList extends Vue {
     return createElement(
       'ol',
       { class: { 'hst-container': this.page.isPreview() } },
-      this.$slots.default?.map((node) =>
-        createElement('li', { class: { 'hst-container-item': this.page.isPreview() } }, [node]),
-      ),
+      this.$slots.default?.map((node) => createElement('li', { class: { 'hst-container-item': this.page.isPreview() } }, [node])),
     );
   }
 }

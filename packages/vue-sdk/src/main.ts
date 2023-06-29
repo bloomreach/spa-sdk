@@ -30,4 +30,6 @@ export function BrSdk(vue: VueConstructor): void {
   vue.component('br-page', BrPage);
 }
 
-export { BrComponent, BrManageContentButton, BrManageMenuButton, BrPage };
+export {
+  BrComponent, BrManageContentButton, BrManageMenuButton, BrPage,
+};

@@ -26,7 +26,7 @@ describe('BrContainerUnorderedList', () => {
   });
 
   describe('render', () => {
-    it(`should render container's children`, async () => {
+    it('should render container\'s children', async () => {
       const wrapper = shallowMount(BrContainerUnorderedList, {
         propsData: { page },
         slots: { default: ['<span id="child1" />', '<span id="child2" />'] },

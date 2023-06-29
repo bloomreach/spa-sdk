@@ -1,6 +1,6 @@
 {
   "name": "@bloomreach/react-sdk",
-  "version": "21.0.0",
+  "version": "22.0.0",
   "description": "Bloomreach SPA SDK for React",
   "keywords": [
     "bloomreach",
@@ -30,8 +30,12 @@
     "build": "rollup -c rollup.config.js",
     "dev": "npm run build -- --watch",
     "lint": "eslint --ext js,ts,tsx src",
-    "prepack": "$npm_execpath run build",
-    "test": "jest --coverage"
+    "prepack": "npm run build",
+    "test": "jest --coverage",
+    "yalcAdd": "yalc add @bloomreach/spa-sdk",
+    "yalcPush": "yalc push --replace --no-scripts",
+    "yalcRetreat": "yalc retreat --all",
+    "yalcRestore": "yalc restore --all"
   },
   "browserslist": [
     "last 1 chrome version",
@@ -39,9 +43,6 @@
     "last 1 safari version",
     "last 1 edge version"
   ],
-  "dependencies": {
-    "@bloomreach/spa-sdk": "21.0.0"
-  },
   "peerDependencies": {
     "react": "^16.14 || ^17.0 || ^18.0"
   },
@@ -50,7 +51,7 @@
     "@babel/plugin-proposal-object-rest-spread": "7.14.7",
     "@babel/preset-env": "7.14.8",
     "@babel/preset-react": "7.14.5",
-    "@bloomreach/eslint-config-react": "1.0.2",
+    "@bloomreach/eslint-config-react": "1.2.0",
     "@rollup/plugin-babel": "5.3.0",
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "13.4.0",
@@ -70,13 +71,15 @@
     "rollup-plugin-terser": "7.0.2",
     "rollup-plugin-typescript2": "0.31.2",
     "ts-jest": "28.0.8",
-    "typescript": "4.5.5"
+    "typescript": "4.5.5",
+    "yalc": "1.0.0-pre.53"
   },
   "eslintConfig": {
     "extends": "@bloomreach/eslint-config-react",
     "rules": {
       "react/require-default-props": "off",
-      "react/static-property-placement": "off"
+      "react/static-property-placement": "off",
+      "import/no-cycle": "off"
     },
     "overrides": [
       {
@@ -111,5 +114,8 @@
   "jest-junit": {
     "outputDirectory": "coverage",
     "outputName": "TEST-react-sdk.xml"
+  },
+  "dependencies": {
+    "@bloomreach/spa-sdk": "file:.yalc/@bloomreach/spa-sdk"
   }
 }

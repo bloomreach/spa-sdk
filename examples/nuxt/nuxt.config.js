@@ -52,7 +52,7 @@ module.exports = {
   server: {
     port: port && port.substring(ARG_PORT.length + 1),
   },
-  serverMiddleware: ['@bloomreach/spa-sdk/lib/express/relevance'],
+  serverMiddleware: ['@bloomreach/spa-sdk/dist/express/relevance'],
   typescript: {
     typeCheck: false,
   },

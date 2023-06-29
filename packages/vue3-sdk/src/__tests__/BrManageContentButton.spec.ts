@@ -55,7 +55,7 @@ describe('BrManageContentButton', () => {
       const wrapper = shallowMount(BrManageContentButton, { global, props: { content, path: 'content' } });
       const props = wrapper.findComponent(BrMeta).props();
 
-      expect(page.getButton).toBeCalledWith(expect.any(String), { content, path: 'content' });
+      expect(page.getButton).toBeCalledWith("MANAGE_CONTENT_LINK", expect.objectContaining({ content, path: 'content' }));
       expect(props.meta).toBe(meta);
       expect(wrapper.findComponent(BrMeta).exists()).toBe(true);
     });

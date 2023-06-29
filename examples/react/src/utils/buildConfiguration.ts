@@ -47,5 +47,6 @@ export function buildConfiguration(
     configuration.path = url;
   }
   configuration.httpClient = httpClient;
-  return configuration as Configuration;
+  configuration.debug = true;
+  return configuration;
 }

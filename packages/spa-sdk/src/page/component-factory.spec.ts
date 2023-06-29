@@ -18,11 +18,10 @@ import { ComponentFactory } from './component-factory';
 import { TYPE_COMPONENT, TYPE_COMPONENT_CONTAINER_ITEM, TYPE_COMPONENT_CONTAINER } from './component';
 import { PageModel } from './page';
 
-const model = (page: Record<string, unknown>) =>
-  ({
-    page,
-    root: { $ref: '/page/root' },
-  } as unknown as PageModel);
+const model = (page: Record<string, unknown>) => ({
+  page,
+  root: { $ref: '/page/root' },
+} as unknown as PageModel);
 
 describe('ComponentFactory', () => {
   describe('create', () => {
@@ -50,17 +49,15 @@ describe('ComponentFactory', () => {
     it('should throw an exception on unknown component type', () => {
       const factory = new ComponentFactory().register(TYPE_COMPONENT_CONTAINER_ITEM, jest.fn());
 
-      expect(() =>
-        factory.create(
-          model({
-            root: {
-              id: 'id2',
-              name: 'Component 2',
-              type: TYPE_COMPONENT_CONTAINER,
-            },
-          }),
-        ),
-      ).toThrowError();
+      expect(() => factory.create(
+        model({
+          root: {
+            id: 'id2',
+            name: 'Component 2',
+            type: TYPE_COMPONENT_CONTAINER,
+          },
+        }),
+      )).toThrowError();
     });
 
     it('should produce a tree structure', () => {

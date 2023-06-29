@@ -49,14 +49,12 @@ describe('ComponentFactory', () => {
     it('should throw an exception on unknown component type', () => {
       const factory = new ComponentFactory().register(TYPE_COMPONENT_CONTAINER_ITEM, jest.fn());
 
-      expect(() =>
-        factory.create({
-          ...model,
-          id: 'id1',
-          type: TYPE_COMPONENT_CONTAINER,
-          name: 'Component 1',
-        }),
-      ).toThrowError();
+      expect(() => factory.create({
+        ...model,
+        id: 'id1',
+        type: TYPE_COMPONENT_CONTAINER,
+        name: 'Component 1',
+      })).toThrowError();
     });
 
     it('should produce a tree structure', () => {

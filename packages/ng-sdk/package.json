@@ -1,6 +1,6 @@
 {
   "name": "@bloomreach/ng-sdk",
-  "version": "21.0.0",
+  "version": "22.0.0",
   "description": "Bloomreach SPA SDK for Angular",
   "keywords": [
     "bloomreach",
@@ -23,8 +23,12 @@
     "dev": "ng build --watch --configuration development",
     "lint": "ng lint",
     "ng": "ng",
-    "prepack": "$npm_execpath run build && rm dist/package.json dist/README.md",
-    "test": "ng test"
+    "prepack": "npm run build && rm dist/package.json dist/README.md",
+    "test": "ng test",
+    "yalcAdd": "yalc add @bloomreach/spa-sdk",
+    "yalcPush": "yalc push --replace --no-scripts",
+    "yalcRetreat": "yalc retreat --all",
+    "yalcRestore": "yalc restore --all"
   },
   "module": "dist/fesm2015/index.mjs",
   "es2020": "dist/fesm2020/index.mjs",
@@ -37,7 +41,7 @@
   ],
   "sideEffects": false,
   "dependencies": {
-    "@bloomreach/spa-sdk": "21.0.0",
+    "@bloomreach/spa-sdk": "file:.yalc/@bloomreach/spa-sdk",
     "tslib": "^2.3.0"
   },
   "peerDependencies": {
@@ -65,6 +69,8 @@
     "@bloomreach/eslint-config-angular": "15.0.0",
     "@types/jest": "28.1.8",
     "@types/node": "16.18.11",
+    "eslint": "7.32.0",
+    "eslint-import-resolver-typescript": "3.5.5",
     "jest": "28.1.3",
     "jest-environment-jsdom": "28.1.3",
     "jest-junit": "14.0.1",
@@ -73,7 +79,8 @@
     "ng-packagr": "15.1.1",
     "rxjs": "6.6.7",
     "typescript": "4.9.4",
-    "zone.js": "~0.11.4"
+    "yalc": "1.0.0-pre.53",
+    "zone.js": "0.11.8"
   },
   "eslintConfig": {
     "extends": [

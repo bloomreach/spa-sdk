@@ -26,9 +26,9 @@
         {{ item.getName() }}
       </a>
 
-      <nuxt-link v-else :to="item.getUrl()" class="nav-link text-capitalize">
+      <a v-else :href="item.getUrl()" class="nav-link text-capitalize">
         {{ item.getName() }}
-      </nuxt-link>
+      </a>
     </li>
   </ul>
 </template>

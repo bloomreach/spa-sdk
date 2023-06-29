@@ -42,5 +42,5 @@ const props = defineProps<{
 }>();
 
 const page = inject(page$);
-const meta = computed<MetaCollection | undefined>(() => page?.value.getButton(TYPE_MANAGE_CONTENT_BUTTON, props));
+const meta = computed<MetaCollection | undefined>(() => page?.value?.getButton(TYPE_MANAGE_CONTENT_BUTTON, props));
 </script>

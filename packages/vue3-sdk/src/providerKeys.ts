@@ -18,6 +18,6 @@ import type { Component, Page } from '@bloomreach/spa-sdk';
 import type { InjectionKey, Ref } from 'vue';
 import type { BrMapping } from '../typings';
 
-export const page$: InjectionKey<Ref<Page>> = Symbol('page$');
+export const page$: InjectionKey<Ref<Page | undefined>> = Symbol('page$');
 export const mapping$: InjectionKey<Ref<BrMapping>> = Symbol('mapping$');
-export const component$: InjectionKey<Ref<Component>> = Symbol('component$');
+export const component$: InjectionKey<Ref<Component | undefined>> = Symbol('component$');

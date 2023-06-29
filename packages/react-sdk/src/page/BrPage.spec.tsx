@@ -232,8 +232,8 @@ describe('BrPage', () => {
       });
 
       jest.runAllTimers();
-      const someEffectOrder = someEffect.mock.invocationCallOrder[0];
-      const initializeDoneOrder = initializeDone.mock.invocationCallOrder[0];
+      const [someEffectOrder] = someEffect.mock.invocationCallOrder;
+      const [initializeDoneOrder] = initializeDone.mock.invocationCallOrder;
       expect(someEffectOrder).toBeLessThan(initializeDoneOrder);
 
       jest.useRealTimers();

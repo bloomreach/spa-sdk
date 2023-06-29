@@ -1,18 +1,21 @@
 {
   "name": "@bloomreach/example-angular",
   "description": "Example Angular SPA for Bloomreach Experience",
-  "version": "21.0.0",
+  "version": "22.0.0",
   "private": true,
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "serve dist/browser -sn",
     "build": "ng build --configuration production && ng run example-angular:server:production",
     "dev": "ng serve",
     "lint": "ng lint",
     "dev:ssr": "ng run example-angular:serve-ssr",
     "start:ssr": "node dist/server/main.js",
     "prerender": "ng run example-angular:prerender",
-    "prebuild:custom": "node pre-build.js"
+    "prebuild:custom": "node pre-build.js",
+    "yalcAdd": "yalc add @bloomreach/spa-sdk @bloomreach/ng-sdk",
+    "yalcRetreat": "yalc retreat --all",
+    "yalcRestore": "yalc restore --all"
   },
   "dependencies": {
     "@angular/animations": "15.1.2",
@@ -24,8 +27,8 @@
     "@angular/platform-browser-dynamic": "15.1.2",
     "@angular/platform-server": "15.1.2",
     "@angular/router": "15.1.2",
-    "@bloomreach/ng-sdk": "21.0.0",
-    "@bloomreach/spa-sdk": "21.0.0",
+    "@bloomreach/ng-sdk": "file:.yalc/@bloomreach/ng-sdk",
+    "@bloomreach/spa-sdk": "file:.yalc/@bloomreach/spa-sdk",
     "@nguniversal/express-engine": "15.1.0",
     "express": "4.18.2",
     "rxjs": "6.6.7",
@@ -51,11 +54,14 @@
     "@types/express": "4.17.16",
     "@types/jest": "28.1.8",
     "dotenv": "16.0.3",
+    "eslint-import-resolver-typescript": "3.5.5",
     "jest": "28.1.3",
     "jest-environment-jsdom": "28.1.3",
     "jest-preset-angular": "12.2.3",
     "jest-util": "28.1.3",
-    "typescript": "4.9.4"
+    "serve": "14.2.0",
+    "typescript": "4.9.4",
+    "yalc": "1.0.0-pre.53"
   },
   "eslintConfig": {
     "extends": [

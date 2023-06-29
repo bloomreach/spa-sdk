@@ -274,10 +274,10 @@ export class PageImpl implements Page {
     @inject(LinkRewriterService) private linkRewriter: LinkRewriter,
     @inject(MetaCollectionFactory) private metaFactory: MetaCollectionFactory,
     @inject(CmsEventBusService) @optional() private cmsEventBus: CmsEventBus,
-    @inject(PageEventBusService) @optional() eventBus?: PageEventBus,
+    @inject(PageEventBusService) @optional() pageEventBus?: PageEventBus,
     @inject(Logger) @optional() private logger?: Logger,
   ) {
-    eventBus?.on('page.update', this.onPageUpdate.bind(this));
+    pageEventBus?.on('page.update', this.onPageUpdate.bind(this));
 
     this.root = componentFactory.create(model);
   }

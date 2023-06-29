@@ -16,7 +16,7 @@
 
 <template>
   <br-page :configuration="configuration" :mapping="mapping">
-    <template v-slot="{ page }">
+    <template v-slot="{ page }: { page: Page }">
       <template v-if="page">
         <header>
           <nav class="navbar navbar-expand-sm navbar-dark sticky-top bg-dark" role="navigation">
@@ -52,7 +52,7 @@ import BrContent from '@/components/BrContent.vue';
 import BrMenu from '@/components/BrMenu.vue';
 import BrNewsList from '@/components/BrNewsList.vue';
 import { buildConfiguration } from '@/utils/buildConfiguration';
-import type { Configuration } from '@bloomreach/spa-sdk';
+import type { Configuration, Page } from '@bloomreach/spa-sdk';
 import type { BrMapping } from '@bloomreach/vue3-sdk';
 import { BrComponent, BrPage } from '@bloomreach/vue3-sdk';
 import axios from 'axios';

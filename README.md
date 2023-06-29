@@ -74,28 +74,39 @@ and the Framework SDK contains:
 
 ## Development
 
-### Lerna-lite + npm workspaces
+### NPM + Lerna-lite + Yalc
 
-This repository uses [npm workspaces](https://docs.npmjs.com/cli/v8/using-npm/workspaces) and
-[lerna-lite](https://github.com/ghiscoding/lerna-lite) to manage its packages and builds.
-
-This lerna workspace configuration is located in [lerna.json](./lerna.json) and the packages are listed in the root
-[package.json](./package.json).
+The repository contains multiple self-contained npm packages that also depend
+on other packages in the repository. To easily manage the dependencies between
+them and execute commands taking into account topological order we use
+[lerna-lite](https://github.com/ghiscoding/lerna-lite) to manage its packages
+and builds, however we do not use the `bootstrap` mechanism of lerna as it
+caused duplicate framework instances when symlinking the dependencies. Instead
+we use [Yalc](https://github.com/wclr/yalc) to (optionally) link the
+dependencies.
+ 
+This lerna workspace configuration is located in [lerna.json](./lerna.json).
 
 #### Installation
 
-Installation of the dependencies of all the workspaces is done by running `npm ci`
-in the root of the workspace. This will also symlink all the related packages.
-To have correct compilation of the packages you therefore also need to run the
-`npm run build` command to create the `dist` output of each package that others
-would depend on.
+Installation of the dependencies of all the workspaces is done by running `npm
+ci` in the root of the workspace. 
+
+Running `npm run build` will not only build all packages but also link them
+together such that you can develop packages locally without having to publish
+'prerelease' versions.
+
+Running `npm run dev` in the root of the monorepo will watch each SDK package
+and build and `yalc push` it when changes happen. Combining this with running
+the dev server for one of the example apps allows for live development with any
+SDK.
 
 #### Commands
 
-To run commands in one of the packages while at the root of the workspace you can use the npm `--workspace` flag to run
-any of the package.json scripts, e.g. `npm run build --workspace  @bloomreach/spa-sdk`. You can also use the lerna cli
-to run commands if you require topological ordering such as `npx lerna run build --scope @bloomreach/example-react
---include-dependencies` which wil build example-react as well as its dependency structure.
+You can also use the lerna cli to run commands if you require topological
+ordering such as `npx lerna run build --scope @bloomreach/example-react
+--include-dependencies` which wil build example-react as well as its dependency
+structure.
 
 The root workspace commands are straightforward and are listed in the
 [package.json](./package.json) scripts property.

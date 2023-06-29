@@ -23,8 +23,6 @@ var str = `
 export const environment = {
     production: true,
     endpoint: '${ process.env.BRXM_ENDPOINT || "" }',
-    exponeaProjectToken: '${ process.env.EXPONEA_PROJECT_TOKEN || "" }',
-    exponeaApiUrl: '${ process.env.EXPONEA_API_URL || "" }',
     hasMultiTenantSupport: '${ process.env.BR_MULTI_TENANT_SUPPORT || "" }'
 };
 `;

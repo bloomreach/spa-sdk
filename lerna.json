@@ -1,5 +1,5 @@
 {
-  "version": "21.0.0",
+  "version": "22.0.0",
   "npmClient": "npm",
   "packages": [
     "packages/*",
@@ -10,5 +10,5 @@
       "message": "TRIVIAL Bump versions to %v"
     }
   },
-  "useWorkspaces": true
+  "$schema": "node_modules/lerna/schemas/lerna-schema.json"
 }

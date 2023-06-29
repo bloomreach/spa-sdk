@@ -41,7 +41,7 @@ describe('BrMeta', () => {
 
     expect(meta.render).toBeCalled();
 
-    const [head, tail] = meta.render.mock.calls[0];
+    const [[head, tail]] = meta.render.mock.calls;
 
     expect(head).toMatchSnapshot();
     expect(tail.previousSibling).toMatchSnapshot();

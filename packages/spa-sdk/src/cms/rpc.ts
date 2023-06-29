@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { EmitterMixin, Emitter } from '../emitter';
+import { Emitter, EmitterMixin } from '../emitter';
 
 export const RpcClientService = Symbol.for('RpcClientService');
 export const RpcServerService = Symbol.for('RpcServerService');
@@ -69,14 +69,13 @@ export interface RpcServer<TProcedures extends Procedures, TEvents extends Event
 class Dummy {}
 
 export abstract class Rpc<
-    TRemoteProcedures extends Procedures,
-    TRemoteEvents extends Events,
-    TProcedures extends Procedures,
-    TEvents extends Events,
-  >
+  TRemoteProcedures extends Procedures,
+  TRemoteEvents extends Events,
+  TProcedures extends Procedures,
+  TEvents extends Events,
+>
   extends EmitterMixin<typeof Dummy, Events>(Dummy)
-  implements RpcClient<TRemoteProcedures, TRemoteEvents>, RpcServer<TProcedures, TEvents>
-{
+  implements RpcClient<TRemoteProcedures, TRemoteEvents>, RpcServer<TProcedures, TEvents> {
   private calls = new Map<string, [Callable, Callable]>();
 
   private callbacks = new Map<keyof TProcedures, Callable<Promise<any>, any>>();

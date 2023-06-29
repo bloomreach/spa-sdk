@@ -398,8 +398,8 @@ describe('initialize', () => {
       headers: {},
       method: 'GET',
       url:
-        'http://localhost:8080/site/my-spa/resourceapi/' +
-        '?__br__campaignVariant=12345%3Agold&__br__segmentIds=12345%2C2345',
+        'http://localhost:8080/site/my-spa/resourceapi/'
+        + '?__br__campaignVariant=12345%3Agold&__br__segmentIds=12345%2C2345',
     });
 
     destroy(page);

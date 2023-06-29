@@ -19,7 +19,7 @@
     <div class="card-body">
       <br-manage-content-button :content="item" />
       <h2 v-if="data.title" class="card-title">
-        <nuxt-link :to="item.getUrl()">{{ data.title }}</nuxt-link>
+        <a :href="item.getUrl()">{{ data.title }}</a>
       </h2>
       <div v-if="data.author" class="card-subtitle mb-3 text-muted">
         {{ data.author }}
