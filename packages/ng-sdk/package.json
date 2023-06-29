@@ -24,7 +24,11 @@
     "lint": "ng lint",
     "ng": "ng",
     "prepack": "npm run build && rm dist/package.json dist/README.md",
-    "test": "ng test"
+    "test": "ng test",
+    "yalcAdd": "yalc add @bloomreach/spa-sdk",
+    "yalcPush": "yalc push --replace --no-scripts",
+    "yalcRetreat": "yalc retreat --all",
+    "yalcRestore": "yalc restore --all"
   },
   "module": "dist/fesm2015/index.mjs",
   "es2020": "dist/fesm2020/index.mjs",
@@ -37,7 +41,7 @@
   ],
   "sideEffects": false,
   "dependencies": {
-    "@bloomreach/spa-sdk": "21.0.0",
+    "@bloomreach/spa-sdk": "file:.yalc/@bloomreach/spa-sdk",
     "tslib": "^2.3.0"
   },
   "peerDependencies": {
@@ -75,6 +79,7 @@
     "ng-packagr": "15.1.1",
     "rxjs": "6.6.7",
     "typescript": "4.9.4",
+    "yalc": "1.0.0-pre.53",
     "zone.js": "0.11.8"
   },
   "eslintConfig": {

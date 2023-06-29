@@ -7,11 +7,14 @@
     "build": "nuxt build",
     "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server",
     "generate": "nuxt generate",
-    "start": "cross-env NODE_ENV=production node server/index.js"
+    "start": "cross-env NODE_ENV=production node server/index.js",
+    "yalcAdd": "yalc add @bloomreach/spa-sdk @bloomreach/vue-sdk",
+    "yalcRetreat": "yalc retreat --all",
+    "yalcRestore": "yalc restore --all"
   },
   "dependencies": {
-    "@bloomreach/spa-sdk": "21.0.0",
-    "@bloomreach/vue-sdk": "21.0.0",
+    "@bloomreach/spa-sdk": "file:.yalc/@bloomreach/spa-sdk",
+    "@bloomreach/vue-sdk": "file:.yalc/@bloomreach/vue-sdk",
     "@nuxtjs/axios": "5.13.6",
     "@nuxtjs/dotenv": "1.4.1",
     "consola": "2.15.3",
@@ -30,6 +33,7 @@
     "nodemon": "2.0.12",
     "ts-loader": "8.4.0",
     "vue-server-renderer": "2.6.14",
-    "vue-template-compiler": "2.6.14"
+    "vue-template-compiler": "2.6.14",
+    "yalc": "1.0.0-pre.53"
   }
 }

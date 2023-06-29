@@ -1,0 +1,13 @@
+{
+  "version": "v1",
+  "packages": {
+    "@bloomreach/spa-sdk": {
+      "signature": "b776bdff5bbbb8fec6d7951523fce3a2",
+      "file": true
+    },
+    "@bloomreach/react-sdk": {
+      "signature": "729ce662d696a0937f6460511a2bea8c",
+      "file": true
+    }
+  }
+}

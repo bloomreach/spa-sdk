@@ -9,7 +9,10 @@
     "lint": "vue-cli-service lint --no-fix",
     "serve": "vue-cli-service serve",
     "test": "vue-cli-service test:unit --pass-with-no-tests",
-    "start": "serve dist -sn"
+    "start": "serve dist -sn",
+    "yalcAdd": "yalc add @bloomreach/spa-sdk @bloomreach/vue-sdk",
+    "yalcRetreat": "yalc retreat --all",
+    "yalcRestore": "yalc restore --all"
   },
   "browserslist": [
     "last 1 chrome version",
@@ -18,8 +21,8 @@
     "last 1 edge version"
   ],
   "dependencies": {
-    "@bloomreach/spa-sdk": "21.0.0",
-    "@bloomreach/vue-sdk": "21.0.0",
+    "@bloomreach/spa-sdk": "file:.yalc/@bloomreach/spa-sdk",
+    "@bloomreach/vue-sdk": "file:.yalc/@bloomreach/vue-sdk",
     "axios": "0.26.1",
     "core-js": "3.16.0",
     "sanitize-html": "2.10.0",
@@ -48,7 +51,8 @@
     "typescript": "4.4.4",
     "vue-server-renderer": "2.6.14",
     "vue-template-compiler": "2.6.14",
-    "webpack": "4.46.0"
+    "webpack": "4.46.0",
+    "yalc": "1.0.0-pre.53"
   },
   "overrides": {
     "eslint": "7.32.0",

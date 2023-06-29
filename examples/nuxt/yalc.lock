@@ -1,0 +1,13 @@
+{
+  "version": "v1",
+  "packages": {
+    "@bloomreach/spa-sdk": {
+      "signature": "b776bdff5bbbb8fec6d7951523fce3a2",
+      "file": true
+    },
+    "@bloomreach/vue-sdk": {
+      "signature": "d87a8ac8f8f4e2e84aa991a8529e02f2",
+      "file": true
+    }
+  }
+}
