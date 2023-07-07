@@ -51,7 +51,7 @@
     "@lerna-lite/watch": "2.4.0",
     "auto-changelog": "2.3.0",
     "glob": "10.2.6",
-    "heroku": "7.60.2"
+    "heroku": "8.1.9"
   },
   "auto-changelog": {
     "package": true,
