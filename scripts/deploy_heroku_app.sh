@@ -58,6 +58,7 @@ then
 fi
 
 # Set common config options
+heroku config:set --app=$NAME NPM_CONFIG_PRODUCTION=false
 heroku config:set --app=$NAME PROJECT_PATH=$APP_PATH
 heroku config:set --app=$NAME PACKAGE=$APP_PACKAGE
 heroku config:set --app=$NAME PROCFILE=$APP_PATH/Procfile
