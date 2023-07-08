@@ -55,17 +55,16 @@ then
 fi
 
 # Set common config options
-heroku config:set --app=$NAME NPM_CONFIG_PRODUCTION=false
-heroku config:set --app=$NAME PROJECT_PATH=$APP_PATH
-heroku config:set --app=$NAME SDK_NAME=$APP_NAME
-heroku config:set --app=$NAME PACKAGE=$APP_PACKAGE
-heroku config:set --app=$NAME PROCFILE=$APP_PATH/Procfile
+heroku config:set --app=$NAME NPM_CONFIG_PRODUCTION=false \
+  PROJECT_PATH=$APP_PATH \
+  SDK_NAME=$APP_NAME \
+  PACKAGE=$APP_PACKAGE \
+  PROCFILE=$APP_PATH/Procfile
 
 # Set project specific config options
 if [[ $APP_NAME = "ng" ]]
 then
-  heroku config:set --app=$NAME EXAMPLE_NAME="angular"
-  heroku config:set --app=$NAME BR_MULTI_TENANT_SUPPORT=true
+  heroku config:set --app=$NAME EXAMPLE_NAME="angular" BR_MULTI_TENANT_SUPPORT=true
 fi
 
 if [[ $APP_TYPE = "ssr" ]] && [[ $APP_NAME = "ng" ]]
@@ -75,33 +74,27 @@ fi
 
 if [[ $APP_TYPE = "csr" ]] && [[ $APP_NAME = "react" ]]
 then
-  heroku config:set --app=$NAME EXAMPLE_NAME="react"
-  heroku config:set --app=$NAME REACT_APP_BR_MULTI_TENANT_SUPPORT=true
+  heroku config:set --app=$NAME EXAMPLE_NAME="react" REACT_APP_BR_MULTI_TENANT_SUPPORT=true
 fi
 
 if [[ $APP_TYPE = "ssr" ]] && [[ $APP_NAME = "react" ]]
 then
-  heroku config:set --app=$NAME EXAMPLE_NAME="next"
-  heroku config:set --app=$NAME NEXT_PUBLIC_BR_MULTI_TENANT_SUPPORT=true
+  heroku config:set --app=$NAME EXAMPLE_NAME="next" NEXT_PUBLIC_BR_MULTI_TENANT_SUPPORT=true
 fi
 
 if [[ $APP_TYPE = "csr" ]] && [[ $APP_NAME = "vue" ]]
 then
-  heroku config:set --app=$NAME EXAMPLE_NAME="vue"
-  heroku config:set --app=$NAME VUE_APP_BR_MULTI_TENANT_SUPPORT=true
+  heroku config:set --app=$NAME EXAMPLE_NAME="vue" VUE_APP_BR_MULTI_TENANT_SUPPORT=true
 fi
 
 if [[ $APP_TYPE = "ssr" ]] && [[ $APP_NAME = "vue" ]]
 then
-  heroku config:set --app=$NAME EXAMPLE_NAME="nuxt"
-  heroku config:set --app=$NAME HOST=0.0.0.0
-  heroku config:set --app=$NAME NUXT_APP_BR_MULTI_TENANT_SUPPORT=true
+  heroku config:set --app=$NAME EXAMPLE_NAME="nuxt" NUXT_APP_BR_MULTI_TENANT_SUPPORT=true HOST=0.0.0.0
 fi
 
 if [[ $APP_TYPE = "csr" ]] && [[ $APP_NAME = "vue3" ]]
 then
-  heroku config:set --app=$NAME EXAMPLE_NAME="vue3"
-  heroku config:set --app=$NAME VITE_MULTI_TENANT_SUPPORT=true
+  heroku config:set --app=$NAME EXAMPLE_NAME="vue3" VITE_MULTI_TENANT_SUPPORT=true
 fi
 
 git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/$NAME.git HEAD:refs/heads/main
