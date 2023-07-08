@@ -38,9 +38,6 @@ APP_PACKAGE=$(node -p -e "require('./$APP_PATH/package.json').name")
 echo "Deploying ${APP_PACKAGE} as ${NAME} app using path ${APP_PATH}";
 echo '-----------------------------------------------------------------------------'
 
-heroku plugins:install buildpack-registry
-heroku plugins:install buildpacks
-
 # Common heroku settup for both ssr and csr apps
 heroku apps:destroy --app=$NAME --confirm $NAME || true
 heroku apps:create --app=$NAME --team=$HEROKU_TEAM
