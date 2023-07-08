@@ -25,10 +25,10 @@
   "scripts": {
     "audit": "lerna exec --no-private --stream -- \"npm audit --omit=dev --audit-level=critical\"",
     "prebuild:custom": "lerna exec --scope @bloomreach/example-angular -- \"npm run prebuild:custom\"",
-    "postinstall": "lerna exec --stream -- 'npm ci'",
+    "postinstall": "lerna exec --stream --scope \"@bloomreach/{spa-sdk,${FRAMEWORK:-*}-sdk,example-${FRAMEWORK:-*}}\" -- 'npm ci'",
     "build:core": "lerna exec --stream --scope '@bloomreach/spa-sdk' -- 'npm run build && npm run yalcPush'",
-    "build:sdks": "lerna exec --stream --ignore '@bloomreach/spa-sdk' --scope '@bloomreach/*-sdk' -- 'npm run yalcAdd && npm run build && npm run yalcPush'",
-    "build:apps": "lerna exec --stream --ignore '@bloomreach/*-sdk' -- 'npm run yalcAdd && npm run build'",
+    "build:sdks": "lerna exec --stream --ignore '@bloomreach/spa-sdk' --scope \"@bloomreach/${FRAMEWORK:-*}-sdk\" -- 'npm run yalcAdd && npm run build && npm run yalcPush'",
+    "build:apps": "lerna exec --stream --scope \"@bloomreach/example-${FRAMEWORK:-*}\" -- 'npm run yalcAdd && npm run build'",
     "build": "npm run build:core && npm run build:sdks && npm run build:apps",
     "dev": "lerna watch --ignore '@bloomreach/example-*' --glob='src' -- lerna exec --scope=\\$LERNA_PACKAGE_NAME -- 'npm run build && yalc push --no-scripts'",
     "lint": "lerna run lint --parallel",
