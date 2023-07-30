@@ -7,7 +7,6 @@ import Header from '../components/Header/Header.astro';
 import PageContent from '../components/PageContent/PageContent.astro';
 import LeftSidebar from '../components/LeftSidebar/LeftSidebar.astro';
 import RightSidebar from '../components/RightSidebar/RightSidebar.astro';
-import Footer from '../components/Footer/Footer.astro';
 import { GITHUB_EDIT_URL, SITE } from '../consts';
 
 type Props = CollectionEntry<'docs'>['data'] & {
@@ -21,7 +20,7 @@ const currentFile = `src/content/docs${currentPage.replace(/\/$/, '')}.md`;
 const githubEditUrl = `${GITHUB_EDIT_URL}/${currentFile}`;
 ---
 
-<html dir={data.dir} lang={data.lang} class="initial">
+<html class="initial">
 	<head>
 		<HeadCommon />
 		<HeadSEO {...data} canonicalUrl={canonicalURL} />
@@ -134,6 +133,5 @@ const githubEditUrl = `${GITHUB_EDIT_URL}/${currentFile}`;
 				<RightSidebar headings={headings} githubEditUrl={githubEditUrl} />
 			</aside>
 		</main>
-		<Footer path={currentFile} />
 	</body>
 </html>
