@@ -1,5 +1,4 @@
 ---
-import { getLanguageFromURL } from '../../languages';
 import { SIDEBAR } from '../../consts';
 
 type Props = {
@@ -10,14 +9,13 @@ const { currentPage } = Astro.props;
 const currentPageMatch = currentPage.endsWith('/')
 	? currentPage.slice(1, -1)
 	: currentPage.slice(1);
-const langCode = getLanguageFromURL(currentPage);
-const sidebar = SIDEBAR[langCode];
+const sidebar = SIDEBAR;
 ---
 
 <nav aria-labelledby="grid-left">
 	<ul class="nav-groups">
 		{
-			Object.entries(sidebar).map(([header, children]) => (
+		Object.entries(sidebar).map(([header, children]) => (
 				<li>
 					<div class="nav-group">
 						<h3>{header}</h3>
