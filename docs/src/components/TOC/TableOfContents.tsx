@@ -1,17 +1,16 @@
 import type { MarkdownHeading } from 'astro';
-import type { FunctionalComponent } from 'preact';
 import { unescape } from 'html-escaper';
-import { useState, useEffect, useRef } from 'preact/hooks';
+import { useState, useEffect, useRef, FC } from 'react';
 
 type ItemOffsets = {
 	id: string;
 	topOffset: number;
 };
 
-const TableOfContents: FunctionalComponent<{ headings: MarkdownHeading[] }> = ({
+const TableOfContents: FC<{ headings: MarkdownHeading[]; }> = ({
 	headings = [],
 }) => {
-	const toc = useRef<HTMLUListElement>();
+	const toc = useRef<HTMLUListElement>(null);
 	const onThisPageID = 'on-this-page-heading';
 	const itemOffsets = useRef<ItemOffsets[]>([]);
 	const [currentID, setCurrentID] = useState('overview');
@@ -62,7 +61,7 @@ const TableOfContents: FunctionalComponent<{ headings: MarkdownHeading[] }> = ({
 		return () => headingsObserver.disconnect();
 	}, [toc.current]);
 
-	const onLinkClick = (e) => {
+	const onLinkClick = (e: any) => {
 		setCurrentID(e.target.getAttribute('href').replace('#', ''));
 	};
 
@@ -76,9 +75,9 @@ const TableOfContents: FunctionalComponent<{ headings: MarkdownHeading[] }> = ({
 					.filter(({ depth }) => depth > 1 && depth < 4)
 					.map((heading) => (
 						<li
-							className={`header-link depth-${heading.depth} ${
-								currentID === heading.slug ? 'current-header-link' : ''
-							}`.trim()}
+							key={heading.slug}
+							className={`header-link depth-${heading.depth} ${currentID === heading.slug ? 'current-header-link' : ''
+								}`.trim()}
 						>
 							<a href={`#${heading.slug}`} onClick={onLinkClick}>
 								{unescape(heading.text)}

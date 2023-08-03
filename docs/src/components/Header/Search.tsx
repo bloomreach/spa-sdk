@@ -1,5 +1,5 @@
 /** @jsxImportSource react */
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback, useRef, FC } from 'react';
 import { ALGOLIA } from '../../consts';
 import '@docsearch/css';
 import './Search.css';
@@ -14,7 +14,7 @@ const useDocSearchKeyboardEvents =
 	docSearchReact.useDocSearchKeyboardEvents ||
 	(docSearchReact as any).default.useDocSearchKeyboardEvents;
 
-export default function Search() {
+export default function Search(): FC {
 	const [isOpen, setIsOpen] = useState(false);
 	const searchButtonRef = useRef<HTMLButtonElement>(null);
 	const [initialQuery, setInitialQuery] = useState('');
