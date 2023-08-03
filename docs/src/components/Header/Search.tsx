@@ -1,20 +1,12 @@
-/** @jsxImportSource react */
-import { useState, useCallback, useRef, FC } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import { ALGOLIA } from '../../consts';
 import '@docsearch/css';
 import './Search.css';
 
 import { createPortal } from 'react-dom';
-import * as docSearchReact from '@docsearch/react';
+import { DocSearchModal, useDocSearchKeyboardEvents } from '@docsearch/react';
 
-/** FIXME: This is still kinda nasty, but DocSearch is not ESM ready. */
-const DocSearchModal =
-	docSearchReact.DocSearchModal || (docSearchReact as any).default.DocSearchModal;
-const useDocSearchKeyboardEvents =
-	docSearchReact.useDocSearchKeyboardEvents ||
-	(docSearchReact as any).default.useDocSearchKeyboardEvents;
-
-export default function Search(): FC {
+export default function Search(): JSX.Element {
 	const [isOpen, setIsOpen] = useState(false);
 	const searchButtonRef = useRef<HTMLButtonElement>(null);
 	const [initialQuery, setInitialQuery] = useState('');

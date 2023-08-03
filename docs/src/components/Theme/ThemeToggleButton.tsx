@@ -57,7 +57,7 @@ const ThemeToggle: FC = () => {
 				const icon = icons[i];
 				const checked = t === theme;
 				return (
-					<label className={checked ? ' checked' : ''}>
+					<label key={i} className={checked ? ' checked' : ''}>
 						{icon}
 						<input
 							type="radio"
