@@ -46,8 +46,10 @@ const ThemeToggle: FC = () => {
 		const root = document.documentElement;
 		if (theme === 'light') {
 			root.classList.remove('theme-dark');
+			root.dataset.theme = '';
 		} else {
 			root.classList.add('theme-dark');
+			root.dataset.theme = 'dark';
 		}
 	}, [theme]);
 

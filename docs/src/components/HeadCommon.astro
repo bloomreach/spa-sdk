@@ -20,8 +20,10 @@ import "../styles/index.css";
     theme === "dark" ||
     (!theme && window.matchMedia("(prefers-color-scheme: dark)").matches)
   ) {
+    root.dataset.theme = "dark";
     root.classList.add("theme-dark");
   } else {
+    root.dataset.theme = undefined;
     root.classList.remove("theme-dark");
   }
 </script>
