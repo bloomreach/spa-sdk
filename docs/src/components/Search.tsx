@@ -10,7 +10,6 @@ export default function Search(): JSX.Element {
 			appId={import.meta.env.PUBLIC_ALGOLIA_APP_ID}
 			apiKey={import.meta.env.PUBLIC_ALGOLIA_SEARCH_API_KEY}
 			transformItems={(items) => {
-				console.log(items);
 				return items.map((item) => {
 					// We transform the absolute URL into a relative URL to
 					// work better on localhost, preview URLS.
