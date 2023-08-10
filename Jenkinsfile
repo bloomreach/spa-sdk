@@ -69,7 +69,7 @@ pipeline {
     }
     stage('Release') {
       when {
-        branch 'main'
+        branch 'add-docs'
       }
 
       environment {
@@ -85,98 +85,105 @@ pipeline {
             }
           }
         }
-        stage('Publish to Github') {
-          steps {
-            sshagent (credentials: ['github-spa-sdk']) {
-              sh 'git remote add github git@github.com:bloomreach/spa-sdk.git'
-              sh 'git push github HEAD:refs/heads/main'
-              sh 'git push github "spa-sdk-${VERSION}"'
-            }
-          }
-        }
+        // stage('Publish to Github') {
+        //   steps {
+        //     sshagent (credentials: ['github-spa-sdk']) {
+        //       sh 'git remote add github git@github.com:bloomreach/spa-sdk.git'
+        //       sh 'git push github HEAD:refs/heads/main'
+        //       sh 'git push github "spa-sdk-${VERSION}"'
+        //     }
+        //   }
+        // }
         stage('Setup git config') {
           steps {
             sh 'git config --global user.email "jenkins@code.bloomreach.com"'
             sh 'git config --global user.name "Jenkins"'
           }
         }
-        stage('Generate and publish SPA SDK TypeDoc') {
+        stage('Generate and publish docs') {
           stages {
-            stage('Generate SPA SDK TypeDoc') {
+            stage('Build TypeDoc') {
               steps {
                 sh 'npx lerna run docs --scope @bloomreach/spa-sdk'
               }
             }
-            stage('Clone github pages with TypeDoc') {
+            stage('Build docs') {
+              steps {
+                sh 'cd docs && npm ci && npm run build'
+              }
+            }
+            stage('Clone github docs branch') {
               steps {
                 sshagent (credentials: ['github-spa-sdk']) {
-                  sh 'git clone -b gh-pages --single-branch git@github.com:bloomreach/spa-sdk.git spa-sdk-typedoc'
+                  sh 'git clone -b gh-pages --single-branch git@github.com:bloomreach/spa-sdk.git github-pages-root'
                 }
               }
             }
-            stage('Copy new version of TypeDoc') {
+            stage('Copy TypeDoc & docs') {
               steps {
-                sh 'rm -rf spa-sdk-typedoc/*'
-                sh 'cp -r packages/spa-sdk/docs/. spa-sdk-typedoc/'
+                sh 'rm -rf github-pages-root/*'
+                sh 'cp -r packages/spa-sdk/docs/. github-pages-root/'
+                sh 'mkdir github-pages-root/docs'
+                sh 'cp -r docs/dist/. github-pages-root/docs/'
               }
             }
             stage('Publish to github pages') {
               steps {
-                sh 'git -C spa-sdk-typedoc add --all'
-                sh 'git -C spa-sdk-typedoc commit -m "Update SPA SDK TypeDocs for release ${VERSION}"'
+                sh 'git -C github-pages-root add --all'
+                sh 'git -C github-pages-root commit -m "Update SPA SDK docs for release ${VERSION}"'
                 sshagent (credentials: ['github-spa-sdk']) {
-                  sh 'git -C spa-sdk-typedoc push'
+                  sh 'git -C github-pages-root push'
                 }
               }
             }
             stage('Cleanup') {
               steps {
-                sh 'rm -rf spa-sdk-typedoc'
+                sh 'rm -rf github-pages-root'
               }
             }
           }
         }
-        stage('Publish to NPM') {
-          steps {
-            withCredentials([[$class: 'StringBinding', credentialsId: 'NPM_AUTH_TOKEN', variable: 'NPM_AUTH_TOKEN']]) {
-              sh 'echo "//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}" >> ~/.npmrc'
-              sh 'npm run release -- --yes'
-            }
-          }
-        }
-        stage('Deploy to Heroku') {
-          environment {
-            // Replace dots with dashes in version because the Heroku URL requires dashes
-            VERSION_FOR_HEROKU = "${VERSION.replace('.', '-')}"
-            HEROKU_TEAM = "bloomreach"
-          }
-
-          stages {
-            stage('Deploy apps') {
-              matrix {
-                axes {
-                  axis {
-                    name 'APP_TYPE'
-                    values 'ssr', 'csr'
-                  }
-                  axis {
-                    name 'APP_NAME'
-                    values 'ng', 'react', 'vue', 'vue3'
-                  }
-                }
-                stages {
-                  stage('Deploy app') {
-                    steps {
-                      withCredentials([[$class: 'StringBinding', credentialsId: 'HEROKU_API_KEY', variable: 'HEROKU_API_KEY']]) {
-                        sh 'npm run deploy-to-heroku "${APP_TYPE}" "${APP_NAME}" "${VERSION_FOR_HEROKU}"'
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
+//        stage('Publish to NPM') {
+//          steps {
+//            withCredentials([[$class: 'StringBinding', credentialsId: 'NPM_AUTH_TOKEN', variable: 'NPM_AUTH_TOKEN']]) {
+//              sh 'echo "//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}" >> ~/.npmrc'
+//              sh 'npm run release -- --yes'
+//            }
+//          }
+//        }
+//        stage('Deploy to Heroku') {
+//          environment {
+//            // Replace dots with dashes in version because the Heroku URL requires dashes
+//            VERSION_FOR_HEROKU = "${VERSION.replace('.', '-')}"
+//            HEROKU_TEAM = "bloomreach"
+//          }
+//
+//          stages {
+//            stage('Deploy apps') {
+//              matrix {
+//                axes {
+//                  axis {
+//                    name 'APP_TYPE'
+//                    values 'ssr', 'csr'
+//                  }
+//                  axis {
+//                    name 'APP_NAME'
+//                    values 'ng', 'react', 'vue', 'vue3'
+//                  }
+//                }
+//                stages {
+//                  stage('Deploy app') {
+//                    steps {
+//                      withCredentials([[$class: 'StringBinding', credentialsId: 'HEROKU_API_KEY', variable: 'HEROKU_API_KEY']]) {
+//                        sh 'npm run deploy-to-heroku "${APP_TYPE}" "${APP_NAME}" "${VERSION_FOR_HEROKU}"'
+//                      }
+//                    }
+//                  }
+//                }
+//              }
+//            }
+//          }
+//        }
       }
     }
   }

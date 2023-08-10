@@ -1,0 +1,28 @@
+{
+  "name": "docs",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@algolia/client-search": "4.19.1",
+    "@docsearch/css": "3.5.1",
+    "@docsearch/react": "3.5.1",
+    "astro": "2.10.4",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0"
+  },
+  "devDependencies": {
+    "@astrojs/react": "2.2.1",
+    "@types/html-escaper": "3.0.0",
+    "@types/node": "^18.0.0",
+    "@types/react": "18.2.20",
+    "@types/react-dom": "18.2.7",
+    "html-escaper": "^3.0.3"
+  }
+}
