@@ -14,14 +14,13 @@
  * limitations under the License.
  */
 
-import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
 import { Container, Page } from '@bloomreach/spa-sdk';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'ol.br-container-ordered-list',
   templateUrl: './br-container-ordered-list.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BrContainerOrderedListComponent {
   @Input() component!: Container;
