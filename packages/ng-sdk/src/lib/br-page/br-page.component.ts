@@ -19,8 +19,6 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import {
   AfterContentChecked,
   AfterContentInit,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   ContentChild,
   EventEmitter,
@@ -49,7 +47,6 @@ import { BrNodeContext, BrPageService } from './br-page.service';
  * The brXM page.
  */
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'br-page',
   templateUrl: './br-page.component.html',
   providers: [BrPageService],
@@ -96,7 +93,6 @@ export class BrPageComponent implements AfterContentChecked, AfterContentInit, O
   private afterContentChecked$ = new Subject();
 
   constructor(
-    private changeDetectorRef: ChangeDetectorRef,
     private httpClient: HttpClient,
     private pageService: BrPageService,
     zone: NgZone,
