@@ -1,14 +1,12 @@
 ---
 import type { MarkdownHeading } from "astro";
-import MoreMenu from "./MoreMenu.astro";
 import TableOfContents from "./TableOfContents";
 
 type Props = {
-  headings?: MarkdownHeading[];
-  githubEditUrl: string;
+  headings: MarkdownHeading[];
 };
 
-const { headings, githubEditUrl } = Astro.props;
+const { headings } = Astro.props;
 ---
 
 <article id="article" class="content">
@@ -18,9 +16,6 @@ const { headings, githubEditUrl } = Astro.props;
     </nav>
     <slot />
   </section>
-  <nav class="block sm:hidden">
-    <MoreMenu editHref={githubEditUrl} />
-  </nav>
 </article>
 
 <style>

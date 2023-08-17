@@ -8,9 +8,4 @@ export default defineConfig({
   site: `https://bloomreach.github.io/spa-sdk/docs`,
   base: `spa-sdk/docs`,
   trailingSlash: "ignore",
-  vite: {
-    ssr: {
-      noExternal: ['@docsearch/react', '@algolia/autocomplete-core', '@algolia/autocomplete-shared', 'algoliasearch', '@algolia/autocomplete-plugin-algolia-insights']
-    }
-  }
 });
