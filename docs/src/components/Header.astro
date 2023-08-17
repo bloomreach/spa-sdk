@@ -2,6 +2,7 @@
 import { SITE } from "../consts";
 import AstroLogo from "./AstroLogo.astro";
 import SidebarToggle from "./SidebarToggle";
+import ThemeToggleButton from './ThemeToggleButton';
 
 type Props = {
   currentPage: string;
@@ -20,6 +21,9 @@ type Props = {
       </a>
     </div>
     <div style="flex-grow: 1;"></div>
+    <div>
+      <ThemeToggleButton client:only />
+    </div>
   </nav>
 </header>
 
@@ -38,7 +42,7 @@ type Props = {
   }
 
   .logo {
-    flex: 1;
+    flex: 2;
     display: flex;
     overflow: hidden;
     width: 30px;

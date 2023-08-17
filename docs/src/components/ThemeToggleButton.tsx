@@ -28,11 +28,8 @@ const icons = [
 	</svg>,
 ];
 
-const ThemeToggle: FC = () => {
+const ThemeToggleButton: FC = () => {
 	const [theme, setTheme] = useState(() => {
-		if (import.meta.env.SSR) {
-			return undefined;
-		}
 		if (typeof localStorage !== undefined && localStorage.getItem('theme')) {
 			return localStorage.getItem('theme');
 		}
@@ -80,4 +77,4 @@ const ThemeToggle: FC = () => {
 	);
 };
 
-export default ThemeToggle;
+export default ThemeToggleButton;
