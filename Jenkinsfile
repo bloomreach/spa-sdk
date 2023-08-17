@@ -69,7 +69,7 @@ pipeline {
     }
     stage('Release') {
       when {
-        branch 'add-docs'
+        branch 'main'
       }
 
       environment {
@@ -85,15 +85,15 @@ pipeline {
             }
           }
         }
-        // stage('Publish to Github') {
-        //   steps {
-        //     sshagent (credentials: ['github-spa-sdk']) {
-        //       sh 'git remote add github git@github.com:bloomreach/spa-sdk.git'
-        //       sh 'git push github HEAD:refs/heads/main'
-        //       sh 'git push github "spa-sdk-${VERSION}"'
-        //     }
-        //   }
-        // }
+        stage('Publish to Github') {
+          steps {
+            sshagent (credentials: ['github-spa-sdk']) {
+              sh 'git remote add github git@github.com:bloomreach/spa-sdk.git'
+              sh 'git push github HEAD:refs/heads/main'
+              sh 'git push github "spa-sdk-${VERSION}"'
+            }
+          }
+        }
         stage('Setup git config') {
           steps {
             sh 'git config --global user.email "jenkins@code.bloomreach.com"'
@@ -143,47 +143,47 @@ pipeline {
             }
           }
         }
-//        stage('Publish to NPM') {
-//          steps {
-//            withCredentials([[$class: 'StringBinding', credentialsId: 'NPM_AUTH_TOKEN', variable: 'NPM_AUTH_TOKEN']]) {
-//              sh 'echo "//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}" >> ~/.npmrc'
-//              sh 'npm run release -- --yes'
-//            }
-//          }
-//        }
-//        stage('Deploy to Heroku') {
-//          environment {
-//            // Replace dots with dashes in version because the Heroku URL requires dashes
-//            VERSION_FOR_HEROKU = "${VERSION.replace('.', '-')}"
-//            HEROKU_TEAM = "bloomreach"
-//          }
-//
-//          stages {
-//            stage('Deploy apps') {
-//              matrix {
-//                axes {
-//                  axis {
-//                    name 'APP_TYPE'
-//                    values 'ssr', 'csr'
-//                  }
-//                  axis {
-//                    name 'APP_NAME'
-//                    values 'ng', 'react', 'vue', 'vue3'
-//                  }
-//                }
-//                stages {
-//                  stage('Deploy app') {
-//                    steps {
-//                      withCredentials([[$class: 'StringBinding', credentialsId: 'HEROKU_API_KEY', variable: 'HEROKU_API_KEY']]) {
-//                        sh 'npm run deploy-to-heroku "${APP_TYPE}" "${APP_NAME}" "${VERSION_FOR_HEROKU}"'
-//                      }
-//                    }
-//                  }
-//                }
-//              }
-//            }
-//          }
-//        }
+        stage('Publish to NPM') {
+          steps {
+            withCredentials([[$class: 'StringBinding', credentialsId: 'NPM_AUTH_TOKEN', variable: 'NPM_AUTH_TOKEN']]) {
+              sh 'echo "//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}" >> ~/.npmrc'
+              sh 'npm run release -- --yes'
+            }
+          }
+        }
+        stage('Deploy to Heroku') {
+          environment {
+            // Replace dots with dashes in version because the Heroku URL requires dashes
+            VERSION_FOR_HEROKU = "${VERSION.replace('.', '-')}"
+            HEROKU_TEAM = "bloomreach"
+          }
+
+          stages {
+            stage('Deploy apps') {
+              matrix {
+                axes {
+                  axis {
+                    name 'APP_TYPE'
+                    values 'ssr', 'csr'
+                  }
+                  axis {
+                    name 'APP_NAME'
+                    values 'ng', 'react', 'vue', 'vue3'
+                  }
+                }
+                stages {
+                  stage('Deploy app') {
+                    steps {
+                      withCredentials([[$class: 'StringBinding', credentialsId: 'HEROKU_API_KEY', variable: 'HEROKU_API_KEY']]) {
+                        sh 'npm run deploy-to-heroku "${APP_TYPE}" "${APP_NAME}" "${VERSION_FOR_HEROKU}"'
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
