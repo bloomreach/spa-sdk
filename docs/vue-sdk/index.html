@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html class="initial astro-OUAMJN2I">
+  <head>
+    <!-- Global Metadata --><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<meta name="generator" content="Astro v2.10.4">
+
+<link rel="icon" type="image/svg+xml" href="/spa-sdk/docs/favicon.svg">
+
+<link rel="sitemap" href="/sitemap.xml">
+
+<!-- This is intentionally inlined to avoid FOUC -->
+<script>
+const root = document.documentElement;
+const theme = localStorage.getItem("theme");
+if (theme === "dark" || (!theme && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+  root.dataset.theme = "dark";
+  root.classList.add("theme-dark");
+} else {
+  root.dataset.theme = undefined;
+  root.classList.remove("theme-dark");
+}
+</script>
+    <!-- Page Metadata --><link rel="canonical" href="https://bloomreach.github.io/spa-sdk/docs/vue-sdk/">
+
+<!-- OpenGraph Tags -->
+<meta property="og:title" content="undefined 🚀 Bloomreach SDK Documentation Portal">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://bloomreach.github.io/spa-sdk/docs/vue-sdk/">
+<meta property="og:image" content="https://github.com/withastro/astro/blob/main/assets/social/banner-minimal.png?raw=true">
+<meta property="og:image:alt" content="astro logo on a starry expanse of space, with a purple saturn-like planet floating in the right foreground">
+<meta name="description" property="og:description" content="Bloomreach provides an SPA SDK for integrating SPAs and other Javascript front-end applications with Bloomreach Content's Delivery API and the preview and editing capabilities of the Experience manager application.">
+<meta property="og:site_name" content="Bloomreach SDK Documentation Portal">
+
+<!-- Twitter Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="astrodotbuild">
+<meta name="twitter:title" content="undefined 🚀 Bloomreach SDK Documentation Portal">
+<meta name="twitter:description" content="Bloomreach provides an SPA SDK for integrating SPAs and other Javascript front-end applications with Bloomreach Content's Delivery API and the preview and editing capabilities of the Experience manager application.">
+<meta name="twitter:image" content="https://github.com/withastro/astro/blob/main/assets/social/banner-minimal.png?raw=true">
+<meta name="twitter:image:alt" content="astro logo on a starry expanse of space, with a purple saturn-like planet floating in the right foreground">
+
+<!--
+  TODO: Add json+ld data, maybe https://schema.org/APIReference makes sense?
+  Docs: https://developers.google.com/search/docs/advanced/structured-data/intro-structured-data
+  https://www.npmjs.com/package/schema-dts seems like a great resource for implementing this.
+  Even better, there's a React component that integrates with `schema-dts`: https://github.com/google/react-schemaorg
+-->
+    <title>
+      Bloomreach SDK Documentation Portal
+    </title>
+    
+    
+  <link rel="stylesheet" href="/spa-sdk/docs/_astro/changelog.3ac6b34f.css" /></head>
+
+  <body class="astro-OUAMJN2I">
+    <header class="astro-3EF6KSR2">
+  <a href="#article" class="sr-only focus:not-sr-only skiplink astro-SVSPNZ7O"><span class="astro-SVSPNZ7O">Skip to Content</span></a>
+  <nav class="nav-wrapper astro-3EF6KSR2" title="Top Navigation">
+    <div class="menu-toggle astro-3EF6KSR2">
+      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var i=t=>{let e=async()=>{await(await t())()};"requestIdleCallback"in window?window.requestIdleCallback(e):setTimeout(e,200)};(self.Astro||(self.Astro={})).idle=i;window.dispatchEvent(new Event("astro:idle"));})();;(()=>{var d;{let p={0:t=>u(t),1:t=>l(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(l(t)),5:t=>new Set(l(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t)},h=t=>{let[e,n]=t;return e in p?p[e](n):void 0},l=t=>t.map(h),u=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([e,n])=>[e,h(n)]));customElements.get("astro-island")||customElements.define("astro-island",(d=class extends HTMLElement{constructor(){super(...arguments);this.hydrate=async()=>{var i;if(!this.hydrator||!this.isConnected)return;let e=(i=this.parentElement)==null?void 0:i.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let n=this.querySelectorAll("astro-slot"),o={},a=this.querySelectorAll("template[data-astro-template]");for(let r of a){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(o[r.getAttribute("data-astro-template")||"default"]=r.innerHTML,r.remove())}for(let r of n){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(o[r.getAttribute("name")||"default"]=r.innerHTML)}let c;try{c=this.hasAttribute("props")?u(JSON.parse(this.getAttribute("props"))):{}}catch(r){let s=this.getAttribute("component-url")||"<unknown>",y=this.getAttribute("component-export");throw y&&(s+=` (export ${y})`),console.error(`[hydrate] Error parsing props for component ${s}`,this.getAttribute("props"),r),r}await this.hydrator(this)(this.Component,c,o,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))}}connectedCallback(){!this.hasAttribute("await-children")||this.firstChild?this.childrenConnectedCallback():new MutationObserver((e,n)=>{n.disconnect(),setTimeout(()=>this.childrenConnectedCallback(),0)}).observe(this,{childList:!0})}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}start(){let e=JSON.parse(this.getAttribute("opts")),n=this.getAttribute("client");if(Astro[n]===void 0){window.addEventListener(`astro:${n}`,()=>this.start(),{once:!0});return}Astro[n](async()=>{let o=this.getAttribute("renderer-url"),[a,{default:c}]=await Promise.all([import(this.getAttribute("component-url")),o?import(o):()=>()=>{}]),i=this.getAttribute("component-export")||"default";if(!i.includes("."))this.Component=a[i];else{this.Component=a;for(let r of i.split("."))this.Component=this.Component[r]}return this.hydrator=c,this.hydrate},e,this)}attributeChangedCallback(){this.hydrate()}},d.observedAttributes=["props"],d))}})();</script><astro-island uid="EySUY" prefix="r0" component-url="/spa-sdk/docs/_astro/SidebarToggle.63a3e517.js" component-export="default" renderer-url="/spa-sdk/docs/_astro/client.8ec44e5c.js" props="{}" ssr="" client="idle" opts="{&quot;name&quot;:&quot;SidebarToggle&quot;,&quot;value&quot;:true}" await-children=""><button type="button" aria-pressed="false" id="menu-toggle"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg><span class="sr-only">Toggle sidebar</span></button></astro-island>
+    </div>
+    <div class="logo flex astro-3EF6KSR2">
+      <a href="/" class="astro-3EF6KSR2">
+        <svg class="logo" width="48" height="48" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    #flame {
+      fill: var(--theme-text-accent);
+    }
+
+    #a {
+      fill: var(--theme-text-accent);
+    }
+  </style>
+  <title>Bloomreach SDK Documentation Portal</title>
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #002840;
+      }
+      .cls-2 {
+        fill: #ffd500;
+      }
+    </style>
+  </defs>
+  <g id="Layer_2" data-name="Layer 2">
+    <g id="bloomreach-logo">
+      <circle class="cls-2" cx="35.94" cy="35.94" r="35.94"></circle>
+      <path class="cls-1" d="M43.22,28.47,41.46,33a6.6,6.6,0,0,1,3,5.64,6.38,6.38,0,1,1-12.76,0A6.36,6.36,0,0,1,37.83,32l1.65-4.6A11,11,0,0,0,26.71,38.29h0V49.84h5V48a11.7,11.7,0,0,0,6.38,1.82,11.26,11.26,0,0,0,5.11-21.37Z"></path>
+      <path class="cls-1" d="M26.69,27.92a15.51,15.51,0,0,1,5-3.41V17.27h-5Z"></path>
+    </g>
+  </g>
+</svg>
+        <h1 class="astro-3EF6KSR2">Bloomreach SDK Documentation Portal</h1>
+      </a>
+    </div>
+    <div style="flex-grow: 1;" class="astro-3EF6KSR2"></div>
+    <div class="search-item astro-3EF6KSR2">
+      <astro-island uid="oG8Qz" prefix="r1" component-url="/spa-sdk/docs/_astro/Search.b5b7622a.js" component-export="default" renderer-url="/spa-sdk/docs/_astro/client.8ec44e5c.js" props="{}" ssr="" client="idle" opts="{&quot;name&quot;:&quot;Search&quot;,&quot;value&quot;:true}" await-children=""><button type="button" class="DocSearch DocSearch-Button" aria-label="Search"><span class="DocSearch-Button-Container"><svg width="20" height="20" class="DocSearch-Search-Icon" viewBox="0 0 20 20"><path d="M14.386 14.386l4.0877 4.0877-4.0877-4.0877c-2.9418 2.9419-7.7115 2.9419-10.6533 0-2.9419-2.9418-2.9419-7.7115 0-10.6533 2.9418-2.9419 7.7115-2.9419 10.6533 0 2.9419 2.9418 2.9419 7.7115 0 10.6533z" stroke="currentColor" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="DocSearch-Button-Placeholder">Search</span></span><span class="DocSearch-Button-Keys"></span></button></astro-island>
+    </div>
+  </nav>
+</header>
+    <main class="layout astro-OUAMJN2I">
+      <aside id="grid-left" class="grid-sidebar astro-OUAMJN2I" title="Site Navigation">
+        <nav aria-labelledby="grid-left" class="astro-RYJZJGVK">
+  <ul class="nav-groups astro-RYJZJGVK">
+    <div class="nav-group astro-RYJZJGVK">
+      <li class="nav-link astro-RYJZJGVK">
+              <a href="/spa-sdk/docs/getting-started" class="astro-RYJZJGVK">
+                Getting started
+              </a>
+            </li><li class="nav-link astro-RYJZJGVK">
+              <a href="/spa-sdk/docs/spa-sdk" class="astro-RYJZJGVK">
+                SPA SDK
+              </a>
+            </li><li class="nav-link astro-RYJZJGVK">
+              <a href="/spa-sdk/docs/react-sdk" class="astro-RYJZJGVK">
+                React SDK
+              </a>
+            </li><li class="nav-link astro-RYJZJGVK">
+              <a href="/spa-sdk/docs/ng-sdk" class="astro-RYJZJGVK">
+                Angular SDK
+              </a>
+            </li><li class="nav-link astro-RYJZJGVK">
+              <a href="/spa-sdk/docs/vue-sdk" aria-current="page" class="astro-RYJZJGVK">
+                Vue 2 SDK
+              </a>
+            </li><li class="nav-link astro-RYJZJGVK">
+              <a href="/spa-sdk/docs/vue3-sdk" class="astro-RYJZJGVK">
+                Vue 3 SDK
+              </a>
+            </li><li class="nav-link astro-RYJZJGVK">
+              <a href="/spa-sdk/docs/migration-guide" class="astro-RYJZJGVK">
+                Migration guide
+              </a>
+            </li><li class="nav-link astro-RYJZJGVK">
+              <a href="/spa-sdk/docs/changelog" class="astro-RYJZJGVK">
+                Changelog
+              </a>
+            </li>
+      <li class="nav-link astro-RYJZJGVK">
+        <a href="https://github.com/bloomreach/spa-sdk/releases" target="_blank" class="astro-RYJZJGVK">Releases</a>
+      </li>
+      <li class="nav-link astro-RYJZJGVK">
+        <a href="https://bloomreach.github.io/spa-sdk/" target="_blank" class="astro-RYJZJGVK">Typedoc</a>
+      </li>
+    </div>
+  </ul>
+</nav>
+
+<script>
+window.addEventListener("DOMContentLoaded", () => {
+  var target = document.querySelector('[aria-current="page"]');
+  if (target && target.offsetTop > window.innerHeight - 100) {
+    document.querySelector(".nav-groups").scrollTop = target.offsetTop;
+  }
+});
+</script>
+      </aside>
+      <div id="grid-main" class="astro-OUAMJN2I">
+        <article id="article" class="content astro-KIB2VHRF">
+  <section class="main-section astro-KIB2VHRF">
+    <nav class="block sm:hidden astro-KIB2VHRF">
+      <script>(()=>{var s=(i,t)=>{let a=async()=>{await(await i())()};if(t.value){let e=matchMedia(t.value);e.matches?a():e.addEventListener("change",a,{once:!0})}};(self.Astro||(self.Astro={})).media=s;window.dispatchEvent(new Event("astro:media"));})();</script><astro-island uid="1XFRgP" prefix="r2" component-url="/spa-sdk/docs/_astro/TableOfContents.fbf6df89.js" component-export="default" renderer-url="/spa-sdk/docs/_astro/client.8ec44e5c.js" props="{&quot;headings&quot;:[1,[[0,{&quot;depth&quot;:[0,1],&quot;slug&quot;:[0,&quot;bloomreach-vuejs-sdk&quot;],&quot;text&quot;:[0,&quot;Bloomreach Vue.js SDK&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;features&quot;],&quot;text&quot;:[0,&quot;Features&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;get-started&quot;],&quot;text&quot;:[0,&quot;Get Started&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;installation&quot;],&quot;text&quot;:[0,&quot;Installation&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;usage&quot;],&quot;text&quot;:[0,&quot;Usage&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;srcmaints&quot;],&quot;text&quot;:[0,&quot;src/main.ts&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;srcappvue&quot;],&quot;text&quot;:[0,&quot;src/App.vue&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;srccomponentsbannervue&quot;],&quot;text&quot;:[0,&quot;src/components/Banner.vue&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;non-blocking-render-mode-nbrmode&quot;],&quot;text&quot;:[0,&quot;Non-blocking render mode (NBRMode)&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;configuration&quot;],&quot;text&quot;:[0,&quot;Configuration&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;mapping&quot;],&quot;text&quot;:[0,&quot;Mapping&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;inline-mapping&quot;],&quot;text&quot;:[0,&quot;Inline Mapping&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;buttons&quot;],&quot;text&quot;:[0,&quot;Buttons&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;license&quot;],&quot;text&quot;:[0,&quot;License&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;reference&quot;],&quot;text&quot;:[0,&quot;Reference&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;br-page&quot;],&quot;text&quot;:[0,&quot;br-page&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;br-component&quot;],&quot;text&quot;:[0,&quot;br-component&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;br-manage-content-button&quot;],&quot;text&quot;:[0,&quot;br-manage-content-button&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;br-manage-menu-button&quot;],&quot;text&quot;:[0,&quot;br-manage-menu-button&quot;]}]]]}" ssr="" client="media" opts="{&quot;name&quot;:&quot;TableOfContents&quot;,&quot;value&quot;:&quot;(max-width: 50em)&quot;}" await-children=""><h2 id="on-this-page-heading" class="heading">On this page</h2><ul><li class="header-link depth-2"><a href="#features">Features</a></li><li class="header-link depth-2"><a href="#get-started">Get Started</a></li><li class="header-link depth-3"><a href="#installation">Installation</a></li><li class="header-link depth-3"><a href="#usage">Usage</a></li><li class="header-link depth-3"><a href="#non-blocking-render-mode-nbrmode">Non-blocking render mode (NBRMode)</a></li><li class="header-link depth-3"><a href="#configuration">Configuration</a></li><li class="header-link depth-3"><a href="#mapping">Mapping</a></li><li class="header-link depth-3"><a href="#inline-mapping">Inline Mapping</a></li><li class="header-link depth-3"><a href="#buttons">Buttons</a></li><li class="header-link depth-2"><a href="#license">License</a></li><li class="header-link depth-2"><a href="#reference">Reference</a></li><li class="header-link depth-3"><a href="#br-page">br-page</a></li><li class="header-link depth-3"><a href="#br-component">br-component</a></li><li class="header-link depth-3"><a href="#br-manage-content-button">br-manage-content-button</a></li><li class="header-link depth-3"><a href="#br-manage-menu-button">br-manage-menu-button</a></li></ul></astro-island>
+    </nav>
+    
+          
+  <h1 id="bloomreach-vuejs-sdk">Bloomreach Vue.js SDK</h1>
+<p>Bloomreach Vue.js SDK provides simplified headless integration with <a href="https://www.bloomreach.com/en/products/content">Bloomreach Content</a>
+for Vue-based applications. This library interacts with the <a href="https://documentation.bloomreach.com/api-reference/content/delivery/page-delivery-api/page-delivery-api.html">Page Model API</a>
+and <a href="https://www.npmjs.com/package/@bloomreach/spa-sdk">Bloomreach SPA SDK</a> and
+exposes a simplified declarative Vue.js interface over the Page Model.</p>
+<h2 id="features">Features</h2>
+<ul>
+<li>Bloomreach Page Vue component;</li>
+<li>Bloomreach Components Vue component;</li>
+<li>Manage Content Button;</li>
+<li>Manage Menu Button;</li>
+<li><a href="https://vuejs.org/v2/guide/components-slots.html">Slots</a> support;</li>
+<li><a href="https://ssr.vuejs.org/">Vue Server-Side Rendering</a> support;</li>
+<li><a href="https://nuxtjs.org/">Nuxt.js</a> support;</li>
+<li><a href="https://router.vuejs.org/">Vue Router</a> support;</li>
+<li><a href="https://jestjs.io/">Jest</a> support.</li>
+</ul>
+<p><strong>Important notice</strong>: Vue SDK does not work in combination with <code>nomarkup</code>
+xtype container components. (The xtype of a container component is described <a href="https://documentation.bloomreach.com/api-reference/content/management/site-management-api/schemas.html">here</a> and <a href="https://documentation.bloomreach.com/14/library/concepts/template-composer/channel-editor-containers.html">here</a>)
+The problem is that Vue 2 does not support multi-root templates and the fragement libraries such as <a href="https://www.npmjs.com/package/vue-fragment">Vue Fragment</a> that enable this for Vue 2 all add ‘magic’ parentNodes which is incompatible with some of the Bloomreach Experience Manager code constructs. We are looking into updating to Vue 3 when possible which <a href="https://v3.vuejs.org/guide/migration/fragments.html#_2-x-syntax">does support multi-root templates</a> without extra magic.</p>
+<h2 id="get-started">Get Started</h2>
+<h3 id="installation">Installation</h3>
+<p>To get the SDK into your project with <a href="https://docs.npmjs.com/cli/npm">NPM</a>:</p>
+<pre is:raw="" class="astro-code github-dark" style="background-color: #24292e; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color: #B392F0">npm</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">install</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">@bloomreach/vue-sdk</span></span></code></pre>
+<p>And with <a href="https://yarnpkg.com">Yarn</a>:</p>
+<pre is:raw="" class="astro-code github-dark" style="background-color: #24292e; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color: #B392F0">yarn</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">add</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">@bloomreach/vue-sdk</span></span></code></pre>
+<h3 id="usage">Usage</h3>
+<p>The following code snippets render a simple page with a
+<a href="https://documentation.bloomreach.com/library/setup/hst-components/overview.html">Banner</a>
+component.</p>
+<h4 id="srcmaints"><code>src/main.ts</code></h4>
+<p>In the app’s entry file, it needs to import and
+<a href="https://vuejs.org/v2/guide/plugins.html#Using-a-Plugin">install</a> the <code>BrSdk</code>
+plugin to make the SDK components available globally.</p>
+<pre is:raw="" class="astro-code github-dark" style="background-color: #24292e; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color: #F97583">import</span><span style="color: #E1E4E8"> Vue </span><span style="color: #F97583">from</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">'vue'</span><span style="color: #E1E4E8">;</span></span>
+<span class="line"><span style="color: #F97583">import</span><span style="color: #E1E4E8"> { BrSdk } </span><span style="color: #F97583">from</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">'@bloomreach/vue-sdk'</span><span style="color: #E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E1E4E8">Vue.</span><span style="color: #B392F0">use</span><span style="color: #E1E4E8">(BrSdk);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A737D">// ...</span></span></code></pre>
+<h4 id="srcappvue"><code>src/App.vue</code></h4>
+<p>In the <code>App</code> component, it needs to pass the configuration and brXM components
+mapping into the <code>br-page</code> component inputs.</p>
+<pre is:raw="" class="astro-code github-dark" style="background-color: #24292e; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">  &#x3C;</span><span style="color: #85E89D">br-page</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">:configuration</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"configuration"</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">:mapping</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"mapping"</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">    &#x3C;</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">v-slot:default</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"props"</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">      &#x3C;</span><span style="color: #85E89D">header</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">        &#x3C;</span><span style="color: #85E89D">a</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">:href</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"props.page.getUrl('/')"</span><span style="color: #E1E4E8">>Home&#x3C;/</span><span style="color: #85E89D">a</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">        &#x3C;</span><span style="color: #85E89D">br-component</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">component</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"menu"</span><span style="color: #E1E4E8"> /></span></span>
+<span class="line"><span style="color: #E1E4E8">      &#x3C;/</span><span style="color: #85E89D">header</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">      &#x3C;</span><span style="color: #85E89D">section</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">        &#x3C;</span><span style="color: #85E89D">br-component</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">component</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"main"</span><span style="color: #E1E4E8"> /></span></span>
+<span class="line"><span style="color: #E1E4E8">      &#x3C;/</span><span style="color: #85E89D">section</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">      &#x3C;</span><span style="color: #85E89D">footer</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">        &#x3C;</span><span style="color: #85E89D">br-component</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">component</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"footer"</span><span style="color: #E1E4E8"> /></span></span>
+<span class="line"><span style="color: #E1E4E8">      &#x3C;/</span><span style="color: #85E89D">footer</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">    &#x3C;/</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">  &#x3C;/</span><span style="color: #85E89D">br-page</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">import</span><span style="color: #E1E4E8"> Banner </span><span style="color: #F97583">from</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">'./components/Banner.vue'</span><span style="color: #E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">export</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">default</span><span style="color: #E1E4E8"> {</span></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #B392F0">data</span><span style="color: #E1E4E8">() {</span></span>
+<span class="line"><span style="color: #E1E4E8">      </span><span style="color: #F97583">return</span><span style="color: #E1E4E8"> {</span></span>
+<span class="line"><span style="color: #E1E4E8">        configuration: {</span></span>
+<span class="line"><span style="color: #E1E4E8">          </span><span style="color: #6A737D">/* ... */</span></span>
+<span class="line"><span style="color: #E1E4E8">        },</span></span>
+<span class="line"><span style="color: #E1E4E8">        mapping: { Banner },</span></span>
+<span class="line"><span style="color: #E1E4E8">      };</span></span>
+<span class="line"><span style="color: #E1E4E8">    },</span></span>
+<span class="line"><span style="color: #E1E4E8">  };</span></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span></code></pre>
+<h4 id="srccomponentsbannervue"><code>src/components/Banner.vue</code></h4>
+<p>Finally, in the <code>Banner</code> component, it can consume the component data via the
+<code>component</code> prop.</p>
+<pre is:raw="" class="astro-code github-dark" style="background-color: #24292e; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">  &#x3C;</span><span style="color: #85E89D">div</span><span style="color: #E1E4E8">>Banner: {{ component.getName() }}&#x3C;/</span><span style="color: #85E89D">div</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">export</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">default</span><span style="color: #E1E4E8"> { props: [</span><span style="color: #9ECBFF">'component'</span><span style="color: #E1E4E8">] };</span></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span></code></pre>
+<h3 id="non-blocking-render-mode-nbrmode">Non-blocking render mode (NBRMode)</h3>
+<p>Non-blocking rendering mode can be used to decrease the time for your application to load fully on the client side. By
+default the NBRMode configuration is <code>false</code> to avoid breaking existing setups. Setting it to <code>true</code> will enable
+non-blocking render mode. When the mode is active the children of the BrPage component will start mounting while the
+Page Model is being fetched. These children might contain logic themselves that queries some external API and using
+non-blocking render mode would allow this to be executed in parallel to requesting the Page Model.</p>
+<pre is:raw="" class="astro-code github-dark" style="background-color: #24292e; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">  Hello</span></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">export</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">default</span><span style="color: #E1E4E8"> {</span></span>
+<span class="line"><span style="color: #E1E4E8">    name: </span><span style="color: #9ECBFF">'MyComponent'</span><span style="color: #E1E4E8">,</span></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #F97583">async</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">mounted</span><span style="color: #E1E4E8">() {</span></span>
+<span class="line"><span style="color: #E1E4E8">      </span><span style="color: #6A737D">// This will run in parallel to fetching the PageModel from the Delivery API</span></span>
+<span class="line"><span style="color: #E1E4E8">      </span><span style="color: #F97583">await</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">fetch</span><span style="color: #E1E4E8">(</span><span style="color: #9ECBFF">'https://yourapi.com'</span><span style="color: #E1E4E8">);</span></span>
+<span class="line"><span style="color: #E1E4E8">    }</span></span>
+<span class="line"><span style="color: #E1E4E8">  };</span></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span></code></pre>
+<pre is:raw="" class="astro-code github-dark" style="background-color: #24292e; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">  &#x3C;</span><span style="color: #85E89D">br-page</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">:configuration</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"configuration"</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">:mapping</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"mapping"</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">    &#x3C;</span><span style="color: #85E89D">my-component</span><span style="color: #E1E4E8">>&#x3C;/</span><span style="color: #85E89D">my-component</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">    &#x3C;</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">v-slot:default</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"props"</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">      ...</span></span>
+<span class="line"><span style="color: #E1E4E8">  &#x3C;/</span><span style="color: #85E89D">br-page</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">export</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">default</span><span style="color: #E1E4E8"> {</span></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #B392F0">data</span><span style="color: #E1E4E8">() {</span></span>
+<span class="line"><span style="color: #E1E4E8">      </span><span style="color: #F97583">return</span><span style="color: #E1E4E8"> {</span></span>
+<span class="line"><span style="color: #E1E4E8">        configuration: {</span></span>
+<span class="line"><span style="color: #E1E4E8">          </span><span style="color: #6A737D">/* ... */</span></span>
+<span class="line"><span style="color: #E1E4E8">          NBRMode: </span><span style="color: #79B8FF">true</span><span style="color: #E1E4E8">,</span></span>
+<span class="line"><span style="color: #E1E4E8">        },</span></span>
+<span class="line"><span style="color: #E1E4E8">        mapping: { </span><span style="color: #F97583">...</span><span style="color: #E1E4E8"> },</span></span>
+<span class="line"><span style="color: #E1E4E8">      };</span></span>
+<span class="line"><span style="color: #E1E4E8">    },</span></span>
+<span class="line"><span style="color: #E1E4E8">  };</span></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span></code></pre>
+<h3 id="configuration">Configuration</h3>
+<p>The <code>br-page</code> component supports several options you may use to customize page
+initialization. These options will be passed to the <code>initialize</code> function from
+<a href="https://www.npmjs.com/package/@bloomreach/spa-sdk"><code>@bloomreach/spa-sdk</code></a>. See
+<a href="https://bloomreach.github.io/spa-sdk/modules/index.html#Configuration">here</a> for the
+full configuration documentation in the SPA SDK Typedocs.</p>
+<h3 id="mapping">Mapping</h3>
+<p>The <code>br-page</code> component provides a way to link Vue components with the brXM
+ones. It requires to pass the <code>mapping</code> property that maps the component type
+with its representation.</p>
+<p>The <a href="https://bloomreach.github.io/spa-sdk/interfaces/index.ContainerItem.html">Container Items</a> can be
+mapped by their labels.</p>
+<pre is:raw="" class="astro-code github-dark" style="background-color: #24292e; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">  &#x3C;</span><span style="color: #85E89D">br-page</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">:configuration</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"configuration"</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">:mapping</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"mapping"</span><span style="color: #E1E4E8"> /></span></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">import</span><span style="color: #E1E4E8"> NewsList </span><span style="color: #F97583">from</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">'./components/NewsList.vue'</span><span style="color: #E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">export</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">default</span><span style="color: #E1E4E8"> {</span></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #B392F0">data</span><span style="color: #E1E4E8">() {</span></span>
+<span class="line"><span style="color: #E1E4E8">      </span><span style="color: #F97583">return</span><span style="color: #E1E4E8"> {</span></span>
+<span class="line"><span style="color: #E1E4E8">        configuration: {</span></span>
+<span class="line"><span style="color: #E1E4E8">          </span><span style="color: #6A737D">/* ... */</span></span>
+<span class="line"><span style="color: #E1E4E8">        },</span></span>
+<span class="line"><span style="color: #E1E4E8">        mapping: { </span><span style="color: #9ECBFF">'News List'</span><span style="color: #E1E4E8">: NewsList },</span></span>
+<span class="line"><span style="color: #E1E4E8">      };</span></span>
+<span class="line"><span style="color: #E1E4E8">    },</span></span>
+<span class="line"><span style="color: #E1E4E8">  };</span></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span></code></pre>
+<p>The <a href="https://bloomreach.github.io/spa-sdk/interfaces/index.ContainerItem.html">Containers</a>
+can be only mapped by their <a href="https://documentation.bloomreach.com/library/concepts/template-composer/channel-editor-containers.html">type</a>,
+so you need to use <a href="https://bloomreach.github.io/spa-sdk/modules/index.html#TYPE_CONTAINER_BOX">constants</a> from
+<a href="www.npmjs.com/package/@bloomreach/spa-sdk"><code>@bloomreach/spa-sdk</code></a>. By default,
+the Vue.js SDK provides an implementation for all the container types as it is
+defined in the <a href="https://documentation.bloomreach.com/library/concepts/template-composer/channel-editor-containers.html">documentation</a>.</p>
+<pre is:raw="" class="astro-code github-dark" style="background-color: #24292e; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">  &#x3C;</span><span style="color: #85E89D">br-page</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">:configuration</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"configuration"</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">:mapping</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"mapping"</span><span style="color: #E1E4E8"> /></span></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">import</span><span style="color: #E1E4E8"> { TYPE_CONTAINER_INLINE } </span><span style="color: #F97583">from</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">'@bloomreach/spa-sdk'</span><span style="color: #E1E4E8">;</span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">import</span><span style="color: #E1E4E8"> InlineContainer </span><span style="color: #F97583">from</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">'./components/InlineContainer.vue'</span><span style="color: #E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">export</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">default</span><span style="color: #E1E4E8"> {</span></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #B392F0">data</span><span style="color: #E1E4E8">() {</span></span>
+<span class="line"><span style="color: #E1E4E8">      </span><span style="color: #F97583">return</span><span style="color: #E1E4E8"> {</span></span>
+<span class="line"><span style="color: #E1E4E8">        configuration: {</span></span>
+<span class="line"><span style="color: #E1E4E8">          </span><span style="color: #6A737D">/* ... */</span></span>
+<span class="line"><span style="color: #E1E4E8">        },</span></span>
+<span class="line"><span style="color: #E1E4E8">        mapping: { [</span><span style="color: #79B8FF">TYPE_CONTAINER_INLINE</span><span style="color: #E1E4E8">]: InlineContainer },</span></span>
+<span class="line"><span style="color: #E1E4E8">      };</span></span>
+<span class="line"><span style="color: #E1E4E8">    },</span></span>
+<span class="line"><span style="color: #E1E4E8">  };</span></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span></code></pre>
+<p>From within the Container component, the Container Items can be accessed via the
+<code>getChildren</code> method. This can be used to reorder or wrap child elements.</p>
+<pre is:raw="" class="astro-code github-dark" style="background-color: #24292e; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">  &#x3C;</span><span style="color: #85E89D">div</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">    &#x3C;</span><span style="color: #85E89D">span</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">v-for</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"(child, key) in component.getChildren()"</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">:key</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"key"</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">      &#x3C;</span><span style="color: #85E89D">br-component</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">:component</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"child"</span><span style="color: #E1E4E8"> /></span></span>
+<span class="line"><span style="color: #E1E4E8">    &#x3C;/</span><span style="color: #85E89D">span</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">  &#x3C;/</span><span style="color: #85E89D">div</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">export</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">default</span><span style="color: #E1E4E8"> { props: [</span><span style="color: #9ECBFF">'component'</span><span style="color: #E1E4E8">] };</span></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span></code></pre>
+<p>That is also possible to render children via the default slot.</p>
+<pre is:raw="" class="astro-code github-dark" style="background-color: #24292e; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color: #F97583">export</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">default</span><span style="color: #E1E4E8"> {</span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #B392F0">render</span><span style="color: #E1E4E8">(</span><span style="color: #FFAB70">createElement</span><span style="color: #E1E4E8">) {</span></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #F97583">return</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">createElement</span><span style="color: #E1E4E8">(</span></span>
+<span class="line"><span style="color: #E1E4E8">      </span><span style="color: #9ECBFF">'div'</span><span style="color: #E1E4E8">,</span></span>
+<span class="line"><span style="color: #E1E4E8">      </span><span style="color: #79B8FF">this</span><span style="color: #E1E4E8">.$slots.default.</span><span style="color: #B392F0">map</span><span style="color: #E1E4E8">((</span><span style="color: #FFAB70">node</span><span style="color: #E1E4E8">) </span><span style="color: #F97583">=></span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">createElement</span><span style="color: #E1E4E8">(</span><span style="color: #9ECBFF">'span'</span><span style="color: #E1E4E8">, [node])),</span></span>
+<span class="line"><span style="color: #E1E4E8">    );</span></span>
+<span class="line"><span style="color: #E1E4E8">  },</span></span>
+<span class="line"><span style="color: #E1E4E8">};</span></span></code></pre>
+<p>The <a href="https://bloomreach.github.io/spa-sdk/interfaces/index.Component.html">Components</a>
+can be mapped by their names. It is useful for a menu component mapping.</p>
+<pre is:raw="" class="astro-code github-dark" style="background-color: #24292e; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">  &#x3C;</span><span style="color: #85E89D">br-page</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">:configuration</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"configuration"</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">:mapping</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"mapping"</span><span style="color: #E1E4E8"> /></span></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">import</span><span style="color: #E1E4E8"> Menu </span><span style="color: #F97583">from</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">'./components/Menu.vue'</span><span style="color: #E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">export</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">default</span><span style="color: #E1E4E8"> {</span></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #B392F0">data</span><span style="color: #E1E4E8">() {</span></span>
+<span class="line"><span style="color: #E1E4E8">      </span><span style="color: #F97583">return</span><span style="color: #E1E4E8"> {</span></span>
+<span class="line"><span style="color: #E1E4E8">        configuration: {</span></span>
+<span class="line"><span style="color: #E1E4E8">          </span><span style="color: #6A737D">/* ... */</span></span>
+<span class="line"><span style="color: #E1E4E8">        },</span></span>
+<span class="line"><span style="color: #E1E4E8">        mapping: { menu: Menu },</span></span>
+<span class="line"><span style="color: #E1E4E8">      };</span></span>
+<span class="line"><span style="color: #E1E4E8">    },</span></span>
+<span class="line"><span style="color: #E1E4E8">  };</span></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span></code></pre>
+<p>By default, container items that are not mapped will be rendered as a warning
+text. There is an option to override the fallback.</p>
+<pre is:raw="" class="astro-code github-dark" style="background-color: #24292e; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">  &#x3C;</span><span style="color: #85E89D">br-page</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">:configuration</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"configuration"</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">:mapping</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"mapping"</span><span style="color: #E1E4E8"> /></span></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">import</span><span style="color: #E1E4E8"> { TYPE_CONTAINER_ITEM_UNDEFINED } </span><span style="color: #F97583">from</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">'@bloomreach/spa-sdk'</span><span style="color: #E1E4E8">;</span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">import</span><span style="color: #E1E4E8"> Fallback </span><span style="color: #F97583">from</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">'./components/Fallback.vue'</span><span style="color: #E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">export</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">default</span><span style="color: #E1E4E8"> {</span></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #B392F0">data</span><span style="color: #E1E4E8">() {</span></span>
+<span class="line"><span style="color: #E1E4E8">      </span><span style="color: #F97583">return</span><span style="color: #E1E4E8"> {</span></span>
+<span class="line"><span style="color: #E1E4E8">        configuration: {</span></span>
+<span class="line"><span style="color: #E1E4E8">          </span><span style="color: #6A737D">/* ... */</span></span>
+<span class="line"><span style="color: #E1E4E8">        },</span></span>
+<span class="line"><span style="color: #E1E4E8">        mapping: { [</span><span style="color: #79B8FF">TYPE_CONTAINER_ITEM_UNDEFINED</span><span style="color: #E1E4E8">]: Fallback },</span></span>
+<span class="line"><span style="color: #E1E4E8">      };</span></span>
+<span class="line"><span style="color: #E1E4E8">    },</span></span>
+<span class="line"><span style="color: #E1E4E8">  };</span></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span></code></pre>
+<h3 id="inline-mapping">Inline Mapping</h3>
+<p>There is also another way to render a component. In case you need to show a
+static component or a component from the abstract page, you can use inline
+component mapping.</p>
+<pre is:raw="" class="astro-code github-dark" style="background-color: #24292e; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">  &#x3C;</span><span style="color: #85E89D">br-page</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">:configuration</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"configuration"</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">:mapping</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"mapping"</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">    &#x3C;</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">      &#x3C;</span><span style="color: #85E89D">br-component</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">component</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"menu"</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">        &#x3C;</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">v-slot:default</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"{ component, page }"</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">          &#x3C;</span><span style="color: #85E89D">menu</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">:component</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"component"</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">:page</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"page"</span><span style="color: #E1E4E8"> </span><span style="color: #FDAEB7; font-style: italic">/</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">        &#x3C;/</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">      &#x3C;/</span><span style="color: #85E89D">br-component</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">    &#x3C;/</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">  &#x3C;/</span><span style="color: #85E89D">br-page</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">import</span><span style="color: #E1E4E8"> Menu </span><span style="color: #F97583">from</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">'./components/Menu.vue'</span><span style="color: #E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">export</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">default</span><span style="color: #E1E4E8"> {</span></span>
+<span class="line"><span style="color: #E1E4E8">    components: { Menu },</span></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #B392F0">data</span><span style="color: #E1E4E8">() {</span></span>
+<span class="line"><span style="color: #E1E4E8">      </span><span style="color: #F97583">return</span><span style="color: #E1E4E8"> {</span></span>
+<span class="line"><span style="color: #E1E4E8">        configuration: {</span></span>
+<span class="line"><span style="color: #E1E4E8">          </span><span style="color: #6A737D">/* ... */</span></span>
+<span class="line"><span style="color: #E1E4E8">        },</span></span>
+<span class="line"><span style="color: #E1E4E8">        mapping: {},</span></span>
+<span class="line"><span style="color: #E1E4E8">      };</span></span>
+<span class="line"><span style="color: #E1E4E8">    },</span></span>
+<span class="line"><span style="color: #E1E4E8">  };</span></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span></code></pre>
+<p>In a component it is also possible to point where the component’s children are
+going to be placed.</p>
+<pre is:raw="" class="astro-code github-dark" style="background-color: #24292e; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">  &#x3C;</span><span style="color: #85E89D">div</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">    @copy; Bloomreach</span></span>
+<span class="line"><span style="color: #E1E4E8">    &#x3C;</span><span style="color: #85E89D">br-component</span><span style="color: #E1E4E8"> /></span></span>
+<span class="line"><span style="color: #E1E4E8">  &#x3C;/</span><span style="color: #85E89D">div</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">export</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">default</span><span style="color: #E1E4E8"> { props: [</span><span style="color: #9ECBFF">'component'</span><span style="color: #E1E4E8">] };</span></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span></code></pre>
+<p>The component data in case of inline mapping can be accessed via the template
+context.</p>
+<pre is:raw="" class="astro-code github-dark" style="background-color: #24292e; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">  &#x3C;</span><span style="color: #85E89D">br-page</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">:configuration</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"configuration"</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">:mapping</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"mapping"</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">    &#x3C;</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">      &#x3C;</span><span style="color: #85E89D">br-component</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">component</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"menu"</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">        &#x3C;</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">v-slot:default</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"{ component, page }"</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">          &#x3C;</span><span style="color: #85E89D">ul</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">            &#x3C;</span><span style="color: #85E89D">li</span><span style="color: #E1E4E8">>&#x3C;</span><span style="color: #85E89D">a</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">:href</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"page.getUrl('/')"</span><span style="color: #E1E4E8">>Home&#x3C;/</span><span style="color: #85E89D">a</span><span style="color: #E1E4E8">>&#x3C;/</span><span style="color: #85E89D">li</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">            &#x3C;</span><span style="color: #85E89D">li</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">v-for</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"(item, key) in component.getModels()"</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">:key</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"key"</span><span style="color: #E1E4E8">>...&#x3C;/</span><span style="color: #85E89D">li</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">          &#x3C;/</span><span style="color: #85E89D">ul</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">        &#x3C;/</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">      &#x3C;/</span><span style="color: #85E89D">br-component</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">    &#x3C;/</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">  &#x3C;/</span><span style="color: #85E89D">br-page</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">export</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">default</span><span style="color: #E1E4E8"> {</span></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #B392F0">data</span><span style="color: #E1E4E8">() {</span></span>
+<span class="line"><span style="color: #E1E4E8">      </span><span style="color: #F97583">return</span><span style="color: #E1E4E8"> {</span></span>
+<span class="line"><span style="color: #E1E4E8">        configuration: {</span></span>
+<span class="line"><span style="color: #E1E4E8">          </span><span style="color: #6A737D">/* ... */</span></span>
+<span class="line"><span style="color: #E1E4E8">        },</span></span>
+<span class="line"><span style="color: #E1E4E8">        mapping: {},</span></span>
+<span class="line"><span style="color: #E1E4E8">      };</span></span>
+<span class="line"><span style="color: #E1E4E8">    },</span></span>
+<span class="line"><span style="color: #E1E4E8">  };</span></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span></code></pre>
+<h3 id="buttons">Buttons</h3>
+<p>It is recommended to add the css style <code>position: relative</code> to the Buttons
+so they will position correctly within their parent container component.</p>
+<p>Manage menu button can be placed inside a menu component using
+<code>br-manage-menu-button</code> component.</p>
+<pre is:raw="" class="astro-code github-dark" style="background-color: #24292e; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">  &#x3C;</span><span style="color: #85E89D">ul</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">v-if</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"menu"</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">:class</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"{ 'has-edit-button': page.isPreview() }"</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #6A737D">&#x3C;!-- ... --></span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E1E4E8">    &#x3C;</span><span style="color: #85E89D">br-manage-menu-button</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">:menu</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"menu"</span><span style="color: #E1E4E8"> /></span></span>
+<span class="line"><span style="color: #E1E4E8">  &#x3C;/</span><span style="color: #85E89D">ul</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">import</span><span style="color: #E1E4E8"> { Menu, Reference } </span><span style="color: #F97583">from</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">'@bloomreach/spa-sdk'</span><span style="color: #E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">interface</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">MenuModels</span><span style="color: #E1E4E8"> {</span></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #FFAB70">menu</span><span style="color: #F97583">:</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">Reference</span><span style="color: #E1E4E8">;</span></span>
+<span class="line"><span style="color: #E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">export</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">default</span><span style="color: #E1E4E8"> {</span></span>
+<span class="line"><span style="color: #E1E4E8">    computed: {</span></span>
+<span class="line"><span style="color: #E1E4E8">      </span><span style="color: #B392F0">menu</span><span style="color: #E1E4E8">() {</span></span>
+<span class="line"><span style="color: #E1E4E8">        </span><span style="color: #F97583">const</span><span style="color: #E1E4E8"> { </span><span style="color: #FFAB70">menu</span><span style="color: #E1E4E8">: </span><span style="color: #79B8FF">menuRef</span><span style="color: #E1E4E8"> } </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">this</span><span style="color: #E1E4E8">.component.</span><span style="color: #B392F0">getModels</span><span style="color: #E1E4E8">&#x3C;</span><span style="color: #B392F0">MenuModels</span><span style="color: #E1E4E8">>();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E1E4E8">        </span><span style="color: #F97583">return</span><span style="color: #E1E4E8"> menuRef </span><span style="color: #F97583">&#x26;&#x26;</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">this</span><span style="color: #E1E4E8">.page.</span><span style="color: #B392F0">getContent</span><span style="color: #E1E4E8">&#x3C;</span><span style="color: #B392F0">Menu</span><span style="color: #E1E4E8">>(menuRef);</span></span>
+<span class="line"><span style="color: #E1E4E8">      },</span></span>
+<span class="line"><span style="color: #E1E4E8">    },</span></span>
+<span class="line"><span style="color: #E1E4E8">    props: [</span><span style="color: #9ECBFF">'component'</span><span style="color: #E1E4E8">, </span><span style="color: #9ECBFF">'page'</span><span style="color: #E1E4E8">],</span></span>
+<span class="line"><span style="color: #E1E4E8">  };</span></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span></code></pre>
+<p>Manage content button can be placed inside a component using
+<code>br-manage-content-button</code> component with non-empty <code>content</code> property.</p>
+<pre is:raw="" class="astro-code github-dark" style="background-color: #24292e; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">  &#x3C;</span><span style="color: #85E89D">div</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">v-if</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"document"</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">:class</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"{ 'has-edit-button': page.isPreview() }"</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #6A737D">&#x3C;!-- ... --></span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E1E4E8">    &#x3C;</span><span style="color: #85E89D">br-manage-content-button</span></span>
+<span class="line"><span style="color: #E1E4E8">      </span><span style="color: #B392F0">:content</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"document"</span></span>
+<span class="line"><span style="color: #E1E4E8">      </span><span style="color: #B392F0">document-template-query</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"new-banner-document"</span></span>
+<span class="line"><span style="color: #E1E4E8">      </span><span style="color: #B392F0">folder-template-query</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"new-banner-folder"</span></span>
+<span class="line"><span style="color: #E1E4E8">      </span><span style="color: #B392F0">parameter</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"document"</span></span>
+<span class="line"><span style="color: #E1E4E8">      </span><span style="color: #B392F0">root</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"banners"</span></span>
+<span class="line"><span style="color: #E1E4E8">      </span><span style="color: #B392F0">:relative</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"true"</span></span>
+<span class="line"><span style="color: #E1E4E8">    /></span></span>
+<span class="line"><span style="color: #E1E4E8">  &#x3C;/</span><span style="color: #85E89D">div</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">import</span><span style="color: #E1E4E8"> { Document, Reference } </span><span style="color: #F97583">from</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">'@bloomreach/spa-sdk'</span><span style="color: #E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">interface</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">BannerModels</span><span style="color: #E1E4E8"> {</span></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #FFAB70">document</span><span style="color: #F97583">:</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">Reference</span><span style="color: #E1E4E8">;</span></span>
+<span class="line"><span style="color: #E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">export</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">default</span><span style="color: #E1E4E8"> {</span></span>
+<span class="line"><span style="color: #E1E4E8">    computed: {</span></span>
+<span class="line"><span style="color: #E1E4E8">      </span><span style="color: #B392F0">document</span><span style="color: #E1E4E8">() {</span></span>
+<span class="line"><span style="color: #E1E4E8">        </span><span style="color: #F97583">const</span><span style="color: #E1E4E8"> { </span><span style="color: #FFAB70">document</span><span style="color: #E1E4E8">: </span><span style="color: #79B8FF">documentRef</span><span style="color: #E1E4E8"> } </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">this</span><span style="color: #E1E4E8">.component.</span><span style="color: #B392F0">getModels</span><span style="color: #E1E4E8">&#x3C;</span><span style="color: #B392F0">BannerModels</span><span style="color: #E1E4E8">>();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E1E4E8">        </span><span style="color: #F97583">return</span><span style="color: #E1E4E8"> documentRef </span><span style="color: #F97583">&#x26;&#x26;</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">this</span><span style="color: #E1E4E8">.page.</span><span style="color: #B392F0">getContent</span><span style="color: #E1E4E8">&#x3C;</span><span style="color: #B392F0">Document</span><span style="color: #E1E4E8">>(documentRef);</span></span>
+<span class="line"><span style="color: #E1E4E8">      },</span></span>
+<span class="line"><span style="color: #E1E4E8">    },</span></span>
+<span class="line"><span style="color: #E1E4E8">    props: [</span><span style="color: #9ECBFF">'component'</span><span style="color: #E1E4E8">, </span><span style="color: #9ECBFF">'page'</span><span style="color: #E1E4E8">],</span></span>
+<span class="line"><span style="color: #E1E4E8">  };</span></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span></code></pre>
+<p>Add new content button can be placed inside a component using
+<code>br-manage-content-button</code> directive but without passing a content entity.</p>
+<pre is:raw="" class="astro-code github-dark" style="background-color: #24292e; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">  &#x3C;</span><span style="color: #85E89D">div</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">:class</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"{ 'has-edit-button': page.isPreview() }"</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #6A737D">&#x3C;!-- ... --></span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E1E4E8">    &#x3C;</span><span style="color: #85E89D">br-manage-content-button</span></span>
+<span class="line"><span style="color: #E1E4E8">      </span><span style="color: #B392F0">document-template-query</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"new-news-document"</span></span>
+<span class="line"><span style="color: #E1E4E8">      </span><span style="color: #B392F0">folder-template-query</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"new-news-folder"</span></span>
+<span class="line"><span style="color: #E1E4E8">      </span><span style="color: #B392F0">root</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"news"</span></span>
+<span class="line"><span style="color: #E1E4E8">    /></span></span>
+<span class="line"><span style="color: #E1E4E8">  &#x3C;/</span><span style="color: #85E89D">div</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">export</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">default</span><span style="color: #E1E4E8"> {</span></span>
+<span class="line"><span style="color: #E1E4E8">    props: [</span><span style="color: #9ECBFF">'component'</span><span style="color: #E1E4E8">, </span><span style="color: #9ECBFF">'page'</span><span style="color: #E1E4E8">],</span></span>
+<span class="line"><span style="color: #E1E4E8">  };</span></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span></code></pre>
+<h2 id="license">License</h2>
+<p>Published under <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</a>
+license.</p>
+<h2 id="reference">Reference</h2>
+<p>The Vue.js SDK is using <a href="https://www.npmjs.com/package/@bloomreach/spa-sdk">Bloomreach SPA SDK</a> to interact
+with Bloomreach Content.</p>
+<h3 id="br-page">br-page</h3>
+<p>This is the entry point to the page model. This component requests and
+initializes the page model, and then renders the page root component
+recursively.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Property</th><th align="center">Required</th><th>Description</th></tr></thead><tbody><tr><td><code>configuration</code></td><td align="center"><em>yes</em></td><td>The <a href="#configuration">configuration</a> of the SPA SDK.</td></tr><tr><td><code>mapping</code></td><td align="center"><em>yes</em></td><td>The brXM and Vue.js components <a href="#mapping">mapping</a>.</td></tr><tr><td><code>page</code></td><td align="center"><em>no</em></td><td>Preinitialized page instance or prefetched page model. Mostly that should be used to transfer state from the server-side to the client-side.</td></tr></tbody></table>
+<p>This component also supports a default slot transclusion. <code>&#x3C;template></code> from the
+component contents will be rendered in the root component context.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Variable</th><th>Description</th></tr></thead><tbody><tr><td><code>component</code></td><td>The root component.</td></tr><tr><td><code>page</code></td><td>The current page instance.</td></tr></tbody></table>
+<h3 id="br-component">br-component</h3>
+<p>This component points to where children or some component should be placed.
+<code>br-component</code> can be used inside <code>br-page</code> or mapped components only. If it
+contains <code>&#x3C;template></code> in the contents, then the template will be rendered in the
+context of every matched component. Otherwise, it will try to render all
+children components recursively.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Property</th><th align="center">Required</th><th>Description</th></tr></thead><tbody><tr><td><code>component</code></td><td align="center"><em>no</em></td><td>The component instance or a path to a component. The path is defined as a slash-separated components name chain relative to the current component (e.g. <code>main/container</code>). If it is omitted, all the children will be rendered.</td></tr></tbody></table>
+<p>The template context holds references to the current component and the current
+page instance.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Variable</th><th>Description</th></tr></thead><tbody><tr><td><code>component</code></td><td>The current component.</td></tr><tr><td><code>page</code></td><td>The current page instance.</td></tr></tbody></table>
+<h3 id="br-manage-content-button">br-manage-content-button</h3>
+<p>This component places a button on the page that opens the linked content in the
+document editor or opens a document editor to create a new one. The button will
+only be shown in preview mode.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Property</th><th align="center">Required</th><th>Description</th></tr></thead><tbody><tr><td><code>content</code></td><td align="center"><em>no</em></td><td>The content entity to open for editing.</td></tr><tr><td><code>document-template-query</code></td><td align="center"><em>no</em></td><td>Template query to use for creating new documents. For Content SaaS, the key is like <code>new-banner-document</code> for <code>banner</code> document type. In case the document type is in a namespace other than <code>brxsaas</code>, the key also includes namespace prefix, such as <code>new-vuestorefront-accordion-document</code> for <code>accordion</code> document type in <code>vuestorefront</code> namespace.</td></tr><tr><td><code>folder-template-query</code></td><td align="center"><em>no</em></td><td>Template query to use in case folders specified by <code>path</code> do not yet exist and must be created. For Content SaaS, the key is like <code>new-banner-folder</code> for <code>banner</code> document type. In case the document type is in a namespace other than <code>brxsaas</code>, the key also includes namespace prefix, such as <code>new-vuestorefront-accordion-folder</code> for <code>accordion</code> document type in <code>vuestorefront</code> namespace.</td></tr><tr><td><code>path</code></td><td align="center"><em>no</em></td><td>Initial location of a new document, relative to the <code>root</code>.</td></tr><tr><td><code>parameter</code></td><td align="center"><em>no</em></td><td>Name of the component parameter in which the document path is stored.</td></tr><tr><td><code>pickerConfiguration</code></td><td align="center"><em>no</em></td><td>The root path of the CMS configuration to use for the picker, relative to <code>/hippo:configuration/hippo:frontend/cms</code>.</td></tr><tr><td><code>pickerEnableUpload</code></td><td align="center"><em>no</em></td><td>When this picker is used for images, this flag determines if uploads are enabled.</td></tr><tr><td><code>pickerInitialPath</code></td><td align="center"><em>no</em></td><td>The initial path to use in the picker if nothing has been selected yet, relative to the pickerRootPath.</td></tr><tr><td><code>pickerRemembersLastVisited</code></td><td align="center"><em>no</em></td><td>Whether the picker remembers the last visited path.</td></tr><tr><td><code>pickerRootPath</code></td><td align="center"><em>no</em></td><td>The absolute root path to use in the picker, or an empty string if the channel content path is used.</td></tr><tr><td><code>pickerSelectableNodeTypes</code></td><td align="center"><em>no</em></td><td>Types of nodes to be able to select in the picker, separated by a comma.</td></tr><tr><td><code>relative</code></td><td align="center"><em>no</em></td><td>Flag indicating that the picked value should be stored as a relative path.</td></tr><tr><td><code>root</code></td><td align="center"><em>no</em></td><td>Path to the root folder of selectable document locations.</td></tr></tbody></table>
+<h3 id="br-manage-menu-button">br-manage-menu-button</h3>
+<p>This directive places a button on the page that opens the linked menu in the
+menu editor. The button will only be shown in preview mode.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Property</th><th align="center">Required</th><th>Description</th></tr></thead><tbody><tr><td><code>menu</code></td><td align="center"><em>yes</em></td><td>The related menu model.</td></tr></tbody></table>
+
+        
+  </section>
+  <nav class="block sm:hidden astro-KIB2VHRF">
+    <h2 class="heading astro-G36SCSFA">More</h2>
+<ul class="astro-G36SCSFA">
+  <li class="header-link depth-2 astro-G36SCSFA">
+        <a class="edit-on-github astro-G36SCSFA" href="https://github.com/withastro/astro/tree/main/examples/docs/src/content/docs/spa-sdk/docs/vue-sdk.md" target="_blank">
+          <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen" class="svg-inline--fa fa-pen fa-w-16 astro-G36SCSFA" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="1em" width="1em">
+            <path fill="currentColor" d="M290.74 93.24l128.02 128.02-277.99 277.99-114.14 12.6C11.35 513.54-1.56 500.62.14 485.34l12.7-114.22 277.9-277.88zm207.2-19.06l-60.11-60.11c-18.75-18.75-49.16-18.75-67.91 0l-56.55 56.55 128.02 128.02 56.55-56.55c18.75-18.76 18.75-49.16 0-67.91z" class="astro-G36SCSFA"></path>
+          </svg>
+          <span class="astro-G36SCSFA">Edit this page</span>
+        </a>
+      </li>
+  <li class="header-link depth-2 astro-G36SCSFA">
+        <a href="https://astro.build/chat" target="_blank" class="astro-G36SCSFA">
+          <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="comment-alt" class="svg-inline--fa fa-comment-alt fa-w-16 astro-G36SCSFA" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="1em" width="1em">
+            <path fill="currentColor" d="M448 0H64C28.7 0 0 28.7 0 64v288c0 35.3 28.7 64 64 64h96v84c0 9.8 11.2 15.5 19.1 9.7L304 416h144c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64z" class="astro-G36SCSFA"></path>
+          </svg>
+          <span class="astro-G36SCSFA">Join our community</span>
+        </a>
+      </li>
+</ul>
+<div style="margin: 2rem 0; text-align: center;" class="astro-G36SCSFA">
+  <script>(()=>{var r=(i,c,n)=>{let s=async()=>{await(await i())()},t=new IntersectionObserver(e=>{for(let o of e)if(o.isIntersecting){t.disconnect(),s();break}});for(let e of n.children)t.observe(e)};(self.Astro||(self.Astro={})).visible=r;window.dispatchEvent(new Event("astro:visible"));})();</script><astro-island uid="SMJWX" prefix="r3" component-url="/spa-sdk/docs/_astro/ThemeToggleButton.65b0c565.js" component-export="default" renderer-url="/spa-sdk/docs/_astro/client.8ec44e5c.js" props="{}" ssr="" client="visible" opts="{&quot;name&quot;:&quot;ThemeToggleButton&quot;,&quot;value&quot;:true}" await-children=""><div class="theme-toggle"><label class=""><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path></svg><input type="radio" name="theme-toggle" title="Use light theme" aria-label="Use light theme" value="light"/></label><label class=""><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg><input type="radio" name="theme-toggle" title="Use dark theme" aria-label="Use dark theme" value="dark"/></label></div></astro-island>
+</div>
+  </nav>
+</article>
+      </div>
+      <aside id="grid-right" class="grid-sidebar astro-OUAMJN2I" title="Table of Contents">
+        <nav class="sidebar-nav astro-ZUJYV34G" aria-labelledby="grid-right">
+  <div class="sidebar-nav-inner astro-ZUJYV34G">
+    <astro-island uid="1XFRgP" prefix="r4" component-url="/spa-sdk/docs/_astro/TableOfContents.fbf6df89.js" component-export="default" renderer-url="/spa-sdk/docs/_astro/client.8ec44e5c.js" props="{&quot;headings&quot;:[1,[[0,{&quot;depth&quot;:[0,1],&quot;slug&quot;:[0,&quot;bloomreach-vuejs-sdk&quot;],&quot;text&quot;:[0,&quot;Bloomreach Vue.js SDK&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;features&quot;],&quot;text&quot;:[0,&quot;Features&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;get-started&quot;],&quot;text&quot;:[0,&quot;Get Started&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;installation&quot;],&quot;text&quot;:[0,&quot;Installation&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;usage&quot;],&quot;text&quot;:[0,&quot;Usage&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;srcmaints&quot;],&quot;text&quot;:[0,&quot;src/main.ts&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;srcappvue&quot;],&quot;text&quot;:[0,&quot;src/App.vue&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;srccomponentsbannervue&quot;],&quot;text&quot;:[0,&quot;src/components/Banner.vue&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;non-blocking-render-mode-nbrmode&quot;],&quot;text&quot;:[0,&quot;Non-blocking render mode (NBRMode)&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;configuration&quot;],&quot;text&quot;:[0,&quot;Configuration&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;mapping&quot;],&quot;text&quot;:[0,&quot;Mapping&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;inline-mapping&quot;],&quot;text&quot;:[0,&quot;Inline Mapping&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;buttons&quot;],&quot;text&quot;:[0,&quot;Buttons&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;license&quot;],&quot;text&quot;:[0,&quot;License&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;reference&quot;],&quot;text&quot;:[0,&quot;Reference&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;br-page&quot;],&quot;text&quot;:[0,&quot;br-page&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;br-component&quot;],&quot;text&quot;:[0,&quot;br-component&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;br-manage-content-button&quot;],&quot;text&quot;:[0,&quot;br-manage-content-button&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;br-manage-menu-button&quot;],&quot;text&quot;:[0,&quot;br-manage-menu-button&quot;]}]]]}" ssr="" client="media" opts="{&quot;name&quot;:&quot;TableOfContents&quot;,&quot;value&quot;:&quot;(min-width: 50em)&quot;}" await-children=""><h2 id="on-this-page-heading" class="heading">On this page</h2><ul><li class="header-link depth-2"><a href="#features">Features</a></li><li class="header-link depth-2"><a href="#get-started">Get Started</a></li><li class="header-link depth-3"><a href="#installation">Installation</a></li><li class="header-link depth-3"><a href="#usage">Usage</a></li><li class="header-link depth-3"><a href="#non-blocking-render-mode-nbrmode">Non-blocking render mode (NBRMode)</a></li><li class="header-link depth-3"><a href="#configuration">Configuration</a></li><li class="header-link depth-3"><a href="#mapping">Mapping</a></li><li class="header-link depth-3"><a href="#inline-mapping">Inline Mapping</a></li><li class="header-link depth-3"><a href="#buttons">Buttons</a></li><li class="header-link depth-2"><a href="#license">License</a></li><li class="header-link depth-2"><a href="#reference">Reference</a></li><li class="header-link depth-3"><a href="#br-page">br-page</a></li><li class="header-link depth-3"><a href="#br-component">br-component</a></li><li class="header-link depth-3"><a href="#br-manage-content-button">br-manage-content-button</a></li><li class="header-link depth-3"><a href="#br-manage-menu-button">br-manage-menu-button</a></li></ul></astro-island>
+    <h2 class="heading astro-G36SCSFA">More</h2>
+<ul class="astro-G36SCSFA">
+  <li class="header-link depth-2 astro-G36SCSFA">
+        <a class="edit-on-github astro-G36SCSFA" href="https://github.com/withastro/astro/tree/main/examples/docs/src/content/docs/spa-sdk/docs/vue-sdk.md" target="_blank">
+          <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen" class="svg-inline--fa fa-pen fa-w-16 astro-G36SCSFA" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="1em" width="1em">
+            <path fill="currentColor" d="M290.74 93.24l128.02 128.02-277.99 277.99-114.14 12.6C11.35 513.54-1.56 500.62.14 485.34l12.7-114.22 277.9-277.88zm207.2-19.06l-60.11-60.11c-18.75-18.75-49.16-18.75-67.91 0l-56.55 56.55 128.02 128.02 56.55-56.55c18.75-18.76 18.75-49.16 0-67.91z" class="astro-G36SCSFA"></path>
+          </svg>
+          <span class="astro-G36SCSFA">Edit this page</span>
+        </a>
+      </li>
+  <li class="header-link depth-2 astro-G36SCSFA">
+        <a href="https://astro.build/chat" target="_blank" class="astro-G36SCSFA">
+          <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="comment-alt" class="svg-inline--fa fa-comment-alt fa-w-16 astro-G36SCSFA" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="1em" width="1em">
+            <path fill="currentColor" d="M448 0H64C28.7 0 0 28.7 0 64v288c0 35.3 28.7 64 64 64h96v84c0 9.8 11.2 15.5 19.1 9.7L304 416h144c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64z" class="astro-G36SCSFA"></path>
+          </svg>
+          <span class="astro-G36SCSFA">Join our community</span>
+        </a>
+      </li>
+</ul>
+<div style="margin: 2rem 0; text-align: center;" class="astro-G36SCSFA">
+  <astro-island uid="SMJWX" prefix="r5" component-url="/spa-sdk/docs/_astro/ThemeToggleButton.65b0c565.js" component-export="default" renderer-url="/spa-sdk/docs/_astro/client.8ec44e5c.js" props="{}" ssr="" client="visible" opts="{&quot;name&quot;:&quot;ThemeToggleButton&quot;,&quot;value&quot;:true}" await-children=""><div class="theme-toggle"><label class=""><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path></svg><input type="radio" name="theme-toggle" title="Use light theme" aria-label="Use light theme" value="light"/></label><label class=""><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg><input type="radio" name="theme-toggle" title="Use dark theme" aria-label="Use dark theme" value="dark"/></label></div></astro-island>
+</div>
+  </div>
+</nav>
+      </aside>
+    </main>
+  </body></html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html class="initial astro-OUAMJN2I">
+  <head>
+    <!-- Global Metadata --><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<meta name="generator" content="Astro v2.10.4">
+
+<link rel="icon" type="image/svg+xml" href="/spa-sdk/docs/favicon.svg">
+
+<link rel="sitemap" href="/sitemap.xml">
+
+<!-- This is intentionally inlined to avoid FOUC -->
+<script>
+const root = document.documentElement;
+const theme = localStorage.getItem("theme");
+if (theme === "dark" || (!theme && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+  root.dataset.theme = "dark";
+  root.classList.add("theme-dark");
+} else {
+  root.dataset.theme = undefined;
+  root.classList.remove("theme-dark");
+}
+</script>
+    <!-- Page Metadata --><link rel="canonical" href="https://bloomreach.github.io/spa-sdk/docs/getting-started/">
+
+<!-- OpenGraph Tags -->
+<meta property="og:title" content="undefined 🚀 Bloomreach SDK Documentation Portal">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://bloomreach.github.io/spa-sdk/docs/getting-started/">
+<meta property="og:image" content="https://github.com/withastro/astro/blob/main/assets/social/banner-minimal.png?raw=true">
+<meta property="og:image:alt" content="astro logo on a starry expanse of space, with a purple saturn-like planet floating in the right foreground">
+<meta name="description" property="og:description" content="Bloomreach provides an SPA SDK for integrating SPAs and other Javascript front-end applications with Bloomreach Content's Delivery API and the preview and editing capabilities of the Experience manager application.">
+<meta property="og:site_name" content="Bloomreach SDK Documentation Portal">
+
+<!-- Twitter Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="astrodotbuild">
+<meta name="twitter:title" content="undefined 🚀 Bloomreach SDK Documentation Portal">
+<meta name="twitter:description" content="Bloomreach provides an SPA SDK for integrating SPAs and other Javascript front-end applications with Bloomreach Content's Delivery API and the preview and editing capabilities of the Experience manager application.">
+<meta name="twitter:image" content="https://github.com/withastro/astro/blob/main/assets/social/banner-minimal.png?raw=true">
+<meta name="twitter:image:alt" content="astro logo on a starry expanse of space, with a purple saturn-like planet floating in the right foreground">
+
+<!--
+  TODO: Add json+ld data, maybe https://schema.org/APIReference makes sense?
+  Docs: https://developers.google.com/search/docs/advanced/structured-data/intro-structured-data
+  https://www.npmjs.com/package/schema-dts seems like a great resource for implementing this.
+  Even better, there's a React component that integrates with `schema-dts`: https://github.com/google/react-schemaorg
+-->
+    <title>
+      Bloomreach SDK Documentation Portal
+    </title>
+    
+    
+  <link rel="stylesheet" href="/spa-sdk/docs/_astro/changelog.3ac6b34f.css" /></head>
+
+  <body class="astro-OUAMJN2I">
+    <header class="astro-3EF6KSR2">
+  <a href="#article" class="sr-only focus:not-sr-only skiplink astro-SVSPNZ7O"><span class="astro-SVSPNZ7O">Skip to Content</span></a>
+  <nav class="nav-wrapper astro-3EF6KSR2" title="Top Navigation">
+    <div class="menu-toggle astro-3EF6KSR2">
+      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var i=t=>{let e=async()=>{await(await t())()};"requestIdleCallback"in window?window.requestIdleCallback(e):setTimeout(e,200)};(self.Astro||(self.Astro={})).idle=i;window.dispatchEvent(new Event("astro:idle"));})();;(()=>{var d;{let p={0:t=>u(t),1:t=>l(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(l(t)),5:t=>new Set(l(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t)},h=t=>{let[e,n]=t;return e in p?p[e](n):void 0},l=t=>t.map(h),u=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([e,n])=>[e,h(n)]));customElements.get("astro-island")||customElements.define("astro-island",(d=class extends HTMLElement{constructor(){super(...arguments);this.hydrate=async()=>{var i;if(!this.hydrator||!this.isConnected)return;let e=(i=this.parentElement)==null?void 0:i.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let n=this.querySelectorAll("astro-slot"),o={},a=this.querySelectorAll("template[data-astro-template]");for(let r of a){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(o[r.getAttribute("data-astro-template")||"default"]=r.innerHTML,r.remove())}for(let r of n){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(o[r.getAttribute("name")||"default"]=r.innerHTML)}let c;try{c=this.hasAttribute("props")?u(JSON.parse(this.getAttribute("props"))):{}}catch(r){let s=this.getAttribute("component-url")||"<unknown>",y=this.getAttribute("component-export");throw y&&(s+=` (export ${y})`),console.error(`[hydrate] Error parsing props for component ${s}`,this.getAttribute("props"),r),r}await this.hydrator(this)(this.Component,c,o,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))}}connectedCallback(){!this.hasAttribute("await-children")||this.firstChild?this.childrenConnectedCallback():new MutationObserver((e,n)=>{n.disconnect(),setTimeout(()=>this.childrenConnectedCallback(),0)}).observe(this,{childList:!0})}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}start(){let e=JSON.parse(this.getAttribute("opts")),n=this.getAttribute("client");if(Astro[n]===void 0){window.addEventListener(`astro:${n}`,()=>this.start(),{once:!0});return}Astro[n](async()=>{let o=this.getAttribute("renderer-url"),[a,{default:c}]=await Promise.all([import(this.getAttribute("component-url")),o?import(o):()=>()=>{}]),i=this.getAttribute("component-export")||"default";if(!i.includes("."))this.Component=a[i];else{this.Component=a;for(let r of i.split("."))this.Component=this.Component[r]}return this.hydrator=c,this.hydrate},e,this)}attributeChangedCallback(){this.hydrate()}},d.observedAttributes=["props"],d))}})();</script><astro-island uid="EySUY" prefix="r0" component-url="/spa-sdk/docs/_astro/SidebarToggle.63a3e517.js" component-export="default" renderer-url="/spa-sdk/docs/_astro/client.8ec44e5c.js" props="{}" ssr="" client="idle" opts="{&quot;name&quot;:&quot;SidebarToggle&quot;,&quot;value&quot;:true}" await-children=""><button type="button" aria-pressed="false" id="menu-toggle"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg><span class="sr-only">Toggle sidebar</span></button></astro-island>
+    </div>
+    <div class="logo flex astro-3EF6KSR2">
+      <a href="/" class="astro-3EF6KSR2">
+        <svg class="logo" width="48" height="48" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    #flame {
+      fill: var(--theme-text-accent);
+    }
+
+    #a {
+      fill: var(--theme-text-accent);
+    }
+  </style>
+  <title>Bloomreach SDK Documentation Portal</title>
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #002840;
+      }
+      .cls-2 {
+        fill: #ffd500;
+      }
+    </style>
+  </defs>
+  <g id="Layer_2" data-name="Layer 2">
+    <g id="bloomreach-logo">
+      <circle class="cls-2" cx="35.94" cy="35.94" r="35.94"></circle>
+      <path class="cls-1" d="M43.22,28.47,41.46,33a6.6,6.6,0,0,1,3,5.64,6.38,6.38,0,1,1-12.76,0A6.36,6.36,0,0,1,37.83,32l1.65-4.6A11,11,0,0,0,26.71,38.29h0V49.84h5V48a11.7,11.7,0,0,0,6.38,1.82,11.26,11.26,0,0,0,5.11-21.37Z"></path>
+      <path class="cls-1" d="M26.69,27.92a15.51,15.51,0,0,1,5-3.41V17.27h-5Z"></path>
+    </g>
+  </g>
+</svg>
+        <h1 class="astro-3EF6KSR2">Bloomreach SDK Documentation Portal</h1>
+      </a>
+    </div>
+    <div style="flex-grow: 1;" class="astro-3EF6KSR2"></div>
+    <div class="search-item astro-3EF6KSR2">
+      <astro-island uid="oG8Qz" prefix="r1" component-url="/spa-sdk/docs/_astro/Search.b5b7622a.js" component-export="default" renderer-url="/spa-sdk/docs/_astro/client.8ec44e5c.js" props="{}" ssr="" client="idle" opts="{&quot;name&quot;:&quot;Search&quot;,&quot;value&quot;:true}" await-children=""><button type="button" class="DocSearch DocSearch-Button" aria-label="Search"><span class="DocSearch-Button-Container"><svg width="20" height="20" class="DocSearch-Search-Icon" viewBox="0 0 20 20"><path d="M14.386 14.386l4.0877 4.0877-4.0877-4.0877c-2.9418 2.9419-7.7115 2.9419-10.6533 0-2.9419-2.9418-2.9419-7.7115 0-10.6533 2.9418-2.9419 7.7115-2.9419 10.6533 0 2.9419 2.9418 2.9419 7.7115 0 10.6533z" stroke="currentColor" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="DocSearch-Button-Placeholder">Search</span></span><span class="DocSearch-Button-Keys"></span></button></astro-island>
+    </div>
+  </nav>
+</header>
+    <main class="layout astro-OUAMJN2I">
+      <aside id="grid-left" class="grid-sidebar astro-OUAMJN2I" title="Site Navigation">
+        <nav aria-labelledby="grid-left" class="astro-RYJZJGVK">
+  <ul class="nav-groups astro-RYJZJGVK">
+    <div class="nav-group astro-RYJZJGVK">
+      <li class="nav-link astro-RYJZJGVK">
+              <a href="/spa-sdk/docs/getting-started" aria-current="page" class="astro-RYJZJGVK">
+                Getting started
+              </a>
+            </li><li class="nav-link astro-RYJZJGVK">
+              <a href="/spa-sdk/docs/spa-sdk" class="astro-RYJZJGVK">
+                SPA SDK
+              </a>
+            </li><li class="nav-link astro-RYJZJGVK">
+              <a href="/spa-sdk/docs/react-sdk" class="astro-RYJZJGVK">
+                React SDK
+              </a>
+            </li><li class="nav-link astro-RYJZJGVK">
+              <a href="/spa-sdk/docs/ng-sdk" class="astro-RYJZJGVK">
+                Angular SDK
+              </a>
+            </li><li class="nav-link astro-RYJZJGVK">
+              <a href="/spa-sdk/docs/vue-sdk" class="astro-RYJZJGVK">
+                Vue 2 SDK
+              </a>
+            </li><li class="nav-link astro-RYJZJGVK">
+              <a href="/spa-sdk/docs/vue3-sdk" class="astro-RYJZJGVK">
+                Vue 3 SDK
+              </a>
+            </li><li class="nav-link astro-RYJZJGVK">
+              <a href="/spa-sdk/docs/migration-guide" class="astro-RYJZJGVK">
+                Migration guide
+              </a>
+            </li><li class="nav-link astro-RYJZJGVK">
+              <a href="/spa-sdk/docs/changelog" class="astro-RYJZJGVK">
+                Changelog
+              </a>
+            </li>
+      <li class="nav-link astro-RYJZJGVK">
+        <a href="https://github.com/bloomreach/spa-sdk/releases" target="_blank" class="astro-RYJZJGVK">Releases</a>
+      </li>
+      <li class="nav-link astro-RYJZJGVK">
+        <a href="https://bloomreach.github.io/spa-sdk/" target="_blank" class="astro-RYJZJGVK">Typedoc</a>
+      </li>
+    </div>
+  </ul>
+</nav>
+
+<script>
+window.addEventListener("DOMContentLoaded", () => {
+  var target = document.querySelector('[aria-current="page"]');
+  if (target && target.offsetTop > window.innerHeight - 100) {
+    document.querySelector(".nav-groups").scrollTop = target.offsetTop;
+  }
+});
+</script>
+      </aside>
+      <div id="grid-main" class="astro-OUAMJN2I">
+        <article id="article" class="content astro-KIB2VHRF">
+  <section class="main-section astro-KIB2VHRF">
+    <nav class="block sm:hidden astro-KIB2VHRF">
+      <script>(()=>{var s=(i,t)=>{let a=async()=>{await(await i())()};if(t.value){let e=matchMedia(t.value);e.matches?a():e.addEventListener("change",a,{once:!0})}};(self.Astro||(self.Astro={})).media=s;window.dispatchEvent(new Event("astro:media"));})();</script><astro-island uid="1QO5d5" prefix="r2" component-url="/spa-sdk/docs/_astro/TableOfContents.fbf6df89.js" component-export="default" renderer-url="/spa-sdk/docs/_astro/client.8ec44e5c.js" props="{&quot;headings&quot;:[1,[[0,{&quot;depth&quot;:[0,1],&quot;slug&quot;:[0,&quot;getting-started&quot;],&quot;text&quot;:[0,&quot;Getting started&quot;]}]]]}" ssr="" client="media" opts="{&quot;name&quot;:&quot;TableOfContents&quot;,&quot;value&quot;:&quot;(max-width: 50em)&quot;}" await-children=""><h2 id="on-this-page-heading" class="heading">On this page</h2><ul></ul></astro-island>
+    </nav>
+    
+          <h1 id="getting-started">Getting started</h1>
+<p>The Bloomreach SPA SDKs make life considerably easier when integrating the Content Delivery APIs in your app, it also
+provides automatic integration with the Bloomreach Experience Manager which is a Visual Page Builder for business users.</p>
+<p>The SDKs consists of a core plain javascript/typescript SDK <code>@bloomreach/spa-sdk</code> and a set of framework specific SDKs
+<code>@bloomreach/react-sdk</code>, <code>@bloomreach/vue-sdk</code>, <code>@bloomreach/vue3-sdk</code> and <code>@bloomreach/ng-sdk</code> which extend the core
+SDK with the framework specific rendering logic.</p>
+<p>The SPA SDK itself is written in typescript and is framework independent, it holds the core code that sets up a
+connection to the Page Delivery API of the Bloomreach Content instance. When initializing it will use the provided
+configuration to do a call to the PDA and transform the response from a PageModel to a Page object that provides methods
+to easily query and work with the model. See the SPA SDK documentation for more information. The SPA SDK also
+automatically detects whether it is in <code>preview</code> mode and sets up the connection with the Bloomreach Experience Manager
+Preview if that is the case. The Framework SDKs use this Page object to derive what needs to be rendered on the page and
+use the framework specific lifecylces and rendering hooks to dynamically render out the page components.</p>
+<p>In short the core SPA SDK contains:</p>
+<ul>
+<li>Page Delivery API Client</li>
+<li>Page Model Javascript implementation</li>
+<li>URL Generator</li>
+<li>Integration with Bloomreach Experience Manager Preview</li>
+</ul>
+<p>and the Framework SDK contains:</p>
+<ul>
+<li>HTTP Client</li>
+<li>Framework specific components that render provided components</li>
+</ul>
+        
+  </section>
+  <nav class="block sm:hidden astro-KIB2VHRF">
+    <h2 class="heading astro-G36SCSFA">More</h2>
+<ul class="astro-G36SCSFA">
+  <li class="header-link depth-2 astro-G36SCSFA">
+        <a class="edit-on-github astro-G36SCSFA" href="https://github.com/withastro/astro/tree/main/examples/docs/src/content/docs/spa-sdk/docs/getting-started.md" target="_blank">
+          <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen" class="svg-inline--fa fa-pen fa-w-16 astro-G36SCSFA" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="1em" width="1em">
+            <path fill="currentColor" d="M290.74 93.24l128.02 128.02-277.99 277.99-114.14 12.6C11.35 513.54-1.56 500.62.14 485.34l12.7-114.22 277.9-277.88zm207.2-19.06l-60.11-60.11c-18.75-18.75-49.16-18.75-67.91 0l-56.55 56.55 128.02 128.02 56.55-56.55c18.75-18.76 18.75-49.16 0-67.91z" class="astro-G36SCSFA"></path>
+          </svg>
+          <span class="astro-G36SCSFA">Edit this page</span>
+        </a>
+      </li>
+  <li class="header-link depth-2 astro-G36SCSFA">
+        <a href="https://astro.build/chat" target="_blank" class="astro-G36SCSFA">
+          <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="comment-alt" class="svg-inline--fa fa-comment-alt fa-w-16 astro-G36SCSFA" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="1em" width="1em">
+            <path fill="currentColor" d="M448 0H64C28.7 0 0 28.7 0 64v288c0 35.3 28.7 64 64 64h96v84c0 9.8 11.2 15.5 19.1 9.7L304 416h144c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64z" class="astro-G36SCSFA"></path>
+          </svg>
+          <span class="astro-G36SCSFA">Join our community</span>
+        </a>
+      </li>
+</ul>
+<div style="margin: 2rem 0; text-align: center;" class="astro-G36SCSFA">
+  <script>(()=>{var r=(i,c,n)=>{let s=async()=>{await(await i())()},t=new IntersectionObserver(e=>{for(let o of e)if(o.isIntersecting){t.disconnect(),s();break}});for(let e of n.children)t.observe(e)};(self.Astro||(self.Astro={})).visible=r;window.dispatchEvent(new Event("astro:visible"));})();</script><astro-island uid="SMJWX" prefix="r3" component-url="/spa-sdk/docs/_astro/ThemeToggleButton.65b0c565.js" component-export="default" renderer-url="/spa-sdk/docs/_astro/client.8ec44e5c.js" props="{}" ssr="" client="visible" opts="{&quot;name&quot;:&quot;ThemeToggleButton&quot;,&quot;value&quot;:true}" await-children=""><div class="theme-toggle"><label class=""><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path></svg><input type="radio" name="theme-toggle" title="Use light theme" aria-label="Use light theme" value="light"/></label><label class=""><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg><input type="radio" name="theme-toggle" title="Use dark theme" aria-label="Use dark theme" value="dark"/></label></div></astro-island>
+</div>
+  </nav>
+</article>
+      </div>
+      <aside id="grid-right" class="grid-sidebar astro-OUAMJN2I" title="Table of Contents">
+        <nav class="sidebar-nav astro-ZUJYV34G" aria-labelledby="grid-right">
+  <div class="sidebar-nav-inner astro-ZUJYV34G">
+    <astro-island uid="1QO5d5" prefix="r4" component-url="/spa-sdk/docs/_astro/TableOfContents.fbf6df89.js" component-export="default" renderer-url="/spa-sdk/docs/_astro/client.8ec44e5c.js" props="{&quot;headings&quot;:[1,[[0,{&quot;depth&quot;:[0,1],&quot;slug&quot;:[0,&quot;getting-started&quot;],&quot;text&quot;:[0,&quot;Getting started&quot;]}]]]}" ssr="" client="media" opts="{&quot;name&quot;:&quot;TableOfContents&quot;,&quot;value&quot;:&quot;(min-width: 50em)&quot;}" await-children=""><h2 id="on-this-page-heading" class="heading">On this page</h2><ul></ul></astro-island>
+    <h2 class="heading astro-G36SCSFA">More</h2>
+<ul class="astro-G36SCSFA">
+  <li class="header-link depth-2 astro-G36SCSFA">
+        <a class="edit-on-github astro-G36SCSFA" href="https://github.com/withastro/astro/tree/main/examples/docs/src/content/docs/spa-sdk/docs/getting-started.md" target="_blank">
+          <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen" class="svg-inline--fa fa-pen fa-w-16 astro-G36SCSFA" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="1em" width="1em">
+            <path fill="currentColor" d="M290.74 93.24l128.02 128.02-277.99 277.99-114.14 12.6C11.35 513.54-1.56 500.62.14 485.34l12.7-114.22 277.9-277.88zm207.2-19.06l-60.11-60.11c-18.75-18.75-49.16-18.75-67.91 0l-56.55 56.55 128.02 128.02 56.55-56.55c18.75-18.76 18.75-49.16 0-67.91z" class="astro-G36SCSFA"></path>
+          </svg>
+          <span class="astro-G36SCSFA">Edit this page</span>
+        </a>
+      </li>
+  <li class="header-link depth-2 astro-G36SCSFA">
+        <a href="https://astro.build/chat" target="_blank" class="astro-G36SCSFA">
+          <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="comment-alt" class="svg-inline--fa fa-comment-alt fa-w-16 astro-G36SCSFA" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="1em" width="1em">
+            <path fill="currentColor" d="M448 0H64C28.7 0 0 28.7 0 64v288c0 35.3 28.7 64 64 64h96v84c0 9.8 11.2 15.5 19.1 9.7L304 416h144c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64z" class="astro-G36SCSFA"></path>
+          </svg>
+          <span class="astro-G36SCSFA">Join our community</span>
+        </a>
+      </li>
+</ul>
+<div style="margin: 2rem 0; text-align: center;" class="astro-G36SCSFA">
+  <astro-island uid="SMJWX" prefix="r5" component-url="/spa-sdk/docs/_astro/ThemeToggleButton.65b0c565.js" component-export="default" renderer-url="/spa-sdk/docs/_astro/client.8ec44e5c.js" props="{}" ssr="" client="visible" opts="{&quot;name&quot;:&quot;ThemeToggleButton&quot;,&quot;value&quot;:true}" await-children=""><div class="theme-toggle"><label class=""><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path></svg><input type="radio" name="theme-toggle" title="Use light theme" aria-label="Use light theme" value="light"/></label><label class=""><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg><input type="radio" name="theme-toggle" title="Use dark theme" aria-label="Use dark theme" value="dark"/></label></div></astro-island>
+</div>
+  </div>
+</nav>
+      </aside>
+    </main>
+  </body></html>

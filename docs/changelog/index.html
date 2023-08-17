@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html class="initial astro-OUAMJN2I">
+  <head>
+    <!-- Global Metadata --><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<meta name="generator" content="Astro v2.10.4">
+
+<link rel="icon" type="image/svg+xml" href="/spa-sdk/docs/favicon.svg">
+
+<link rel="sitemap" href="/sitemap.xml">
+
+<!-- This is intentionally inlined to avoid FOUC -->
+<script>
+const root = document.documentElement;
+const theme = localStorage.getItem("theme");
+if (theme === "dark" || (!theme && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+  root.dataset.theme = "dark";
+  root.classList.add("theme-dark");
+} else {
+  root.dataset.theme = undefined;
+  root.classList.remove("theme-dark");
+}
+</script>
+    <!-- Page Metadata --><link rel="canonical" href="https://bloomreach.github.io/spa-sdk/docs/changelog/">
+
+<!-- OpenGraph Tags -->
+<meta property="og:title" content="undefined 🚀 Bloomreach SDK Documentation Portal">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://bloomreach.github.io/spa-sdk/docs/changelog/">
+<meta property="og:image" content="https://github.com/withastro/astro/blob/main/assets/social/banner-minimal.png?raw=true">
+<meta property="og:image:alt" content="astro logo on a starry expanse of space, with a purple saturn-like planet floating in the right foreground">
+<meta name="description" property="og:description" content="Bloomreach provides an SPA SDK for integrating SPAs and other Javascript front-end applications with Bloomreach Content's Delivery API and the preview and editing capabilities of the Experience manager application.">
+<meta property="og:site_name" content="Bloomreach SDK Documentation Portal">
+
+<!-- Twitter Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="astrodotbuild">
+<meta name="twitter:title" content="undefined 🚀 Bloomreach SDK Documentation Portal">
+<meta name="twitter:description" content="Bloomreach provides an SPA SDK for integrating SPAs and other Javascript front-end applications with Bloomreach Content's Delivery API and the preview and editing capabilities of the Experience manager application.">
+<meta name="twitter:image" content="https://github.com/withastro/astro/blob/main/assets/social/banner-minimal.png?raw=true">
+<meta name="twitter:image:alt" content="astro logo on a starry expanse of space, with a purple saturn-like planet floating in the right foreground">
+
+<!--
+  TODO: Add json+ld data, maybe https://schema.org/APIReference makes sense?
+  Docs: https://developers.google.com/search/docs/advanced/structured-data/intro-structured-data
+  https://www.npmjs.com/package/schema-dts seems like a great resource for implementing this.
+  Even better, there's a React component that integrates with `schema-dts`: https://github.com/google/react-schemaorg
+-->
+    <title>
+      Bloomreach SDK Documentation Portal
+    </title>
+    
+    
+  <link rel="stylesheet" href="/spa-sdk/docs/_astro/changelog.3ac6b34f.css" /></head>
+
+  <body class="astro-OUAMJN2I">
+    <header class="astro-3EF6KSR2">
+  <a href="#article" class="sr-only focus:not-sr-only skiplink astro-SVSPNZ7O"><span class="astro-SVSPNZ7O">Skip to Content</span></a>
+  <nav class="nav-wrapper astro-3EF6KSR2" title="Top Navigation">
+    <div class="menu-toggle astro-3EF6KSR2">
+      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var i=t=>{let e=async()=>{await(await t())()};"requestIdleCallback"in window?window.requestIdleCallback(e):setTimeout(e,200)};(self.Astro||(self.Astro={})).idle=i;window.dispatchEvent(new Event("astro:idle"));})();;(()=>{var d;{let p={0:t=>u(t),1:t=>l(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(l(t)),5:t=>new Set(l(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t)},h=t=>{let[e,n]=t;return e in p?p[e](n):void 0},l=t=>t.map(h),u=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([e,n])=>[e,h(n)]));customElements.get("astro-island")||customElements.define("astro-island",(d=class extends HTMLElement{constructor(){super(...arguments);this.hydrate=async()=>{var i;if(!this.hydrator||!this.isConnected)return;let e=(i=this.parentElement)==null?void 0:i.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let n=this.querySelectorAll("astro-slot"),o={},a=this.querySelectorAll("template[data-astro-template]");for(let r of a){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(o[r.getAttribute("data-astro-template")||"default"]=r.innerHTML,r.remove())}for(let r of n){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(o[r.getAttribute("name")||"default"]=r.innerHTML)}let c;try{c=this.hasAttribute("props")?u(JSON.parse(this.getAttribute("props"))):{}}catch(r){let s=this.getAttribute("component-url")||"<unknown>",y=this.getAttribute("component-export");throw y&&(s+=` (export ${y})`),console.error(`[hydrate] Error parsing props for component ${s}`,this.getAttribute("props"),r),r}await this.hydrator(this)(this.Component,c,o,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))}}connectedCallback(){!this.hasAttribute("await-children")||this.firstChild?this.childrenConnectedCallback():new MutationObserver((e,n)=>{n.disconnect(),setTimeout(()=>this.childrenConnectedCallback(),0)}).observe(this,{childList:!0})}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}start(){let e=JSON.parse(this.getAttribute("opts")),n=this.getAttribute("client");if(Astro[n]===void 0){window.addEventListener(`astro:${n}`,()=>this.start(),{once:!0});return}Astro[n](async()=>{let o=this.getAttribute("renderer-url"),[a,{default:c}]=await Promise.all([import(this.getAttribute("component-url")),o?import(o):()=>()=>{}]),i=this.getAttribute("component-export")||"default";if(!i.includes("."))this.Component=a[i];else{this.Component=a;for(let r of i.split("."))this.Component=this.Component[r]}return this.hydrator=c,this.hydrate},e,this)}attributeChangedCallback(){this.hydrate()}},d.observedAttributes=["props"],d))}})();</script><astro-island uid="EySUY" prefix="r0" component-url="/spa-sdk/docs/_astro/SidebarToggle.63a3e517.js" component-export="default" renderer-url="/spa-sdk/docs/_astro/client.8ec44e5c.js" props="{}" ssr="" client="idle" opts="{&quot;name&quot;:&quot;SidebarToggle&quot;,&quot;value&quot;:true}" await-children=""><button type="button" aria-pressed="false" id="menu-toggle"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg><span class="sr-only">Toggle sidebar</span></button></astro-island>
+    </div>
+    <div class="logo flex astro-3EF6KSR2">
+      <a href="/" class="astro-3EF6KSR2">
+        <svg class="logo" width="48" height="48" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    #flame {
+      fill: var(--theme-text-accent);
+    }
+
+    #a {
+      fill: var(--theme-text-accent);
+    }
+  </style>
+  <title>Bloomreach SDK Documentation Portal</title>
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #002840;
+      }
+      .cls-2 {
+        fill: #ffd500;
+      }
+    </style>
+  </defs>
+  <g id="Layer_2" data-name="Layer 2">
+    <g id="bloomreach-logo">
+      <circle class="cls-2" cx="35.94" cy="35.94" r="35.94"></circle>
+      <path class="cls-1" d="M43.22,28.47,41.46,33a6.6,6.6,0,0,1,3,5.64,6.38,6.38,0,1,1-12.76,0A6.36,6.36,0,0,1,37.83,32l1.65-4.6A11,11,0,0,0,26.71,38.29h0V49.84h5V48a11.7,11.7,0,0,0,6.38,1.82,11.26,11.26,0,0,0,5.11-21.37Z"></path>
+      <path class="cls-1" d="M26.69,27.92a15.51,15.51,0,0,1,5-3.41V17.27h-5Z"></path>
+    </g>
+  </g>
+</svg>
+        <h1 class="astro-3EF6KSR2">Bloomreach SDK Documentation Portal</h1>
+      </a>
+    </div>
+    <div style="flex-grow: 1;" class="astro-3EF6KSR2"></div>
+    <div class="search-item astro-3EF6KSR2">
+      <astro-island uid="oG8Qz" prefix="r1" component-url="/spa-sdk/docs/_astro/Search.b5b7622a.js" component-export="default" renderer-url="/spa-sdk/docs/_astro/client.8ec44e5c.js" props="{}" ssr="" client="idle" opts="{&quot;name&quot;:&quot;Search&quot;,&quot;value&quot;:true}" await-children=""><button type="button" class="DocSearch DocSearch-Button" aria-label="Search"><span class="DocSearch-Button-Container"><svg width="20" height="20" class="DocSearch-Search-Icon" viewBox="0 0 20 20"><path d="M14.386 14.386l4.0877 4.0877-4.0877-4.0877c-2.9418 2.9419-7.7115 2.9419-10.6533 0-2.9419-2.9418-2.9419-7.7115 0-10.6533 2.9418-2.9419 7.7115-2.9419 10.6533 0 2.9419 2.9418 2.9419 7.7115 0 10.6533z" stroke="currentColor" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="DocSearch-Button-Placeholder">Search</span></span><span class="DocSearch-Button-Keys"></span></button></astro-island>
+    </div>
+  </nav>
+</header>
+    <main class="layout astro-OUAMJN2I">
+      <aside id="grid-left" class="grid-sidebar astro-OUAMJN2I" title="Site Navigation">
+        <nav aria-labelledby="grid-left" class="astro-RYJZJGVK">
+  <ul class="nav-groups astro-RYJZJGVK">
+    <div class="nav-group astro-RYJZJGVK">
+      <li class="nav-link astro-RYJZJGVK">
+              <a href="/spa-sdk/docs/getting-started" class="astro-RYJZJGVK">
+                Getting started
+              </a>
+            </li><li class="nav-link astro-RYJZJGVK">
+              <a href="/spa-sdk/docs/spa-sdk" class="astro-RYJZJGVK">
+                SPA SDK
+              </a>
+            </li><li class="nav-link astro-RYJZJGVK">
+              <a href="/spa-sdk/docs/react-sdk" class="astro-RYJZJGVK">
+                React SDK
+              </a>
+            </li><li class="nav-link astro-RYJZJGVK">
+              <a href="/spa-sdk/docs/ng-sdk" class="astro-RYJZJGVK">
+                Angular SDK
+              </a>
+            </li><li class="nav-link astro-RYJZJGVK">
+              <a href="/spa-sdk/docs/vue-sdk" class="astro-RYJZJGVK">
+                Vue 2 SDK
+              </a>
+            </li><li class="nav-link astro-RYJZJGVK">
+              <a href="/spa-sdk/docs/vue3-sdk" class="astro-RYJZJGVK">
+                Vue 3 SDK
+              </a>
+            </li><li class="nav-link astro-RYJZJGVK">
+              <a href="/spa-sdk/docs/migration-guide" class="astro-RYJZJGVK">
+                Migration guide
+              </a>
+            </li><li class="nav-link astro-RYJZJGVK">
+              <a href="/spa-sdk/docs/changelog" aria-current="page" class="astro-RYJZJGVK">
+                Changelog
+              </a>
+            </li>
+      <li class="nav-link astro-RYJZJGVK">
+        <a href="https://github.com/bloomreach/spa-sdk/releases" target="_blank" class="astro-RYJZJGVK">Releases</a>
+      </li>
+      <li class="nav-link astro-RYJZJGVK">
+        <a href="https://bloomreach.github.io/spa-sdk/" target="_blank" class="astro-RYJZJGVK">Typedoc</a>
+      </li>
+    </div>
+  </ul>
+</nav>
+
+<script>
+window.addEventListener("DOMContentLoaded", () => {
+  var target = document.querySelector('[aria-current="page"]');
+  if (target && target.offsetTop > window.innerHeight - 100) {
+    document.querySelector(".nav-groups").scrollTop = target.offsetTop;
+  }
+});
+</script>
+      </aside>
+      <div id="grid-main" class="astro-OUAMJN2I">
+        <article id="article" class="content astro-KIB2VHRF">
+  <section class="main-section astro-KIB2VHRF">
+    <nav class="block sm:hidden astro-KIB2VHRF">
+      <script>(()=>{var s=(i,t)=>{let a=async()=>{await(await i())()};if(t.value){let e=matchMedia(t.value);e.matches?a():e.addEventListener("change",a,{once:!0})}};(self.Astro||(self.Astro={})).media=s;window.dispatchEvent(new Event("astro:media"));})();</script><astro-island uid="Z43Ocs" prefix="r2" component-url="/spa-sdk/docs/_astro/TableOfContents.fbf6df89.js" component-export="default" renderer-url="/spa-sdk/docs/_astro/client.8ec44e5c.js" props="{&quot;headings&quot;:[1,[[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;changelog&quot;],&quot;text&quot;:[0,&quot;Changelog&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;spa-sdk-2200&quot;],&quot;text&quot;:[0,&quot;spa-sdk-22.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2100&quot;],&quot;text&quot;:[0,&quot;spa-sdk-21.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2100-alpha0&quot;],&quot;text&quot;:[0,&quot;spa-sdk-21.0.0-alpha.0&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;spa-sdk-2000&quot;],&quot;text&quot;:[0,&quot;spa-sdk-20.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1902&quot;],&quot;text&quot;:[0,&quot;spa-sdk-19.0.2&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1901&quot;],&quot;text&quot;:[0,&quot;spa-sdk-19.0.1&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;spa-sdk-1900&quot;],&quot;text&quot;:[0,&quot;spa-sdk-19.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1801&quot;],&quot;text&quot;:[0,&quot;spa-sdk-18.0.1&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;spa-sdk-1800&quot;],&quot;text&quot;:[0,&quot;spa-sdk-18.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1720&quot;],&quot;text&quot;:[0,&quot;spa-sdk-17.2.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1711&quot;],&quot;text&quot;:[0,&quot;spa-sdk-17.1.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1710&quot;],&quot;text&quot;:[0,&quot;spa-sdk-17.1.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1701&quot;],&quot;text&quot;:[0,&quot;spa-sdk-17.0.1&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;spa-sdk-1700&quot;],&quot;text&quot;:[0,&quot;spa-sdk-17.0.0&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;spa-sdk-1600&quot;],&quot;text&quot;:[0,&quot;spa-sdk-16.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;v1551&quot;],&quot;text&quot;:[0,&quot;v15.5.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1550&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.5.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1546&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.4.6&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1545&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.4.5&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1544&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.4.4&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1543&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.4.3&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1542&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.4.2&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1541&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.4.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1540&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.4.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1533&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.3.3&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1532&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.3.2&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1531&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.3.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1530&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.3.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1522-0&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.2.2-0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1521&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.2.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1512&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.1.2&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1510&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.1.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1501-0&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.0.1-0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1500&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1500-1&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.0.0-1&quot;]}]]]}" ssr="" client="media" opts="{&quot;name&quot;:&quot;TableOfContents&quot;,&quot;value&quot;:&quot;(max-width: 50em)&quot;}" await-children=""><h2 id="on-this-page-heading" class="heading">On this page</h2><ul><li class="header-link depth-3"><a href="#changelog">Changelog</a></li><li class="header-link depth-3"><a href="#spa-sdk-2200">spa-sdk-22.0.0</a></li><li class="header-link depth-3"><a href="#spa-sdk-2000">spa-sdk-20.0.0</a></li><li class="header-link depth-3"><a href="#spa-sdk-1900">spa-sdk-19.0.0</a></li><li class="header-link depth-3"><a href="#spa-sdk-1800">spa-sdk-18.0.0</a></li><li class="header-link depth-3"><a href="#spa-sdk-1700">spa-sdk-17.0.0</a></li><li class="header-link depth-3"><a href="#spa-sdk-1600">spa-sdk-16.0.0</a></li></ul></astro-island>
+    </nav>
+    
+          
+  <h3 id="changelog">Changelog</h3>
+<p>All notable changes to this project will be documented in this file. Dates are displayed in UTC.</p>
+<h3 id="spa-sdk-2200"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-21.0.0...spa-sdk-22.0.0">spa-sdk-22.0.0</a></h3>
+<blockquote>
+<p>27 June 2023</p>
+</blockquote>
+<ul>
+<li>SPASDK-185 Allow images in rich content in example apps <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/135"><code>#135</code></a></li>
+<li>SPASDK-186 Run yalcAdd before builds <a href="https://issues.onehippo.com/browse/SPASDK-186"><code>#SPASDK-186</code></a></li>
+<li>SPASDK-186 Use yalc as starting dependency in monorepo <a href="https://issues.onehippo.com/browse/SPASDK-186"><code>#SPASDK-186</code></a></li>
+<li>SPASDK-186 Commit changelog after version bump <a href="https://issues.onehippo.com/browse/SPASDK-186"><code>#SPASDK-186</code></a></li>
+<li>SPASDK-186 Remove root package.json version <a href="https://issues.onehippo.com/browse/SPASDK-186"><code>#SPASDK-186</code></a></li>
+<li>SPASDK-186 Revert “Store yalc links in repo folder to isolate from other yalc installations” <a href="https://issues.onehippo.com/browse/SPASDK-186"><code>#SPASDK-186</code></a></li>
+<li>SPASDK-186 Restore reactivity of the component property in BrNodeComponent <a href="https://issues.onehippo.com/browse/SPASDK-186"><code>#SPASDK-186</code></a></li>
+<li>SPASDK-186 Move all nuxt-links to anchors <a href="https://issues.onehippo.com/browse/SPASDK-186"><code>#SPASDK-186</code></a></li>
+<li>SPASDK-186 use anchor instead of nuxt-link <a href="https://issues.onehippo.com/browse/SPASDK-186"><code>#SPASDK-186</code></a></li>
+<li>SPASDK-186 Try suggestion to remove default layout and use router-link directly <a href="https://issues.onehippo.com/browse/SPASDK-186"><code>#SPASDK-186</code></a></li>
+<li>SPASDK-186 Add certain vue dependencies to the nuxt project <a href="https://issues.onehippo.com/browse/SPASDK-186"><code>#SPASDK-186</code></a></li>
+<li>SPASDK-186 Add typing to vue3 CSR page template <a href="https://issues.onehippo.com/browse/SPASDK-186"><code>#SPASDK-186</code></a></li>
+<li>SPASDK-186 Due to excessive output of the page model only debug on client side if possible <a href="https://issues.onehippo.com/browse/SPASDK-186"><code>#SPASDK-186</code></a></li>
+<li>SPASDK-186 Add debug mode to all example apps <a href="https://issues.onehippo.com/browse/SPASDK-186"><code>#SPASDK-186</code></a></li>
+<li>SPASDK-186 Add serve to serve build files for all example apps <a href="https://issues.onehippo.com/browse/SPASDK-186"><code>#SPASDK-186</code></a></li>
+<li>SPASDK-186 Store yalc links in repo folder to isolate from other yalc installations <a href="https://issues.onehippo.com/browse/SPASDK-186"><code>#SPASDK-186</code></a></li>
+<li>SPASDK-186 Rewrite ‘workspace’ commands to lerna commands <a href="https://issues.onehippo.com/browse/SPASDK-186"><code>#SPASDK-186</code></a></li>
+<li>SPASDK-186 Fix tsdoc entry point paths <a href="https://issues.onehippo.com/browse/SPASDK-186"><code>#SPASDK-186</code></a></li>
+<li>SPASDK-186 Merge branch ‘feature/SPASDK-186-lerna-yalc’ into ‘development’ <a href="https://issues.onehippo.com/browse/SPASDK-186"><code>#SPASDK-186</code></a></li>
+<li>SPASDK-186 Utilize lerna watch to trigger build and yalc on change <a href="https://issues.onehippo.com/browse/SPASDK-186"><code>#SPASDK-186</code></a></li>
+<li>SPASDK-186 Specify exact dependencies <a href="https://issues.onehippo.com/browse/SPASDK-186"><code>#SPASDK-186</code></a></li>
+<li>SPASDK-186 Correct path to spa-sdk express module <a href="https://issues.onehippo.com/browse/SPASDK-186"><code>#SPASDK-186</code></a></li>
+<li>SPASDK-185 Allow images in rich content in example apps <a href="https://issues.onehippo.com/browse/SPASDK-185"><code>#SPASDK-185</code></a></li>
+<li>SPASDK-186 Fix example/angular build <a href="https://issues.onehippo.com/browse/SPASDK-186"><code>#SPASDK-186</code></a></li>
+<li>SPASDK-186 Dont bail on linting <a href="https://issues.onehippo.com/browse/SPASDK-186"><code>#SPASDK-186</code></a></li>
+<li>SPASDK-186 Resolve Vue2 eslint-plugin-vue dependency conflict by overriding it <a href="https://issues.onehippo.com/browse/SPASDK-186"><code>#SPASDK-186</code></a></li>
+<li>SPASDK-186 Update Vue3 example app type checking and test <a href="https://issues.onehippo.com/browse/SPASDK-186"><code>#SPASDK-186</code></a></li>
+<li>SPASDK-186 Update Vue3 type checking and test <a href="https://issues.onehippo.com/browse/SPASDK-186"><code>#SPASDK-186</code></a></li>
+<li>SPASDK-186 Update Vue2 SDK dependency and test <a href="https://issues.onehippo.com/browse/SPASDK-186"><code>#SPASDK-186</code></a></li>
+<li>SPASDK-186 Update example app lint configs <a href="https://issues.onehippo.com/browse/SPASDK-186"><code>#SPASDK-186</code></a></li>
+<li>SPASDK-186 Update and fix linting in vue-sdk <a href="https://issues.onehippo.com/browse/SPASDK-186"><code>#SPASDK-186</code></a></li>
+<li>SPASDK-186 Update and fix linting in ng-sdk <a href="https://issues.onehippo.com/browse/SPASDK-186"><code>#SPASDK-186</code></a></li>
+<li>SPASDK-186 Update and fix linting in react-sdk <a href="https://issues.onehippo.com/browse/SPASDK-186"><code>#SPASDK-186</code></a></li>
+<li>SPASDK-186 Update lint config in spa-sdk <a href="https://issues.onehippo.com/browse/SPASDK-186"><code>#SPASDK-186</code></a></li>
+<li>SPASDK-186 Yalc setup that links together during build <a href="https://issues.onehippo.com/browse/SPASDK-186"><code>#SPASDK-186</code></a></li>
+<li>SPASDK-186 Lerna packages with the double framework issue <a href="https://issues.onehippo.com/browse/SPASDK-186"><code>#SPASDK-186</code></a></li>
+<li>SPASDK-186 Independend packages <a href="https://issues.onehippo.com/browse/SPASDK-186"><code>#SPASDK-186</code></a></li>
+<li>SPASDK-186 Add shim typings for vue 3 to fix spec type check <a href="https://issues.onehippo.com/browse/SPASDK-186"><code>#SPASDK-186</code></a></li>
+<li>SPASDK-186 Let Next.js import commonjs bundle for express module <a href="https://issues.onehippo.com/browse/SPASDK-186"><code>#SPASDK-186</code></a></li>
+<li>SPASDK-186 Set correct type for $page and $component providers <a href="https://issues.onehippo.com/browse/SPASDK-186"><code>#SPASDK-186</code></a></li>
+<li>SPASDK-186 Clarify subject of event bus <a href="https://issues.onehippo.com/browse/SPASDK-186"><code>#SPASDK-186</code></a></li>
+<li>SPASDK-184 Merge branch ‘development’ into ‘main’ <a href="https://issues.onehippo.com/browse/SPASDK-184"><code>#SPASDK-184</code></a></li>
+<li>SPASDK-184 Update typescript version to allow htmlparser to build for docs <a href="https://issues.onehippo.com/browse/SPASDK-184"><code>#SPASDK-184</code></a></li>
+<li>SPASDK-184 Merge branch ‘development’ into ‘main’ <a href="https://issues.onehippo.com/browse/SPASDK-184"><code>#SPASDK-184</code></a></li>
+<li>SPASDK-181 Merge branch ‘development’ into ‘main’ <a href="https://issues.onehippo.com/browse/SPASDK-181"><code>#SPASDK-181</code></a></li>
+<li>SPASDK-178 Merge branch ‘development’ into ‘main’ <a href="https://issues.onehippo.com/browse/SPASDK-178"><code>#SPASDK-178</code></a></li>
+<li>SPASDK-178 Merge branch ‘development’ into ‘main’ <a href="https://issues.onehippo.com/browse/SPASDK-178"><code>#SPASDK-178</code></a></li>
+<li>SPASDK-167 Merge branch ‘development’ into ‘main’ <a href="https://issues.onehippo.com/browse/SPASDK-167"><code>#SPASDK-167</code></a></li>
+<li>SPASDK-154 Merge branch ‘development’ into ‘main’ <a href="https://issues.onehippo.com/browse/SPASDK-154"><code>#SPASDK-154</code></a></li>
+<li>SPASDK-154 Merge branch ‘development’ into ‘main’ <a href="https://issues.onehippo.com/browse/SPASDK-154"><code>#SPASDK-154</code></a></li>
+<li>SPASDK-147 Merge branch ‘development’ into ‘main’ <a href="https://issues.onehippo.com/browse/SPASDK-147"><code>#SPASDK-147</code></a></li>
+<li>TRIVIAL Bump versions to 22.0.0 <a href="https://github.com/bloomreach/spa-sdk/commit/befd487fb9749702aa62d0610fdd8b9e3fcb5f75"><code>befd487</code></a></li>
+<li>TRIVIAL Update CHANGELOG <a href="https://github.com/bloomreach/spa-sdk/commit/a8a7cb648d35e725aedc3a46f6c6dd34a0119db7"><code>a8a7cb6</code></a></li>
+<li>TRIVIAL Merge branch ‘development’ into ‘main’ <a href="https://github.com/bloomreach/spa-sdk/commit/b3ef042dcb08a8af5421d33fe3758c45ab85758f"><code>b3ef042</code></a></li>
+<li>TRIVIAL Merge branch ‘development’ into ‘main’ <a href="https://github.com/bloomreach/spa-sdk/commit/17b3ebfb5e3fd0b18e56c2c9c0e07b9ef867913c"><code>17b3ebf</code></a></li>
+<li>TRIVIAL Merge branch ‘development’ into ‘main’ <a href="https://github.com/bloomreach/spa-sdk/commit/feae721c448e5636b350ae9ead60ff0cfe595470"><code>feae721</code></a></li>
+<li>TRIVIAL Merge branch ‘development’ into ‘main’ <a href="https://github.com/bloomreach/spa-sdk/commit/30137498740623a2bae135e7adb72b597b5fec8c"><code>3013749</code></a></li>
+<li>TRIVIAL Merge branch ‘development’ into ‘main’ <a href="https://github.com/bloomreach/spa-sdk/commit/ab29770b6ee908838c7d97de6b989496eeae10bc"><code>ab29770</code></a></li>
+</ul>
+<h4 id="spa-sdk-2100"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-21.0.0-alpha.0...spa-sdk-21.0.0">spa-sdk-21.0.0</a></h4>
+<blockquote>
+<p>26 April 2023</p>
+</blockquote>
+<ul>
+<li>SPASDK-184 Bumping versions to 21.0.0 <a href="https://issues.onehippo.com/browse/SPASDK-184"><code>#SPASDK-184</code></a></li>
+<li>SPASDK-163 Merge branch ‘bugfix/SPASDK-163-next-relevance’ into ‘development’ <a href="https://issues.onehippo.com/browse/SPASDK-163"><code>#SPASDK-163</code></a></li>
+<li>SPASDK-163 Output CJS bundle for the relevance express module <a href="https://issues.onehippo.com/browse/SPASDK-163"><code>#SPASDK-163</code></a></li>
+<li>SPASDK-182 Merge branch ‘bugfix/SPASDK-182-bundle-size’ into ‘development’ <a href="https://issues.onehippo.com/browse/SPASDK-182"><code>#SPASDK-182</code></a></li>
+<li>SPASDK-182 Add sanitize-html to the example apps <a href="https://issues.onehippo.com/browse/SPASDK-182"><code>#SPASDK-182</code></a></li>
+<li>SPASDK-182 Replace @xmldom/xmldom library with htmlparser2 <a href="https://issues.onehippo.com/browse/SPASDK-182"><code>#SPASDK-182</code></a></li>
+<li>SPASDK-182 Remove the <code>sanitize</code> method from the Page object <a href="https://issues.onehippo.com/browse/SPASDK-182"><code>#SPASDK-182</code></a></li>
+</ul>
+<h4 id="spa-sdk-2100-alpha0"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-20.0.0...spa-sdk-21.0.0-alpha.0">spa-sdk-21.0.0-alpha.0</a></h4>
+<blockquote>
+<p>26 April 2023</p>
+</blockquote>
+<ul>
+<li>SPASDK-179 Deploy Vue3 CSR to Heroku <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/129"><code>#129</code></a></li>
+<li>SPASDK-181 Revert async implementation of rewriteLinks and sanitize <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/128"><code>#128</code></a></li>
+<li>SPASDK-174 Only load CmsModule once <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/125"><code>#125</code></a></li>
+<li>SPASDK-181 Bumping versions to 21.0.0-alpha.0 <a href="https://issues.onehippo.com/browse/SPASDK-181"><code>#SPASDK-181</code></a></li>
+<li>SPASDK-181 Fix infinite loop in Vue3 components <a href="https://issues.onehippo.com/browse/SPASDK-181"><code>#SPASDK-181</code></a></li>
+<li>SPASDK-181 Update snapshots <a href="https://issues.onehippo.com/browse/SPASDK-181"><code>#SPASDK-181</code></a></li>
+<li>SPASDK-181 Remove use of Suspense <a href="https://issues.onehippo.com/browse/SPASDK-181"><code>#SPASDK-181</code></a></li>
+<li>SPASDK-181 Call sync on original page object in Vue 3 SDK <a href="https://issues.onehippo.com/browse/SPASDK-181"><code>#SPASDK-181</code></a></li>
+<li>SPASDK-181 Remove manual changeDetection and its test <a href="https://issues.onehippo.com/browse/SPASDK-181"><code>#SPASDK-181</code></a></li>
+<li>SPASDK-179 Add configuration for starting Vue3 on Heroku <a href="https://issues.onehippo.com/browse/SPASDK-179"><code>#SPASDK-179</code></a></li>
+<li>SPASDK-179 Add a Procfile for Vue3 <a href="https://issues.onehippo.com/browse/SPASDK-179"><code>#SPASDK-179</code></a></li>
+<li>SPASDK-181 Correct order of rendering during Angular SSR <a href="https://issues.onehippo.com/browse/SPASDK-181"><code>#SPASDK-181</code></a></li>
+<li>SPASDK-181 Fully render next.js pages with rich text during SSR <a href="https://issues.onehippo.com/browse/SPASDK-181"><code>#SPASDK-181</code></a></li>
+<li>SPASDK-179 Deploy Vue3 CSR to Heroku <a href="https://issues.onehippo.com/browse/SPASDK-179"><code>#SPASDK-179</code></a></li>
+<li>SPASDK-181 Revert async initialize and lazy load of preview code <a href="https://issues.onehippo.com/browse/SPASDK-181"><code>#SPASDK-181</code></a></li>
+<li>SPASDK-181 Revert async implementation of rewriteLinks and sanitize <a href="https://issues.onehippo.com/browse/SPASDK-181"><code>#SPASDK-181</code></a></li>
+<li>SPASDK-174 Render example react app with StrictMode <a href="https://issues.onehippo.com/browse/SPASDK-174"><code>#SPASDK-174</code></a></li>
+<li>SPASDK-174 Only load CmsModule once <a href="https://issues.onehippo.com/browse/SPASDK-174"><code>#SPASDK-174</code></a></li>
+<li>SPASDK-174 Let jest run tests in parallel <a href="https://issues.onehippo.com/browse/SPASDK-174"><code>#SPASDK-174</code></a></li>
+<li>TRIVIAL Fix type docs generation by removing outdated dependency <a href="https://github.com/bloomreach/spa-sdk/commit/80c3b1e8940058050c19b447737a39d608a54ccd"><code>80c3b1e</code></a></li>
+</ul>
+<h3 id="spa-sdk-2000"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-19.0.2...spa-sdk-20.0.0">spa-sdk-20.0.0</a></h3>
+<blockquote>
+<p>5 April 2023</p>
+</blockquote>
+<ul>
+<li>SPASDK-159 Port tests to vue 3 sdk <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/120"><code>#120</code></a></li>
+<li>Resolve SPASDK-172 “Feature/ remove personalization” <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/119"><code>#119</code></a></li>
+<li>SPASDK-178 Bumping versions to 20.0.0 <a href="https://issues.onehippo.com/browse/SPASDK-178"><code>#SPASDK-178</code></a></li>
+<li>SPASDK-157 Update vue 3 version in example package.json <a href="https://issues.onehippo.com/browse/SPASDK-157"><code>#SPASDK-157</code></a></li>
+<li>SPASDK-157 Update package-lock.json <a href="https://issues.onehippo.com/browse/SPASDK-157"><code>#SPASDK-157</code></a></li>
+<li>SPASDK-157 Bump vue3-sdk version in example vue3 <a href="https://issues.onehippo.com/browse/SPASDK-157"><code>#SPASDK-157</code></a></li>
+<li>SPASDK-157 Fix package-lock.json <a href="https://issues.onehippo.com/browse/SPASDK-157"><code>#SPASDK-157</code></a></li>
+<li>SPASDK-157 Set prerelease version for vue 3 sdk <a href="https://issues.onehippo.com/browse/SPASDK-157"><code>#SPASDK-157</code></a></li>
+<li>SPASDK-157 Fix typechecking in vue 3 sdk and its tests <a href="https://issues.onehippo.com/browse/SPASDK-157"><code>#SPASDK-157</code></a></li>
+<li>SPASDK-169 Merge branch ‘bugfix/SPASDK-169-readmes’ into ‘development’ <a href="https://issues.onehippo.com/browse/SPASDK-169"><code>#SPASDK-169</code></a></li>
+<li>SPASDK-169 Update links to reference the typedoc <a href="https://issues.onehippo.com/browse/SPASDK-169"><code>#SPASDK-169</code></a></li>
+<li>SPASDK-169 Explain how the examples can be build within the monorepo <a href="https://issues.onehippo.com/browse/SPASDK-169"><code>#SPASDK-169</code></a></li>
+<li>SPASDK-169 Generalize example of using SDK on only a few pages <a href="https://issues.onehippo.com/browse/SPASDK-169"><code>#SPASDK-169</code></a></li>
+<li>SPASDK-169 Point to automatically generated SPA SDK typedoc <a href="https://issues.onehippo.com/browse/SPASDK-169"><code>#SPASDK-169</code></a></li>
+<li>SPASDK-169 Update SPA SDK readme to include vue 3 packages <a href="https://issues.onehippo.com/browse/SPASDK-169"><code>#SPASDK-169</code></a></li>
+<li>SPASDK-169 Update vue 3 readme <a href="https://issues.onehippo.com/browse/SPASDK-169"><code>#SPASDK-169</code></a></li>
+<li>SPASDK-176 Merge branch ‘bugfix/SPASDK-176-meta’ into ‘development’ <a href="https://issues.onehippo.com/browse/SPASDK-176"><code>#SPASDK-176</code></a></li>
+<li>SPASDK-176 Force rerender of meta tag when component changes <a href="https://issues.onehippo.com/browse/SPASDK-176"><code>#SPASDK-176</code></a></li>
+<li>SPASDK-176 Revert “SPASDK-159 Render component meta comments within bounding span elements” <a href="https://issues.onehippo.com/browse/SPASDK-176"><code>#SPASDK-176</code></a></li>
+<li>SPASDK-159 Remove duplicate nextTick call <a href="https://issues.onehippo.com/browse/SPASDK-159"><code>#SPASDK-159</code></a></li>
+<li>SPASDK-159 Render component meta comments within bounding span elements <a href="https://issues.onehippo.com/browse/SPASDK-159"><code>#SPASDK-159</code></a></li>
+<li>SPASDK-159 Rerender container item when it receives an update event <a href="https://issues.onehippo.com/browse/SPASDK-159"><code>#SPASDK-159</code></a></li>
+<li>SPASDK-159 Fix beforeEach <a href="https://issues.onehippo.com/browse/SPASDK-159"><code>#SPASDK-159</code></a></li>
+<li>SPASDK-159 Convert unit tests from vue 2 to vue 3 <a href="https://issues.onehippo.com/browse/SPASDK-159"><code>#SPASDK-159</code></a></li>
+<li>SPASDK-159 Add vitest to the project <a href="https://issues.onehippo.com/browse/SPASDK-159"><code>#SPASDK-159</code></a></li>
+<li>SPASDK-159 Retrieve slot values on every container render <a href="https://issues.onehippo.com/browse/SPASDK-159"><code>#SPASDK-159</code></a></li>
+<li>SPASDK-159 Add update handling to container item <a href="https://issues.onehippo.com/browse/SPASDK-159"><code>#SPASDK-159</code></a></li>
+<li>SPASDK-172 Remove personalization from example apps <a href="https://issues.onehippo.com/browse/SPASDK-172"><code>#SPASDK-172</code></a></li>
+<li>SPASDK-157 Merge branch ‘feature/SPASDK-157-Vue-CSR-example’ into ‘development’ <a href="https://issues.onehippo.com/browse/SPASDK-157"><code>#SPASDK-157</code></a></li>
+<li>SPASDK-157 Correct type check for httpClient <a href="https://issues.onehippo.com/browse/SPASDK-157"><code>#SPASDK-157</code></a></li>
+<li>SPASDK-157 Set prerelease version 19.0.2-beta.2 <a href="https://issues.onehippo.com/browse/SPASDK-157"><code>#SPASDK-157</code></a></li>
+<li>SPASDK-157 Add meta info in vue3-sdk package <a href="https://issues.onehippo.com/browse/SPASDK-157"><code>#SPASDK-157</code></a></li>
+<li>SPASDK-157 Set prerelease version <a href="https://issues.onehippo.com/browse/SPASDK-157"><code>#SPASDK-157</code></a></li>
+<li>SPASDK-157 Force rerender BrPage when changing paths <a href="https://issues.onehippo.com/browse/SPASDK-157"><code>#SPASDK-157</code></a></li>
+<li>SPASDK-157 Implement BrMeta in similar fashion to React SDK <a href="https://issues.onehippo.com/browse/SPASDK-157"><code>#SPASDK-157</code></a></li>
+<li>SPASDK-157 Rename ‘state’ to ‘page’ for readability/clarity <a href="https://issues.onehippo.com/browse/SPASDK-157"><code>#SPASDK-157</code></a></li>
+<li>SPASDK-157 Generate sourcemaps for SDK and example app <a href="https://issues.onehippo.com/browse/SPASDK-157"><code>#SPASDK-157</code></a></li>
+<li>SPASDK-157 Set typescript lib to use 2020 like the rest of the SDKs <a href="https://issues.onehippo.com/browse/SPASDK-157"><code>#SPASDK-157</code></a></li>
+<li>SPASDK-157 Move container rendering logic to composable <a href="https://issues.onehippo.com/browse/SPASDK-157"><code>#SPASDK-157</code></a></li>
+<li>SPASDK-157 Support async components when directly mapped in BrNodeComponent <a href="https://issues.onehippo.com/browse/SPASDK-157"><code>#SPASDK-157</code></a></li>
+<li>SPASDK-157 Place top level div and class to index.html <a href="https://issues.onehippo.com/browse/SPASDK-157"><code>#SPASDK-157</code></a></li>
+<li>SPASDK-157 Reactively watch the html sanitize call <a href="https://issues.onehippo.com/browse/SPASDK-157"><code>#SPASDK-157</code></a></li>
+<li>SPASDK-157 Fix vue reactivity in SDK and example app <a href="https://issues.onehippo.com/browse/SPASDK-157"><code>#SPASDK-157</code></a></li>
+<li>SPASDK-157 Correct typescript errors in templates <a href="https://issues.onehippo.com/browse/SPASDK-157"><code>#SPASDK-157</code></a></li>
+<li>SPASDK-157 Mount after initial navigation is complete and router is ready <a href="https://issues.onehippo.com/browse/SPASDK-157"><code>#SPASDK-157</code></a></li>
+<li>SPASDK-157 Banner and Content should render rich content on first render <a href="https://issues.onehippo.com/browse/SPASDK-157"><code>#SPASDK-157</code></a></li>
+<li>SPASDK-157 Use suspense to allow for async container-item components <a href="https://issues.onehippo.com/browse/SPASDK-157"><code>#SPASDK-157</code></a></li>
+<li>SPASDK-157 Page should possibly be undefined when using NBRmode <a href="https://issues.onehippo.com/browse/SPASDK-157"><code>#SPASDK-157</code></a></li>
+<li>SPASDK-157 Do not import httpClient type from spa-sdk src folder <a href="https://issues.onehippo.com/browse/SPASDK-157"><code>#SPASDK-157</code></a></li>
+<li>SPASDK-157 Access env variables through import.meta instead of process <a href="https://issues.onehippo.com/browse/SPASDK-157"><code>#SPASDK-157</code></a></li>
+<li>SPASDK-157 Prevent vite from externalizing certain node modules <a href="https://issues.onehippo.com/browse/SPASDK-157"><code>#SPASDK-157</code></a></li>
+<li>SPASDK-157 Convert example vue 2 components to vue 3 components <a href="https://issues.onehippo.com/browse/SPASDK-157"><code>#SPASDK-157</code></a></li>
+<li>SPASDK-157 Remove defineProps from imports as its a compiler buildin <a href="https://issues.onehippo.com/browse/SPASDK-157"><code>#SPASDK-157</code></a></li>
+<li>SPASDK-152 Merge branch ‘feature/SPASDK-152-vue3-components’ into ‘development’ <a href="https://issues.onehippo.com/browse/SPASDK-152"><code>#SPASDK-152</code></a></li>
+<li>SPASDK-152 Add newly generated vue 3 csr app with vue 3 sdk integration <a href="https://issues.onehippo.com/browse/SPASDK-152"><code>#SPASDK-152</code></a></li>
+<li>SPASDK-152 Convert all components to composition API syntax <a href="https://issues.onehippo.com/browse/SPASDK-152"><code>#SPASDK-152</code></a></li>
+<li>SPASDK-153 Merge branch ‘feature/SPASDK-153-vue3-vite’ into ‘development’ <a href="https://issues.onehippo.com/browse/SPASDK-153"><code>#SPASDK-153</code></a></li>
+<li>SPASDK-153 Add vite library <a href="https://issues.onehippo.com/browse/SPASDK-153"><code>#SPASDK-153</code></a></li>
+</ul>
+<h4 id="spa-sdk-1902"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-19.0.1...spa-sdk-19.0.2">spa-sdk-19.0.2</a></h4>
+<blockquote>
+<p>22 February 2023</p>
+</blockquote>
+<ul>
+<li>SPASDK-168 Change BrPageService to support multiple br-page components <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/116"><code>#116</code></a></li>
+<li>SPASDK-168 Bumping versions to 19.0.2 <a href="https://issues.onehippo.com/browse/SPASDK-168"><code>#SPASDK-168</code></a></li>
+<li>SPASDK-168 Change BrPageService to support multiple br-page components <a href="https://issues.onehippo.com/browse/SPASDK-168"><code>#SPASDK-168</code></a></li>
+</ul>
+<h4 id="spa-sdk-1901"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-19.0.0...spa-sdk-19.0.1">spa-sdk-19.0.1</a></h4>
+<blockquote>
+<p>13 February 2023</p>
+</blockquote>
+<ul>
+<li>feature/SPASDK-156 use a non-registrable domain to protect from link highjacking <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/111"><code>#111</code></a></li>
+<li>SPASDK-167 Merge branch ‘bugfix/SPASDK-167-ng-sdk’ into ‘development’ <a href="https://issues.onehippo.com/browse/SPASDK-167"><code>#SPASDK-167</code></a></li>
+<li>SPASDK-167 Bumping versions to 19.0.1 <a href="https://issues.onehippo.com/browse/SPASDK-167"><code>#SPASDK-167</code></a></li>
+<li>SPASDK-167 Restore ng-sdk package.json properties <a href="https://issues.onehippo.com/browse/SPASDK-167"><code>#SPASDK-167</code></a></li>
+<li>SPASDK-154 Merge branch ‘typedoc-update’ into ‘development’ <a href="https://issues.onehippo.com/browse/SPASDK-154"><code>#SPASDK-154</code></a></li>
+<li>SPASDK-154 Update typedoc to latest version supported by current typescript version 4.3.5 <a href="https://issues.onehippo.com/browse/SPASDK-154"><code>#SPASDK-154</code></a></li>
+<li>feature/SPASDK-156 update tests to no longer use ‘example.com’ as domain as that is used internally as a DUMMY <a href="https://github.com/bloomreach/spa-sdk/commit/ab0737f4f4284606b4df66e6bed7ad3c09ed0f42"><code>ab0737f</code></a></li>
+<li>feature/SPASDK-156 lint formating <a href="https://github.com/bloomreach/spa-sdk/commit/8f645dd99d0f08d74aa2ceba3a27d5ff31749407"><code>8f645dd</code></a></li>
+</ul>
+<h3 id="spa-sdk-1900"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-18.0.1...spa-sdk-19.0.0">spa-sdk-19.0.0</a></h3>
+<blockquote>
+<p>1 February 2023</p>
+</blockquote>
+<ul>
+<li>SPASDK-151 Upgrade the angular SDK and the example app to Angular 15 <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/106"><code>#106</code></a></li>
+<li>SPASDK-122 Remove default apiVersion header value from PDA request <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/102"><code>#102</code></a></li>
+<li>SPASDK-154 Bumping versions to 19.0.0 <a href="https://issues.onehippo.com/browse/SPASDK-154"><code>#SPASDK-154</code></a></li>
+<li>SPASDK-151 Remove unneeded npm flag <a href="https://issues.onehippo.com/browse/SPASDK-151"><code>#SPASDK-151</code></a></li>
+<li>SPASDK-151 Fix spa-sdk tests hanging and some deprecation errors <a href="https://issues.onehippo.com/browse/SPASDK-151"><code>#SPASDK-151</code></a></li>
+<li>SPASDK-151 Update licences <a href="https://issues.onehippo.com/browse/SPASDK-151"><code>#SPASDK-151</code></a></li>
+<li>SPASDK-151 Remove obsolete tslint comment <a href="https://issues.onehippo.com/browse/SPASDK-151"><code>#SPASDK-151</code></a></li>
+<li>SPASDK-151 Update @bloomreach/eslint-config-angular to v15 <a href="https://issues.onehippo.com/browse/SPASDK-151"><code>#SPASDK-151</code></a></li>
+<li>SPASDK-151 Change ng-sdk supported Angular versions <a href="https://issues.onehippo.com/browse/SPASDK-151"><code>#SPASDK-151</code></a></li>
+<li>SPASDK-151 Upgrade example/angular to Angular 15 <a href="https://issues.onehippo.com/browse/SPASDK-151"><code>#SPASDK-151</code></a></li>
+<li>SPASDK-151 Upgrade ng-sdk to Angular 15 <a href="https://issues.onehippo.com/browse/SPASDK-151"><code>#SPASDK-151</code></a></li>
+<li>SPASDK-151 Fix npm dependencies and remove deprecated functionality <a href="https://issues.onehippo.com/browse/SPASDK-151"><code>#SPASDK-151</code></a></li>
+<li>SPASDK-151 Upgrade example/angular to Angular 14 <a href="https://issues.onehippo.com/browse/SPASDK-151"><code>#SPASDK-151</code></a></li>
+<li>SPASDK-151 Upgrade ng-sdk to Angular 14 <a href="https://issues.onehippo.com/browse/SPASDK-151"><code>#SPASDK-151</code></a></li>
+<li>SPASDK-151 Upgrade example/angular to Angular 13 <a href="https://issues.onehippo.com/browse/SPASDK-151"><code>#SPASDK-151</code></a></li>
+<li>SPASDK-151 Fix several building issues and unit tests <a href="https://issues.onehippo.com/browse/SPASDK-151"><code>#SPASDK-151</code></a></li>
+<li>SPASDK-151 Upgrade ng-sdk to angular 13 <a href="https://issues.onehippo.com/browse/SPASDK-151"><code>#SPASDK-151</code></a></li>
+<li>SPASDK-151 Fix wrong url properties <a href="https://issues.onehippo.com/browse/SPASDK-151"><code>#SPASDK-151</code></a></li>
+<li>SPASDK-151 Fix node undefined and memory leak <a href="https://issues.onehippo.com/browse/SPASDK-151"><code>#SPASDK-151</code></a></li>
+<li>SPASDK-151 Upgrade angular example app to Angular 12 <a href="https://issues.onehippo.com/browse/SPASDK-151"><code>#SPASDK-151</code></a></li>
+<li>SPASDK-151 Fix Ivy compilation mode <a href="https://issues.onehippo.com/browse/SPASDK-151"><code>#SPASDK-151</code></a></li>
+<li>SPASDK-151 Fix linting errors <a href="https://issues.onehippo.com/browse/SPASDK-151"><code>#SPASDK-151</code></a></li>
+<li>SPASDK-151 Add angular fixed dev dependencies <a href="https://issues.onehippo.com/browse/SPASDK-151"><code>#SPASDK-151</code></a></li>
+<li>SPASDK-151 Delete unused tslint file and fix ng-packagr configuration <a href="https://issues.onehippo.com/browse/SPASDK-151"><code>#SPASDK-151</code></a></li>
+<li>SPASDK-151 Upgrade ng-sdk to Angular 12 <a href="https://issues.onehippo.com/browse/SPASDK-151"><code>#SPASDK-151</code></a></li>
+<li>SPASDK-151 Fix npm scripts to work on Windows <a href="https://issues.onehippo.com/browse/SPASDK-151"><code>#SPASDK-151</code></a></li>
+<li>SPASDK-122 Remove default apiVersion header value from PDA request <a href="https://issues.onehippo.com/browse/SPASDK-122"><code>#SPASDK-122</code></a></li>
+<li>SPASDK-122 Adjust bump script for cross-env <a href="https://issues.onehippo.com/browse/SPASDK-122"><code>#SPASDK-122</code></a></li>
+</ul>
+<h4 id="spa-sdk-1801"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-18.0.0...spa-sdk-18.0.1">spa-sdk-18.0.1</a></h4>
+<blockquote>
+<p>7 December 2022</p>
+</blockquote>
+<ul>
+<li>SPASDK-148 Update component in preview when editing <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/103"><code>#103</code></a></li>
+<li>SPASDK-149 Bumping versions to 18.0.1 <a href="https://issues.onehippo.com/browse/SPASDK-149"><code>#SPASDK-149</code></a></li>
+<li>SPASDK-149 Retrieve spa service from correct container <a href="https://issues.onehippo.com/browse/SPASDK-149"><code>#SPASDK-149</code></a></li>
+<li>SPASDK-149 Revert “SPASDK-149 Revert “SPASDK-148 Set cms update listener after loading the cms module"" <a href="https://issues.onehippo.com/browse/SPASDK-149"><code>#SPASDK-149</code></a></li>
+<li>SPASDK-149 Revert “SPASDK-148 Set cms update listener after loading the cms module” <a href="https://issues.onehippo.com/browse/SPASDK-149"><code>#SPASDK-149</code></a></li>
+<li>SPASDK-149 Display rich text in Banner and Content components <a href="https://issues.onehippo.com/browse/SPASDK-149"><code>#SPASDK-149</code></a></li>
+<li>SPASDK-149 Merge branch ‘bugfix/SPASDK-149-ssr’ into development <a href="https://issues.onehippo.com/browse/SPASDK-149"><code>#SPASDK-149</code></a></li>
+<li>SPASDK-149 Initialize now always returns a Promise&#x3C;Page> <a href="https://issues.onehippo.com/browse/SPASDK-149"><code>#SPASDK-149</code></a></li>
+<li>SPASDK-149 Fix data object in vue components <a href="https://issues.onehippo.com/browse/SPASDK-149"><code>#SPASDK-149</code></a></li>
+<li>SPASDK-149 Clarify event origins in classes and modules <a href="https://issues.onehippo.com/browse/SPASDK-149"><code>#SPASDK-149</code></a></li>
+<li>SPASDK-149 Prevent tests from hogging all the CPU resources and crashing the system <a href="https://issues.onehippo.com/browse/SPASDK-149"><code>#SPASDK-149</code></a></li>
+<li>SPASDK-148 Disable failing test for now <a href="https://issues.onehippo.com/browse/SPASDK-148"><code>#SPASDK-148</code></a></li>
+<li>SPASDK-148 Set cms update listener after loading the cms module <a href="https://issues.onehippo.com/browse/SPASDK-148"><code>#SPASDK-148</code></a></li>
+<li>SPASDK-148 Output sourcemaps for ES modules <a href="https://issues.onehippo.com/browse/SPASDK-148"><code>#SPASDK-148</code></a></li>
+<li>SPASDK-148 Allow field to be null <a href="https://issues.onehippo.com/browse/SPASDK-148"><code>#SPASDK-148</code></a></li>
+</ul>
+<h3 id="spa-sdk-1800"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-17.2.0...spa-sdk-18.0.0">spa-sdk-18.0.0</a></h3>
+<blockquote>
+<p>28 November 2022</p>
+</blockquote>
+<ul>
+<li>SPASDK-147 Bumping versions to 18.0.0 <a href="https://issues.onehippo.com/browse/SPASDK-147"><code>#SPASDK-147</code></a></li>
+<li>SPASDK-126 Merge branch ‘feature/SPASDK-126-sdk-split-bundles’ into ‘development’ <a href="https://issues.onehippo.com/browse/SPASDK-126"><code>#SPASDK-126</code></a></li>
+<li>SPASDK-141 Fix the package-lock file versions <a href="https://issues.onehippo.com/browse/SPASDK-141"><code>#SPASDK-141</code></a></li>
+<li>SPASDK-126 Provide preparation of HTML content as page method <a href="https://issues.onehippo.com/browse/SPASDK-126"><code>#SPASDK-126</code></a></li>
+<li>SPASDK-126 Change to rollup and ts configs to support ES modules <a href="https://issues.onehippo.com/browse/SPASDK-126"><code>#SPASDK-126</code></a></li>
+<li>SPASDK-126 Change comments to multiline <a href="https://issues.onehippo.com/browse/SPASDK-126"><code>#SPASDK-126</code></a></li>
+<li>SPASDK-126 Remove check for preview before attempting to send the ready event <a href="https://issues.onehippo.com/browse/SPASDK-126"><code>#SPASDK-126</code></a></li>
+<li>SPASDK-126 Split preview code into separate chunk <a href="https://issues.onehippo.com/browse/SPASDK-126"><code>#SPASDK-126</code></a></li>
+<li>SPASDK-126 Load the html sanitizer dynamically <a href="https://issues.onehippo.com/browse/SPASDK-126"><code>#SPASDK-126</code></a></li>
+<li>SPASDK-126 Split DomParser and XMLDom dependencies from main bundle <a href="https://issues.onehippo.com/browse/SPASDK-126"><code>#SPASDK-126</code></a></li>
+</ul>
+<h4 id="spa-sdk-1720"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-17.1.1...spa-sdk-17.2.0">spa-sdk-17.2.0</a></h4>
+<blockquote>
+<p>24 November 2022</p>
+</blockquote>
+<ul>
+<li>SPASDK-141 Move SKIP_PREFLIGHT_CHECK from react-scripts to the environment file <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/100"><code>#100</code></a></li>
+<li>SPASDK-141 Bumping versions to 17.2.0 <a href="https://issues.onehippo.com/browse/SPASDK-141"><code>#SPASDK-141</code></a></li>
+<li>SPASDK-141 Use cross-env npm package instead of .env file <a href="https://issues.onehippo.com/browse/SPASDK-141"><code>#SPASDK-141</code></a></li>
+<li>SPASDK-141 Add global environment file <a href="https://issues.onehippo.com/browse/SPASDK-141"><code>#SPASDK-141</code></a></li>
+<li>SPASDK-141 Move SKIP_PREFLIGHT_CHECK from react-scripts to the environment file <a href="https://issues.onehippo.com/browse/SPASDK-141"><code>#SPASDK-141</code></a></li>
+</ul>
+<h4 id="spa-sdk-1711"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-17.1.0...spa-sdk-17.1.1">spa-sdk-17.1.1</a></h4>
+<blockquote>
+<p>11 November 2022</p>
+</blockquote>
+<ul>
+<li>SPASDK-144 Bump @xmldom/xmldom to patched 0.7.9 <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/98"><code>#98</code></a></li>
+<li>SPASDK-138 Upgrade next, react examples to react 18 <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/97"><code>#97</code></a></li>
+<li>SPASDK-144 Bumping versions to 17.1.1 <a href="https://issues.onehippo.com/browse/SPASDK-144"><code>#SPASDK-144</code></a></li>
+<li>SPASDK-144 Bump @xmldom/xmldom to patched 0.7.9 <a href="https://issues.onehippo.com/browse/SPASDK-144"><code>#SPASDK-144</code></a></li>
+<li>SPASDK-138 Upgrade next, react examples to react 18 <a href="https://issues.onehippo.com/browse/SPASDK-138"><code>#SPASDK-138</code></a></li>
+<li>TRIVIAL Merge branch ‘TRIVIAL/heroku-cleanup-scrip’ into ‘development’ <a href="https://github.com/bloomreach/spa-sdk/commit/1ecf2e0d78069f3634a8a5cf1f169012f820c52d"><code>1ecf2e0</code></a></li>
+<li>TRIVIAL add heroku app cleanup script <a href="https://github.com/bloomreach/spa-sdk/commit/a9f66b356c83f8865dbbc7127c17a471ab8676f0"><code>a9f66b3</code></a></li>
+<li>TRIVIAL Update the description for the cleanup utility <a href="https://github.com/bloomreach/spa-sdk/commit/81316945f49fe34336a5330e09c46b755be31f3d"><code>8131694</code></a></li>
+</ul>
+<h4 id="spa-sdk-1710"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-17.0.1...spa-sdk-17.1.0">spa-sdk-17.1.0</a></h4>
+<blockquote>
+<p>28 October 2022</p>
+</blockquote>
+<ul>
+<li>SPASDK-142 Bump @xmldom/xmldom to patched 0.7.6 <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/92"><code>#92</code></a></li>
+<li>SPASDK-143 Remove debug mode from example apps <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/93"><code>#93</code></a></li>
+<li>SPASDK-137 Support React 18 <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/91"><code>#91</code></a></li>
+<li>SPASDK-142 Bumping versions to 17.1.0 <a href="https://issues.onehippo.com/browse/SPASDK-142"><code>#SPASDK-142</code></a></li>
+<li>SPASDK-143 Remove debug mode from example apps <a href="https://issues.onehippo.com/browse/SPASDK-143"><code>#SPASDK-143</code></a></li>
+<li>SPASDK-142 Bump @xmldom/xmldom to patched 0.7.6 <a href="https://issues.onehippo.com/browse/SPASDK-142"><code>#SPASDK-142</code></a></li>
+<li>SPASDK-137 Explicitly set children to component properties interface <a href="https://issues.onehippo.com/browse/SPASDK-137"><code>#SPASDK-137</code></a></li>
+<li>SPASDK-137 Support React 18 <a href="https://issues.onehippo.com/browse/SPASDK-137"><code>#SPASDK-137</code></a></li>
+</ul>
+<h4 id="spa-sdk-1701"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-17.0.0...spa-sdk-17.0.1">spa-sdk-17.0.1</a></h4>
+<blockquote>
+<p>18 October 2022</p>
+</blockquote>
+<ul>
+<li>SPASDK-129 Set environment variables for nuxt example app <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/90"><code>#90</code></a></li>
+<li>Resolve SPASDK-129 “Feature/ deploy heroku” <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/89"><code>#89</code></a></li>
+<li>Resolve SPASDK-129 “Feature/ multi tenant support” <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/88"><code>#88</code></a></li>
+<li>SPASDK-133 Heroku 22 support <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/87"><code>#87</code></a></li>
+<li>SPASDK-129 Bumping versions to 17.0.1 <a href="https://issues.onehippo.com/browse/SPASDK-129"><code>#SPASDK-129</code></a></li>
+<li>SPASDK-129 Set environment variables for nuxt example app <a href="https://issues.onehippo.com/browse/SPASDK-129"><code>#SPASDK-129</code></a></li>
+<li>SPASDK-129 Add prebuild command for Heroku <a href="https://issues.onehippo.com/browse/SPASDK-129"><code>#SPASDK-129</code></a></li>
+<li>SPASDK-129 Set environment variables for Heroku to use multitenant <a href="https://issues.onehippo.com/browse/SPASDK-129"><code>#SPASDK-129</code></a></li>
+<li>SPASDK-129 Export util function for extracting params from URL <a href="https://issues.onehippo.com/browse/SPASDK-129"><code>#SPASDK-129</code></a></li>
+<li>SPASDK-129 Persist endpoint query parameter in URL <a href="https://issues.onehippo.com/browse/SPASDK-129"><code>#SPASDK-129</code></a></li>
+<li>SPASDK-129 Add multi-tenant support for example apps <a href="https://issues.onehippo.com/browse/SPASDK-129"><code>#SPASDK-129</code></a></li>
+<li>SPASDK-133 License headers <a href="https://issues.onehippo.com/browse/SPASDK-133"><code>#SPASDK-133</code></a></li>
+<li>SPASDK-133 Remove angular package-lock <a href="https://issues.onehippo.com/browse/SPASDK-133"><code>#SPASDK-133</code></a></li>
+<li>SPASDK-133 Remove test token and port <a href="https://issues.onehippo.com/browse/SPASDK-133"><code>#SPASDK-133</code></a></li>
+<li>SPASDK-133 Heroku 22 support <a href="https://issues.onehippo.com/browse/SPASDK-133"><code>#SPASDK-133</code></a></li>
+<li>SPASDK-128 Merge branch ‘development’ into ‘main’ <a href="https://issues.onehippo.com/browse/SPASDK-128"><code>#SPASDK-128</code></a></li>
+<li>SPASDK-118 Add changelog for 15.5.0 <a href="https://issues.onehippo.com/browse/SPASDK-118"><code>#SPASDK-118</code></a></li>
+<li>SPASDK-118 Release 15.5.0 <a href="https://issues.onehippo.com/browse/SPASDK-118"><code>#SPASDK-118</code></a></li>
+<li>SPASDK-116 Release 15.4.6 <a href="https://issues.onehippo.com/browse/SPASDK-116"><code>#SPASDK-116</code></a></li>
+<li>TRIVIAL Merge branch ‘main’ into development <a href="https://github.com/bloomreach/spa-sdk/commit/c48825e35c7536354718ad2168971517da7f80dd"><code>c48825e</code></a></li>
+<li>TRIVIAL Merge branch ‘development’ into ‘main’ <a href="https://github.com/bloomreach/spa-sdk/commit/bd4ba15a2d771d208db3f7a0f88773b2384cc4d2"><code>bd4ba15</code></a></li>
+<li>TRIVIAL Merge branch ‘development’ into ‘main’ <a href="https://github.com/bloomreach/spa-sdk/commit/a540e23ddc5ee23d8dc82c60d969b1039dc656f9"><code>a540e23</code></a></li>
+<li>TRIVIAL Merge branch ‘development’ into ‘main’ <a href="https://github.com/bloomreach/spa-sdk/commit/3d91af742fcb528c062fc2fd284e10611469dd91"><code>3d91af7</code></a></li>
+</ul>
+<h3 id="spa-sdk-1700"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-16.0.0...spa-sdk-17.0.0">spa-sdk-17.0.0</a></h3>
+<blockquote>
+<p>19 September 2022</p>
+</blockquote>
+<ul>
+<li>SPASDK-129 Remove endpointQueryParameter <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/85"><code>#85</code></a></li>
+<li>SPASDK-129 Bumping versions to 17.0.0 <a href="https://issues.onehippo.com/browse/SPASDK-129"><code>#SPASDK-129</code></a></li>
+<li>SPASDK-129 Fix lint warnings in vue-sdk and ng-sdk <a href="https://issues.onehippo.com/browse/SPASDK-129"><code>#SPASDK-129</code></a></li>
+<li>SPASDK-129 Remove endpointQueryParameter <a href="https://issues.onehippo.com/browse/SPASDK-129"><code>#SPASDK-129</code></a></li>
+<li>TRIVIAL Fix bash name substitution in heroku deploy script <a href="https://github.com/bloomreach/spa-sdk/commit/721b46871e938630f3f3a51ca9343425868f8c49"><code>721b468</code></a></li>
+</ul>
+<h3 id="spa-sdk-1600"><a href="https://github.com/bloomreach/spa-sdk/compare/v15.5.1...spa-sdk-16.0.0">spa-sdk-16.0.0</a></h3>
+<blockquote>
+<p>16 August 2022</p>
+</blockquote>
+<ul>
+<li>SPASDK-123 Add getLocale to Page object <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/81"><code>#81</code></a></li>
+<li>SPASDK-119 Improve heroku deploy speed by using lerna filter flags <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/80"><code>#80</code></a></li>
+<li>SPASDK-128 Bumping versions to 16.0.0 <a href="https://issues.onehippo.com/browse/SPASDK-128"><code>#SPASDK-128</code></a></li>
+<li>SPASDK-124 Merge branch ‘feature/SPADSK-124-nbr-react’ into ‘development’ <a href="https://issues.onehippo.com/browse/SPASDK-124"><code>#SPASDK-124</code></a></li>
+<li>SPASDK-124 Set debug mode to true by default on example apps <a href="https://issues.onehippo.com/browse/SPASDK-124"><code>#SPASDK-124</code></a></li>
+<li>SPASDK-124 Update copyright on files <a href="https://issues.onehippo.com/browse/SPASDK-124"><code>#SPASDK-124</code></a></li>
+<li>SPASDK-124 Document NBR mode usage <a href="https://issues.onehippo.com/browse/SPASDK-124"><code>#SPASDK-124</code></a></li>
+<li>SPASDK-124 Adjust Vue SDK to NBR Mode <a href="https://issues.onehippo.com/browse/SPASDK-124"><code>#SPASDK-124</code></a></li>
+<li>SPASDK-124 Adjust NG SDK to NBR Mode <a href="https://issues.onehippo.com/browse/SPASDK-124"><code>#SPASDK-124</code></a></li>
+<li>SPASDK-124 Add test for call order on child components <a href="https://issues.onehippo.com/browse/SPASDK-124"><code>#SPASDK-124</code></a></li>
+<li>SPASDK-124 Bumping versions to 16.0.0-alpha.0 <a href="https://issues.onehippo.com/browse/SPASDK-124"><code>#SPASDK-124</code></a></li>
+<li>SPASDK-124 Optionally provide the heroku app name as arg <a href="https://issues.onehippo.com/browse/SPASDK-124"><code>#SPASDK-124</code></a></li>
+<li>SPASDK-124 Allow delay in page and component context instantiation <a href="https://issues.onehippo.com/browse/SPASDK-124"><code>#SPASDK-124</code></a></li>
+<li>SPASDK-124 Add ‘dev’ script to all packages for easy development start <a href="https://issues.onehippo.com/browse/SPASDK-124"><code>#SPASDK-124</code></a></li>
+<li>SPASDK-123 Add getLocale to Page object <a href="https://issues.onehippo.com/browse/SPASDK-123"><code>#SPASDK-123</code></a></li>
+<li>SPASDK-119 Improve heroku deploy speed by using lerna filter flags <a href="https://issues.onehippo.com/browse/SPASDK-119"><code>#SPASDK-119</code></a></li>
+</ul>
+<h4 id="v1551"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.5.0...v15.5.1">v15.5.1</a></h4>
+<blockquote>
+<p>24 June 2022</p>
+</blockquote>
+<ul>
+<li>TRIVIAL Bump versions to 15.5.1 <a href="https://github.com/bloomreach/spa-sdk/commit/94d26991ce5e8d4f2916aa6756b0c927b721a25e"><code>94d2699</code></a></li>
+</ul>
+<h4 id="spa-sdk-1550"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.4.6...spa-sdk-15.5.0">spa-sdk-15.5.0</a></h4>
+<blockquote>
+<p>24 June 2022</p>
+</blockquote>
+<ul>
+<li>SPASDK-104 Allow react 17 to be used <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/77"><code>#77</code></a></li>
+<li>SPASDK-118 Add changelog for 15.5.0 <a href="https://issues.onehippo.com/browse/SPASDK-118"><code>#SPASDK-118</code></a></li>
+<li>SPASDK-118 Generate changelog for 15.5.0 <a href="https://issues.onehippo.com/browse/SPASDK-118"><code>#SPASDK-118</code></a></li>
+<li>SPASDK-118 Generate changelog after version bump <a href="https://issues.onehippo.com/browse/SPASDK-118"><code>#SPASDK-118</code></a></li>
+<li>SPASDK-118 Release 15.5.0 <a href="https://issues.onehippo.com/browse/SPASDK-118"><code>#SPASDK-118</code></a></li>
+<li>SPASDK-118 Bumping versions to 15.5.0 <a href="https://issues.onehippo.com/browse/SPASDK-118"><code>#SPASDK-118</code></a></li>
+<li>SPASDK-118 Do not exit execution when apps do not exit yet <a href="https://issues.onehippo.com/browse/SPASDK-118"><code>#SPASDK-118</code></a></li>
+<li>SPASDK-118 Always bump all versions of packages at the same time <a href="https://issues.onehippo.com/browse/SPASDK-118"><code>#SPASDK-118</code></a></li>
+<li>SPASDK-104 Bump versions to test react 17 <a href="https://issues.onehippo.com/browse/SPASDK-104"><code>#SPASDK-104</code></a></li>
+<li>SPASDK-104 Allow react 17 to be used <a href="https://issues.onehippo.com/browse/SPASDK-104"><code>#SPASDK-104</code></a></li>
+<li>SPASDK-116 Release 15.4.6 <a href="https://issues.onehippo.com/browse/SPASDK-116"><code>#SPASDK-116</code></a></li>
+<li>TRIVIAL Merge branch ‘development’ into ‘main’ <a href="https://github.com/bloomreach/spa-sdk/commit/bd4ba15a2d771d208db3f7a0f88773b2384cc4d2"><code>bd4ba15</code></a></li>
+<li>TRIVIAL Merge branch ‘development’ into ‘main’ <a href="https://github.com/bloomreach/spa-sdk/commit/a540e23ddc5ee23d8dc82c60d969b1039dc656f9"><code>a540e23</code></a></li>
+<li>TRIVIAL Merge branch ‘development’ into ‘main’ <a href="https://github.com/bloomreach/spa-sdk/commit/3d91af742fcb528c062fc2fd284e10611469dd91"><code>3d91af7</code></a></li>
+</ul>
+<h4 id="spa-sdk-1546"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.4.5...spa-sdk-15.4.6">spa-sdk-15.4.6</a></h4>
+<blockquote>
+<p>23 June 2022</p>
+</blockquote>
+<ul>
+<li>SPASDK-36 Lerna setup and audit scripts <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/74"><code>#74</code></a></li>
+<li>CICD-181: Immediately fail script if any command fails <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/73"><code>#73</code></a></li>
+<li>Add “pickerEnableUpload” to ng and vue sdk + add documentation <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/72"><code>#72</code></a></li>
+<li>SPASDK-114 Add pickerEnableUpload option to manage-content-btn <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/70"><code>#70</code></a></li>
+<li>SPASDK-116 Bumping versions to 15.4.6 <a href="https://issues.onehippo.com/browse/SPASDK-116"><code>#SPASDK-116</code></a></li>
+<li>SPASDK-36 Enable auditing of just the SDK packages <a href="https://issues.onehippo.com/browse/SPASDK-36"><code>#SPASDK-36</code></a></li>
+<li>SPASDK-36 Switch from using yarn to lerna-lite + npm workspaces <a href="https://issues.onehippo.com/browse/SPASDK-36"><code>#SPASDK-36</code></a></li>
+<li>CICD-181: Immediately fail script if any command fails <a href="https://issues.onehippo.com/browse/CICD-181"><code>#CICD-181</code></a></li>
+<li>SPASDK-114 Add documentation about ManageContentButton.pickerEnableUpload <a href="https://issues.onehippo.com/browse/SPASDK-114"><code>#SPASDK-114</code></a></li>
+<li>SPASDK-114 Add ManageContentButton.pickerEnableUpload to ng-sdk and vue-sdk <a href="https://issues.onehippo.com/browse/SPASDK-114"><code>#SPASDK-114</code></a></li>
+<li>SPASDK-114 Add pickerEnableUpload option to manage-content-btn <a href="https://issues.onehippo.com/browse/SPASDK-114"><code>#SPASDK-114</code></a></li>
+</ul>
+<h4 id="spa-sdk-1545"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.4.4...spa-sdk-15.4.5">spa-sdk-15.4.5</a></h4>
+<blockquote>
+<p>13 April 2022</p>
+</blockquote>
+<ul>
+<li>Resolve SPASDK-110 “Change HttpClient interface to follow the axios api definition” <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/68"><code>#68</code></a></li>
+<li>SPASDK-110 Update axios in example apps to the latest version (0.26.1) <a href="https://issues.onehippo.com/browse/SPASDK-110"><code>#SPASDK-110</code></a></li>
+<li>SPASDK-110 Make headers type in <code>HttpClient</code> compatible with latest axios (0.26.0) <a href="https://issues.onehippo.com/browse/SPASDK-110"><code>#SPASDK-110</code></a></li>
+<li>TRIVIAL Bumping versions to 15.4.5 <a href="https://github.com/bloomreach/spa-sdk/commit/bccf5b4778e5d729ce8b23a861e3b9b302aad57f"><code>bccf5b4</code></a></li>
+</ul>
+<h4 id="spa-sdk-1544"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.4.3...spa-sdk-15.4.4">spa-sdk-15.4.4</a></h4>
+<blockquote>
+<p>4 April 2022</p>
+</blockquote>
+<ul>
+<li>Resolve SPASDK-109 “Eature/ preview session persistence docs” <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/66"><code>#66</code></a></li>
+<li>SPASDK-107 Indicate that the change only applies to Content SaaS <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/62"><code>#62</code></a></li>
+<li>SPASDK-107 Describe template query formats in readme doc files <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/61"><code>#61</code></a></li>
+<li>SPASDK-109 Describe solution to make persist the preview related data when navigated to the page without SPA SDK <a href="https://issues.onehippo.com/browse/SPASDK-109"><code>#SPASDK-109</code></a></li>
+<li>SPASDK-107 Indicate that the change only applies to Content SaaS <a href="https://issues.onehippo.com/browse/SPASDK-107"><code>#SPASDK-107</code></a></li>
+<li>SPASDK-107 Update template query names to correct ones in vue sdk doc <a href="https://issues.onehippo.com/browse/SPASDK-107"><code>#SPASDK-107</code></a></li>
+<li>SPASDK-107 Describe template query formats in readme doc files <a href="https://issues.onehippo.com/browse/SPASDK-107"><code>#SPASDK-107</code></a></li>
+<li>TRIVIAL Bumping versions to 15.4.4 <a href="https://github.com/bloomreach/spa-sdk/commit/2deeb623dfb9c666035342a75d9ac7e96461050b"><code>2deeb62</code></a></li>
+<li>TRIVIAL Merge branch ‘fetch-tags-during-release-pipeline’ into ‘development’ <a href="https://github.com/bloomreach/spa-sdk/commit/4048f73dce43c1d3f99a6b28533779c52a8839ca"><code>4048f73</code></a></li>
+<li>TRIVIAL Fetch all tags before mirroring to the github <a href="https://github.com/bloomreach/spa-sdk/commit/c7373de3213bf3a396d74efc74e0ad6ed11a07bd"><code>c7373de</code></a></li>
+</ul>
+<h4 id="spa-sdk-1543"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.4.2...spa-sdk-15.4.3">spa-sdk-15.4.3</a></h4>
+<blockquote>
+<p>18 January 2022</p>
+</blockquote>
+<ul>
+<li>SPASDK-82 Release pipeline <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/56"><code>#56</code></a></li>
+<li>SPASDK-80 Use origin from URL object instead of modifying incoming url <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/55"><code>#55</code></a></li>
+<li>SPASDK-82 Fix branch name in release steps <a href="https://issues.onehippo.com/browse/SPASDK-82"><code>#SPASDK-82</code></a></li>
+<li>SPASDK-82 Remove debug and test setup <a href="https://issues.onehippo.com/browse/SPASDK-82"><code>#SPASDK-82</code></a></li>
+<li>SPASDK-82 Update release steps according to the latest changes <a href="https://issues.onehippo.com/browse/SPASDK-82"><code>#SPASDK-82</code></a></li>
+<li>SPASDK-82 Remove release bash script <a href="https://issues.onehippo.com/browse/SPASDK-82"><code>#SPASDK-82</code></a></li>
+<li>SPASDK-82 Use heroku from dev dependencies and run deploy via scripts section <a href="https://issues.onehippo.com/browse/SPASDK-82"><code>#SPASDK-82</code></a></li>
+<li>SPASDK-82 Setup release pipeline triggered by merge in main branch <a href="https://issues.onehippo.com/browse/SPASDK-82"><code>#SPASDK-82</code></a></li>
+<li>SPASDK-80 Use origin from URL object instead of modifying incoming url <a href="https://issues.onehippo.com/browse/SPASDK-80"><code>#SPASDK-80</code></a></li>
+<li>TRIVIAL Bumping versions to 15.4.3 <a href="https://github.com/bloomreach/spa-sdk/commit/34b67fa6a8144d2d0993d06c77320649ea19e8d0"><code>34b67fa</code></a></li>
+</ul>
+<h4 id="spa-sdk-1542"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.4.1...spa-sdk-15.4.2">spa-sdk-15.4.2</a></h4>
+<blockquote>
+<p>27 December 2021</p>
+</blockquote>
+<ul>
+<li>Resolve SPASDK-76 “Feature/ heroku cd pipeline” <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/51"><code>#51</code></a></li>
+<li>Resolve SPASDK-78 “Feature/ add an alias for helper method getcontaineritemcontent” <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/53"><code>#53</code></a></li>
+<li>Resolve SPASDK-77 “Feature/ add alias <code>getProperties</code> to match with experience manager terminology” <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/52"><code>#52</code></a></li>
+<li>SPASDK-75 Update file header to replace Hippo with Bloomreach <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/48"><code>#48</code></a></li>
+<li>SPASDK-76 Move release script to the scripts folder <a href="https://issues.onehippo.com/browse/SPASDK-76"><code>#SPASDK-76</code></a></li>
+<li>SPASDK-76 Rename Jenkins email to consistency <a href="https://issues.onehippo.com/browse/SPASDK-76"><code>#SPASDK-76</code></a></li>
+<li>SPASDK-76 Call explicitly yarn install <a href="https://issues.onehippo.com/browse/SPASDK-76"><code>#SPASDK-76</code></a></li>
+<li>SPASDK-76 Remove script for heroku deploy from release script <a href="https://issues.onehippo.com/browse/SPASDK-76"><code>#SPASDK-76</code></a></li>
+<li>SPASDK-76 HOME env variable already set at the begin of pipeline <a href="https://issues.onehippo.com/browse/SPASDK-76"><code>#SPASDK-76</code></a></li>
+<li>SPASDK-76 Remove unused args for docker container <a href="https://issues.onehippo.com/browse/SPASDK-76"><code>#SPASDK-76</code></a></li>
+<li>SPASDK-76 Setup heroku cli via npm and provide bin path to deploy script <a href="https://issues.onehippo.com/browse/SPASDK-76"><code>#SPASDK-76</code></a></li>
+<li>SPASDK-76 Chnage HOME env path to WORKSPACE path <a href="https://issues.onehippo.com/browse/SPASDK-76"><code>#SPASDK-76</code></a></li>
+<li>SPASDK-76 Define matrix for deploy all example apps to heroku <a href="https://issues.onehippo.com/browse/SPASDK-76"><code>#SPASDK-76</code></a></li>
+<li>SPASDK-76 Create a separate bash script to handle deploy specific app to heroku <a href="https://issues.onehippo.com/browse/SPASDK-76"><code>#SPASDK-76</code></a></li>
+<li>SPASDK-78 Add method <code>getContent</code> to Container Item <a href="https://issues.onehippo.com/browse/SPASDK-78"><code>#SPASDK-78</code></a></li>
+<li>SPASDK-78 Add description for the method <code>getContentReference</code> in Container Item <a href="https://issues.onehippo.com/browse/SPASDK-78"><code>#SPASDK-78</code></a></li>
+<li>SPASDK-77 Add <code>getProperies</code> method to the mock object in react sdk <a href="https://issues.onehippo.com/browse/SPASDK-77"><code>#SPASDK-77</code></a></li>
+<li>SPASDK-77 Verify that getProperties return paramsInfo for container item <a href="https://issues.onehippo.com/browse/SPASDK-77"><code>#SPASDK-77</code></a></li>
+<li>SPASDK-77 Add <code>getProperties</code> method as alias for <code>getParameters</code> in component <a href="https://issues.onehippo.com/browse/SPASDK-77"><code>#SPASDK-77</code></a></li>
+<li>SPASDK-75 Update file header to replace Hippo with Bloomreach <a href="https://issues.onehippo.com/browse/SPASDK-75"><code>#SPASDK-75</code></a></li>
+<li>SPASDK-75 Update file header to replace Hippo with Bloomreach <a href="https://issues.onehippo.com/browse/SPASDK-75"><code>#SPASDK-75</code></a></li>
+<li>TRIVIAL Bumping version to 15.4.2 <a href="https://github.com/bloomreach/spa-sdk/commit/9e6391a5cb8381da2a41d6746b892fc18cb44d13"><code>9e6391a</code></a></li>
+<li>TRIVIAL Merge branch ‘trivial/enhance-release-script’ into ‘development’ <a href="https://github.com/bloomreach/spa-sdk/commit/0a0df958ff9274fdb366d8ebfc09952803c2a882"><code>0a0df95</code></a></li>
+<li>TRIVIAL Stop execution of release in case build, lint or test has been finished with non zero result <a href="https://github.com/bloomreach/spa-sdk/commit/35393c8b4046c91bf1ce5b12170c86eb17a39b75"><code>35393c8</code></a></li>
+<li>TRIVIAL Add reminder to post release actions about check typedoc <a href="https://github.com/bloomreach/spa-sdk/commit/49e01ce7df91a18a631744f1ad74bb435dddf326"><code>49e01ce</code></a></li>
+<li>TRIVIAL Merge branch ‘enhance-release-script’ into development <a href="https://github.com/bloomreach/spa-sdk/commit/f45e24c9c12201d0fce6b3c8ed51f0b7461d717f"><code>f45e24c</code></a></li>
+<li>TRIVIAL Add lint, test and build steps at the beginning of the script <a href="https://github.com/bloomreach/spa-sdk/commit/60dd9681110ab611e4efa62e3e4f859513a549d2"><code>60dd968</code></a></li>
+</ul>
+<h4 id="spa-sdk-1541"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.4.0...spa-sdk-15.4.1">spa-sdk-15.4.1</a></h4>
+<blockquote>
+<p>1 December 2021</p>
+</blockquote>
+<ul>
+<li>TRIVIAL Bumping version to 15.4.1 <a href="https://github.com/bloomreach/spa-sdk/commit/65dd1c38be90986df001eec1c28f74f76a6520fa"><code>65dd1c3</code></a></li>
+<li>TRIVIAL Update release script with build step before publising <a href="https://github.com/bloomreach/spa-sdk/commit/b377221d974138c1ee092610c037ee1987b765b6"><code>b377221</code></a></li>
+</ul>
+<h4 id="spa-sdk-1540"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.3.3...spa-sdk-15.4.0">spa-sdk-15.4.0</a></h4>
+<blockquote>
+<p>1 December 2021</p>
+</blockquote>
+<ul>
+<li>Resolve SPASDK-72 “Feature/ add cookie consent dialog to example apps” <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/46"><code>#46</code></a></li>
+<li>SPASDK-73 Add “picker” options to manage-content-button <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/45"><code>#45</code></a></li>
+<li>SPASDK-72 Update readmes about cookie consent popup and personalisation <a href="https://issues.onehippo.com/browse/SPASDK-72"><code>#SPASDK-72</code></a></li>
+<li>SPASDK-72 Use single if for nuxt consent component <a href="https://issues.onehippo.com/browse/SPASDK-72"><code>#SPASDK-72</code></a></li>
+<li>SPASDK-72 Fix missed copyrights headers <a href="https://issues.onehippo.com/browse/SPASDK-72"><code>#SPASDK-72</code></a></li>
+<li>SPASDK-72 Align cookie consent implementation to prevent reinitialisation of it <a href="https://issues.onehippo.com/browse/SPASDK-72"><code>#SPASDK-72</code></a></li>
+<li>SPASDK-72 Init consent during app lifecycle to hide it on preview <a href="https://issues.onehippo.com/browse/SPASDK-72"><code>#SPASDK-72</code></a></li>
+<li>SPASDK-72 Run only campaign personalization if exponea token and url are absent <a href="https://issues.onehippo.com/browse/SPASDK-72"><code>#SPASDK-72</code></a></li>
+<li>SPASDK-72 Move exponea api url to the environment varable for all examples <a href="https://issues.onehippo.com/browse/SPASDK-72"><code>#SPASDK-72</code></a></li>
+<li>SPASDK-72 Move work with segmentation lib to cookieconsent util <a href="https://issues.onehippo.com/browse/SPASDK-72"><code>#SPASDK-72</code></a></li>
+<li>SPASDK-72 Align all example apps to using the same util file with cookie consent <a href="https://issues.onehippo.com/browse/SPASDK-72"><code>#SPASDK-72</code></a></li>
+<li>SPASDK-72 [next] Use cookieconsent lib to consistency with the rest of examples <a href="https://issues.onehippo.com/browse/SPASDK-72"><code>#SPASDK-72</code></a></li>
+<li>SPASDK-72 [react] Initialise personalisation based on consent value <a href="https://issues.onehippo.com/browse/SPASDK-72"><code>#SPASDK-72</code></a></li>
+<li>SPASDK-72 [vue] Initialise personalisation based on consent value <a href="https://issues.onehippo.com/browse/SPASDK-72"><code>#SPASDK-72</code></a></li>
+<li>SPASDK-72 [angular] Initialise personalisation based on consent value <a href="https://issues.onehippo.com/browse/SPASDK-72"><code>#SPASDK-72</code></a></li>
+<li>SPASDK-72 [nuxt] Initialise personalisation based on consent value <a href="https://issues.onehippo.com/browse/SPASDK-72"><code>#SPASDK-72</code></a></li>
+<li>SPASDK-72 [next] Initialise personalisation based on consent value <a href="https://issues.onehippo.com/browse/SPASDK-72"><code>#SPASDK-72</code></a></li>
+<li>SPASDK-72 [next] Show cookie consent window and inject Exponea snippet on accept <a href="https://issues.onehippo.com/browse/SPASDK-72"><code>#SPASDK-72</code></a></li>
+<li>SPASDK-72 Remove logic by saving cookie for campaign <a href="https://issues.onehippo.com/browse/SPASDK-72"><code>#SPASDK-72</code></a></li>
+<li>SPASDK-74 Load component via GET if payload is empty <a href="https://issues.onehippo.com/browse/SPASDK-74"><code>#SPASDK-74</code></a></li>
+<li>SPASDK-73 Add “pickerSelectableNodeTypes” to examples <a href="https://issues.onehippo.com/browse/SPASDK-73"><code>#SPASDK-73</code></a></li>
+<li>SPASDK-73 Add “picker” options to manage-content-button <a href="https://issues.onehippo.com/browse/SPASDK-73"><code>#SPASDK-73</code></a></li>
+<li>TRIVIAL Bumping version to 15.4.0 <a href="https://github.com/bloomreach/spa-sdk/commit/ba8e0adb0547e41e26d0691560884b340c7d512a"><code>ba8e0ad</code></a></li>
+</ul>
+<h4 id="spa-sdk-1533"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.3.2...spa-sdk-15.3.3">spa-sdk-15.3.3</a></h4>
+<blockquote>
+<p>1 November 2021</p>
+</blockquote>
+<ul>
+<li>SPASDK-69 Rework heroku deploy script <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/44"><code>#44</code></a></li>
+<li>SPASDK-65 Warn for incompatibility of nomarkup container with vue-sdk <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/43"><code>#43</code></a></li>
+<li>SPASDK-71 Bumping version to 15.3.3 <a href="https://issues.onehippo.com/browse/SPASDK-71"><code>#SPASDK-71</code></a></li>
+<li>SPASDK-69 Rework heroku deploy script <a href="https://issues.onehippo.com/browse/SPASDK-69"><code>#SPASDK-69</code></a></li>
+<li>SPASDK-65 Warn for incompatibility of nomarkup container with vue-sdk <a href="https://issues.onehippo.com/browse/SPASDK-65"><code>#SPASDK-65</code></a></li>
+<li>TRIVIAL Add force flag to remove all folders inside docs folder <a href="https://github.com/bloomreach/spa-sdk/commit/6f0f3bd625ab21440fd56b0ffc443404e17e6f65"><code>6f0f3bd</code></a></li>
+</ul>
+<h4 id="spa-sdk-1532"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.3.1...spa-sdk-15.3.2">spa-sdk-15.3.2</a></h4>
+<blockquote>
+<p>19 October 2021</p>
+</blockquote>
+<ul>
+<li>SPASDK-62 Retrieve segmentation cookies from request object in case SSR <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/41"><code>#41</code></a></li>
+<li>SPASDK-63 Allow attribute “rel” in sanitize <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/42"><code>#42</code></a></li>
+<li>SPASDK-49 Add <code>s</code> flag to regular expression to match body content <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/38"><code>#38</code></a></li>
+<li>SPASDK-64 Bumping version to 15.3.2 <a href="https://issues.onehippo.com/browse/SPASDK-64"><code>#SPASDK-64</code></a></li>
+<li>SPASDK-62 Retrieve segmentation cookies from request object in case SSR <a href="https://issues.onehippo.com/browse/SPASDK-62"><code>#SPASDK-62</code></a></li>
+<li>SPASDK-63 Allow attribute “rel” in sanitize <a href="https://issues.onehippo.com/browse/SPASDK-63"><code>#SPASDK-63</code></a></li>
+<li>SPASDK-49 Add <code>s</code> flag to regular expression to match body content <a href="https://issues.onehippo.com/browse/SPASDK-49"><code>#SPASDK-49</code></a></li>
+<li>TRIVIAL Fix release script part related to the publishing TypyDoc <a href="https://github.com/bloomreach/spa-sdk/commit/8faca440aed3751041e8f80d070366189072d2de"><code>8faca44</code></a></li>
+</ul>
+<h4 id="spa-sdk-1531"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.3.0...spa-sdk-15.3.1">spa-sdk-15.3.1</a></h4>
+<blockquote>
+<p>8 October 2021</p>
+</blockquote>
+<ul>
+<li>SPASDK-61 Provide options to html sanitizer to allow some attributes for anchor <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/40"><code>#40</code></a></li>
+<li>SPASDK-61 Bumping versions to 15.3.1 <a href="https://issues.onehippo.com/browse/SPASDK-61"><code>#SPASDK-61</code></a></li>
+<li>SPASDK-61 Provide options to html sanitizer to allow some attributes for anchor <a href="https://issues.onehippo.com/browse/SPASDK-61"><code>#SPASDK-61</code></a></li>
+<li>SPASDK-60 Improve README explanation of release process <a href="https://issues.onehippo.com/browse/SPASDK-60"><code>#SPASDK-60</code></a></li>
+<li>SPASDK-60 Use correct path to app in heroku deploy <a href="https://issues.onehippo.com/browse/SPASDK-60"><code>#SPASDK-60</code></a></li>
+<li>SPASDK-60 Additional fixes to the release script <a href="https://issues.onehippo.com/browse/SPASDK-60"><code>#SPASDK-60</code></a></li>
+<li>SPASDK-60 Add heroku as dev dep to enforce version and all build packs are installed <a href="https://issues.onehippo.com/browse/SPASDK-60"><code>#SPASDK-60</code></a></li>
+</ul>
+<h4 id="spa-sdk-1530"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.2.2-0...spa-sdk-15.3.0">spa-sdk-15.3.0</a></h4>
+<blockquote>
+<p>6 October 2021</p>
+</blockquote>
+<ul>
+<li>SPASDK-59 Bumping versions to 15.3.0 <a href="https://issues.onehippo.com/browse/SPASDK-59"><code>#SPASDK-59</code></a></li>
+<li>SPASDK-58 Remove release pipeline and use release script <a href="https://issues.onehippo.com/browse/SPASDK-58"><code>#SPASDK-58</code></a></li>
+<li>SPASDK-38 Add page api to sanitize html content in SPA SDK <a href="https://issues.onehippo.com/browse/SPASDK-38"><code>#SPASDK-38</code></a></li>
+</ul>
+<h4 id="spa-sdk-1522-0"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.2.1...spa-sdk-15.2.2-0">spa-sdk-15.2.2-0</a></h4>
+<blockquote>
+<p>30 September 2021</p>
+</blockquote>
+<ul>
+<li>SPASDK-58 Merge branch ‘development’ <a href="https://issues.onehippo.com/browse/SPASDK-58"><code>#SPASDK-58</code></a></li>
+<li>SPASDK-58 Bump versions to 15.2.2-0 <a href="https://issues.onehippo.com/browse/SPASDK-58"><code>#SPASDK-58</code></a></li>
+<li>SPASDK-58 Update push to github script in Jenkins <a href="https://issues.onehippo.com/browse/SPASDK-58"><code>#SPASDK-58</code></a></li>
+</ul>
+<h4 id="spa-sdk-1521"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.1.2...spa-sdk-15.2.1">spa-sdk-15.2.1</a></h4>
+<blockquote>
+<p>30 September 2021</p>
+</blockquote>
+<ul>
+<li>SPASDK-53 Handle segmentation; Change campaign variant parameter; <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/31"><code>#31</code></a></li>
+<li>SPASDK-53 Merge branch ‘development’ into ‘main’ <a href="https://issues.onehippo.com/browse/SPASDK-53"><code>#SPASDK-53</code></a></li>
+<li>SPASDK-58 Adjust README according to release process <a href="https://issues.onehippo.com/browse/SPASDK-58"><code>#SPASDK-58</code></a></li>
+<li>SPASDK-58 Adjust jenkins file so github push works <a href="https://issues.onehippo.com/browse/SPASDK-58"><code>#SPASDK-58</code></a></li>
+<li>SPASDK-53 Bump versions to 15.2.1 <a href="https://issues.onehippo.com/browse/SPASDK-53"><code>#SPASDK-53</code></a></li>
+<li>SPASDK-53 Handle segmentation; Change campaign variant parameter; <a href="https://issues.onehippo.com/browse/SPASDK-53"><code>#SPASDK-53</code></a></li>
+</ul>
+<h4 id="spa-sdk-1512"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.1.0...spa-sdk-15.1.2">spa-sdk-15.1.2</a></h4>
+<blockquote>
+<p>23 September 2021</p>
+</blockquote>
+<ul>
+<li>SPASDK-52 Move meta component inside BrNodeComponent <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/32"><code>#32</code></a></li>
+<li>SPASDK-55 Document “getContainerItemContent’ utility fn <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/33"><code>#33</code></a></li>
+<li>SPASDK-52 Merge branch ‘development’ into ‘main’ <a href="https://issues.onehippo.com/browse/SPASDK-52"><code>#SPASDK-52</code></a></li>
+<li>SPASDK-52 Bump versions to 15.1.2 <a href="https://issues.onehippo.com/browse/SPASDK-52"><code>#SPASDK-52</code></a></li>
+<li>SPASDK-52 Move meta component inside BrNodeComponent <a href="https://issues.onehippo.com/browse/SPASDK-52"><code>#SPASDK-52</code></a></li>
+<li>SPASDK-55 Document “getContainerItemContent’ utility fn <a href="https://issues.onehippo.com/browse/SPASDK-55"><code>#SPASDK-55</code></a></li>
+<li>SPASDK-47 Merge branch ‘development’ into ‘main’ <a href="https://issues.onehippo.com/browse/SPASDK-47"><code>#SPASDK-47</code></a></li>
+<li>SPASDK-33 Merge branch ‘development’ into ‘main’ <a href="https://issues.onehippo.com/browse/SPASDK-33"><code>#SPASDK-33</code></a></li>
+<li>SPASDK-33 Merge branch ‘development’ into ‘main’ <a href="https://issues.onehippo.com/browse/SPASDK-33"><code>#SPASDK-33</code></a></li>
+<li>SPASDK-33 Merge branch ‘development’ into ‘main’ <a href="https://issues.onehippo.com/browse/SPASDK-33"><code>#SPASDK-33</code></a></li>
+<li>TRIVIAL Update readme table <a href="https://github.com/bloomreach/spa-sdk/commit/e7aacbed48bba8865def26d63e5f218f54cbb5d4"><code>e7aacbe</code></a></li>
+<li>TRIVIAL Update development rules about publishing test version to npm <a href="https://github.com/bloomreach/spa-sdk/commit/c40e06fd54738ef29eb293d7a3918d415653afe4"><code>c40e06f</code></a></li>
+<li>TRIVIAL Add more information about what should be in <code>dist-tag</code> <a href="https://github.com/bloomreach/spa-sdk/commit/4ca281831a0235a7a8ac5b70fe339f0f0b04eae8"><code>4ca2818</code></a></li>
+<li>TRIVIAL Update readme table <a href="https://github.com/bloomreach/spa-sdk/commit/0d6b7c292eae27e5b3ad95a68772421f1470106e"><code>0d6b7c2</code></a></li>
+<li>TRIVIAL Merge branch ‘development’ into main <a href="https://github.com/bloomreach/spa-sdk/commit/52412ae42ab0303cdf514081c3b254fde2cdab3c"><code>52412ae</code></a></li>
+<li>TRIVIAL Merge branch ‘development’ into ‘main’ <a href="https://github.com/bloomreach/spa-sdk/commit/f44624130fea51d553e2f1488ce433a11846f71a"><code>f446241</code></a></li>
+</ul>
+<h4 id="spa-sdk-1510"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.0.1-0...spa-sdk-15.1.0">spa-sdk-15.1.0</a></h4>
+<blockquote>
+<p>23 August 2021</p>
+</blockquote>
+<ul>
+<li>Resolve SPASDK-13 “Migrate to eslint all spa sdk projects” <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/24"><code>#24</code></a></li>
+<li>SPASDK-42 Link doesn’t get updated when btm_campaign_id is present <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/27"><code>#27</code></a></li>
+<li>Resolve SPASDK-43 “Bugfix/ sbcp does not work with ssr apps” <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/26"><code>#26</code></a></li>
+<li>SPASDK-34 Check if window variable is defined(Fix SSR issue) <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/21"><code>#21</code></a></li>
+<li>SPASDK-47 Bump versions to 15.1.0 <a href="https://issues.onehippo.com/browse/SPASDK-47"><code>#SPASDK-47</code></a></li>
+<li>SPASDK-13 [example-next] Fix all lint warnings <a href="https://issues.onehippo.com/browse/SPASDK-13"><code>#SPASDK-13</code></a></li>
+<li>SPASDK-13 [example-nuxt] Fix all lint warnings <a href="https://issues.onehippo.com/browse/SPASDK-13"><code>#SPASDK-13</code></a></li>
+<li>SPASDK-13 [example-angular] Fix all lint warnings <a href="https://issues.onehippo.com/browse/SPASDK-13"><code>#SPASDK-13</code></a></li>
+<li>SPASDK-13 [ng-sdk] Fix all lint warnings <a href="https://issues.onehippo.com/browse/SPASDK-13"><code>#SPASDK-13</code></a></li>
+<li>SPASDK-13 [react-sdk] Fix all lint warnings <a href="https://issues.onehippo.com/browse/SPASDK-13"><code>#SPASDK-13</code></a></li>
+<li>SPASDK-13 [spa-sdk] Fix all lint warnings <a href="https://issues.onehippo.com/browse/SPASDK-13"><code>#SPASDK-13</code></a></li>
+<li>SPASDK-13 Bump eslint configs to the latest version <a href="https://issues.onehippo.com/browse/SPASDK-13"><code>#SPASDK-13</code></a></li>
+<li>SPASDK-13 Bump eslint-config-react version <a href="https://issues.onehippo.com/browse/SPASDK-13"><code>#SPASDK-13</code></a></li>
+<li>SPASDK-46 Bump xmldom to 0.7.2 <a href="https://issues.onehippo.com/browse/SPASDK-46"><code>#SPASDK-46</code></a></li>
+<li>SPASDK-46 Bump xmldom to 0.7.1 <a href="https://issues.onehippo.com/browse/SPASDK-46"><code>#SPASDK-46</code></a></li>
+<li>SPASDK-13 Update eslint configs to latest version <a href="https://issues.onehippo.com/browse/SPASDK-13"><code>#SPASDK-13</code></a></li>
+<li>SPASDK-13 Remove IDE specific settings <a href="https://issues.onehippo.com/browse/SPASDK-13"><code>#SPASDK-13</code></a></li>
+<li>SPASDK-13 Bump @bloomreach/eslint-config-* to prerelease version <a href="https://issues.onehippo.com/browse/SPASDK-13"><code>#SPASDK-13</code></a></li>
+<li>SPASDK-13 [example-next] Rollback next to the prev version <a href="https://issues.onehippo.com/browse/SPASDK-13"><code>#SPASDK-13</code></a></li>
+<li>SPASDK-13 Add .vscode to gitignore but skip config files <a href="https://issues.onehippo.com/browse/SPASDK-13"><code>#SPASDK-13</code></a></li>
+<li>SPASDK-13 Move the rest of eslintrc congfigs to the package.json <a href="https://issues.onehippo.com/browse/SPASDK-13"><code>#SPASDK-13</code></a></li>
+<li>SPASDK-13 Move all eslint config to package.json except angular projects <a href="https://issues.onehippo.com/browse/SPASDK-13"><code>#SPASDK-13</code></a></li>
+<li>SPASDK-13 [spa-sdk] Switch on no-shadow and max-len rules for tests <a href="https://issues.onehippo.com/browse/SPASDK-13"><code>#SPASDK-13</code></a></li>
+<li>SPASDK-13 Remove some unused dependencies from next and react examples <a href="https://issues.onehippo.com/browse/SPASDK-13"><code>#SPASDK-13</code></a></li>
+<li>SPASDK-13 [react-sdk] Fix rest of eslint errors manually <a href="https://issues.onehippo.com/browse/SPASDK-13"><code>#SPASDK-13</code></a></li>
+<li>SPASDK-13 [react-sdk] Explicitly setup enzyme adapter react <a href="https://issues.onehippo.com/browse/SPASDK-13"><code>#SPASDK-13</code></a></li>
+<li>SPASDK-13 [example-angular] Fix rest of eslint errors manually <a href="https://issues.onehippo.com/browse/SPASDK-13"><code>#SPASDK-13</code></a></li>
+<li>SPASDK-13 [example-angular] Replace tslint with @bloomreach/eslint-config-angular <a href="https://issues.onehippo.com/browse/SPASDK-13"><code>#SPASDK-13</code></a></li>
+<li>SPASDK-13 [example-nuxt] Fix eslint errors manually <a href="https://issues.onehippo.com/browse/SPASDK-13"><code>#SPASDK-13</code></a></li>
+<li>SPASDK-13 [example-nuxt] Use @bloomreach/eslint-config-nuxt <a href="https://issues.onehippo.com/browse/SPASDK-13"><code>#SPASDK-13</code></a></li>
+<li>SPASDK-13 [example-next] Fix rest of eslint errors manually <a href="https://issues.onehippo.com/browse/SPASDK-13"><code>#SPASDK-13</code></a></li>
+<li>SPASDK-13 [example-next] Bump next.js to 11 and set up eslint <a href="https://issues.onehippo.com/browse/SPASDK-13"><code>#SPASDK-13</code></a></li>
+<li>SPASDK-13 [example-react] Fix rest of eslint errors manually <a href="https://issues.onehippo.com/browse/SPASDK-13"><code>#SPASDK-13</code></a></li>
+<li>SPASDK-13 [example-react] Use @bloomreach/eslint-config <a href="https://issues.onehippo.com/browse/SPASDK-13"><code>#SPASDK-13</code></a></li>
+<li>SPASDK-13 [example-vue] Use @bloomreach/eslint-config <a href="https://issues.onehippo.com/browse/SPASDK-13"><code>#SPASDK-13</code></a></li>
+<li>SPASDK-13 [vue-sdk] Use @bloomreach/eslint-config <a href="https://issues.onehippo.com/browse/SPASDK-13"><code>#SPASDK-13</code></a></li>
+<li>SPASDK-13 [ng-sdk] Fix rest of eslint errors manually <a href="https://issues.onehippo.com/browse/SPASDK-13"><code>#SPASDK-13</code></a></li>
+<li>SPASDK-13 [ng-sdk] Replace tslint with @bloomreach/eslint-config <a href="https://issues.onehippo.com/browse/SPASDK-13"><code>#SPASDK-13</code></a></li>
+<li>SPASDK-13 [spa-sdk] Fix rest of eslint errors manually <a href="https://issues.onehippo.com/browse/SPASDK-13"><code>#SPASDK-13</code></a></li>
+<li>SPASDK-13 [spa-sdk] Replace tslint with eslint <a href="https://issues.onehippo.com/browse/SPASDK-13"><code>#SPASDK-13</code></a></li>
+<li>SPASDK-13 [react-sdk] Replace tslint with eslint <a href="https://issues.onehippo.com/browse/SPASDK-13"><code>#SPASDK-13</code></a></li>
+<li>SPASDK-42 Fix wrong campaign parameter name <a href="https://issues.onehippo.com/browse/SPASDK-42"><code>#SPASDK-42</code></a></li>
+<li>SPASDK-42 Add missing license <a href="https://issues.onehippo.com/browse/SPASDK-42"><code>#SPASDK-42</code></a></li>
+<li>SPASDK-42 Extend unit tests <a href="https://issues.onehippo.com/browse/SPASDK-42"><code>#SPASDK-42</code></a></li>
+<li>SPASDK-42 Refactor folder structure <a href="https://issues.onehippo.com/browse/SPASDK-42"><code>#SPASDK-42</code></a></li>
+<li>SPASDK-42 Refactor getCampaignVariantId method into its own class <a href="https://issues.onehippo.com/browse/SPASDK-42"><code>#SPASDK-42</code></a></li>
+<li>SPASDK-42 Check if DOM is ready <a href="https://issues.onehippo.com/browse/SPASDK-42"><code>#SPASDK-42</code></a></li>
+<li>SPASDK-42 Change TTL from milliseconds to days, default to 7 days with a maximun of 28 days <a href="https://issues.onehippo.com/browse/SPASDK-42"><code>#SPASDK-42</code></a></li>
+<li>SPASDK-42 Change campaign parameter, fix TTL implementation and some code refactoring <a href="https://issues.onehippo.com/browse/SPASDK-42"><code>#SPASDK-42</code></a></li>
+<li>SPASDK-43 Add test cases with request object <a href="https://issues.onehippo.com/browse/SPASDK-43"><code>#SPASDK-43</code></a></li>
+<li>SPASDK-43 Provide request object to get campaign variant id method <a href="https://issues.onehippo.com/browse/SPASDK-43"><code>#SPASDK-43</code></a></li>
+<li>SPASDK-43 Add new method to get cookies from the request object <a href="https://issues.onehippo.com/browse/SPASDK-43"><code>#SPASDK-43</code></a></li>
+<li>SPASDK-34 Check if window variable is defined(Fix SSR issue) <a href="https://issues.onehippo.com/browse/SPASDK-34"><code>#SPASDK-34</code></a></li>
+<li>Revert “SPASDK-22 Update xmldom to the latest version to fix security issue” <a href="https://github.com/bloomreach/spa-sdk/commit/abc33141c2579341a12a02f5b9b148d6c5ae7aa8"><code>abc3314</code></a></li>
+<li>TRIVIAL Add jenkins status to gitlab MRs <a href="https://github.com/bloomreach/spa-sdk/commit/4da07135f78485d4577c24b1320d22453028f3e0"><code>4da0713</code></a></li>
+<li>TRIVIAL Update readme table <a href="https://github.com/bloomreach/spa-sdk/commit/c4d00b2301485695717483d517ee299fd93998b9"><code>c4d00b2</code></a></li>
+</ul>
+<h4 id="spa-sdk-1501-0"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.0.0...spa-sdk-15.0.1-0">spa-sdk-15.0.1-0</a></h4>
+<blockquote>
+<p>9 August 2021</p>
+</blockquote>
+<ul>
+<li>SPASDK-22 Update xmldom to the latest version to fix security issue <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/18"><code>#18</code></a></li>
+<li>SPASDK-34 Make the SPA Personalization aware <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/14"><code>#14</code></a></li>
+<li>SPASDK-33 Bump versions to 15.0.1-0 <a href="https://issues.onehippo.com/browse/SPASDK-33"><code>#SPASDK-33</code></a></li>
+<li>SPASDK-34 Make the SPA Personalization aware <a href="https://issues.onehippo.com/browse/SPASDK-34"><code>#SPASDK-34</code></a></li>
+<li>SPASDK-33 Update git command to publish to github <a href="https://issues.onehippo.com/browse/SPASDK-33"><code>#SPASDK-33</code></a></li>
+<li>SPASDK-22 Update xmldom to the latest version to fix security issue <a href="https://issues.onehippo.com/browse/SPASDK-22"><code>#SPASDK-22</code></a></li>
+</ul>
+<h4 id="spa-sdk-1500"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.0.0-1...spa-sdk-15.0.0">spa-sdk-15.0.0</a></h4>
+<blockquote>
+<p>9 August 2021</p>
+</blockquote>
+<ul>
+<li>SPASDK-32 Auto generate a changelog and setup release notes process <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/15"><code>#15</code></a></li>
+<li>Resolve SPASDK-22 “Update and lock spa sdk dependencies” <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/10"><code>#10</code></a></li>
+<li>SPASDK-33 Bump versions to SPASDK-33 <a href="https://issues.onehippo.com/browse/SPASDK-33"><code>#SPASDK-33</code></a></li>
+<li>SPASDK-33 Remove ‘main’ branch specification <a href="https://issues.onehippo.com/browse/SPASDK-33"><code>#SPASDK-33</code></a></li>
+<li>SPASDK-32 Bump versions to 15.0.0-2 <a href="https://issues.onehippo.com/browse/SPASDK-32"><code>#SPASDK-32</code></a></li>
+<li>SPASDK-32 Add version to workspace so auto-changelog can detect it <a href="https://issues.onehippo.com/browse/SPASDK-32"><code>#SPASDK-32</code></a></li>
+<li>SPASDK-22 Set explicit version for node types in next example <a href="https://issues.onehippo.com/browse/SPASDK-22"><code>#SPASDK-22</code></a></li>
+<li>SPASDK-22 Return back initila version befor changes <a href="https://issues.onehippo.com/browse/SPASDK-22"><code>#SPASDK-22</code></a></li>
+<li>SPASDK-22 Return back range for angular in ng-sdk peer dependencies <a href="https://issues.onehippo.com/browse/SPASDK-22"><code>#SPASDK-22</code></a></li>
+<li>SPASDK-22 Retunr back <code>nuxt/recomended</code> setting removed by mistake <a href="https://issues.onehippo.com/browse/SPASDK-22"><code>#SPASDK-22</code></a></li>
+<li>SPASDK-22 Run prettier on vue-sdk <a href="https://issues.onehippo.com/browse/SPASDK-22"><code>#SPASDK-22</code></a></li>
+<li>SPASDK-22 Bump and pin dependencies in nuxt example project <a href="https://issues.onehippo.com/browse/SPASDK-22"><code>#SPASDK-22</code></a></li>
+<li>SPASDK-22 Update vue-sdk version in vue/nuxt example projects <a href="https://issues.onehippo.com/browse/SPASDK-22"><code>#SPASDK-22</code></a></li>
+<li>SPASDK-22 Bump vue-sdk version and publish <a href="https://issues.onehippo.com/browse/SPASDK-22"><code>#SPASDK-22</code></a></li>
+<li>SPASDK-22 Rollback <code>vue-fragment</code> to 1.5.1 <a href="https://issues.onehippo.com/browse/SPASDK-22"><code>#SPASDK-22</code></a></li>
+<li>SPASDK-22 Change SDK’s versions in example projects <a href="https://issues.onehippo.com/browse/SPASDK-22"><code>#SPASDK-22</code></a></li>
+<li>SPASDK-22 Bump SDK’s versions and publish <a href="https://issues.onehippo.com/browse/SPASDK-22"><code>#SPASDK-22</code></a></li>
+<li>SPASDK-22 Bump and pin dependencies in vue example project <a href="https://issues.onehippo.com/browse/SPASDK-22"><code>#SPASDK-22</code></a></li>
+<li>SPASDK-22 Adjust TS to the new version 4.1 <a href="https://issues.onehippo.com/browse/SPASDK-22"><code>#SPASDK-22</code></a></li>
+<li>SPASDK-22 Bump and pin dependincies in next example project <a href="https://issues.onehippo.com/browse/SPASDK-22"><code>#SPASDK-22</code></a></li>
+<li>SPASDK-22 Adjust TS to the new version 4.1 <a href="https://issues.onehippo.com/browse/SPASDK-22"><code>#SPASDK-22</code></a></li>
+<li>SPASDK-22 Bump and pin dependencies in react example project <a href="https://issues.onehippo.com/browse/SPASDK-22"><code>#SPASDK-22</code></a></li>
+<li>SPASDK-22 Bump and pin dependencies in angular example project <a href="https://issues.onehippo.com/browse/SPASDK-22"><code>#SPASDK-22</code></a></li>
+<li>SPASDK-22 Bump and pin dependencies in vue-sdk package <a href="https://issues.onehippo.com/browse/SPASDK-22"><code>#SPASDK-22</code></a></li>
+<li>SPASDK-22 Bump and pin dependencies in ng-sdk package <a href="https://issues.onehippo.com/browse/SPASDK-22"><code>#SPASDK-22</code></a></li>
+<li>SPASDK-22 Bump and pin dependencies in react-sdk package <a href="https://issues.onehippo.com/browse/SPASDK-22"><code>#SPASDK-22</code></a></li>
+<li>SPASDK-22 Bump and pin dev dependencies in the spa-sdk package <a href="https://issues.onehippo.com/browse/SPASDK-22"><code>#SPASDK-22</code></a></li>
+<li>SPASDK-22 Install yarn plugin for interactive upgrade <a href="https://issues.onehippo.com/browse/SPASDK-22"><code>#SPASDK-22</code></a></li>
+<li>SPASDK-22 Update local yarn to the latest version <a href="https://issues.onehippo.com/browse/SPASDK-22"><code>#SPASDK-22</code></a></li>
+<li>SPASDK-22 Update dependencies in spa-sdk <a href="https://issues.onehippo.com/browse/SPASDK-22"><code>#SPASDK-22</code></a></li>
+<li>SPASDK-32 Use auto-changelog to generate CHANGELOG.md <a href="https://issues.onehippo.com/browse/SPASDK-32"><code>#SPASDK-32</code></a></li>
+</ul>
+<h4 id="spa-sdk-1500-1"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-0.3.0-saas...spa-sdk-15.0.0-1">spa-sdk-15.0.0-1</a></h4>
+<blockquote>
+<p>5 August 2021</p>
+</blockquote>
+<ul>
+<li>SPASDK-31 Generate and host Typescript docs for SDKs <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/13"><code>#13</code></a></li>
+<li>SPASDK-25 Set up spa sdk pipelines <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/9"><code>#9</code></a></li>
+<li>SPASDK-18 Improve documentation (READMEs) in SPA SDKs and Example apps <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/11"><code>#11</code></a></li>
+<li>SPASDK-18 Improve documentation (READMEs) in SPA SDKs and Example apps <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/8"><code>#8</code></a></li>
+<li>SPASDK-29 Fix container can’t be interacted <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/5"><code>#5</code></a></li>
+<li>SPASDK-8 Bump version to 0.3.2-saas <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/6"><code>#6</code></a></li>
+<li>SPASDK-7 Add HandleHttpError <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/3"><code>#3</code></a></li>
+<li>SPASDK-2 Add exported function “getContainerItemContent” <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/1"><code>#1</code></a></li>
+<li>SPASDK-32 Bump versions to 15.0.0-1 <a href="https://issues.onehippo.com/browse/SPASDK-32"><code>#SPASDK-32</code></a></li>
+<li>SPASDK-31 Include non exported interfaces as it gives complete documentation <a href="https://issues.onehippo.com/browse/SPASDK-31"><code>#SPASDK-31</code></a></li>
+<li>SPASDK-31 Add pipeline for publishing SPA SDK TypeDocs <a href="https://issues.onehippo.com/browse/SPASDK-31"><code>#SPASDK-31</code></a></li>
+<li>SPASDK-31 indicate version in typedoc <a href="https://issues.onehippo.com/browse/SPASDK-31"><code>#SPASDK-31</code></a></li>
+<li>SPASDK-31 Fix table in README.md <a href="https://issues.onehippo.com/browse/SPASDK-31"><code>#SPASDK-31</code></a></li>
+<li>SPASDK-25 Remove heroku prefix <a href="https://issues.onehippo.com/browse/SPASDK-25"><code>#SPASDK-25</code></a></li>
+<li>SPASDK-25 Update package files with correct links <a href="https://issues.onehippo.com/browse/SPASDK-25"><code>#SPASDK-25</code></a></li>
+<li>SPASDK-25 For Heroku, replace dots with dashes <a href="https://issues.onehippo.com/browse/SPASDK-25"><code>#SPASDK-25</code></a></li>
+<li>SPASDK-25 Do changes after verification <a href="https://issues.onehippo.com/browse/SPASDK-25"><code>#SPASDK-25</code></a></li>
+<li>SPASDK-25 Add heroku deploy pipeline <a href="https://issues.onehippo.com/browse/SPASDK-25"><code>#SPASDK-25</code></a></li>
+<li>SPASDK-25 Publish to github on tag <a href="https://issues.onehippo.com/browse/SPASDK-25"><code>#SPASDK-25</code></a></li>
+<li>SPASDK-18 Reflect current release process instead of ideal one <a href="https://issues.onehippo.com/browse/SPASDK-18"><code>#SPASDK-18</code></a></li>
+<li>SPASDK-18 Improved table of initialize config documentation <a href="https://issues.onehippo.com/browse/SPASDK-18"><code>#SPASDK-18</code></a></li>
+<li>SPASDK-18 Consistent naming of PMA in READMEs <a href="https://issues.onehippo.com/browse/SPASDK-18"><code>#SPASDK-18</code></a></li>
+<li>SPASDK-18 Add recommendation of styling for buttons <a href="https://issues.onehippo.com/browse/SPASDK-18"><code>#SPASDK-18</code></a></li>
+<li>SPASDK-18 Remove link as there will be multiple release notes <a href="https://issues.onehippo.com/browse/SPASDK-18"><code>#SPASDK-18</code></a></li>
+<li>SPASDK-18 Explicitly mention path should include query parameters <a href="https://issues.onehippo.com/browse/SPASDK-18"><code>#SPASDK-18</code></a></li>
+<li>SPASDK-18 Use yarn instead of npm in nuxt example <a href="https://issues.onehippo.com/browse/SPASDK-18"><code>#SPASDK-18</code></a></li>
+<li>SPASDK-18 Fix run command in react example <a href="https://issues.onehippo.com/browse/SPASDK-18"><code>#SPASDK-18</code></a></li>
+<li>SPASDK-18 Update README.md files of example apps <a href="https://issues.onehippo.com/browse/SPASDK-18"><code>#SPASDK-18</code></a></li>
+<li>SPASDK-18 Update package README’s <a href="https://issues.onehippo.com/browse/SPASDK-18"><code>#SPASDK-18</code></a></li>
+<li>SPASDK-18 No longer work with special saas versions <a href="https://issues.onehippo.com/browse/SPASDK-18"><code>#SPASDK-18</code></a></li>
+<li>SPASDK-18 Update root README <a href="https://issues.onehippo.com/browse/SPASDK-18"><code>#SPASDK-18</code></a></li>
+<li>SPASDK-8 Bump version to 0.3.2-saas <a href="https://issues.onehippo.com/browse/SPASDK-8"><code>#SPASDK-8</code></a></li>
+<li>SPASDK-29 Fix unit test <a href="https://issues.onehippo.com/browse/SPASDK-29"><code>#SPASDK-29</code></a></li>
+<li>SPASDK-29 Fix unit tests <a href="https://issues.onehippo.com/browse/SPASDK-29"><code>#SPASDK-29</code></a></li>
+<li>SPASDK-29 Fix container can’t be interacted when a container-item is not mapped in SPA and “nomarkup” is used for the parent container <a href="https://issues.onehippo.com/browse/SPASDK-29"><code>#SPASDK-29</code></a></li>
+<li>SPASDK-7 Add HandleHttpError <a href="https://issues.onehippo.com/browse/SPASDK-7"><code>#SPASDK-7</code></a></li>
+<li>SPASDK-6 Set versions to 0.3.1-saas <a href="https://issues.onehippo.com/browse/SPASDK-6"><code>#SPASDK-6</code></a></li>
+<li>SPASDK-6 Lock vue-fragment version to 1.5.1 <a href="https://issues.onehippo.com/browse/SPASDK-6"><code>#SPASDK-6</code></a></li>
+<li>SPASDK-2 Update snapshots for tests <a href="https://issues.onehippo.com/browse/SPASDK-2"><code>#SPASDK-2</code></a></li>
+<li>SPASDK-2 Revert accidentally commited change <a href="https://issues.onehippo.com/browse/SPASDK-2"><code>#SPASDK-2</code></a></li>
+<li>SPASDK-2 Update test snapshots to fix failing tests <a href="https://issues.onehippo.com/browse/SPASDK-2"><code>#SPASDK-2</code></a></li>
+<li>SPASDK-2 Log warning for unsupported method “getContentReference” in v0.9 <a href="https://issues.onehippo.com/browse/SPASDK-2"><code>#SPASDK-2</code></a></li>
+<li>SPASDK-2 Add exported function “getContainerItemContent” <a href="https://issues.onehippo.com/browse/SPASDK-2"><code>#SPASDK-2</code></a></li>
+<li>SPASDK-1 Bump to use node 14 <a href="https://issues.onehippo.com/browse/SPASDK-1"><code>#SPASDK-1</code></a></li>
+<li>TRIVIAL Set branch name to ‘main’ in changesetBaseRefs <a href="https://github.com/bloomreach/spa-sdk/commit/4dacdcd2fdb0712e40dcb33b9809ae12786f9ab1"><code>4dacdcd</code></a></li>
+<li>TRIVIAL Skip telemetry check on nuxt startup <a href="https://github.com/bloomreach/spa-sdk/commit/15deb25b1edde3af3296d4dc34dba1483fe278f2"><code>15deb25</code></a></li>
+</ul>
+
+        
+  </section>
+  <nav class="block sm:hidden astro-KIB2VHRF">
+    <h2 class="heading astro-G36SCSFA">More</h2>
+<ul class="astro-G36SCSFA">
+  <li class="header-link depth-2 astro-G36SCSFA">
+        <a class="edit-on-github astro-G36SCSFA" href="https://github.com/withastro/astro/tree/main/examples/docs/src/content/docs/spa-sdk/docs/changelog.md" target="_blank">
+          <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen" class="svg-inline--fa fa-pen fa-w-16 astro-G36SCSFA" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="1em" width="1em">
+            <path fill="currentColor" d="M290.74 93.24l128.02 128.02-277.99 277.99-114.14 12.6C11.35 513.54-1.56 500.62.14 485.34l12.7-114.22 277.9-277.88zm207.2-19.06l-60.11-60.11c-18.75-18.75-49.16-18.75-67.91 0l-56.55 56.55 128.02 128.02 56.55-56.55c18.75-18.76 18.75-49.16 0-67.91z" class="astro-G36SCSFA"></path>
+          </svg>
+          <span class="astro-G36SCSFA">Edit this page</span>
+        </a>
+      </li>
+  <li class="header-link depth-2 astro-G36SCSFA">
+        <a href="https://astro.build/chat" target="_blank" class="astro-G36SCSFA">
+          <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="comment-alt" class="svg-inline--fa fa-comment-alt fa-w-16 astro-G36SCSFA" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="1em" width="1em">
+            <path fill="currentColor" d="M448 0H64C28.7 0 0 28.7 0 64v288c0 35.3 28.7 64 64 64h96v84c0 9.8 11.2 15.5 19.1 9.7L304 416h144c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64z" class="astro-G36SCSFA"></path>
+          </svg>
+          <span class="astro-G36SCSFA">Join our community</span>
+        </a>
+      </li>
+</ul>
+<div style="margin: 2rem 0; text-align: center;" class="astro-G36SCSFA">
+  <script>(()=>{var r=(i,c,n)=>{let s=async()=>{await(await i())()},t=new IntersectionObserver(e=>{for(let o of e)if(o.isIntersecting){t.disconnect(),s();break}});for(let e of n.children)t.observe(e)};(self.Astro||(self.Astro={})).visible=r;window.dispatchEvent(new Event("astro:visible"));})();</script><astro-island uid="SMJWX" prefix="r3" component-url="/spa-sdk/docs/_astro/ThemeToggleButton.65b0c565.js" component-export="default" renderer-url="/spa-sdk/docs/_astro/client.8ec44e5c.js" props="{}" ssr="" client="visible" opts="{&quot;name&quot;:&quot;ThemeToggleButton&quot;,&quot;value&quot;:true}" await-children=""><div class="theme-toggle"><label class=""><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path></svg><input type="radio" name="theme-toggle" title="Use light theme" aria-label="Use light theme" value="light"/></label><label class=""><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg><input type="radio" name="theme-toggle" title="Use dark theme" aria-label="Use dark theme" value="dark"/></label></div></astro-island>
+</div>
+  </nav>
+</article>
+      </div>
+      <aside id="grid-right" class="grid-sidebar astro-OUAMJN2I" title="Table of Contents">
+        <nav class="sidebar-nav astro-ZUJYV34G" aria-labelledby="grid-right">
+  <div class="sidebar-nav-inner astro-ZUJYV34G">
+    <astro-island uid="Z43Ocs" prefix="r4" component-url="/spa-sdk/docs/_astro/TableOfContents.fbf6df89.js" component-export="default" renderer-url="/spa-sdk/docs/_astro/client.8ec44e5c.js" props="{&quot;headings&quot;:[1,[[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;changelog&quot;],&quot;text&quot;:[0,&quot;Changelog&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;spa-sdk-2200&quot;],&quot;text&quot;:[0,&quot;spa-sdk-22.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2100&quot;],&quot;text&quot;:[0,&quot;spa-sdk-21.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2100-alpha0&quot;],&quot;text&quot;:[0,&quot;spa-sdk-21.0.0-alpha.0&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;spa-sdk-2000&quot;],&quot;text&quot;:[0,&quot;spa-sdk-20.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1902&quot;],&quot;text&quot;:[0,&quot;spa-sdk-19.0.2&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1901&quot;],&quot;text&quot;:[0,&quot;spa-sdk-19.0.1&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;spa-sdk-1900&quot;],&quot;text&quot;:[0,&quot;spa-sdk-19.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1801&quot;],&quot;text&quot;:[0,&quot;spa-sdk-18.0.1&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;spa-sdk-1800&quot;],&quot;text&quot;:[0,&quot;spa-sdk-18.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1720&quot;],&quot;text&quot;:[0,&quot;spa-sdk-17.2.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1711&quot;],&quot;text&quot;:[0,&quot;spa-sdk-17.1.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1710&quot;],&quot;text&quot;:[0,&quot;spa-sdk-17.1.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1701&quot;],&quot;text&quot;:[0,&quot;spa-sdk-17.0.1&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;spa-sdk-1700&quot;],&quot;text&quot;:[0,&quot;spa-sdk-17.0.0&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;spa-sdk-1600&quot;],&quot;text&quot;:[0,&quot;spa-sdk-16.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;v1551&quot;],&quot;text&quot;:[0,&quot;v15.5.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1550&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.5.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1546&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.4.6&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1545&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.4.5&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1544&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.4.4&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1543&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.4.3&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1542&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.4.2&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1541&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.4.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1540&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.4.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1533&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.3.3&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1532&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.3.2&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1531&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.3.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1530&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.3.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1522-0&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.2.2-0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1521&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.2.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1512&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.1.2&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1510&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.1.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1501-0&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.0.1-0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1500&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1500-1&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.0.0-1&quot;]}]]]}" ssr="" client="media" opts="{&quot;name&quot;:&quot;TableOfContents&quot;,&quot;value&quot;:&quot;(min-width: 50em)&quot;}" await-children=""><h2 id="on-this-page-heading" class="heading">On this page</h2><ul><li class="header-link depth-3"><a href="#changelog">Changelog</a></li><li class="header-link depth-3"><a href="#spa-sdk-2200">spa-sdk-22.0.0</a></li><li class="header-link depth-3"><a href="#spa-sdk-2000">spa-sdk-20.0.0</a></li><li class="header-link depth-3"><a href="#spa-sdk-1900">spa-sdk-19.0.0</a></li><li class="header-link depth-3"><a href="#spa-sdk-1800">spa-sdk-18.0.0</a></li><li class="header-link depth-3"><a href="#spa-sdk-1700">spa-sdk-17.0.0</a></li><li class="header-link depth-3"><a href="#spa-sdk-1600">spa-sdk-16.0.0</a></li></ul></astro-island>
+    <h2 class="heading astro-G36SCSFA">More</h2>
+<ul class="astro-G36SCSFA">
+  <li class="header-link depth-2 astro-G36SCSFA">
+        <a class="edit-on-github astro-G36SCSFA" href="https://github.com/withastro/astro/tree/main/examples/docs/src/content/docs/spa-sdk/docs/changelog.md" target="_blank">
+          <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen" class="svg-inline--fa fa-pen fa-w-16 astro-G36SCSFA" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="1em" width="1em">
+            <path fill="currentColor" d="M290.74 93.24l128.02 128.02-277.99 277.99-114.14 12.6C11.35 513.54-1.56 500.62.14 485.34l12.7-114.22 277.9-277.88zm207.2-19.06l-60.11-60.11c-18.75-18.75-49.16-18.75-67.91 0l-56.55 56.55 128.02 128.02 56.55-56.55c18.75-18.76 18.75-49.16 0-67.91z" class="astro-G36SCSFA"></path>
+          </svg>
+          <span class="astro-G36SCSFA">Edit this page</span>
+        </a>
+      </li>
+  <li class="header-link depth-2 astro-G36SCSFA">
+        <a href="https://astro.build/chat" target="_blank" class="astro-G36SCSFA">
+          <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="comment-alt" class="svg-inline--fa fa-comment-alt fa-w-16 astro-G36SCSFA" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="1em" width="1em">
+            <path fill="currentColor" d="M448 0H64C28.7 0 0 28.7 0 64v288c0 35.3 28.7 64 64 64h96v84c0 9.8 11.2 15.5 19.1 9.7L304 416h144c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64z" class="astro-G36SCSFA"></path>
+          </svg>
+          <span class="astro-G36SCSFA">Join our community</span>
+        </a>
+      </li>
+</ul>
+<div style="margin: 2rem 0; text-align: center;" class="astro-G36SCSFA">
+  <astro-island uid="SMJWX" prefix="r5" component-url="/spa-sdk/docs/_astro/ThemeToggleButton.65b0c565.js" component-export="default" renderer-url="/spa-sdk/docs/_astro/client.8ec44e5c.js" props="{}" ssr="" client="visible" opts="{&quot;name&quot;:&quot;ThemeToggleButton&quot;,&quot;value&quot;:true}" await-children=""><div class="theme-toggle"><label class=""><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path></svg><input type="radio" name="theme-toggle" title="Use light theme" aria-label="Use light theme" value="light"/></label><label class=""><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg><input type="radio" name="theme-toggle" title="Use dark theme" aria-label="Use dark theme" value="dark"/></label></div></astro-island>
+</div>
+  </div>
+</nav>
+      </aside>
+    </main>
+  </body></html>
