@@ -1,24 +1,11 @@
 ---
-import { SITE } from "../consts";
-
 type Props = {
   size: number;
-  title: string;
 };
 const { size } = Astro.props;
 ---
 
 <svg class="logo" width={size} height={size} viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
-  <style>
-    #flame {
-      fill: var(--theme-text-accent);
-    }
-
-    #a {
-      fill: var(--theme-text-accent);
-    }
-  </style>
-  <title>{SITE.title}</title>
   <defs>
     <style>
       .cls-1 {

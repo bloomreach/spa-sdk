@@ -1,3 +1,3 @@
 export const SITE = {
-	title: 'Bloomreach SDK Documentation Portal',
+	title: 'SDK Documentation Portal',
 } as const;

@@ -1,115 +1,35 @@
 ---
-import { SITE } from "../consts";
-import AstroLogo from "./AstroLogo.astro";
-import SidebarToggle from "./SidebarToggle";
+import MainMenu from './MainMenu.astro';
+import AstroLogo from './AstroLogo.astro';
 import ThemeToggleButton from './ThemeToggleButton';
+import { SITE } from '../consts';
 
 type Props = {
   currentPage: string;
 };
+
+const { currentPage } = Astro.props;
 ---
 
 <header>
-  <nav class="nav-wrapper" title="Top Navigation">
-    <div class="menu-toggle">
-      <SidebarToggle client:idle />
-    </div>
-    <div class="logo flex">
-      <a href="/spa-sdk/docs/">
-        <AstroLogo size={48} title={SITE.title} />
+  <div class="navbar">
+    <div class="navbar-start">
+      <div class="dropdown">
+        <label tabindex="0" class="btn btn-ghost btn-circle md:hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path>
+          </svg>
+        </label>
+        <MainMenu class="dropdown-content bg-base-100 rounded-box w-52 shadow" currentPage={currentPage} />
+      </div>
+      <a class="btn btn-ghost" href="/spa-sdk/docs/">
+        <AstroLogo size={24} />
         <h1>{SITE.title}</h1>
       </a>
     </div>
-    <div style="flex-grow: 1;"></div>
-    <div>
+    <div class="navbar-center"></div>
+    <div class="navbar-end">
       <ThemeToggleButton client:only />
     </div>
-  </nav>
+  </div>
 </header>
-
-<style>
-  header {
-    z-index: 11;
-    height: var(--theme-navbar-height);
-    width: 100%;
-    background-color: var(--theme-navbar-bg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    position: sticky;
-    top: 0;
-  }
-
-  .logo {
-    flex: 2;
-    display: flex;
-    overflow: hidden;
-    width: 30px;
-    font-size: 2rem;
-    flex-shrink: 0;
-    font-weight: 600;
-    line-height: 1;
-    color: hsla(var(--color-base-white), 100%, 1);
-    gap: 0.25em;
-    z-index: -1;
-  }
-
-  .logo a {
-    display: flex;
-    padding: 0.5em 0.25em;
-    margin: -0.5em -0.25em;
-    text-decoration: none;
-    font-weight: bold;
-  }
-
-  .logo a {
-    transition: color 100ms ease-out;
-    color: var(--theme-text);
-  }
-
-  .logo a:hover,
-  .logo a:focus {
-    color: var(--theme-text-accent);
-  }
-
-  .logo h1 {
-    display: none;
-    font: inherit;
-    color: inherit;
-    margin: 0;
-  }
-
-  .nav-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 1em;
-    width: 100%;
-    max-width: 82em;
-    padding: 0 1rem;
-  }
-
-  @media (min-width: 50em) {
-    header {
-      position: static;
-      padding: 2rem 0rem;
-    }
-
-    .logo {
-      width: auto;
-      margin: 0;
-      z-index: 0;
-    }
-
-    .logo h1 {
-      display: initial;
-    }
-
-    .menu-toggle {
-      display: none;
-    }
-  }
-</style>
-
-<style is:global></style>
