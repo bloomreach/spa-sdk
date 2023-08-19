@@ -11,25 +11,25 @@
   },
   "dependencies": {
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "theme-change": "2.5.0",
+    "@tailwindcss/typography": "0.5.9",
+    "daisyui": "3.5.1",
+    "html-escaper": "^3.0.3",
+    "tailwindcss": "3.3.3"
   },
   "devDependencies": {
     "@astrojs/mdx": "0.19.7",
     "@astrojs/react": "2.2.1",
-    "@tailwindcss/typography": "0.5.9",
+    "@astrojs/tailwind": "4.0.0",
     "@types/html-escaper": "3.0.0",
     "@types/node": "16.18.40",
     "@types/react": "18.2.20",
     "@types/react-dom": "18.2.7",
     "astro": "2.10.4",
-    "autoprefixer": "10.4.15",
-    "daisyui": "3.5.1",
-    "html-escaper": "^3.0.3",
     "prettier": "3.0.2",
     "prettier-plugin-astro": "0.11.1",
-    "prettier-plugin-tailwindcss": "0.5.3",
-    "tailwindcss": "3.3.3",
-    "theme-change": "2.5.0"
+    "prettier-plugin-tailwindcss": "0.5.3"
   },
   "prettier": {
     "plugins": [
@@ -41,11 +41,5 @@
     "trailingComma": "all",
     "bracketSameLine": true,
     "proseWrap": "always"
-  },
-  "postcss": {
-    "plugins": {
-      "tailwindcss": {},
-      "autoprefixer": {}
-    }
   }
 }
