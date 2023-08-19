@@ -1,8 +1,8 @@
 ---
 import MainMenu from './MainMenu.astro';
 import Logo from './Logo.astro';
-import ThemeToggleButton from './ThemeToggleButton';
 import { SITE } from '../consts';
+import ThemeToggle from './ThemeToggle.astro';
 
 type Props = {
   currentPage: string;
@@ -13,23 +13,24 @@ const { currentPage } = Astro.props;
 
 <header>
   <div class="navbar">
-    <div class="navbar-start">
+    <div class="navbar-start"></div>
+    <div class="navbar-center">
       <div class="dropdown">
         <label tabindex="0" class="btn btn-ghost btn-circle md:hidden">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path>
           </svg>
         </label>
-        <MainMenu class="dropdown-content bg-base-100 rounded-box w-52 shadow" currentPage={currentPage} />
+        <MainMenu class="dropdown-content bg-base-100 dark:bg-base-200 rounded-box shadow w-max" currentPage={currentPage} />
       </div>
       <a class="btn btn-ghost" href="/spa-sdk/docs/">
         <Logo size={24} />
         <h1>{SITE.title}</h1>
       </a>
+      <button class="btn btn-ghost btn-circle">
+        <ThemeToggle />
+      </button>
     </div>
-    <div class="navbar-center"></div>
-    <div class="navbar-end">
-      <ThemeToggleButton client:only />
-    </div>
+    <div class="navbar-end"></div>
   </div>
 </header>
