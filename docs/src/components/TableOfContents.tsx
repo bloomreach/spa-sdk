@@ -88,7 +88,7 @@ const TableOfContents: FC<{ headings: MarkdownHeading[]; }> = ({
 				</li>
 			</ul>
 
-			<div className="divider md:hidden"></div>
+			<div className="divider lg:hidden"></div>
 		</nav>
 	);
 };

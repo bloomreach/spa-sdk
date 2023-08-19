@@ -1,6 +1,7 @@
 export default {
   content: ['./src/**/*.{astro,html,svelte,vue,js,ts,jsx,tsx}'],
   plugins: [require("@tailwindcss/typography"), require("daisyui")],
+  darkMode: ['class', '[data-theme="dark"]'],
   daisyui: {
     themes: [
       {
