@@ -1,6 +1,6 @@
 ---
 import MainMenu from './MainMenu.astro';
-import AstroLogo from './AstroLogo.astro';
+import Logo from './Logo.astro';
 import ThemeToggleButton from './ThemeToggleButton';
 import { SITE } from '../consts';
 
@@ -23,7 +23,7 @@ const { currentPage } = Astro.props;
         <MainMenu class="dropdown-content bg-base-100 rounded-box w-52 shadow" currentPage={currentPage} />
       </div>
       <a class="btn btn-ghost" href="/spa-sdk/docs/">
-        <AstroLogo size={24} />
+        <Logo size={24} />
         <h1>{SITE.title}</h1>
       </a>
     </div>

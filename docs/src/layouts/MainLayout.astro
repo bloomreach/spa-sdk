@@ -3,9 +3,8 @@ import '../styles/index.css';
 import type { MarkdownHeading } from 'astro';
 import HeadCommon from '../components/HeadCommon.astro';
 import Header from '../components/Header.astro';
-import PageContent from '../components/PageContent.astro';
 import MainMenu from '../components/MainMenu.astro';
-import RightSidebar from '../components/RightSidebar.astro';
+import TableOfContents from '../components/TableOfContents';
 import { SITE } from '../consts';
 
 type Props = {
@@ -29,17 +28,22 @@ const currentPage = Astro.url.pathname;
 
     <main class="grid md:grid-cols-4 gap-x-10 p-10">
       <aside class="hidden md:block col-span-1">
-        <nav>
+        <nav class="sticky top-0">
           <MainMenu currentPage={currentPage} />
         </nav>
       </aside>
       <div class="col-span-3 md:col-span-2">
-        <PageContent headings={headings}>
-          <slot />
-        </PageContent>
+        <article>
+          <div class="block md:hidden">
+            {headings.length > 1 && <TableOfContents client:load headings={headings} />}
+          </div>
+          <section class="prose">
+            <slot />
+          </section>
+        </article>
       </div>
-      <aside class="col-span-1">
-        <RightSidebar headings={headings} />
+      <aside class="hidden md:block col-span-1">
+        {headings.length > 1 && <TableOfContents client:load headings={headings} />}
       </aside>
     </main>
   </body>

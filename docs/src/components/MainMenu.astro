@@ -19,7 +19,7 @@ const links = [
 ];
 ---
 
-<ul class:list={['menu', className]} }>
+<ul class:list={['menu', className, 'z-10']} }>
   {
     links.map((child) => {
       const url = Astro.site?.pathname + child.link;

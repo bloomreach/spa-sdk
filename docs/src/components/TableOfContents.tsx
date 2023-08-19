@@ -66,26 +66,30 @@ const TableOfContents: FC<{ headings: MarkdownHeading[]; }> = ({
 	};
 
 	return (
-		<>
-			<h2 id={onThisPageID} className="heading">
-				On this page
-			</h2>
-			<ul ref={toc}>
-				{headings
-					.filter(({ depth }) => depth > 1 && depth < 4)
-					.map((heading) => (
-						<li
-							key={heading.slug}
-							className={`header-link depth-${heading.depth} ${currentID === heading.slug ? 'current-header-link' : ''
-								}`.trim()}
-						>
-							<a href={`#${heading.slug}`} onClick={onLinkClick}>
-								{unescape(heading.text)}
-							</a>
-						</li>
-					))}
+		<nav className="sticky top-0">
+			<ul className="menu">
+				<li>
+					<h2 id={onThisPageID} className="menu-title">
+						<span className="">On this page</span>
+					</h2>
+					<ul ref={toc}>
+						{headings
+							.filter(({ depth }) => depth > 1 && depth < 4)
+							.map((heading) => (
+								<li key={heading.slug}>
+									<a href={`#${heading.slug}`}
+										onClick={onLinkClick}
+										className={`${currentID === heading.slug ? 'active' : ''}`.trim()}>
+										{unescape(heading.text)}
+									</a>
+								</li>
+							))}
+					</ul>
+				</li>
 			</ul>
-		</>
+
+			<div className="divider md:hidden"></div>
+		</nav>
 	);
 };
 
