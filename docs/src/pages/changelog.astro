@@ -1,0 +1,9 @@
+---
+import { Content, getHeadings } from "../../../CHANGELOG.md";
+import MainLayout from "../layouts/MainLayout.astro";
+---
+
+<MainLayout title="Changelog" headings={getHeadings()}>
+  <Content />
+</MainLayout>
+

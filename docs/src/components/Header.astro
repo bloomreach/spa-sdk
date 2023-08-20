@@ -1,0 +1,82 @@
+---
+import MainMenu from './MainMenu.astro';
+import Logo from './Logo.astro';
+import ThemeToggle from './ThemeToggle.astro';
+import Search from 'astro-pagefind/components/Search';
+import { Icon } from 'astro-icon';
+
+type Props = {
+  currentPage: string;
+};
+
+const { currentPage } = Astro.props;
+---
+
+<header id="header">
+  <div class="navbar">
+    <div class="navbar-start">
+      <div class="dropdown">
+        <label tabindex="0" class="btn btn-ghost btn-circle lg:hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path>
+          </svg>
+        </label>
+        <MainMenu
+          class="dropdown-content bg-base-100 dark:bg-base-200 rounded-box shadow w-max"
+          currentPage={currentPage}
+        />
+      </div>
+      <a class="btn btn-ghost" href="/spa-sdk/docs/">
+        <Logo size={24} />
+        <h1>SDK Documentation Portal</h1>
+      </a>
+    </div>
+    <div class="navbar-center"></div>
+    <div class="navbar-end">
+      <button class="btn btn-ghost btn-circle" id="searchModalTrigger">
+        <Icon pack="mdi" name="magnify" size="24" />
+      </button>
+      <ThemeToggle />
+    </div>
+  </div>
+</header>
+
+<dialog id="searchModal" class="modal">
+  <form method="dialog" class="modal-box p-10">
+    <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+      <Icon pack="mdi" name="close" size="24" />
+    </button>
+    <div class="search mt-5">
+      <Search />
+    </div>
+  </form>
+  <form method="dialog" class="modal-backdrop">
+    <button>Close</button>
+  </form>
+</dialog>
+
+<script>
+  const searchModalTrigger = document.querySelector<HTMLButtonElement>('#searchModalTrigger');
+  const searchModal = document.querySelector<HTMLDialogElement>('#searchModal');
+
+  searchModalTrigger?.addEventListener('click', () => {
+    searchModal?.showModal();
+    const searchInput = document.querySelector<HTMLInputElement>('.pagefind-ui__search-input');
+    searchInput?.focus();
+  });
+</script>
+
+<style is:global>
+  .search {
+    --pagefind-ui-primary: hsl(var(--bc));
+    --pagefind-ui-text: hsl(var(--bc));
+    --pagefind-ui-background: hsl(var(--b1));
+    --pagefind-ui-border: hsl(var(--p));
+    --pagefind-ui-tag: hsl(var(--p));
+    --pagefind-ui-border-width: 1px;
+  }
+
+  .search .pagefind-ui__result-thumb {
+    display: none;
+  }
+</style>
