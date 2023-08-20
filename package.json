@@ -35,7 +35,8 @@
     "test": "lerna run test --concurrency 1",
     "prebump": "lerna run yalcRetreat",
     "bump": "lerna version --exact --no-push --yes --force-publish --no-git-tag-version",
-    "postbump": "auto-changelog && lerna run yalcRestore && lerna exec --stream -- 'npm install --package-lock-only'",
+    "postbump": "npm run changelog && lerna run yalcRestore && lerna exec --stream -- 'npm install --package-lock-only'",
+    "changelog": "auto-changelog --latest-version $(npm --prefix ./packages/spa-sdk pkg get version)",
     "docs": "lerna run docs",
     "deploy-to-heroku": "./scripts/deploy_heroku_app.sh ${0} ${1} ${2}",
     "heroku-postbuild": "npm run prebuild:custom && npm run build && cd ${PROJECT_PATH:-.}",
@@ -54,7 +55,6 @@
     "heroku": "8.1.9"
   },
   "auto-changelog": {
-    "package": true,
     "hideCredit": true,
     "commitLimit": false,
     "tagPrefix": "spa-sdk-",
