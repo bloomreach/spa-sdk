@@ -4,21 +4,22 @@ import HeadCommon from '../components/HeadCommon.astro';
 import Header from '../components/Header.astro';
 import MainMenu from '../components/MainMenu.astro';
 import TableOfContents from '../components/TableOfContents';
-import { SITE } from '../consts';
 
 type Props = {
   headings: MarkdownHeading[];
+  title?: string;
+  frontmatter?: { title: string };
 };
 
-const { headings } = Astro.props;
+const { headings, title, frontmatter } = Astro.props;
 const currentPage = Astro.url.pathname;
 ---
 
 <html>
   <head>
     <HeadCommon />
-    <title>
-      {`${SITE.title}`}
+    <title data-pagefind-meta="title">
+      {`${title || frontmatter?.title }`}
     </title>
     <script is:inline>
       if (localStorage.getItem('theme') === null) {
@@ -45,7 +46,7 @@ const currentPage = Astro.url.pathname;
           <div class="block lg:hidden">
             {headings.length > 1 && <TableOfContents client:load headings={headings} />}
           </div>
-          <section class="prose">
+          <section class="prose" data-pagefind-body>
             <slot />
           </section>
         </article>
