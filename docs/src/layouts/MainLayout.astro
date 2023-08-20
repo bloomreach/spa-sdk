@@ -1,0 +1,59 @@
+---
+import type { MarkdownHeading } from 'astro';
+import HeadCommon from '../components/HeadCommon.astro';
+import Header from '../components/Header.astro';
+import MainMenu from '../components/MainMenu.astro';
+import TableOfContents from '../components/TableOfContents';
+
+type Props = {
+  headings: MarkdownHeading[];
+  title?: string;
+  frontmatter?: { title: string };
+};
+
+const { headings, title, frontmatter } = Astro.props;
+const currentPage = Astro.url.pathname;
+---
+
+<html>
+  <head>
+    <HeadCommon />
+    <title data-pagefind-meta="title">
+      {`${title || frontmatter?.title }`}
+    </title>
+    <script is:inline>
+      if (localStorage.getItem('theme') === null) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      } else document.documentElement.setAttribute('data-theme', localStorage.getItem('theme'));
+    </script>
+    <script>
+      import { themeChange } from 'theme-change';
+      themeChange();
+    </script>
+  </head>
+
+  <body>
+    <Header currentPage={currentPage} />
+
+    <main class="grid lg:grid-cols-4 gap-x-10 p-10">
+      <aside class="hidden lg:block col-span-1">
+        <nav class="sticky top-0">
+          <MainMenu currentPage={currentPage} />
+        </nav>
+      </aside>
+      <div class="col-span-3 lg:col-span-2">
+        <article>
+          <div class="block lg:hidden">
+            {headings.length > 1 && <TableOfContents client:load headings={headings} />}
+          </div>
+          <section class="prose" data-pagefind-body>
+            <slot />
+          </section>
+        </article>
+      </div>
+      <aside class="hidden lg:block col-span-1">
+        {headings.length > 1 && <TableOfContents client:load headings={headings} />}
+      </aside>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,41 @@
+---
+type Props = {
+  currentPage: string;
+  class?: string;
+};
+
+const { currentPage, class: className } = Astro.props;
+const currentPageMatch = currentPage.endsWith('/') ? currentPage.slice(1, -1) : currentPage.slice(1);
+
+const links = [
+  { text: 'Getting started', link: '/getting-started' },
+  { text: 'SPA SDK', link: '/spa-sdk' },
+  { text: 'React SDK', link: '/react-sdk' },
+  { text: 'Angular SDK', link: '/ng-sdk' },
+  { text: 'Vue 2 SDK', link: '/vue-sdk' },
+  { text: 'Vue 3 SDK', link: '/vue3-sdk' },
+  { text: 'Migration guide', link: '/migration-guide' },
+  { text: 'Changelog', link: '/changelog' },
+];
+---
+
+<ul class:list={['menu', className, 'z-10']} }>
+  {
+    links.map((child) => {
+      const url = Astro.site?.pathname + child.link;
+      return (
+        <li class="nav-link">
+          <a href={url} class={currentPageMatch.endsWith(child.link) ? 'active' : null}>
+            {child.text}
+          </a>
+        </li>
+      );
+    })
+  }
+  <li>
+    <a href="https://github.com/bloomreach/spa-sdk/releases" target="_blank">Releases</a>
+  </li>
+  <li>
+    <a href="https://bloomreach.github.io/spa-sdk/" target="_blank">Typedoc</a>
+  </li>
+</ul>

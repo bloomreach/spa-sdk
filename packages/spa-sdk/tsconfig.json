@@ -23,10 +23,11 @@
     "disableSources": true,
     "excludePrivate": true,
     "excludeProtected": true,
-    "exclude": "!dist/**/*",
+    "excludeExternals": true,
     "hideGenerator": true,
     "includeVersion": true,
-    "entryPoints": ["dist/index.d.ts", "dist/express/index.d.ts"],
-    "out": "docs"
+    "internalModule": "Internals",
+    "entryPoints": ["src/index.ts", "src/express/index.ts"],
+    "cleanOutputDir": true
   }
 }

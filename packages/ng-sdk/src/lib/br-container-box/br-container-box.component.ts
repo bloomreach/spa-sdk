@@ -14,14 +14,13 @@
  * limitations under the License.
  */
 
-import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
 import { Container, Page } from '@bloomreach/spa-sdk';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'div.br-container-box',
   templateUrl: './br-container-box.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BrContainerBoxComponent {
   @Input() component!: Container;

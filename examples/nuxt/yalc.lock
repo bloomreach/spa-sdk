@@ -2,11 +2,11 @@
   "version": "v1",
   "packages": {
     "@bloomreach/spa-sdk": {
-      "signature": "b776bdff5bbbb8fec6d7951523fce3a2",
+      "signature": "7121141de8676cc882631118a95b05d6",
       "file": true
     },
     "@bloomreach/vue-sdk": {
-      "signature": "d87a8ac8f8f4e2e84aa991a8529e02f2",
+      "signature": "67f87ffe4d1b1be3bba7b8076a7e69ac",
       "file": true
     }
   }

@@ -78,64 +78,71 @@ pipeline {
       }
 
       stages {
-//        stage('Fetch tags') {
-//          steps {
-//            sshagent (credentials: ['a9511950-0b5d-4727-aa82-a0d7f205b1f4']) {
-//              sh 'git fetch --tags'
-//            }
-//          }
-//        }
-//        stage('Publish to Github') {
-//          steps {
-//            sshagent (credentials: ['github-spa-sdk']) {
-//              sh 'git remote add github git@github.com:bloomreach/spa-sdk.git'
-//              sh 'git push github HEAD:refs/heads/main'
-//              sh 'git push github "spa-sdk-${VERSION}"'
-//            }
-//          }
-//        }
-//        stage('Setup git config') {
-//          steps {
-//            sh 'git config --global user.email "jenkins@code.bloomreach.com"'
-//            sh 'git config --global user.name "Jenkins"'
-//          }
-//        }
-//        stage('Generate and publish SPA SDK TypeDoc') {
-//          stages {
-//            stage('Generate SPA SDK TypeDoc') {
-//              steps {
-//                sh 'npx lerna run docs --scope @bloomreach/spa-sdk'
-//              }
-//            }
-//            stage('Clone github pages with TypeDoc') {
-//              steps {
-//                sshagent (credentials: ['github-spa-sdk']) {
-//                  sh 'git clone -b gh-pages --single-branch git@github.com:bloomreach/spa-sdk.git spa-sdk-typedoc'
-//                }
-//              }
-//            }
-//            stage('Copy new version of TypeDoc') {
-//              steps {
-//                sh 'rm -rf spa-sdk-typedoc/*'
-//                sh 'cp -r packages/spa-sdk/docs/. spa-sdk-typedoc/'
-//              }
-//            }
-//            stage('Publish to github pages') {
-//              steps {
-//                sh 'git -C spa-sdk-typedoc add --all'
-//                sh 'git -C spa-sdk-typedoc commit -m "Update SPA SDK TypeDocs for release ${VERSION}"'
-//                sshagent (credentials: ['github-spa-sdk']) {
-//                  sh 'git -C spa-sdk-typedoc push'
-//                }
-//              }
-//            }
-//            stage('Cleanup') {
-//              steps {
-//                sh 'rm -rf spa-sdk-typedoc'
-//              }
-//            }
-//          }
-//        }
+        stage('Fetch tags') {
+          steps {
+            sshagent (credentials: ['a9511950-0b5d-4727-aa82-a0d7f205b1f4']) {
+              sh 'git fetch --tags'
+            }
+          }
+        }
+        stage('Publish to Github') {
+          steps {
+            sshagent (credentials: ['github-spa-sdk']) {
+              sh 'git remote add github git@github.com:bloomreach/spa-sdk.git'
+              sh 'git push github HEAD:refs/heads/main'
+              sh 'git push github "spa-sdk-${VERSION}"'
+            }
+          }
+        }
+        stage('Setup git config') {
+          steps {
+            sh 'git config --global user.email "jenkins@code.bloomreach.com"'
+            sh 'git config --global user.name "Jenkins"'
+          }
+        }
+        stage('Generate and publish docs') {
+          stages {
+            stage('Build TypeDoc') {
+              steps {
+                sh 'npx lerna run docs --scope @bloomreach/spa-sdk'
+              }
+            }
+            stage('Build docs') {
+              steps {
+                sh 'cd docs && npm ci && npm run build'
+              }
+            }
+            stage('Clone github docs branch') {
+              steps {
+                sshagent (credentials: ['github-spa-sdk']) {
+                  sh 'git clone -b gh-pages --single-branch git@github.com:bloomreach/spa-sdk.git github-pages-root'
+                }
+              }
+            }
+            stage('Copy TypeDoc & docs') {
+              steps {
+                sh 'rm -rf github-pages-root/*'
+                sh 'cp -r packages/spa-sdk/docs/. github-pages-root/'
+                sh 'mkdir github-pages-root/docs'
+                sh 'cp -r docs/dist/. github-pages-root/docs/'
+              }
+            }
+            stage('Publish to github pages') {
+              steps {
+                sh 'git -C github-pages-root add --all'
+                sh 'git -C github-pages-root commit -m "Update SPA SDK docs for release ${VERSION}"'
+                sshagent (credentials: ['github-spa-sdk']) {
+                  sh 'git -C github-pages-root push'
+                }
+              }
+            }
+            stage('Cleanup') {
+              steps {
+                sh 'rm -rf github-pages-root'
+              }
+            }
+          }
+        }
         stage('Publish to NPM') {
           steps {
             withCredentials([[$class: 'StringBinding', credentialsId: 'NPM_AUTH_TOKEN', variable: 'NPM_AUTH_TOKEN']]) {
