@@ -46,7 +46,7 @@ const currentPage = Astro.url.pathname;
           <div class="block lg:hidden">
             {headings.length > 1 && <TableOfContents client:load headings={headings} />}
           </div>
-          <section class="prose">
+          <section class="prose" data-pagefind-body>
             <slot />
           </section>
         </article>
