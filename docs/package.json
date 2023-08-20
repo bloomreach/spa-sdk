@@ -10,17 +10,36 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/mdx": "0.19.7",
-    "@astrojs/react": "2.2.1",
-    "astro": "2.10.4",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "theme-change": "2.5.0",
+    "@tailwindcss/typography": "0.5.9",
+    "daisyui": "3.5.1",
+    "html-escaper": "^3.0.3",
+    "tailwindcss": "3.3.3"
   },
   "devDependencies": {
+    "@astrojs/mdx": "0.19.7",
+    "@astrojs/react": "2.2.1",
+    "@astrojs/tailwind": "4.0.0",
     "@types/html-escaper": "3.0.0",
     "@types/node": "16.18.40",
     "@types/react": "18.2.20",
     "@types/react-dom": "18.2.7",
-    "html-escaper": "^3.0.3"
+    "astro": "2.10.4",
+    "prettier": "3.0.2",
+    "prettier-plugin-astro": "0.11.1",
+    "prettier-plugin-tailwindcss": "0.5.3"
+  },
+  "prettier": {
+    "plugins": [
+      "prettier-plugin-astro"
+    ],
+    "printWidth": 120,
+    "singleQuote": true,
+    "arrowParens": "always",
+    "trailingComma": "all",
+    "bracketSameLine": true,
+    "proseWrap": "always"
   }
 }
