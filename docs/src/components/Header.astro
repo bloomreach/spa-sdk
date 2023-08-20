@@ -14,8 +14,7 @@ const { currentPage } = Astro.props;
 
 <header id="header">
   <div class="navbar">
-    <div class="navbar-start"></div>
-    <div class="navbar-center">
+    <div class="navbar-start">
       <div class="dropdown">
         <label tabindex="0" class="btn btn-ghost btn-circle lg:hidden">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -31,14 +30,14 @@ const { currentPage } = Astro.props;
         <Logo size={24} />
         <h1>SDK Documentation Portal</h1>
       </a>
-      <ThemeToggle />
-      <button class="btn btn-ghost btn-circle" onclick="
-      searchModal.showModal();
-      ">
+    </div>
+    <div class="navbar-center"></div>
+    <div class="navbar-end">
+      <button class="btn btn-ghost btn-circle" id="searchModalTrigger">
         <Icon pack="mdi" name="magnify" size="24" />
       </button>
+      <ThemeToggle />
     </div>
-    <div class="navbar-end"></div>
   </div>
 </header>
 
@@ -55,6 +54,17 @@ const { currentPage } = Astro.props;
     <button>Close</button>
   </form>
 </dialog>
+
+<script>
+  const searchModalTrigger = document.querySelector<HTMLButtonElement>('#searchModalTrigger');
+  const searchModal = document.querySelector<HTMLDialogElement>('#searchModal');
+
+  searchModalTrigger?.addEventListener('click', () => {
+    searchModal?.showModal();
+    const searchInput = document.querySelector<HTMLInputElement>('.pagefind-ui__search-input');
+    searchInput?.focus();
+  });
+</script>
 
 <style is:global>
   .search {
