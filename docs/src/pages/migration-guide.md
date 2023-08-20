@@ -1,5 +1,6 @@
 ---
 layout: "/src/layouts/MainLayout.astro"
+title: "Migration guide"
 ---
 
 # Migration guide

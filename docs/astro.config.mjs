@@ -9,5 +9,8 @@ export default defineConfig({
   integrations: [react(), mdx(), tailwind()],
   site: `https://bloomreach.github.io/spa-sdk/docs`,
   base: `spa-sdk/docs`,
-  trailingSlash: "ignore"
+  trailingSlash: "ignore",
+  redirects: {
+    '/': '/spa-sdk/docs/getting-started'
+  }
 });
