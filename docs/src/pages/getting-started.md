@@ -32,4 +32,4 @@ and the Framework SDK contains:
 - HTTP Client
 - Framework specific components that render provided components
 
-Please be aware there are more extensive docs available on [https://documentation.bloomreach.com](https://documentation.bloomreach.com/content/docs/frontend-integration)
+There are more extensive docs available on [https://documentation.bloomreach.com](https://documentation.bloomreach.com/content/docs/frontend-integration)
