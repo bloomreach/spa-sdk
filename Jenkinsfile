@@ -78,7 +78,7 @@ pipeline {
     }
     stage('Generate and publish docs') {
       when {
-        changeset "./docs/**"
+        changeset "docs/**/*"
         branch 'development'
       }
       stages {
