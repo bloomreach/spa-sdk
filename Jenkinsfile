@@ -67,11 +67,9 @@ pipeline {
         sh 'npm run test'
       }
     }
-    stage('Setup Github remote') {
+    stage('Setup git config') {
       steps {
-        sshagent (credentials: ['github-spa-sdk']) {
-          sh 'git remote add github git@github.com:bloomreach/spa-sdk.git'
-        }
+        sh 'git remote add github git@github.com:bloomreach/spa-sdk.git'
         sh 'git config --global user.email "jenkins@code.bloomreach.com"'
         sh 'git config --global user.name "Jenkins"'
       }
@@ -81,6 +79,11 @@ pipeline {
         changeset "docs/**/*"
         branch 'development'
       }
+
+      environment {
+        GIT_SSH_COMMAND='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
+      }
+
       stages {
         stage('Build TypeDoc') {
           steps {
