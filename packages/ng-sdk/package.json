@@ -24,11 +24,7 @@
     "lint": "ng lint",
     "ng": "ng",
     "prepack": "rm dist/package.json dist/README.md",
-    "test": "ng test",
-    "yalcAdd": "yalc add @bloomreach/spa-sdk",
-    "yalcPush": "yalc push --replace --no-scripts",
-    "yalcRetreat": "yalc retreat --all",
-    "yalcRestore": "yalc restore --all"
+    "test": "ng test"
   },
   "module": "dist/fesm2022/index.mjs",
   "esm2022": "dist/esm2022/index.mjs",
@@ -39,7 +35,7 @@
   ],
   "sideEffects": false,
   "dependencies": {
-    "@bloomreach/spa-sdk": "file:.yalc/@bloomreach/spa-sdk",
+    "@bloomreach/spa-sdk": "23.3.0",
     "tslib": "^2.6.2"
   },
   "peerDependencies": {
@@ -62,6 +58,8 @@
     "@angular/compiler-cli": "17.3.7",
     "@angular/core": "17.3.7",
     "@angular/language-service": "17.3.7",
+    "@angular/animations": "17.3.7",
+    "@angular/platform-server": "17.3.7",
     "@angular/platform-browser": "17.3.7",
     "@angular/platform-browser-dynamic": "17.3.7",
     "@bloomreach/eslint-config-angular": "17.0.0",
@@ -77,7 +75,6 @@
     "ng-packagr": "17.3.0",
     "rxjs": "7.8.1",
     "typescript": "5.4.5",
-    "yalc": "1.0.0-pre.53",
     "zone.js": "0.14.5"
   },
   "eslintConfig": {

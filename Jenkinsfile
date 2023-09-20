@@ -18,13 +18,12 @@ pipeline {
   agent {
     docker {
       label 'docker'
-      image 'node:18'
+      image 'guergeiro/pnpm:18-8'
       args '-v  /etc/passwd:/etc/passwd'
     }
   }
 
   environment {
-    // Setup HOME to WORKSPACE path to avoid access errors during npm install
     HOME = "${env.WORKSPACE}"
   }
 
@@ -49,22 +48,22 @@ pipeline {
   stages {
     stage('Install') {
       steps {
-        sh 'npm ci'
+        sh 'pnpm install'
       }
     }
     stage('Build') {
       steps {
-        sh 'npm run build'
+        sh 'pnpm build'
       }
     }
     stage('Lint') {
       steps {
-        sh 'npm run lint'
+        sh 'pnpm lint'
       }
     }
     stage('Unit tests') {
       steps {
-        sh 'npm run test'
+        sh 'pnpm test'
       }
     }
     stage('Setup git config') {
@@ -87,17 +86,18 @@ pipeline {
       stages {
         stage('Build TypeDoc') {
           steps {
-            sh 'npx lerna run docs --scope @bloomreach/spa-sdk'
+            sh 'pnpm docs'
           }
         }
         stage('Build docs') {
           steps {
-            sh 'cd docs && npm ci && npm run build'
+            sh ''
           }
         }
         stage('Clone github docs branch') {
           steps {
             sshagent (credentials: ['github-spa-sdk']) {
+              sh 'cd docs'
               sh 'git clone -b gh-pages --single-branch git@github.com:bloomreach/spa-sdk.git github-pages-root'
             }
           }

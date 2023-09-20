@@ -30,11 +30,7 @@
     "build": "rollup -c rollup.config.js",
     "dev": "npm run build -- --watch",
     "lint": "eslint --ext js,ts,tsx src",
-    "test": "jest --coverage",
-    "yalcAdd": "yalc add @bloomreach/spa-sdk",
-    "yalcPush": "yalc push --replace --no-scripts",
-    "yalcRetreat": "yalc retreat --all",
-    "yalcRestore": "yalc restore --all"
+    "test": "jest --coverage"
   },
   "browserslist": [
     "last 1 chrome version",
@@ -70,8 +66,7 @@
     "rollup-plugin-terser": "7.0.2",
     "rollup-plugin-typescript2": "0.31.2",
     "ts-jest": "28.0.8",
-    "typescript": "4.5.5",
-    "yalc": "1.0.0-pre.53"
+    "typescript": "4.5.5"
   },
   "eslintConfig": {
     "extends": "@bloomreach/eslint-config-react",
@@ -115,6 +110,6 @@
     "outputName": "TEST-react-sdk.xml"
   },
   "dependencies": {
-    "@bloomreach/spa-sdk": "file:.yalc/@bloomreach/spa-sdk"
+    "@bloomreach/spa-sdk": "23.3.0"
   }
 }
