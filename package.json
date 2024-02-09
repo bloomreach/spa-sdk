@@ -64,5 +64,8 @@
     "issueUrl": "https://issues.onehippo.com/browse/{id}",
     "issuePattern": "^[A-Z]+-\\d+",
     "mergeUrl": "https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/{id}"
+  },
+  "volta": {
+    "node": "16.20.2"
   }
 }
