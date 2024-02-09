@@ -1,6 +1,6 @@
 {
   "name": "@bloomreach/vue-sdk",
-  "version": "22.0.2",
+  "version": "22.0.3",
   "description": "Bloomreach SPA SDK for Vue.js",
   "keywords": [
     "bloomreach",

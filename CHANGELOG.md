@@ -2,8 +2,25 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### ["22.0.2"](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-22.0.1..."22.0.2")
+#### ["22.0.3"](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-22.0.2..."22.0.3")
 
+- SPASDK-207 Fix type exports Vue 3 SDK [`#152`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/152)
+- SPASDK-207 Fix type exports Vue 3 SDK [`#SPASDK-207`](https://issues.onehippo.com/browse/SPASDK-207)
+- TRIVIAL Allow docs to be published without a SDK release [`4847ce5`](https://github.com/bloomreach/spa-sdk/commit/4847ce521803b091fb52f76f224c5389f226fc49)
+- TRIVIAL Clarify variable in heroku deploy script [`0244028`](https://github.com/bloomreach/spa-sdk/commit/02440282749e569f1fef8fb9dd1cdf478e174753)
+- TRIVIAL Add Vue 3 notice to Vue 2 README.md [`e0c3617`](https://github.com/bloomreach/spa-sdk/commit/e0c36170dc30013e46c19fdeaf4db03b18628665)
+- TRIVIAL Fix git credentials in Jenkinsfile [`f47e003`](https://github.com/bloomreach/spa-sdk/commit/f47e0030e642ee9338ba342c692b61c240803e50)
+- TRIVIAL Set debug state via env variable [`3a2329a`](https://github.com/bloomreach/spa-sdk/commit/3a2329ad5f1e7ef1a75c1314b18fcebc07ab6a78)
+- TRIVIAL Pin node version when working with volta [`1b9c7eb`](https://github.com/bloomreach/spa-sdk/commit/1b9c7eb8e73cd31d665ac97dd6c73caee1720328)
+- TRIVIAL Update reference to documentation.bloomreach.com [`0d7e22e`](https://github.com/bloomreach/spa-sdk/commit/0d7e22ee74c5a6f0cc5957b5c6d59d3a0b3ac1c9)
+- TRIVIAL Adjust glob for jenkins changeset clause [`021d6ca`](https://github.com/bloomreach/spa-sdk/commit/021d6ca05a68a3d366cd7a7e7ef44fe258ef6adb)
+- TRIVIAL Include reference to documentation.bloomreach.com [`f3aeced`](https://github.com/bloomreach/spa-sdk/commit/f3aeced0c3e1dc3fae3b3fbd343b0d0af742aae5)
+
+#### [spa-sdk-22.0.2](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-22.0.1...spa-sdk-22.0.2)
+
+> 20 August 2023
+
+- SPASDK-196 Bumping versions to 22.0.2 [`#SPASDK-196`](https://issues.onehippo.com/browse/SPASDK-196)
 - TRIVIAL Fix changelog generation [`f87b5a8`](https://github.com/bloomreach/spa-sdk/commit/f87b5a8b07a1f859f475908c46137136389d344b)
 - TRIVIAL Add step to release process [`a9d5e7b`](https://github.com/bloomreach/spa-sdk/commit/a9d5e7b7edd46e98d463b49f9d61b873ab12d8f7)
 

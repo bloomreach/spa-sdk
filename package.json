@@ -66,6 +66,7 @@
     "mergeUrl": "https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/{id}"
   },
   "volta": {
-    "node": "16.20.2"
+    "node": "16.20.2",
+    "npm": "9.9.2"
   }
 }
