@@ -28,8 +28,14 @@
   ],
   "exports": {
     ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.umd.cjs"
+      "import": {
+        "types": "./typings.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./typings.d.ts",
+        "default": "./dist/index.umd.cjs"
+      }
     }
   },
   "scripts": {
