@@ -1,6 +1,6 @@
 {
   "name": "@bloomreach/vue3-sdk",
-  "version": "22.0.2",
+  "version": "22.0.3",
   "description": "Bloomreach SPA SDK for Vue 3",
   "keywords": [
     "bloomreach",
@@ -28,8 +28,14 @@
   ],
   "exports": {
     ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.umd.cjs"
+      "import": {
+        "types": "./typings.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./typings.d.ts",
+        "default": "./dist/index.umd.cjs"
+      }
     }
   },
   "scripts": {

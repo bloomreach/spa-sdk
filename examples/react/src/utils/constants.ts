@@ -16,3 +16,4 @@
 
 export const BRXM_ENDPOINT = process.env.REACT_APP_BRXM_ENDPOINT ?? '';
 export const BR_MULTI_TENANT_SUPPORT = process.env.REACT_APP_BR_MULTI_TENANT_SUPPORT === 'true';
+export const DEBUG = process.env.DEBUG === 'true';

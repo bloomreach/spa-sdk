@@ -15,7 +15,7 @@
  */
 
 import { Configuration, extractSearchParams } from '@bloomreach/spa-sdk';
-import { BR_MULTI_TENANT_SUPPORT, BRXM_ENDPOINT } from './constants';
+import { BR_MULTI_TENANT_SUPPORT, BRXM_ENDPOINT, DEBUG } from './constants';
 
 type BuildConfigurationOptions = {
   endpoint: string | (string | null)[];
@@ -47,6 +47,7 @@ export function buildConfiguration(
     configuration.path = url;
   }
   configuration.httpClient = httpClient;
-  configuration.debug = true;
-  return configuration;
+  configuration.debug = DEBUG;
+
+  return configuration as ConfigurationBuilder;
 }

@@ -1,6 +1,6 @@
 {
   "name": "@bloomreach/example-nuxt",
-  "version": "22.0.2",
+  "version": "22.0.3",
   "description": "Example Nuxt.js SPA for Bloomreach Experience",
   "private": true,
   "scripts": {
