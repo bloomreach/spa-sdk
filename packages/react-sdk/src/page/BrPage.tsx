@@ -39,10 +39,6 @@ interface BrPageProps {
   page?: Page | PageModel;
 }
 
-interface BrPageState {
-  page?: Page;
-}
-
 /**
  * @typedef {Object} BrPageProps
  * @property {Configuration} configuration The configuration of the SPA SDK.
@@ -54,82 +50,44 @@ interface BrPageState {
 /**
  * The brXM page.
  */
-export class BrPage extends React.Component<React.PropsWithChildren<BrPageProps>, BrPageState> {
-  /**
-   * @param props {BrPageProps}
-   */
-  constructor(props: BrPageProps) {
-    super(props);
+export function BrPage(props: React.PropsWithChildren<BrPageProps>): JSX.Element | null {
+  const { page, configuration, mapping, children } = props;
+  const pageDerivedFromProps = React.useMemo<Page | undefined>(() => page && initialize(configuration, page), [page, configuration]);
+  const [pageInState, setPageInState] = React.useState<Page | undefined>(pageDerivedFromProps);
 
-    this.state = { page: props.page && initialize(props.configuration, props.page) };
-  }
-
-  componentDidMount(): void {
-    const { page } = this.props;
-
-    if (!page) {
-      this.initialize();
-    }
-
-    const { page: pageInState } = this.state;
-    pageInState?.sync();
-  }
-
-  componentDidUpdate(prevProps: BrPageProps, prevState: BrPageState): void {
-    const { configuration, page } = this.props;
-
-    if (configuration !== prevProps.configuration || page !== prevProps.page) {
-      this.destroy();
-      this.initialize(page === prevProps.page);
-    }
-
-    const { page: pageInState } = this.state;
-
-    if (pageInState !== prevState.page) {
-      this.forceUpdate(() => pageInState?.sync());
-    }
-  }
-
-  componentWillUnmount(): void {
-    this.destroy();
-  }
-
-  private async initialize(force = false): Promise<void> {
-    const { page, configuration } = this.props;
-    const model = force ? undefined : page;
-
+  const initializePageInState = React.useCallback<() => Promise<void>>(async () => {
     try {
-      this.setState({
-        page: model ? initialize(configuration, model) : await initialize(configuration),
-      });
+      const initializedPage = await initialize(configuration);
+      setPageInState(initializedPage);
     } catch (error) {
-      this.setState(() => {
-        throw error;
-      });
+      setPageInState(() => { throw error; });
     }
-  }
+  }, [configuration]);
 
-  private destroy(): void {
-    const { page } = this.state;
-
-    if (!page) {
-      return;
+  React.useEffect(() => {
+    if (!pageDerivedFromProps) {
+      initializePageInState();
+    } else if (pageInState !== pageDerivedFromProps) {
+      setPageInState(pageDerivedFromProps);
     }
+  }, [pageDerivedFromProps]);
 
-    destroy(page);
-  }
+  React.useEffect(() => {
+    pageInState?.sync();
 
-  render(): JSX.Element | null {
-    const { page } = this.state;
-    const { configuration, mapping, children } = this.props;
+    return () => {
+      if (pageInState) {
+        destroy(pageInState);
+      }
+    };
+  }, [pageInState]);
 
-    return (
-      <BrPageContext.Provider value={page}>
-        <BrMappingContext.Provider value={mapping}>
-          {!page && !configuration.NBRMode && null}
-          {(page || configuration.NBRMode) && <BrNode component={page?.getComponent()}>{children}</BrNode>}
-        </BrMappingContext.Provider>
-      </BrPageContext.Provider>
-    );
-  }
+  return (
+    <BrPageContext.Provider value={pageInState}>
+      <BrMappingContext.Provider value={mapping}>
+        {!pageInState && !configuration.NBRMode && null}
+        {(pageInState || configuration.NBRMode) && <BrNode component={pageInState?.getComponent()}>{children}</BrNode>}
+      </BrMappingContext.Provider>
+    </BrPageContext.Provider>
+  );
 }
