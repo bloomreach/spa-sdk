@@ -17,6 +17,8 @@
 import React, { useEffect } from 'react';
 import { destroy, initialize, Page, PageModel } from '@bloomreach/spa-sdk';
 import { act, render, RenderResult } from '@testing-library/react';
+import { ErrorBoundary } from 'react-error-boundary';
+
 import { BrProps } from '../component';
 import { BrPage } from './BrPage';
 
@@ -88,7 +90,7 @@ describe('BrPage', () => {
       jest.mocked(initialize as unknown as () => Page).mockReturnValueOnce(page);
 
       await act(async () => {
-        element = render(<BrPage configuration={config} mapping={mapping} page={page} />);
+        element.rerender(<BrPage configuration={config} mapping={mapping} page={page} />);
       });
     });
 
@@ -98,9 +100,7 @@ describe('BrPage', () => {
 
       jest.mocked(initialize as unknown as () => Page).mockReturnValueOnce(newPage);
       await act(async () => {
-        render(<BrPage configuration={configuration} mapping={mapping} page={newPage} />, {
-          container: element.container,
-        });
+        element.rerender(<BrPage configuration={configuration} mapping={mapping} page={newPage} />);
       });
 
       expect(initialize).toBeCalledWith(configuration, newPage);
@@ -109,15 +109,13 @@ describe('BrPage', () => {
     it('should initialize page on props update when page from props is not updated', async () => {
       const configuration = { ...config };
 
+      jest.mocked(initialize as unknown as () => Page).mockReturnValueOnce(page);
       await act(async () => {
-        render(<BrPage configuration={configuration} mapping={mapping} page={page} />, {
-          container: element.container,
-        });
+        element.rerender(<BrPage configuration={configuration} mapping={mapping} page={page} />);
       });
 
-      expect(destroy).toHaveBeenCalledWith(page);
-      expect(initialize).toBeCalledWith(configuration);
-      expect(page.sync).toHaveBeenCalled();
+      expect(initialize).toBeCalledWith(configuration, page);
+      expect(page.sync).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -146,9 +144,6 @@ describe('BrPage', () => {
           <BrPage configuration={config} mapping={mapping}>
             {children}
           </BrPage>,
-          {
-            container: element.container,
-          },
         );
       });
 
@@ -163,9 +158,6 @@ describe('BrPage', () => {
           <BrPage configuration={{ ...config, NBRMode: false }} mapping={mapping}>
             {children}
           </BrPage>,
-          {
-            container: element.container,
-          },
         );
       });
 
@@ -180,9 +172,6 @@ describe('BrPage', () => {
           <BrPage configuration={{ ...config, NBRMode: true }} mapping={mapping}>
             {children}
           </BrPage>,
-          {
-            container: element.container,
-          },
         );
       });
 
@@ -193,16 +182,27 @@ describe('BrPage', () => {
       const error = new Error('error-loading-page');
       jest.mocked(initialize).mockRejectedValueOnce(error);
 
-      const setState = jest.spyOn(BrPage.prototype, 'setState').mockImplementationOnce(() => {});
+      const consoleErrorSpyOn = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+      const FallbackComponent = <div>fallback</div>;
+      const onErrorMock = jest.fn();
+      const ErrorBoundaryComponent = (
+        <ErrorBoundary fallback={FallbackComponent} onError={onErrorMock}>
+          <BrPage configuration={config} mapping={mapping} />
+        </ErrorBoundary>
+      );
 
       await act(async () => {
-        render(<BrPage configuration={config} mapping={mapping} />);
+        element = render(
+          ErrorBoundaryComponent,
+        );
       });
 
-      await new Promise(process.nextTick);
+      expect(onErrorMock).toHaveBeenCalledWith(error, expect.anything());
+      expect(element.getByText('fallback')).toBeVisible();
+      expect(element.asFragment()).toMatchSnapshot();
 
-      expect(setState).toHaveBeenCalledWith(expect.any(Function));
-      expect(setState.mock.calls[0][0]).toThrowError(error);
+      consoleErrorSpyOn.mockRestore();
     });
 
     it('should run child component effects while retrieving Page model when NBR mode is true', async () => {
