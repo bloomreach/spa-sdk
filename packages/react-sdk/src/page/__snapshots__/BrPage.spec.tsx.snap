@@ -13,3 +13,11 @@ exports[`BrPage render should render children if there is no page and NBR mode i
   <div />
 </DocumentFragment>
 `;
+
+exports[`BrPage render should render nothing if there is an error loading the page 1`] = `
+<DocumentFragment>
+  <div>
+    fallback
+  </div>
+</DocumentFragment>
+`;
