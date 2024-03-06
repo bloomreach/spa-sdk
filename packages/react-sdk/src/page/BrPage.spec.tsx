@@ -213,6 +213,7 @@ describe('BrPage', () => {
 
       function MyComponent(): JSX.Element {
         useEffect(() => someEffect());
+        // eslint-disable-next-line react/jsx-no-useless-fragment
         return <></>;
       }
 

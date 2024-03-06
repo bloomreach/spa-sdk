@@ -52,6 +52,7 @@ interface BrPageProps {
  */
 export function BrPage(props: React.PropsWithChildren<BrPageProps>): JSX.Element | null {
   const { page, configuration, mapping, children } = props;
+  // eslint-disable-next-line max-len
   const pageDerivedFromProps = React.useMemo<Page | undefined>(() => page && initialize(configuration, page), [page, configuration]);
   const [pageInState, setPageInState] = React.useState<Page | undefined>(pageDerivedFromProps);
 
@@ -70,6 +71,7 @@ export function BrPage(props: React.PropsWithChildren<BrPageProps>): JSX.Element
     } else if (pageInState !== pageDerivedFromProps) {
       setPageInState(pageDerivedFromProps);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageDerivedFromProps]);
 
   React.useEffect(() => {
