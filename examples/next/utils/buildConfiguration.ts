@@ -22,7 +22,7 @@ type BuildConfigurationOptions = {
   baseUrl: string;
 };
 
-type ConfigurationBuilder = Omit<Configuration & Partial<BuildConfigurationOptions>, 'httpClient'>;
+export type ConfigurationBuilder = Omit<Configuration & Partial<BuildConfigurationOptions>, 'httpClient'>;
 
 export function buildConfiguration(
   path: string,
@@ -32,6 +32,8 @@ export function buildConfiguration(
   const configuration: ConfigurationBuilder = {
     path,
   };
+  console.log('BRXM_ENDPOINT', BRXM_ENDPOINT);
+  console.log('endpoint', endpoint);
   if (endpoint) {
     configuration.endpoint = endpoint;
     // The else statement below is needed for multi-tenant support

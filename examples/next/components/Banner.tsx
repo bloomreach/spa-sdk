@@ -18,7 +18,7 @@ import {BrManageContentButton, BrProps} from '@bloomreach/react-sdk';
 import {Document, ImageSet} from '@bloomreach/spa-sdk';
 import Link from 'next/link';
 import React from 'react';
-import {sanitize} from "../utils/sanitize";
+import {sanitize} from '../utils/sanitize';
 
 export function Banner(props: BrProps): JSX.Element | null {
   const documentRef = props.component?.getModels().document;
@@ -51,10 +51,8 @@ export function Banner(props: BrProps): JSX.Element | null {
       )}
       {link && (
         <p className="lead">
-          <Link href={link.getUrl() ?? '/'}>
-            <a className="btn btn-primary btn-lg" role="button">
-              Learn more
-            </a>
+          <Link href={link.getUrl() ?? '/'} className="btn btn-primary btn-lg" role="button">
+            Learn more
           </Link>
         </p>
       )}
