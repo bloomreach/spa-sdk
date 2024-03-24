@@ -1,15 +1,15 @@
 'use client'
 
-import axios from "axios";
-import {BrComponent, BrPage, BrPageContext} from "@bloomreach/react-sdk";
-import Link from "next/link";
-import {Menu} from "./Menu";
-import React from "react";
-import {Banner} from "./Banner";
-import {Content} from "./Content";
-import {NewsList} from "./NewsList";
-import {Page} from "@bloomreach/spa-sdk";
-import {ConfigurationBuilder} from "../utils/buildConfiguration";
+import React from 'react';
+import axios from 'axios';
+import {BrComponent, BrPage, BrPageContext} from '@bloomreach/react-sdk';
+import Link from 'next/link';
+import {Menu} from './Menu';
+import {Banner} from './Banner';
+import {Content} from './Content';
+import {NewsList} from './NewsList';
+import {Page} from '@bloomreach/spa-sdk';
+import {ConfigurationBuilder} from '../utils/buildConfiguration';
 
 interface Props {
   configuration: ConfigurationBuilder;
@@ -25,7 +25,7 @@ const BrxApp = ({configuration, page}: Props) => {
         <div className="container">
           <BrPageContext.Consumer>
             {(contextPage) => (
-              <Link href={contextPage?.getUrl('/') ?? ''} className="navbar-brand">
+              <Link href={contextPage?.getUrl('/') ?? ''}>
                 {contextPage?.getTitle() || 'brXM + Next.js = ♥️'}
               </Link>
             )}

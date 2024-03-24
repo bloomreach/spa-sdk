@@ -1,18 +1,17 @@
-import axios from 'axios';
 import { headers } from 'next/headers';
-import { initialize } from '@bloomreach/spa-sdk';
-import { buildConfiguration } from '../../utils/buildConfiguration';
 import BrxApp from '../../components/BrxApp';
 
 export default async function Page() {
-  const _headers = headers();
-  const url = _headers.get('x-url');
+  const headersList = headers();
+  const origin = headersList.get('x-next-origin');
+  const searchParams = headersList.get('x-next-search-params');
+  const nextPathname = headersList.get('x-next-pathname');
+  const pathname = nextPathname === '/' ? '' : nextPathname;
 
-  const configuration = buildConfiguration(url ?? '/');
-  const page = await initialize({ ...configuration, httpClient: axios });
-  const copiedPage = JSON.parse(JSON.stringify(page));
+  const res = await fetch(`${origin}/api${pathname}?${searchParams}`, { cache: 'no-store' });
+  const { page, configuration } = await res.json();
 
   return (
-    <BrxApp configuration={configuration} page={copiedPage} />
+    <BrxApp configuration={configuration} page={page} />
   )
 }

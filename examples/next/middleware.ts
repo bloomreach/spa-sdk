@@ -1,12 +1,19 @@
 import { NextResponse, type NextRequest } from 'next/server';
 
 export async function middleware(request: NextRequest) {
-  const requestHeaders = new Headers(request.headers);
-  requestHeaders.set('x-url', request.url);
-
   return NextResponse.next({
     request: {
-      headers: requestHeaders,
+      headers: new Headers({
+        'x-next-origin': request.nextUrl.origin,
+        'x-next-pathname': request.nextUrl.pathname,
+        'x-next-search-params': request.nextUrl.searchParams.toString(),
+      }),
     },
   });
 }
+
+export const config = {
+  matcher: [
+    '/((?!api|_next/static|_next/image|favicon.ico).*)',
+  ],
+};
