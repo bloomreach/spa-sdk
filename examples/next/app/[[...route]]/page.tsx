@@ -24,8 +24,7 @@ export default async function Page() {
   const searchParams = headersList.get('x-next-search-params');
   const nextPathname = headersList.get('x-next-pathname');
   const pathname = nextPathname === '/' ? '' : nextPathname;
-  const path = `${pathname}?${searchParams}`;
-  const url = `${origin}/api${path}`;
+  const url = `${origin}/api${pathname}?${searchParams}`;
 
   const { page, configuration } = await fetchBrxData(url);
 
