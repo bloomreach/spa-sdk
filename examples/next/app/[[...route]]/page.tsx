@@ -1,5 +1,6 @@
 import { headers } from 'next/headers';
 import BrxApp from '../../components/BrxApp';
+import {fetchBrxData} from '../../utils/fetchBrxData';
 
 export default async function Page() {
   const headersList = headers();
@@ -7,11 +8,12 @@ export default async function Page() {
   const searchParams = headersList.get('x-next-search-params');
   const nextPathname = headersList.get('x-next-pathname');
   const pathname = nextPathname === '/' ? '' : nextPathname;
+  const path = `${pathname}?${searchParams}`;
+  const url = `${origin}/api${path}`;
 
-  const res = await fetch(`${origin}/api${pathname}?${searchParams}`, { cache: 'no-store' });
-  const { page, configuration } = await res.json();
+  const { page, configuration } = await fetchBrxData(url);
 
   return (
-    <BrxApp configuration={configuration} page={page} />
+    <BrxApp configuration={configuration} page={page} url={url}/>
   )
 }

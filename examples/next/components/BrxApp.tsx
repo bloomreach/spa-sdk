@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import axios from 'axios';
 import {BrComponent, BrPage, BrPageContext} from '@bloomreach/react-sdk';
 import Link from 'next/link';
@@ -10,16 +10,28 @@ import {Content} from './Content';
 import {NewsList} from './NewsList';
 import {Page} from '@bloomreach/spa-sdk';
 import {ConfigurationBuilder} from '../utils/buildConfiguration';
+import {fetchBrxData} from '../utils/fetchBrxData';
 
 interface Props {
   configuration: ConfigurationBuilder;
   page: Page
+  url: string
 }
 
-const BrxApp = ({configuration, page}: Props) => {
+const BrxApp = ({configuration, page, url}: Props) => {
+  const [brxPage, setBrxPage] = useState(page);
   const mapping = { Banner, Content, 'News List': NewsList, 'Simple Content': Content };
 
-  return <BrPage configuration={{ ...configuration, httpClient: axios }} mapping={mapping} page={page}>
+  const fetchData = useCallback(async () => {
+    const { page } = await fetchBrxData(url);
+    setBrxPage(page);
+  }, [url])
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData])
+
+  return <BrPage configuration={{ ...configuration, httpClient: axios }} mapping={mapping} page={brxPage}>
     <header>
       <nav className="navbar navbar-expand-sm navbar-dark sticky-top bg-dark" role="navigation">
         <div className="container">
