@@ -17,14 +17,13 @@
 import {buildConfiguration} from '../../../utils/buildConfiguration';
 import {initialize} from '@bloomreach/spa-sdk';
 import axios from 'axios';
-import {NextResponse} from 'next/server';
-import {NextApiRequest} from 'next';
+import {NextRequest, NextResponse} from 'next/server';
 
-export async function GET(request: NextApiRequest, context: { params: Record<string, string[]> }) {
+export async function GET(request: NextRequest, context: { params: Record<string, string[]> }) {
   const {searchParams} = new URL(request.url as string);
   const path = `/${context.params?.path?.join('/') ?? ''}?${searchParams.toString()}`;
 
-  const configuration = buildConfiguration(path, request);
+  const configuration = buildConfiguration(path, request as any);
   const page = await initialize({
     ...configuration,
     httpClient: axios
