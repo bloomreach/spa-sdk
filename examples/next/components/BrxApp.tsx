@@ -24,13 +24,13 @@ import {Menu} from './Menu';
 import {Banner} from './Banner';
 import {Content} from './Content';
 import {NewsList} from './NewsList';
-import {Page} from '@bloomreach/spa-sdk';
 import {ConfigurationBuilder} from '../utils/buildConfiguration';
 import {fetchBrxData} from '../utils/fetchBrxData';
+import {PageModel} from '@bloomreach/spa-sdk';
 
 interface Props {
   configuration: ConfigurationBuilder;
-  page: Page
+  page: PageModel
   url: string
 }
 
@@ -38,14 +38,18 @@ const BrxApp = ({configuration, page, url}: Props) => {
   const [brxPage, setBrxPage] = useState(page);
   const mapping = { Banner, Content, 'News List': NewsList, 'Simple Content': Content };
 
-  const fetchData = useCallback(async () => {
-    const { page } = await fetchBrxData(url);
-    setBrxPage(page);
-  }, [url])
+  const isPreview = (page as Record<string, any>).meta.preview;
+
+  const loadPreviewData = useCallback(async (url: string) => {
+      const { page } = await fetchBrxData(url);
+      setBrxPage(page);
+  }, [])
 
   useEffect(() => {
-    fetchData();
-  }, [fetchData])
+    if (isPreview) {
+      loadPreviewData(url);
+    }
+  }, [loadPreviewData, isPreview, url])
 
   return <BrPage configuration={{ ...configuration, httpClient: axios }} mapping={mapping} page={brxPage}>
     <header>
