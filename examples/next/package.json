@@ -9,7 +9,7 @@
     "@bloomreach/react-sdk": "file:.yalc/@bloomreach/react-sdk",
     "@bloomreach/spa-sdk": "file:.yalc/@bloomreach/spa-sdk",
     "axios": "0.26.1",
-    "next": "14.1.4",
+    "next": "13.5.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "sanitize-html": "2.10.0"
@@ -19,7 +19,7 @@
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.8",
     "eslint": "7.32.0",
-    "eslint-config-next": "14.1.4",
+    "eslint-config-next": "13.5.6",
     "typescript": "4.8.4",
     "yalc": "1.0.0-pre.53"
   },
