@@ -65,6 +65,7 @@
     "jest-junit": "13.2.0",
     "prop-types": "15.8.1",
     "react": "18.2.0",
+    "react-error-boundary": "^4.0.13",
     "rollup": "2.55.0",
     "rollup-plugin-dts": "3.0.2",
     "rollup-plugin-terser": "7.0.2",
