@@ -22,7 +22,7 @@ type BuildConfigurationOptions = {
   baseUrl: string;
 };
 
-type ConfigurationBuilder = Omit<Configuration & Partial<BuildConfigurationOptions>, 'httpClient'>;
+export type ConfigurationBuilder = Omit<Configuration & Partial<BuildConfigurationOptions>, 'httpClient'>;
 
 export function buildConfiguration(
   path: string,

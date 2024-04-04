@@ -33,7 +33,7 @@ export function NewsListItem({ item }: NewsListItemProps): JSX.Element {
         {title && (
           <h2 className="card-title">
             <Link href={item.getUrl() ?? '/'}>
-              <a>{title}</a>
+              {title}
             </Link>
           </h2>
         )}
@@ -56,26 +56,24 @@ export function NewsListPagination(props: Pageable): JSX.Element | null {
     <nav aria-label="News List Pagination">
       <ul className="pagination">
         <li className={`page-item ${props.previous ? '' : 'disabled'}`}>
-          <Link href={props.previous ? page.getUrl(`?page=${props.previousPage}`) : '/'}>
-            <a className="page-link" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-              <span className="sr-only">Previous</span>
-            </a>
+          <Link href={props.previous ? page.getUrl(`?page=${props.previousPage}`) : '/'} className="page-link"
+                aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+            <span className="sr-only">Previous</span>
           </Link>
         </li>
         {props.pageNumbersArray.map((pageNumber, key) => (
           <li key={key} className={`page-item ${pageNumber === props.currentPage ? 'active' : ''}`}>
-            <Link href={page.getUrl(`?page=${pageNumber}`)}>
-              <a className="page-link">{pageNumber}</a>
+            <Link href={page.getUrl(`?page=${pageNumber}`)} className="page-link">
+              {pageNumber}
             </Link>
           </li>
         ))}
         <li className={`page-item ${props.next ? '' : 'disabled'}`}>
-          <Link href={props.next ? page.getUrl(`?page=${props.nextPage}`) : '/'}>
-            <a className="page-link" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-              <span className="sr-only">Next</span>
-            </a>
+          <Link href={props.next ? page.getUrl(`?page=${props.nextPage}`) : '/'} className="page-link"
+                aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            <span className="sr-only">Next</span>
           </Link>
         </li>
       </ul>

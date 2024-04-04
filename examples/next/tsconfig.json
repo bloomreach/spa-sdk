@@ -18,7 +18,12 @@
     "sourceMap": true,
     "strict": true,
     "target": "esnext",
-    "incremental": true
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
   "exclude": [
     "node_modules"
@@ -28,6 +33,7 @@
     "next-env.d.ts",
     "components",
     "pages",
-    "**/*.js"
+    "**/*.js",
+    ".next/types/**/*.ts"
   ]
 }

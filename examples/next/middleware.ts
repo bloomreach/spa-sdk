@@ -1,5 +1,5 @@
 /*
- * Copyright 2023-2024 Bloomreach
+ * Copyright 2024 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,14 +14,23 @@
  * limitations under the License.
  */
 
-import sanitizeHTML from 'sanitize-html';
+import {NextResponse, type NextRequest} from 'next/server';
+import {cookies} from 'next/headers';
 
-export function sanitize(content: string): string {
-  return sanitizeHTML(content, {
-    allowedAttributes: {
-      a: ['href', 'name', 'target', 'title', 'data-type', 'rel'],
-      img: ['src', 'srcset', 'alt', 'title', 'width', 'height', 'loading'],
+export async function middleware(request: NextRequest) {
+  return NextResponse.next({
+    request: {
+      headers: new Headers({
+        'x-next-pathname': request.nextUrl.pathname,
+        'x-next-search-params': request.nextUrl.searchParams.toString(),
+        'x-next-cookie': cookies().toString(),
+      }),
     },
-    allowedTags: sanitizeHTML.defaults.allowedTags.concat(['img']),
   });
 }
+
+export const config = {
+  matcher: [
+    '/((?!api|_next/static|_next/image|favicon.ico).*)',
+  ],
+};
