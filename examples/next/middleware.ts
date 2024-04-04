@@ -14,15 +14,16 @@
  * limitations under the License.
  */
 
-import { NextResponse, type NextRequest } from 'next/server';
+import {NextResponse, type NextRequest} from 'next/server';
+import {cookies} from 'next/headers';
 
 export async function middleware(request: NextRequest) {
   return NextResponse.next({
     request: {
       headers: new Headers({
-        'x-next-origin': request.nextUrl.origin,
         'x-next-pathname': request.nextUrl.pathname,
         'x-next-search-params': request.nextUrl.searchParams.toString(),
+        'x-next-cookie': cookies().toString(),
       }),
     },
   });

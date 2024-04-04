@@ -14,21 +14,28 @@
  * limitations under the License.
  */
 
-import { headers } from 'next/headers';
+import {headers} from 'next/headers';
 import BrxApp from '../../components/BrxApp';
-import {fetchBrxData} from '../../utils/fetchBrxData';
+import {buildConfiguration} from '../../utils/buildConfiguration';
+import {initialize} from '@bloomreach/spa-sdk';
+import axios from 'axios';
 
 export default async function Page() {
   const headersList = headers();
-  const origin = headersList.get('x-next-origin');
   const searchParams = headersList.get('x-next-search-params');
-  const nextPathname = headersList.get('x-next-pathname');
-  const pathname = nextPathname === '/' ? '' : nextPathname;
-  const url = `${origin}/api${pathname}?${searchParams}`;
+  const pathname = headersList.get('x-next-pathname');
+  const cookie = headersList.get('x-next-cookie') ?? '';
+  const configuration = buildConfiguration(`${pathname}?${searchParams}`);
 
-  const { page, configuration } = await fetchBrxData(url);
+  const page = await initialize({
+    ...configuration,
+    request: { headers: { cookie } },
+    httpClient: axios
+  });
+
+  const pageModel = page.isPreview() ? undefined : page.toJSON();
 
   return (
-    <BrxApp configuration={configuration} page={page} url={url}/>
+    <BrxApp configuration={configuration} page={pageModel} />
   )
 }

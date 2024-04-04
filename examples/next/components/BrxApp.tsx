@@ -16,7 +16,6 @@
  * limitations under the License.
  */
 
-import React, {useCallback, useEffect, useState} from 'react';
 import axios from 'axios';
 import {BrComponent, BrPage, BrPageContext} from '@bloomreach/react-sdk';
 import Link from 'next/link';
@@ -25,33 +24,17 @@ import {Banner} from './Banner';
 import {Content} from './Content';
 import {NewsList} from './NewsList';
 import {ConfigurationBuilder} from '../utils/buildConfiguration';
-import {fetchBrxData} from '../utils/fetchBrxData';
-import {PageModel} from '@bloomreach/spa-sdk';
+import {Page} from '@bloomreach/spa-sdk';
 
 interface Props {
   configuration: ConfigurationBuilder;
-  page: PageModel
-  url: string
+  page?: Page;
 }
 
-const BrxApp = ({configuration, page, url}: Props) => {
-  const [brxPage, setBrxPage] = useState(page);
+const BrxApp = ({configuration, page}: Props) => {
   const mapping = { Banner, Content, 'News List': NewsList, 'Simple Content': Content };
 
-  const isPreview = (page as Record<string, any>).meta.preview;
-
-  const loadPreviewData = useCallback(async (url: string) => {
-      const { page } = await fetchBrxData(url);
-      setBrxPage(page);
-  }, [])
-
-  useEffect(() => {
-    if (isPreview) {
-      loadPreviewData(url);
-    }
-  }, [loadPreviewData, isPreview, url])
-
-  return <BrPage configuration={{ ...configuration, httpClient: axios }} mapping={mapping} page={brxPage}>
+  return <BrPage configuration={{ ...configuration, httpClient: axios }} mapping={mapping} page={page}>
     <header>
       <nav className="navbar navbar-expand-sm navbar-dark sticky-top bg-dark" role="navigation">
         <div className="container">

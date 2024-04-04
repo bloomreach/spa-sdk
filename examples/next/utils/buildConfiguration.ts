@@ -16,7 +16,6 @@
 
 import { Configuration, extractSearchParams } from '@bloomreach/spa-sdk';
 import { NEXT_PUBLIC_BR_MULTI_TENANT_SUPPORT, BRXM_ENDPOINT } from './constants';
-import { NextApiRequest } from 'next';
 
 type BuildConfigurationOptions = {
   endpoint: string | (string | null)[];
@@ -27,7 +26,6 @@ export type ConfigurationBuilder = Omit<Configuration & Partial<BuildConfigurati
 
 export function buildConfiguration(
   path: string,
-  request: NextApiRequest,
   endpoint: string = BRXM_ENDPOINT,
   hasMultiTenantSupport: boolean = NEXT_PUBLIC_BR_MULTI_TENANT_SUPPORT,
 ): ConfigurationBuilder {
@@ -46,10 +44,6 @@ export function buildConfiguration(
     configuration.endpoint = searchParams.get(endpointQueryParameter) ?? '';
     configuration.baseUrl = `?${endpointQueryParameter}=${searchParams.get(endpointQueryParameter)}`;
     configuration.path = url;
-  }
-
-  if (request) {
-    configuration.request = request;
   }
   return configuration;
 }
