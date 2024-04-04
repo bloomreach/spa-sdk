@@ -39,8 +39,8 @@ function MenuLink({ item }: MenuLinkProps): JSX.Element {
   }
 
   return (
-    <Link href={url}>
-      <a className="nav-link text-capitalize">{item.getName()}</a>
+    <Link href={url} className="nav-link text-capitalize">
+      {item.getName()}
     </Link>
   );
 }
