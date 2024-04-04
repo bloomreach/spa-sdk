@@ -1,7 +1,7 @@
 {
   "name": "@bloomreach/example-react",
   "description": "Example React SPA for Bloomreach Experience",
-  "version": "22.0.3",
+  "version": "22.0.4",
   "private": true,
   "dependencies": {
     "@bloomreach/react-sdk": "file:.yalc/@bloomreach/react-sdk",

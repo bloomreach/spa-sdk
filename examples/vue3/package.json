@@ -1,6 +1,6 @@
 {
   "name": "@bloomreach/example-vue3",
-  "version": "22.0.3",
+  "version": "22.0.4",
   "private": true,
   "type": "module",
   "scripts": {

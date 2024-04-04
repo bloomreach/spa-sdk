@@ -1,7 +1,7 @@
 {
   "name": "@bloomreach/example-vue",
   "description": "Example Vue.js SPA for Bloomreach Experience",
-  "version": "22.0.3",
+  "version": "22.0.4",
   "private": true,
   "scripts": {
     "build": "vue-cli-service build",

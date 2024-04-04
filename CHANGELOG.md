@@ -2,29 +2,48 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### ["22.0.3"](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-22.0.2..."22.0.3")
+#### "22.0.4"
+
+- SPASDK-209 Upgrade Next example app with Next js 13 [`#153`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/153)
+- SPASDK-209 Remove unused fetchBrxData.ts [`#SPASDK-209`](https://issues.onehippo.com/browse/SPASDK-209)
+- SPASDK-209 Improve code readability [`#SPASDK-209`](https://issues.onehippo.com/browse/SPASDK-209)
+- SPASDK-209 Update types in route.ts [`#SPASDK-209`](https://issues.onehippo.com/browse/SPASDK-209)
+- SPASDK-209 Downgrade Next to 13 in Next example app [`#SPASDK-209`](https://issues.onehippo.com/browse/SPASDK-209)
+- SPASDK-209 Load data on client side only if page is in preview [`#SPASDK-209`](https://issues.onehippo.com/browse/SPASDK-209)
+- SPASDK-209 Update url in page component [`#SPASDK-209`](https://issues.onehippo.com/browse/SPASDK-209)
+- SPASDK-209 Add/update license headers [`#SPASDK-209`](https://issues.onehippo.com/browse/SPASDK-209)
+- SPASDK-209 Upgrade to NextJs 14 [`#SPASDK-209`](https://issues.onehippo.com/browse/SPASDK-209)
+- SPASDK-209 Make preview work [`#SPASDK-209`](https://issues.onehippo.com/browse/SPASDK-209)
+- SPASDK-209 Enable personalization feature [`#SPASDK-209`](https://issues.onehippo.com/browse/SPASDK-209)
+- SPASDK-209 Update routing in next example app [`#SPASDK-209`](https://issues.onehippo.com/browse/SPASDK-209)
+- SPASDK-209 Upgrade Next example app with Next js 13 [`#SPASDK-209`](https://issues.onehippo.com/browse/SPASDK-209)
+
+#### spa-sdk-22.0.3
+
+> 9 February 2024
 
 - SPASDK-207 Fix type exports Vue 3 SDK [`#152`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/152)
+- SPASDK-207 Bump versios to 22.0.3 [`#SPASDK-207`](https://issues.onehippo.com/browse/SPASDK-207)
 - SPASDK-207 Fix type exports Vue 3 SDK [`#SPASDK-207`](https://issues.onehippo.com/browse/SPASDK-207)
-- TRIVIAL Allow docs to be published without a SDK release [`4847ce5`](https://github.com/bloomreach/spa-sdk/commit/4847ce521803b091fb52f76f224c5389f226fc49)
-- TRIVIAL Clarify variable in heroku deploy script [`0244028`](https://github.com/bloomreach/spa-sdk/commit/02440282749e569f1fef8fb9dd1cdf478e174753)
-- TRIVIAL Add Vue 3 notice to Vue 2 README.md [`e0c3617`](https://github.com/bloomreach/spa-sdk/commit/e0c36170dc30013e46c19fdeaf4db03b18628665)
-- TRIVIAL Fix git credentials in Jenkinsfile [`f47e003`](https://github.com/bloomreach/spa-sdk/commit/f47e0030e642ee9338ba342c692b61c240803e50)
-- TRIVIAL Set debug state via env variable [`3a2329a`](https://github.com/bloomreach/spa-sdk/commit/3a2329ad5f1e7ef1a75c1314b18fcebc07ab6a78)
-- TRIVIAL Pin node version when working with volta [`1b9c7eb`](https://github.com/bloomreach/spa-sdk/commit/1b9c7eb8e73cd31d665ac97dd6c73caee1720328)
-- TRIVIAL Update reference to documentation.bloomreach.com [`0d7e22e`](https://github.com/bloomreach/spa-sdk/commit/0d7e22ee74c5a6f0cc5957b5c6d59d3a0b3ac1c9)
-- TRIVIAL Adjust glob for jenkins changeset clause [`021d6ca`](https://github.com/bloomreach/spa-sdk/commit/021d6ca05a68a3d366cd7a7e7ef44fe258ef6adb)
-- TRIVIAL Include reference to documentation.bloomreach.com [`f3aeced`](https://github.com/bloomreach/spa-sdk/commit/f3aeced0c3e1dc3fae3b3fbd343b0d0af742aae5)
+- TRIVIAL Allow docs to be published without a SDK release
+- TRIVIAL Clarify variable in heroku deploy script
+- TRIVIAL Add Vue 3 notice to Vue 2 README.md
+- TRIVIAL Fix git credentials in Jenkinsfile
+- TRIVIAL Set debug state via env variable
+- TRIVIAL Pin node version when working with volta
+- TRIVIAL Update reference to documentation.bloomreach.com
+- TRIVIAL Adjust glob for jenkins changeset clause
+- TRIVIAL Include reference to documentation.bloomreach.com
 
-#### [spa-sdk-22.0.2](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-22.0.1...spa-sdk-22.0.2)
+#### spa-sdk-22.0.2
 
 > 20 August 2023
 
 - SPASDK-196 Bumping versions to 22.0.2 [`#SPASDK-196`](https://issues.onehippo.com/browse/SPASDK-196)
-- TRIVIAL Fix changelog generation [`f87b5a8`](https://github.com/bloomreach/spa-sdk/commit/f87b5a8b07a1f859f475908c46137136389d344b)
-- TRIVIAL Add step to release process [`a9d5e7b`](https://github.com/bloomreach/spa-sdk/commit/a9d5e7b7edd46e98d463b49f9d61b873ab12d8f7)
+- TRIVIAL Fix changelog generation
+- TRIVIAL Add step to release process
 
-#### [spa-sdk-22.0.1](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-22.0.0...spa-sdk-22.0.1)
+#### spa-sdk-22.0.1
 
 > 20 August 2023
 
@@ -71,16 +90,16 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-186 Temp disable the github jenkins script [`#SPASDK-186`](https://issues.onehippo.com/browse/SPASDK-186)
 - SPASDK-186 Remove prepack scripts, we already build everything before release [`#SPASDK-186`](https://issues.onehippo.com/browse/SPASDK-186)
 - SPASDK-186 Update Jenkinsfile to use lerna version instead of package version [`#SPASDK-186`](https://issues.onehippo.com/browse/SPASDK-186)
-- TRIVIAL Update Heroku [`ed12217`](https://github.com/bloomreach/spa-sdk/commit/ed12217de8a86a667a0c29d39a24391df3b36df3)
-- TRIVIAL Uncomment normal Jenkins steps [`6171936`](https://github.com/bloomreach/spa-sdk/commit/61719361f94de25f16ecbe26c9a18566099ada89)
-- TRIVIAL Distinguish sdk from example app name in scripts [`50b9609`](https://github.com/bloomreach/spa-sdk/commit/50b96095eca9c31aa5304b792bfac9289ee92fd2)
-- TRIVIAL Only build relevant app in Heroku deploy [`1784825`](https://github.com/bloomreach/spa-sdk/commit/17848257403f324fcdaf6521aba6c9f754ad2fe5)
-- TRIVIAL Optimize deploy time [`7420008`](https://github.com/bloomreach/spa-sdk/commit/7420008682ddddbe6ee5a9ff3e7c889fade9921e)
-- TRIVIAL Add dist to packages/spa-sdk git ignore [`5d62fc1`](https://github.com/bloomreach/spa-sdk/commit/5d62fc19f55f9622e5e90f0ff602df09306378a1)
-- TRIVIAL Remove buildpacks plugins [`ec04f4e`](https://github.com/bloomreach/spa-sdk/commit/ec04f4e9478e4b4eec032c1b43ba9980153f744c)
-- TRIVIAL Allow npm to install dev dependencies on heroku [`c44105e`](https://github.com/bloomreach/spa-sdk/commit/c44105e5a8fa7c390ba796fc3c97e20e58b23bfd)
+- TRIVIAL Update Heroku
+- TRIVIAL Uncomment normal Jenkins steps
+- TRIVIAL Distinguish sdk from example app name in scripts
+- TRIVIAL Only build relevant app in Heroku deploy
+- TRIVIAL Optimize deploy time
+- TRIVIAL Add dist to packages/spa-sdk git ignore
+- TRIVIAL Remove buildpacks plugins
+- TRIVIAL Allow npm to install dev dependencies on heroku
 
-### [spa-sdk-22.0.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-21.0.0...spa-sdk-22.0.0)
+#### spa-sdk-22.0.0
 
 > 28 June 2023
 
@@ -116,13 +135,13 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-154 Merge branch 'development' into 'main' [`#SPASDK-154`](https://issues.onehippo.com/browse/SPASDK-154)
 - SPASDK-154 Merge branch 'development' into 'main' [`#SPASDK-154`](https://issues.onehippo.com/browse/SPASDK-154)
 - SPASDK-147 Merge branch 'development' into 'main' [`#SPASDK-147`](https://issues.onehippo.com/browse/SPASDK-147)
-- TRIVIAL Merge branch 'development' into 'main' [`b3ef042`](https://github.com/bloomreach/spa-sdk/commit/b3ef042dcb08a8af5421d33fe3758c45ab85758f)
-- TRIVIAL Merge branch 'development' into 'main' [`17b3ebf`](https://github.com/bloomreach/spa-sdk/commit/17b3ebfb5e3fd0b18e56c2c9c0e07b9ef867913c)
-- TRIVIAL Merge branch 'development' into 'main' [`feae721`](https://github.com/bloomreach/spa-sdk/commit/feae721c448e5636b350ae9ead60ff0cfe595470)
-- TRIVIAL Merge branch 'development' into 'main' [`3013749`](https://github.com/bloomreach/spa-sdk/commit/30137498740623a2bae135e7adb72b597b5fec8c)
-- TRIVIAL Merge branch 'development' into 'main' [`ab29770`](https://github.com/bloomreach/spa-sdk/commit/ab29770b6ee908838c7d97de6b989496eeae10bc)
+- TRIVIAL Merge branch 'development' into 'main'
+- TRIVIAL Merge branch 'development' into 'main'
+- TRIVIAL Merge branch 'development' into 'main'
+- TRIVIAL Merge branch 'development' into 'main'
+- TRIVIAL Merge branch 'development' into 'main'
 
-#### [spa-sdk-21.0.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-21.0.0-alpha.0...spa-sdk-21.0.0)
+#### spa-sdk-21.0.0
 
 > 26 April 2023
 
@@ -134,7 +153,7 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-182 Replace @xmldom/xmldom library with htmlparser2 [`#SPASDK-182`](https://issues.onehippo.com/browse/SPASDK-182)
 - SPASDK-182 Remove the `sanitize` method from the Page object [`#SPASDK-182`](https://issues.onehippo.com/browse/SPASDK-182)
 
-#### [spa-sdk-21.0.0-alpha.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-20.0.0...spa-sdk-21.0.0-alpha.0)
+#### spa-sdk-21.0.0-alpha.0
 
 > 26 April 2023
 
@@ -157,9 +176,9 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-174 Render example react app with StrictMode [`#SPASDK-174`](https://issues.onehippo.com/browse/SPASDK-174)
 - SPASDK-174 Only load CmsModule once [`#SPASDK-174`](https://issues.onehippo.com/browse/SPASDK-174)
 - SPASDK-174 Let jest run tests in parallel [`#SPASDK-174`](https://issues.onehippo.com/browse/SPASDK-174)
-- TRIVIAL Fix type docs generation by removing outdated dependency [`80c3b1e`](https://github.com/bloomreach/spa-sdk/commit/80c3b1e8940058050c19b447737a39d608a54ccd)
+- TRIVIAL Fix type docs generation by removing outdated dependency
 
-### [spa-sdk-20.0.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-19.0.2...spa-sdk-20.0.0)
+#### spa-sdk-20.0.0
 
 > 5 April 2023
 
@@ -222,7 +241,7 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-153 Merge branch 'feature/SPASDK-153-vue3-vite' into 'development' [`#SPASDK-153`](https://issues.onehippo.com/browse/SPASDK-153)
 - SPASDK-153 Add vite library [`#SPASDK-153`](https://issues.onehippo.com/browse/SPASDK-153)
 
-#### [spa-sdk-19.0.2](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-19.0.1...spa-sdk-19.0.2)
+#### spa-sdk-19.0.2
 
 > 22 February 2023
 
@@ -230,7 +249,7 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-168 Bumping versions to 19.0.2 [`#SPASDK-168`](https://issues.onehippo.com/browse/SPASDK-168)
 - SPASDK-168 Change BrPageService to support multiple br-page components [`#SPASDK-168`](https://issues.onehippo.com/browse/SPASDK-168)
 
-#### [spa-sdk-19.0.1](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-19.0.0...spa-sdk-19.0.1)
+#### spa-sdk-19.0.1
 
 > 13 February 2023
 
@@ -240,10 +259,10 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-167 Restore ng-sdk package.json properties [`#SPASDK-167`](https://issues.onehippo.com/browse/SPASDK-167)
 - SPASDK-154 Merge branch 'typedoc-update' into 'development' [`#SPASDK-154`](https://issues.onehippo.com/browse/SPASDK-154)
 - SPASDK-154 Update typedoc to latest version supported by current typescript version 4.3.5 [`#SPASDK-154`](https://issues.onehippo.com/browse/SPASDK-154)
-- feature/SPASDK-156 update tests to no longer use 'example.com' as domain as that is used internally as a DUMMY [`ab0737f`](https://github.com/bloomreach/spa-sdk/commit/ab0737f4f4284606b4df66e6bed7ad3c09ed0f42)
-- feature/SPASDK-156 lint formating [`8f645dd`](https://github.com/bloomreach/spa-sdk/commit/8f645dd99d0f08d74aa2ceba3a27d5ff31749407)
+- feature/SPASDK-156 update tests to no longer use 'example.com' as domain as that is used internally as a DUMMY
+- feature/SPASDK-156 lint formating
 
-### [spa-sdk-19.0.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-18.0.1...spa-sdk-19.0.0)
+#### spa-sdk-19.0.0
 
 > 1 February 2023
 
@@ -276,7 +295,7 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-122 Remove default apiVersion header value from PDA request [`#SPASDK-122`](https://issues.onehippo.com/browse/SPASDK-122)
 - SPASDK-122 Adjust bump script for cross-env [`#SPASDK-122`](https://issues.onehippo.com/browse/SPASDK-122)
 
-#### [spa-sdk-18.0.1](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-18.0.0...spa-sdk-18.0.1)
+#### spa-sdk-18.0.1
 
 > 7 December 2022
 
@@ -296,7 +315,7 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-148 Output sourcemaps for ES modules [`#SPASDK-148`](https://issues.onehippo.com/browse/SPASDK-148)
 - SPASDK-148 Allow field to be null [`#SPASDK-148`](https://issues.onehippo.com/browse/SPASDK-148)
 
-### [spa-sdk-18.0.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-17.2.0...spa-sdk-18.0.0)
+#### spa-sdk-18.0.0
 
 > 28 November 2022
 
@@ -311,7 +330,7 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-126 Load the html sanitizer dynamically [`#SPASDK-126`](https://issues.onehippo.com/browse/SPASDK-126)
 - SPASDK-126 Split DomParser and XMLDom dependencies from main bundle [`#SPASDK-126`](https://issues.onehippo.com/browse/SPASDK-126)
 
-#### [spa-sdk-17.2.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-17.1.1...spa-sdk-17.2.0)
+#### spa-sdk-17.2.0
 
 > 24 November 2022
 
@@ -321,7 +340,7 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-141 Add global environment file [`#SPASDK-141`](https://issues.onehippo.com/browse/SPASDK-141)
 - SPASDK-141 Move SKIP_PREFLIGHT_CHECK from react-scripts to the environment file [`#SPASDK-141`](https://issues.onehippo.com/browse/SPASDK-141)
 
-#### [spa-sdk-17.1.1](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-17.1.0...spa-sdk-17.1.1)
+#### spa-sdk-17.1.1
 
 > 11 November 2022
 
@@ -330,11 +349,11 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-144 Bumping versions to 17.1.1 [`#SPASDK-144`](https://issues.onehippo.com/browse/SPASDK-144)
 - SPASDK-144 Bump @xmldom/xmldom to patched 0.7.9 [`#SPASDK-144`](https://issues.onehippo.com/browse/SPASDK-144)
 - SPASDK-138 Upgrade next, react examples to react 18 [`#SPASDK-138`](https://issues.onehippo.com/browse/SPASDK-138)
-- TRIVIAL Merge branch 'TRIVIAL/heroku-cleanup-scrip' into 'development' [`1ecf2e0`](https://github.com/bloomreach/spa-sdk/commit/1ecf2e0d78069f3634a8a5cf1f169012f820c52d)
-- TRIVIAL add heroku app cleanup script [`a9f66b3`](https://github.com/bloomreach/spa-sdk/commit/a9f66b356c83f8865dbbc7127c17a471ab8676f0)
-- TRIVIAL Update the description for the cleanup utility [`8131694`](https://github.com/bloomreach/spa-sdk/commit/81316945f49fe34336a5330e09c46b755be31f3d)
+- TRIVIAL Merge branch 'TRIVIAL/heroku-cleanup-scrip' into 'development'
+- TRIVIAL add heroku app cleanup script
+- TRIVIAL Update the description for the cleanup utility
 
-#### [spa-sdk-17.1.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-17.0.1...spa-sdk-17.1.0)
+#### spa-sdk-17.1.0
 
 > 28 October 2022
 
@@ -347,7 +366,7 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-137 Explicitly set children to component properties interface [`#SPASDK-137`](https://issues.onehippo.com/browse/SPASDK-137)
 - SPASDK-137 Support React 18 [`#SPASDK-137`](https://issues.onehippo.com/browse/SPASDK-137)
 
-#### [spa-sdk-17.0.1](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-17.0.0...spa-sdk-17.0.1)
+#### spa-sdk-17.0.1
 
 > 18 October 2022
 
@@ -370,12 +389,12 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-118 Add changelog for 15.5.0 [`#SPASDK-118`](https://issues.onehippo.com/browse/SPASDK-118)
 - SPASDK-118 Release 15.5.0 [`#SPASDK-118`](https://issues.onehippo.com/browse/SPASDK-118)
 - SPASDK-116 Release 15.4.6 [`#SPASDK-116`](https://issues.onehippo.com/browse/SPASDK-116)
-- TRIVIAL Merge branch 'main' into development [`c48825e`](https://github.com/bloomreach/spa-sdk/commit/c48825e35c7536354718ad2168971517da7f80dd)
-- TRIVIAL Merge branch 'development' into 'main' [`bd4ba15`](https://github.com/bloomreach/spa-sdk/commit/bd4ba15a2d771d208db3f7a0f88773b2384cc4d2)
-- TRIVIAL Merge branch 'development' into 'main' [`a540e23`](https://github.com/bloomreach/spa-sdk/commit/a540e23ddc5ee23d8dc82c60d969b1039dc656f9)
-- TRIVIAL Merge branch 'development' into 'main' [`3d91af7`](https://github.com/bloomreach/spa-sdk/commit/3d91af742fcb528c062fc2fd284e10611469dd91)
+- TRIVIAL Merge branch 'main' into development
+- TRIVIAL Merge branch 'development' into 'main'
+- TRIVIAL Merge branch 'development' into 'main'
+- TRIVIAL Merge branch 'development' into 'main'
 
-### [spa-sdk-17.0.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-16.0.0...spa-sdk-17.0.0)
+#### spa-sdk-17.0.0
 
 > 19 September 2022
 
@@ -383,9 +402,9 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-129 Bumping versions to 17.0.0 [`#SPASDK-129`](https://issues.onehippo.com/browse/SPASDK-129)
 - SPASDK-129 Fix lint warnings in vue-sdk and ng-sdk [`#SPASDK-129`](https://issues.onehippo.com/browse/SPASDK-129)
 - SPASDK-129 Remove endpointQueryParameter [`#SPASDK-129`](https://issues.onehippo.com/browse/SPASDK-129)
-- TRIVIAL Fix bash name substitution in heroku deploy script [`721b468`](https://github.com/bloomreach/spa-sdk/commit/721b46871e938630f3f3a51ca9343425868f8c49)
+- TRIVIAL Fix bash name substitution in heroku deploy script
 
-### [spa-sdk-16.0.0](https://github.com/bloomreach/spa-sdk/compare/v15.5.1...spa-sdk-16.0.0)
+#### spa-sdk-16.0.0
 
 > 16 August 2022
 
@@ -406,13 +425,13 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-123 Add getLocale to Page object [`#SPASDK-123`](https://issues.onehippo.com/browse/SPASDK-123)
 - SPASDK-119 Improve heroku deploy speed by using lerna filter flags [`#SPASDK-119`](https://issues.onehippo.com/browse/SPASDK-119)
 
-#### [v15.5.1](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.5.0...v15.5.1)
+#### v15.5.1
 
 > 24 June 2022
 
-- TRIVIAL Bump versions to 15.5.1 [`94d2699`](https://github.com/bloomreach/spa-sdk/commit/94d26991ce5e8d4f2916aa6756b0c927b721a25e)
+- TRIVIAL Bump versions to 15.5.1
 
-#### [spa-sdk-15.5.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.4.6...spa-sdk-15.5.0)
+#### spa-sdk-15.5.0
 
 > 24 June 2022
 
@@ -427,11 +446,11 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-104 Bump versions to test react 17 [`#SPASDK-104`](https://issues.onehippo.com/browse/SPASDK-104)
 - SPASDK-104 Allow react 17 to be used [`#SPASDK-104`](https://issues.onehippo.com/browse/SPASDK-104)
 - SPASDK-116 Release 15.4.6 [`#SPASDK-116`](https://issues.onehippo.com/browse/SPASDK-116)
-- TRIVIAL Merge branch 'development' into 'main' [`bd4ba15`](https://github.com/bloomreach/spa-sdk/commit/bd4ba15a2d771d208db3f7a0f88773b2384cc4d2)
-- TRIVIAL Merge branch 'development' into 'main' [`a540e23`](https://github.com/bloomreach/spa-sdk/commit/a540e23ddc5ee23d8dc82c60d969b1039dc656f9)
-- TRIVIAL Merge branch 'development' into 'main' [`3d91af7`](https://github.com/bloomreach/spa-sdk/commit/3d91af742fcb528c062fc2fd284e10611469dd91)
+- TRIVIAL Merge branch 'development' into 'main'
+- TRIVIAL Merge branch 'development' into 'main'
+- TRIVIAL Merge branch 'development' into 'main'
 
-#### [spa-sdk-15.4.6](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.4.5...spa-sdk-15.4.6)
+#### spa-sdk-15.4.6
 
 > 23 June 2022
 
@@ -447,16 +466,16 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-114 Add ManageContentButton.pickerEnableUpload to ng-sdk and vue-sdk [`#SPASDK-114`](https://issues.onehippo.com/browse/SPASDK-114)
 - SPASDK-114 Add pickerEnableUpload option to manage-content-btn [`#SPASDK-114`](https://issues.onehippo.com/browse/SPASDK-114)
 
-#### [spa-sdk-15.4.5](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.4.4...spa-sdk-15.4.5)
+#### spa-sdk-15.4.5
 
 > 13 April 2022
 
 - Resolve SPASDK-110 "Change HttpClient interface to follow the axios api definition" [`#68`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/68)
 - SPASDK-110 Update axios in example apps to the latest version (0.26.1) [`#SPASDK-110`](https://issues.onehippo.com/browse/SPASDK-110)
 - SPASDK-110 Make headers type in `HttpClient` compatible with latest axios (0.26.0) [`#SPASDK-110`](https://issues.onehippo.com/browse/SPASDK-110)
-- TRIVIAL Bumping versions to 15.4.5 [`bccf5b4`](https://github.com/bloomreach/spa-sdk/commit/bccf5b4778e5d729ce8b23a861e3b9b302aad57f)
+- TRIVIAL Bumping versions to 15.4.5
 
-#### [spa-sdk-15.4.4](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.4.3...spa-sdk-15.4.4)
+#### spa-sdk-15.4.4
 
 > 4 April 2022
 
@@ -467,11 +486,11 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-107 Indicate that the change only applies to Content SaaS [`#SPASDK-107`](https://issues.onehippo.com/browse/SPASDK-107)
 - SPASDK-107 Update template query names to correct ones in vue sdk doc [`#SPASDK-107`](https://issues.onehippo.com/browse/SPASDK-107)
 - SPASDK-107 Describe template query formats in readme doc files [`#SPASDK-107`](https://issues.onehippo.com/browse/SPASDK-107)
-- TRIVIAL Bumping versions to 15.4.4 [`2deeb62`](https://github.com/bloomreach/spa-sdk/commit/2deeb623dfb9c666035342a75d9ac7e96461050b)
-- TRIVIAL Merge branch 'fetch-tags-during-release-pipeline' into 'development' [`4048f73`](https://github.com/bloomreach/spa-sdk/commit/4048f73dce43c1d3f99a6b28533779c52a8839ca)
-- TRIVIAL Fetch all tags before mirroring to the github [`c7373de`](https://github.com/bloomreach/spa-sdk/commit/c7373de3213bf3a396d74efc74e0ad6ed11a07bd)
+- TRIVIAL Bumping versions to 15.4.4
+- TRIVIAL Merge branch 'fetch-tags-during-release-pipeline' into 'development'
+- TRIVIAL Fetch all tags before mirroring to the github
 
-#### [spa-sdk-15.4.3](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.4.2...spa-sdk-15.4.3)
+#### spa-sdk-15.4.3
 
 > 18 January 2022
 
@@ -484,9 +503,9 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-82 Use heroku from dev dependencies and run deploy via scripts section [`#SPASDK-82`](https://issues.onehippo.com/browse/SPASDK-82)
 - SPASDK-82 Setup release pipeline triggered by merge in main branch [`#SPASDK-82`](https://issues.onehippo.com/browse/SPASDK-82)
 - SPASDK-80 Use origin from URL object instead of modifying incoming url [`#SPASDK-80`](https://issues.onehippo.com/browse/SPASDK-80)
-- TRIVIAL Bumping versions to 15.4.3 [`34b67fa`](https://github.com/bloomreach/spa-sdk/commit/34b67fa6a8144d2d0993d06c77320649ea19e8d0)
+- TRIVIAL Bumping versions to 15.4.3
 
-#### [spa-sdk-15.4.2](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.4.1...spa-sdk-15.4.2)
+#### spa-sdk-15.4.2
 
 > 27 December 2021
 
@@ -511,21 +530,21 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-77 Add `getProperties` method as alias for `getParameters` in component [`#SPASDK-77`](https://issues.onehippo.com/browse/SPASDK-77)
 - SPASDK-75 Update file header to replace Hippo with Bloomreach [`#SPASDK-75`](https://issues.onehippo.com/browse/SPASDK-75)
 - SPASDK-75 Update file header to replace Hippo with Bloomreach [`#SPASDK-75`](https://issues.onehippo.com/browse/SPASDK-75)
-- TRIVIAL Bumping version to 15.4.2 [`9e6391a`](https://github.com/bloomreach/spa-sdk/commit/9e6391a5cb8381da2a41d6746b892fc18cb44d13)
-- TRIVIAL Merge branch 'trivial/enhance-release-script' into 'development' [`0a0df95`](https://github.com/bloomreach/spa-sdk/commit/0a0df958ff9274fdb366d8ebfc09952803c2a882)
-- TRIVIAL Stop execution of release in case build, lint or test has been finished with non zero result [`35393c8`](https://github.com/bloomreach/spa-sdk/commit/35393c8b4046c91bf1ce5b12170c86eb17a39b75)
-- TRIVIAL Add reminder to post release actions about check typedoc [`49e01ce`](https://github.com/bloomreach/spa-sdk/commit/49e01ce7df91a18a631744f1ad74bb435dddf326)
-- TRIVIAL Merge branch 'enhance-release-script' into development [`f45e24c`](https://github.com/bloomreach/spa-sdk/commit/f45e24c9c12201d0fce6b3c8ed51f0b7461d717f)
-- TRIVIAL Add lint, test and build steps at the beginning of the script [`60dd968`](https://github.com/bloomreach/spa-sdk/commit/60dd9681110ab611e4efa62e3e4f859513a549d2)
+- TRIVIAL Bumping version to 15.4.2
+- TRIVIAL Merge branch 'trivial/enhance-release-script' into 'development'
+- TRIVIAL Stop execution of release in case build, lint or test has been finished with non zero result
+- TRIVIAL Add reminder to post release actions about check typedoc
+- TRIVIAL Merge branch 'enhance-release-script' into development
+- TRIVIAL Add lint, test and build steps at the beginning of the script
 
-#### [spa-sdk-15.4.1](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.4.0...spa-sdk-15.4.1)
+#### spa-sdk-15.4.1
 
 > 1 December 2021
 
-- TRIVIAL Bumping version to 15.4.1 [`65dd1c3`](https://github.com/bloomreach/spa-sdk/commit/65dd1c38be90986df001eec1c28f74f76a6520fa)
-- TRIVIAL Update release script with build step before publising [`b377221`](https://github.com/bloomreach/spa-sdk/commit/b377221d974138c1ee092610c037ee1987b765b6)
+- TRIVIAL Bumping version to 15.4.1
+- TRIVIAL Update release script with build step before publising
 
-#### [spa-sdk-15.4.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.3.3...spa-sdk-15.4.0)
+#### spa-sdk-15.4.0
 
 > 1 December 2021
 
@@ -551,9 +570,9 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-74 Load component via GET if payload is empty [`#SPASDK-74`](https://issues.onehippo.com/browse/SPASDK-74)
 - SPASDK-73 Add "pickerSelectableNodeTypes" to examples [`#SPASDK-73`](https://issues.onehippo.com/browse/SPASDK-73)
 - SPASDK-73 Add "picker" options to manage-content-button [`#SPASDK-73`](https://issues.onehippo.com/browse/SPASDK-73)
-- TRIVIAL Bumping version to 15.4.0 [`ba8e0ad`](https://github.com/bloomreach/spa-sdk/commit/ba8e0adb0547e41e26d0691560884b340c7d512a)
+- TRIVIAL Bumping version to 15.4.0
 
-#### [spa-sdk-15.3.3](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.3.2...spa-sdk-15.3.3)
+#### spa-sdk-15.3.3
 
 > 1 November 2021
 
@@ -562,9 +581,9 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-71 Bumping version to 15.3.3 [`#SPASDK-71`](https://issues.onehippo.com/browse/SPASDK-71)
 - SPASDK-69 Rework heroku deploy script [`#SPASDK-69`](https://issues.onehippo.com/browse/SPASDK-69)
 - SPASDK-65 Warn for incompatibility of nomarkup container with vue-sdk [`#SPASDK-65`](https://issues.onehippo.com/browse/SPASDK-65)
-- TRIVIAL Add force flag to remove all folders inside docs folder [`6f0f3bd`](https://github.com/bloomreach/spa-sdk/commit/6f0f3bd625ab21440fd56b0ffc443404e17e6f65)
+- TRIVIAL Add force flag to remove all folders inside docs folder
 
-#### [spa-sdk-15.3.2](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.3.1...spa-sdk-15.3.2)
+#### spa-sdk-15.3.2
 
 > 19 October 2021
 
@@ -575,9 +594,9 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-62 Retrieve segmentation cookies from request object in case SSR [`#SPASDK-62`](https://issues.onehippo.com/browse/SPASDK-62)
 - SPASDK-63 Allow attribute "rel" in sanitize [`#SPASDK-63`](https://issues.onehippo.com/browse/SPASDK-63)
 - SPASDK-49 Add `s` flag to regular expression to match body content [`#SPASDK-49`](https://issues.onehippo.com/browse/SPASDK-49)
-- TRIVIAL Fix release script part related to the publishing TypyDoc [`8faca44`](https://github.com/bloomreach/spa-sdk/commit/8faca440aed3751041e8f80d070366189072d2de)
+- TRIVIAL Fix release script part related to the publishing TypyDoc
 
-#### [spa-sdk-15.3.1](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.3.0...spa-sdk-15.3.1)
+#### spa-sdk-15.3.1
 
 > 8 October 2021
 
@@ -589,7 +608,7 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-60 Additional fixes to the release script [`#SPASDK-60`](https://issues.onehippo.com/browse/SPASDK-60)
 - SPASDK-60 Add heroku as dev dep to enforce version and all build packs are installed [`#SPASDK-60`](https://issues.onehippo.com/browse/SPASDK-60)
 
-#### [spa-sdk-15.3.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.2.2-0...spa-sdk-15.3.0)
+#### spa-sdk-15.3.0
 
 > 6 October 2021
 
@@ -597,7 +616,7 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-58 Remove release pipeline and use release script [`#SPASDK-58`](https://issues.onehippo.com/browse/SPASDK-58)
 - SPASDK-38 Add page api to sanitize html content in SPA SDK [`#SPASDK-38`](https://issues.onehippo.com/browse/SPASDK-38)
 
-#### [spa-sdk-15.2.2-0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.2.1...spa-sdk-15.2.2-0)
+#### spa-sdk-15.2.2-0
 
 > 30 September 2021
 
@@ -605,7 +624,7 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-58 Bump versions to 15.2.2-0 [`#SPASDK-58`](https://issues.onehippo.com/browse/SPASDK-58)
 - SPASDK-58 Update push to github script in Jenkins [`#SPASDK-58`](https://issues.onehippo.com/browse/SPASDK-58)
 
-#### [spa-sdk-15.2.1](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.1.2...spa-sdk-15.2.1)
+#### spa-sdk-15.2.1
 
 > 30 September 2021
 
@@ -616,7 +635,7 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-53 Bump versions to 15.2.1 [`#SPASDK-53`](https://issues.onehippo.com/browse/SPASDK-53)
 - SPASDK-53 Handle segmentation; Change campaign variant parameter; [`#SPASDK-53`](https://issues.onehippo.com/browse/SPASDK-53)
 
-#### [spa-sdk-15.1.2](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.1.0...spa-sdk-15.1.2)
+#### spa-sdk-15.1.2
 
 > 23 September 2021
 
@@ -630,14 +649,14 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-33 Merge branch 'development' into 'main' [`#SPASDK-33`](https://issues.onehippo.com/browse/SPASDK-33)
 - SPASDK-33 Merge branch 'development' into 'main' [`#SPASDK-33`](https://issues.onehippo.com/browse/SPASDK-33)
 - SPASDK-33 Merge branch 'development' into 'main' [`#SPASDK-33`](https://issues.onehippo.com/browse/SPASDK-33)
-- TRIVIAL Update readme table [`e7aacbe`](https://github.com/bloomreach/spa-sdk/commit/e7aacbed48bba8865def26d63e5f218f54cbb5d4)
-- TRIVIAL Update development rules about publishing test version to npm [`c40e06f`](https://github.com/bloomreach/spa-sdk/commit/c40e06fd54738ef29eb293d7a3918d415653afe4)
-- TRIVIAL Add more information about what should be in `dist-tag` [`4ca2818`](https://github.com/bloomreach/spa-sdk/commit/4ca281831a0235a7a8ac5b70fe339f0f0b04eae8)
-- TRIVIAL Update readme table [`0d6b7c2`](https://github.com/bloomreach/spa-sdk/commit/0d6b7c292eae27e5b3ad95a68772421f1470106e)
-- TRIVIAL Merge branch 'development' into main [`52412ae`](https://github.com/bloomreach/spa-sdk/commit/52412ae42ab0303cdf514081c3b254fde2cdab3c)
-- TRIVIAL Merge branch 'development' into 'main' [`f446241`](https://github.com/bloomreach/spa-sdk/commit/f44624130fea51d553e2f1488ce433a11846f71a)
+- TRIVIAL Update readme table
+- TRIVIAL Update development rules about publishing test version to npm
+- TRIVIAL Add more information about what should be in `dist-tag`
+- TRIVIAL Update readme table
+- TRIVIAL Merge branch 'development' into main
+- TRIVIAL Merge branch 'development' into 'main'
 
-#### [spa-sdk-15.1.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.0.1-0...spa-sdk-15.1.0)
+#### spa-sdk-15.1.0
 
 > 23 August 2021
 
@@ -694,11 +713,11 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-43 Provide request object to get campaign variant id method [`#SPASDK-43`](https://issues.onehippo.com/browse/SPASDK-43)
 - SPASDK-43 Add new method to get cookies from the request object [`#SPASDK-43`](https://issues.onehippo.com/browse/SPASDK-43)
 - SPASDK-34 Check if window variable is defined(Fix SSR issue) [`#SPASDK-34`](https://issues.onehippo.com/browse/SPASDK-34)
-- Revert "SPASDK-22 Update xmldom to the latest version to fix security issue" [`abc3314`](https://github.com/bloomreach/spa-sdk/commit/abc33141c2579341a12a02f5b9b148d6c5ae7aa8)
-- TRIVIAL Add jenkins status to gitlab MRs [`4da0713`](https://github.com/bloomreach/spa-sdk/commit/4da07135f78485d4577c24b1320d22453028f3e0)
-- TRIVIAL Update readme table [`c4d00b2`](https://github.com/bloomreach/spa-sdk/commit/c4d00b2301485695717483d517ee299fd93998b9)
+- Revert "SPASDK-22 Update xmldom to the latest version to fix security issue"
+- TRIVIAL Add jenkins status to gitlab MRs
+- TRIVIAL Update readme table
 
-#### [spa-sdk-15.0.1-0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.0.0...spa-sdk-15.0.1-0)
+#### spa-sdk-15.0.1-0
 
 > 9 August 2021
 
@@ -709,7 +728,7 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-33 Update git command to publish to github [`#SPASDK-33`](https://issues.onehippo.com/browse/SPASDK-33)
 - SPASDK-22 Update xmldom to the latest version to fix security issue [`#SPASDK-22`](https://issues.onehippo.com/browse/SPASDK-22)
 
-#### [spa-sdk-15.0.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.0.0-1...spa-sdk-15.0.0)
+#### spa-sdk-15.0.0
 
 > 9 August 2021
 
@@ -745,7 +764,7 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-22 Update dependencies in spa-sdk [`#SPASDK-22`](https://issues.onehippo.com/browse/SPASDK-22)
 - SPASDK-32 Use auto-changelog to generate CHANGELOG.md [`#SPASDK-32`](https://issues.onehippo.com/browse/SPASDK-32)
 
-#### [spa-sdk-15.0.0-1](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-0.3.0-saas...spa-sdk-15.0.0-1)
+#### spa-sdk-15.0.0-1
 
 > 5 August 2021
 
@@ -793,5 +812,7 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-2 Log warning for unsupported method "getContentReference" in v0.9 [`#SPASDK-2`](https://issues.onehippo.com/browse/SPASDK-2)
 - SPASDK-2 Add exported function "getContainerItemContent" [`#SPASDK-2`](https://issues.onehippo.com/browse/SPASDK-2)
 - SPASDK-1 Bump to use node 14 [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
-- TRIVIAL Set branch name to 'main' in changesetBaseRefs [`4dacdcd`](https://github.com/bloomreach/spa-sdk/commit/4dacdcd2fdb0712e40dcb33b9809ae12786f9ab1)
-- TRIVIAL Skip telemetry check on nuxt startup [`15deb25`](https://github.com/bloomreach/spa-sdk/commit/15deb25b1edde3af3296d4dc34dba1483fe278f2)
+- SPASDK-1 Remove maven files and update Jenkinsfile [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
+- SPASDK-1 Initial move from brxm monorepo [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
+- TRIVIAL Set branch name to 'main' in changesetBaseRefs
+- TRIVIAL Skip telemetry check on nuxt startup
