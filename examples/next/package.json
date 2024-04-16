@@ -9,13 +9,16 @@
     "@bloomreach/react-sdk": "file:.yalc/@bloomreach/react-sdk",
     "@bloomreach/spa-sdk": "file:.yalc/@bloomreach/spa-sdk",
     "axios": "0.26.1",
+    "cookie": "0.6.0",
     "next": "13.5.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "sanitize-html": "2.10.0"
+    "sanitize-html": "2.10.0",
+    "swr": "2.2.5"
   },
   "devDependencies": {
-    "@types/node": "14.17.3",
+    "@types/cookie": "0.6.0",
+    "@types/node": "16.18.96",
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.8",
     "eslint": "7.32.0",

@@ -19,17 +19,28 @@ import BrxApp from '../../components/BrxApp';
 import {buildConfiguration} from '../../utils/buildConfiguration';
 import {initialize} from '@bloomreach/spa-sdk';
 import axios from 'axios';
+import * as cookieUtils from 'cookie';
+import {DEFAULT_RELEVANCE_COOKIE_NAME} from '../../constants';
 
 export default async function Page() {
   const headersList = headers();
   const searchParams = headersList.get('x-next-search-params');
   const pathname = headersList.get('x-next-pathname');
-  const cookie = headersList.get('x-next-cookie') ?? '';
+  const cookie = headersList.get('x-next-cookie');
+  const ip = headersList.get('x-next-forwarded-for');
+
+  const { [DEFAULT_RELEVANCE_COOKIE_NAME]: value } = cookieUtils.parse(cookie ?? '');
+  const visitor = value ? JSON.parse(value) : '';
+
   const configuration = buildConfiguration(`${pathname}?${searchParams}`);
 
   const page = await initialize({
     ...configuration,
-    request: { headers: { cookie } },
+    visitor,
+    request: {
+      headers: {cookie: cookie ?? ''},
+      connection: {remoteAddress: ip ?? ''},
+    },
     httpClient: axios
   });
 
