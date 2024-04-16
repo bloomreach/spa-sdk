@@ -9,8 +9,8 @@
     "sdk"
   ],
   "engines": {
-    "node": "^14.0.0 || ^16.0.0",
-    "npm": "^8.0.0 || ^9.0.0"
+    "node": "^16.0.0 || ^18.0.0",
+    "npm": "^9.0.0 || ^10.0.0"
   },
   "author": "Bloomreach B.V.",
   "license": "Apache-2.0",
@@ -66,7 +66,7 @@
     "mergeUrl": "https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/{id}"
   },
   "volta": {
-    "node": "16.20.2",
-    "npm": "9.9.2"
+    "node": "18.19.1",
+    "npm": "10.2.4"
   }
 }
