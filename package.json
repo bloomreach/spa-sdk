@@ -52,7 +52,7 @@
     "@lerna-lite/watch": "^3.3.3",
     "auto-changelog": "^2.4.0",
     "glob": "^10.3.12",
-    "heroku": "^8.11.3"
+    "heroku": "8.1.9"
   },
   "auto-changelog": {
     "hideCredit": true,
