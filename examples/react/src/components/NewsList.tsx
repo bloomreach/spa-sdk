@@ -32,7 +32,7 @@ export function NewsListItem({ item }: NewsListItemProps): JSX.Element {
       <div className="card-body">
         {title && (
           <h2 className="card-title">
-            <Link to={item.getUrl()}>{title}</Link>
+            <Link to={item.getUrl() || ''}>{title}</Link>
           </h2>
         )}
         {author && <div className="card-subtitle mb-3 text-muted">{author}</div>}
@@ -102,7 +102,7 @@ export function NewsList({ component, page }: BrProps): JSX.Element | null {
     <div>
       {pageable.items.map((reference, key) => (
         // eslint-disable-next-line react/no-array-index-key
-        <NewsListItem key={key} item={page.getContent<Document>(reference)} />
+        <NewsListItem key={key} item={page.getContent<Document>(reference) as Document} />
       ))}
       {page.isPreview() && (
         <div className="has-edit-button float-right">

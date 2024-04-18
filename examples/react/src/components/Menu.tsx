@@ -56,7 +56,7 @@ export function Menu(): JSX.Element | null {
   }
 
   return (
-    <ul className={`navbar-nav col-12 ${page.isPreview() ? 'has-edit-button' : ''}`}>
+    <ul className={`navbar-nav col-12 ${page?.isPreview() ? 'has-edit-button' : ''}`}>
       <BrManageMenuButton menu={menu} />
       {menu.getItems().map((item, index) => (
         // eslint-disable-next-line react/no-array-index-key
