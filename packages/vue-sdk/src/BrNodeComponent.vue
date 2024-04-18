@@ -1,11 +1,11 @@
 <!--
-  Copyright 2020-2023 Bloomreach
+  Copyright 2023 Bloomreach
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
   You may obtain a copy of the License at
 
-   https://www.apache.org/licenses/LICENSE-2.0
+    https://www.apache.org/licenses/LICENSE-2.0
 
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,67 +15,38 @@
   -->
 
 <template>
-  <br-meta :meta="meta">
+  <br-meta :meta="meta" :key="componentRef?.getId()">
     <slot>
-      <br-node-container-item v-if="isContainerItem(component)" />
+      <br-node-container-item v-if="isContainerItem(componentRef)"/>
 
-      <br-node-container v-else-if="isContainer(component)">
-        <br-node-component v-for="(component, key) in children" :key="key" :component="component" />
+      <br-node-container v-else-if="isContainer(componentRef)">
+        <br-node-component v-for="child in children" :key="(child as Component).getId()" :component="child"/>
       </br-node-container>
 
-      <component v-else-if="name in mapping" :is="mapping[name]" :component="component" :page="page" />
+      <component v-else-if="name && name in mapping" :is="mapping[name]" :component="componentRef" :page="page"/>
 
-      <br-node-component v-else v-for="(component, key) in children" :key="key" :component="component" />
+      <br-node-component v-else v-for="child in children" :key="(child as Component).getId()" :component="child"/>
     </slot>
   </br-meta>
 </template>
 
-<script lang="ts">
-import { Component as SpaComponent, isContainer, isContainerItem, Page } from '@bloomreach/spa-sdk';
-import { Component, Inject, Prop, Provide, Vue } from 'vue-property-decorator';
-import BrMeta from './BrMeta.vue';
-import BrNodeContainer from './BrNodeContainer.vue';
-import BrNodeContainerItem from './BrNodeContainerItem.vue';
+<script setup lang="ts">
+import BrMeta from '@/BrMeta.vue';
+import BrNodeContainer from '@/BrNodeContainer.vue';
+import BrNodeContainerItem from '@/BrNodeContainerItem.vue';
+import { component$, mapping$, page$ } from '@/providerKeys';
+import type { Component } from '@bloomreach/spa-sdk';
+import { isContainer, isContainerItem } from '@bloomreach/spa-sdk';
+import { computed, inject, provide, toRefs } from 'vue';
 
-@Component({
-  components: {
-    BrMeta,
-    BrNodeContainerItem,
-    BrNodeContainer,
-  },
-  computed: {
-    mapping(this: BrNodeComponent) {
-      return this.mapping$();
-    },
-    page(this: BrNodeComponent) {
-      return this.page$?.();
-    },
-    children(this: BrNodeComponent) {
-      return this.component?.getChildren();
-    },
-    meta(this: BrNodeComponent) {
-      return this.component?.getMeta();
-    },
-    name(this: BrNodeComponent) {
-      return this.component?.getName();
-    },
-  },
-  methods: {
-    isContainerItem,
-    isContainer,
-  },
-  name: 'br-node-component',
-})
-export default class BrNodeComponent extends Vue {
-  @Prop() component?: SpaComponent;
+const props = defineProps<{ component: Component | undefined }>();
+const { component: componentRef } = toRefs(props);
+const page = inject(page$);
+const mapping = inject(mapping$)!;
 
-  @Inject() private mapping$!: () => Record<string, Vue.Component>;
+const children = computed(() => componentRef?.value?.getChildren());
+const meta = computed(() => componentRef?.value?.getMeta());
+const name = computed(() => componentRef?.value?.getName());
 
-  @Inject() private page$?: () => Page;
-
-  @Provide() // ProvideReactive doesn't work with recursive components
-  private component$() {
-    return this.component;
-  }
-}
+provide(component$, componentRef);
 </script>

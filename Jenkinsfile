@@ -177,7 +177,7 @@ pipeline {
                   }
                   axis {
                     name 'APP_NAME'
-                    values 'ng', 'react', 'vue', 'vue3'
+                    values 'ng', 'react', 'vue'
                   }
                 }
                 stages {

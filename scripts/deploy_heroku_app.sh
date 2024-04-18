@@ -28,12 +28,12 @@ then
 elif [[ $APP_TYPE = "csr" ]] && [[ $APP_FRAMEWORK = "react" ]]
 then
   APP_PATH="examples/react"
-elif [[ $APP_TYPE = "csr" ]] && [[ $APP_FRAMEWORK = "vue3" ]]
+elif [[ $APP_TYPE = "csr" ]] && [[ $APP_FRAMEWORK = "vue" ]]
 then
-  APP_PATH="examples/vue3"
-elif [[ $APP_TYPE = "ssr" ]] && [[ $APP_FRAMEWORK = "vue3" ]]
+  APP_PATH="examples/vue"
+elif [[ $APP_TYPE = "ssr" ]] && [[ $APP_FRAMEWORK = "vue" ]]
 then
-# We don't have vue3 ssr app, but the deployment matrix is done in such a way that it will try to deploy the vue3 ssr
+# We don't have vue ssr app, but the deployment matrix is done in such a way that it will try to deploy the vue ssr
 # So we ignore this until we add ssr app to Heroku
   exit 0
 fi
@@ -97,9 +97,9 @@ then
   heroku config:set --app=$NAME EXAMPLE_NAME="nuxt" NUXT_APP_BR_MULTI_TENANT_SUPPORT=true HOST=0.0.0.0
 fi
 
-if [[ $APP_TYPE = "csr" ]] && [[ $APP_FRAMEWORK = "vue3" ]]
+if [[ $APP_TYPE = "csr" ]] && [[ $APP_FRAMEWORK = "vue" ]]
 then
-  heroku config:set --app=$NAME EXAMPLE_NAME="vue3" VITE_MULTI_TENANT_SUPPORT=true
+  heroku config:set --app=$NAME EXAMPLE_NAME="vue" VITE_MULTI_TENANT_SUPPORT=true
 fi
 
 git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/$NAME.git HEAD:refs/heads/main

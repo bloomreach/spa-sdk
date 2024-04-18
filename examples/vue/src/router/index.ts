@@ -1,5 +1,5 @@
 /*
- * Copyright 2020-2023 Bloomreach
+ * Copyright 2023 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,18 +14,15 @@
  * limitations under the License.
  */
 
-import Vue from 'vue';
-import VueRouter from 'vue-router';
-import App from '../App.vue';
+import App from '@/App.vue';
+import Index from '@/router/Index.vue';
+import { createRouter, createWebHistory } from 'vue-router'
 
-Vue.use(VueRouter);
+const routes = [{ path: '/:pathMatch(.*)*', component: Index }];
 
-const routes = [{ path: '*', component: App }];
-
-const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
+const router = createRouter({
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes,
-});
+})
 
-export default router;
+export default router

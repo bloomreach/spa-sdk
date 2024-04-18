@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
-export const BRXM_ENDPOINT = process.env.VUE_APP_BRXM_ENDPOINT ?? '';
-export const BR_MULTI_TENANT_SUPPORT = process.env.VUE_APP_BR_MULTI_TENANT_SUPPORT === 'true';
-export const BASE_URL = process.env.BASE_URL !== '/' ? process.env.BASE_URL ?? '' : '';
+export const BRXM_ENDPOINT = import.meta.env.VITE_BRXM_ENDPOINT ?? '';
+export const BR_MULTI_TENANT_SUPPORT = import.meta.env.VITE_MULTI_TENANT_SUPPORT === 'true';
+export const BASE_URL = import.meta.env.BASE_URL !== '/' ? import.meta.env.BASE_URL ?? '' : '';
+export const VUE_APP_EXPONEA_PROJECT_TOKEN = import.meta.env.VITE_EXPONEA_PROJECT_TOKEN ?? '';
+export const VUE_APP_EXPONEA_API_URL = import.meta.env.VITE_EXPONEA_API_URL ?? '';
