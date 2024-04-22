@@ -1,6 +1,6 @@
 {
   "name": "@bloomreach/example-next",
-  "version": "22.0.4",
+  "version": "22.0.5",
   "description": "Example Next.js SPA for Bloomreach Experience",
   "private": true,
   "author": "Bloomreach B.V.",

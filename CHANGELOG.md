@@ -2,9 +2,19 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### "22.0.4"
+#### "22.0.5"
+
+- SPASDK-210 Check for window.document before accessing cookie [`#155`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/155)
+- SPASDK-214: Implement relevance in next-example app [`#157`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/157)
+- SPASDK-214: Implement relevance in next-example app [`#SPASDK-214`](https://issues.onehippo.com/browse/SPASDK-214)
+- SPASDK-210 Check for window.document before accessing cookie [`#SPASDK-210`](https://issues.onehippo.com/browse/SPASDK-210)
+
+#### spa-sdk-22.0.4
+
+> 4 April 2024
 
 - SPASDK-209 Upgrade Next example app with Next js 13 [`#153`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/153)
+- SPASDK-209 Bumping versions to 22.0.4 [`#SPASDK-209`](https://issues.onehippo.com/browse/SPASDK-209)
 - SPASDK-209 Remove unused fetchBrxData.ts [`#SPASDK-209`](https://issues.onehippo.com/browse/SPASDK-209)
 - SPASDK-209 Improve code readability [`#SPASDK-209`](https://issues.onehippo.com/browse/SPASDK-209)
 - SPASDK-209 Update types in route.ts [`#SPASDK-209`](https://issues.onehippo.com/browse/SPASDK-209)
