@@ -25,6 +25,7 @@ import {Content} from './Content';
 import {NewsList} from './NewsList';
 import {ConfigurationBuilder} from '../utils/buildConfiguration';
 import {Page} from '@bloomreach/spa-sdk';
+import {useRelevance} from '../hooks/useRelevance';
 
 interface Props {
   configuration: ConfigurationBuilder;
@@ -34,13 +35,15 @@ interface Props {
 const BrxApp = ({configuration, page}: Props) => {
   const mapping = { Banner, Content, 'News List': NewsList, 'Simple Content': Content };
 
+  useRelevance(configuration, page);
+
   return <BrPage configuration={{ ...configuration, httpClient: axios }} mapping={mapping} page={page}>
     <header>
       <nav className="navbar navbar-expand-sm navbar-dark sticky-top bg-dark" role="navigation">
         <div className="container">
           <BrPageContext.Consumer>
             {(contextPage) => (
-              <Link href={contextPage?.getUrl('/') ?? ''}>
+              <Link className="navbar-brand" href={contextPage?.getUrl('/') ?? ''}>
                 {contextPage?.getTitle() || 'brXM + Next.js = ♥️'}
               </Link>
             )}

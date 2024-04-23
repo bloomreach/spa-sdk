@@ -18,12 +18,16 @@ import {NextResponse, type NextRequest} from 'next/server';
 import {cookies} from 'next/headers';
 
 export async function middleware(request: NextRequest) {
+  const HEADER_X_FORWARDED_FOR = 'X-Forwarded-For';
+
   return NextResponse.next({
     request: {
       headers: new Headers({
         'x-next-pathname': request.nextUrl.pathname,
         'x-next-search-params': request.nextUrl.searchParams.toString(),
         'x-next-cookie': cookies().toString(),
+        'x-next-origin': request.nextUrl.origin,
+        'x-next-forwarded-for': request.headers.get(HEADER_X_FORWARDED_FOR),
       }),
     },
   });
