@@ -1,5 +1,5 @@
-# Vue 3 CSR SPA
-Example Vue 3 SPA using the Bloomreach Experience [Vue 3 SDK](https://www.npmjs.com/package/@bloomreach/vue-sdk).  This project was
+# Vue CSR SPA
+Example Vue SPA using the Bloomreach Experience [Vue SDK](https://www.npmjs.com/package/@bloomreach/vue-sdk).  This project was
 generated with [Create Vue](https://github.com/vuejs/create-vue).
 
 ## Install and run

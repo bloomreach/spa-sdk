@@ -1,9 +1,13 @@
-# Bloomreach Vue 3 SDK
+# Bloomreach Vue SDK
 
-Bloomreach Vue 3 SDK provides simplified headless integration with [Bloomreach Content](https://www.bloomreach.com/en/products/content)
+Bloomreach Vue SDK provides simplified headless integration with [Bloomreach Content](https://www.bloomreach.com/en/products/content)
 for Vue-based applications. This library interacts with the [Page Model API](https://documentation.bloomreach.com/api-reference/content/delivery/page-delivery-api/page-delivery-api.html)
 and [Bloomreach SPA SDK](https://www.npmjs.com/package/@bloomreach/spa-sdk) and
 exposes a simplified declarative Vue.js interface over the Page Model.
+
+## Prerequisite
+
+To use Vue SDK, you need to have Vue 3 installed.
 
 ## Features
 
@@ -177,7 +181,7 @@ The [Containers](https://bloomreach.github.io/spa-sdk/interfaces/index.Container
 can be only mapped by their [type](https://documentation.bloomreach.com/library/concepts/template-composer/channel-editor-containers.html),
 so you need to use [constants](https://bloomreach.github.io/spa-sdk/modules/index.html#TYPE_CONTAINER_BOX) from
 [`@bloomreach/spa-sdk`](www.npmjs.com/package/@bloomreach/spa-sdk). By default,
-the Vue 3 SDK provides an implementation for all the container types as it is
+the Vue SDK provides an implementation for all the container types as it is
 defined in the [documentation](https://documentation.bloomreach.com/library/concepts/template-composer/channel-editor-containers.html).
 
 ```html
@@ -436,7 +440,7 @@ license.
 
 ## Reference
 
-The Vue 3 SDK is using [Bloomreach SPA SDK](https://www.npmjs.com/package/@bloomreach/spa-sdk) to interact
+The Vue SDK is using [Bloomreach SPA SDK](https://www.npmjs.com/package/@bloomreach/spa-sdk) to interact
 with Bloomreach Content.
 
 ### br-page

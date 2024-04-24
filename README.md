@@ -35,7 +35,7 @@ guides on the documentation website.
 The supported frameworks are currently:
 
 - React and Next.js
-- Vue (2 and 3) and Nuxt.js (2)
+- Vue (3)
 - Angular and Angular Universal
 
 The versions of these frameworks that the SDKs currently is verified to work
