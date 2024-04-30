@@ -21,7 +21,6 @@ The examples:
 - [React CSR example](./examples/react/README.md)
 - [Next.js example](./examples/next/README.md)
 - [Vue CSR example](./examples/vue/README.md)
-- [Nuxt.js example](./examples/nuxt/README.md)
 - [Angular CSR/Universal example](./examples/angular/README.md)
 
 ### Bloomreach support

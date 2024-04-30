@@ -16,9 +16,6 @@ echo "name ${NAME}"
 if [[ $APP_FRAMEWORK = "ng" ]]
 then
   APP_PATH="examples/angular"
-elif [[ $APP_TYPE = "ssr" ]] && [[ $APP_FRAMEWORK = "vue" ]]
-then
-  APP_PATH="examples/nuxt"
 elif [[ $APP_TYPE = "ssr" ]] && [[ $APP_FRAMEWORK = "react" ]]
 then
   APP_PATH="examples/next"
@@ -28,9 +25,6 @@ then
 elif [[ $APP_TYPE = "csr" ]] && [[ $APP_FRAMEWORK = "react" ]]
 then
   APP_PATH="examples/react"
-elif [[ $APP_TYPE = "csr" ]] && [[ $APP_FRAMEWORK = "vue" ]]
-then
-  APP_PATH="examples/vue"
 elif [[ $APP_TYPE = "ssr" ]] && [[ $APP_FRAMEWORK = "vue" ]]
 then
 # We don't have vue ssr app, but the deployment matrix is done in such a way that it will try to deploy the vue ssr
@@ -85,16 +79,6 @@ fi
 if [[ $APP_TYPE = "ssr" ]] && [[ $APP_FRAMEWORK = "react" ]]
 then
   heroku config:set --app=$NAME EXAMPLE_NAME="next" NEXT_PUBLIC_BR_MULTI_TENANT_SUPPORT=true
-fi
-
-if [[ $APP_TYPE = "csr" ]] && [[ $APP_FRAMEWORK = "vue" ]]
-then
-  heroku config:set --app=$NAME EXAMPLE_NAME="vue" VUE_APP_BR_MULTI_TENANT_SUPPORT=true
-fi
-
-if [[ $APP_TYPE = "ssr" ]] && [[ $APP_FRAMEWORK = "vue" ]]
-then
-  heroku config:set --app=$NAME EXAMPLE_NAME="nuxt" NUXT_APP_BR_MULTI_TENANT_SUPPORT=true HOST=0.0.0.0
 fi
 
 if [[ $APP_TYPE = "csr" ]] && [[ $APP_FRAMEWORK = "vue" ]]
