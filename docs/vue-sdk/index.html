@@ -7,7 +7,7 @@
 <link rel="icon" type="image/svg+xml" href="/spa-sdk/docs/favicon.svg">
 <link rel="sitemap" href="/sitemap.xml">
     <title data-pagefind-meta="title">
-      Vue 2 SDK
+      Vue SDK
     </title>
     <script>
       if (localStorage.getItem('theme') === null) {
@@ -46,11 +46,7 @@
           </a>
         </li><li class="nav-link">
           <a href="/spa-sdk/docs/vue-sdk" class="active">
-            Vue 2 SDK
-          </a>
-        </li><li class="nav-link">
-          <a href="/spa-sdk/docs/vue3-sdk">
-            Vue 3 SDK
+            Vue SDK
           </a>
         </li><li class="nav-link">
           <a href="/spa-sdk/docs/migration-guide">
@@ -147,11 +143,7 @@
           </a>
         </li><li class="nav-link">
           <a href="/spa-sdk/docs/vue-sdk" class="active">
-            Vue 2 SDK
-          </a>
-        </li><li class="nav-link">
-          <a href="/spa-sdk/docs/vue3-sdk">
-            Vue 3 SDK
+            Vue SDK
           </a>
         </li><li class="nav-link">
           <a href="/spa-sdk/docs/migration-guide">
@@ -174,27 +166,23 @@
       <div class="col-span-3 lg:col-span-2">
         <article>
           <div class="block lg:hidden">
-            <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();;(()=>{var d;{let p={0:t=>u(t),1:t=>l(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(l(t)),5:t=>new Set(l(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t)},h=t=>{let[e,n]=t;return e in p?p[e](n):void 0},l=t=>t.map(h),u=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([e,n])=>[e,h(n)]));customElements.get("astro-island")||customElements.define("astro-island",(d=class extends HTMLElement{constructor(){super(...arguments);this.hydrate=async()=>{var i;if(!this.hydrator||!this.isConnected)return;let e=(i=this.parentElement)==null?void 0:i.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let n=this.querySelectorAll("astro-slot"),o={},a=this.querySelectorAll("template[data-astro-template]");for(let r of a){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(o[r.getAttribute("data-astro-template")||"default"]=r.innerHTML,r.remove())}for(let r of n){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(o[r.getAttribute("name")||"default"]=r.innerHTML)}let c;try{c=this.hasAttribute("props")?u(JSON.parse(this.getAttribute("props"))):{}}catch(r){let s=this.getAttribute("component-url")||"<unknown>",y=this.getAttribute("component-export");throw y&&(s+=` (export ${y})`),console.error(`[hydrate] Error parsing props for component ${s}`,this.getAttribute("props"),r),r}await this.hydrator(this)(this.Component,c,o,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))}}connectedCallback(){!this.hasAttribute("await-children")||this.firstChild?this.childrenConnectedCallback():new MutationObserver((e,n)=>{n.disconnect(),setTimeout(()=>this.childrenConnectedCallback(),0)}).observe(this,{childList:!0})}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}start(){let e=JSON.parse(this.getAttribute("opts")),n=this.getAttribute("client");if(Astro[n]===void 0){window.addEventListener(`astro:${n}`,()=>this.start(),{once:!0});return}Astro[n](async()=>{let o=this.getAttribute("renderer-url"),[a,{default:c}]=await Promise.all([import(this.getAttribute("component-url")),o?import(o):()=>()=>{}]),i=this.getAttribute("component-export")||"default";if(!i.includes("."))this.Component=a[i];else{this.Component=a;for(let r of i.split("."))this.Component=this.Component[r]}return this.hydrator=c,this.hydrate},e,this)}attributeChangedCallback(){this.hydrate()}},d.observedAttributes=["props"],d))}})();</script><astro-island uid="Z1msMwX" prefix="r0" component-url="/spa-sdk/docs/_astro/TableOfContents.ba90f8bc.js" component-export="default" renderer-url="/spa-sdk/docs/_astro/client.2ce19805.js" props="{&quot;headings&quot;:[1,[[0,{&quot;depth&quot;:[0,1],&quot;slug&quot;:[0,&quot;bloomreach-vuejs-sdk&quot;],&quot;text&quot;:[0,&quot;Bloomreach Vue.js SDK&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;features&quot;],&quot;text&quot;:[0,&quot;Features&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;get-started&quot;],&quot;text&quot;:[0,&quot;Get Started&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;installation&quot;],&quot;text&quot;:[0,&quot;Installation&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;usage&quot;],&quot;text&quot;:[0,&quot;Usage&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;srcmaints&quot;],&quot;text&quot;:[0,&quot;src/main.ts&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;srcappvue&quot;],&quot;text&quot;:[0,&quot;src/App.vue&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;srccomponentsbannervue&quot;],&quot;text&quot;:[0,&quot;src/components/Banner.vue&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;non-blocking-render-mode-nbrmode&quot;],&quot;text&quot;:[0,&quot;Non-blocking render mode (NBRMode)&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;configuration&quot;],&quot;text&quot;:[0,&quot;Configuration&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;mapping&quot;],&quot;text&quot;:[0,&quot;Mapping&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;inline-mapping&quot;],&quot;text&quot;:[0,&quot;Inline Mapping&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;buttons&quot;],&quot;text&quot;:[0,&quot;Buttons&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;license&quot;],&quot;text&quot;:[0,&quot;License&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;reference&quot;],&quot;text&quot;:[0,&quot;Reference&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;br-page&quot;],&quot;text&quot;:[0,&quot;br-page&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;br-component&quot;],&quot;text&quot;:[0,&quot;br-component&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;br-manage-content-button&quot;],&quot;text&quot;:[0,&quot;br-manage-content-button&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;br-manage-menu-button&quot;],&quot;text&quot;:[0,&quot;br-manage-menu-button&quot;]}]]]}" ssr="" client="load" opts="{&quot;name&quot;:&quot;TableOfContents&quot;,&quot;value&quot;:true}" await-children=""><nav class="sticky top-0"><ul class="menu"><li><h2 id="on-this-page-heading" class="menu-title"><span class="">On this page</span></h2><ul><li><a href="#features" class="">Features</a></li><li><a href="#get-started" class="">Get Started</a></li><li><a href="#installation" class="">Installation</a></li><li><a href="#usage" class="">Usage</a></li><li><a href="#non-blocking-render-mode-nbrmode" class="">Non-blocking render mode (NBRMode)</a></li><li><a href="#configuration" class="">Configuration</a></li><li><a href="#mapping" class="">Mapping</a></li><li><a href="#inline-mapping" class="">Inline Mapping</a></li><li><a href="#buttons" class="">Buttons</a></li><li><a href="#license" class="">License</a></li><li><a href="#reference" class="">Reference</a></li><li><a href="#br-page" class="">br-page</a></li><li><a href="#br-component" class="">br-component</a></li><li><a href="#br-manage-content-button" class="">br-manage-content-button</a></li><li><a href="#br-manage-menu-button" class="">br-manage-menu-button</a></li></ul></li></ul><div class="divider lg:hidden"></div></nav></astro-island>
+            <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();;(()=>{var d;{let p={0:t=>u(t),1:t=>l(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(l(t)),5:t=>new Set(l(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t)},h=t=>{let[e,n]=t;return e in p?p[e](n):void 0},l=t=>t.map(h),u=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([e,n])=>[e,h(n)]));customElements.get("astro-island")||customElements.define("astro-island",(d=class extends HTMLElement{constructor(){super(...arguments);this.hydrate=async()=>{var i;if(!this.hydrator||!this.isConnected)return;let e=(i=this.parentElement)==null?void 0:i.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let n=this.querySelectorAll("astro-slot"),o={},a=this.querySelectorAll("template[data-astro-template]");for(let r of a){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(o[r.getAttribute("data-astro-template")||"default"]=r.innerHTML,r.remove())}for(let r of n){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(o[r.getAttribute("name")||"default"]=r.innerHTML)}let c;try{c=this.hasAttribute("props")?u(JSON.parse(this.getAttribute("props"))):{}}catch(r){let s=this.getAttribute("component-url")||"<unknown>",y=this.getAttribute("component-export");throw y&&(s+=` (export ${y})`),console.error(`[hydrate] Error parsing props for component ${s}`,this.getAttribute("props"),r),r}await this.hydrator(this)(this.Component,c,o,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))}}connectedCallback(){!this.hasAttribute("await-children")||this.firstChild?this.childrenConnectedCallback():new MutationObserver((e,n)=>{n.disconnect(),setTimeout(()=>this.childrenConnectedCallback(),0)}).observe(this,{childList:!0})}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}start(){let e=JSON.parse(this.getAttribute("opts")),n=this.getAttribute("client");if(Astro[n]===void 0){window.addEventListener(`astro:${n}`,()=>this.start(),{once:!0});return}Astro[n](async()=>{let o=this.getAttribute("renderer-url"),[a,{default:c}]=await Promise.all([import(this.getAttribute("component-url")),o?import(o):()=>()=>{}]),i=this.getAttribute("component-export")||"default";if(!i.includes("."))this.Component=a[i];else{this.Component=a;for(let r of i.split("."))this.Component=this.Component[r]}return this.hydrator=c,this.hydrate},e,this)}attributeChangedCallback(){this.hydrate()}},d.observedAttributes=["props"],d))}})();</script><astro-island uid="Z1PS38P" prefix="r0" component-url="/spa-sdk/docs/_astro/TableOfContents.ba90f8bc.js" component-export="default" renderer-url="/spa-sdk/docs/_astro/client.2ce19805.js" props="{&quot;headings&quot;:[1,[[0,{&quot;depth&quot;:[0,1],&quot;slug&quot;:[0,&quot;bloomreach-vue-sdk&quot;],&quot;text&quot;:[0,&quot;Bloomreach Vue SDK&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;prerequisite&quot;],&quot;text&quot;:[0,&quot;Prerequisite&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;features&quot;],&quot;text&quot;:[0,&quot;Features&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;get-started&quot;],&quot;text&quot;:[0,&quot;Get Started&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;installation&quot;],&quot;text&quot;:[0,&quot;Installation&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;usage&quot;],&quot;text&quot;:[0,&quot;Usage&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;srcmaints&quot;],&quot;text&quot;:[0,&quot;src/main.ts&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;srcappvue&quot;],&quot;text&quot;:[0,&quot;src/App.vue&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;srccomponentsbannervue&quot;],&quot;text&quot;:[0,&quot;src/components/Banner.vue&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;non-blocking-render-mode-nbrmode&quot;],&quot;text&quot;:[0,&quot;Non-blocking render mode (NBRMode)&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;configuration&quot;],&quot;text&quot;:[0,&quot;Configuration&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;mapping&quot;],&quot;text&quot;:[0,&quot;Mapping&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;inline-mapping&quot;],&quot;text&quot;:[0,&quot;Inline Mapping&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;buttons&quot;],&quot;text&quot;:[0,&quot;Buttons&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;license&quot;],&quot;text&quot;:[0,&quot;License&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;reference&quot;],&quot;text&quot;:[0,&quot;Reference&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;br-page&quot;],&quot;text&quot;:[0,&quot;br-page&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;br-component&quot;],&quot;text&quot;:[0,&quot;br-component&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;br-manage-content-button&quot;],&quot;text&quot;:[0,&quot;br-manage-content-button&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;br-manage-menu-button&quot;],&quot;text&quot;:[0,&quot;br-manage-menu-button&quot;]}]]]}" ssr="" client="load" opts="{&quot;name&quot;:&quot;TableOfContents&quot;,&quot;value&quot;:true}" await-children=""><nav class="sticky top-0"><ul class="menu"><li><h2 id="on-this-page-heading" class="menu-title"><span class="">On this page</span></h2><ul><li><a href="#prerequisite" class="">Prerequisite</a></li><li><a href="#features" class="">Features</a></li><li><a href="#get-started" class="">Get Started</a></li><li><a href="#installation" class="">Installation</a></li><li><a href="#usage" class="">Usage</a></li><li><a href="#non-blocking-render-mode-nbrmode" class="">Non-blocking render mode (NBRMode)</a></li><li><a href="#configuration" class="">Configuration</a></li><li><a href="#mapping" class="">Mapping</a></li><li><a href="#inline-mapping" class="">Inline Mapping</a></li><li><a href="#buttons" class="">Buttons</a></li><li><a href="#license" class="">License</a></li><li><a href="#reference" class="">Reference</a></li><li><a href="#br-page" class="">br-page</a></li><li><a href="#br-component" class="">br-component</a></li><li><a href="#br-manage-content-button" class="">br-manage-content-button</a></li><li><a href="#br-manage-menu-button" class="">br-manage-menu-button</a></li></ul></li></ul><div class="divider lg:hidden"></div></nav></astro-island>
           </div>
           <section class="prose" data-pagefind-body>
             
-  <h1 id="bloomreach-vuejs-sdk">Bloomreach Vue.js SDK</h1>
-<p><strong>If you are looking for Vue 3 support please take a look at the <a href="https://www.npmjs.com/package/@bloomreach/vue3-sdk">vue3-sdk</a></strong></p>
-<p>Bloomreach Vue.js SDK provides simplified headless integration with <a href="https://www.bloomreach.com/en/products/content">Bloomreach Content</a>
+  <h1 id="bloomreach-vue-sdk">Bloomreach Vue SDK</h1>
+<p>Bloomreach Vue SDK provides simplified headless integration with <a href="https://www.bloomreach.com/en/products/content">Bloomreach Content</a>
 for Vue-based applications. This library interacts with the <a href="https://documentation.bloomreach.com/api-reference/content/delivery/page-delivery-api/page-delivery-api.html">Page Model API</a>
 and <a href="https://www.npmjs.com/package/@bloomreach/spa-sdk">Bloomreach SPA SDK</a> and
 exposes a simplified declarative Vue.js interface over the Page Model.</p>
+<h2 id="prerequisite">Prerequisite</h2>
+<p>To use Vue SDK, you need to have Vue 3 installed.</p>
 <h2 id="features">Features</h2>
 <ul>
 <li>Bloomreach Page Vue component;</li>
 <li>Bloomreach Components Vue component;</li>
 <li>Manage Content Button;</li>
 <li>Manage Menu Button;</li>
-<li><a href="https://vuejs.org/v2/guide/components-slots.html">Slots</a> support;</li>
-<li><a href="https://ssr.vuejs.org/">Vue Server-Side Rendering</a> support;</li>
-<li><a href="https://nuxtjs.org/">Nuxt.js</a> support;</li>
-<li><a href="https://router.vuejs.org/">Vue Router</a> support;</li>
-<li><a href="https://jestjs.io/">Jest</a> support.</li>
 </ul>
 <h2 id="get-started">Get Started</h2>
 <h3 id="installation">Installation</h3>
@@ -208,20 +196,21 @@ exposes a simplified declarative Vue.js interface over the Page Model.</p>
 component.</p>
 <h4 id="srcmaints"><code>src/main.ts</code></h4>
 <p>In the app’s entry file, it needs to import and
-<a href="https://vuejs.org/v2/guide/plugins.html#Using-a-Plugin">install</a> the <code>BrSdk</code>
+<a href="https://vuejs.org/guide/reusability/plugins.html">install</a> the <code>BrSdk</code>
 plugin to make the SDK components available globally.</p>
-<pre is:raw="" class="astro-code github-dark" style="background-color: #24292e; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color: #F97583">import</span><span style="color: #E1E4E8"> Vue </span><span style="color: #F97583">from</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">'vue'</span><span style="color: #E1E4E8">;</span></span>
+<pre is:raw="" class="astro-code github-dark" style="background-color: #24292e; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color: #F97583">import</span><span style="color: #E1E4E8"> { createApp } </span><span style="color: #F97583">from</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">'vue'</span></span>
 <span class="line"><span style="color: #F97583">import</span><span style="color: #E1E4E8"> { BrSdk } </span><span style="color: #F97583">from</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">'@bloomreach/vue-sdk'</span><span style="color: #E1E4E8">;</span></span>
 <span class="line"></span>
-<span class="line"><span style="color: #E1E4E8">Vue.</span><span style="color: #B392F0">use</span><span style="color: #E1E4E8">(BrSdk);</span></span>
+<span class="line"><span style="color: #F97583">const</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">app</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">createApp</span><span style="color: #E1E4E8">(</span><span style="color: #6A737D">/*... */</span><span style="color: #E1E4E8">);</span></span>
+<span class="line"><span style="color: #E1E4E8">app.</span><span style="color: #B392F0">use</span><span style="color: #E1E4E8">(BrSdk);</span></span>
 <span class="line"></span>
-<span class="line"><span style="color: #6A737D">// ...</span></span></code></pre>
+<span class="line"><span style="color: #6A737D">/*... */</span></span></code></pre>
 <h4 id="srcappvue"><code>src/App.vue</code></h4>
-<p>In the <code>App</code> component, it needs to pass the configuration and brXM components
+<p>In the <code>App</code> component, it needs to pass the configuration and Bloomreach Content components
 mapping into the <code>br-page</code> component inputs.</p>
 <pre is:raw="" class="astro-code github-dark" style="background-color: #24292e; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
 <span class="line"><span style="color: #E1E4E8">  &#x3C;</span><span style="color: #85E89D">br-page</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">:configuration</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"configuration"</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">:mapping</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"mapping"</span><span style="color: #E1E4E8">></span></span>
-<span class="line"><span style="color: #E1E4E8">    &#x3C;</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">v-slot:default</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"props"</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">    &#x3C;</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">v-slot</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"props"</span><span style="color: #E1E4E8">></span></span>
 <span class="line"><span style="color: #E1E4E8">      &#x3C;</span><span style="color: #85E89D">header</span><span style="color: #E1E4E8">></span></span>
 <span class="line"><span style="color: #E1E4E8">        &#x3C;</span><span style="color: #85E89D">a</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">:href</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"props.page.getUrl('/')"</span><span style="color: #E1E4E8">>Home&#x3C;/</span><span style="color: #85E89D">a</span><span style="color: #E1E4E8">></span></span>
 <span class="line"><span style="color: #E1E4E8">        &#x3C;</span><span style="color: #85E89D">br-component</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">component</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"menu"</span><span style="color: #E1E4E8"> /></span></span>
@@ -236,19 +225,13 @@ mapping into the <code>br-page</code> component inputs.</p>
 <span class="line"><span style="color: #E1E4E8">  &#x3C;/</span><span style="color: #85E89D">br-page</span><span style="color: #E1E4E8">></span></span>
 <span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
 <span class="line"></span>
-<span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">lang</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"ts"</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">setup</span><span style="color: #E1E4E8">></span></span>
 <span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">import</span><span style="color: #E1E4E8"> Banner </span><span style="color: #F97583">from</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">'./components/Banner.vue'</span><span style="color: #E1E4E8">;</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">export</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">default</span><span style="color: #E1E4E8"> {</span></span>
-<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #B392F0">data</span><span style="color: #E1E4E8">() {</span></span>
-<span class="line"><span style="color: #E1E4E8">      </span><span style="color: #F97583">return</span><span style="color: #E1E4E8"> {</span></span>
-<span class="line"><span style="color: #E1E4E8">        configuration: {</span></span>
-<span class="line"><span style="color: #E1E4E8">          </span><span style="color: #6A737D">/* ... */</span></span>
-<span class="line"><span style="color: #E1E4E8">        },</span></span>
-<span class="line"><span style="color: #E1E4E8">        mapping: { Banner },</span></span>
-<span class="line"><span style="color: #E1E4E8">      };</span></span>
-<span class="line"><span style="color: #E1E4E8">    },</span></span>
+<span class="line"><span style="color: #E1E4E8">  </span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">const</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">configuration</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> {</span></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #6A737D">/* ... */</span></span>
 <span class="line"><span style="color: #E1E4E8">  };</span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">const</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">mapping</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> { Banner };</span></span>
 <span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span></code></pre>
 <h4 id="srccomponentsbannervue"><code>src/components/Banner.vue</code></h4>
 <p>Finally, in the <code>Banner</code> component, it can consume the component data via the
@@ -257,8 +240,11 @@ mapping into the <code>br-page</code> component inputs.</p>
 <span class="line"><span style="color: #E1E4E8">  &#x3C;</span><span style="color: #85E89D">div</span><span style="color: #E1E4E8">>Banner: {{ component.getName() }}&#x3C;/</span><span style="color: #85E89D">div</span><span style="color: #E1E4E8">></span></span>
 <span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
 <span class="line"></span>
-<span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span>
-<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">export</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">default</span><span style="color: #E1E4E8"> { props: [</span><span style="color: #9ECBFF">'component'</span><span style="color: #E1E4E8">] };</span></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">lang</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"ts"</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">setup</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">import</span><span style="color: #E1E4E8"> { toRefs } </span><span style="color: #F97583">from</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">'vue'</span><span style="color: #E1E4E8">;</span></span>
+<span class="line"><span style="color: #E1E4E8">  </span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">const</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">props</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">defineProps</span><span style="color: #E1E4E8">&#x3C;{ </span><span style="color: #FFAB70">component</span><span style="color: #F97583">:</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">Component</span><span style="color: #E1E4E8"> }>();</span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">const</span><span style="color: #E1E4E8"> { </span><span style="color: #79B8FF">component</span><span style="color: #E1E4E8"> } </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">toRefs</span><span style="color: #E1E4E8">(props);</span></span>
 <span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span></code></pre>
 <h3 id="non-blocking-render-mode-nbrmode">Non-blocking render mode (NBRMode)</h3>
 <p>Non-blocking rendering mode can be used to decrease the time for your application to load fully on the client side. By
@@ -266,18 +252,18 @@ default the NBRMode configuration is <code>false</code> to avoid breaking existi
 non-blocking render mode. When the mode is active the children of the BrPage component will start mounting while the
 Page Model is being fetched. These children might contain logic themselves that queries some external API and using
 non-blocking render mode would allow this to be executed in parallel to requesting the Page Model.</p>
-<pre is:raw="" class="astro-code github-dark" style="background-color: #24292e; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
+<pre is:raw="" class="astro-code github-dark" style="background-color: #24292e; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color: #6A737D">&#x3C;!-- MyComponent.vue --></span></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
 <span class="line"><span style="color: #E1E4E8">  Hello</span></span>
 <span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
 <span class="line"></span>
-<span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span>
-<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">export</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">default</span><span style="color: #E1E4E8"> {</span></span>
-<span class="line"><span style="color: #E1E4E8">    name: </span><span style="color: #9ECBFF">'MyComponent'</span><span style="color: #E1E4E8">,</span></span>
-<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #F97583">async</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">mounted</span><span style="color: #E1E4E8">() {</span></span>
-<span class="line"><span style="color: #E1E4E8">      </span><span style="color: #6A737D">// This will run in parallel to fetching the PageModel from the Delivery API</span></span>
-<span class="line"><span style="color: #E1E4E8">      </span><span style="color: #F97583">await</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">fetch</span><span style="color: #E1E4E8">(</span><span style="color: #9ECBFF">'https://yourapi.com'</span><span style="color: #E1E4E8">);</span></span>
-<span class="line"><span style="color: #E1E4E8">    }</span></span>
-<span class="line"><span style="color: #E1E4E8">  };</span></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">lang</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"ts"</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">setup</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">import</span><span style="color: #E1E4E8"> { onMounted } </span><span style="color: #F97583">from</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">'vue'</span><span style="color: #E1E4E8">;</span></span>
+<span class="line"><span style="color: #E1E4E8">  </span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #B392F0">onMounted</span><span style="color: #E1E4E8">(</span><span style="color: #F97583">async</span><span style="color: #E1E4E8"> () </span><span style="color: #F97583">=></span><span style="color: #E1E4E8"> {</span></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #6A737D">// This will run in parallel to fetching the Page Model from the Delivery API</span></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #F97583">await</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">fetch</span><span style="color: #E1E4E8">(</span><span style="color: #9ECBFF">'https://yourapi.com'</span><span style="color: #E1E4E8">);</span></span>
+<span class="line"><span style="color: #E1E4E8">  });</span></span>
 <span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span></code></pre>
 <pre is:raw="" class="astro-code github-dark" style="background-color: #24292e; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
 <span class="line"><span style="color: #E1E4E8">  &#x3C;</span><span style="color: #85E89D">br-page</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">:configuration</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"configuration"</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">:mapping</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"mapping"</span><span style="color: #E1E4E8">></span></span>
@@ -287,18 +273,12 @@ non-blocking render mode would allow this to be executed in parallel to requesti
 <span class="line"><span style="color: #E1E4E8">  &#x3C;/</span><span style="color: #85E89D">br-page</span><span style="color: #E1E4E8">></span></span>
 <span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
 <span class="line"></span>
-<span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span>
-<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">export</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">default</span><span style="color: #E1E4E8"> {</span></span>
-<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #B392F0">data</span><span style="color: #E1E4E8">() {</span></span>
-<span class="line"><span style="color: #E1E4E8">      </span><span style="color: #F97583">return</span><span style="color: #E1E4E8"> {</span></span>
-<span class="line"><span style="color: #E1E4E8">        configuration: {</span></span>
-<span class="line"><span style="color: #E1E4E8">          </span><span style="color: #6A737D">/* ... */</span></span>
-<span class="line"><span style="color: #E1E4E8">          NBRMode: </span><span style="color: #79B8FF">true</span><span style="color: #E1E4E8">,</span></span>
-<span class="line"><span style="color: #E1E4E8">        },</span></span>
-<span class="line"><span style="color: #E1E4E8">        mapping: { </span><span style="color: #F97583">...</span><span style="color: #E1E4E8"> },</span></span>
-<span class="line"><span style="color: #E1E4E8">      };</span></span>
-<span class="line"><span style="color: #E1E4E8">    },</span></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">lang</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"ts"</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">setup</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">const</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">configuration</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> {</span></span>
+<span class="line"><span style="color: #E1E4E8">    NBRMode: </span><span style="color: #79B8FF">true</span><span style="color: #E1E4E8">,</span></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #6A737D">/* ... */</span></span>
 <span class="line"><span style="color: #E1E4E8">  };</span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">const</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">mapping</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> {</span><span style="color: #6A737D">/* ... */</span><span style="color: #E1E4E8">};</span></span>
 <span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span></code></pre>
 <h3 id="configuration">Configuration</h3>
 <p>The <code>br-page</code> component supports several options you may use to customize page
@@ -307,7 +287,7 @@ initialization. These options will be passed to the <code>initialize</code> func
 <a href="https://bloomreach.github.io/spa-sdk/modules/index.html#Configuration">here</a> for the
 full configuration documentation in the SPA SDK Typedocs.</p>
 <h3 id="mapping">Mapping</h3>
-<p>The <code>br-page</code> component provides a way to link Vue components with the brXM
+<p>The <code>br-page</code> component provides a way to link Vue components with the Bloomreach Content
 ones. It requires to pass the <code>mapping</code> property that maps the component type
 with its representation.</p>
 <p>The <a href="https://bloomreach.github.io/spa-sdk/interfaces/index.ContainerItem.html">Container Items</a> can be
@@ -316,44 +296,32 @@ mapped by their labels.</p>
 <span class="line"><span style="color: #E1E4E8">  &#x3C;</span><span style="color: #85E89D">br-page</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">:configuration</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"configuration"</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">:mapping</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"mapping"</span><span style="color: #E1E4E8"> /></span></span>
 <span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
 <span class="line"></span>
-<span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">lang</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"ts"</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">setup</span><span style="color: #E1E4E8">></span></span>
 <span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">import</span><span style="color: #E1E4E8"> NewsList </span><span style="color: #F97583">from</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">'./components/NewsList.vue'</span><span style="color: #E1E4E8">;</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">export</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">default</span><span style="color: #E1E4E8"> {</span></span>
-<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #B392F0">data</span><span style="color: #E1E4E8">() {</span></span>
-<span class="line"><span style="color: #E1E4E8">      </span><span style="color: #F97583">return</span><span style="color: #E1E4E8"> {</span></span>
-<span class="line"><span style="color: #E1E4E8">        configuration: {</span></span>
-<span class="line"><span style="color: #E1E4E8">          </span><span style="color: #6A737D">/* ... */</span></span>
-<span class="line"><span style="color: #E1E4E8">        },</span></span>
-<span class="line"><span style="color: #E1E4E8">        mapping: { </span><span style="color: #9ECBFF">'News List'</span><span style="color: #E1E4E8">: NewsList },</span></span>
-<span class="line"><span style="color: #E1E4E8">      };</span></span>
-<span class="line"><span style="color: #E1E4E8">    },</span></span>
+<span class="line"><span style="color: #E1E4E8">  </span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">const</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">configuration</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> {</span></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #6A737D">/* ... */</span></span>
 <span class="line"><span style="color: #E1E4E8">  };</span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">const</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">mapping</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> { </span><span style="color: #9ECBFF">'News List'</span><span style="color: #E1E4E8">: NewsList };</span></span>
 <span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span></code></pre>
 <p>The <a href="https://bloomreach.github.io/spa-sdk/interfaces/index.ContainerItem.html">Containers</a>
 can be only mapped by their <a href="https://documentation.bloomreach.com/library/concepts/template-composer/channel-editor-containers.html">type</a>,
 so you need to use <a href="https://bloomreach.github.io/spa-sdk/modules/index.html#TYPE_CONTAINER_BOX">constants</a> from
 <a href="www.npmjs.com/package/@bloomreach/spa-sdk"><code>@bloomreach/spa-sdk</code></a>. By default,
-the Vue.js SDK provides an implementation for all the container types as it is
+the Vue SDK provides an implementation for all the container types as it is
 defined in the <a href="https://documentation.bloomreach.com/library/concepts/template-composer/channel-editor-containers.html">documentation</a>.</p>
 <pre is:raw="" class="astro-code github-dark" style="background-color: #24292e; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
 <span class="line"><span style="color: #E1E4E8">  &#x3C;</span><span style="color: #85E89D">br-page</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">:configuration</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"configuration"</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">:mapping</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"mapping"</span><span style="color: #E1E4E8"> /></span></span>
 <span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
 <span class="line"></span>
-<span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">lang</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"ts"</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">setup</span><span style="color: #E1E4E8">></span></span>
 <span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">import</span><span style="color: #E1E4E8"> { TYPE_CONTAINER_INLINE } </span><span style="color: #F97583">from</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">'@bloomreach/spa-sdk'</span><span style="color: #E1E4E8">;</span></span>
 <span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">import</span><span style="color: #E1E4E8"> InlineContainer </span><span style="color: #F97583">from</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">'./components/InlineContainer.vue'</span><span style="color: #E1E4E8">;</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">export</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">default</span><span style="color: #E1E4E8"> {</span></span>
-<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #B392F0">data</span><span style="color: #E1E4E8">() {</span></span>
-<span class="line"><span style="color: #E1E4E8">      </span><span style="color: #F97583">return</span><span style="color: #E1E4E8"> {</span></span>
-<span class="line"><span style="color: #E1E4E8">        configuration: {</span></span>
-<span class="line"><span style="color: #E1E4E8">          </span><span style="color: #6A737D">/* ... */</span></span>
-<span class="line"><span style="color: #E1E4E8">        },</span></span>
-<span class="line"><span style="color: #E1E4E8">        mapping: { [</span><span style="color: #79B8FF">TYPE_CONTAINER_INLINE</span><span style="color: #E1E4E8">]: InlineContainer },</span></span>
-<span class="line"><span style="color: #E1E4E8">      };</span></span>
-<span class="line"><span style="color: #E1E4E8">    },</span></span>
+<span class="line"><span style="color: #E1E4E8">  </span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">const</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">configuration</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> {</span></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #6A737D">/* ... */</span></span>
 <span class="line"><span style="color: #E1E4E8">  };</span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">const</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">mapping</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> { [</span><span style="color: #79B8FF">TYPE_CONTAINER_INLINE</span><span style="color: #E1E4E8">]: InlineContainer };</span></span>
 <span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span></code></pre>
 <p>From within the Container component, the Container Items can be accessed via the
 <code>getChildren</code> method. This can be used to reorder or wrap child elements.</p>
@@ -365,37 +333,25 @@ defined in the <a href="https://documentation.bloomreach.com/library/concepts/te
 <span class="line"><span style="color: #E1E4E8">  &#x3C;/</span><span style="color: #85E89D">div</span><span style="color: #E1E4E8">></span></span>
 <span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
 <span class="line"></span>
-<span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span>
-<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">export</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">default</span><span style="color: #E1E4E8"> { props: [</span><span style="color: #9ECBFF">'component'</span><span style="color: #E1E4E8">] };</span></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">lang</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"ts"</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">setup</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">import</span><span style="color: #E1E4E8"> { toRefs } </span><span style="color: #F97583">from</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">'vue'</span><span style="color: #E1E4E8">;</span></span>
+<span class="line"><span style="color: #E1E4E8">  </span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">const</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">props</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">defineProps</span><span style="color: #E1E4E8">&#x3C;{ </span><span style="color: #FFAB70">component</span><span style="color: #F97583">:</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">Component</span><span style="color: #E1E4E8"> }>();</span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">const</span><span style="color: #E1E4E8"> { </span><span style="color: #79B8FF">component</span><span style="color: #E1E4E8"> } </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">toRefs</span><span style="color: #E1E4E8">(props);</span></span>
 <span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span></code></pre>
-<p>That is also possible to render children via the default slot.</p>
-<pre is:raw="" class="astro-code github-dark" style="background-color: #24292e; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color: #F97583">export</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">default</span><span style="color: #E1E4E8"> {</span></span>
-<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #B392F0">render</span><span style="color: #E1E4E8">(</span><span style="color: #FFAB70">createElement</span><span style="color: #E1E4E8">) {</span></span>
-<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #F97583">return</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">createElement</span><span style="color: #E1E4E8">(</span></span>
-<span class="line"><span style="color: #E1E4E8">      </span><span style="color: #9ECBFF">'div'</span><span style="color: #E1E4E8">,</span></span>
-<span class="line"><span style="color: #E1E4E8">      </span><span style="color: #79B8FF">this</span><span style="color: #E1E4E8">.$slots.default.</span><span style="color: #B392F0">map</span><span style="color: #E1E4E8">((</span><span style="color: #FFAB70">node</span><span style="color: #E1E4E8">) </span><span style="color: #F97583">=></span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">createElement</span><span style="color: #E1E4E8">(</span><span style="color: #9ECBFF">'span'</span><span style="color: #E1E4E8">, [node])),</span></span>
-<span class="line"><span style="color: #E1E4E8">    );</span></span>
-<span class="line"><span style="color: #E1E4E8">  },</span></span>
-<span class="line"><span style="color: #E1E4E8">};</span></span></code></pre>
 <p>The <a href="https://bloomreach.github.io/spa-sdk/interfaces/index.Component.html">Components</a>
 can be mapped by their names. It is useful for a menu component mapping.</p>
 <pre is:raw="" class="astro-code github-dark" style="background-color: #24292e; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
 <span class="line"><span style="color: #E1E4E8">  &#x3C;</span><span style="color: #85E89D">br-page</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">:configuration</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"configuration"</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">:mapping</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"mapping"</span><span style="color: #E1E4E8"> /></span></span>
 <span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
 <span class="line"></span>
-<span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">lang</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"ts"</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">setup</span><span style="color: #E1E4E8">></span></span>
 <span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">import</span><span style="color: #E1E4E8"> Menu </span><span style="color: #F97583">from</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">'./components/Menu.vue'</span><span style="color: #E1E4E8">;</span></span>
 <span class="line"></span>
-<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">export</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">default</span><span style="color: #E1E4E8"> {</span></span>
-<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #B392F0">data</span><span style="color: #E1E4E8">() {</span></span>
-<span class="line"><span style="color: #E1E4E8">      </span><span style="color: #F97583">return</span><span style="color: #E1E4E8"> {</span></span>
-<span class="line"><span style="color: #E1E4E8">        configuration: {</span></span>
-<span class="line"><span style="color: #E1E4E8">          </span><span style="color: #6A737D">/* ... */</span></span>
-<span class="line"><span style="color: #E1E4E8">        },</span></span>
-<span class="line"><span style="color: #E1E4E8">        mapping: { menu: Menu },</span></span>
-<span class="line"><span style="color: #E1E4E8">      };</span></span>
-<span class="line"><span style="color: #E1E4E8">    },</span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">const</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">configuration</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> {</span></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #6A737D">/* ... */</span></span>
 <span class="line"><span style="color: #E1E4E8">  };</span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">const</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">mapping</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> { menu: Menu };</span></span>
 <span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span></code></pre>
 <p>By default, container items that are not mapped will be rendered as a warning
 text. There is an option to override the fallback.</p>
@@ -403,20 +359,14 @@ text. There is an option to override the fallback.</p>
 <span class="line"><span style="color: #E1E4E8">  &#x3C;</span><span style="color: #85E89D">br-page</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">:configuration</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"configuration"</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">:mapping</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"mapping"</span><span style="color: #E1E4E8"> /></span></span>
 <span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
 <span class="line"></span>
-<span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">lang</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"ts"</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">setup</span><span style="color: #E1E4E8">></span></span>
 <span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">import</span><span style="color: #E1E4E8"> { TYPE_CONTAINER_ITEM_UNDEFINED } </span><span style="color: #F97583">from</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">'@bloomreach/spa-sdk'</span><span style="color: #E1E4E8">;</span></span>
 <span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">import</span><span style="color: #E1E4E8"> Fallback </span><span style="color: #F97583">from</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">'./components/Fallback.vue'</span><span style="color: #E1E4E8">;</span></span>
 <span class="line"></span>
-<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">export</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">default</span><span style="color: #E1E4E8"> {</span></span>
-<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #B392F0">data</span><span style="color: #E1E4E8">() {</span></span>
-<span class="line"><span style="color: #E1E4E8">      </span><span style="color: #F97583">return</span><span style="color: #E1E4E8"> {</span></span>
-<span class="line"><span style="color: #E1E4E8">        configuration: {</span></span>
-<span class="line"><span style="color: #E1E4E8">          </span><span style="color: #6A737D">/* ... */</span></span>
-<span class="line"><span style="color: #E1E4E8">        },</span></span>
-<span class="line"><span style="color: #E1E4E8">        mapping: { [</span><span style="color: #79B8FF">TYPE_CONTAINER_ITEM_UNDEFINED</span><span style="color: #E1E4E8">]: Fallback },</span></span>
-<span class="line"><span style="color: #E1E4E8">      };</span></span>
-<span class="line"><span style="color: #E1E4E8">    },</span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">const</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">configuration</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> {</span></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #6A737D">/* ... */</span></span>
 <span class="line"><span style="color: #E1E4E8">  };</span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">const</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">mapping</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> { [</span><span style="color: #79B8FF">TYPE_CONTAINER_ITEM_UNDEFINED</span><span style="color: #E1E4E8">]: Fallback };</span></span>
 <span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span></code></pre>
 <h3 id="inline-mapping">Inline Mapping</h3>
 <p>There is also another way to render a component. In case you need to show a
@@ -427,7 +377,7 @@ component mapping.</p>
 <span class="line"><span style="color: #E1E4E8">    &#x3C;</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
 <span class="line"><span style="color: #E1E4E8">      &#x3C;</span><span style="color: #85E89D">br-component</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">component</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"menu"</span><span style="color: #E1E4E8">></span></span>
 <span class="line"><span style="color: #E1E4E8">        &#x3C;</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">v-slot:default</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"{ component, page }"</span><span style="color: #E1E4E8">></span></span>
-<span class="line"><span style="color: #E1E4E8">          &#x3C;</span><span style="color: #85E89D">menu</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">:component</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"component"</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">:page</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"page"</span><span style="color: #E1E4E8"> </span><span style="color: #FDAEB7; font-style: italic">/</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">          &#x3C;</span><span style="color: #85E89D">Menu</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">:component</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"component"</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">:page</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"page"</span><span style="color: #E1E4E8"> </span><span style="color: #FDAEB7; font-style: italic">/</span><span style="color: #E1E4E8">></span></span>
 <span class="line"><span style="color: #E1E4E8">        &#x3C;/</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
 <span class="line"><span style="color: #E1E4E8">      &#x3C;/</span><span style="color: #85E89D">br-component</span><span style="color: #E1E4E8">></span></span>
 <span class="line"><span style="color: #E1E4E8">    &#x3C;/</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
@@ -436,30 +386,30 @@ component mapping.</p>
 <span class="line"></span>
 <span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span>
 <span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">import</span><span style="color: #E1E4E8"> Menu </span><span style="color: #F97583">from</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">'./components/Menu.vue'</span><span style="color: #E1E4E8">;</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">export</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">default</span><span style="color: #E1E4E8"> {</span></span>
-<span class="line"><span style="color: #E1E4E8">    components: { Menu },</span></span>
-<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #B392F0">data</span><span style="color: #E1E4E8">() {</span></span>
-<span class="line"><span style="color: #E1E4E8">      </span><span style="color: #F97583">return</span><span style="color: #E1E4E8"> {</span></span>
-<span class="line"><span style="color: #E1E4E8">        configuration: {</span></span>
-<span class="line"><span style="color: #E1E4E8">          </span><span style="color: #6A737D">/* ... */</span></span>
-<span class="line"><span style="color: #E1E4E8">        },</span></span>
-<span class="line"><span style="color: #E1E4E8">        mapping: {},</span></span>
-<span class="line"><span style="color: #E1E4E8">      };</span></span>
-<span class="line"><span style="color: #E1E4E8">    },</span></span>
+<span class="line"><span style="color: #E1E4E8">  </span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">const</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">configuration</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> {</span></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #6A737D">/* ... */</span></span>
+<span class="line"><span style="color: #E1E4E8">  };</span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">const</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">mapping</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> {</span></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #6A737D">/* ... */</span></span>
 <span class="line"><span style="color: #E1E4E8">  };</span></span>
 <span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span></code></pre>
 <p>In a component it is also possible to point where the component’s children are
 going to be placed.</p>
-<pre is:raw="" class="astro-code github-dark" style="background-color: #24292e; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
+<pre is:raw="" class="astro-code github-dark" style="background-color: #24292e; overflow-x: auto;" tabindex="0"><code><span class="line"></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
 <span class="line"><span style="color: #E1E4E8">  &#x3C;</span><span style="color: #85E89D">div</span><span style="color: #E1E4E8">></span></span>
 <span class="line"><span style="color: #E1E4E8">    @copy; Bloomreach</span></span>
-<span class="line"><span style="color: #E1E4E8">    &#x3C;</span><span style="color: #85E89D">br-component</span><span style="color: #E1E4E8"> /></span></span>
+<span class="line"><span style="color: #E1E4E8">    &#x3C;</span><span style="color: #85E89D">br-component</span><span style="color: #E1E4E8">/></span></span>
 <span class="line"><span style="color: #E1E4E8">  &#x3C;/</span><span style="color: #85E89D">div</span><span style="color: #E1E4E8">></span></span>
 <span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
 <span class="line"></span>
-<span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span>
-<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">export</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">default</span><span style="color: #E1E4E8"> { props: [</span><span style="color: #9ECBFF">'component'</span><span style="color: #E1E4E8">] };</span></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">lang</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"ts"</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">setup</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">import</span><span style="color: #E1E4E8"> { Component } </span><span style="color: #F97583">from</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">'@bloomreach/spa-sdk'</span><span style="color: #E1E4E8">;</span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">import</span><span style="color: #E1E4E8"> { toRefs } </span><span style="color: #F97583">from</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">'vue'</span><span style="color: #E1E4E8">;</span></span>
+<span class="line"><span style="color: #E1E4E8">  </span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">const</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">props</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">defineProps</span><span style="color: #E1E4E8"> &#x3C; { </span><span style="color: #FFAB70">component</span><span style="color: #F97583">:</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">Component</span><span style="color: #E1E4E8"> } > ();</span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">const</span><span style="color: #E1E4E8"> { </span><span style="color: #79B8FF">component</span><span style="color: #E1E4E8"> } </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">toRefs</span><span style="color: #E1E4E8">(props);</span></span>
 <span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span></code></pre>
 <p>The component data in case of inline mapping can be accessed via the template
 context.</p>
@@ -478,16 +428,12 @@ context.</p>
 <span class="line"><span style="color: #E1E4E8">  &#x3C;/</span><span style="color: #85E89D">br-page</span><span style="color: #E1E4E8">></span></span>
 <span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
 <span class="line"></span>
-<span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span>
-<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">export</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">default</span><span style="color: #E1E4E8"> {</span></span>
-<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #B392F0">data</span><span style="color: #E1E4E8">() {</span></span>
-<span class="line"><span style="color: #E1E4E8">      </span><span style="color: #F97583">return</span><span style="color: #E1E4E8"> {</span></span>
-<span class="line"><span style="color: #E1E4E8">        configuration: {</span></span>
-<span class="line"><span style="color: #E1E4E8">          </span><span style="color: #6A737D">/* ... */</span></span>
-<span class="line"><span style="color: #E1E4E8">        },</span></span>
-<span class="line"><span style="color: #E1E4E8">        mapping: {},</span></span>
-<span class="line"><span style="color: #E1E4E8">      };</span></span>
-<span class="line"><span style="color: #E1E4E8">    },</span></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">lang</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"ts"</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">setup</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">const</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">configuration</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> {</span></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #6A737D">/* ... */</span></span>
+<span class="line"><span style="color: #E1E4E8">  };</span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">const</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">mapping</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> {</span></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #6A737D">/* ... */</span></span>
 <span class="line"><span style="color: #E1E4E8">  };</span></span>
 <span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span></code></pre>
 <h3 id="buttons">Buttons</h3>
@@ -503,23 +449,20 @@ so they will position correctly within their parent container component.</p>
 <span class="line"><span style="color: #E1E4E8">  &#x3C;/</span><span style="color: #85E89D">ul</span><span style="color: #E1E4E8">></span></span>
 <span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
 <span class="line"></span>
-<span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span>
-<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">import</span><span style="color: #E1E4E8"> { Menu, Reference } </span><span style="color: #F97583">from</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">'@bloomreach/spa-sdk'</span><span style="color: #E1E4E8">;</span></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">lang</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"ts"</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">setup</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">import</span><span style="color: #E1E4E8"> { toRefs, computed } </span><span style="color: #F97583">from</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">'vue'</span><span style="color: #E1E4E8">;</span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">import</span><span style="color: #E1E4E8"> { Menu, Reference, Component, Page } </span><span style="color: #F97583">from</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">'@bloomreach/spa-sdk'</span><span style="color: #E1E4E8">;</span></span>
 <span class="line"></span>
 <span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">interface</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">MenuModels</span><span style="color: #E1E4E8"> {</span></span>
 <span class="line"><span style="color: #E1E4E8">    </span><span style="color: #FFAB70">menu</span><span style="color: #F97583">:</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">Reference</span><span style="color: #E1E4E8">;</span></span>
 <span class="line"><span style="color: #E1E4E8">  }</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">export</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">default</span><span style="color: #E1E4E8"> {</span></span>
-<span class="line"><span style="color: #E1E4E8">    computed: {</span></span>
-<span class="line"><span style="color: #E1E4E8">      </span><span style="color: #B392F0">menu</span><span style="color: #E1E4E8">() {</span></span>
-<span class="line"><span style="color: #E1E4E8">        </span><span style="color: #F97583">const</span><span style="color: #E1E4E8"> { </span><span style="color: #FFAB70">menu</span><span style="color: #E1E4E8">: </span><span style="color: #79B8FF">menuRef</span><span style="color: #E1E4E8"> } </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">this</span><span style="color: #E1E4E8">.component.</span><span style="color: #B392F0">getModels</span><span style="color: #E1E4E8">&#x3C;</span><span style="color: #B392F0">MenuModels</span><span style="color: #E1E4E8">>();</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #E1E4E8">        </span><span style="color: #F97583">return</span><span style="color: #E1E4E8"> menuRef </span><span style="color: #F97583">&#x26;&#x26;</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">this</span><span style="color: #E1E4E8">.page.</span><span style="color: #B392F0">getContent</span><span style="color: #E1E4E8">&#x3C;</span><span style="color: #B392F0">Menu</span><span style="color: #E1E4E8">>(menuRef);</span></span>
-<span class="line"><span style="color: #E1E4E8">      },</span></span>
-<span class="line"><span style="color: #E1E4E8">    },</span></span>
-<span class="line"><span style="color: #E1E4E8">    props: [</span><span style="color: #9ECBFF">'component'</span><span style="color: #E1E4E8">, </span><span style="color: #9ECBFF">'page'</span><span style="color: #E1E4E8">],</span></span>
-<span class="line"><span style="color: #E1E4E8">  };</span></span>
+<span class="line"><span style="color: #E1E4E8">  </span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">const</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">props</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">defineProps</span><span style="color: #E1E4E8">&#x3C;{ </span><span style="color: #FFAB70">component</span><span style="color: #F97583">:</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">Component</span><span style="color: #E1E4E8">; </span><span style="color: #FFAB70">page</span><span style="color: #F97583">:</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">Page</span><span style="color: #E1E4E8"> }>();</span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">const</span><span style="color: #E1E4E8"> { </span><span style="color: #79B8FF">component</span><span style="color: #E1E4E8">, </span><span style="color: #79B8FF">page</span><span style="color: #E1E4E8"> } </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">toRefs</span><span style="color: #E1E4E8">(props);</span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">const</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">menu</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">computed</span><span style="color: #E1E4E8">(() </span><span style="color: #F97583">=></span><span style="color: #E1E4E8"> {</span></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #F97583">const</span><span style="color: #E1E4E8"> { </span><span style="color: #FFAB70">menu</span><span style="color: #E1E4E8">: </span><span style="color: #79B8FF">menuRef</span><span style="color: #E1E4E8"> } </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> component.value.</span><span style="color: #B392F0">getModels</span><span style="color: #E1E4E8">&#x3C;</span><span style="color: #B392F0">MenuModels</span><span style="color: #E1E4E8">>();</span></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #F97583">return</span><span style="color: #E1E4E8"> menuRef </span><span style="color: #F97583">&#x26;&#x26;</span><span style="color: #E1E4E8"> page.value.</span><span style="color: #B392F0">getContent</span><span style="color: #E1E4E8">&#x3C;</span><span style="color: #B392F0">Menu</span><span style="color: #E1E4E8">>(menuRef);</span></span>
+<span class="line"><span style="color: #E1E4E8">  });</span></span>
 <span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span></code></pre>
 <p>Manage content button can be placed inside a component using
 <code>br-manage-content-button</code> component with non-empty <code>content</code> property.</p>
@@ -539,22 +482,20 @@ so they will position correctly within their parent container component.</p>
 <span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
 <span class="line"></span>
 <span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span>
-<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">import</span><span style="color: #E1E4E8"> { Document, Reference } </span><span style="color: #F97583">from</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">'@bloomreach/spa-sdk'</span><span style="color: #E1E4E8">;</span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">import</span><span style="color: #E1E4E8"> { toRefs, computed } </span><span style="color: #F97583">from</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">'vue'</span><span style="color: #E1E4E8">;</span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">import</span><span style="color: #E1E4E8"> { Document, Reference, Page, Component } </span><span style="color: #F97583">from</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">'@bloomreach/spa-sdk'</span><span style="color: #E1E4E8">;</span></span>
 <span class="line"></span>
 <span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">interface</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">BannerModels</span><span style="color: #E1E4E8"> {</span></span>
 <span class="line"><span style="color: #E1E4E8">    </span><span style="color: #FFAB70">document</span><span style="color: #F97583">:</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">Reference</span><span style="color: #E1E4E8">;</span></span>
 <span class="line"><span style="color: #E1E4E8">  }</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">export</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">default</span><span style="color: #E1E4E8"> {</span></span>
-<span class="line"><span style="color: #E1E4E8">    computed: {</span></span>
-<span class="line"><span style="color: #E1E4E8">      </span><span style="color: #B392F0">document</span><span style="color: #E1E4E8">() {</span></span>
-<span class="line"><span style="color: #E1E4E8">        </span><span style="color: #F97583">const</span><span style="color: #E1E4E8"> { </span><span style="color: #FFAB70">document</span><span style="color: #E1E4E8">: </span><span style="color: #79B8FF">documentRef</span><span style="color: #E1E4E8"> } </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">this</span><span style="color: #E1E4E8">.component.</span><span style="color: #B392F0">getModels</span><span style="color: #E1E4E8">&#x3C;</span><span style="color: #B392F0">BannerModels</span><span style="color: #E1E4E8">>();</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #E1E4E8">        </span><span style="color: #F97583">return</span><span style="color: #E1E4E8"> documentRef </span><span style="color: #F97583">&#x26;&#x26;</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">this</span><span style="color: #E1E4E8">.page.</span><span style="color: #B392F0">getContent</span><span style="color: #E1E4E8">&#x3C;</span><span style="color: #B392F0">Document</span><span style="color: #E1E4E8">>(documentRef);</span></span>
-<span class="line"><span style="color: #E1E4E8">      },</span></span>
-<span class="line"><span style="color: #E1E4E8">    },</span></span>
-<span class="line"><span style="color: #E1E4E8">    props: [</span><span style="color: #9ECBFF">'component'</span><span style="color: #E1E4E8">, </span><span style="color: #9ECBFF">'page'</span><span style="color: #E1E4E8">],</span></span>
-<span class="line"><span style="color: #E1E4E8">  };</span></span>
+<span class="line"><span style="color: #E1E4E8">  </span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">const</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">props</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">defineProps</span><span style="color: #E1E4E8">&#x3C;{ </span><span style="color: #FFAB70">component</span><span style="color: #F97583">:</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">Component</span><span style="color: #E1E4E8">; </span><span style="color: #FFAB70">page</span><span style="color: #F97583">:</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">Page</span><span style="color: #E1E4E8"> }>();</span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">const</span><span style="color: #E1E4E8"> { </span><span style="color: #79B8FF">component</span><span style="color: #E1E4E8">, </span><span style="color: #79B8FF">page</span><span style="color: #E1E4E8"> } </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">toRefs</span><span style="color: #E1E4E8">(props);</span></span>
+<span class="line"><span style="color: #E1E4E8">  </span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">const</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">document</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">computed</span><span style="color: #E1E4E8">(() </span><span style="color: #F97583">=></span><span style="color: #E1E4E8"> {</span></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #F97583">const</span><span style="color: #E1E4E8"> { </span><span style="color: #FFAB70">document</span><span style="color: #E1E4E8">: </span><span style="color: #79B8FF">documentRef</span><span style="color: #E1E4E8"> } </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> component.value.</span><span style="color: #B392F0">getModels</span><span style="color: #E1E4E8">&#x3C;</span><span style="color: #B392F0">BannerModels</span><span style="color: #E1E4E8">>();</span></span>
+<span class="line"><span style="color: #E1E4E8">    </span><span style="color: #F97583">return</span><span style="color: #E1E4E8"> documentRef </span><span style="color: #F97583">&#x26;&#x26;</span><span style="color: #E1E4E8"> page.value.</span><span style="color: #B392F0">getContent</span><span style="color: #E1E4E8">&#x3C;</span><span style="color: #B392F0">Document</span><span style="color: #E1E4E8">>(documentRef);</span></span>
+<span class="line"><span style="color: #E1E4E8">  });</span></span>
 <span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span></code></pre>
 <p>Add new content button can be placed inside a component using
 <code>br-manage-content-button</code> directive but without passing a content entity.</p>
@@ -570,16 +511,17 @@ so they will position correctly within their parent container component.</p>
 <span class="line"><span style="color: #E1E4E8">  &#x3C;/</span><span style="color: #85E89D">div</span><span style="color: #E1E4E8">></span></span>
 <span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">template</span><span style="color: #E1E4E8">></span></span>
 <span class="line"></span>
-<span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span>
-<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">export</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">default</span><span style="color: #E1E4E8"> {</span></span>
-<span class="line"><span style="color: #E1E4E8">    props: [</span><span style="color: #9ECBFF">'component'</span><span style="color: #E1E4E8">, </span><span style="color: #9ECBFF">'page'</span><span style="color: #E1E4E8">],</span></span>
-<span class="line"><span style="color: #E1E4E8">  };</span></span>
+<span class="line"><span style="color: #E1E4E8">&#x3C;</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">lang</span><span style="color: #E1E4E8">=</span><span style="color: #9ECBFF">"ts"</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">setup</span><span style="color: #E1E4E8">></span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">import</span><span style="color: #E1E4E8"> { Component, Page } </span><span style="color: #F97583">from</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">'@bloomreach/spa-sdk'</span><span style="color: #E1E4E8">;</span></span>
+<span class="line"><span style="color: #E1E4E8">  </span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">const</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">props</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">defineProps</span><span style="color: #E1E4E8">&#x3C;{ </span><span style="color: #FFAB70">component</span><span style="color: #F97583">:</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">Component</span><span style="color: #E1E4E8">, </span><span style="color: #FFAB70">page</span><span style="color: #F97583">:</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">Page</span><span style="color: #E1E4E8"> }>();</span></span>
+<span class="line"><span style="color: #E1E4E8">  </span><span style="color: #F97583">const</span><span style="color: #E1E4E8"> { </span><span style="color: #79B8FF">component</span><span style="color: #E1E4E8">, </span><span style="color: #79B8FF">page</span><span style="color: #E1E4E8"> } </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">toRefs</span><span style="color: #E1E4E8">(props);</span></span>
 <span class="line"><span style="color: #E1E4E8">&#x3C;/</span><span style="color: #85E89D">script</span><span style="color: #E1E4E8">></span></span></code></pre>
 <h2 id="license">License</h2>
-<p>Published under <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</a>
+<p>Published under <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</a>
 license.</p>
 <h2 id="reference">Reference</h2>
-<p>The Vue.js SDK is using <a href="https://www.npmjs.com/package/@bloomreach/spa-sdk">Bloomreach SPA SDK</a> to interact
+<p>The Vue SDK is using <a href="https://www.npmjs.com/package/@bloomreach/spa-sdk">Bloomreach SPA SDK</a> to interact
 with Bloomreach Content.</p>
 <h3 id="br-page">br-page</h3>
 <p>This is the entry point to the page model. This component requests and
@@ -777,7 +719,7 @@ menu editor. The button will only be shown in preview mode.</p>
         </article>
       </div>
       <aside class="hidden lg:block col-span-1">
-        <astro-island uid="Z1msMwX" prefix="r1" component-url="/spa-sdk/docs/_astro/TableOfContents.ba90f8bc.js" component-export="default" renderer-url="/spa-sdk/docs/_astro/client.2ce19805.js" props="{&quot;headings&quot;:[1,[[0,{&quot;depth&quot;:[0,1],&quot;slug&quot;:[0,&quot;bloomreach-vuejs-sdk&quot;],&quot;text&quot;:[0,&quot;Bloomreach Vue.js SDK&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;features&quot;],&quot;text&quot;:[0,&quot;Features&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;get-started&quot;],&quot;text&quot;:[0,&quot;Get Started&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;installation&quot;],&quot;text&quot;:[0,&quot;Installation&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;usage&quot;],&quot;text&quot;:[0,&quot;Usage&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;srcmaints&quot;],&quot;text&quot;:[0,&quot;src/main.ts&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;srcappvue&quot;],&quot;text&quot;:[0,&quot;src/App.vue&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;srccomponentsbannervue&quot;],&quot;text&quot;:[0,&quot;src/components/Banner.vue&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;non-blocking-render-mode-nbrmode&quot;],&quot;text&quot;:[0,&quot;Non-blocking render mode (NBRMode)&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;configuration&quot;],&quot;text&quot;:[0,&quot;Configuration&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;mapping&quot;],&quot;text&quot;:[0,&quot;Mapping&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;inline-mapping&quot;],&quot;text&quot;:[0,&quot;Inline Mapping&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;buttons&quot;],&quot;text&quot;:[0,&quot;Buttons&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;license&quot;],&quot;text&quot;:[0,&quot;License&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;reference&quot;],&quot;text&quot;:[0,&quot;Reference&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;br-page&quot;],&quot;text&quot;:[0,&quot;br-page&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;br-component&quot;],&quot;text&quot;:[0,&quot;br-component&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;br-manage-content-button&quot;],&quot;text&quot;:[0,&quot;br-manage-content-button&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;br-manage-menu-button&quot;],&quot;text&quot;:[0,&quot;br-manage-menu-button&quot;]}]]]}" ssr="" client="load" opts="{&quot;name&quot;:&quot;TableOfContents&quot;,&quot;value&quot;:true}" await-children=""><nav class="sticky top-0"><ul class="menu"><li><h2 id="on-this-page-heading" class="menu-title"><span class="">On this page</span></h2><ul><li><a href="#features" class="">Features</a></li><li><a href="#get-started" class="">Get Started</a></li><li><a href="#installation" class="">Installation</a></li><li><a href="#usage" class="">Usage</a></li><li><a href="#non-blocking-render-mode-nbrmode" class="">Non-blocking render mode (NBRMode)</a></li><li><a href="#configuration" class="">Configuration</a></li><li><a href="#mapping" class="">Mapping</a></li><li><a href="#inline-mapping" class="">Inline Mapping</a></li><li><a href="#buttons" class="">Buttons</a></li><li><a href="#license" class="">License</a></li><li><a href="#reference" class="">Reference</a></li><li><a href="#br-page" class="">br-page</a></li><li><a href="#br-component" class="">br-component</a></li><li><a href="#br-manage-content-button" class="">br-manage-content-button</a></li><li><a href="#br-manage-menu-button" class="">br-manage-menu-button</a></li></ul></li></ul><div class="divider lg:hidden"></div></nav></astro-island>
+        <astro-island uid="Z1PS38P" prefix="r1" component-url="/spa-sdk/docs/_astro/TableOfContents.ba90f8bc.js" component-export="default" renderer-url="/spa-sdk/docs/_astro/client.2ce19805.js" props="{&quot;headings&quot;:[1,[[0,{&quot;depth&quot;:[0,1],&quot;slug&quot;:[0,&quot;bloomreach-vue-sdk&quot;],&quot;text&quot;:[0,&quot;Bloomreach Vue SDK&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;prerequisite&quot;],&quot;text&quot;:[0,&quot;Prerequisite&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;features&quot;],&quot;text&quot;:[0,&quot;Features&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;get-started&quot;],&quot;text&quot;:[0,&quot;Get Started&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;installation&quot;],&quot;text&quot;:[0,&quot;Installation&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;usage&quot;],&quot;text&quot;:[0,&quot;Usage&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;srcmaints&quot;],&quot;text&quot;:[0,&quot;src/main.ts&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;srcappvue&quot;],&quot;text&quot;:[0,&quot;src/App.vue&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;srccomponentsbannervue&quot;],&quot;text&quot;:[0,&quot;src/components/Banner.vue&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;non-blocking-render-mode-nbrmode&quot;],&quot;text&quot;:[0,&quot;Non-blocking render mode (NBRMode)&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;configuration&quot;],&quot;text&quot;:[0,&quot;Configuration&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;mapping&quot;],&quot;text&quot;:[0,&quot;Mapping&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;inline-mapping&quot;],&quot;text&quot;:[0,&quot;Inline Mapping&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;buttons&quot;],&quot;text&quot;:[0,&quot;Buttons&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;license&quot;],&quot;text&quot;:[0,&quot;License&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;reference&quot;],&quot;text&quot;:[0,&quot;Reference&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;br-page&quot;],&quot;text&quot;:[0,&quot;br-page&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;br-component&quot;],&quot;text&quot;:[0,&quot;br-component&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;br-manage-content-button&quot;],&quot;text&quot;:[0,&quot;br-manage-content-button&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;br-manage-menu-button&quot;],&quot;text&quot;:[0,&quot;br-manage-menu-button&quot;]}]]]}" ssr="" client="load" opts="{&quot;name&quot;:&quot;TableOfContents&quot;,&quot;value&quot;:true}" await-children=""><nav class="sticky top-0"><ul class="menu"><li><h2 id="on-this-page-heading" class="menu-title"><span class="">On this page</span></h2><ul><li><a href="#prerequisite" class="">Prerequisite</a></li><li><a href="#features" class="">Features</a></li><li><a href="#get-started" class="">Get Started</a></li><li><a href="#installation" class="">Installation</a></li><li><a href="#usage" class="">Usage</a></li><li><a href="#non-blocking-render-mode-nbrmode" class="">Non-blocking render mode (NBRMode)</a></li><li><a href="#configuration" class="">Configuration</a></li><li><a href="#mapping" class="">Mapping</a></li><li><a href="#inline-mapping" class="">Inline Mapping</a></li><li><a href="#buttons" class="">Buttons</a></li><li><a href="#license" class="">License</a></li><li><a href="#reference" class="">Reference</a></li><li><a href="#br-page" class="">br-page</a></li><li><a href="#br-component" class="">br-component</a></li><li><a href="#br-manage-content-button" class="">br-manage-content-button</a></li><li><a href="#br-manage-menu-button" class="">br-manage-menu-button</a></li></ul></li></ul><div class="divider lg:hidden"></div></nav></astro-island>
       </aside>
     </main>
   </body>
