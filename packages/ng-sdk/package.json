@@ -68,7 +68,7 @@
     "@angular/platform-browser-dynamic": "15.1.2",
     "@bloomreach/eslint-config-angular": "15.0.0",
     "@types/jest": "28.1.8",
-    "@types/node": "16.18.11",
+    "@types/node": "18.11.9",
     "eslint": "7.32.0",
     "eslint-import-resolver-typescript": "3.5.5",
     "jest": "28.1.3",
