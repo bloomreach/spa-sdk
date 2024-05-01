@@ -1,11 +1,11 @@
 <!--
-  Copyright 2020-2023 Bloomreach
+  Copyright 2023 Bloomreach
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
   You may obtain a copy of the License at
 
-   https://www.apache.org/licenses/LICENSE-2.0
+    https://www.apache.org/licenses/LICENSE-2.0
 
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,59 +15,32 @@
   -->
 
 <template>
-  <br-meta v-if="page && page.isPreview()" :meta="meta" />
+  <br-meta v-if="page && page?.isPreview()" :meta="meta"/>
 </template>
 
-<script lang="ts">
-import { ManageContentButton, Page, TYPE_MANAGE_CONTENT_BUTTON } from '@bloomreach/spa-sdk';
-import { Component, Inject, Prop, Vue } from 'vue-property-decorator';
-import BrMeta from './BrMeta.vue';
+<script setup lang="ts">
+import { page$ } from '@/providerKeys';
+import type { ManageContentButton, MetaCollection } from '@bloomreach/spa-sdk';
+import { TYPE_MANAGE_CONTENT_BUTTON } from '@bloomreach/spa-sdk';
+import { computed, inject } from 'vue';
+import BrMeta from '@/BrMeta.vue';
 
-/**
- * The button component that opens for editing a content.
- */
-@Component({
-  components: { BrMeta },
-  computed: {
-    meta(this: BrManageContentButton) {
-      return this.page?.getButton(TYPE_MANAGE_CONTENT_BUTTON, this.$props);
-    },
+const props = defineProps<{
+  content?: ManageContentButton['content'],
+  documentTemplateQuery?: ManageContentButton['documentTemplateQuery'],
+  folderTemplateQuery?: ManageContentButton['folderTemplateQuery'],
+  path?: ManageContentButton['path'],
+  parameter?: ManageContentButton['parameter'],
+  pickerConfiguration?: ManageContentButton['pickerConfiguration'],
+  pickerEnableUpload?: ManageContentButton['pickerEnableUpload'],
+  pickerInitialPath?: ManageContentButton['pickerInitialPath'],
+  pickerRemembersLastVisited?: ManageContentButton['pickerRemembersLastVisited'],
+  pickerRootPath?: ManageContentButton['pickerRootPath'],
+  pickerSelectableNodeTypes?: ManageContentButton['pickerSelectableNodeTypes'],
+  relative?: ManageContentButton['relative'],
+  root?: ManageContentButton['root'],
+}>();
 
-    page(this: BrManageContentButton) {
-      return this.page$?.();
-    },
-  },
-  name: 'br-manage-content-button',
-})
-export default class BrManageContentButton extends Vue implements ManageContentButton {
-  @Prop() content?: ManageContentButton['content'];
-
-  @Prop() documentTemplateQuery?: ManageContentButton['documentTemplateQuery'];
-
-  @Prop() folderTemplateQuery?: ManageContentButton['folderTemplateQuery'];
-
-  @Prop() path?: ManageContentButton['path'];
-
-  @Prop() parameter?: ManageContentButton['parameter'];
-
-  @Prop() pickerConfiguration?: ManageContentButton['pickerConfiguration'];
-
-  @Prop() pickerEnableUpload?: ManageContentButton['pickerEnableUpload'];
-
-  @Prop() pickerInitialPath?: ManageContentButton['pickerInitialPath'];
-
-  @Prop() pickerRemembersLastVisited?: ManageContentButton['pickerRemembersLastVisited'];
-
-  @Prop() pickerRootPath?: ManageContentButton['pickerRootPath'];
-
-  @Prop() pickerSelectableNodeTypes?: ManageContentButton['pickerSelectableNodeTypes'];
-
-  @Prop() relative?: ManageContentButton['relative'];
-
-  @Prop() root?: ManageContentButton['root'];
-
-  page?: Page;
-
-  @Inject() private page$?: () => Page;
-}
+const page = inject(page$);
+const meta = computed<MetaCollection | undefined>(() => page?.value?.getButton(TYPE_MANAGE_CONTENT_BUTTON, props));
 </script>

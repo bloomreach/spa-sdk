@@ -1,11 +1,11 @@
 <!--
-  Copyright 2020-2023 Bloomreach
+  Copyright 2023 Bloomreach
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
   You may obtain a copy of the License at
 
-   https://www.apache.org/licenses/LICENSE-2.0
+    https://www.apache.org/licenses/LICENSE-2.0
 
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,16 +15,13 @@
   -->
 
 <template>
-  <div>{{ `Component "${component.getType()}" is not defined.` }}</div>
+  <div>{{ `Component "${type}" is not defined.` }}</div>
 </template>
 
-<script lang="ts">
-import { ContainerItem } from '@bloomreach/spa-sdk';
-import { Component, Prop, Vue } from 'vue-property-decorator';
-import { Fragment } from 'vue-fragment';
+<script setup lang="ts">
+import type { ContainerItem } from '@bloomreach/spa-sdk';
+import { computed } from 'vue';
 
-@Component({ components: { Fragment } })
-export default class BrContainerItemUndefined extends Vue {
-  @Prop() component!: ContainerItem;
-}
+const props = defineProps<{ component: ContainerItem }>();
+const type = computed(() => props.component.getType());
 </script>
