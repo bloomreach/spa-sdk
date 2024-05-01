@@ -18,7 +18,7 @@ pipeline {
   agent {
     docker {
       label 'docker'
-      image 'node:16'
+      image 'node:18'
       args '-v  /etc/passwd:/etc/passwd'
     }
   }
