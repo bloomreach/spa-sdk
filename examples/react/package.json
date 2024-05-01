@@ -6,11 +6,11 @@
   "dependencies": {
     "@bloomreach/react-sdk": "file:.yalc/@bloomreach/react-sdk",
     "@bloomreach/spa-sdk": "file:.yalc/@bloomreach/spa-sdk",
-    "axios": "^1.6.8",
+    "axios": "1.6.8",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-router-dom": "6.4.2",
-    "sanitize-html": "^2.13.0"
+    "sanitize-html": "2.13.0"
   },
   "scripts": {
     "build": "cross-env SKIP_PREFLIGHT_CHECK=true react-scripts build",
@@ -41,11 +41,11 @@
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.8",
     "@types/react-router-dom": "5.3.3",
-    "@types/sanitize-html": "^2.11.0",
+    "@types/sanitize-html": "2.11.0",
     "cross-env": "7.0.3",
     "eslint": "7.32.0",
     "eslint-import-resolver-typescript": "3.5.5",
-    "react-scripts": "^5.0.1",
+    "react-scripts": "5.0.1",
     "serve": "14.2.0",
     "typescript": "4.1.6",
     "yalc": "1.0.0-pre.53"
