@@ -1,6 +1,6 @@
 {
   "name": "@bloomreach/example-vue",
-  "version": "22.0.5",
+  "version": "23.0.0",
   "private": true,
   "type": "module",
   "scripts": {
