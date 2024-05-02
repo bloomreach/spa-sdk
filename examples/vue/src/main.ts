@@ -1,5 +1,5 @@
 /*
- * Copyright 2020-2023 Bloomreach
+ * Copyright 2023 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,15 +14,14 @@
  * limitations under the License.
  */
 
-import Vue from 'vue';
 import { BrSdk } from '@bloomreach/vue-sdk';
-import App from './App.vue';
-import router from './router';
+import { createApp } from 'vue'
+import App from './App.vue'
+import router from './router'
 
-Vue.config.productionTip = false;
-Vue.use(BrSdk);
+const app = createApp(App)
 
-new Vue({
-  router,
-  render: (h) => h(App),
-}).$mount('#app');
+app.use(BrSdk)
+app.use(router)
+
+app.mount('#app');

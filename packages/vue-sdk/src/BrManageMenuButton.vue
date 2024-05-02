@@ -1,11 +1,11 @@
 <!--
-  Copyright 2020-2023 Bloomreach
+  Copyright 2023 Bloomreach
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
   You may obtain a copy of the License at
 
-   https://www.apache.org/licenses/LICENSE-2.0
+    https://www.apache.org/licenses/LICENSE-2.0
 
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,38 +15,17 @@
   -->
 
 <template>
-  <br-meta v-if="page && page.isPreview()" :meta="meta" />
+  <br-meta v-if="page && page.isPreview()" :meta="meta"/>
 </template>
 
-<script lang="ts">
-import { Menu, TYPE_MANAGE_MENU_BUTTON, Page } from '@bloomreach/spa-sdk';
-import { Component, Inject, Prop, Vue } from 'vue-property-decorator';
-import BrMeta from './BrMeta.vue';
+<script setup lang="ts">
+import { page$ } from '@/providerKeys';
+import type { Menu, MetaCollection } from '@bloomreach/spa-sdk';
+import { TYPE_MANAGE_MENU_BUTTON } from '@bloomreach/spa-sdk';
+import { computed, inject } from 'vue';
+import BrMeta from '@/BrMeta.vue';
 
-/**
- * The button component that opens a menu editor.
- */
-@Component({
-  components: { BrMeta },
-  computed: {
-    meta(this: BrManageMenuButton) {
-      return this.page?.getButton(TYPE_MANAGE_MENU_BUTTON, this.menu);
-    },
-
-    page(this: BrManageMenuButton) {
-      return this.page$?.();
-    },
-  },
-  name: 'br-manage-menu-button',
-})
-export default class BrManageMenuButton extends Vue {
-  /**
-   * The related menu model.
-   */
-  @Prop() menu!: Menu;
-
-  page?: Page;
-
-  @Inject() private page$?: () => Page;
-}
+const props = defineProps<{ menu: Menu }>();
+const page = inject(page$);
+const meta = computed<MetaCollection | undefined>(() => page?.value?.getButton(TYPE_MANAGE_MENU_BUTTON, props.menu));
 </script>

@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-import { Configuration, extractSearchParams } from '@bloomreach/spa-sdk';
-import { BR_MULTI_TENANT_SUPPORT, BRXM_ENDPOINT, BASE_URL } from './constants';
+import type { Configuration } from '@bloomreach/spa-sdk';
+import { extractSearchParams } from '@bloomreach/spa-sdk';
+import { BASE_URL, BR_MULTI_TENANT_SUPPORT, BRXM_ENDPOINT } from './constants';
 
 type BuildConfigurationOptions = {
   endpoint: string | (string | null)[];
@@ -49,6 +50,5 @@ export function buildConfiguration(
     configuration.path = url;
   }
   configuration.httpClient = httpClient;
-  configuration.debug = true;
   return configuration as Configuration;
 }

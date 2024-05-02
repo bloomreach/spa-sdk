@@ -1,11 +1,11 @@
 <!--
-  Copyright 2020-2023 Bloomreach
+  Copyright 2023 Bloomreach
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
   You may obtain a copy of the License at
 
-   https://www.apache.org/licenses/LICENSE-2.0
+    https://www.apache.org/licenses/LICENSE-2.0
 
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,69 +14,42 @@
   limitations under the License.
   -->
 
-<script lang="ts">
-import { Component as SpaComponent, Page, isComponent } from '@bloomreach/spa-sdk';
-import { Component, Inject, Prop, Vue } from 'vue-property-decorator';
-import { Fragment } from 'vue-fragment';
-import BrNodeComponent from './BrNodeComponent.vue';
+<template>
+  <br-node-component v-for="component in components" :component="component">
+    <slot :component="component" :page="page"></slot>
+  </br-node-component>
+</template>
 
-/**
- * The brXM component.
- */
-@Component({
-  computed: {
-    page(this: BrComponent) {
-      return this.page$?.();
-    },
-    parent(this: BrComponent) {
-      return this.parent$?.();
-    },
-  },
-  name: 'br-component',
-})
-export default class BrComponent extends Vue {
-  /**
-   * The component instance or a path to a component.
-   * The path is defined as a slash-separated components name chain
-   * relative to the current component (e.g. `main/container`).
-   * If it is omitted, all the children will be rendered.
-   */
-  @Prop() component?: SpaComponent | string;
+<script setup lang="ts">
+import BrNodeComponent from '@/BrNodeComponent.vue';
+import { component$, page$ } from '@/providerKeys';
+import type { Component } from '@bloomreach/spa-sdk';
+import { isComponent } from '@bloomreach/spa-sdk';
+import { computed, inject } from 'vue';
 
-  @Inject() private page$?: () => Page;
-
-  @Inject('component$') private parent$?: () => SpaComponent;
-
-  private page?: Page;
-
-  private parent?: SpaComponent;
-
-  private getComponents() {
-    if (isComponent(this.component)) {
-      return [this.component];
-    }
-
-    if (!this.parent) {
-      return [];
-    }
-
-    if (!this.component) {
-      return this.parent.getChildren();
-    }
-
-    const component = this.parent.getComponent(...this.component.split('/'));
-
-    return component ? [component] : [];
+function getComponents(
+  parentComponent: Component | undefined,
+  propsComponent: Component | string | undefined,
+): Component[] {
+  if (isComponent(propsComponent)) {
+    return [propsComponent];
   }
 
-  render(createElement: Vue.CreateElement): Vue.VNode {
-    const components = this.getComponents().map((component) => createElement(
-      BrNodeComponent,
-      { props: { component } },
-      this.$scopedSlots.default?.({ component, page: this.page }),
-    ));
-
-    return components.length > 1 ? createElement(Fragment, components) : components[0];
+  if (!parentComponent) {
+    return [];
   }
+
+  if (!propsComponent) {
+    return parentComponent.getChildren();
+  }
+
+  // else propsComponent is a string denoting a path in the page model tree
+  const componentInParent = parentComponent.getComponent(...propsComponent.split('/'));
+  return componentInParent ? [componentInParent] : [];
 }
+
+const props = defineProps<{ component?: Component | string }>();
+const page = inject(page$);
+const parent = inject(component$);
+const components = computed(() => getComponents(parent?.value, props.component));
 </script>

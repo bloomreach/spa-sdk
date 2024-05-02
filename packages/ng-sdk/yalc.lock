@@ -2,7 +2,7 @@
   "version": "v1",
   "packages": {
     "@bloomreach/spa-sdk": {
-      "signature": "93ba344c283dcf2e4b2317fa5766c11c",
+      "signature": "7f2db09b6915acdc842a3ad90632d836",
       "file": true
     }
   }

@@ -9,7 +9,7 @@ The Bloomreach SPA SDKs make life considerably easier when integrating the Conte
 provides automatic integration with the Bloomreach Experience Manager which is a Visual Page Builder for business users.
 
 The SDKs consists of a core plain javascript/typescript SDK `@bloomreach/spa-sdk` and a set of framework specific SDKs
-`@bloomreach/react-sdk`, `@bloomreach/vue-sdk`, `@bloomreach/vue3-sdk` and `@bloomreach/ng-sdk` which extend the core
+`@bloomreach/react-sdk`, `@bloomreach/vue-sdk` and `@bloomreach/ng-sdk` which extend the core
 SDK with the framework specific rendering logic.
 
 The SPA SDK itself is written in typescript and is framework independent, it holds the core code that sets up a

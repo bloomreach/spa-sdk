@@ -5,7 +5,7 @@
   you may not use this file except in compliance with the License.
   You may obtain a copy of the License at
 
-   https://www.apache.org/licenses/LICENSE-2.0
+    https://www.apache.org/licenses/LICENSE-2.0
 
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
@@ -41,24 +41,16 @@
   </nav>
 </template>
 
-<script lang="ts">
-import { Page } from '@bloomreach/spa-sdk';
-import { Component, Prop, Vue } from 'vue-property-decorator';
+<script setup lang="ts">
+import type { Page } from '@bloomreach/spa-sdk';
+import { computed, toRefs } from 'vue';
 
-@Component({
-  computed: {
-    nextUrl(this: BrNewsListPagination) {
-      return this.pageable.next ? this.page.getUrl(`?page=${this.pageable.nextPage}`) : '#';
-    },
-    previousUrl(this: BrNewsListPagination) {
-      return this.pageable.previous ? this.page.getUrl(`?page=${this.pageable.previousPage}`) : '#';
-    },
-  },
-  name: 'br-news-list-pagination',
-})
-export default class BrNewsListPagination extends Vue {
-  @Prop() pageable!: Pageable;
+const props = defineProps<{
+  pageable: Pageable,
+  page: Page,
+}>();
+const { pageable, page } = toRefs(props);
 
-  @Prop() page!: Page;
-}
+const nextUrl = computed(() => (pageable.value.next ? page.value.getUrl(`?page=${pageable.value.nextPage}`) : '#'))
+const previousUrl = computed(() => (pageable.value.previous ? page.value.getUrl(`?page=${pageable.value.previousPage}`) : '#'));
 </script>

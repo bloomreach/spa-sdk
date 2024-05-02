@@ -2,12 +2,35 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### "22.0.5"
+#### "23.0.0"
 
-- SPASDK-210 Check for window.document before accessing cookie [`#155`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/155)
-- SPASDK-214: Implement relevance in next-example app [`#157`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/157)
-- SPASDK-214: Implement relevance in next-example app [`#SPASDK-214`](https://issues.onehippo.com/browse/SPASDK-214)
+- SPASDK-212 Upgrade node version to 18 [`#156`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/156)
+- SPASDK-213 Remove vue2 sdk and example [`#158`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/158)
+- SPASDK-212 Add babel dev dependency to example-react to fix warning [`#SPASDK-212`](https://issues.onehippo.com/browse/SPASDK-212)
+- SPASDK-212 Set GENERATE_SOURCEMAP to false in example-react app [`#SPASDK-212`](https://issues.onehippo.com/browse/SPASDK-212)
+- SPASDK-212 Update package lock files [`#SPASDK-212`](https://issues.onehippo.com/browse/SPASDK-212)
+- SPASDK-212 Upgrade node version in jenkins file [`#SPASDK-212`](https://issues.onehippo.com/browse/SPASDK-212)
+- SPASDK-212 Add .env.dist file & pin dependencies [`#SPASDK-212`](https://issues.onehippo.com/browse/SPASDK-212)
+- SPASDK-212 Change package-lock [`#SPASDK-212`](https://issues.onehippo.com/browse/SPASDK-212)
+- SPASDK-212 Upgrade react example app dependencie [`#SPASDK-212`](https://issues.onehippo.com/browse/SPASDK-212)
+- SPASDK-213 Remove vue2 sdk and example [`#SPASDK-213`](https://issues.onehippo.com/browse/SPASDK-213)
+- SPASDK-212 Revert Heroku version bump [`#SPASDK-212`](https://issues.onehippo.com/browse/SPASDK-212)
+- SPASDK-212 Upgrade dev dependencies [`#SPASDK-212`](https://issues.onehippo.com/browse/SPASDK-212)
+- SPASDK-212 Upgrade node version to 18 [`#SPASDK-212`](https://issues.onehippo.com/browse/SPASDK-212)
+- SPASDK-213 Remove nuxt example app [`#SPASDK-213`](https://issues.onehippo.com/browse/SPASDK-213)
+- SPASDK-213 Update READMEs [`#SPASDK-213`](https://issues.onehippo.com/browse/SPASDK-213)
+- SPASDK-213 Remove unused constants [`#SPASDK-213`](https://issues.onehippo.com/browse/SPASDK-213)
+- SPASDK-213 Add .env.dist [`#SPASDK-213`](https://issues.onehippo.com/browse/SPASDK-213)
+- SPASDK-213 Update package-lock.json in vue example app [`#SPASDK-213`](https://issues.onehippo.com/browse/SPASDK-213)
+- SPASDK-213 Remove vue2 sdk and example [`#SPASDK-213`](https://issues.onehippo.com/browse/SPASDK-213)
+
+#### spa-sdk-22.0.5
+
+> 23 April 2024
+
+- SPASDK-214 Bumping versions to 22.0.5 [`#SPASDK-214`](https://issues.onehippo.com/browse/SPASDK-214)
 - SPASDK-210 Check for window.document before accessing cookie [`#SPASDK-210`](https://issues.onehippo.com/browse/SPASDK-210)
+- SPASDK-214 Implement relevance in next-example app [`#SPASDK-214`](https://issues.onehippo.com/browse/SPASDK-214)
 
 #### spa-sdk-22.0.4
 

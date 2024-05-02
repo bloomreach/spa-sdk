@@ -18,7 +18,7 @@ pipeline {
   agent {
     docker {
       label 'docker'
-      image 'node:16'
+      image 'node:18'
       args '-v  /etc/passwd:/etc/passwd'
     }
   }
@@ -177,7 +177,7 @@ pipeline {
                   }
                   axis {
                     name 'APP_NAME'
-                    values 'ng', 'react', 'vue', 'vue3'
+                    values 'ng', 'react', 'vue'
                   }
                 }
                 stages {
