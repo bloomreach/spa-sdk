@@ -13,8 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
   -->
-
-<ng-template [ngIf]="menu">
+<ng-container *ngIf="menu">
   <ng-container [brManageMenuButton]="menu"></ng-container>
 
   <li
@@ -44,4 +43,4 @@
       {{ item.getName() }}
     </a>
   </li>
-</ng-template>
+</ng-container>
