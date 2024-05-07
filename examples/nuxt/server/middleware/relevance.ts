@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { relevance } from '@bloomreach/spa-sdk/dist/express';
+import { relevance } from '@bloomreach/spa-sdk/dist/express/index.js';
 
 export default defineEventHandler((event) => {
     relevance(event.node.req, event.node.res);

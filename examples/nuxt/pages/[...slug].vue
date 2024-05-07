@@ -71,7 +71,6 @@ const mapping: BrMapping = {
 
 const configuration = {
   ...buildConfiguration(`${route.fullPath}`, axios, baseUrl, endpoint, hasMultiTenantSupport),
-  debug: true,
 };
 
 const { data } = await useAsyncData(async (context) => {
