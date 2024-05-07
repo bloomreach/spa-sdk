@@ -23,7 +23,8 @@ export abstract class BrMetaDirective implements OnChanges, OnDestroy {
 
   private clear?: ReturnType<MetaCollection['render']>;
 
-  constructor(private container: ViewContainerRef, @Optional() private template?: TemplateRef<never>) {}
+  // eslint-disable-next-line no-empty-function
+  constructor(private container: ViewContainerRef, @Optional() private template?: TemplateRef<never>) { }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   ngOnChanges(changes: SimpleChanges): void {

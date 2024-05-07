@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import * as angular from '@angular/common';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA, SimpleChange } from '@angular/core';
 import { ComponentFixture, getTestBed, TestBed, waitForAsync } from '@angular/core/testing';
@@ -25,11 +24,8 @@ import { BrNodeTypePipe } from '../br-node-type.pipe';
 import { BrPageComponent } from './br-page.component';
 
 jest.mock('@bloomreach/spa-sdk');
-
 describe('BrPageComponent', () => {
   let component: BrPageComponent;
-  let isPlatformBrowserSpy: jest.SpyInstance;
-  let isPlatformServerSpy: jest.SpyInstance;
   let httpMock: HttpTestingController;
   let fixture: ComponentFixture<BrPageComponent>;
   let page: jest.Mocked<Page>;
@@ -48,8 +44,6 @@ describe('BrPageComponent', () => {
 
   beforeEach(() => {
     httpMock = getTestBed().inject(HttpTestingController);
-    isPlatformBrowserSpy = jest.spyOn(angular, 'isPlatformBrowser');
-    isPlatformServerSpy = jest.spyOn(angular, 'isPlatformServer');
     transferState = {
       hasKey: jest.fn(),
       get: jest.fn(),
@@ -173,7 +167,7 @@ describe('BrPageComponent', () => {
       const state = {};
 
       jest.mocked(initialize as unknown as () => Page).mockReturnValueOnce(page);
-      jest.mocked(isPlatformBrowserSpy).mockReturnValue(true);
+      jest.spyOn(component, 'isPlatformBrowser').mockReturnValue(true);
       transferState.hasKey.mockReturnValueOnce(true);
       transferState.get.mockReturnValueOnce(state);
 
@@ -190,7 +184,7 @@ describe('BrPageComponent', () => {
 
     it('should initialize a page using the page model from the inputs instead of the transferred state', () => {
       jest.mocked(initialize as unknown as () => Page).mockReturnValueOnce(page);
-      jest.mocked(isPlatformBrowserSpy).mockReturnValue(true);
+      jest.spyOn(component, 'isPlatformBrowser').mockReturnValue(true);
       transferState.hasKey.mockReturnValueOnce(true);
 
       component.configuration = {} as Configuration;
@@ -206,7 +200,7 @@ describe('BrPageComponent', () => {
 
     it('should not initialize from the transferred state if the stateKey is false', async () => {
       jest.mocked(initialize).mockResolvedValueOnce(page);
-      jest.mocked(isPlatformBrowserSpy).mockReturnValue(true);
+      jest.spyOn(component, 'isPlatformBrowser').mockReturnValue(true);
 
       component.configuration = {} as Configuration;
       component.stateKey = false;
@@ -226,7 +220,7 @@ describe('BrPageComponent', () => {
       const model = {} as PageModel;
 
       jest.mocked(initialize as unknown as () => Page).mockReturnValueOnce(page);
-      jest.mocked(isPlatformServerSpy).mockReturnValue(true);
+      jest.spyOn(component, 'isPlatformServer').mockReturnValue(true);
       page.toJSON.mockReturnValue(model);
 
       component.configuration = {} as Configuration;
@@ -240,7 +234,7 @@ describe('BrPageComponent', () => {
     });
 
     it('should update the transferred state on the stateKey update', () => {
-      jest.mocked(isPlatformServerSpy).mockReturnValue(true);
+      jest.spyOn(component, 'isPlatformServer').mockReturnValue(true);
       transferState.hasKey.mockReturnValueOnce(true);
       transferState.get.mockReturnValueOnce('state');
 

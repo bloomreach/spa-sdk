@@ -52,7 +52,6 @@ import { BannerComponent } from "./banner/banner.component";
 @NgModule({
   bootstrap: [AppComponent],
   declarations: [AppComponent, BannerComponent],
-  entryComponents: [BannerComponent],
   imports: [BrowserModule, BrSdkModule],
 })
 export class AppModule {}

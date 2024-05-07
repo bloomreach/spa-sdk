@@ -33,7 +33,9 @@ export class BrNodeComponentDirective implements OnChanges, OnDestroy {
     private injector: Injector,
     private node: BrNodeDirective,
     protected page: BrPageService,
-  ) {}
+  ) {
+    // Constructor intentionally left empty
+  }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   ngOnChanges(changes: SimpleChanges): void {
