@@ -76,12 +76,12 @@ pipeline {
     }
     stage('Generate and publish docs') {
       when {
-        changeset "docs/**/*"
-        branch 'development'
+        branch 'main'
       }
 
       environment {
         GIT_SSH_COMMAND='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
+        VERSION = sh(script: "node -p -e \"require('./lerna.json').version\"", returnStdout: true).trim()
       }
 
       stages {
