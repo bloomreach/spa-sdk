@@ -2,10 +2,20 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### "23.0.0"
+#### "23.1.0"
+
+- SPASDK-158 Add Nuxt 3 example app [`#164`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/164)
+- SPASDK-158 Fix import error related to relevance [`#SPASDK-158`](https://issues.onehippo.com/browse/SPASDK-158)
+- SPASDK-158 Always generate and publish docs on main branch [`#SPASDK-158`](https://issues.onehippo.com/browse/SPASDK-158)
+- SPASDK-158 Add Nuxt 3 example app [`#SPASDK-158`](https://issues.onehippo.com/browse/SPASDK-158)
+
+#### spa-sdk-23.0.0
+
+> 2 May 2024
 
 - SPASDK-212 Upgrade node version to 18 [`#156`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/156)
 - SPASDK-213 Remove vue2 sdk and example [`#158`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/158)
+- SPASDK-213 Bumping versions to 23.0.0 [`#SPASDK-213`](https://issues.onehippo.com/browse/SPASDK-213)
 - SPASDK-212 Add babel dev dependency to example-react to fix warning [`#SPASDK-212`](https://issues.onehippo.com/browse/SPASDK-212)
 - SPASDK-212 Set GENERATE_SOURCEMAP to false in example-react app [`#SPASDK-212`](https://issues.onehippo.com/browse/SPASDK-212)
 - SPASDK-212 Update package lock files [`#SPASDK-212`](https://issues.onehippo.com/browse/SPASDK-212)
