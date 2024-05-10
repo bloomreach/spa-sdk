@@ -67,7 +67,9 @@ export class BrComponentDirective implements OnChanges, OnDestroy, OnInit {
     @Optional() private template?: TemplateRef<BrComponentContext>,
     @Optional() private node?: BrNodeDirective,
     @Optional() private page?: BrPageService,
-  ) {}
+  ) {
+    // Constructor intentionally left empty
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (!changes.component || changes.component.isFirstChange()) {

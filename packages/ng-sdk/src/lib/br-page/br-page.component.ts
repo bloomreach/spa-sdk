@@ -112,7 +112,7 @@ export class BrPageComponent implements AfterContentChecked, AfterContentInit, O
 
     this.state
       .pipe(
-        filter(() => isPlatformServer(this.platform)),
+        filter(() => this.isPlatformServer(this.platform)),
         filter(isPage),
       )
       .subscribe((page) => this.stateKey && this.transferState?.set(this.stateKey, page.toJSON()));
@@ -140,7 +140,7 @@ export class BrPageComponent implements AfterContentChecked, AfterContentInit, O
       this.pageService.mapping = this.mapping;
     }
 
-    if (changes.stateKey?.previousValue && isPlatformServer(this.platform)) {
+    if (changes.stateKey?.previousValue && this.isPlatformServer(this.platform)) {
       if (changes.stateKey.currentValue && this.transferState?.hasKey(changes.stateKey.previousValue)) {
         this.transferState?.set(
           changes.stateKey.currentValue,
@@ -167,7 +167,7 @@ export class BrPageComponent implements AfterContentChecked, AfterContentInit, O
   }
 
   private initialize(page: Page | PageModel | undefined): void {
-    if (this.stateKey && isPlatformBrowser(this.platform) && this.transferState?.hasKey(this.stateKey)) {
+    if (this.stateKey && this.isPlatformBrowser(this.platform) && this.transferState?.hasKey(this.stateKey)) {
       page = page ?? this.transferState?.get(this.stateKey, undefined);
       this.transferState?.remove(this.stateKey);
     }
@@ -192,5 +192,13 @@ export class BrPageComponent implements AfterContentChecked, AfterContentInit, O
       .pipe(map((data) => ({ data })))
       .toPromise()
       .catch((error) => this.httpError.emit(error));
+  }
+
+  isPlatformBrowser(platform: object): boolean {
+    return isPlatformBrowser(platform);
+  }
+
+  isPlatformServer(platform: object): boolean {
+    return isPlatformServer(platform);
   }
 }

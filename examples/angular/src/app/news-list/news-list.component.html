@@ -14,7 +14,7 @@
   limitations under the License.
   -->
 
-<ng-template [ngIf]="pagination">
+<ng-container *ngIf="pagination">
   <br-news-item
     *ngFor="let reference of pagination.items"
     [item]="page.getContent(reference)!"
@@ -74,4 +74,4 @@
       </li>
     </ul>
   </nav>
-</ng-template>
+</ng-container>
