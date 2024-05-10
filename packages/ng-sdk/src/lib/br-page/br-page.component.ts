@@ -194,13 +194,11 @@ export class BrPageComponent implements AfterContentChecked, AfterContentInit, O
       .catch((error) => this.httpError.emit(error));
   }
 
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  isPlatformBrowser(platform: Object): boolean {
+  isPlatformBrowser(platform: object): boolean {
     return isPlatformBrowser(platform);
   }
 
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  isPlatformServer(platform: Object): boolean {
+  isPlatformServer(platform: object): boolean {
     return isPlatformServer(platform);
   }
 }
