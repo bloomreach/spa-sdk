@@ -43,9 +43,9 @@
     "tslib": "^2.3.0"
   },
   "peerDependencies": {
-    "@angular/common": "^15.0.0 || ^16.0.0",
-    "@angular/core": "^15.0.0 || ^16.0.0",
-    "@angular/platform-browser": "^15.0.0 || ^16.0.0",
+    "@angular/common": "^14.0.0 || ^15.0.0 || ^16.0.0",
+    "@angular/core": "^14.0.0 || ^15.0.0 || ^16.0.0",
+    "@angular/platform-browser": "^14.0.0 || ^15.0.0 || ^16.0.0",
     "rxjs": "^6.5.3 || ^7.4.0"
   },
   "devDependencies": {
