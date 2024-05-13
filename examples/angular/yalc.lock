@@ -2,11 +2,11 @@
   "version": "v1",
   "packages": {
     "@bloomreach/spa-sdk": {
-      "signature": "141fd5740ac579d0b8e631d99748cc85",
+      "signature": "7d6b8d05bb6928bceb6b5f410aa75804",
       "file": true
     },
     "@bloomreach/ng-sdk": {
-      "signature": "7b2547afdd9edb4c1e0dbb4111154e6c",
+      "signature": "afee659f41b080777d87af3e072eed3a",
       "file": true
     }
   }
