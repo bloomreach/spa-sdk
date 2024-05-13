@@ -17,24 +17,13 @@
 <ng-template #brNode let-component let-template="template">
   <ng-container [brNode]="component" [brNodeTemplate]="template">
     <ng-container [ngSwitch]="component | brNodeType">
-      <ng-container
-        *ngSwitchCase="'container-item'"
-        [brNodeContainerItem]="component"
-      ></ng-container>
-      <ng-container
-        *ngSwitchCase="'container'"
-        [brNodeContainer]="component"
-      ></ng-container>
-      <ng-container
-        *ngSwitchDefault
-        [brNodeComponent]="component"
-      ></ng-container>
+      <ng-container *ngSwitchCase="'container-item'" [brNodeContainerItem]="component"></ng-container>
+      <ng-container *ngSwitchCase="'container'" [brNodeContainer]="component"></ng-container>
+      <ng-container *ngSwitchDefault [brNodeComponent]="component"></ng-container>
     </ng-container>
   </ng-container>
 </ng-template>
 
-<ng-template
-  *ngIf="context?.template"
-  [ngTemplateOutlet]="brNode"
-  [ngTemplateOutletContext]="context"
-></ng-template>
+@if (context?.template) {
+<ng-template [ngTemplateOutlet]="brNode" [ngTemplateOutletContext]="context"></ng-template>
+}

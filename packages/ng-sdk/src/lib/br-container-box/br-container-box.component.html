@@ -13,10 +13,8 @@
   See the License for the specific language governing permissions and
   limitations under the License.
   -->
-
-<div
-  *ngFor="let child of component.getChildren()"
-  [ngClass]="{ 'hst-container-item': page.isPreview() }"
->
+@for (child of component.getChildren(); track $index) {
+<div [ngClass]="{ 'hst-container-item': page.isPreview() }">
   <ng-container [brComponent]="child"></ng-container>
 </div>
+}

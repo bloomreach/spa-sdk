@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import {
   AfterContentChecked,
@@ -27,7 +26,6 @@ import {
   NgZone,
   OnChanges,
   OnDestroy,
-  Optional,
   Output,
   PLATFORM_ID,
   SimpleChanges,
@@ -35,7 +33,7 @@ import {
   Type,
   ViewChild,
 } from '@angular/core';
-import { makeStateKey, StateKey, TransferState } from '@angular/platform-browser';
+
 import { Configuration, destroy, initialize, isPage, Page, PageModel } from '@bloomreach/spa-sdk';
 import { from, of, Subject } from 'rxjs';
 import { filter, map, mapTo, pairwise, pluck, switchMap, take } from 'rxjs/operators';
@@ -70,13 +68,6 @@ export class BrPageComponent implements AfterContentChecked, AfterContentInit, O
   @Input() page?: Page | PageModel;
 
   /**
-   * The TransferState key is used to transfer the state from the server-side to the client-side.
-   * By default, it equals to `brPage`.
-   * If `false` is passed then the state transferring feature will be disabled.
-   */
-  @Input() stateKey: StateKey<PageModel | undefined> | false = makeStateKey('brPage');
-
-  /**
    * The current state of the page component.
    */
   @Output() state = this.pageService.state;
@@ -97,7 +88,6 @@ export class BrPageComponent implements AfterContentChecked, AfterContentInit, O
     private pageService: BrPageService,
     zone: NgZone,
     @Inject(PLATFORM_ID) private platform: any,
-    @Optional() private transferState?: TransferState,
   ) {
     this.request = this.request.bind(this);
 
@@ -109,13 +99,6 @@ export class BrPageComponent implements AfterContentChecked, AfterContentInit, O
         switchMap((page) => this.afterContentChecked$.pipe(take(1), mapTo(page))),
       )
       .subscribe((page) => zone.runOutsideAngular(() => page.sync()));
-
-    this.state
-      .pipe(
-        filter(() => this.isPlatformServer(this.platform)),
-        filter(isPage),
-      )
-      .subscribe((page) => this.stateKey && this.transferState?.set(this.stateKey, page.toJSON()));
   }
 
   get context(): BrNodeContext {
@@ -139,21 +122,10 @@ export class BrPageComponent implements AfterContentChecked, AfterContentInit, O
     if (changes.mapping?.currentValue !== this.pageService.mapping) {
       this.pageService.mapping = this.mapping;
     }
-
-    if (changes.stateKey?.previousValue && this.isPlatformServer(this.platform)) {
-      if (changes.stateKey.currentValue && this.transferState?.hasKey(changes.stateKey.previousValue)) {
-        this.transferState?.set(
-          changes.stateKey.currentValue,
-          this.transferState?.get(changes.stateKey.previousValue, undefined),
-        );
-      }
-
-      this.transferState?.remove(changes.stateKey.previousValue);
-    }
   }
 
   ngAfterContentChecked(): void {
-    this.afterContentChecked$.next();
+    this.afterContentChecked$.next(null);
   }
 
   ngAfterContentInit(): void {
@@ -167,11 +139,6 @@ export class BrPageComponent implements AfterContentChecked, AfterContentInit, O
   }
 
   private initialize(page: Page | PageModel | undefined): void {
-    if (this.stateKey && this.isPlatformBrowser(this.platform) && this.transferState?.hasKey(this.stateKey)) {
-      page = page ?? this.transferState?.get(this.stateKey, undefined);
-      this.transferState?.remove(this.stateKey);
-    }
-
     const configuration = { httpClient: this.request, ...this.configuration } as Configuration;
     const observable = page ? of(initialize(configuration, page)) : from(initialize(configuration));
 
@@ -192,13 +159,5 @@ export class BrPageComponent implements AfterContentChecked, AfterContentInit, O
       .pipe(map((data) => ({ data })))
       .toPromise()
       .catch((error) => this.httpError.emit(error));
-  }
-
-  isPlatformBrowser(platform: object): boolean {
-    return isPlatformBrowser(platform);
-  }
-
-  isPlatformServer(platform: object): boolean {
-    return isPlatformServer(platform);
   }
 }
