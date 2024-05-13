@@ -26,9 +26,9 @@ export const environment = {
     hasMultiTenantSupport: '${ process.env.BR_MULTI_TENANT_SUPPORT || "" }'
 };
 `;
-fs.writeFile("./src/environments/environment.prod.ts", str, function (err) {
+fs.writeFile("./src/environments/environment.ts", str, function (err) {
   if (err) {
     return console.log(err);
   }
-  console.log("environment.prod.ts was saved!");
+  console.log("environment.ts was saved!");
 });

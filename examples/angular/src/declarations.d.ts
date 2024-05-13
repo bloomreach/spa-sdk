@@ -1,5 +1,5 @@
 /*
- * Copyright 2020-2023 Bloomreach
+ * Copyright 2024 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,6 +27,7 @@ interface DocumentData {
   introduction: string;
   title: string;
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [property: string]: any;
 }
 

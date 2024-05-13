@@ -1,5 +1,5 @@
 /*
- * Copyright 2022-2023 Bloomreach
+ * Copyright 2024 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,5 @@
  * limitations under the License.
  */
 
-import { environment } from '../../environments/environment';
-
-export const BRXM_ENDPOINT = environment.endpoint ?? '';
-export const BR_MULTI_TENANT_SUPPORT = environment.hasMultiTenantSupport === 'true';
+export const BRXM_ENDPOINT = '';
+export const BR_MULTI_TENANT_SUPPORT = true;

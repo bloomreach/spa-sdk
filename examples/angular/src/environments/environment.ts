@@ -1,5 +1,5 @@
 /*
- * Copyright 2020-2023 Bloomreach
+ * Copyright 2024 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,6 @@
 
 export const environment = {
   endpoint: undefined,
-  production: false,
-  hasMultiTenantSupport: 'true',
+  production: true,
+  hasMultiTenantSupport: undefined,
 };

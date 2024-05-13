@@ -1,0 +1,35 @@
+<!--
+  Copyright 2024 Bloomreach
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+   https://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+@if (document) {
+<div [ngClass]="{ 'has-edit-button': page.isPreview() }">
+  <ng-container [brManageContentButton]="document"></ng-container>
+  @if (image) {
+  <img class="img-fluid" [src]="image.getOriginal()?.getUrl()" [alt]="data?.title || ''" />
+  }
+  @if (data?.title) {
+  <h1>{{ data!.title }}</h1>
+  }
+  @if (data?.author) {
+  <p class="mb-3 text-muted">{{ data!.author }}</p>
+  }
+  @if (date) {
+  <p class="mb-3 small text-muted">{{ date | date }}</p>
+  }
+  @if (data?.content) {
+  <div [innerHTML]="safeHTML"></div>
+  }
+</div>
+}
