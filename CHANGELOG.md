@@ -2,9 +2,20 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### "23.1.0"
+#### "23.2.0"
+
+- SPASDK-211 Update angular sdk and example version to 16 [`#161`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/161)
+- SPASDK-211 Fix linting issues [`#SPASDK-211`](https://issues.onehippo.com/browse/SPASDK-211)
+- SPASDK-211 Add empty lines at the begining of html files [`#SPASDK-211`](https://issues.onehippo.com/browse/SPASDK-211)
+- SPASDK-211 Update angular example to version 16 [`#SPASDK-211`](https://issues.onehippo.com/browse/SPASDK-211)
+- SPASDK-211 Upgrade ng-sdk to angular version 16 [`#SPASDK-211`](https://issues.onehippo.com/browse/SPASDK-211)
+
+#### spa-sdk-23.1.0
+
+> 10 May 2024
 
 - SPASDK-158 Add Nuxt 3 example app [`#164`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/164)
+- SPASDK-158 Bumping versions to 23.1.0 [`#SPASDK-158`](https://issues.onehippo.com/browse/SPASDK-158)
 - SPASDK-158 Fix import error related to relevance [`#SPASDK-158`](https://issues.onehippo.com/browse/SPASDK-158)
 - SPASDK-158 Always generate and publish docs on main branch [`#SPASDK-158`](https://issues.onehippo.com/browse/SPASDK-158)
 - SPASDK-158 Add Nuxt 3 example app [`#SPASDK-158`](https://issues.onehippo.com/browse/SPASDK-158)

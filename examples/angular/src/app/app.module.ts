@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-import { BrowserModule, BrowserTransferStateModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { APP_ID, NgModule } from '@angular/core';
 import { BrSdkModule } from '@bloomreach/ng-sdk';
+import { CommonModule } from '@angular/common';
 
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
@@ -46,11 +47,14 @@ import { NewsItemComponent } from './news-item/news-item.component';
     ParseUrlPipe,
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'brxm-angular-spa' }),
-    BrowserTransferStateModule,
+    CommonModule,
+    BrowserModule,
     BrSdkModule,
     AppRoutingModule,
   ],
-  providers: [{ provide: ENDPOINT, useValue: environment.endpoint }],
+  providers: [
+    { provide: ENDPOINT, useValue: environment.endpoint },
+    { provide: APP_ID, useValue: 'brxm-angular-spa' },
+  ],
 })
 export class AppModule {}
