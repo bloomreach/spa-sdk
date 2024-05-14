@@ -22,7 +22,6 @@ import { Component as BrComponent, Page } from '@bloomreach/spa-sdk';
 import { NewsItemComponent } from '../news-item/news-item.component';
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'br-news-list',
   standalone: true,
   imports: [

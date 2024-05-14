@@ -21,7 +21,6 @@ import { BrSdkModule } from '@bloomreach/ng-sdk';
 import { sanitize } from '../../utils/sanitize';
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'br-content',
   standalone: true,
   imports: [

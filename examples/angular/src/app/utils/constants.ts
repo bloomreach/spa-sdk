@@ -14,5 +14,7 @@
  * limitations under the License.
  */
 
-export const BRXM_ENDPOINT = '';
-export const BR_MULTI_TENANT_SUPPORT = true;
+import { environment } from '../../environments/environment';
+
+export const BRXM_ENDPOINT = environment.endpoint ?? '';
+export const BR_MULTI_TENANT_SUPPORT = environment.hasMultiTenantSupport === 'true';

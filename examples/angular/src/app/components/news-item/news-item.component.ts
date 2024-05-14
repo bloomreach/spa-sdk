@@ -22,7 +22,6 @@ import { Document } from '@bloomreach/spa-sdk';
 import { ParseUrlPipe } from '../../pipes/parse-url.pipe';
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'br-news-item',
   standalone: true,
   imports: [

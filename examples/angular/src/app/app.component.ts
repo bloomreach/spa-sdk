@@ -19,8 +19,7 @@ import { RouterOutlet } from '@angular/router';
 import { IndexComponent } from './pages/index/index.component';
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'app-root',
+  selector: 'br-app-root',
   standalone: true,
   imports: [RouterOutlet, IndexComponent],
   templateUrl: './app.component.html',

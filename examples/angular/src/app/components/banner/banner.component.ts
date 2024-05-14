@@ -23,7 +23,6 @@ import { sanitize } from '../../utils/sanitize';
 import { ParseUrlPipe } from '../../pipes/parse-url.pipe';
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'br-banner',
   standalone: true,
   imports: [
@@ -62,7 +61,6 @@ export class BannerComponent implements OnInit {
   }
 
   get link(): Document | undefined {
-    // eslint-disable-next-line dot-notation
-    return this.data && this.data['link'] && this.page.getContent<Document>(this.data['link']);
+    return this.data?.link && this.page.getContent<Document>(this.data.link);
   }
 }
