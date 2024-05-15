@@ -10,6 +10,8 @@
     "watch": "ng build --watch --configuration development",
     "dev": "ng serve",
     "lint": "ng lint",
+    "dev:ssr": "ng serve",
+    "start:ssr": "ng serve",
     "serve:ssr:angular": "node dist/angular/server/server.mjs",
     "yalcAdd": "yalc add @bloomreach/spa-sdk @bloomreach/ng-sdk",
     "yalcRetreat": "yalc retreat --all",
