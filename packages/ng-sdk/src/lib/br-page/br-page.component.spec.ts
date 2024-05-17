@@ -15,9 +15,9 @@
  */
 
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { NO_ERRORS_SCHEMA, SimpleChange, TransferState } from '@angular/core';
+import { NO_ERRORS_SCHEMA, SimpleChange } from '@angular/core';
 import { ComponentFixture, getTestBed, TestBed, waitForAsync } from '@angular/core/testing';
-
+import { TransferState } from '@angular/platform-browser';
 import { Component, Configuration, destroy, initialize, isPage, Page, PageModel } from '@bloomreach/spa-sdk';
 
 import { BrNodeTypePipe } from '../br-node-type.pipe';
@@ -161,6 +161,89 @@ describe('BrPageComponent', () => {
 
       expect(initialize).toBeCalledWith(expect.any(Object), component.page);
       expect(component.state.getValue()).toBe(page);
+    });
+
+    it('should initialize a page from the transferred state', async () => {
+      const state = {};
+
+      jest.mocked(initialize as unknown as () => Page).mockReturnValueOnce(page);
+      jest.spyOn(component, 'isPlatformBrowser').mockReturnValue(true);
+      transferState.hasKey.mockReturnValueOnce(true);
+      transferState.get.mockReturnValueOnce(state);
+
+      component.configuration = {} as Configuration;
+      await component.ngOnChanges({
+        configuration: new SimpleChange(undefined, component.configuration, true),
+      });
+
+      expect(transferState.get).toBeCalledWith(component.stateKey, undefined);
+      expect(transferState.remove).toBeCalledWith(component.stateKey);
+      expect(initialize).toBeCalledWith(expect.any(Object), state);
+      expect(component.state.getValue()).toBe(page);
+    });
+
+    it('should initialize a page using the page model from the inputs instead of the transferred state', () => {
+      jest.mocked(initialize as unknown as () => Page).mockReturnValueOnce(page);
+      jest.spyOn(component, 'isPlatformBrowser').mockReturnValue(true);
+      transferState.hasKey.mockReturnValueOnce(true);
+
+      component.configuration = {} as Configuration;
+      component.page = {} as PageModel;
+      component.ngOnChanges({
+        configuration: new SimpleChange(undefined, component.configuration, true),
+        page: new SimpleChange(undefined, component.page, true),
+      });
+
+      expect(transferState.remove).toBeCalledWith(component.stateKey);
+      expect(initialize).toBeCalledWith(expect.any(Object), component.page);
+    });
+
+    it('should not initialize from the transferred state if the stateKey is false', async () => {
+      jest.mocked(initialize).mockResolvedValueOnce(page);
+      jest.spyOn(component, 'isPlatformBrowser').mockReturnValue(true);
+
+      component.configuration = {} as Configuration;
+      component.stateKey = false;
+      await component.ngOnChanges({
+        configuration: new SimpleChange(undefined, component.configuration, true),
+      });
+
+      await new Promise(process.nextTick);
+
+      expect(transferState.hasKey).not.toBeCalled();
+      expect(transferState.get).not.toBeCalled();
+      expect(transferState.remove).not.toBeCalled();
+      expect(initialize).toBeCalledWith(expect.any(Object));
+    });
+
+    it('should update a page in the transferred state', async () => {
+      const model = {} as PageModel;
+
+      jest.mocked(initialize as unknown as () => Page).mockReturnValueOnce(page);
+      jest.spyOn(component, 'isPlatformServer').mockReturnValue(true);
+      page.toJSON.mockReturnValue(model);
+
+      component.configuration = {} as Configuration;
+      component.page = page;
+      await component.ngOnChanges({
+        configuration: new SimpleChange(undefined, component.configuration, true),
+        page: new SimpleChange(undefined, component.page, true),
+      });
+
+      expect(transferState.set).toBeCalledWith(component.stateKey, model);
+    });
+
+    it('should update the transferred state on the stateKey update', () => {
+      jest.spyOn(component, 'isPlatformServer').mockReturnValue(true);
+      transferState.hasKey.mockReturnValueOnce(true);
+      transferState.get.mockReturnValueOnce('state');
+
+      component.ngOnChanges({
+        stateKey: new SimpleChange('old-key', 'new-key', true),
+      });
+
+      expect(transferState.set).toBeCalledWith('new-key', 'state');
+      expect(transferState.remove).toBeCalledWith('old-key');
     });
 
     it('should pass a compatible http client', () => {

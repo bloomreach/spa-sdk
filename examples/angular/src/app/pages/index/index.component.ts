@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
-import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { CommonModule, isPlatformServer } from '@angular/common';
+import { Component, Inject, OnInit, Optional, PLATFORM_ID, inject } from '@angular/core';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { BrPageComponent, BrSdkModule } from '@bloomreach/ng-sdk';
 import { Page } from '@bloomreach/spa-sdk';
 import { Observable, filter } from 'rxjs';
+import { Request } from 'express';
+import { REQUEST } from '../../../express.tokens';
 import { ParseUrlPipe } from '../../pipes/parse-url.pipe';
 import { buildConfiguration } from '../../utils/buildConfiguration';
 import { MenuComponent } from '../../components/menu/menu.component';
@@ -43,6 +45,7 @@ import { environment } from '../../../environments/environment.development';
 export class IndexComponent implements OnInit {
   router = inject(Router);
   configuration!: BrPageComponent['configuration'];
+  platformId = inject(PLATFORM_ID);
 
   mapping = {
     menu: MenuComponent,
@@ -54,8 +57,13 @@ export class IndexComponent implements OnInit {
 
   private navigationEnd: Observable<NavigationEnd>;
 
-  constructor() {
-    this.configuration = buildConfiguration(this.router.url, environment.endpoint);
+  constructor(@Optional() @Inject(REQUEST) private request: Request) {
+    let req;
+    if (isPlatformServer(this.platformId)) {
+      req = this.request;
+    }
+    this.configuration = buildConfiguration(this.router.url, req, environment.endpoint);
+
     this.navigationEnd = this.router.events.pipe(
       filter((event) => event instanceof NavigationEnd),
     ) as Observable<NavigationEnd>;

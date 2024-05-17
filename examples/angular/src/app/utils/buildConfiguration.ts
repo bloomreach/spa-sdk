@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 Bloomreach
+ * Copyright 2022-2023 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
  */
 
 import { Configuration, extractSearchParams } from '@bloomreach/spa-sdk';
+import { Request } from 'express';
 import { BR_MULTI_TENANT_SUPPORT, BRXM_ENDPOINT } from './constants';
 
 type BuildConfigurationOptions = {
@@ -26,6 +27,7 @@ type ConfigurationBuilder = Omit<Configuration & Partial<BuildConfigurationOptio
 
 export function buildConfiguration(
   path: string,
+  request?: Request,
   endpoint: string = BRXM_ENDPOINT,
   hasMultiTenantSupport: boolean = BR_MULTI_TENANT_SUPPORT,
 ): ConfigurationBuilder {
@@ -45,6 +47,8 @@ export function buildConfiguration(
     configuration.baseUrl = `?${endpointQueryParameter}=${searchParams.get(endpointQueryParameter)}`;
     configuration.path = url;
   }
-
+  if (request) {
+    configuration.request = request;
+  }
   return configuration;
 }
