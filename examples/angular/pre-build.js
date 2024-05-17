@@ -21,9 +21,9 @@ dotenv.config();
 var fs = require('fs');
 var str = `
 export const environment = {
-    production: true,
-    endpoint: '${ process.env.BRXM_ENDPOINT || "" }',
-    hasMultiTenantSupport: '${ process.env.BR_MULTI_TENANT_SUPPORT || "" }'
+  production: true,
+  endpoint: '${ process.env.BRXM_ENDPOINT || "" }',
+  hasMultiTenantSupport: '${ process.env.BR_MULTI_TENANT_SUPPORT || "" }',
 };
 `;
 fs.writeFile("./src/environments/environment.ts", str, function (err) {
