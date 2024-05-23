@@ -27,8 +27,6 @@ interface DocumentData {
   introduction: string;
   title: string;
   link?: any;
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [property: string]: any;
 }
 

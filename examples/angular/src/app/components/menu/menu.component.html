@@ -15,7 +15,6 @@
   -->
 @if (menu) {
 <ng-container [brManageMenuButton]="menu"></ng-container>
-
 @for (item of menu.getItems(); track $index) {
 <li key="{index}" class="nav-item" [ngClass]="{ active: item.isSelected() }">
   @if (!item.getUrl()) {

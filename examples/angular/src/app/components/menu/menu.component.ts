@@ -24,8 +24,7 @@ import { IsInternalLinkPipe } from '../../pipes/is-internal-link.pipe';
 import { ParseUrlPipe } from '../../pipes/parse-url.pipe';
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'ul.br-menu',
+  selector: 'br-menu',
   standalone: true,
   imports: [
     CommonModule,
