@@ -1,6 +1,8 @@
-# Angular17
+# Angular CSR/SSR SPA
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.5.
+Example Angular SPA using the Bloomreach Experience [Angular SDK](https://www.npmjs.com/package/@bloomreach/ng-sdk).  This project was
+generated with [Angular CLI](https://github.com/angular/angular-cli).
+
 
 ## Development server
 

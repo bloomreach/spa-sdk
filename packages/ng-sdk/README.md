@@ -436,6 +436,18 @@ export class NewsComponent {
   // ...
 }
 ```
+### State Transfering
+
+The `br-page` component supports
+[TransferState](https://angular.io/api/platform-browser/TransferState) without
+any extra configuration. To use it in [Angular Universal](https://angular.io/guide/universal) applications,
+import [ServerTransferStateModule](https://angular.io/api/platform-server/ServerTransferStateModule)
+on the server and [BrowserTransferStateModule](BrowserTransferStateModule) on
+the client. If you would like to disable the feature, just pass `false` into
+the `stateKey` input. (this input works with angular universal and angular version < 17)
+
+```html
+<br-page [stateKey]="false"></br-page>
 
 
 ### Http error handling
