@@ -58,11 +58,7 @@ export class IndexComponent implements OnInit {
   private navigationEnd: Observable<NavigationEnd>;
 
   constructor(@Optional() @Inject(REQUEST) private request: Request) {
-    let req;
-    if (isPlatformServer(this.platformId)) {
-      req = this.request;
-    }
-    this.configuration = buildConfiguration(this.router.url, req, environment.endpoint);
+    this.configuration = buildConfiguration(this.router.url, this.request, environment.endpoint);
 
     this.navigationEnd = this.router.events.pipe(
       filter((event) => event instanceof NavigationEnd),
