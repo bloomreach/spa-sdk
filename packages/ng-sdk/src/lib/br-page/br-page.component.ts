@@ -153,7 +153,7 @@ export class BrPageComponent implements AfterContentChecked, AfterContentInit, O
   }
 
   ngAfterContentChecked(): void {
-    this.afterContentChecked$.next();
+    this.afterContentChecked$.next(null);
   }
 
   ngAfterContentInit(): void {

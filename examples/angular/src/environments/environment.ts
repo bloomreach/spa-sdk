@@ -15,7 +15,7 @@
  */
 
 export const environment = {
-  endpoint: undefined,
-  production: false,
-  hasMultiTenantSupport: 'true',
+  production: true,
+  endpoint: '',
+  hasMultiTenantSupport: '',
 };

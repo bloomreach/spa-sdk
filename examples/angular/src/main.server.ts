@@ -1,5 +1,5 @@
 /*
- * Copyright 2020-2023 Bloomreach
+ * Copyright 2024 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,10 @@
  * limitations under the License.
  */
 
-import { enableProdMode } from '@angular/core';
+import { bootstrapApplication } from '@angular/platform-browser';
+import { AppComponent } from './app/app.component';
+import { config } from './app/app.config.server';
 
-import { environment } from './environments/environment';
+const bootstrap = () => bootstrapApplication(AppComponent, config);
 
-if (environment.production) {
-  enableProdMode();
-}
-
-export * from './app/app.server.module';
-export { renderModule } from '@angular/platform-server';
+export default bootstrap;

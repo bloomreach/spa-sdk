@@ -1,0 +1,42 @@
+<!--
+  Copyright 2024 Bloomreach
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+   https://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<div class="card mb-3">
+  <ng-container [brManageContentButton]="item"></ng-container>
+
+  <div class="card-body">
+    @if (data.title) {
+    <h2 class="card-title">
+      <a [routerLink]="(item.getUrl()! | parseUrl).pathname" [queryParams]="(item.getUrl()! | parseUrl).queryParams">
+        {{ data!.title }}
+      </a>
+    </h2>
+    }
+    @if (data.author) {
+    <div class="card-subtitle mb-3 text-muted">
+      {{ data!.author }}
+    </div>
+    }
+    @if (data.date) {
+    <div class="card-subtitle mb-3 small text-muted">
+      {{ data!.date | date }}
+    </div>
+    }
+    @if (data.introduction) {
+    <p class="card-text">{{ data!.introduction }}</p>
+    }
+  </div>
+</div>

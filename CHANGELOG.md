@@ -2,9 +2,32 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### "23.2.0"
+#### "23.3.0"
 
+- SPASDK-215 Upgrade ng-sdk angular version to 17 [`#171`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/171)
+- SPASDK-215 Add styles for edit button [`#SPASDK-215`](https://issues.onehippo.com/browse/SPASDK-215)
+- SPASDK-215 Fix linting issue [`#SPASDK-215`](https://issues.onehippo.com/browse/SPASDK-215)
+- SPASDK-215 Add request object in both server and browser versions [`#SPASDK-215`](https://issues.onehippo.com/browse/SPASDK-215)
+- SPASDK-215 Add heroku ssr deployment file [`#SPASDK-215`](https://issues.onehippo.com/browse/SPASDK-215)
+- SPASDK-215 Add stateKey description to ng-sdk README file [`#SPASDK-215`](https://issues.onehippo.com/browse/SPASDK-215)
+- SPASDK-215 Fix linting issues [`#SPASDK-215`](https://issues.onehippo.com/browse/SPASDK-215)
+- SPASDK-215 Add angular 15 and 16 support [`#SPASDK-215`](https://issues.onehippo.com/browse/SPASDK-215)
+- SPASDK-215 Add browser & server folders in dist build output directory [`#SPASDK-215`](https://issues.onehippo.com/browse/SPASDK-215)
+- SPASDK-215 Add ssr commands to angular example [`#SPASDK-215`](https://issues.onehippo.com/browse/SPASDK-215)
+- SPASDK-215 Add prebuild command to generate environments file in angular example [`#SPASDK-215`](https://issues.onehippo.com/browse/SPASDK-215)
+- SPASDK-215 Remove request from configuration builder [`#SPASDK-215`](https://issues.onehippo.com/browse/SPASDK-215)
+- SPASDK-215 Remove linting issues & add relevance to  server [`#SPASDK-215`](https://issues.onehippo.com/browse/SPASDK-215)
+- SPASDK-215 Remove unit testing from angular example [`#SPASDK-215`](https://issues.onehippo.com/browse/SPASDK-215)
+- SPASDK-215 Add new angular 17 example and remove the angular 16 example [`#SPASDK-215`](https://issues.onehippo.com/browse/SPASDK-215)
+- SPASDK-215 Upgrade ng-sdk angular version to 17 [`#SPASDK-215`](https://issues.onehippo.com/browse/SPASDK-215)
+
+#### spa-sdk-23.2.0
+
+> 13 May 2024
+
+- SPASDK-211 Support angular v16 in ng-sdk [`#169`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/169)
 - SPASDK-211 Update angular sdk and example version to 16 [`#161`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/161)
+- SPASDK-211 Bumping versions to 23.2.0 [`#SPASDK-211`](https://issues.onehippo.com/browse/SPASDK-211)
 - SPASDK-211 Fix linting issues [`#SPASDK-211`](https://issues.onehippo.com/browse/SPASDK-211)
 - SPASDK-211 Add empty lines at the begining of html files [`#SPASDK-211`](https://issues.onehippo.com/browse/SPASDK-211)
 - SPASDK-211 Update angular example to version 16 [`#SPASDK-211`](https://issues.onehippo.com/browse/SPASDK-211)

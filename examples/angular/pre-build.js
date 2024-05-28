@@ -21,14 +21,14 @@ dotenv.config();
 var fs = require('fs');
 var str = `
 export const environment = {
-    production: true,
-    endpoint: '${ process.env.BRXM_ENDPOINT || "" }',
-    hasMultiTenantSupport: '${ process.env.BR_MULTI_TENANT_SUPPORT || "" }'
+  production: true,
+  endpoint: '${ process.env.BRXM_ENDPOINT || "" }',
+  hasMultiTenantSupport: '${ process.env.BR_MULTI_TENANT_SUPPORT || "" }',
 };
 `;
-fs.writeFile("./src/environments/environment.prod.ts", str, function (err) {
+fs.writeFile("./src/environments/environment.ts", str, function (err) {
   if (err) {
     return console.log(err);
   }
-  console.log("environment.prod.ts was saved!");
+  console.log("environment.ts was saved!");
 });

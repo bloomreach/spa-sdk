@@ -39,7 +39,7 @@ component.
 #### `src/app/app.module.ts`
 
 In the [`NgModule`](https://angular.io/guide/ngmodules) metadata, it needs to
-import `BrSdkModule` and specify all the brXM components as [module entry components](https://angular.io/guide/entry-components).
+import `BrSdkModule`
 
 ```typescript
 import { BrowserModule } from "@angular/platform-browser";
@@ -222,9 +222,11 @@ import { Component as BrComponent } from '@bloomreach/spa-sdk';
   selector: 'app-inline-container',
   template: `
     <div>
-      <span *ngFor="let child of component.getChildren()">
-        <ng-container [brComponent]="child"></ng-container>
-      </span>
+      @for (child of component.getChildren(); track $index){
+        <span>
+          <ng-container [brComponent]="child"></ng-container>
+        </span>
+      }
     </div>
   `,
 })
@@ -305,7 +307,9 @@ The component data in case of inline mapping can be accessed via the template co
       <ng-template>
         <ul *brComponent="'menu'; let component; let page = page">
           <li><a [href]="page.getUrl('/')">Home</a></li>
-          <li *ngFor="let item of component.getModels()">...</li>
+          @for (item of component.getModels(); track $index){
+            <li>...</li>
+          }
         </ul>
       </ng-template>
     </br-page>
@@ -432,7 +436,6 @@ export class NewsComponent {
   // ...
 }
 ```
-
 ### State Transfering
 
 The `br-page` component supports
@@ -441,11 +444,11 @@ any extra configuration. To use it in [Angular Universal](https://angular.io/gui
 import [ServerTransferStateModule](https://angular.io/api/platform-server/ServerTransferStateModule)
 on the server and [BrowserTransferStateModule](BrowserTransferStateModule) on
 the client. If you would like to disable the feature, just pass `false` into
-the `stateKey` input.
+the `stateKey` input. (this input works with angular universal and angular version < 17)
 
 ```html
 <br-page [stateKey]="false"></br-page>
-```
+
 
 ### Http error handling
 
@@ -492,7 +495,7 @@ recursively.
 | input  | `configuration` |  _yes_   | The [configuration](#configuration) of the SPA SDK.                                                                                                                                                        |
 | input  | `mapping`       |  _yes_   | The brXM and Angular components [mapping](#mapping).                                                                                                                                                       |
 | input  | `page`          |   _no_   | Preinitialized page instance or prefetched page model. Mostly that should be used to transfer state from the server-side to the client-side.                                                               |
-| input  | `stateKey`      |   _no_   | The TransferState key is used to transfer the state from the server-side to the client-side. By default, it equals to `brPage`. If `false` is passed then the state transferring feature will be disabled. |
+| input  | `stateKey`      |   _no_   | The TransferState key is used to transfer the state from the server-side to the client-side. By default, it equals to `brPage`. If `false` is passed then the state transferring feature will be disabled.(note that in angular >= 17 this property is deprecated and you will use built-in angular ssr instead) |
 | output | `state`         |   _no_   | The current state of the page component.                                                                                                                                                                   |
 | output | `httpError`     |   _no_   | The event handler that processes HTTP error events from fetching PMA.                                                                                                                                      |
 

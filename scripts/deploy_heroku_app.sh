@@ -66,7 +66,7 @@ fi
 
 if [[ $APP_TYPE = "ssr" ]] && [[ $APP_FRAMEWORK = "ng" ]]
 then
-  heroku config:set --app=$NAME PROCFILE=$APP_PATH/universal.Procfile
+  heroku config:set --app=$NAME PROCFILE=$APP_PATH/ssr.Procfile
 fi
 
 if [[ $APP_TYPE = "csr" ]] && [[ $APP_FRAMEWORK = "react" ]]
