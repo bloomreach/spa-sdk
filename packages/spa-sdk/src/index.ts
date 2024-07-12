@@ -327,6 +327,7 @@ export {
   ManageContentButton,
   MenuItem,
   Menu,
+  Menu10,
   MetaCollection,
   MetaComment,
   Meta,
