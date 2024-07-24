@@ -94,7 +94,7 @@ export { Image } from './image';
 export { Link, TYPE_LINK_EXTERNAL, TYPE_LINK_INTERNAL, TYPE_LINK_RESOURCE, isLink } from './link';
 export { ManageContentButton, TYPE_MANAGE_CONTENT_BUTTON } from './button-manage-content';
 export { MenuItem } from './menu-item';
-export { TYPE_MANAGE_MENU_BUTTON, TYPE_MENU, isMenu } from './menu';
+export { TYPE_MANAGE_MENU_BUTTON, TYPE_MENU, isMenu, Menu as Menu10 } from './menu';
 export { MetaCollection } from './meta-collection';
 export { MetaComment, isMetaComment } from './meta-comment';
 export { Meta, META_POSITION_BEGIN, META_POSITION_END, isMeta } from './meta';

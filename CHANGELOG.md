@@ -2,9 +2,17 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### "23.3.0"
+#### "23.3.1"
 
-- SPASDK-215 Upgrade ng-sdk angular version to 17 [`#171`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/171)
+- SPASDK-223 Export Menu10 to avoid TS4058 [`#173`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/173)
+- SPASDK-223 Export Menu10 to avoid TS4058 [`#SPASDK-223`](https://issues.onehippo.com/browse/SPASDK-223)
+
+#### spa-sdk-23.3.0
+
+> 27 May 2024
+
+- SPASDK-215 Fix CHANGELOG.md [`#SPASDK-215`](https://issues.onehippo.com/browse/SPASDK-215)
+- SPASDK-215 Bumping versions to 23.3.0 [`#SPASDK-215`](https://issues.onehippo.com/browse/SPASDK-215)
 - SPASDK-215 Add styles for edit button [`#SPASDK-215`](https://issues.onehippo.com/browse/SPASDK-215)
 - SPASDK-215 Fix linting issue [`#SPASDK-215`](https://issues.onehippo.com/browse/SPASDK-215)
 - SPASDK-215 Add request object in both server and browser versions [`#SPASDK-215`](https://issues.onehippo.com/browse/SPASDK-215)
@@ -20,13 +28,26 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-215 Remove unit testing from angular example [`#SPASDK-215`](https://issues.onehippo.com/browse/SPASDK-215)
 - SPASDK-215 Add new angular 17 example and remove the angular 16 example [`#SPASDK-215`](https://issues.onehippo.com/browse/SPASDK-215)
 - SPASDK-215 Upgrade ng-sdk angular version to 17 [`#SPASDK-215`](https://issues.onehippo.com/browse/SPASDK-215)
+- SPASDK-211 Merge branch 'development' into 'main' [`#SPASDK-211`](https://issues.onehippo.com/browse/SPASDK-211)
+- SPASDK-158 Merge branch 'development' into 'main' [`#SPASDK-158`](https://issues.onehippo.com/browse/SPASDK-158)
+- SPASDK-213 Merge branch 'development' into 'main' [`#SPASDK-213`](https://issues.onehippo.com/browse/SPASDK-213)
+- SPASDK-214 Merge branch 'development' into 'main' [`#SPASDK-214`](https://issues.onehippo.com/browse/SPASDK-214)
+- SPASDK-209 Merge branch 'development' into 'main' [`#SPASDK-209`](https://issues.onehippo.com/browse/SPASDK-209)
+- SPASDK-207 Merge branch 'development' into 'main' [`#SPASDK-207`](https://issues.onehippo.com/browse/SPASDK-207)
+- SPASDK-196 Merge branch 'development' into 'main' [`#SPASDK-196`](https://issues.onehippo.com/browse/SPASDK-196)
+- SPASDK-196 Merge branch 'development' into 'main' [`#SPASDK-196`](https://issues.onehippo.com/browse/SPASDK-196)
+- SPASDK-186 Merge branch 'development' into 'main' [`#SPASDK-186`](https://issues.onehippo.com/browse/SPASDK-186)
+- SPASDK-186 Merge branch 'development' into 'main' [`#SPASDK-186`](https://issues.onehippo.com/browse/SPASDK-186)
+- SPASDK-186 Merge branch 'development' into 'main' [`#SPASDK-186`](https://issues.onehippo.com/browse/SPASDK-186)
+- SPASDK-186 Merge branch 'development' into 'main' [`#SPASDK-186`](https://issues.onehippo.com/browse/SPASDK-186)
 
 #### spa-sdk-23.2.0
 
 > 13 May 2024
 
-- SPASDK-211 Support angular v16 in ng-sdk [`#169`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/169)
+- SPASDK-211 Support angular v14 in ng-sdk [`#169`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/169)
 - SPASDK-211 Update angular sdk and example version to 16 [`#161`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/161)
+- SPASDK-211 Support angular v14 in ng-sdk [`#SPASDK-211`](https://issues.onehippo.com/browse/SPASDK-211)
 - SPASDK-211 Bumping versions to 23.2.0 [`#SPASDK-211`](https://issues.onehippo.com/browse/SPASDK-211)
 - SPASDK-211 Fix linting issues [`#SPASDK-211`](https://issues.onehippo.com/browse/SPASDK-211)
 - SPASDK-211 Add empty lines at the begining of html files [`#SPASDK-211`](https://issues.onehippo.com/browse/SPASDK-211)
@@ -889,7 +910,5 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-2 Log warning for unsupported method "getContentReference" in v0.9 [`#SPASDK-2`](https://issues.onehippo.com/browse/SPASDK-2)
 - SPASDK-2 Add exported function "getContainerItemContent" [`#SPASDK-2`](https://issues.onehippo.com/browse/SPASDK-2)
 - SPASDK-1 Bump to use node 14 [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
-- SPASDK-1 Remove maven files and update Jenkinsfile [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
-- SPASDK-1 Initial move from brxm monorepo [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
 - TRIVIAL Set branch name to 'main' in changesetBaseRefs
 - TRIVIAL Skip telemetry check on nuxt startup
