@@ -28,7 +28,7 @@
     "build": "pnpm -r --stream build",
     "lint": "echo 'Linting disabled'",
     "test": "pnpm -r --workspace-concurrency=1 test",
-    "bump": "echo 'bump not defined yet'",
+    "bump": "pnpm changeset && pnpm changeset version && pnpm install && pnpm postbump",
     "postbump": "pnpm changelog",
     "changelog": "auto-changelog --latest-version $(pnpm pkg get version -C ./packages/spa-sdk)",
     "docs": "pnpm -r --stream docs",
@@ -37,6 +37,7 @@
     "release": "echo 'release not defined yet'"
   },
   "devDependencies": {
+    "@changesets/cli": "2.27.7",
     "auto-changelog": "2.3.0",
     "glob": "10.2.6",
     "heroku": "8.1.9",
