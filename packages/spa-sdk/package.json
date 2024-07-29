@@ -28,7 +28,7 @@
   ],
   "scripts": {
     "build": "rollup -c rollup.config.js",
-    "dev": "npm run build -- --watch",
+    "dev": "pnpm run build -- --watch",
     "docs": "typedoc",
     "lint": "eslint --ext js,ts src",
     "test": "jest"
@@ -60,6 +60,7 @@
     "@types/cookie": "0.4.1",
     "@types/jest": "27.5.2",
     "@types/node": "16.18.11",
+    "@typescript-eslint/eslint-plugin": "5.49.0",
     "babel-jest": "27.5.1",
     "babel-plugin-transform-async-to-promises": "0.8.18",
     "eslint": "7.32.0",
@@ -80,7 +81,8 @@
   "eslintConfig": {
     "extends": "@bloomreach/eslint-config-base",
     "rules": {
-      "import/no-cycle": "off"
+      "import/no-cycle": "off",
+      "@typescript-eslint/no-unnecessary-type-constraint": "off"
     }
   }
 }

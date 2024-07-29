@@ -26,7 +26,7 @@
     "audit": "pnpm -r --stream audit --prod --audit-level=critical",
     "prebuild": "pnpm --filter @bloomreach/example-angular run prebuild:custom",
     "build": "pnpm -r --stream build",
-    "lint": "echo 'Linting disabled'",
+    "lint": "pnpm -r --workspace-concurrency=1 lint",
     "test": "pnpm -r --workspace-concurrency=1 test",
     "bump": "pnpm changeset && pnpm changeset version && pnpm install && pnpm postbump",
     "postbump": "pnpm changelog",

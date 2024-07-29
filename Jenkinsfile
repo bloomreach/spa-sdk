@@ -18,7 +18,7 @@ pipeline {
   agent {
     docker {
       label 'docker'
-      image 'guergeiro/pnpm:18-8'
+      image 'node:18.20.4'
       args '-v  /etc/passwd:/etc/passwd'
     }
   }
@@ -48,7 +48,10 @@ pipeline {
   stages {
     stage('Install') {
       steps {
-        sh 'pnpm install'
+      sh 'mkdir ~/bin'
+      sh 'corepack enable --install-directory ~/bin'
+      sh 'corepack prepare pnpm@8 --activate'
+      sh 'pnpm install'
       }
     }
     stage('Build') {
