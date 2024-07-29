@@ -33,8 +33,8 @@
     "changelog": "auto-changelog --latest-version $(pnpm pkg get version -C ./packages/spa-sdk)",
     "docs": "pnpm -r --stream docs",
     "deploy-to-heroku": "./scripts/deploy_heroku_app.sh ${0} ${1} ${2}",
-    "heroku-postbuild": "npm run prebuild:custom && npm run build && cd ${PROJECT_PATH:-.}",
-    "release": "echo 'release not defined yet'"
+    "heroku-postbuild": "pnpm prebuild && pnpm build && cd ${PROJECT_PATH:-.}",
+    "release": "pnpm publish -r"
   },
   "devDependencies": {
     "@changesets/cli": "2.27.7",
