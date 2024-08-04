@@ -71,6 +71,16 @@
         "tsconfig.spec.json"
       ],
       "createDefaultProgram": true
+    },
+    "rules": {
+      "no-console": [
+        "error",
+        {
+          "allow": [
+            "error"
+          ]
+        }
+      ]
     }
   }
 }
