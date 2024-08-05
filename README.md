@@ -87,7 +87,8 @@ Installation of the dependencies of all the workspaces is done by running `pnpm 
 
 Running `pnpm build` will not only build all packages but also link them together such that you can develop packages locally without having to publish 'prerelease' versions.
 
-Running `pnpm --filter @bloomreach/spa-sdk run dev` in the root of the monorepo will watch SDK package and build and link it when changes happen. Combining this with running the dev server for one of the example apps allows for live development with any SDK.
+Running `pnpm dev` in the root of the monorepo will watch each SDK package and build and link it when changes happen. 
+Combining this with running the dev server for one of the example apps allows for live development with any SDK.
 
 #### Commands
 
@@ -114,6 +115,8 @@ Generally speaking for any kind of development one would:
 * Branch the `development` branch to a new branch e.g. `mybranch`
 * Do work on `mybranch` until finished
 * Create an MR of `mybranch` to be merged into `development`
+* Create a test release if it has to be published to `npm` for test purposes and use `dist-tag` that mentions jira ticket or
+  general effort for easier recognition by running `pnpm publish --filter <package-name> --tag [your Jira issue / effort name]`
 * Get reviews & approval
 * After the pipelines are green: merge the MR to `development`
 
