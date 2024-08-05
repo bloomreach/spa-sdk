@@ -26,6 +26,7 @@
     "audit": "pnpm -r --stream audit --prod --audit-level=critical",
     "prebuild": "pnpm --filter @bloomreach/example-angular run prebuild:custom",
     "build": "pnpm -r --stream build",
+    "dev": "pnpm -r --parallel --filter @bloomreach/${SDK_NAME:-*}-sdk run dev",
     "lint": "pnpm -r --workspace-concurrency=1 lint",
     "test": "pnpm -r --workspace-concurrency=1 test",
     "bump": "pnpm changeset && pnpm changeset version && pnpm install && pnpm postbump",
@@ -34,7 +35,7 @@
     "docs": "pnpm -r --stream docs",
     "deploy-to-heroku": "./scripts/deploy_heroku_app.sh ${0} ${1} ${2}",
     "heroku-postbuild": "pnpm prebuild && pnpm build && cd ${PROJECT_PATH:-.}",
-    "release": "pnpm publish -r"
+    "release": "pnpm publish -r --filter ./packages/*"
   },
   "devDependencies": {
     "@changesets/cli": "2.27.7",
