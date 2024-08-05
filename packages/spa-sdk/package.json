@@ -28,7 +28,7 @@
   ],
   "scripts": {
     "build": "rollup -c rollup.config.js",
-    "dev": "pnpm run build -- --watch",
+    "dev": "npm run build -- --watch",
     "docs": "typedoc",
     "lint": "eslint --ext js,ts src",
     "test": "jest"
@@ -81,8 +81,7 @@
   "eslintConfig": {
     "extends": "@bloomreach/eslint-config-base",
     "rules": {
-      "import/no-cycle": "off",
-      "@typescript-eslint/no-unnecessary-type-constraint": "off"
+      "import/no-cycle": "off"
     }
   }
 }
