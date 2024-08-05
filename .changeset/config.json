@@ -5,7 +5,7 @@
   "fixed": [["@bloomreach/example-angular", "@bloomreach/example-react", "@bloomreach/example-next", "@bloomreach/example-nuxt", "@bloomreach/example-vue", "@bloomreach/ng-sdk", "@bloomreach/react-sdk", "@bloomreach/spa-sdk", "@bloomreach/vue-sdk"]],
   "linked": [],
   "access": "restricted",
-  "baseBranch": "develop",
+  "baseBranch": "development",
   "updateInternalDependencies": "patch",
   "ignore": ["@bloomreach/documentation-portal"]
 }
