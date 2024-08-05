@@ -28,6 +28,7 @@
     "includeVersion": true,
     "internalModule": "Internals",
     "entryPoints": ["src/index.ts", "src/express/index.ts"],
+    "plugin": ["typedoc-plugin-missing-exports"],
     "cleanOutputDir": true
   }
 }
