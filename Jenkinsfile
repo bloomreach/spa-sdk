@@ -80,18 +80,18 @@ pipeline {
 
       environment {
         GIT_SSH_COMMAND='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
-        VERSION = sh(script: "node -p -e \"require('./lerna.json').version\"", returnStdout: true).trim()
+        VERSION = sh(script: "node -p -e \"require('./packages/spa-sdk/package.json').version\"", returnStdout: true).trim()
       }
 
       stages {
         stage('Build TypeDoc') {
           steps {
-            sh 'pnpm docs'
+            sh 'pnpm --filter @bloomreach/spa-sdk run docs'
           }
         }
         stage('Build docs') {
           steps {
-            sh ''
+            sh 'cd docs && pnpm install && pnpm build'
           }
         }
         stage('Clone github docs branch') {
@@ -133,7 +133,7 @@ pipeline {
 
       environment {
         GIT_SSH_COMMAND='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
-        VERSION = sh(script: "node -p -e \"require('./lerna.json').version\"", returnStdout: true).trim()
+        VERSION = sh(script: "node -p -e \"require('./packages/spa-sdk/package.json').version\"", returnStdout: true).trim()
       }
 
       stages {
@@ -156,7 +156,7 @@ pipeline {
           steps {
             withCredentials([[$class: 'StringBinding', credentialsId: 'NPM_AUTH_TOKEN', variable: 'NPM_AUTH_TOKEN']]) {
               sh 'echo "//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}" >> ~/.npmrc'
-              sh 'npm run release -- --yes'
+              sh 'pnpm release -- --yes'
             }
           }
         }
@@ -184,7 +184,7 @@ pipeline {
                   stage('Deploy app') {
                     steps {
                       withCredentials([[$class: 'StringBinding', credentialsId: 'HEROKU_API_KEY', variable: 'HEROKU_API_KEY']]) {
-                        sh 'npm run deploy-to-heroku "${APP_TYPE}" "${APP_NAME}" "${VERSION_FOR_HEROKU}"'
+                        sh 'pnpm deploy-to-heroku "${APP_TYPE}" "${APP_NAME}" "${VERSION_FOR_HEROKU}"'
                       }
                     }
                   }
