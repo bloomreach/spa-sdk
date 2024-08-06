@@ -11,22 +11,22 @@ In the project directory, you can run:
 
 ### Development server
 ```bash
-npm run dev
+pnpm run dev
 ```
 
 ### Build
 ```bash
-npm run build
+pnpn run build
 ```
 
 ### Preview
 ```bash
-npm run preview
+pnpm run preview
 ```
 
 ### Generate static project
 ```bash
-npm run generate
+pnpm run generate
 ```
 
 For detailed explanation on how things work, check out [Nuxt docs](https://nuxt.com).
