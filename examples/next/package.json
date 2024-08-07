@@ -1,6 +1,6 @@
 {
   "name": "@bloomreach/example-next",
-  "version": "23.3.1",
+  "version": "23.3.2",
   "description": "Example Next.js SPA for Bloomreach Experience",
   "private": true,
   "author": "Bloomreach B.V.",
@@ -10,9 +10,9 @@
     "@bloomreach/spa-sdk": "file:.yalc/@bloomreach/spa-sdk",
     "axios": "0.26.1",
     "cookie": "0.6.0",
-    "next": "13.5.6",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "next": "14.2.5",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
     "sanitize-html": "2.10.0",
     "swr": "2.2.5"
   },
@@ -22,7 +22,7 @@
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.8",
     "eslint": "7.32.0",
-    "eslint-config-next": "13.5.6",
+    "eslint-config-next": "14.2.5",
     "typescript": "4.8.4",
     "yalc": "1.0.0-pre.53"
   },

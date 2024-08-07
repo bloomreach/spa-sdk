@@ -2,11 +2,11 @@
   "version": "v1",
   "packages": {
     "@bloomreach/spa-sdk": {
-      "signature": "2a08d6db1bdd2c37034d870b597d2902",
+      "signature": "9b1399c1a195da70aecffc38cdf0f898",
       "file": true
     },
     "@bloomreach/react-sdk": {
-      "signature": "54a50d8d98848329efdef82c94c1092a",
+      "signature": "4916f12efae113ff27e24aa6a537aaaf",
       "file": true
     }
   }

@@ -2,9 +2,17 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### "23.3.1"
+#### "23.3.2"
+
+- SPASDK-216 Update the Next example app with Next 14 [`#175`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/175)
+- SPASDK-216 Update the Next example app with Next 14 [`#SPASDK-216`](https://issues.onehippo.com/browse/SPASDK-216)
+
+#### spa-sdk-23.3.1
+
+> 24 July 2024
 
 - SPASDK-223 Export Menu10 to avoid TS4058 [`#173`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/173)
+- SPASDK-223 Bumping versions to 23.3.1 [`#SPASDK-223`](https://issues.onehippo.com/browse/SPASDK-223)
 - SPASDK-223 Export Menu10 to avoid TS4058 [`#SPASDK-223`](https://issues.onehippo.com/browse/SPASDK-223)
 
 #### spa-sdk-23.3.0
@@ -910,5 +918,7 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-2 Log warning for unsupported method "getContentReference" in v0.9 [`#SPASDK-2`](https://issues.onehippo.com/browse/SPASDK-2)
 - SPASDK-2 Add exported function "getContainerItemContent" [`#SPASDK-2`](https://issues.onehippo.com/browse/SPASDK-2)
 - SPASDK-1 Bump to use node 14 [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
+- SPASDK-1 Remove maven files and update Jenkinsfile [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
+- SPASDK-1 Initial move from brxm monorepo [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
 - TRIVIAL Set branch name to 'main' in changesetBaseRefs
 - TRIVIAL Skip telemetry check on nuxt startup
