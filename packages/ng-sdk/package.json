@@ -1,6 +1,6 @@
 {
   "name": "@bloomreach/ng-sdk",
-  "version": "23.3.1",
+  "version": "23.3.2",
   "description": "Bloomreach SPA SDK for Angular",
   "keywords": [
     "bloomreach",

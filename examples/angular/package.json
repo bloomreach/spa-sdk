@@ -1,7 +1,7 @@
 {
   "name": "@bloomreach/example-angular",
   "description": "Example Angular SPA for Bloomreach Experience",
-  "version": "23.3.1",
+  "version": "23.3.2",
   "private": true,
   "scripts": {
     "ng": "ng",
