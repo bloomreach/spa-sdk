@@ -13,8 +13,8 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@bloomreach/spa-sdk": "23.3.0",
-    "@bloomreach/vue-sdk": "23.3.0",
+    "@bloomreach/spa-sdk": "23.3.2",
+    "@bloomreach/vue-sdk": "23.3.2",
     "axios": "1.6.8",
     "nuxt": "3.11.2",
     "sanitize-html": "2.10.0",

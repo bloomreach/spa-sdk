@@ -111,6 +111,6 @@
     "outputName": "TEST-react-sdk.xml"
   },
   "dependencies": {
-    "@bloomreach/spa-sdk": "23.3.0"
+    "@bloomreach/spa-sdk": "23.3.2"
   }
 }
