@@ -57,6 +57,9 @@ export default defineNuxtConfig({
   },
   telemetry: false,
   build: {
-    transpile: [({ isServer }: any) => isServer ? 'server' : 'client'],
+    transpile: [({ isServer }: any) => isServer ? 'server' : 'client', 'emittery'],
   },
+  nitro: {
+    moduleSideEffects: ['reflect-metadata']
+  }
 })
