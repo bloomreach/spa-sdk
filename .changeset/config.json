@@ -1,0 +1,11 @@
+{
+  "$schema": "https://unpkg.com/@changesets/config@3.0.2/schema.json",
+  "commit": false,
+  "changelog": false,
+  "fixed": [["@bloomreach/example-angular", "@bloomreach/example-react", "@bloomreach/example-next", "@bloomreach/example-nuxt", "@bloomreach/example-vue", "@bloomreach/ng-sdk", "@bloomreach/react-sdk", "@bloomreach/spa-sdk", "@bloomreach/vue-sdk"]],
+  "linked": [],
+  "access": "restricted",
+  "baseBranch": "development",
+  "updateInternalDependencies": "patch",
+  "ignore": ["@bloomreach/documentation-portal"]
+}

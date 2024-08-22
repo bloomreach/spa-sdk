@@ -9,8 +9,8 @@
     "sdk"
   ],
   "engines": {
-    "node": "^16.0.0 || ^18.0.0",
-    "npm": "^9.0.0 || ^10.0.0"
+    "node": "^18.0.0",
+    "pnpm": "^8.0.0"
   },
   "author": "Bloomreach B.V.",
   "license": "Apache-2.0",
@@ -23,36 +23,26 @@
     "url": "https://issues.onehippo.com/projects/SPASDK/issues"
   },
   "scripts": {
-    "audit": "lerna exec --no-private --stream -- \"npm audit --omit=dev --audit-level=critical\"",
-    "prebuild:custom": "lerna exec --scope @bloomreach/example-angular -- \"npm run prebuild:custom\"",
-    "postinstall": "lerna exec --stream --scope \"@bloomreach/{spa-sdk,${SDK_NAME:-*}-sdk,example-${EXAMPLE_NAME:-*}}\" -- 'npm ci'",
-    "build:core": "lerna exec --stream --scope '@bloomreach/spa-sdk' -- 'npm run build && npm run yalcPush'",
-    "build:sdks": "lerna exec --stream --ignore '@bloomreach/spa-sdk' --scope \"@bloomreach/${SDK_NAME:-*}-sdk\" -- 'npm run yalcAdd && npm run build && npm run yalcPush'",
-    "build:apps": "lerna exec --stream --scope \"@bloomreach/example-${EXAMPLE_NAME:-*}\" -- 'npm run yalcAdd && npm run build'",
-    "build": "npm run build:core && npm run build:sdks && npm run build:apps",
-    "dev": "lerna watch --ignore '@bloomreach/example-*' --glob='src' -- lerna exec --scope=\\$LERNA_PACKAGE_NAME -- 'npm run build && yalc push --no-scripts'",
-    "lint": "lerna run lint --parallel",
-    "test": "lerna run test --concurrency 1",
-    "prebump": "lerna run yalcRetreat",
-    "bump": "lerna version --exact --no-push --yes --force-publish --no-git-tag-version",
-    "postbump": "npm run changelog && lerna run yalcRestore && lerna exec --stream -- 'npm install --package-lock-only'",
-    "changelog": "auto-changelog --latest-version $(npm --prefix ./packages/spa-sdk pkg get version)",
-    "docs": "lerna run docs",
+    "audit": "pnpm -r --stream audit --prod --audit-level=critical",
+    "prebuild": "pnpm --filter @bloomreach/example-angular run prebuild:custom",
+    "build": "pnpm -r --stream build",
+    "dev": "pnpm -r --parallel --filter @bloomreach/${SDK_NAME:-*}-sdk run dev",
+    "lint": "pnpm -r --workspace-concurrency=1 lint",
+    "test": "pnpm -r --workspace-concurrency=1 test",
+    "bump": "pnpm changeset && pnpm changeset version && pnpm install && pnpm postbump",
+    "postbump": "pnpm changelog",
+    "changelog": "auto-changelog --latest-version $(pnpm pkg get version -C ./packages/spa-sdk)",
+    "docs": "pnpm -r --stream docs",
     "deploy-to-heroku": "./scripts/deploy_heroku_app.sh ${0} ${1} ${2}",
-    "heroku-postbuild": "npm run prebuild:custom && npm run build && cd ${PROJECT_PATH:-.}",
-    "prerelease": "lerna run yalcRetreat",
-    "release": "lerna publish from-package"
+    "heroku-postbuild": "pnpm prebuild && pnpm build && cd ${PROJECT_PATH:-.}",
+    "release": "pnpm publish -r --filter ./packages/*"
   },
   "devDependencies": {
-    "@lerna-lite/cli": "3.3.3",
-    "@lerna-lite/exec": "3.3.3",
-    "@lerna-lite/list": "3.3.3",
-    "@lerna-lite/publish": "3.3.3",
-    "@lerna-lite/run": "3.3.3",
-    "@lerna-lite/watch": "3.3.3",
-    "auto-changelog": "2.4.0",
-    "glob": "10.3.12",
-    "heroku": "8.1.9"
+    "@changesets/cli": "2.27.7",
+    "auto-changelog": "2.3.0",
+    "glob": "10.2.6",
+    "heroku": "8.1.9",
+    "npx": "10.2.2"
   },
   "auto-changelog": {
     "hideCredit": true,
@@ -65,8 +55,5 @@
     "issuePattern": "^[A-Z]+-\\d+",
     "mergeUrl": "https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/{id}"
   },
-  "volta": {
-    "node": "18.19.1",
-    "npm": "10.2.4"
-  }
+  "packageManager": "pnpm@8.15.8"
 }
