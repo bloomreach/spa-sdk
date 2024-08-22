@@ -2,9 +2,17 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### "23.4.2"
+#### "23.4.3"
+
+- SPASDK-224 Fix running SSR apps on Heroku [`#186`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/186)
+- SPASDK-224 Fix running SSR apps on Heroku [`#SPASDK-224`](https://issues.onehippo.com/browse/SPASDK-224)
+
+#### spa-sdk-23.4.2
+
+> 22 August 2024
 
 - SPASDK-224 Fix release command [`#184`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/184)
+- SPASDK-224 Bumping versions to 23.4.2 [`#SPASDK-224`](https://issues.onehippo.com/browse/SPASDK-224)
 - SPASDK-224 Fix release command [`#SPASDK-224`](https://issues.onehippo.com/browse/SPASDK-224)
 
 #### spa-sdk-23.4.1
