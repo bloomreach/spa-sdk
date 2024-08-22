@@ -1,7 +1,7 @@
 {
   "name": "@bloomreach/example-angular",
   "description": "Example Angular SPA for Bloomreach Experience",
-  "version": "23.4.0",
+  "version": "23.4.1",
   "private": true,
   "scripts": {
     "ng": "ng",
@@ -25,8 +25,8 @@
     "@angular/platform-server": "17.3.7",
     "@angular/router": "17.3.7",
     "@angular/ssr": "17.3.7",
-    "@bloomreach/ng-sdk": "23.4.0",
-    "@bloomreach/spa-sdk": "23.4.0",
+    "@bloomreach/ng-sdk": "23.4.1",
+    "@bloomreach/spa-sdk": "23.4.1",
     "dotenv": "16.4.5",
     "emittery": "0.7.2",
     "express": "4.19.2",
