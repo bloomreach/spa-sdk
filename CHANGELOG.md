@@ -2,8 +2,16 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### "23.4.0"
+#### "23.4.1"
 
+- SPASDK-224 Add no git checks to release script [`#182`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/182)
+- SPASDK-224 Add no git checks to release script [`#SPASDK-224`](https://issues.onehippo.com/browse/SPASDK-224)
+
+#### spa-sdk-23.4.0
+
+> 22 August 2024
+
+- SPASDK-224 Bumping versions to 23.4.0 [`#SPASDK-224`](https://issues.onehippo.com/browse/SPASDK-224)
 - SPASDK-224 Update README.md to use PNPM in example apps [`#SPASDK-224`](https://issues.onehippo.com/browse/SPASDK-224)
 - SPASDK-224 Set baseBranch as development for changeset [`#SPASDK-224`](https://issues.onehippo.com/browse/SPASDK-224)
 - SPASDK-224 Fix typedoc in spa sdk package [`#SPASDK-224`](https://issues.onehippo.com/browse/SPASDK-224)
