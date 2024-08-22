@@ -2,9 +2,34 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### "23.3.2"
+#### "23.4.0"
+
+- SPASDK-224 Update README.md to use PNPM in example apps [`#SPASDK-224`](https://issues.onehippo.com/browse/SPASDK-224)
+- SPASDK-224 Set baseBranch as development for changeset [`#SPASDK-224`](https://issues.onehippo.com/browse/SPASDK-224)
+- SPASDK-224 Fix typedoc in spa sdk package [`#SPASDK-224`](https://issues.onehippo.com/browse/SPASDK-224)
+- SPASDK-224 Add build typedoc and build docs stages to Jenkins [`#SPASDK-224`](https://issues.onehippo.com/browse/SPASDK-224)
+- SPASDK-224 Add dev and release commands [`#SPASDK-224`](https://issues.onehippo.com/browse/SPASDK-224)
+- SPASDK-224 Adjust README.md [`#SPASDK-224`](https://issues.onehippo.com/browse/SPASDK-224)
+- SPASDK-224 Revert changes in spa-sdk package [`#SPASDK-224`](https://issues.onehippo.com/browse/SPASDK-224)
+- SPASDK-218 Remove unused files in Nuxt example app [`#SPASDK-218`](https://issues.onehippo.com/browse/SPASDK-218)
+- SPASDK-219 Fix angular app [`#SPASDK-219`](https://issues.onehippo.com/browse/SPASDK-219)
+- SPASDK-218 Revert Jenkinsfile changes [`#SPASDK-218`](https://issues.onehippo.com/browse/SPASDK-218)
+- SPASDK-218 Fix lint warnings in Angular example app [`#SPASDK-218`](https://issues.onehippo.com/browse/SPASDK-218)
+- SPASDK-218 Enable linting in root package.json [`#SPASDK-218`](https://issues.onehippo.com/browse/SPASDK-218)
+- SPASDK-220 Update README.md [`#SPASDK-220`](https://issues.onehippo.com/browse/SPASDK-220)
+- SPASDK-220 Update release and heroku-postbuild commands [`#SPASDK-220`](https://issues.onehippo.com/browse/SPASDK-220)
+- SPASDK-220 Add bump command using changeset [`#SPASDK-220`](https://issues.onehippo.com/browse/SPASDK-220)
+- TRIVIAL Merge branch 'pnpm' into 'development'
+- TRIVIAL Move workspace to pnpm
+- TRIVIAL Adjust dependencies versions after rebase
+- TRIVIAL Fix vue ssr app on start command
+
+#### spa-sdk-23.3.2
+
+> 7 August 2024
 
 - SPASDK-216 Update the Next example app with Next 14 [`#175`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/175)
+- SPASDK-216 Bumping versions to 23.3.2 [`#SPASDK-216`](https://issues.onehippo.com/browse/SPASDK-216)
 - SPASDK-216 Update the Next example app with Next 14 [`#SPASDK-216`](https://issues.onehippo.com/browse/SPASDK-216)
 
 #### spa-sdk-23.3.1
@@ -918,7 +943,5 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-2 Log warning for unsupported method "getContentReference" in v0.9 [`#SPASDK-2`](https://issues.onehippo.com/browse/SPASDK-2)
 - SPASDK-2 Add exported function "getContainerItemContent" [`#SPASDK-2`](https://issues.onehippo.com/browse/SPASDK-2)
 - SPASDK-1 Bump to use node 14 [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
-- SPASDK-1 Remove maven files and update Jenkinsfile [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
-- SPASDK-1 Initial move from brxm monorepo [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
 - TRIVIAL Set branch name to 'main' in changesetBaseRefs
 - TRIVIAL Skip telemetry check on nuxt startup
