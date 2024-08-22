@@ -46,11 +46,7 @@
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit -p tsconfig.app.json --composite false",
     "type-check:tests": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
-    "type-check:watch": "npm run type-check -- --watch",
-    "yalcAdd": "yalc add @bloomreach/spa-sdk",
-    "yalcPush": "yalc push --replace --no-scripts",
-    "yalcRetreat": "yalc retreat --all",
-    "yalcRestore": "yalc restore --all"
+    "type-check:watch": "npm run type-check -- --watch"
   },
   "peerDependencies": {
     "vue": "^3.2.45"
@@ -67,10 +63,9 @@
     "vite": "4.3.8",
     "vitest": "0.29.8",
     "vue": "3.3.4",
-    "vue-tsc": "1.6.5",
-    "yalc": "1.0.0-pre.53"
+    "vue-tsc": "1.6.5"
   },
   "dependencies": {
-    "@bloomreach/spa-sdk": "file:.yalc/@bloomreach/spa-sdk"
+    "@bloomreach/spa-sdk": "23.3.2"
   }
 }

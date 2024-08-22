@@ -4,8 +4,8 @@
   "version": "23.3.2",
   "private": true,
   "dependencies": {
-    "@bloomreach/react-sdk": "file:.yalc/@bloomreach/react-sdk",
-    "@bloomreach/spa-sdk": "file:.yalc/@bloomreach/spa-sdk",
+    "@bloomreach/react-sdk": "23.3.2",
+    "@bloomreach/spa-sdk": "23.3.2",
     "axios": "1.6.8",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -16,10 +16,7 @@
     "build": "cross-env GENERATE_SOURCEMAP=false SKIP_PREFLIGHT_CHECK=true react-scripts build",
     "lint": "eslint --ext js,ts,tsx src",
     "start": "serve build -sn",
-    "dev": "cross-env GENERATE_SOURCEMAP=false SKIP_PREFLIGHT_CHECK=true react-scripts start",
-    "yalcAdd": "yalc add @bloomreach/spa-sdk @bloomreach/react-sdk",
-    "yalcRetreat": "yalc retreat --all",
-    "yalcRestore": "yalc restore --all"
+    "dev": "cross-env GENERATE_SOURCEMAP=false SKIP_PREFLIGHT_CHECK=true react-scripts start"
   },
   "eslintConfig": {
     "extends": "@bloomreach/eslint-config-react"
@@ -43,12 +40,12 @@
     "@types/react-dom": "18.0.8",
     "@types/react-router-dom": "5.3.3",
     "@types/sanitize-html": "2.11.0",
+    "@typescript-eslint/eslint-plugin": "5.49.0",
     "cross-env": "7.0.3",
     "eslint": "7.32.0",
     "eslint-import-resolver-typescript": "3.5.5",
     "react-scripts": "5.0.1",
     "serve": "14.2.0",
-    "typescript": "4.1.6",
-    "yalc": "1.0.0-pre.53"
+    "typescript": "4.1.6"
   }
 }

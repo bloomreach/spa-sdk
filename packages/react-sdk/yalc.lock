@@ -1,9 +1,0 @@
-{
-  "version": "v1",
-  "packages": {
-    "@bloomreach/spa-sdk": {
-      "signature": "9b1399c1a195da70aecffc38cdf0f898",
-      "file": true
-    }
-  }
-}

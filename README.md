@@ -35,7 +35,7 @@ guides on the documentation website.
 The supported frameworks are currently:
 
 - React and Next.js
-- Vue (3)
+- Vue (3) and Nuxt
 - Angular and Angular Universal
 
 The versions of these frameworks that the SDKs currently is verified to work
@@ -72,39 +72,31 @@ and the Framework SDK contains:
 
 ## Development
 
-### NPM + Lerna-lite + Yalc
+### PNPM
 
-The repository contains multiple self-contained npm packages that also depend
-on other packages in the repository. To easily manage the dependencies between
-them and execute commands taking into account topological order we use
-[lerna-lite](https://github.com/ghiscoding/lerna-lite) to manage its packages
-and builds, however we do not use the `bootstrap` mechanism of lerna as it
-caused duplicate framework instances when symlinking the dependencies. Instead
-we use [Yalc](https://github.com/wclr/yalc) to (optionally) link the
-dependencies.
- 
-This lerna workspace configuration is located in [lerna.json](./lerna.json).
+The repository contains multiple self-contained npm packages that also depend 
+on other packages in the repository. To easily manage the dependencies between 
+them and execute commands taking into account topological order, we use pnpm 
+to manage its packages and builds.
+
+This pnpm workspace configuration is located in the [pnpm-workspace.yaml](pnpm-workspace.yaml) file.
 
 #### Installation
 
-Installation of the dependencies of all the workspaces is done by running `npm
-ci` in the root of the workspace. 
+Installation of the dependencies of all the workspaces is done by running `pnpm install` in the root of the workspace.
 
-Running `npm run build` will not only build all packages but also link them
-together such that you can develop packages locally without having to publish
-'prerelease' versions.
+Running `pnpm build` will not only build all packages but also link them together such that you can develop packages locally without having to publish 'prerelease' versions.
 
-Running `npm run dev` in the root of the monorepo will watch each SDK package
-and build and `yalc push` it when changes happen. Combining this with running
-the dev server for one of the example apps allows for live development with any
-SDK.
+Running `pnpm dev` in the root of the monorepo will watch each SDK package and build and link it when changes happen. 
+Combining this with running the dev server for one of the example apps allows for live development with any SDK.
 
 #### Commands
 
-You can also use the lerna cli to run commands if you require topological
-ordering such as `npx lerna run build --scope @bloomreach/example-react
---include-dependencies` which wil build example-react as well as its dependency
-structure.
+You can use the pnpm CLI to run commands in a topological order. For example, to build a specific package and its dependencies, you can use:
+
+```pnpm --filter @bloomreach/example-react run build```
+
+This will build example-react as well as its dependency structure.
 
 The root workspace commands are straightforward and are listed in the
 [package.json](./package.json) scripts property.
@@ -123,9 +115,8 @@ Generally speaking for any kind of development one would:
 * Branch the `development` branch to a new branch e.g. `mybranch`
 * Do work on `mybranch` until finished
 * Create an MR of `mybranch` to be merged into `development`
-* Create a test release if it has to be published to `npm` for test purposes
-   but use `prerelease` strategy and use `dist-tag` that mentions jira ticket or
-   general effort for easier recognition by running `npm run release -- prerelease --dist-tag [your Jira issue / effort name]`
+* Create a test release if it has to be published to `npm` for test purposes and use `dist-tag` that mentions jira ticket or
+  general effort for easier recognition by running `pnpm publish --filter <package-name> --tag [your Jira issue / effort name]`
 * Get reviews & approval
 * After the pipelines are green: merge the MR to `development`
 
@@ -141,10 +132,10 @@ Pre release actions:
 * Check if all issues in the upcoming release are closed, any open issues must be moved to a different release, or the
     release must be postponed
 * Check out the `development` branch and make sure your local branch its up to date and the pipeline for `development` is green
-* Make sure that running `npm run docs` can be done succesfully
+* Make sure that running `pnpm docs` can be done succesfully
 
 Release actions:
-* Run `npm run bump` in the workspace root to update the versions in all package files
+* Run `pnpm bump` in the workspace root to update the versions in all package files
 * Commit these version changes with `git commit -am "[your Jira issue] Bumping versions to [new version]"`
 * Create a new _annotated_ tag on the `development` branch using `git tag -a spa-sdk-[new-version]`
 * Push to `origin` with `git push --follow-tags`
