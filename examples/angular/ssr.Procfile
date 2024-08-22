@@ -12,4 +12,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-web: npx lerna run start:ssr --scope @bloomreach/example-angular -- --prod
+web: pnpm --filter @bloomreach/example-angular run start:ssr -- --prod
