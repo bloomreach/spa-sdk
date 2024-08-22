@@ -35,7 +35,7 @@
     "docs": "pnpm -r --stream docs",
     "deploy-to-heroku": "./scripts/deploy_heroku_app.sh ${0} ${1} ${2}",
     "heroku-postbuild": "pnpm prebuild && pnpm build && cd ${PROJECT_PATH:-.}",
-    "release": "pnpm publish -r --no-git-checks --filter ./packages/*"
+    "release": "pnpm publish -r --filter \"./packages/**\" --no-git-checks"
   },
   "devDependencies": {
     "@changesets/cli": "2.27.7",
