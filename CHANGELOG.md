@@ -2,9 +2,18 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### "23.4.3"
+#### "23.4.4"
+
+- SPASDK-224 Add slugignore to fix Heroku deployment for ssr apps [`#188`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/188)
+- SPASDK-224 Upgrade heroku to v9 [`#SPASDK-224`](https://issues.onehippo.com/browse/SPASDK-224)
+- SPASDK-224 Add slugignore to fix Heroku deployment for ssr apps [`#SPASDK-224`](https://issues.onehippo.com/browse/SPASDK-224)
+
+#### spa-sdk-23.4.3
+
+> 22 August 2024
 
 - SPASDK-224 Fix running SSR apps on Heroku [`#186`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/186)
+- SPASDK-224 Bumping versions to 23.4.3 [`#SPASDK-224`](https://issues.onehippo.com/browse/SPASDK-224)
 - SPASDK-224 Fix running SSR apps on Heroku [`#SPASDK-224`](https://issues.onehippo.com/browse/SPASDK-224)
 
 #### spa-sdk-23.4.2
@@ -967,5 +976,7 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-2 Log warning for unsupported method "getContentReference" in v0.9 [`#SPASDK-2`](https://issues.onehippo.com/browse/SPASDK-2)
 - SPASDK-2 Add exported function "getContainerItemContent" [`#SPASDK-2`](https://issues.onehippo.com/browse/SPASDK-2)
 - SPASDK-1 Bump to use node 14 [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
+- SPASDK-1 Remove maven files and update Jenkinsfile [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
+- SPASDK-1 Initial move from brxm monorepo [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
 - TRIVIAL Set branch name to 'main' in changesetBaseRefs
 - TRIVIAL Skip telemetry check on nuxt startup
