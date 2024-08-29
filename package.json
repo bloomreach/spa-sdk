@@ -41,7 +41,7 @@
     "@changesets/cli": "2.27.7",
     "auto-changelog": "2.3.0",
     "glob": "10.2.6",
-    "heroku": "8.1.9",
+    "heroku": "9.2.0",
     "npx": "10.2.2"
   },
   "auto-changelog": {
