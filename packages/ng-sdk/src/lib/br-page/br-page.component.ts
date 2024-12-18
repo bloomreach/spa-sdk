@@ -34,8 +34,10 @@ import {
   TemplateRef,
   Type,
   ViewChild,
+  makeStateKey,
+  StateKey,
+  TransferState,
 } from '@angular/core';
-import { makeStateKey, StateKey, TransferState } from '@angular/platform-browser';
 import { Configuration, destroy, initialize, isPage, Page, PageModel } from '@bloomreach/spa-sdk';
 import { from, of, Subject } from 'rxjs';
 import { filter, map, mapTo, pairwise, pluck, switchMap, take } from 'rxjs/operators';

@@ -15,7 +15,7 @@
  */
 
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
 import { BrContainerItemUndefinedComponent } from './br-container-item-undefined/br-container-item-undefined.component';
@@ -51,6 +51,7 @@ import { BrPageComponent } from './br-page/br-page.component';
     BrPageComponent,
   ],
   exports: [BrComponentDirective, BrManageContentButtonDirective, BrManageMenuButtonDirective, BrPageComponent],
-  imports: [CommonModule, HttpClientModule],
+  imports: [CommonModule],
+  providers: [provideHttpClient(withInterceptorsFromDi())],
 })
 export class BrSdkModule {}
