@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { NO_ERRORS_SCHEMA, SimpleChange } from '@angular/core';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { NO_ERRORS_SCHEMA, SimpleChange, TransferState } from '@angular/core';
 import { ComponentFixture, getTestBed, TestBed, waitForAsync } from '@angular/core/testing';
-import { TransferState } from '@angular/platform-browser';
 import { Component, Configuration, destroy, initialize, isPage, Page, PageModel } from '@bloomreach/spa-sdk';
 
 import { BrNodeTypePipe } from '../br-node-type.pipe';
@@ -35,9 +35,13 @@ describe('BrPageComponent', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [BrNodeTypePipe, BrPageComponent],
-        imports: [HttpClientTestingModule],
-        providers: [{ provide: TransferState, useFactory: () => transferState }],
         schemas: [NO_ERRORS_SCHEMA],
+        imports: [],
+        providers: [
+          { provide: TransferState, useFactory: () => transferState },
+          provideHttpClient(withInterceptorsFromDi()),
+          provideHttpClientTesting(),
+        ],
       }).compileComponents();
     }),
   );

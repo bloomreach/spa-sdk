@@ -9,22 +9,20 @@
     "build": "ng build --configuration production",
     "dev": "ng serve",
     "lint": "ng lint",
-    "dev:ssr": "ng run example-angular:serve",
     "start:ssr": "node dist/server/server.mjs",
-    "prerender": "ng build",
     "prebuild:custom": "node pre-build.js"
   },
   "dependencies": {
-    "@angular/animations": "17.3.7",
-    "@angular/common": "17.3.7",
-    "@angular/compiler": "17.3.7",
-    "@angular/core": "17.3.7",
-    "@angular/forms": "17.3.7",
-    "@angular/platform-browser": "17.3.7",
-    "@angular/platform-browser-dynamic": "17.3.7",
-    "@angular/platform-server": "17.3.7",
-    "@angular/router": "17.3.7",
-    "@angular/ssr": "17.3.7",
+    "@angular/animations": "18.2.13",
+    "@angular/common": "18.2.13",
+    "@angular/compiler": "18.2.13",
+    "@angular/core": "18.2.13",
+    "@angular/forms": "18.2.13",
+    "@angular/platform-browser": "18.2.13",
+    "@angular/platform-browser-dynamic": "18.2.13",
+    "@angular/platform-server": "18.2.13",
+    "@angular/router": "18.2.13",
+    "@angular/ssr": "18.2.12",
     "@bloomreach/ng-sdk": "23.4.4",
     "@bloomreach/spa-sdk": "23.4.4",
     "dotenv": "16.4.5",
@@ -33,24 +31,20 @@
     "rxjs": "7.8.1",
     "sanitize-html": "2.10.0",
     "tslib": "2.6.2",
-    "zone.js": "0.14.5"
+    "zone.js": "0.14.10"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "17.3.7",
-    "@angular-eslint/builder": "17.3.0",
-    "@angular-eslint/eslint-plugin": "17.3.0",
-    "@angular-eslint/eslint-plugin-template": "17.3.0",
-    "@angular-eslint/schematics": "17.3.0",
-    "@angular-eslint/template-parser": "17.3.0",
-    "@angular/cli": "17.3.7",
-    "@angular/compiler-cli": "17.3.7",
-    "@bloomreach/eslint-config-angular": "17.0.0",
+    "@angular-devkit/build-angular": "18.2.12",
+    "@angular/cli": "18.2.12",
+    "@angular/compiler-cli": "18.2.13",
+    "@eslint/eslintrc": "3.2.0",
     "@types/express": "4.17.21",
     "@types/jasmine": "5.1.0",
     "@types/node": "18.18.0",
-    "@typescript-eslint/eslint-plugin": "7.2.0",
-    "@typescript-eslint/parser": "7.2.0",
-    "eslint": "8.57.0",
+    "angular-eslint": "18.4.3",
+    "eslint": "9.17.0",
+    "eslint-plugin-import": "2.31.0",
+    "eslint-plugin-import-newlines": "1.4.0",
     "jasmine-core": "5.1.0",
     "karma": "6.4.0",
     "karma-chrome-launcher": "3.2.0",
@@ -58,29 +52,7 @@
     "karma-jasmine": "5.1.0",
     "karma-jasmine-html-reporter": "2.1.0",
     "serve": "14.2.3",
-    "typescript": "5.4.2"
-  },
-  "eslintConfig": {
-    "extends": [
-      "@bloomreach/eslint-config-angular"
-    ],
-    "parserOptions": {
-      "ecmaVersion": 2022,
-      "project": [
-        "tsconfig.json",
-        "tsconfig.spec.json"
-      ],
-      "createDefaultProgram": true
-    },
-    "rules": {
-      "no-console": [
-        "error",
-        {
-          "allow": [
-            "error"
-          ]
-        }
-      ]
-    }
+    "typescript": "5.4.2",
+    "typescript-eslint": "8.18.1"
   }
 }

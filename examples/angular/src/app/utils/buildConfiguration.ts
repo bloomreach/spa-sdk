@@ -18,10 +18,10 @@ import { Configuration, extractSearchParams } from '@bloomreach/spa-sdk';
 import { Request } from 'express';
 import { BR_MULTI_TENANT_SUPPORT, BRXM_ENDPOINT } from './constants';
 
-type BuildConfigurationOptions = {
+interface BuildConfigurationOptions {
   endpoint: string | (string | null)[];
   baseUrl: string;
-};
+}
 
 type ConfigurationBuilder = Omit<Configuration & Partial<BuildConfigurationOptions>, 'httpClient'>;
 
