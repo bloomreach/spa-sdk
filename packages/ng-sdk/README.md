@@ -444,7 +444,7 @@ any extra configuration. To use it in [Angular Universal](https://angular.io/gui
 import [ServerTransferStateModule](https://angular.io/api/platform-server/ServerTransferStateModule)
 on the server and [BrowserTransferStateModule](BrowserTransferStateModule) on
 the client. If you would like to disable the feature, just pass `false` into
-the `stateKey` input. (this input works with angular universal and angular version < 17)
+the `stateKey` input.
 
 ```html
 <br-page [stateKey]="false"></br-page>
@@ -495,7 +495,7 @@ recursively.
 | input  | `configuration` |  _yes_   | The [configuration](#configuration) of the SPA SDK.                                                                                                                                                        |
 | input  | `mapping`       |  _yes_   | The brXM and Angular components [mapping](#mapping).                                                                                                                                                       |
 | input  | `page`          |   _no_   | Preinitialized page instance or prefetched page model. Mostly that should be used to transfer state from the server-side to the client-side.                                                               |
-| input  | `stateKey`      |   _no_   | The TransferState key is used to transfer the state from the server-side to the client-side. By default, it equals to `brPage`. If `false` is passed then the state transferring feature will be disabled.(note that in angular >= 17 this property is deprecated and you will use built-in angular ssr instead) |
+| input  | `stateKey`      |   _no_   | The TransferState key is used to transfer the state from the server-side to the client-side. By default, it equals to `brPage`. If `false` is passed then the state transferring feature will be disabled. |
 | output | `state`         |   _no_   | The current state of the page component.                                                                                                                                                                   |
 | output | `httpError`     |   _no_   | The event handler that processes HTTP error events from fetching PMA.                                                                                                                                      |
 
