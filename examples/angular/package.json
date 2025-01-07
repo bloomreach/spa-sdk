@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "ng": "ng",
-    "start": "serve dist/browser -sn",
+    "start": "mv dist/browser/index.csr.html dist/browser/index.html; serve dist/browser -sn",
     "build": "ng build --configuration production",
     "dev": "ng serve",
     "lint": "ng lint",
