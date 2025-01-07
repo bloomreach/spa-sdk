@@ -1,7 +1,7 @@
 {
   "name": "@bloomreach/example-nuxt",
   "description": "Example Nuxt SPA for Bloomreach Experience",
-  "version": "23.4.4",
+  "version": "23.5.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -13,8 +13,8 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@bloomreach/spa-sdk": "23.4.4",
-    "@bloomreach/vue-sdk": "23.4.4",
+    "@bloomreach/spa-sdk": "23.5.0",
+    "@bloomreach/vue-sdk": "23.5.0",
     "axios": "1.6.8",
     "nuxt": "3.11.2",
     "sanitize-html": "2.10.0",

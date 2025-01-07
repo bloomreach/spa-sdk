@@ -2,9 +2,25 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### "23.4.4"
+#### "23.5.0"
+
+> 7 January 2025
+
+- SPASDK-227: Change start script to fix CSR app [`#191`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/191)
+- SPASDK-227: Upgrade spa-sdk to support angular 18 [`#190`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/190)
+- SPASDK-227: Change start script to fix CSR app [`#SPASDK-227`](https://issues.onehippo.com/browse/SPASDK-227)
+- SPASDK-227: Update README file [`#SPASDK-227`](https://issues.onehippo.com/browse/SPASDK-227)
+- SPASDK-227: Fix react example build error [`#SPASDK-227`](https://issues.onehippo.com/browse/SPASDK-227)
+- SPASDK-227: Upgrade example angular app to support Angular 18 [`#SPASDK-227`](https://issues.onehippo.com/browse/SPASDK-227)
+- SPASDK-227: Move eslint config from `@bloomreach/eslint-config-angular` to each project [`#SPASDK-227`](https://issues.onehippo.com/browse/SPASDK-227)
+- SPASDK-227: Upgrade ng-sdk to support Angular 18 [`#SPASDK-227`](https://issues.onehippo.com/browse/SPASDK-227)
+
+#### spa-sdk-23.4.4
+
+> 29 August 2024
 
 - SPASDK-224 Add slugignore to fix Heroku deployment for ssr apps [`#188`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/188)
+- SPASDK-224 Bumping versions to 23.4.4 [`#SPASDK-224`](https://issues.onehippo.com/browse/SPASDK-224)
 - SPASDK-224 Upgrade heroku to v9 [`#SPASDK-224`](https://issues.onehippo.com/browse/SPASDK-224)
 - SPASDK-224 Add slugignore to fix Heroku deployment for ssr apps [`#SPASDK-224`](https://issues.onehippo.com/browse/SPASDK-224)
 
@@ -589,12 +605,6 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-123 Add getLocale to Page object [`#SPASDK-123`](https://issues.onehippo.com/browse/SPASDK-123)
 - SPASDK-119 Improve heroku deploy speed by using lerna filter flags [`#SPASDK-119`](https://issues.onehippo.com/browse/SPASDK-119)
 
-#### v15.5.1
-
-> 24 June 2022
-
-- TRIVIAL Bump versions to 15.5.1
-
 #### spa-sdk-15.5.0
 
 > 24 June 2022
@@ -779,14 +789,23 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-59 Bumping versions to 15.3.0 [`#SPASDK-59`](https://issues.onehippo.com/browse/SPASDK-59)
 - SPASDK-58 Remove release pipeline and use release script [`#SPASDK-58`](https://issues.onehippo.com/browse/SPASDK-58)
 - SPASDK-38 Add page api to sanitize html content in SPA SDK [`#SPASDK-38`](https://issues.onehippo.com/browse/SPASDK-38)
-
-#### spa-sdk-15.2.2-0
-
-> 30 September 2021
-
 - SPASDK-58 Merge branch 'development' [`#SPASDK-58`](https://issues.onehippo.com/browse/SPASDK-58)
 - SPASDK-58 Bump versions to 15.2.2-0 [`#SPASDK-58`](https://issues.onehippo.com/browse/SPASDK-58)
 - SPASDK-58 Update push to github script in Jenkins [`#SPASDK-58`](https://issues.onehippo.com/browse/SPASDK-58)
+- SPASDK-53 Merge branch 'development' into 'main' [`#SPASDK-53`](https://issues.onehippo.com/browse/SPASDK-53)
+- SPASDK-58 Adjust README according to release process [`#SPASDK-58`](https://issues.onehippo.com/browse/SPASDK-58)
+- SPASDK-58 Adjust jenkins file so github push works [`#SPASDK-58`](https://issues.onehippo.com/browse/SPASDK-58)
+- SPASDK-52 Merge branch 'development' into 'main' [`#SPASDK-52`](https://issues.onehippo.com/browse/SPASDK-52)
+
+#### spa-sdk-15.2.2-0
+
+> 5 October 2021
+
+- SPASDK-58 Fix release pipeline [`#SPASDK-58`](https://issues.onehippo.com/browse/SPASDK-58)
+- SPASDK-58 Bump versions to 15.2.2-0 [`#SPASDK-58`](https://issues.onehippo.com/browse/SPASDK-58)
+- SPASDK-58 Update push to github script in Jenkins [`#SPASDK-58`](https://issues.onehippo.com/browse/SPASDK-58)
+- SPASDK-58 Adjust README according to release process [`#SPASDK-58`](https://issues.onehippo.com/browse/SPASDK-58)
+- SPASDK-58 Adjust jenkins file so github push works [`#SPASDK-58`](https://issues.onehippo.com/browse/SPASDK-58)
 
 #### spa-sdk-15.2.1
 
@@ -896,10 +915,16 @@ All notable changes to this project will be documented in this file. Dates are d
 
 > 9 August 2021
 
-- SPASDK-32 Auto generate a changelog and setup release notes process [`#15`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/15)
-- Resolve SPASDK-22 "Update and lock spa sdk dependencies" [`#10`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/10)
 - SPASDK-33 Bump versions to SPASDK-33 [`#SPASDK-33`](https://issues.onehippo.com/browse/SPASDK-33)
 - SPASDK-33 Remove 'main' branch specification [`#SPASDK-33`](https://issues.onehippo.com/browse/SPASDK-33)
+
+#### spa-sdk-15.0.0-2
+
+> 6 August 2021
+
+- SPASDK-32 Auto generate a changelog and setup release notes process [`#15`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/15)
+- Resolve SPASDK-22 "Update and lock spa sdk dependencies" [`#10`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/10)
+- SPASDK-33 Update Jenkinsfile and package.json for release testing [`#SPASDK-33`](https://issues.onehippo.com/browse/SPASDK-33)
 - SPASDK-32 Bump versions to 15.0.0-2 [`#SPASDK-32`](https://issues.onehippo.com/browse/SPASDK-32)
 - SPASDK-32 Add version to workspace so auto-changelog can detect it [`#SPASDK-32`](https://issues.onehippo.com/browse/SPASDK-32)
 - SPASDK-22 Set explicit version for node types in next example [`#SPASDK-22`](https://issues.onehippo.com/browse/SPASDK-22)
@@ -976,7 +1001,5 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-2 Log warning for unsupported method "getContentReference" in v0.9 [`#SPASDK-2`](https://issues.onehippo.com/browse/SPASDK-2)
 - SPASDK-2 Add exported function "getContainerItemContent" [`#SPASDK-2`](https://issues.onehippo.com/browse/SPASDK-2)
 - SPASDK-1 Bump to use node 14 [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
-- SPASDK-1 Remove maven files and update Jenkinsfile [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
-- SPASDK-1 Initial move from brxm monorepo [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
 - TRIVIAL Set branch name to 'main' in changesetBaseRefs
 - TRIVIAL Skip telemetry check on nuxt startup
