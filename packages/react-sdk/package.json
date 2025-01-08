@@ -1,6 +1,6 @@
 {
   "name": "@bloomreach/react-sdk",
-  "version": "23.5.0",
+  "version": "24.0.0",
   "description": "Bloomreach SPA SDK for React",
   "keywords": [
     "bloomreach",
@@ -111,6 +111,6 @@
     "outputName": "TEST-react-sdk.xml"
   },
   "dependencies": {
-    "@bloomreach/spa-sdk": "23.5.0"
+    "@bloomreach/spa-sdk": "24.0.0"
   }
 }

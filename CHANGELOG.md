@@ -2,18 +2,22 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### "23.5.0"
+#### "24.0.0"
 
-> 7 January 2025
+> 8 January 2025
 
+- SPASDK-230: Update the license headers [`#192`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/192)
+- SPASDK-230: Update the license headers [`#SPASDK-230`](https://issues.onehippo.com/browse/SPASDK-230)
 - SPASDK-227: Change start script to fix CSR app [`#191`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/191)
 - SPASDK-227: Upgrade spa-sdk to support angular 18 [`#190`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/190)
+- SPASDK-227: Bumping versions to 23.5.0 [`#SPASDK-227`](https://issues.onehippo.com/browse/SPASDK-227)
 - SPASDK-227: Change start script to fix CSR app [`#SPASDK-227`](https://issues.onehippo.com/browse/SPASDK-227)
 - SPASDK-227: Update README file [`#SPASDK-227`](https://issues.onehippo.com/browse/SPASDK-227)
 - SPASDK-227: Fix react example build error [`#SPASDK-227`](https://issues.onehippo.com/browse/SPASDK-227)
 - SPASDK-227: Upgrade example angular app to support Angular 18 [`#SPASDK-227`](https://issues.onehippo.com/browse/SPASDK-227)
 - SPASDK-227: Move eslint config from `@bloomreach/eslint-config-angular` to each project [`#SPASDK-227`](https://issues.onehippo.com/browse/SPASDK-227)
 - SPASDK-227: Upgrade ng-sdk to support Angular 18 [`#SPASDK-227`](https://issues.onehippo.com/browse/SPASDK-227)
+- SPASDK-227: Drop ng-sdk support for Angular versions < 18 [`#SPASDK-227`](https://issues.onehippo.com/browse/SPASDK-227)
 
 #### spa-sdk-23.4.4
 
@@ -1001,5 +1005,7 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-2 Log warning for unsupported method "getContentReference" in v0.9 [`#SPASDK-2`](https://issues.onehippo.com/browse/SPASDK-2)
 - SPASDK-2 Add exported function "getContainerItemContent" [`#SPASDK-2`](https://issues.onehippo.com/browse/SPASDK-2)
 - SPASDK-1 Bump to use node 14 [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
+- SPASDK-1 Remove maven files and update Jenkinsfile [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
+- SPASDK-1 Initial move from brxm monorepo [`#SPASDK-1`](https://issues.onehippo.com/browse/SPASDK-1)
 - TRIVIAL Set branch name to 'main' in changesetBaseRefs
 - TRIVIAL Skip telemetry check on nuxt startup
