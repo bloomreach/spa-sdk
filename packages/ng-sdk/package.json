@@ -1,6 +1,6 @@
 {
   "name": "@bloomreach/ng-sdk",
-  "version": "23.4.4",
+  "version": "24.0.0",
   "description": "Bloomreach SPA SDK for Angular",
   "keywords": [
     "bloomreach",
@@ -35,60 +35,45 @@
   ],
   "sideEffects": false,
   "dependencies": {
-    "@bloomreach/spa-sdk": "23.4.4",
+    "@bloomreach/spa-sdk": "24.0.0",
     "tslib": "^2.6.2"
   },
   "peerDependencies": {
-    "@angular/common": "^15.0.0 || ^16.0.0|| ^17.0.0",
-    "@angular/core": "^15.0.0 || ^16.0.0|| ^17.0.0",
-    "@angular/platform-browser": "^15.0.0 || ^16.0.0|| ^17.0.0",
+    "@angular/common": "^18.0.0",
+    "@angular/core": "^18.0.0",
+    "@angular/platform-browser": "^18.0.0",
     "rxjs": "^6.5.3 || ^7.4.0"
   },
   "devDependencies": {
-    "@angular-builders/jest": "17.0.3",
-    "@angular-devkit/architect": "0.1703.6",
-    "@angular-devkit/build-angular": "17.3.6",
-    "@angular-eslint/builder": "17.3.0",
-    "@angular-eslint/eslint-plugin": "17.3.0",
-    "@angular-eslint/eslint-plugin-template": "17.3.0",
-    "@angular-eslint/template-parser": "17.3.0",
-    "@angular/animations": "17.3.7",
-    "@angular/cli": "17.3.6",
-    "@angular/common": "17.3.7",
-    "@angular/compiler": "17.3.7",
-    "@angular/compiler-cli": "17.3.7",
-    "@angular/core": "17.3.7",
-    "@angular/language-service": "17.3.7",
-    "@angular/platform-browser": "17.3.7",
-    "@angular/platform-browser-dynamic": "17.3.7",
-    "@angular/platform-server": "17.3.7",
-    "@bloomreach/eslint-config-angular": "17.0.0",
+    "@angular-builders/jest": "18.0.0",
+    "@angular-devkit/architect": "0.1802.12",
+    "@angular-devkit/build-angular": "18.2.12",
+    "@angular/animations": "18.2.13",
+    "@angular/cli": "18.2.12",
+    "@angular/common": "18.2.13",
+    "@angular/compiler": "18.2.13",
+    "@angular/compiler-cli": "18.2.13",
+    "@angular/core": "18.2.13",
+    "@angular/language-service": "18.2.13",
+    "@angular/platform-browser": "18.2.13",
+    "@angular/platform-browser-dynamic": "18.2.13",
+    "@angular/platform-server": "18.2.13",
+    "@eslint/eslintrc": "3.2.0",
     "@types/jest": "29.5.12",
     "@types/node": "18.11.9",
-    "@typescript-eslint/eslint-plugin": "5.49.0",
-    "eslint": "7.32.0",
-    "eslint-import-resolver-typescript": "3.6.1",
+    "angular-eslint": "18.4.3",
+    "eslint": "9.17.0",
+    "eslint-plugin-import": "2.31.0",
+    "eslint-plugin-import-newlines": "1.4.0",
     "jest": "29.7.0",
     "jest-environment-jsdom": "29.7.0",
     "jest-junit": "16.0.0",
-    "jest-preset-angular": "14.0.3",
+    "jest-preset-angular": "14.4.2",
     "jest-util": "29.7.0",
-    "ng-packagr": "17.3.0",
+    "ng-packagr": "18.2.1",
     "rxjs": "7.8.1",
     "typescript": "5.4.5",
-    "zone.js": "0.14.5"
-  },
-  "eslintConfig": {
-    "extends": [
-      "@bloomreach/eslint-config-angular"
-    ],
-    "parserOptions": {
-      "ecmaVersion": 2022,
-      "project": [
-        "tsconfig.json",
-        "tsconfig.spec.json"
-      ],
-      "createDefaultProgram": true
-    }
+    "typescript-eslint": "8.18.1",
+    "zone.js": "0.14.10"
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2020-2023 Bloomreach
+ * Copyright 2020-2025 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,8 +34,10 @@ import {
   TemplateRef,
   Type,
   ViewChild,
+  makeStateKey,
+  StateKey,
+  TransferState,
 } from '@angular/core';
-import { makeStateKey, StateKey, TransferState } from '@angular/platform-browser';
 import { Configuration, destroy, initialize, isPage, Page, PageModel } from '@bloomreach/spa-sdk';
 import { from, of, Subject } from 'rxjs';
 import { filter, map, mapTo, pairwise, pluck, switchMap, take } from 'rxjs/operators';

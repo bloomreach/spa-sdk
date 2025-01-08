@@ -1,5 +1,5 @@
 /*
- * Copyright 2020-2023 Bloomreach
+ * Copyright 2020-2025 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { Component, NO_ERRORS_SCHEMA, OnInit } from '@angular/core';
 import { ComponentFixture, fakeAsync, flush, TestBed } from '@angular/core/testing';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { Component as BrComponent, initialize, Page } from '@bloomreach/spa-sdk';
 import { BrSdkModule } from '../br-sdk.module';
 import { BrPageComponent } from './br-page.component';
@@ -94,8 +95,9 @@ describe('BrPageComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [MyComponent, WrapperComponent],
-      imports: [HttpClientTestingModule, BrSdkModule],
       schemas: [NO_ERRORS_SCHEMA],
+      imports: [BrSdkModule],
+      providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()],
     });
 
     jest.mocked(initialize).mockImplementation(

@@ -55,5 +55,10 @@
     "issuePattern": "^[A-Z]+-\\d+",
     "mergeUrl": "https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/{id}"
   },
-  "packageManager": "pnpm@8.15.8"
+  "packageManager": "pnpm@8.15.8",
+  "pnpm": {
+    "overrides": {
+      "eslint-plugin-react": "7.34.2"
+    }
+  }
 }

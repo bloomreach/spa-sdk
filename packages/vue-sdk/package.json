@@ -1,6 +1,6 @@
 {
   "name": "@bloomreach/vue-sdk",
-  "version": "23.4.4",
+  "version": "24.0.0",
   "description": "Bloomreach SPA SDK for Vue",
   "keywords": [
     "bloomreach",
@@ -66,6 +66,6 @@
     "vue-tsc": "1.6.5"
   },
   "dependencies": {
-    "@bloomreach/spa-sdk": "23.4.4"
+    "@bloomreach/spa-sdk": "24.0.0"
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2022-2023 Bloomreach
+ * Copyright 2022-2025 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,10 +18,10 @@ import { Configuration, extractSearchParams } from '@bloomreach/spa-sdk';
 import { Request } from 'express';
 import { BR_MULTI_TENANT_SUPPORT, BRXM_ENDPOINT } from './constants';
 
-type BuildConfigurationOptions = {
+interface BuildConfigurationOptions {
   endpoint: string | (string | null)[];
   baseUrl: string;
-};
+}
 
 type ConfigurationBuilder = Omit<Configuration & Partial<BuildConfigurationOptions>, 'httpClient'>;
 
