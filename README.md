@@ -144,6 +144,7 @@ Release actions:
 Post release actions:
 * Check that release pipeline is green
 * Check that all example apps have been deployed to Heroku
+* Delete previous example apps. Only the version before the latest should remain. For example, if you release 14.0.2, you need to delete all 14.0.0 apps
 * Set the Jira release version as released
 * Create release notes on github
 * Check that Documentation Portal has been deployed correctly to [github pages](https://bloomreach.github.io/spa-sdk/docs/)
