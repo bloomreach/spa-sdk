@@ -38,10 +38,10 @@
     "release": "pnpm publish -r --filter \"./packages/**\" --no-git-checks"
   },
   "devDependencies": {
-    "@changesets/cli": "2.27.7",
+    "@changesets/cli": "2.27.11",
     "auto-changelog": "2.3.0",
     "glob": "10.2.6",
-    "heroku": "9.2.0",
+    "heroku": "9.5.1",
     "npx": "10.2.2"
   },
   "auto-changelog": {

@@ -15,9 +15,9 @@
   "dependencies": {
     "@bloomreach/spa-sdk": "24.0.0",
     "@bloomreach/vue-sdk": "24.0.0",
-    "axios": "1.6.8",
-    "nuxt": "3.11.2",
-    "sanitize-html": "2.10.0",
+    "axios": "1.7.9",
+    "nuxt": "3.12.4",
+    "sanitize-html": "2.14.0",
     "vue": "3.4.26",
     "vue-router": "4.3.2"
   }
