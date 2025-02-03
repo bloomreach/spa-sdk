@@ -15,48 +15,50 @@
   -->
 
 <template>
-  <component
-    v-if="containerType && containerType in mapping"
-    :is="mapping[containerType]"
-    :component="component"
-    :page="page">
-    <slot/>
-  </component>
+  <br-meta :meta="meta" :key="component?.getId()">
+    <component
+      v-if="containerType && containerType in mapping"
+      :is="mapping[containerType]"
+      :component="component"
+      :page="page">
+      <slot/>
+    </component>
 
-  <br-container-inline
-    v-else-if="containerType === TYPE_CONTAINER_INLINE"
-    :component="component"
-    :page="page">
-    <slot/>
-  </br-container-inline>
+    <br-container-inline
+      v-else-if="containerType === TYPE_CONTAINER_INLINE"
+      :component="component"
+      :page="page">
+      <slot/>
+    </br-container-inline>
 
-  <br-container-no-markup
-    v-else-if="containerType === TYPE_CONTAINER_NO_MARKUP"
-    :component="component"
-    :page="page">
-    <slot/>
-  </br-container-no-markup>
+    <br-container-no-markup
+      v-else-if="containerType === TYPE_CONTAINER_NO_MARKUP"
+      :component="component"
+      :page="page">
+      <slot/>
+    </br-container-no-markup>
 
-  <br-container-ordered-list
-    v-else-if="containerType === TYPE_CONTAINER_ORDERED_LIST"
-    :component="component"
-    :page="page">
-    <slot/>
-  </br-container-ordered-list>
+    <br-container-ordered-list
+      v-else-if="containerType === TYPE_CONTAINER_ORDERED_LIST"
+      :component="component"
+      :page="page">
+      <slot/>
+    </br-container-ordered-list>
 
-  <br-container-unordered-list
-    v-else-if="containerType === TYPE_CONTAINER_UNORDERED_LIST"
-    :component="component"
-    :page="page">
-    <slot/>
-  </br-container-unordered-list>
+    <br-container-unordered-list
+      v-else-if="containerType === TYPE_CONTAINER_UNORDERED_LIST"
+      :component="component"
+      :page="page">
+      <slot/>
+    </br-container-unordered-list>
 
-  <br-container-box
-    v-else
-    :component="component"
-    :page="page">
-    <slot/>
-  </br-container-box>
+    <br-container-box
+      v-else
+      :component="component"
+      :page="page">
+      <slot/>
+    </br-container-box>
+  </br-meta>
 </template>
 
 <script setup lang="ts">
@@ -71,6 +73,7 @@ import {
 import type { Ref } from 'vue';
 import { computed, inject } from 'vue';
 import type { BrMapping } from '../typings';
+import BrMeta from './BrMeta.vue';
 import BrContainerBox from './BrContainerBox.vue';
 import BrContainerInline from './BrContainerInline.vue';
 import BrContainerNoMarkup from './BrContainerNoMarkup.vue';
@@ -81,4 +84,5 @@ const page = inject(page$);
 const component = inject<Ref<Container>>(component$);
 const mapping = inject(mapping$) as Ref<BrMapping>;
 const containerType = computed(() => component?.value?.getType());
+const meta = computed(() => component?.value?.getMeta());
 </script>

@@ -15,19 +15,22 @@
   -->
 
 <template>
-  <br-meta :meta="meta" :key="componentRef?.getId()">
-    <slot>
-      <br-node-container-item v-if="isContainerItem(componentRef)"/>
-
-      <br-node-container v-else-if="isContainer(componentRef)">
-        <br-node-component v-for="child in children" :key="(child as Component).getId()" :component="child"/>
-      </br-node-container>
-
-      <component v-else-if="name && name in mapping" :is="mapping[name]" :component="componentRef" :page="page"/>
-
-      <br-node-component v-else v-for="child in children" :key="(child as Component).getId()" :component="child"/>
-    </slot>
+  <br-meta :meta="meta" :key="componentRef?.getId()" v-if="hasSlotContent">
+    <slot />
   </br-meta>
+  <template v-else>
+    <br-node-container-item v-if="isContainerItem(componentRef)"/>
+
+    <br-node-container v-else-if="isContainer(componentRef)">
+      <br-node-component v-for="child in children" :key="(child as Component).getId()" :component="child"/>
+    </br-node-container>
+
+    <br-meta :meta="meta" :key="componentRef?.getId()" v-else-if="name && name in mapping">
+      <component :is="mapping[name]" :component="componentRef" :page="page"/>
+    </br-meta>
+
+    <br-node-component v-else v-for="child in children" :key="(child as Component).getId()" :component="child"/>
+  </template>
 </template>
 
 <script setup lang="ts">
@@ -38,11 +41,13 @@ import { component$, mapping$, page$ } from '@/providerKeys';
 import type { Component } from '@bloomreach/spa-sdk';
 import { isContainer, isContainerItem } from '@bloomreach/spa-sdk';
 import { computed, inject, provide, toRefs } from 'vue';
+import { useHasSlotContent } from './has-slot-content';
 
 const props = defineProps<{ component: Component | undefined }>();
 const { component: componentRef } = toRefs(props);
 const page = inject(page$);
 const mapping = inject(mapping$)!;
+const hasSlotContent = useHasSlotContent();
 
 const children = computed(() => componentRef?.value?.getChildren());
 const meta = computed(() => componentRef?.value?.getMeta());
