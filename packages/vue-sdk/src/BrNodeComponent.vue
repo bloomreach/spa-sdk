@@ -25,11 +25,17 @@
       <br-node-component v-for="child in children" :key="(child as Component).getId()" :component="child"/>
     </br-node-container>
 
-    <br-meta :meta="meta" :key="componentRef?.getId()" v-else-if="name && name in mapping">
-      <component :is="mapping[name]" :component="componentRef" :page="page"/>
-    </br-meta>
+    <template v-else-if="name && name in mapping">
+      <br-meta :meta="meta" :key="componentRef?.getId()">
+        <component :is="mapping[name]" :component="componentRef" :page="page"/>
+      </br-meta>
+    </template>
 
-    <br-node-component v-else v-for="child in children" :key="(child as Component).getId()" :component="child"/>
+    <template v-else>
+      <br-meta :meta="meta" :key="componentRef?.getId()">
+        <br-node-component v-for="child in children" :key="(child as Component).getId()" :component="child"/>
+      </br-meta>
+    </template>
   </template>
 </template>
 

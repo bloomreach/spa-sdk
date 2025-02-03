@@ -55,7 +55,9 @@ describe('BrNodeContainer', () => {
 
   beforeEach(() => {
     component = {
+      getId: vi.fn(() => 'some-id'),
       getType: vi.fn(),
+      getMeta: vi.fn(),
     } as unknown as typeof component;
     mapping = {};
     page = {
@@ -63,6 +65,7 @@ describe('BrNodeContainer', () => {
     } as unknown as typeof page;
 
     global = {
+      renderStubDefaultSlot: true,
       provide: {
         [page$ as symbol]: ref(page),
         [mapping$ as symbol]: mapping,
