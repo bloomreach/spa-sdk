@@ -51,7 +51,9 @@ describe('BrNodeContainerItem', () => {
 
   beforeAll(() => {
     component = {
+      getId: vi.fn(() => 'some-id'),
       getType: vi.fn(),
+      getMeta: vi.fn(),
       on: vi.fn(),
     } as unknown as typeof component;
     componentRef = ref(component);
@@ -59,6 +61,7 @@ describe('BrNodeContainerItem', () => {
     page = { sync: vi.fn() } as unknown as typeof page;
 
     global = {
+      renderStubDefaultSlot: true,
       provide: {
         [page$ as symbol]: ref(page),
         [mapping$ as symbol]: mapping,
