@@ -19,47 +19,60 @@ const ARG_PORT = '--port';
 const port = process.argv.find((arg) => arg.startsWith(`${ARG_PORT}=`));
 
 export default defineNuxtConfig({
-  devtools: { enabled: true },
-  app: {
-    head: {
-      title: 'brXM + Nuxt = ♥️',
-      meta: [
-        { charset: 'utf-8' },
-        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        {
-          name: 'description',
-          content: process.env.npm_package_description || '',
-        },
-      ],
-      link: [
-        {
-          rel: 'stylesheet',
-          href: 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css',
-          integrity: 'sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk',
-          crossorigin: 'anonymous',
-        },
-      ],
-    },
-  },
-  runtimeConfig: {
-    public: {
-      NUXT_APP_BR_MULTI_TENANT_SUPPORT: process.env.NUXT_APP_BR_MULTI_TENANT_SUPPORT,
-      NUXT_APP_BRXM_ENDPOINT: process.env.NUXT_APP_BRXM_ENDPOINT,
-      BASE_URL: process.env.BASE_URL,
-    },
-  },
-  devServer: {
-    port: (port && Number(port.substring(ARG_PORT.length + 1))) || 3000,
-  },
-  devServerHandlers: [],
-  typescript: {
-    typeCheck: false,
-  },
-  telemetry: false,
-  build: {
-    transpile: [({ isServer }: any) => isServer ? 'server' : 'client', 'emittery'],
-  },
-  nitro: {
-    moduleSideEffects: ['reflect-metadata']
-  }
+ devtools: { enabled: true },
+
+ app: {
+   head: {
+     title: 'brXM + Nuxt = ♥️',
+     meta: [
+       { charset: 'utf-8' },
+       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+       {
+         name: 'description',
+         content: process.env.npm_package_description || '',
+       },
+     ],
+     link: [
+       {
+         rel: 'stylesheet',
+         href: 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css',
+         integrity: 'sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk',
+         crossorigin: 'anonymous',
+       },
+     ],
+   },
+ },
+
+ runtimeConfig: {
+   public: {
+     NUXT_APP_BR_MULTI_TENANT_SUPPORT: process.env.NUXT_APP_BR_MULTI_TENANT_SUPPORT,
+     NUXT_APP_BRXM_ENDPOINT: process.env.NUXT_APP_BRXM_ENDPOINT,
+     BASE_URL: process.env.BASE_URL,
+   },
+ },
+
+ devServer: {
+   port: (port && Number(port.substring(ARG_PORT.length + 1))) || 3000,
+ },
+
+ devServerHandlers: [],
+
+ typescript: {
+   typeCheck: false,
+ },
+
+ telemetry: false,
+
+ build: {
+   transpile: [
+     ({ isServer }: any) => (isServer ? 'server' : 'client'),
+     ...(process.env.NODE_ENV === 'production' ? ['emittery'] : [])
+   ]
+ },
+
+ nitro: {
+   moduleSideEffects: ['reflect-metadata']
+ },
+
+ compatibilityDate: '2025-02-05'
 })
