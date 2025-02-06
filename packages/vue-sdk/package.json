@@ -1,6 +1,6 @@
 {
   "name": "@bloomreach/vue-sdk",
-  "version": "24.0.0",
+  "version": "24.0.1",
   "description": "Bloomreach SPA SDK for Vue",
   "keywords": [
     "bloomreach",
@@ -16,7 +16,7 @@
     "directory": "packages/vue-sdk"
   },
   "bugs": {
-    "url": "https://issues.onehippo.com/projects/SPASDK/issues"
+    "url": "https://bloomreach.atlassian.net/projects/SPASDK/issues"
   },
   "type": "module",
   "main": "./dist/index.umd.cjs",
@@ -66,6 +66,6 @@
     "vue-tsc": "1.6.5"
   },
   "dependencies": {
-    "@bloomreach/spa-sdk": "24.0.0"
+    "@bloomreach/spa-sdk": "24.0.1"
   }
 }

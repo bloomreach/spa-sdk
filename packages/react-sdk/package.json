@@ -1,6 +1,6 @@
 {
   "name": "@bloomreach/react-sdk",
-  "version": "24.0.0",
+  "version": "24.0.1",
   "description": "Bloomreach SPA SDK for React",
   "keywords": [
     "bloomreach",
@@ -16,7 +16,7 @@
     "directory": "packages/react-sdk"
   },
   "bugs": {
-    "url": "https://issues.onehippo.com/projects/SPASDK/issues"
+    "url": "https://bloomreach.atlassian.net/projects/SPASDK/issues"
   },
   "main": "dist/index.umd.js",
   "browser": "dist/index.js",
@@ -111,6 +111,6 @@
     "outputName": "TEST-react-sdk.xml"
   },
   "dependencies": {
-    "@bloomreach/spa-sdk": "24.0.0"
+    "@bloomreach/spa-sdk": "24.0.1"
   }
 }

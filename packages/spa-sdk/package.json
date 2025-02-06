@@ -1,6 +1,6 @@
 {
   "name": "@bloomreach/spa-sdk",
-  "version": "24.0.0",
+  "version": "24.0.1",
   "description": "Bloomreach SPA SDK",
   "keywords": [
     "bloomreach",
@@ -16,7 +16,7 @@
     "directory": "packages/spa-sdk"
   },
   "bugs": {
-    "url": "https://issues.onehippo.com/projects/SPASDK/issues"
+    "url": "https://bloomreach.atlassian.net/projects/SPASDK/issues"
   },
   "main": "dist/index.umd.js",
   "browser": "dist/index.js",
