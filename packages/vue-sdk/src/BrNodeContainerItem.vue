@@ -15,29 +15,32 @@
   -->
 
 <template>
-  <component
-    :is="mapping[componentType]"
-    v-if="componentType && componentType in mapping"
-    :component="passedComponent"
-    :page="page"
-  />
+  <br-meta :meta="meta" :key="passedComponent.getId()">
+    <component
+      :is="mapping[componentType]"
+      v-if="componentType && componentType in mapping"
+      :component="passedComponent"
+      :page="page"
+    />
 
-  <component
-    :is="mapping[TYPE_CONTAINER_ITEM_UNDEFINED]"
-    v-else-if="TYPE_CONTAINER_ITEM_UNDEFINED in mapping"
-    :component="passedComponent"
-    :page="page"
-  />
+    <component
+      :is="mapping[TYPE_CONTAINER_ITEM_UNDEFINED]"
+      v-else-if="TYPE_CONTAINER_ITEM_UNDEFINED in mapping"
+      :component="passedComponent"
+      :page="page"
+    />
 
-  <br-container-item-undefined v-else-if="passedComponent" :component="passedComponent"/>
+    <br-container-item-undefined v-else-if="passedComponent" :component="passedComponent"/>
+  </br-meta>
 </template>
 
 <script setup lang="ts">
 import { component$, mapping$, page$ } from '@/providerKeys';
-import type { Component, ContainerItem } from '@bloomreach/spa-sdk';
+import type { ContainerItem } from '@bloomreach/spa-sdk';
 import { TYPE_CONTAINER_ITEM_UNDEFINED } from '@bloomreach/spa-sdk';
 import type { Ref } from 'vue';
 import { computed, inject, onUnmounted, ref, toRaw, watch } from 'vue';
+import BrMeta from '@/BrMeta.vue';
 import BrContainerItemUndefined from '@/BrContainerItemUndefined.vue';
 
 const page = inject(page$)!;
@@ -57,6 +60,7 @@ function shallowClone(value: ContainerItem): ContainerItem {
 // https://vuejs.org/guide/essentials/reactivity-fundamentals.html#ref-unwrapping-in-templates
 // https://vuejs.org/api/reactivity-utilities.html#unref
 const passedComponent = ref<ContainerItem>(component.value);
+const meta = computed(() => passedComponent.value.getMeta());
 const updateHook = () => {
   passedComponent.value = shallowClone(component.value);
   const sdkPage = toRaw(page.value);

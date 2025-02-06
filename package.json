@@ -20,7 +20,7 @@
     "url": "https://github.com/bloomreach/spa-sdk"
   },
   "bugs": {
-    "url": "https://issues.onehippo.com/projects/SPASDK/issues"
+    "url": "https://bloomreach.atlassian.net/projects/SPASDK/issues"
   },
   "scripts": {
     "audit": "pnpm -r --stream audit --prod --audit-level=critical",
@@ -38,10 +38,10 @@
     "release": "pnpm publish -r --filter \"./packages/**\" --no-git-checks"
   },
   "devDependencies": {
-    "@changesets/cli": "2.27.7",
+    "@changesets/cli": "2.27.11",
     "auto-changelog": "2.3.0",
     "glob": "10.2.6",
-    "heroku": "9.2.0",
+    "heroku": "9.5.1",
     "npx": "10.2.2"
   },
   "auto-changelog": {
@@ -51,7 +51,7 @@
     "appendGitLog": "--since 2021-05-10",
     "hideEmptyReleases": true,
     "remote": "github",
-    "issueUrl": "https://issues.onehippo.com/browse/{id}",
+    "issueUrl": "https://bloomreach.atlassian.net/browse/{id}",
     "issuePattern": "^[A-Z]+-\\d+",
     "mergeUrl": "https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/{id}"
   },

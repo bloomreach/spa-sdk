@@ -22,10 +22,10 @@
 
 <script setup lang="ts">
 import type { MetaCollection } from '@bloomreach/spa-sdk';
-import { getCurrentInstance, onBeforeUnmount, onBeforeUpdate, onMounted, onUpdated, ref, watch } from 'vue';
+import { getCurrentInstance, onBeforeUnmount, onBeforeUpdate, onMounted, onUpdated, ref, toRef, watch } from 'vue';
 
 const props = defineProps<{ meta?: MetaCollection }>();
-const meta = ref(props.meta);
+const meta = toRef(() => props.meta);
 let clear: ReturnType<MetaCollection['render']> | undefined;
 
 const head = ref<HTMLSpanElement>();

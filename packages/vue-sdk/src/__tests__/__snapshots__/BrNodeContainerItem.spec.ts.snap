@@ -1,7 +1,19 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`BrNodeContainerItem > render > should override undefined container item 1`] = `"<some-container-item-stub component=\\"[object Object]\\" page=\\"[object Object]\\"></some-container-item-stub>"`;
+exports[`BrNodeContainerItem > render > should override undefined container item 1`] = `
+"<br-meta-stub>
+  <some-container-item-stub component=\\"[object Object]\\" page=\\"[object Object]\\"></some-container-item-stub>
+</br-meta-stub>"
+`;
 
-exports[`BrNodeContainerItem > render > should render a mapped container item 1`] = `"<some-container-item-stub component=\\"[object Object]\\" page=\\"[object Object]\\"></some-container-item-stub>"`;
+exports[`BrNodeContainerItem > render > should render a mapped container item 1`] = `
+"<br-meta-stub>
+  <some-container-item-stub component=\\"[object Object]\\" page=\\"[object Object]\\"></some-container-item-stub>
+</br-meta-stub>"
+`;
 
-exports[`BrNodeContainerItem > render > should render an undefined container item 1`] = `"<br-container-item-undefined-stub component=\\"[object Object]\\"></br-container-item-undefined-stub>"`;
+exports[`BrNodeContainerItem > render > should render an undefined container item 1`] = `
+"<br-meta-stub>
+  <br-container-item-undefined-stub component=\\"[object Object]\\"></br-container-item-undefined-stub>
+</br-meta-stub>"
+`;

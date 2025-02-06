@@ -1,16 +1,16 @@
 {
   "name": "@bloomreach/example-react",
   "description": "Example React SPA for Bloomreach Experience",
-  "version": "24.0.0",
+  "version": "24.0.1",
   "private": true,
   "dependencies": {
-    "@bloomreach/react-sdk": "24.0.0",
-    "@bloomreach/spa-sdk": "24.0.0",
-    "axios": "1.6.8",
+    "@bloomreach/react-sdk": "24.0.1",
+    "@bloomreach/spa-sdk": "24.0.1",
+    "axios": "1.7.9",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-router-dom": "6.4.2",
-    "sanitize-html": "2.13.0"
+    "sanitize-html": "2.14.0"
   },
   "scripts": {
     "build": "cross-env GENERATE_SOURCEMAP=false SKIP_PREFLIGHT_CHECK=true react-scripts build",
