@@ -16,7 +16,7 @@
 
 import { BrManageContentButton, BrProps } from '@bloomreach/react-sdk';
 import { Document, ImageSet } from '@bloomreach/spa-sdk';
-import React from 'react';
+import React, { JSX } from 'react';
 import { Link } from 'react-router-dom';
 import { sanitize } from '../utils/sanitize';
 

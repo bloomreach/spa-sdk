@@ -33,10 +33,9 @@ import {
   BrContainerOrderedList,
   BrContainerUnorderedList,
 } from '../cms';
-import { BrNodeComponent } from './BrNodeComponent';
 import { BrNodeContainer } from './BrNodeContainer';
 import { BrMeta } from '../meta';
-import { withContextProvider } from '../utils/withContextProvider';
+import { withMappingContextProvider } from '../utils/withContextProvider';
 
 describe('BrNodeContainer', () => {
   const props = {
@@ -53,11 +52,6 @@ describe('BrNodeContainer', () => {
   });
 
   describe('getMapping', () => {
-    beforeEach(() => {
-      (BrNodeContainer as any).contextTypes = { test: () => null };
-      delete (BrNodeComponent as Partial<typeof BrNodeComponent>).contextType;
-    });
-
     it('should use container type for mapping', () => {
       render(<BrNodeContainer {...props} />);
 
@@ -67,7 +61,7 @@ describe('BrNodeContainer', () => {
     it('should render a mapped container', () => {
       props.component.getType.mockReturnValue('test' as ReturnType<Container['getType']>);
       const element = render(
-        withContextProvider(
+        withMappingContextProvider(
           {
             test: ({ children }: React.PropsWithChildren<typeof props>) => <div>{children}</div>,
           },

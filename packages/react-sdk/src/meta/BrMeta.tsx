@@ -21,7 +21,7 @@ interface BrMetaProps {
   meta?: MetaCollection;
 }
 
-export function BrMeta({ children, meta }: React.PropsWithChildren<BrMetaProps>): JSX.Element {
+export function BrMeta({ children, meta }: React.PropsWithChildren<BrMetaProps>): React.ReactElement {
   const head = useRef<HTMLSpanElement>(null);
   const tail = useRef<HTMLSpanElement>(null);
 

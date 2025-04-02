@@ -21,7 +21,7 @@ import { BrNode } from './BrNode';
 import { BrNodeComponent } from './BrNodeComponent';
 import { BrNodeContainer } from './BrNodeContainer';
 import { BrNodeContainerItem } from './BrNodeContainerItem';
-import { withContextProvider } from '../utils/withContextProvider';
+import { withPageContextProvider } from '../utils/withContextProvider';
 import { BrMeta } from '../meta';
 
 jest.mock('@bloomreach/spa-sdk');
@@ -43,11 +43,6 @@ describe('BrNode', () => {
 
   beforeEach(() => {
     jest.restoreAllMocks();
-
-    (BrNode as any).contextTypes = {
-      isPreview: () => null,
-    };
-    delete (BrNode as Partial<typeof BrNode>).contextType;
   });
 
   it('should render a component meta-data', () => {
@@ -55,16 +50,16 @@ describe('BrNode', () => {
     props.component.getMeta.mockReturnValueOnce(meta);
     const element = render(<BrNode {...props} />);
 
-    const nodeMeta = render(withContextProvider(context, <BrMeta meta={props.component.getMeta()} />));
+    const nodeMeta = render(withPageContextProvider(context, <BrMeta meta={props.component.getMeta()} />));
 
     expect(element.container.isEqualNode(nodeMeta.container)).toBe(true);
     expect(element.asFragment()).toMatchSnapshot();
   });
 
   it('should render a component', () => {
-    const element = render(withContextProvider(context, <BrNode {...props} />));
+    const element = render(withPageContextProvider(context, <BrNode {...props} />));
 
-    const nodeComponent = render(withContextProvider(context, <BrNodeComponent {...props} />));
+    const nodeComponent = render(withPageContextProvider(context, <BrNodeComponent {...props} />));
 
     expect(element.container.isEqualNode(nodeComponent.container)).toBe(true);
     expect(element.asFragment()).toMatchSnapshot();
@@ -72,7 +67,7 @@ describe('BrNode', () => {
 
   it('should render a container', () => {
     jest.mocked(isContainer).mockReturnValueOnce(true);
-    const element = render(withContextProvider(context, <BrNode {...props} />));
+    const element = render(withPageContextProvider(context, <BrNode {...props} />));
 
     const nodeContainer = render(<BrNodeContainer page={context} component={props.component as any} />);
 
@@ -82,7 +77,7 @@ describe('BrNode', () => {
 
   it('should render a container item', () => {
     jest.mocked(isContainerItem).mockReturnValueOnce(true);
-    const element = render(withContextProvider(context, <BrNode {...props} />));
+    const element = render(withPageContextProvider(context, <BrNode {...props} />));
 
     const nodeContainerItem = render(<BrNodeContainerItem page={context} component={props.component as any} />);
 

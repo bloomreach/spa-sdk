@@ -17,7 +17,7 @@
 import {BrManageContentButton, BrProps} from '@bloomreach/react-sdk';
 import {Document, ImageSet} from '@bloomreach/spa-sdk';
 import Link from 'next/link';
-import React from 'react';
+import React, {JSX} from 'react';
 import {sanitize} from '../utils/sanitize';
 
 export function Banner(props: BrProps): JSX.Element | null {

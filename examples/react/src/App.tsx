@@ -16,7 +16,7 @@
 
 import { BrComponent, BrPage, BrPageContext } from '@bloomreach/react-sdk';
 import axios from 'axios';
-import React, { StrictMode } from 'react';
+import React, { JSX, StrictMode } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Banner, Content, Menu, NewsList } from './components';
 import { buildConfiguration } from './utils/buildConfiguration';

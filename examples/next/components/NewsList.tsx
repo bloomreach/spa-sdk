@@ -17,7 +17,7 @@
 import { BrManageContentButton, BrPageContext, BrProps } from '@bloomreach/react-sdk';
 import { Document } from '@bloomreach/spa-sdk';
 import Link from 'next/link';
-import React from 'react';
+import React, {JSX} from 'react';
 
 interface NewsListItemProps {
   item: Document;

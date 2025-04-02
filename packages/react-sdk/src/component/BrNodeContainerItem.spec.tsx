@@ -18,10 +18,9 @@ import React from 'react';
 import { ContainerItem, MetaCollection, Page, TYPE_CONTAINER_ITEM_UNDEFINED } from '@bloomreach/spa-sdk';
 import { act, render } from '@testing-library/react';
 import { BrContainerItemUndefined } from '../cms';
-import { BrNodeComponent } from './BrNodeComponent';
 import { BrNodeContainerItem } from './BrNodeContainerItem';
 import { BrMeta } from '../meta';
-import { withContextProvider } from '../utils/withContextProvider';
+import { withMappingContextProvider } from '../utils/withContextProvider';
 
 jest.mock('@bloomreach/spa-sdk', () => () => ({ [TYPE_CONTAINER_ITEM_UNDEFINED]: 'StringValue' }));
 
@@ -74,16 +73,10 @@ describe('BrNodeContainerItem', () => {
   });
 
   describe('getMapping', () => {
-    beforeEach(() => {
-      (BrNodeContainerItem as any).contextTypes = { [TYPE_CONTAINER_ITEM_UNDEFINED]: () => null };
-      delete (BrNodeComponent as Partial<typeof BrNodeComponent>).contextType;
-    });
-
     it('should use container item type for mapping', () => {
       props.component.getType.mockReturnValueOnce('test');
-      (BrNodeContainerItem as any).contextTypes = { test: () => null };
       render(
-        withContextProvider(
+        withMappingContextProvider(
           {
             test: () => <div>Test</div>,
           },
@@ -116,7 +109,7 @@ describe('BrNodeContainerItem', () => {
     it('should override undefined container item', () => {
       props.component.getType.mockReturnValueOnce('test');
       const element = render(
-        withContextProvider(
+        withMappingContextProvider(
           {
             [TYPE_CONTAINER_ITEM_UNDEFINED]: ({ children }: React.PropsWithChildren<typeof props>) => (
               <div>{children}</div>

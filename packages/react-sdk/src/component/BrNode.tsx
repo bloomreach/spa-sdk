@@ -32,7 +32,7 @@ export class BrNode extends React.Component<React.PropsWithChildren<BrNodeProps>
 
   context: React.ContextType<typeof BrPageContext>;
 
-  private renderNode(): JSX.Element | React.ReactNode {
+  private renderNode(): React.ReactElement | React.ReactNode {
     const { children, component } = this.props;
 
     if (React.Children.count(children)) {
@@ -65,7 +65,7 @@ export class BrNode extends React.Component<React.PropsWithChildren<BrNodeProps>
     );
   }
 
-  render(): JSX.Element {
+  render(): React.ReactElement {
     const { component } = this.props;
 
     return <BrComponentContext.Provider value={component}>{this.renderNode()}</BrComponentContext.Provider>;

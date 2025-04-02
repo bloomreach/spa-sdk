@@ -18,7 +18,7 @@ import React from 'react';
 import { Content, MetaCollection, Page } from '@bloomreach/spa-sdk';
 import { render } from '@testing-library/react';
 import { BrManageContentButton } from './BrManageContentButton';
-import { withContextProvider } from '../utils/withContextProvider';
+import { withPageContextProvider } from '../utils/withContextProvider';
 
 describe('BrManageContentButton', () => {
   const context = {
@@ -28,17 +28,11 @@ describe('BrManageContentButton', () => {
 
   beforeEach(() => {
     jest.restoreAllMocks();
-
-    (BrManageContentButton as any).contextTypes = {
-      isPreview: () => null,
-      getButton: () => null,
-    };
-    delete (BrManageContentButton as Partial<typeof BrManageContentButton>).contextType;
   });
 
   it('should only render in preview mode', () => {
     context.isPreview.mockReturnValueOnce(false);
-    const element = render(withContextProvider(context, <BrManageContentButton />));
+    const element = render(withPageContextProvider(context, <BrManageContentButton />));
 
     expect(element.container.firstChild).toBe(null);
   });
@@ -49,7 +43,7 @@ describe('BrManageContentButton', () => {
 
     context.isPreview.mockReturnValueOnce(true);
     context.getButton.mockReturnValueOnce(meta);
-    render(withContextProvider(context, <BrManageContentButton content={content} root="content" />));
+    render(withPageContextProvider(context, <BrManageContentButton content={content} root="content" />));
 
     expect(context.getButton).toBeCalledWith(expect.any(String), { content, root: 'content' });
   });

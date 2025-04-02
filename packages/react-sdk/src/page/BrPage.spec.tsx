@@ -211,7 +211,7 @@ describe('BrPage', () => {
       const initializeDone = jest.fn();
       const someEffect = jest.fn();
 
-      function MyComponent(): JSX.Element {
+      function MyComponent(): React.ReactElement {
         useEffect(() => someEffect());
         return <></>;
       }
