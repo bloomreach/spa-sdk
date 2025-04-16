@@ -71,6 +71,19 @@ export default function App() {
 }
 ```
 
+Memoize the configuration object if the component containing BrPage re-renders to prevent unnecessary requests to the Page Model API.
+
+```jsx
+const location = useLocation();
+
+const memoizedConfiguration = useMemo(() => {
+  return buildConfiguration(`${location.pathname}${location.search}`, axios);
+}, [location.pathname, location.search]);
+
+<BrPage configuration={memoizedConfiguration} mapping={mapping}>
+  ...
+````
+
 ### Non-blocking render mode (NBRMode)
 
 Non-blocking rendering mode can be used to decrease the time for your application to load fully on the client side. By
