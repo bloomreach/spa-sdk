@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import React from 'react';
+import React, { JSX } from 'react';
 import { Link } from 'react-router-dom';
 import { Document } from '@bloomreach/spa-sdk';
 import { BrManageContentButton, BrPageContext, BrProps } from '@bloomreach/react-sdk';

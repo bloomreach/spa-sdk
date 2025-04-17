@@ -27,7 +27,7 @@ export class BrManageContentButton extends React.Component<ManageContentButton> 
 
   context: React.ContextType<typeof BrPageContext>;
 
-  render(): JSX.Element | null {
+  render(): React.ReactElement | null {
     const { context } = this;
 
     return context?.isPreview() ? <BrMeta meta={context.getButton(TYPE_MANAGE_CONTENT_BUTTON, this.props)} /> : null;

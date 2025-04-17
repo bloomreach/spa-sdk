@@ -23,7 +23,7 @@ import * as cookieUtils from 'cookie';
 import {DEFAULT_RELEVANCE_COOKIE_NAME} from '../../constants';
 
 export default async function Page() {
-  const headersList = headers();
+  const headersList = await headers();
   const searchParams = headersList.get('x-next-search-params');
   const pathname = headersList.get('x-next-pathname');
   const cookie = headersList.get('x-next-cookie');

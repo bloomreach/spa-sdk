@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import React from 'react';
+import React, { JSX } from 'react';
 import { Link } from 'react-router-dom';
 import { MenuItem, Menu as BrMenu, TYPE_LINK_EXTERNAL, isMenu } from '@bloomreach/spa-sdk';
 import { BrComponentContext, BrManageMenuButton, BrPageContext } from '@bloomreach/react-sdk';

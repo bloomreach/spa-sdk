@@ -1,6 +1,6 @@
 import type { MarkdownHeading } from 'astro';
 import { unescape } from 'html-escaper';
-import { useState, useEffect, useRef, FC } from 'react';
+import { useState, useEffect, useRef, type FC } from 'react';
 
 type ItemOffsets = {
 	id: string;

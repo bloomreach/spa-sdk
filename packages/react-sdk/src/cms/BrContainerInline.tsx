@@ -17,7 +17,7 @@
 import React from 'react';
 import { BrProps } from '../component';
 
-export function BrContainerInline(props: React.PropsWithChildren<BrProps>): JSX.Element {
+export function BrContainerInline(props: React.PropsWithChildren<BrProps>): React.ReactElement {
   const { page, children } = props;
 
   return (

@@ -119,7 +119,7 @@ export class BrPage extends React.Component<React.PropsWithChildren<BrPageProps>
     destroy(page);
   }
 
-  render(): JSX.Element | null {
+  render(): React.ReactElement | null {
     const { page } = this.state;
     const { configuration, mapping, children } = this.props;
 

@@ -18,7 +18,7 @@ import React from 'react';
 import { Menu, MetaCollection, Page } from '@bloomreach/spa-sdk';
 import { render } from '@testing-library/react';
 import { BrManageMenuButton } from './BrManageMenuButton';
-import { withContextProvider } from '../utils/withContextProvider';
+import { withPageContextProvider } from '../utils/withContextProvider';
 
 describe('BrManageMenuButton', () => {
   const context = {
@@ -31,17 +31,11 @@ describe('BrManageMenuButton', () => {
     jest.restoreAllMocks();
 
     props = { menu: {} as Menu };
-
-    (BrManageMenuButton as any).contextTypes = {
-      isPreview: () => null,
-      getButton: () => null,
-    };
-    delete (BrManageMenuButton as Partial<typeof BrManageMenuButton>).contextType;
   });
 
   it('should only render in preview mode', () => {
     context.isPreview.mockReturnValueOnce(false);
-    const element = render(withContextProvider(context, <BrManageMenuButton {...props} />));
+    const element = render(withPageContextProvider(context, <BrManageMenuButton {...props} />));
 
     expect(element.container.firstChild).toBe(null);
   });
@@ -51,7 +45,7 @@ describe('BrManageMenuButton', () => {
     (props as any).menu = {} as Menu;
     context.isPreview.mockReturnValueOnce(true);
     context.getButton.mockReturnValueOnce(meta);
-    render(withContextProvider(context, <BrManageMenuButton {...props} />));
+    render(withPageContextProvider(context, <BrManageMenuButton {...props} />));
 
     expect(context.getButton).toBeCalledWith(expect.any(String), props.menu);
   });

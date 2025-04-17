@@ -17,7 +17,7 @@
 import React from 'react';
 import { BrProps } from '../component';
 
-export function BrContainerUnorderedList({ page, children }: React.PropsWithChildren<BrProps>): JSX.Element {
+export function BrContainerUnorderedList({ page, children }: React.PropsWithChildren<BrProps>): React.ReactElement {
   return (
     <ul className={page?.isPreview() ? 'hst-container' : undefined}>
       {React.Children.map(children, (child) => (

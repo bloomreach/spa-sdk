@@ -19,7 +19,7 @@ import { Component } from '@bloomreach/spa-sdk';
 import { render } from '@testing-library/react';
 import { BrComponent } from './BrComponent';
 import { BrNode } from './BrNode';
-import { withContextProvider } from '../utils/withContextProvider';
+import { withComponentContextProvider } from '../utils/withContextProvider';
 
 jest.mock('@bloomreach/spa-sdk');
 
@@ -37,17 +37,9 @@ describe('BrComponent', () => {
 
   beforeEach(() => {
     jest.restoreAllMocks();
-
-    (BrComponent as any).contextTypes = {
-      getChildren: () => null,
-      getMeta: () => null,
-      getComponent: () => null,
-    };
-    delete (BrComponent as Partial<typeof BrComponent>).contextType;
   });
 
   it('should render nothing if there is no context', () => {
-    delete (BrComponent as any).contextTypes;
     const element = render(<BrComponent />);
 
     expect(element.container.firstChild).toBe(null);
@@ -57,25 +49,25 @@ describe('BrComponent', () => {
     const component1 = { ...component } as Component;
     const component2 = { ...component } as Component;
     context.getChildren.mockReturnValueOnce([component1, component2]);
-    const element = render(withContextProvider(context, <BrComponent />));
+    const element = render(withComponentContextProvider(context, <BrComponent />));
 
     expect(context.getChildren).toBeCalled();
 
-    const node1 = render(withContextProvider(context, <BrNode component={component1} />));
-    const node2 = render(withContextProvider(context, <BrNode component={component2} />));
+    const node1 = render(withComponentContextProvider(context, <BrNode component={component1} />));
+    const node2 = render(withComponentContextProvider(context, <BrNode component={component2} />));
 
     expect(element.container).toContainHTML(node1.container.innerHTML);
     expect(element.container).toContainHTML(node2.container.innerHTML);
   });
 
   it('should split path by slashes', () => {
-    render(withContextProvider(context, <BrComponent path="a/b" />));
+    render(withComponentContextProvider(context, <BrComponent path="a/b" />));
 
     expect(context.getComponent).toBeCalledWith('a', 'b');
   });
 
   it('should render nothing if no component found', () => {
-    const element = render(withContextProvider(context, <BrComponent path="a/b" />));
+    const element = render(withComponentContextProvider(context, <BrComponent path="a/b" />));
 
     expect(element.container.firstChild).toBe(null);
     expect(element.asFragment()).toMatchSnapshot();
@@ -83,9 +75,9 @@ describe('BrComponent', () => {
 
   it('should render found component', () => {
     context.getComponent.mockReturnValueOnce(component);
-    const element = render(withContextProvider(context, <BrComponent path="a/b" />));
+    const element = render(withComponentContextProvider(context, <BrComponent path="a/b" />));
 
-    const node = render(withContextProvider(context, <BrNode component={component} />));
+    const node = render(withComponentContextProvider(context, <BrNode component={component} />));
 
     expect(element.container).toContainHTML(node.container.innerHTML);
   });
@@ -93,7 +85,7 @@ describe('BrComponent', () => {
   it('should pass children down', () => {
     context.getComponent.mockReturnValueOnce(component);
     const element = render(
-      withContextProvider(
+      withComponentContextProvider(
         context,
         <BrComponent path="a/b">
           <a />
@@ -101,7 +93,7 @@ describe('BrComponent', () => {
       ),
     );
     const node = render(
-      withContextProvider(
+      withComponentContextProvider(
         context,
         <BrNode component={component}>
           <a />
