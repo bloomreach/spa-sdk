@@ -49,5 +49,11 @@ http {
 		client_max_body_size <%= ENV['NGINX_CLIENT_MAX_BODY_SIZE'] || 1 %>M;
 
 		root build; # path to your app
+
+		location / {
+		  try_files $uri /index.html;
+    }
+
+    error_page 404 /index.html;
 	}
 }
