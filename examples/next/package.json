@@ -1,13 +1,13 @@
 {
   "name": "@bloomreach/example-next",
-  "version": "24.0.1",
+  "version": "24.1.0",
   "description": "Example Next.js SPA for Bloomreach Experience",
   "private": true,
   "author": "Bloomreach B.V.",
   "license": "Apache-2.0",
   "dependencies": {
-    "@bloomreach/react-sdk": "24.0.1",
-    "@bloomreach/spa-sdk": "24.0.1",
+    "@bloomreach/react-sdk": "24.1.0",
+    "@bloomreach/spa-sdk": "24.1.0",
     "axios": "1.8.4",
     "cookie": "1.0.2",
     "next": "15.3.0",

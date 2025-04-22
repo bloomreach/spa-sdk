@@ -2,11 +2,21 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### "24.0.1"
+#### "24.1.0"
+
+- SPASDK-235 Support React 19 [`#200`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/200)
+- SPASDK-229 Add memoization example to React SDK README [`#199`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/199)
+- SPASDK-235 Support React 19 [`#SPASDK-235`](https://bloomreach.atlassian.net/browse/SPASDK-235)
+- SPASDK-229 Add memoization example to React SDK README [`#SPASDK-229`](https://bloomreach.atlassian.net/browse/SPASDK-229)
+
+#### spa-sdk-24.0.1
+
+> 6 February 2025
 
 - SPASDK-231 Fix issue in Vue SSR app for prod and dev modes [`#196`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/196)
 - SPASDK-232: Fix a bug in vue-sdk that does not update its meta tags when a... [`#195`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/195)
 - SPASDK-231 Fix security vulnerabilities [`#194`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/194)
+- SPASDK-232: Bumping versions to 24.0.1 [`#SPASDK-232`](https://bloomreach.atlassian.net/browse/SPASDK-232)
 - SPASDK-231 Fix 500 issue in Nuxt example app [`#SPASDK-231`](https://bloomreach.atlassian.net/browse/SPASDK-231)
 - SPASDK-232: Fix failed tests [`#SPASDK-232`](https://bloomreach.atlassian.net/browse/SPASDK-232)
 - SPASDK-232: Fix a bug in vue-sdk that does not update its meta tags when a container item gets updated [`#SPASDK-232`](https://bloomreach.atlassian.net/browse/SPASDK-232)
@@ -620,6 +630,12 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-123 Add getLocale to Page object [`#SPASDK-123`](https://bloomreach.atlassian.net/browse/SPASDK-123)
 - SPASDK-119 Improve heroku deploy speed by using lerna filter flags [`#SPASDK-119`](https://bloomreach.atlassian.net/browse/SPASDK-119)
 
+#### v15.5.1
+
+> 24 June 2022
+
+- TRIVIAL Bump versions to 15.5.1
+
 #### spa-sdk-15.5.0
 
 > 24 June 2022
@@ -804,23 +820,14 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-59 Bumping versions to 15.3.0 [`#SPASDK-59`](https://bloomreach.atlassian.net/browse/SPASDK-59)
 - SPASDK-58 Remove release pipeline and use release script [`#SPASDK-58`](https://bloomreach.atlassian.net/browse/SPASDK-58)
 - SPASDK-38 Add page api to sanitize html content in SPA SDK [`#SPASDK-38`](https://bloomreach.atlassian.net/browse/SPASDK-38)
-- SPASDK-58 Merge branch 'development' [`#SPASDK-58`](https://bloomreach.atlassian.net/browse/SPASDK-58)
-- SPASDK-58 Bump versions to 15.2.2-0 [`#SPASDK-58`](https://bloomreach.atlassian.net/browse/SPASDK-58)
-- SPASDK-58 Update push to github script in Jenkins [`#SPASDK-58`](https://bloomreach.atlassian.net/browse/SPASDK-58)
-- SPASDK-53 Merge branch 'development' into 'main' [`#SPASDK-53`](https://bloomreach.atlassian.net/browse/SPASDK-53)
-- SPASDK-58 Adjust README according to release process [`#SPASDK-58`](https://bloomreach.atlassian.net/browse/SPASDK-58)
-- SPASDK-58 Adjust jenkins file so github push works [`#SPASDK-58`](https://bloomreach.atlassian.net/browse/SPASDK-58)
-- SPASDK-52 Merge branch 'development' into 'main' [`#SPASDK-52`](https://bloomreach.atlassian.net/browse/SPASDK-52)
 
 #### spa-sdk-15.2.2-0
 
-> 5 October 2021
+> 30 September 2021
 
-- SPASDK-58 Fix release pipeline [`#SPASDK-58`](https://bloomreach.atlassian.net/browse/SPASDK-58)
+- SPASDK-58 Merge branch 'development' [`#SPASDK-58`](https://bloomreach.atlassian.net/browse/SPASDK-58)
 - SPASDK-58 Bump versions to 15.2.2-0 [`#SPASDK-58`](https://bloomreach.atlassian.net/browse/SPASDK-58)
 - SPASDK-58 Update push to github script in Jenkins [`#SPASDK-58`](https://bloomreach.atlassian.net/browse/SPASDK-58)
-- SPASDK-58 Adjust README according to release process [`#SPASDK-58`](https://bloomreach.atlassian.net/browse/SPASDK-58)
-- SPASDK-58 Adjust jenkins file so github push works [`#SPASDK-58`](https://bloomreach.atlassian.net/browse/SPASDK-58)
 
 #### spa-sdk-15.2.1
 
@@ -930,16 +937,10 @@ All notable changes to this project will be documented in this file. Dates are d
 
 > 9 August 2021
 
-- SPASDK-33 Bump versions to SPASDK-33 [`#SPASDK-33`](https://bloomreach.atlassian.net/browse/SPASDK-33)
-- SPASDK-33 Remove 'main' branch specification [`#SPASDK-33`](https://bloomreach.atlassian.net/browse/SPASDK-33)
-
-#### spa-sdk-15.0.0-2
-
-> 6 August 2021
-
 - SPASDK-32 Auto generate a changelog and setup release notes process [`#15`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/15)
 - Resolve SPASDK-22 "Update and lock spa sdk dependencies" [`#10`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/10)
-- SPASDK-33 Update Jenkinsfile and package.json for release testing [`#SPASDK-33`](https://bloomreach.atlassian.net/browse/SPASDK-33)
+- SPASDK-33 Bump versions to SPASDK-33 [`#SPASDK-33`](https://bloomreach.atlassian.net/browse/SPASDK-33)
+- SPASDK-33 Remove 'main' branch specification [`#SPASDK-33`](https://bloomreach.atlassian.net/browse/SPASDK-33)
 - SPASDK-32 Bump versions to 15.0.0-2 [`#SPASDK-32`](https://bloomreach.atlassian.net/browse/SPASDK-32)
 - SPASDK-32 Add version to workspace so auto-changelog can detect it [`#SPASDK-32`](https://bloomreach.atlassian.net/browse/SPASDK-32)
 - SPASDK-22 Set explicit version for node types in next example [`#SPASDK-22`](https://bloomreach.atlassian.net/browse/SPASDK-22)
