@@ -19,7 +19,7 @@ import { Component, MetaCollection, Page } from '@bloomreach/spa-sdk';
 import { render } from '@testing-library/react';
 import { BrNodeComponent } from './BrNodeComponent';
 import { BrMeta } from '../meta';
-import { withContextProvider } from '../utils/withContextProvider';
+import { withMappingContextProvider } from '../utils/withContextProvider';
 
 describe('BrNodeComponent', () => {
   const context = {
@@ -47,15 +47,10 @@ describe('BrNodeComponent', () => {
   });
 
   describe('render', () => {
-    beforeEach(() => {
-      (BrNodeComponent as any).contextTypes = { test: () => null };
-      delete (BrNodeComponent as Partial<typeof BrNodeComponent>).contextType;
-    });
-
     it('should fallback when there is no mapping', () => {
       props.component.getName.mockReturnValue('something');
       const element = render(
-        withContextProvider(
+        withMappingContextProvider(
           context,
           <BrNodeComponent {...props}>
             <b />
@@ -75,7 +70,7 @@ describe('BrNodeComponent', () => {
     it('should render a mapped component', () => {
       props.component.getName.mockReturnValue('test');
       const element = render(
-        withContextProvider(
+        withMappingContextProvider(
           context,
           <BrNodeComponent {...props}>
             <b />

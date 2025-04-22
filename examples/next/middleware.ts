@@ -25,7 +25,7 @@ export async function middleware(request: NextRequest) {
       headers: new Headers({
         'x-next-pathname': request.nextUrl.pathname,
         'x-next-search-params': request.nextUrl.searchParams.toString(),
-        'x-next-cookie': cookies().toString(),
+        'x-next-cookie': (await cookies()).toString(),
         'x-next-origin': request.nextUrl.origin,
         'x-next-forwarded-for': request.headers.get(HEADER_X_FORWARDED_FOR),
       }),

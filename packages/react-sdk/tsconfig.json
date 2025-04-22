@@ -14,7 +14,8 @@
     "sourceMap": true,
     "strict": true,
     "target": "es6",
-    "useDefineForClassFields": false
+    "useDefineForClassFields": false,
+    "types": ["node", "@testing-library/jest-dom"]
   },
   "exclude": [
     "dist",

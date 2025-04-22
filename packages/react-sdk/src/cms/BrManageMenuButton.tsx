@@ -34,7 +34,7 @@ export class BrManageMenuButton extends React.Component<BrManageMenuButtonProps>
 
   context: React.ContextType<typeof BrPageContext>;
 
-  render(): JSX.Element | null {
+  render(): React.ReactElement | null {
     const {
       context,
       props: { menu },

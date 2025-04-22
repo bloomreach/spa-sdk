@@ -56,7 +56,7 @@ export class BrComponent extends React.Component<React.PropsWithChildren<BrCompo
     return component ? [component] : [];
   }
 
-  private renderComponents(): JSX.Element[] {
+  private renderComponents(): React.ReactElement[] {
     const { children } = this.props;
 
     return this.getComponents().map((component, index) => (
@@ -67,7 +67,7 @@ export class BrComponent extends React.Component<React.PropsWithChildren<BrCompo
     ));
   }
 
-  render(): JSX.Element {
+  render(): React.ReactElement {
     return <>{this.renderComponents()}</>;
   }
 }
