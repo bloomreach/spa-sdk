@@ -1,175 +1,17 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-<meta name="viewport" content="width=device-width">
-<meta name="generator" content="Astro v2.10.4">
-<link rel="icon" type="image/svg+xml" href="/spa-sdk/docs/favicon.svg">
-<link rel="sitemap" href="/sitemap.xml">
-    <title data-pagefind-meta="title">
+<!DOCTYPE html><html> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><meta name="generator" content="Astro v5.7.0"><link rel="icon" type="image/svg+xml" href="/spa-sdk/docs/favicon.svg"><link rel="sitemap" href="/sitemap.xml"><title data-pagefind-meta="title">
       Migration guide
-    </title>
-    <script>
+    </title><script>
       if (localStorage.getItem('theme') === null) {
         document.documentElement.setAttribute('data-theme', 'light');
       } else document.documentElement.setAttribute('data-theme', localStorage.getItem('theme'));
-    </script>
-    
-  <link rel="stylesheet" href="/spa-sdk/docs/_astro/changelog.161d299a.css" /><script type="module" src="/spa-sdk/docs/_astro/hoisted.9c1e6001.js"></script></head>
-
-  <body>
-    <header id="header">
-  <div class="navbar">
-    <div class="navbar-start">
-      <div class="dropdown">
-        <label tabindex="0" class="btn btn-ghost btn-circle lg:hidden">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path>
-          </svg>
-        </label>
-        <ul class="menu dropdown-content bg-base-100 dark:bg-base-200 rounded-box shadow w-max z-10" }>
-  <li class="nav-link">
-          <a href="/spa-sdk/docs/getting-started">
-            Getting started
-          </a>
-        </li><li class="nav-link">
-          <a href="/spa-sdk/docs/spa-sdk">
-            SPA SDK
-          </a>
-        </li><li class="nav-link">
-          <a href="/spa-sdk/docs/react-sdk">
-            React SDK
-          </a>
-        </li><li class="nav-link">
-          <a href="/spa-sdk/docs/ng-sdk">
-            Angular SDK
-          </a>
-        </li><li class="nav-link">
-          <a href="/spa-sdk/docs/vue-sdk">
-            Vue SDK
-          </a>
-        </li><li class="nav-link">
-          <a href="/spa-sdk/docs/migration-guide" class="active">
-            Migration guide
-          </a>
-        </li><li class="nav-link">
-          <a href="/spa-sdk/docs/changelog">
-            Changelog
-          </a>
-        </li>
-  <li>
-    <a href="https://github.com/bloomreach/spa-sdk/releases" target="_blank">Releases</a>
-  </li>
-  <li>
-    <a href="https://bloomreach.github.io/spa-sdk/" target="_blank">Typedoc</a>
-  </li>
-</ul>
-      </div>
-      <a class="btn btn-ghost" href="/spa-sdk/docs/">
-        <svg width="24" height="24" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <style>
+    </script><script type="module">var l={exports:{}},d;function h(){return d||(d=1,function(n,f){function r(){var c=document.querySelector("[data-toggle-theme]"),e=c?c.getAttribute("data-key"):null;(function(t=localStorage.getItem(e||"theme")){localStorage.getItem(e||"theme")&&(document.documentElement.setAttribute("data-theme",t),c&&[...document.querySelectorAll("[data-toggle-theme]")].forEach(a=>{a.classList.add(c.getAttribute("data-act-class"))}))})(),c&&[...document.querySelectorAll("[data-toggle-theme]")].forEach(t=>{t.addEventListener("click",function(){var a=t.getAttribute("data-toggle-theme");if(a){var o=a.split(",");document.documentElement.getAttribute("data-theme")==o[0]?o.length==1?(document.documentElement.removeAttribute("data-theme"),localStorage.removeItem(e||"theme")):(document.documentElement.setAttribute("data-theme",o[1]),localStorage.setItem(e||"theme",o[1])):(document.documentElement.setAttribute("data-theme",o[0]),localStorage.setItem(e||"theme",o[0]))}[...document.querySelectorAll("[data-toggle-theme]")].forEach(i=>{i.classList.toggle(this.getAttribute("data-act-class"))})})})}function m(){var c=document.querySelector("[data-set-theme='']"),e=c?c.getAttribute("data-key"):null;(function(t=localStorage.getItem(e||"theme")){if(t!=null&&t!="")if(localStorage.getItem(e||"theme")&&localStorage.getItem(e||"theme")!=""){document.documentElement.setAttribute("data-theme",t);var a=document.querySelector("[data-set-theme='"+t.toString()+"']");a&&([...document.querySelectorAll("[data-set-theme]")].forEach(o=>{o.classList.remove(o.getAttribute("data-act-class"))}),a.getAttribute("data-act-class")&&a.classList.add(a.getAttribute("data-act-class")))}else{var a=document.querySelector("[data-set-theme='']");a.getAttribute("data-act-class")&&a.classList.add(a.getAttribute("data-act-class"))}})(),[...document.querySelectorAll("[data-set-theme]")].forEach(t=>{t.addEventListener("click",function(){document.documentElement.setAttribute("data-theme",this.getAttribute("data-set-theme")),localStorage.setItem(e||"theme",document.documentElement.getAttribute("data-theme")),[...document.querySelectorAll("[data-set-theme]")].forEach(a=>{a.classList.remove(a.getAttribute("data-act-class"))}),t.getAttribute("data-act-class")&&t.classList.add(t.getAttribute("data-act-class"))})})}function u(){var c=document.querySelector("select[data-choose-theme]"),e=c?c.getAttribute("data-key"):null;(function(t=localStorage.getItem(e||"theme")){if(localStorage.getItem(e||"theme")){document.documentElement.setAttribute("data-theme",t);var a=document.querySelector("select[data-choose-theme] [value='"+t.toString()+"']");a&&[...document.querySelectorAll("select[data-choose-theme] [value='"+t.toString()+"']")].forEach(o=>{o.selected=!0})}})(),c&&[...document.querySelectorAll("select[data-choose-theme]")].forEach(t=>{t.addEventListener("change",function(){document.documentElement.setAttribute("data-theme",this.value),localStorage.setItem(e||"theme",document.documentElement.getAttribute("data-theme")),[...document.querySelectorAll("select[data-choose-theme] [value='"+localStorage.getItem(e||"theme")+"']")].forEach(a=>{a.selected=!0})})})}function s(c=!0){c===!0?document.addEventListener("DOMContentLoaded",function(e){r(),u(),m()}):(r(),u(),m())}n.exports={themeChange:s}}(l)),l.exports}var g=h();g.themeChange();</script><link rel="stylesheet" href="/spa-sdk/docs/_astro/changelog.Daom8_R6.css"></head> <body> <header id="header"> <div class="navbar"> <div class="navbar-start"> <div class="dropdown"> <label tabindex="0" class="btn btn-ghost btn-circle lg:hidden"> <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path> </svg> </label> <ul class="menu dropdown-content bg-base-100 dark:bg-base-200 rounded-box shadow w-max z-10" }> <li class="nav-link"> <a href="/spa-sdk/docs/getting-started"> Getting started </a> </li><li class="nav-link"> <a href="/spa-sdk/docs/spa-sdk"> SPA SDK </a> </li><li class="nav-link"> <a href="/spa-sdk/docs/react-sdk"> React SDK </a> </li><li class="nav-link"> <a href="/spa-sdk/docs/ng-sdk"> Angular SDK </a> </li><li class="nav-link"> <a href="/spa-sdk/docs/vue-sdk"> Vue SDK </a> </li><li class="nav-link"> <a href="/spa-sdk/docs/migration-guide" class="active"> Migration guide </a> </li><li class="nav-link"> <a href="/spa-sdk/docs/changelog"> Changelog </a> </li> <li> <a href="https://github.com/bloomreach/spa-sdk/releases" target="_blank">Releases</a> </li> <li> <a href="https://bloomreach.github.io/spa-sdk/" target="_blank">Typedoc</a> </li> </ul> </div> <a class="btn btn-ghost" href="/spa-sdk/docs/"> <svg width="24" height="24" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg"> <defs> <style>
       .cls-1 {
         fill: hsl(var(--nc));
       }
       .cls-2 {
         fill: hsl(var(--s));
       }
-    </style>
-  </defs>
-  <circle class="cls-2" cx="35.94" cy="35.94" r="35.94"></circle>
-  <path class="cls-1" d="M43.22,28.47,41.46,33a6.6,6.6,0,0,1,3,5.64,6.38,6.38,0,1,1-12.76,0A6.36,6.36,0,0,1,37.83,32l1.65-4.6A11,11,0,0,0,26.71,38.29h0V49.84h5V48a11.7,11.7,0,0,0,6.38,1.82,11.26,11.26,0,0,0,5.11-21.37Z"></path>
-  <path class="cls-1" d="M26.69,27.92a15.51,15.51,0,0,1,5-3.41V17.27h-5Z"></path>
-</svg>
-        <h1>SDK Documentation Portal</h1>
-      </a>
-    </div>
-    <div class="navbar-center"></div>
-    <div class="navbar-end">
-      <button class="btn btn-ghost btn-circle" id="searchModalTrigger">
-        <svg viewBox="0 0 24 24" width="24" height="24" astro-icon="mdi:magnify"><path fill="currentColor" d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
-      </button>
-      <label class="btn btn-ghost btn-circle swap swap-rotate">
-  <!-- this hidden checkbox controls the state -->
-  <input type="checkbox" data-toggle-theme="light,dark">
-
-  <!-- sun icon -->
-  <svg class="swap-on" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-    <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
-  </svg>
-
-  <!-- moon icon -->
-  <svg class="swap-off" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
-  </svg>
-</label>
-    </div>
-  </div>
-</header>
-
-<dialog id="searchModal" class="modal">
-  <form method="dialog" class="modal-box p-10">
-    <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-      <svg viewBox="0 0 24 24" width="24" height="24" astro-icon="mdi:close"><path fill="currentColor" d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
-    </button>
-    <div class="search mt-5">
-      <div data-pagefind-ui data-bundle-path="/spa-sdk/docs/_pagefind/"></div>
-    </div>
-  </form>
-  <form method="dialog" class="modal-backdrop">
-    <button>Close</button>
-  </form>
-</dialog>
-
-    <main class="grid lg:grid-cols-4 gap-x-10 p-10">
-      <aside class="hidden lg:block col-span-1">
-        <nav class="sticky top-0">
-          <ul class="menu z-10" }>
-  <li class="nav-link">
-          <a href="/spa-sdk/docs/getting-started">
-            Getting started
-          </a>
-        </li><li class="nav-link">
-          <a href="/spa-sdk/docs/spa-sdk">
-            SPA SDK
-          </a>
-        </li><li class="nav-link">
-          <a href="/spa-sdk/docs/react-sdk">
-            React SDK
-          </a>
-        </li><li class="nav-link">
-          <a href="/spa-sdk/docs/ng-sdk">
-            Angular SDK
-          </a>
-        </li><li class="nav-link">
-          <a href="/spa-sdk/docs/vue-sdk">
-            Vue SDK
-          </a>
-        </li><li class="nav-link">
-          <a href="/spa-sdk/docs/migration-guide" class="active">
-            Migration guide
-          </a>
-        </li><li class="nav-link">
-          <a href="/spa-sdk/docs/changelog">
-            Changelog
-          </a>
-        </li>
-  <li>
-    <a href="https://github.com/bloomreach/spa-sdk/releases" target="_blank">Releases</a>
-  </li>
-  <li>
-    <a href="https://bloomreach.github.io/spa-sdk/" target="_blank">Typedoc</a>
-  </li>
-</ul>
-        </nav>
-      </aside>
-      <div class="col-span-3 lg:col-span-2">
-        <article>
-          <div class="block lg:hidden">
-            <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();;(()=>{var d;{let p={0:t=>u(t),1:t=>l(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(l(t)),5:t=>new Set(l(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t)},h=t=>{let[e,n]=t;return e in p?p[e](n):void 0},l=t=>t.map(h),u=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([e,n])=>[e,h(n)]));customElements.get("astro-island")||customElements.define("astro-island",(d=class extends HTMLElement{constructor(){super(...arguments);this.hydrate=async()=>{var i;if(!this.hydrator||!this.isConnected)return;let e=(i=this.parentElement)==null?void 0:i.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let n=this.querySelectorAll("astro-slot"),o={},a=this.querySelectorAll("template[data-astro-template]");for(let r of a){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(o[r.getAttribute("data-astro-template")||"default"]=r.innerHTML,r.remove())}for(let r of n){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(o[r.getAttribute("name")||"default"]=r.innerHTML)}let c;try{c=this.hasAttribute("props")?u(JSON.parse(this.getAttribute("props"))):{}}catch(r){let s=this.getAttribute("component-url")||"<unknown>",y=this.getAttribute("component-export");throw y&&(s+=` (export ${y})`),console.error(`[hydrate] Error parsing props for component ${s}`,this.getAttribute("props"),r),r}await this.hydrator(this)(this.Component,c,o,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))}}connectedCallback(){!this.hasAttribute("await-children")||this.firstChild?this.childrenConnectedCallback():new MutationObserver((e,n)=>{n.disconnect(),setTimeout(()=>this.childrenConnectedCallback(),0)}).observe(this,{childList:!0})}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}start(){let e=JSON.parse(this.getAttribute("opts")),n=this.getAttribute("client");if(Astro[n]===void 0){window.addEventListener(`astro:${n}`,()=>this.start(),{once:!0});return}Astro[n](async()=>{let o=this.getAttribute("renderer-url"),[a,{default:c}]=await Promise.all([import(this.getAttribute("component-url")),o?import(o):()=>()=>{}]),i=this.getAttribute("component-export")||"default";if(!i.includes("."))this.Component=a[i];else{this.Component=a;for(let r of i.split("."))this.Component=this.Component[r]}return this.hydrator=c,this.hydrate},e,this)}attributeChangedCallback(){this.hydrate()}},d.observedAttributes=["props"],d))}})();</script><astro-island uid="Z13Ygsf" prefix="r0" component-url="/spa-sdk/docs/_astro/TableOfContents.ba90f8bc.js" component-export="default" renderer-url="/spa-sdk/docs/_astro/client.2ce19805.js" props="{&quot;headings&quot;:[1,[[0,{&quot;depth&quot;:[0,1],&quot;slug&quot;:[0,&quot;migration-guide&quot;],&quot;text&quot;:[0,&quot;Migration guide&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;v22&quot;],&quot;text&quot;:[0,&quot;v22&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;v21&quot;],&quot;text&quot;:[0,&quot;v21&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;v20-v19-v18-v17&quot;],&quot;text&quot;:[0,&quot;v20, v19, v18, v17&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;v16&quot;],&quot;text&quot;:[0,&quot;v16&quot;]}]]]}" ssr="" client="load" opts="{&quot;name&quot;:&quot;TableOfContents&quot;,&quot;value&quot;:true}" await-children=""><nav class="sticky top-0"><ul class="menu"><li><h2 id="on-this-page-heading" class="menu-title"><span class="">On this page</span></h2><ul><li><a href="#v22" class="">v22</a></li><li><a href="#v21" class="">v21</a></li><li><a href="#v20-v19-v18-v17" class="">v20, v19, v18, v17</a></li><li><a href="#v16" class="">v16</a></li></ul></li></ul><div class="divider lg:hidden"></div></nav></astro-island>
-          </div>
-          <section class="prose" data-pagefind-body>
-            <h1 id="migration-guide">Migration guide</h1>
+    </style> </defs> <circle class="cls-2" cx="35.94" cy="35.94" r="35.94"></circle> <path class="cls-1" d="M43.22,28.47,41.46,33a6.6,6.6,0,0,1,3,5.64,6.38,6.38,0,1,1-12.76,0A6.36,6.36,0,0,1,37.83,32l1.65-4.6A11,11,0,0,0,26.71,38.29h0V49.84h5V48a11.7,11.7,0,0,0,6.38,1.82,11.26,11.26,0,0,0,5.11-21.37Z"></path> <path class="cls-1" d="M26.69,27.92a15.51,15.51,0,0,1,5-3.41V17.27h-5Z"></path> </svg> <h1>SDK Documentation Portal</h1> </a> </div> <div class="navbar-center"></div> <div class="navbar-end"> <button class="btn btn-ghost btn-circle" id="searchModalTrigger"> <svg viewBox="0 0 24 24" width="24" height="24" astro-icon="mdi:magnify"><path fill="currentColor" d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg> </button> <label class="btn btn-ghost btn-circle swap swap-rotate"> <!-- this hidden checkbox controls the state --> <input type="checkbox" data-toggle-theme="light,dark"> <!-- sun icon --> <svg class="swap-on" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"> <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path> </svg> <!-- moon icon --> <svg class="swap-off" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"> <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path> </svg> </label> </div> </div> </header> <dialog id="searchModal" class="modal"> <form method="dialog" class="modal-box p-10"> <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"> <svg viewBox="0 0 24 24" width="24" height="24" astro-icon="mdi:close"><path fill="currentColor" d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg> </button> <div class="search mt-5"> <div class="pagefind-init" data-pagefind-ui data-bundle-path="/spa-sdk/docspagefind/" data-ui-options="{}"></div> <script type="module" src="/spa-sdk/docs/_astro/Search.astro_astro_type_script_index_0_lang.CCY9Nbtr.js"></script> </div> </form> <form method="dialog" class="modal-backdrop"> <button>Close</button> </form> </dialog> <script type="module">const e=document.querySelector("#searchModalTrigger"),c=document.querySelector("#searchModal");e?.addEventListener("click",()=>{c?.showModal(),document.querySelector(".pagefind-ui__search-input")?.focus()});</script>  <main class="grid lg:grid-cols-4 gap-x-10 p-10"> <aside class="hidden lg:block col-span-1"> <nav class="sticky top-0"> <ul class="menu z-10" }> <li class="nav-link"> <a href="/spa-sdk/docs/getting-started"> Getting started </a> </li><li class="nav-link"> <a href="/spa-sdk/docs/spa-sdk"> SPA SDK </a> </li><li class="nav-link"> <a href="/spa-sdk/docs/react-sdk"> React SDK </a> </li><li class="nav-link"> <a href="/spa-sdk/docs/ng-sdk"> Angular SDK </a> </li><li class="nav-link"> <a href="/spa-sdk/docs/vue-sdk"> Vue SDK </a> </li><li class="nav-link"> <a href="/spa-sdk/docs/migration-guide" class="active"> Migration guide </a> </li><li class="nav-link"> <a href="/spa-sdk/docs/changelog"> Changelog </a> </li> <li> <a href="https://github.com/bloomreach/spa-sdk/releases" target="_blank">Releases</a> </li> <li> <a href="https://bloomreach.github.io/spa-sdk/" target="_blank">Typedoc</a> </li> </ul> </nav> </aside> <div class="col-span-3 lg:col-span-2"> <article> <div class="block lg:hidden"> <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();;(()=>{var A=Object.defineProperty;var g=(i,o,a)=>o in i?A(i,o,{enumerable:!0,configurable:!0,writable:!0,value:a}):i[o]=a;var d=(i,o,a)=>g(i,typeof o!="symbol"?o+"":o,a);{let i={0:t=>m(t),1:t=>a(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(a(t)),5:t=>new Set(a(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>1/0*t},o=t=>{let[l,e]=t;return l in i?i[l](e):void 0},a=t=>t.map(o),m=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([l,e])=>[l,o(e)]));class y extends HTMLElement{constructor(){super(...arguments);d(this,"Component");d(this,"hydrator");d(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let c=this.querySelectorAll("astro-slot"),n={},h=this.querySelectorAll("template[data-astro-template]");for(let r of h){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(n[r.getAttribute("data-astro-template")||"default"]=r.innerHTML,r.remove())}for(let r of c){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(n[r.getAttribute("name")||"default"]=r.innerHTML)}let p;try{p=this.hasAttribute("props")?m(JSON.parse(this.getAttribute("props"))):{}}catch(r){let s=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(s+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${s}`,this.getAttribute("props"),r),r}let u;await this.hydrator(this)(this.Component,p,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});d(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),c.disconnect(),this.childrenConnectedCallback()},c=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});c.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}async start(){let e=JSON.parse(this.getAttribute("opts")),c=this.getAttribute("client");if(Astro[c]===void 0){window.addEventListener(`astro:${c}`,()=>this.start(),{once:!0});return}try{await Astro[c](async()=>{let n=this.getAttribute("renderer-url"),[h,{default:p}]=await Promise.all([import(this.getAttribute("component-url")),n?import(n):()=>()=>{}]),u=this.getAttribute("component-export")||"default";if(!u.includes("."))this.Component=h[u];else{this.Component=h;for(let f of u.split("."))this.Component=this.Component[f]}return this.hydrator=p,this.hydrate},e,this)}catch(n){console.error(`[astro-island] Error hydrating ${this.getAttribute("component-url")}`,n)}}attributeChangedCallback(){this.hydrate()}}d(y,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",y)}})();</script><astro-island uid="Z13Ygsf" prefix="r0" component-url="/spa-sdk/docs/_astro/TableOfContents.BTxaqx1b.js" component-export="default" renderer-url="/spa-sdk/docs/_astro/client.Q67u01mC.js" props="{&quot;headings&quot;:[1,[[0,{&quot;depth&quot;:[0,1],&quot;slug&quot;:[0,&quot;migration-guide&quot;],&quot;text&quot;:[0,&quot;Migration guide&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;v22&quot;],&quot;text&quot;:[0,&quot;v22&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;v21&quot;],&quot;text&quot;:[0,&quot;v21&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;v20-v19-v18-v17&quot;],&quot;text&quot;:[0,&quot;v20, v19, v18, v17&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;v16&quot;],&quot;text&quot;:[0,&quot;v16&quot;]}]]]}" ssr client="load" opts="{&quot;name&quot;:&quot;TableOfContents&quot;,&quot;value&quot;:true}" await-children><nav class="sticky top-0"><ul class="menu"><li><h2 id="on-this-page-heading" class="menu-title"><span class="">On this page</span></h2><ul><li><a href="#v22" class="">v22</a></li><li><a href="#v21" class="">v21</a></li><li><a href="#v20-v19-v18-v17" class="">v20, v19, v18, v17</a></li><li><a href="#v16" class="">v16</a></li></ul></li></ul><div class="divider lg:hidden"></div></nav><!--astro:end--></astro-island> </div> <section class="prose" data-pagefind-body> <h1 id="migration-guide">Migration guide</h1>
 <p>Below is a set of instructions that need to be taken into account when migrating from older versions. They are listed in
 reverse order with the latest release on top, so please make sure to scroll down to find the version you are upgrading
 from and follow it from there. Versions that did not require any upgrade steps are not listed.</p>
@@ -205,13 +47,4 @@ with the rewriteLinks method. With the removal of the <code>sanitize</code> meth
 from these versions.</p>
 <h2 id="v16">v16</h2>
 <p>BrProps interface Page and Component properties can now be undefined be sure to adjust the typescript components
-consuming these to avoid breaking builds / type checks.</p>
-          </section>
-        </article>
-      </div>
-      <aside class="hidden lg:block col-span-1">
-        <astro-island uid="Z13Ygsf" prefix="r1" component-url="/spa-sdk/docs/_astro/TableOfContents.ba90f8bc.js" component-export="default" renderer-url="/spa-sdk/docs/_astro/client.2ce19805.js" props="{&quot;headings&quot;:[1,[[0,{&quot;depth&quot;:[0,1],&quot;slug&quot;:[0,&quot;migration-guide&quot;],&quot;text&quot;:[0,&quot;Migration guide&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;v22&quot;],&quot;text&quot;:[0,&quot;v22&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;v21&quot;],&quot;text&quot;:[0,&quot;v21&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;v20-v19-v18-v17&quot;],&quot;text&quot;:[0,&quot;v20, v19, v18, v17&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;v16&quot;],&quot;text&quot;:[0,&quot;v16&quot;]}]]]}" ssr="" client="load" opts="{&quot;name&quot;:&quot;TableOfContents&quot;,&quot;value&quot;:true}" await-children=""><nav class="sticky top-0"><ul class="menu"><li><h2 id="on-this-page-heading" class="menu-title"><span class="">On this page</span></h2><ul><li><a href="#v22" class="">v22</a></li><li><a href="#v21" class="">v21</a></li><li><a href="#v20-v19-v18-v17" class="">v20, v19, v18, v17</a></li><li><a href="#v16" class="">v16</a></li></ul></li></ul><div class="divider lg:hidden"></div></nav></astro-island>
-      </aside>
-    </main>
-  </body>
-</html>
+consuming these to avoid breaking builds / type checks.</p> </section> </article> </div> <aside class="hidden lg:block col-span-1"> <astro-island uid="Z13Ygsf" prefix="r1" component-url="/spa-sdk/docs/_astro/TableOfContents.BTxaqx1b.js" component-export="default" renderer-url="/spa-sdk/docs/_astro/client.Q67u01mC.js" props="{&quot;headings&quot;:[1,[[0,{&quot;depth&quot;:[0,1],&quot;slug&quot;:[0,&quot;migration-guide&quot;],&quot;text&quot;:[0,&quot;Migration guide&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;v22&quot;],&quot;text&quot;:[0,&quot;v22&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;v21&quot;],&quot;text&quot;:[0,&quot;v21&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;v20-v19-v18-v17&quot;],&quot;text&quot;:[0,&quot;v20, v19, v18, v17&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;v16&quot;],&quot;text&quot;:[0,&quot;v16&quot;]}]]]}" ssr client="load" opts="{&quot;name&quot;:&quot;TableOfContents&quot;,&quot;value&quot;:true}" await-children><nav class="sticky top-0"><ul class="menu"><li><h2 id="on-this-page-heading" class="menu-title"><span class="">On this page</span></h2><ul><li><a href="#v22" class="">v22</a></li><li><a href="#v21" class="">v21</a></li><li><a href="#v20-v19-v18-v17" class="">v20, v19, v18, v17</a></li><li><a href="#v16" class="">v16</a></li></ul></li></ul><div class="divider lg:hidden"></div></nav><!--astro:end--></astro-island> </aside> </main> </body></html>
