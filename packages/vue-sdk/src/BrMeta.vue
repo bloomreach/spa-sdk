@@ -16,7 +16,7 @@
 
 <template>
   <span v-if="meta && meta.length > 0" style="display: none;" ref="head"/>
-  <slot/>
+  <slot v-bind="$attrs" />
   <span v-if="meta && meta.length > 0" style="display: none;" ref="tail"/>
 </template>
 
