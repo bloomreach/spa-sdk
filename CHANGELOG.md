@@ -2,10 +2,20 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### "24.1.0"
+#### "24.1.1"
+
+- SPASDK-244 Fix non-props attributes warning by binding $attrs to slot [`#203`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/203)
+- SPASDK-241 Redirect 404 errors to index.html on Heroku for React CSR [`#201`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/201)
+- SPASDK-244 Fix non-props attributes warning by binding $attrs to slot [`#SPASDK-244`](https://bloomreach.atlassian.net/browse/SPASDK-244)
+- SPASDK-241 Redirect 404 errors to index.html on Heroku for React CSR [`#SPASDK-241`](https://bloomreach.atlassian.net/browse/SPASDK-241)
+
+#### spa-sdk-24.1.0
+
+> 22 April 2025
 
 - SPASDK-235 Support React 19 [`#200`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/200)
 - SPASDK-229 Add memoization example to React SDK README [`#199`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/199)
+- SPASDK-235 Bumping versions to 24.1.0 [`#SPASDK-235`](https://bloomreach.atlassian.net/browse/SPASDK-235)
 - SPASDK-235 Support React 19 [`#SPASDK-235`](https://bloomreach.atlassian.net/browse/SPASDK-235)
 - SPASDK-229 Add memoization example to React SDK README [`#SPASDK-229`](https://bloomreach.atlassian.net/browse/SPASDK-229)
 

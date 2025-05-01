@@ -127,10 +127,10 @@ importers:
         specifier: 18.2.12
         version: 18.2.12(@angular/common@18.2.13)(@angular/core@18.2.13)
       '@bloomreach/ng-sdk':
-        specifier: 24.1.0
+        specifier: 24.1.1
         version: link:../../packages/ng-sdk
       '@bloomreach/spa-sdk':
-        specifier: 24.1.0
+        specifier: 24.1.1
         version: link:../../packages/spa-sdk
       dotenv:
         specifier: 16.4.5
@@ -218,10 +218,10 @@ importers:
   examples/next:
     dependencies:
       '@bloomreach/react-sdk':
-        specifier: 24.1.0
+        specifier: 24.1.1
         version: link:../../packages/react-sdk
       '@bloomreach/spa-sdk':
-        specifier: 24.1.0
+        specifier: 24.1.1
         version: link:../../packages/spa-sdk
       axios:
         specifier: 1.8.4
@@ -273,10 +273,10 @@ importers:
   examples/nuxt:
     dependencies:
       '@bloomreach/spa-sdk':
-        specifier: 24.1.0
+        specifier: 24.1.1
         version: link:../../packages/spa-sdk
       '@bloomreach/vue-sdk':
-        specifier: 24.1.0
+        specifier: 24.1.1
         version: link:../../packages/vue-sdk
       axios:
         specifier: 1.7.9
@@ -297,10 +297,10 @@ importers:
   examples/react:
     dependencies:
       '@bloomreach/react-sdk':
-        specifier: 24.1.0
+        specifier: 24.1.1
         version: link:../../packages/react-sdk
       '@bloomreach/spa-sdk':
-        specifier: 24.1.0
+        specifier: 24.1.1
         version: link:../../packages/spa-sdk
       axios:
         specifier: 1.8.4
@@ -358,10 +358,10 @@ importers:
   examples/vue:
     dependencies:
       '@bloomreach/spa-sdk':
-        specifier: 24.1.0
+        specifier: 24.1.1
         version: link:../../packages/spa-sdk
       '@bloomreach/vue-sdk':
-        specifier: 24.1.0
+        specifier: 24.1.1
         version: link:../../packages/vue-sdk
       axios:
         specifier: 1.7.9
@@ -410,7 +410,7 @@ importers:
   packages/ng-sdk:
     dependencies:
       '@bloomreach/spa-sdk':
-        specifier: 24.1.0
+        specifier: 24.1.1
         version: link:../spa-sdk
       tslib:
         specifier: ^2.6.2
@@ -510,7 +510,7 @@ importers:
   packages/react-sdk:
     dependencies:
       '@bloomreach/spa-sdk':
-        specifier: 24.1.0
+        specifier: 24.1.1
         version: link:../spa-sdk
     devDependencies:
       '@babel/core':
@@ -704,7 +704,7 @@ importers:
   packages/vue-sdk:
     dependencies:
       '@bloomreach/spa-sdk':
-        specifier: 24.1.0
+        specifier: 24.1.1
         version: link:../spa-sdk
     devDependencies:
       '@types/jsdom':
