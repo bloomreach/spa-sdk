@@ -11,16 +11,25 @@
       .cls-2 {
         fill: hsl(var(--s));
       }
-    </style> </defs> <circle class="cls-2" cx="35.94" cy="35.94" r="35.94"></circle> <path class="cls-1" d="M43.22,28.47,41.46,33a6.6,6.6,0,0,1,3,5.64,6.38,6.38,0,1,1-12.76,0A6.36,6.36,0,0,1,37.83,32l1.65-4.6A11,11,0,0,0,26.71,38.29h0V49.84h5V48a11.7,11.7,0,0,0,6.38,1.82,11.26,11.26,0,0,0,5.11-21.37Z"></path> <path class="cls-1" d="M26.69,27.92a15.51,15.51,0,0,1,5-3.41V17.27h-5Z"></path> </svg> <h1>SDK Documentation Portal</h1> </a> </div> <div class="navbar-center"></div> <div class="navbar-end"> <button class="btn btn-ghost btn-circle" id="searchModalTrigger"> <svg viewBox="0 0 24 24" width="24" height="24" astro-icon="mdi:magnify"><path fill="currentColor" d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg> </button> <label class="btn btn-ghost btn-circle swap swap-rotate"> <!-- this hidden checkbox controls the state --> <input type="checkbox" data-toggle-theme="light,dark"> <!-- sun icon --> <svg class="swap-on" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"> <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path> </svg> <!-- moon icon --> <svg class="swap-off" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"> <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path> </svg> </label> </div> </div> </header> <dialog id="searchModal" class="modal"> <form method="dialog" class="modal-box p-10"> <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"> <svg viewBox="0 0 24 24" width="24" height="24" astro-icon="mdi:close"><path fill="currentColor" d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg> </button> <div class="search mt-5"> <div class="pagefind-init" data-pagefind-ui data-bundle-path="/spa-sdk/docspagefind/" data-ui-options="{}"></div> <script type="module" src="/spa-sdk/docs/_astro/Search.astro_astro_type_script_index_0_lang.CCY9Nbtr.js"></script> </div> </form> <form method="dialog" class="modal-backdrop"> <button>Close</button> </form> </dialog> <script type="module">const e=document.querySelector("#searchModalTrigger"),c=document.querySelector("#searchModal");e?.addEventListener("click",()=>{c?.showModal(),document.querySelector(".pagefind-ui__search-input")?.focus()});</script>  <main class="grid lg:grid-cols-4 gap-x-10 p-10"> <aside class="hidden lg:block col-span-1"> <nav class="sticky top-0"> <ul class="menu z-10" }> <li class="nav-link"> <a href="/spa-sdk/docs/getting-started"> Getting started </a> </li><li class="nav-link"> <a href="/spa-sdk/docs/spa-sdk"> SPA SDK </a> </li><li class="nav-link"> <a href="/spa-sdk/docs/react-sdk"> React SDK </a> </li><li class="nav-link"> <a href="/spa-sdk/docs/ng-sdk"> Angular SDK </a> </li><li class="nav-link"> <a href="/spa-sdk/docs/vue-sdk"> Vue SDK </a> </li><li class="nav-link"> <a href="/spa-sdk/docs/migration-guide"> Migration guide </a> </li><li class="nav-link"> <a href="/spa-sdk/docs/changelog" class="active"> Changelog </a> </li> <li> <a href="https://github.com/bloomreach/spa-sdk/releases" target="_blank">Releases</a> </li> <li> <a href="https://bloomreach.github.io/spa-sdk/" target="_blank">Typedoc</a> </li> </ul> </nav> </aside> <div class="col-span-3 lg:col-span-2"> <article> <div class="block lg:hidden"> <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();;(()=>{var A=Object.defineProperty;var g=(i,o,a)=>o in i?A(i,o,{enumerable:!0,configurable:!0,writable:!0,value:a}):i[o]=a;var d=(i,o,a)=>g(i,typeof o!="symbol"?o+"":o,a);{let i={0:t=>m(t),1:t=>a(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(a(t)),5:t=>new Set(a(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>1/0*t},o=t=>{let[l,e]=t;return l in i?i[l](e):void 0},a=t=>t.map(o),m=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([l,e])=>[l,o(e)]));class y extends HTMLElement{constructor(){super(...arguments);d(this,"Component");d(this,"hydrator");d(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let c=this.querySelectorAll("astro-slot"),n={},h=this.querySelectorAll("template[data-astro-template]");for(let r of h){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(n[r.getAttribute("data-astro-template")||"default"]=r.innerHTML,r.remove())}for(let r of c){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(n[r.getAttribute("name")||"default"]=r.innerHTML)}let p;try{p=this.hasAttribute("props")?m(JSON.parse(this.getAttribute("props"))):{}}catch(r){let s=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(s+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${s}`,this.getAttribute("props"),r),r}let u;await this.hydrator(this)(this.Component,p,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});d(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),c.disconnect(),this.childrenConnectedCallback()},c=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});c.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}async start(){let e=JSON.parse(this.getAttribute("opts")),c=this.getAttribute("client");if(Astro[c]===void 0){window.addEventListener(`astro:${c}`,()=>this.start(),{once:!0});return}try{await Astro[c](async()=>{let n=this.getAttribute("renderer-url"),[h,{default:p}]=await Promise.all([import(this.getAttribute("component-url")),n?import(n):()=>()=>{}]),u=this.getAttribute("component-export")||"default";if(!u.includes("."))this.Component=h[u];else{this.Component=h;for(let f of u.split("."))this.Component=this.Component[f]}return this.hydrator=p,this.hydrate},e,this)}catch(n){console.error(`[astro-island] Error hydrating ${this.getAttribute("component-url")}`,n)}}attributeChangedCallback(){this.hydrate()}}d(y,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",y)}})();</script><astro-island uid="ZktfrE" prefix="r0" component-url="/spa-sdk/docs/_astro/TableOfContents.BTxaqx1b.js" component-export="default" renderer-url="/spa-sdk/docs/_astro/client.Q67u01mC.js" props="{&quot;headings&quot;:[1,[[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;changelog&quot;],&quot;text&quot;:[0,&quot;Changelog&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;2411&quot;],&quot;text&quot;:[0,&quot;”24.1.1”&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2410&quot;],&quot;text&quot;:[0,&quot;spa-sdk-24.1.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2401&quot;],&quot;text&quot;:[0,&quot;spa-sdk-24.0.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2400&quot;],&quot;text&quot;:[0,&quot;spa-sdk-24.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2344&quot;],&quot;text&quot;:[0,&quot;spa-sdk-23.4.4&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2343&quot;],&quot;text&quot;:[0,&quot;spa-sdk-23.4.3&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2342&quot;],&quot;text&quot;:[0,&quot;spa-sdk-23.4.2&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2341&quot;],&quot;text&quot;:[0,&quot;spa-sdk-23.4.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2340&quot;],&quot;text&quot;:[0,&quot;spa-sdk-23.4.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2332&quot;],&quot;text&quot;:[0,&quot;spa-sdk-23.3.2&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2331&quot;],&quot;text&quot;:[0,&quot;spa-sdk-23.3.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2330&quot;],&quot;text&quot;:[0,&quot;spa-sdk-23.3.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2320&quot;],&quot;text&quot;:[0,&quot;spa-sdk-23.2.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2310&quot;],&quot;text&quot;:[0,&quot;spa-sdk-23.1.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2300&quot;],&quot;text&quot;:[0,&quot;spa-sdk-23.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2205&quot;],&quot;text&quot;:[0,&quot;spa-sdk-22.0.5&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2204&quot;],&quot;text&quot;:[0,&quot;spa-sdk-22.0.4&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2203&quot;],&quot;text&quot;:[0,&quot;spa-sdk-22.0.3&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2202&quot;],&quot;text&quot;:[0,&quot;spa-sdk-22.0.2&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2201&quot;],&quot;text&quot;:[0,&quot;spa-sdk-22.0.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2200&quot;],&quot;text&quot;:[0,&quot;spa-sdk-22.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2100&quot;],&quot;text&quot;:[0,&quot;spa-sdk-21.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2100-alpha0&quot;],&quot;text&quot;:[0,&quot;spa-sdk-21.0.0-alpha.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2000&quot;],&quot;text&quot;:[0,&quot;spa-sdk-20.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1902&quot;],&quot;text&quot;:[0,&quot;spa-sdk-19.0.2&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1901&quot;],&quot;text&quot;:[0,&quot;spa-sdk-19.0.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1900&quot;],&quot;text&quot;:[0,&quot;spa-sdk-19.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1801&quot;],&quot;text&quot;:[0,&quot;spa-sdk-18.0.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1800&quot;],&quot;text&quot;:[0,&quot;spa-sdk-18.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1720&quot;],&quot;text&quot;:[0,&quot;spa-sdk-17.2.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1711&quot;],&quot;text&quot;:[0,&quot;spa-sdk-17.1.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1710&quot;],&quot;text&quot;:[0,&quot;spa-sdk-17.1.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1701&quot;],&quot;text&quot;:[0,&quot;spa-sdk-17.0.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1700&quot;],&quot;text&quot;:[0,&quot;spa-sdk-17.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1600&quot;],&quot;text&quot;:[0,&quot;spa-sdk-16.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;v1551&quot;],&quot;text&quot;:[0,&quot;v15.5.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1550&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.5.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1546&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.4.6&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1545&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.4.5&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1544&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.4.4&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1543&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.4.3&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1542&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.4.2&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1541&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.4.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1540&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.4.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1533&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.3.3&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1532&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.3.2&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1531&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.3.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1530&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.3.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1522-0&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.2.2-0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1521&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.2.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1512&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.1.2&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1510&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.1.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1501-0&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.0.1-0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1500&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1500-1&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.0.0-1&quot;]}]]]}" ssr client="load" opts="{&quot;name&quot;:&quot;TableOfContents&quot;,&quot;value&quot;:true}" await-children><nav class="sticky top-0"><ul class="menu"><li><h2 id="on-this-page-heading" class="menu-title"><span class="">On this page</span></h2><ul><li><a href="#changelog" class="">Changelog</a></li></ul></li></ul><div class="divider lg:hidden"></div></nav><!--astro:end--></astro-island> </div> <section class="prose" data-pagefind-body>  <h3 id="changelog">Changelog</h3>
+    </style> </defs> <circle class="cls-2" cx="35.94" cy="35.94" r="35.94"></circle> <path class="cls-1" d="M43.22,28.47,41.46,33a6.6,6.6,0,0,1,3,5.64,6.38,6.38,0,1,1-12.76,0A6.36,6.36,0,0,1,37.83,32l1.65-4.6A11,11,0,0,0,26.71,38.29h0V49.84h5V48a11.7,11.7,0,0,0,6.38,1.82,11.26,11.26,0,0,0,5.11-21.37Z"></path> <path class="cls-1" d="M26.69,27.92a15.51,15.51,0,0,1,5-3.41V17.27h-5Z"></path> </svg> <h1>SDK Documentation Portal</h1> </a> </div> <div class="navbar-center"></div> <div class="navbar-end"> <button class="btn btn-ghost btn-circle" id="searchModalTrigger"> <svg viewBox="0 0 24 24" width="24" height="24" astro-icon="mdi:magnify"><path fill="currentColor" d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg> </button> <label class="btn btn-ghost btn-circle swap swap-rotate"> <!-- this hidden checkbox controls the state --> <input type="checkbox" data-toggle-theme="light,dark"> <!-- sun icon --> <svg class="swap-on" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"> <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path> </svg> <!-- moon icon --> <svg class="swap-off" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"> <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path> </svg> </label> </div> </div> </header> <dialog id="searchModal" class="modal"> <form method="dialog" class="modal-box p-10"> <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"> <svg viewBox="0 0 24 24" width="24" height="24" astro-icon="mdi:close"><path fill="currentColor" d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg> </button> <div class="search mt-5"> <div class="pagefind-init" data-pagefind-ui data-bundle-path="/spa-sdk/docspagefind/" data-ui-options="{}"></div> <script type="module" src="/spa-sdk/docs/_astro/Search.astro_astro_type_script_index_0_lang.CCY9Nbtr.js"></script> </div> </form> <form method="dialog" class="modal-backdrop"> <button>Close</button> </form> </dialog> <script type="module">const e=document.querySelector("#searchModalTrigger"),c=document.querySelector("#searchModal");e?.addEventListener("click",()=>{c?.showModal(),document.querySelector(".pagefind-ui__search-input")?.focus()});</script>  <main class="grid lg:grid-cols-4 gap-x-10 p-10"> <aside class="hidden lg:block col-span-1"> <nav class="sticky top-0"> <ul class="menu z-10" }> <li class="nav-link"> <a href="/spa-sdk/docs/getting-started"> Getting started </a> </li><li class="nav-link"> <a href="/spa-sdk/docs/spa-sdk"> SPA SDK </a> </li><li class="nav-link"> <a href="/spa-sdk/docs/react-sdk"> React SDK </a> </li><li class="nav-link"> <a href="/spa-sdk/docs/ng-sdk"> Angular SDK </a> </li><li class="nav-link"> <a href="/spa-sdk/docs/vue-sdk"> Vue SDK </a> </li><li class="nav-link"> <a href="/spa-sdk/docs/migration-guide"> Migration guide </a> </li><li class="nav-link"> <a href="/spa-sdk/docs/changelog" class="active"> Changelog </a> </li> <li> <a href="https://github.com/bloomreach/spa-sdk/releases" target="_blank">Releases</a> </li> <li> <a href="https://bloomreach.github.io/spa-sdk/" target="_blank">Typedoc</a> </li> </ul> </nav> </aside> <div class="col-span-3 lg:col-span-2"> <article> <div class="block lg:hidden"> <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();;(()=>{var A=Object.defineProperty;var g=(i,o,a)=>o in i?A(i,o,{enumerable:!0,configurable:!0,writable:!0,value:a}):i[o]=a;var d=(i,o,a)=>g(i,typeof o!="symbol"?o+"":o,a);{let i={0:t=>m(t),1:t=>a(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(a(t)),5:t=>new Set(a(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>1/0*t},o=t=>{let[l,e]=t;return l in i?i[l](e):void 0},a=t=>t.map(o),m=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([l,e])=>[l,o(e)]));class y extends HTMLElement{constructor(){super(...arguments);d(this,"Component");d(this,"hydrator");d(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let c=this.querySelectorAll("astro-slot"),n={},h=this.querySelectorAll("template[data-astro-template]");for(let r of h){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(n[r.getAttribute("data-astro-template")||"default"]=r.innerHTML,r.remove())}for(let r of c){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(n[r.getAttribute("name")||"default"]=r.innerHTML)}let p;try{p=this.hasAttribute("props")?m(JSON.parse(this.getAttribute("props"))):{}}catch(r){let s=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(s+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${s}`,this.getAttribute("props"),r),r}let u;await this.hydrator(this)(this.Component,p,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});d(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),c.disconnect(),this.childrenConnectedCallback()},c=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});c.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}async start(){let e=JSON.parse(this.getAttribute("opts")),c=this.getAttribute("client");if(Astro[c]===void 0){window.addEventListener(`astro:${c}`,()=>this.start(),{once:!0});return}try{await Astro[c](async()=>{let n=this.getAttribute("renderer-url"),[h,{default:p}]=await Promise.all([import(this.getAttribute("component-url")),n?import(n):()=>()=>{}]),u=this.getAttribute("component-export")||"default";if(!u.includes("."))this.Component=h[u];else{this.Component=h;for(let f of u.split("."))this.Component=this.Component[f]}return this.hydrator=p,this.hydrate},e,this)}catch(n){console.error(`[astro-island] Error hydrating ${this.getAttribute("component-url")}`,n)}}attributeChangedCallback(){this.hydrate()}}d(y,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",y)}})();</script><astro-island uid="17mzYX" prefix="r0" component-url="/spa-sdk/docs/_astro/TableOfContents.BTxaqx1b.js" component-export="default" renderer-url="/spa-sdk/docs/_astro/client.Q67u01mC.js" props="{&quot;headings&quot;:[1,[[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;changelog&quot;],&quot;text&quot;:[0,&quot;Changelog&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;2412&quot;],&quot;text&quot;:[0,&quot;”24.1.2”&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2411&quot;],&quot;text&quot;:[0,&quot;spa-sdk-24.1.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2410&quot;],&quot;text&quot;:[0,&quot;spa-sdk-24.1.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2401&quot;],&quot;text&quot;:[0,&quot;spa-sdk-24.0.1&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;spa-sdk-2400&quot;],&quot;text&quot;:[0,&quot;spa-sdk-24.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2344&quot;],&quot;text&quot;:[0,&quot;spa-sdk-23.4.4&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2343&quot;],&quot;text&quot;:[0,&quot;spa-sdk-23.4.3&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2342&quot;],&quot;text&quot;:[0,&quot;spa-sdk-23.4.2&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2341&quot;],&quot;text&quot;:[0,&quot;spa-sdk-23.4.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2340&quot;],&quot;text&quot;:[0,&quot;spa-sdk-23.4.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2332&quot;],&quot;text&quot;:[0,&quot;spa-sdk-23.3.2&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2331&quot;],&quot;text&quot;:[0,&quot;spa-sdk-23.3.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2330&quot;],&quot;text&quot;:[0,&quot;spa-sdk-23.3.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2320&quot;],&quot;text&quot;:[0,&quot;spa-sdk-23.2.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2310&quot;],&quot;text&quot;:[0,&quot;spa-sdk-23.1.0&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;spa-sdk-2300&quot;],&quot;text&quot;:[0,&quot;spa-sdk-23.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2205&quot;],&quot;text&quot;:[0,&quot;spa-sdk-22.0.5&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2204&quot;],&quot;text&quot;:[0,&quot;spa-sdk-22.0.4&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2203&quot;],&quot;text&quot;:[0,&quot;spa-sdk-22.0.3&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2202&quot;],&quot;text&quot;:[0,&quot;spa-sdk-22.0.2&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2201&quot;],&quot;text&quot;:[0,&quot;spa-sdk-22.0.1&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;spa-sdk-2200&quot;],&quot;text&quot;:[0,&quot;spa-sdk-22.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2100&quot;],&quot;text&quot;:[0,&quot;spa-sdk-21.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2100-alpha0&quot;],&quot;text&quot;:[0,&quot;spa-sdk-21.0.0-alpha.0&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;spa-sdk-2000&quot;],&quot;text&quot;:[0,&quot;spa-sdk-20.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1902&quot;],&quot;text&quot;:[0,&quot;spa-sdk-19.0.2&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1901&quot;],&quot;text&quot;:[0,&quot;spa-sdk-19.0.1&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;spa-sdk-1900&quot;],&quot;text&quot;:[0,&quot;spa-sdk-19.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1801&quot;],&quot;text&quot;:[0,&quot;spa-sdk-18.0.1&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;spa-sdk-1800&quot;],&quot;text&quot;:[0,&quot;spa-sdk-18.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1720&quot;],&quot;text&quot;:[0,&quot;spa-sdk-17.2.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1711&quot;],&quot;text&quot;:[0,&quot;spa-sdk-17.1.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1710&quot;],&quot;text&quot;:[0,&quot;spa-sdk-17.1.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1701&quot;],&quot;text&quot;:[0,&quot;spa-sdk-17.0.1&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;spa-sdk-1700&quot;],&quot;text&quot;:[0,&quot;spa-sdk-17.0.0&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;spa-sdk-1600&quot;],&quot;text&quot;:[0,&quot;spa-sdk-16.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;v1551&quot;],&quot;text&quot;:[0,&quot;v15.5.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1550&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.5.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1546&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.4.6&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1545&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.4.5&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1544&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.4.4&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1543&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.4.3&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1542&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.4.2&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1541&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.4.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1540&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.4.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1533&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.3.3&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1532&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.3.2&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1531&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.3.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1530&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.3.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1522-0&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.2.2-0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1521&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.2.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1512&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.1.2&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1510&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.1.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1501-0&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.0.1-0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1500&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1500-1&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.0.0-1&quot;]}]]]}" ssr client="load" opts="{&quot;name&quot;:&quot;TableOfContents&quot;,&quot;value&quot;:true}" await-children><nav class="sticky top-0"><ul class="menu"><li><h2 id="on-this-page-heading" class="menu-title"><span class="">On this page</span></h2><ul><li><a href="#changelog" class="">Changelog</a></li><li><a href="#spa-sdk-2400" class="">spa-sdk-24.0.0</a></li><li><a href="#spa-sdk-2300" class="">spa-sdk-23.0.0</a></li><li><a href="#spa-sdk-2200" class="">spa-sdk-22.0.0</a></li><li><a href="#spa-sdk-2000" class="">spa-sdk-20.0.0</a></li><li><a href="#spa-sdk-1900" class="">spa-sdk-19.0.0</a></li><li><a href="#spa-sdk-1800" class="">spa-sdk-18.0.0</a></li><li><a href="#spa-sdk-1700" class="">spa-sdk-17.0.0</a></li><li><a href="#spa-sdk-1600" class="">spa-sdk-16.0.0</a></li></ul></li></ul><div class="divider lg:hidden"></div></nav><!--astro:end--></astro-island> </div> <section class="prose" data-pagefind-body>  <h3 id="changelog">Changelog</h3>
 <p>All notable changes to this project will be documented in this file. Dates are displayed in UTC.</p>
-<h4 id="2411">”24.1.1”</h4>
+<h4 id="2412"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-24.1.1...%2224.1.2%22">”24.1.2”</a></h4>
+<ul>
+<li>SPASDK-242 Improve SPA SDK initialization and cleanup to support single BrPage per route <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/206"><code>#206</code></a></li>
+<li>SPASDK-242 Improve SPA SDK initialization and cleanup to support single BrPage per route <a href="https://bloomreach.atlassian.net/browse/SPASDK-242"><code>#SPASDK-242</code></a></li>
+</ul>
+<h4 id="spa-sdk-2411"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-24.1.0...spa-sdk-24.1.1">spa-sdk-24.1.1</a></h4>
+<blockquote>
+<p>1 May 2025</p>
+</blockquote>
 <ul>
 <li>SPASDK-244 Fix non-props attributes warning by binding $attrs to slot <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/203"><code>#203</code></a></li>
 <li>SPASDK-241 Redirect 404 errors to index.html on Heroku for React CSR <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/201"><code>#201</code></a></li>
+<li>SPASDK-244 Bumping versions to 24.1.1 <a href="https://bloomreach.atlassian.net/browse/SPASDK-244"><code>#SPASDK-244</code></a></li>
 <li>SPASDK-244 Fix non-props attributes warning by binding $attrs to slot <a href="https://bloomreach.atlassian.net/browse/SPASDK-244"><code>#SPASDK-244</code></a></li>
 <li>SPASDK-241 Redirect 404 errors to index.html on Heroku for React CSR <a href="https://bloomreach.atlassian.net/browse/SPASDK-241"><code>#SPASDK-241</code></a></li>
 </ul>
-<h4 id="spa-sdk-2410">spa-sdk-24.1.0</h4>
+<h4 id="spa-sdk-2410"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-24.0.1...spa-sdk-24.1.0">spa-sdk-24.1.0</a></h4>
 <blockquote>
 <p>22 April 2025</p>
 </blockquote>
@@ -31,7 +40,7 @@
 <li>SPASDK-235 Support React 19 <a href="https://bloomreach.atlassian.net/browse/SPASDK-235"><code>#SPASDK-235</code></a></li>
 <li>SPASDK-229 Add memoization example to React SDK README <a href="https://bloomreach.atlassian.net/browse/SPASDK-229"><code>#SPASDK-229</code></a></li>
 </ul>
-<h4 id="spa-sdk-2401">spa-sdk-24.0.1</h4>
+<h4 id="spa-sdk-2401"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-24.0.0...spa-sdk-24.0.1">spa-sdk-24.0.1</a></h4>
 <blockquote>
 <p>6 February 2025</p>
 </blockquote>
@@ -44,9 +53,9 @@
 <li>SPASDK-232: Fix failed tests <a href="https://bloomreach.atlassian.net/browse/SPASDK-232"><code>#SPASDK-232</code></a></li>
 <li>SPASDK-232: Fix a bug in vue-sdk that does not update its meta tags when a container item gets updated <a href="https://bloomreach.atlassian.net/browse/SPASDK-232"><code>#SPASDK-232</code></a></li>
 <li>SPASDK-231 Fix security vulnerabilities <a href="https://bloomreach.atlassian.net/browse/SPASDK-231"><code>#SPASDK-231</code></a></li>
-<li>TRIVIAL Update README.md</li>
+<li>TRIVIAL Update README.md <a href="https://github.com/bloomreach/spa-sdk/commit/fa6e9e15d075bc360c8bd6bf91aac8b04ed87d00"><code>fa6e9e1</code></a></li>
 </ul>
-<h4 id="spa-sdk-2400">spa-sdk-24.0.0</h4>
+<h3 id="spa-sdk-2400"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-23.4.4...spa-sdk-24.0.0">spa-sdk-24.0.0</a></h3>
 <blockquote>
 <p>8 January 2025</p>
 </blockquote>
@@ -64,7 +73,7 @@
 <li>SPASDK-227: Move eslint config from <code>@bloomreach/eslint-config-angular</code> to each project <a href="https://bloomreach.atlassian.net/browse/SPASDK-227"><code>#SPASDK-227</code></a></li>
 <li>SPASDK-227: Upgrade ng-sdk to support Angular 18 <a href="https://bloomreach.atlassian.net/browse/SPASDK-227"><code>#SPASDK-227</code></a></li>
 </ul>
-<h4 id="spa-sdk-2344">spa-sdk-23.4.4</h4>
+<h4 id="spa-sdk-2344"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-23.4.3...spa-sdk-23.4.4">spa-sdk-23.4.4</a></h4>
 <blockquote>
 <p>29 August 2024</p>
 </blockquote>
@@ -74,7 +83,7 @@
 <li>SPASDK-224 Upgrade heroku to v9 <a href="https://bloomreach.atlassian.net/browse/SPASDK-224"><code>#SPASDK-224</code></a></li>
 <li>SPASDK-224 Add slugignore to fix Heroku deployment for ssr apps <a href="https://bloomreach.atlassian.net/browse/SPASDK-224"><code>#SPASDK-224</code></a></li>
 </ul>
-<h4 id="spa-sdk-2343">spa-sdk-23.4.3</h4>
+<h4 id="spa-sdk-2343"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-23.4.2...spa-sdk-23.4.3">spa-sdk-23.4.3</a></h4>
 <blockquote>
 <p>22 August 2024</p>
 </blockquote>
@@ -83,7 +92,7 @@
 <li>SPASDK-224 Bumping versions to 23.4.3 <a href="https://bloomreach.atlassian.net/browse/SPASDK-224"><code>#SPASDK-224</code></a></li>
 <li>SPASDK-224 Fix running SSR apps on Heroku <a href="https://bloomreach.atlassian.net/browse/SPASDK-224"><code>#SPASDK-224</code></a></li>
 </ul>
-<h4 id="spa-sdk-2342">spa-sdk-23.4.2</h4>
+<h4 id="spa-sdk-2342"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-23.4.1...spa-sdk-23.4.2">spa-sdk-23.4.2</a></h4>
 <blockquote>
 <p>22 August 2024</p>
 </blockquote>
@@ -92,7 +101,7 @@
 <li>SPASDK-224 Bumping versions to 23.4.2 <a href="https://bloomreach.atlassian.net/browse/SPASDK-224"><code>#SPASDK-224</code></a></li>
 <li>SPASDK-224 Fix release command <a href="https://bloomreach.atlassian.net/browse/SPASDK-224"><code>#SPASDK-224</code></a></li>
 </ul>
-<h4 id="spa-sdk-2341">spa-sdk-23.4.1</h4>
+<h4 id="spa-sdk-2341"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-23.4.0...spa-sdk-23.4.1">spa-sdk-23.4.1</a></h4>
 <blockquote>
 <p>22 August 2024</p>
 </blockquote>
@@ -101,7 +110,7 @@
 <li>SPASDK-224 Bumping versions to 23.4.1 <a href="https://bloomreach.atlassian.net/browse/SPASDK-224"><code>#SPASDK-224</code></a></li>
 <li>SPASDK-224 Add no git checks to release script <a href="https://bloomreach.atlassian.net/browse/SPASDK-224"><code>#SPASDK-224</code></a></li>
 </ul>
-<h4 id="spa-sdk-2340">spa-sdk-23.4.0</h4>
+<h4 id="spa-sdk-2340"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-23.3.2...spa-sdk-23.4.0">spa-sdk-23.4.0</a></h4>
 <blockquote>
 <p>22 August 2024</p>
 </blockquote>
@@ -122,12 +131,12 @@
 <li>SPASDK-220 Update README.md <a href="https://bloomreach.atlassian.net/browse/SPASDK-220"><code>#SPASDK-220</code></a></li>
 <li>SPASDK-220 Update release and heroku-postbuild commands <a href="https://bloomreach.atlassian.net/browse/SPASDK-220"><code>#SPASDK-220</code></a></li>
 <li>SPASDK-220 Add bump command using changeset <a href="https://bloomreach.atlassian.net/browse/SPASDK-220"><code>#SPASDK-220</code></a></li>
-<li>TRIVIAL Merge branch ‘pnpm’ into ‘development’</li>
-<li>TRIVIAL Move workspace to pnpm</li>
-<li>TRIVIAL Adjust dependencies versions after rebase</li>
-<li>TRIVIAL Fix vue ssr app on start command</li>
+<li>TRIVIAL Merge branch ‘pnpm’ into ‘development’ <a href="https://github.com/bloomreach/spa-sdk/commit/3df9ce71d7f572e98ac0f348fae5872b4c7f1453"><code>3df9ce7</code></a></li>
+<li>TRIVIAL Move workspace to pnpm <a href="https://github.com/bloomreach/spa-sdk/commit/4e80e3c07a2eedc10ce5378460cbe246698ba48c"><code>4e80e3c</code></a></li>
+<li>TRIVIAL Adjust dependencies versions after rebase <a href="https://github.com/bloomreach/spa-sdk/commit/e58299efb6cd3aa177eddae44f18685d793e1ba0"><code>e58299e</code></a></li>
+<li>TRIVIAL Fix vue ssr app on start command <a href="https://github.com/bloomreach/spa-sdk/commit/39027e2fb82eedf43ee09fe1ca500937e91d9fea"><code>39027e2</code></a></li>
 </ul>
-<h4 id="spa-sdk-2332">spa-sdk-23.3.2</h4>
+<h4 id="spa-sdk-2332"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-23.3.1...spa-sdk-23.3.2">spa-sdk-23.3.2</a></h4>
 <blockquote>
 <p>7 August 2024</p>
 </blockquote>
@@ -136,7 +145,7 @@
 <li>SPASDK-216 Bumping versions to 23.3.2 <a href="https://bloomreach.atlassian.net/browse/SPASDK-216"><code>#SPASDK-216</code></a></li>
 <li>SPASDK-216 Update the Next example app with Next 14 <a href="https://bloomreach.atlassian.net/browse/SPASDK-216"><code>#SPASDK-216</code></a></li>
 </ul>
-<h4 id="spa-sdk-2331">spa-sdk-23.3.1</h4>
+<h4 id="spa-sdk-2331"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-23.3.0...spa-sdk-23.3.1">spa-sdk-23.3.1</a></h4>
 <blockquote>
 <p>24 July 2024</p>
 </blockquote>
@@ -145,7 +154,7 @@
 <li>SPASDK-223 Bumping versions to 23.3.1 <a href="https://bloomreach.atlassian.net/browse/SPASDK-223"><code>#SPASDK-223</code></a></li>
 <li>SPASDK-223 Export Menu10 to avoid TS4058 <a href="https://bloomreach.atlassian.net/browse/SPASDK-223"><code>#SPASDK-223</code></a></li>
 </ul>
-<h4 id="spa-sdk-2330">spa-sdk-23.3.0</h4>
+<h4 id="spa-sdk-2330"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-23.2.0...spa-sdk-23.3.0">spa-sdk-23.3.0</a></h4>
 <blockquote>
 <p>27 May 2024</p>
 </blockquote>
@@ -180,7 +189,7 @@
 <li>SPASDK-186 Merge branch ‘development’ into ‘main’ <a href="https://bloomreach.atlassian.net/browse/SPASDK-186"><code>#SPASDK-186</code></a></li>
 <li>SPASDK-186 Merge branch ‘development’ into ‘main’ <a href="https://bloomreach.atlassian.net/browse/SPASDK-186"><code>#SPASDK-186</code></a></li>
 </ul>
-<h4 id="spa-sdk-2320">spa-sdk-23.2.0</h4>
+<h4 id="spa-sdk-2320"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-23.1.0...spa-sdk-23.2.0">spa-sdk-23.2.0</a></h4>
 <blockquote>
 <p>13 May 2024</p>
 </blockquote>
@@ -194,7 +203,7 @@
 <li>SPASDK-211 Update angular example to version 16 <a href="https://bloomreach.atlassian.net/browse/SPASDK-211"><code>#SPASDK-211</code></a></li>
 <li>SPASDK-211 Upgrade ng-sdk to angular version 16 <a href="https://bloomreach.atlassian.net/browse/SPASDK-211"><code>#SPASDK-211</code></a></li>
 </ul>
-<h4 id="spa-sdk-2310">spa-sdk-23.1.0</h4>
+<h4 id="spa-sdk-2310"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-23.0.0...spa-sdk-23.1.0">spa-sdk-23.1.0</a></h4>
 <blockquote>
 <p>10 May 2024</p>
 </blockquote>
@@ -205,7 +214,7 @@
 <li>SPASDK-158 Always generate and publish docs on main branch <a href="https://bloomreach.atlassian.net/browse/SPASDK-158"><code>#SPASDK-158</code></a></li>
 <li>SPASDK-158 Add Nuxt 3 example app <a href="https://bloomreach.atlassian.net/browse/SPASDK-158"><code>#SPASDK-158</code></a></li>
 </ul>
-<h4 id="spa-sdk-2300">spa-sdk-23.0.0</h4>
+<h3 id="spa-sdk-2300"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-22.0.5...spa-sdk-23.0.0">spa-sdk-23.0.0</a></h3>
 <blockquote>
 <p>2 May 2024</p>
 </blockquote>
@@ -231,7 +240,7 @@
 <li>SPASDK-213 Update package-lock.json in vue example app <a href="https://bloomreach.atlassian.net/browse/SPASDK-213"><code>#SPASDK-213</code></a></li>
 <li>SPASDK-213 Remove vue2 sdk and example <a href="https://bloomreach.atlassian.net/browse/SPASDK-213"><code>#SPASDK-213</code></a></li>
 </ul>
-<h4 id="spa-sdk-2205">spa-sdk-22.0.5</h4>
+<h4 id="spa-sdk-2205"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-22.0.4...spa-sdk-22.0.5">spa-sdk-22.0.5</a></h4>
 <blockquote>
 <p>23 April 2024</p>
 </blockquote>
@@ -240,7 +249,7 @@
 <li>SPASDK-210 Check for window.document before accessing cookie <a href="https://bloomreach.atlassian.net/browse/SPASDK-210"><code>#SPASDK-210</code></a></li>
 <li>SPASDK-214 Implement relevance in next-example app <a href="https://bloomreach.atlassian.net/browse/SPASDK-214"><code>#SPASDK-214</code></a></li>
 </ul>
-<h4 id="spa-sdk-2204">spa-sdk-22.0.4</h4>
+<h4 id="spa-sdk-2204"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-22.0.3...spa-sdk-22.0.4">spa-sdk-22.0.4</a></h4>
 <blockquote>
 <p>4 April 2024</p>
 </blockquote>
@@ -260,7 +269,7 @@
 <li>SPASDK-209 Update routing in next example app <a href="https://bloomreach.atlassian.net/browse/SPASDK-209"><code>#SPASDK-209</code></a></li>
 <li>SPASDK-209 Upgrade Next example app with Next js 13 <a href="https://bloomreach.atlassian.net/browse/SPASDK-209"><code>#SPASDK-209</code></a></li>
 </ul>
-<h4 id="spa-sdk-2203">spa-sdk-22.0.3</h4>
+<h4 id="spa-sdk-2203"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-22.0.2...spa-sdk-22.0.3">spa-sdk-22.0.3</a></h4>
 <blockquote>
 <p>9 February 2024</p>
 </blockquote>
@@ -268,26 +277,26 @@
 <li>SPASDK-207 Fix type exports Vue 3 SDK <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/152"><code>#152</code></a></li>
 <li>SPASDK-207 Bump versios to 22.0.3 <a href="https://bloomreach.atlassian.net/browse/SPASDK-207"><code>#SPASDK-207</code></a></li>
 <li>SPASDK-207 Fix type exports Vue 3 SDK <a href="https://bloomreach.atlassian.net/browse/SPASDK-207"><code>#SPASDK-207</code></a></li>
-<li>TRIVIAL Allow docs to be published without a SDK release</li>
-<li>TRIVIAL Clarify variable in heroku deploy script</li>
-<li>TRIVIAL Add Vue 3 notice to Vue 2 README.md</li>
-<li>TRIVIAL Fix git credentials in Jenkinsfile</li>
-<li>TRIVIAL Set debug state via env variable</li>
-<li>TRIVIAL Pin node version when working with volta</li>
-<li>TRIVIAL Update reference to documentation.bloomreach.com</li>
-<li>TRIVIAL Adjust glob for jenkins changeset clause</li>
-<li>TRIVIAL Include reference to documentation.bloomreach.com</li>
+<li>TRIVIAL Allow docs to be published without a SDK release <a href="https://github.com/bloomreach/spa-sdk/commit/4847ce521803b091fb52f76f224c5389f226fc49"><code>4847ce5</code></a></li>
+<li>TRIVIAL Clarify variable in heroku deploy script <a href="https://github.com/bloomreach/spa-sdk/commit/02440282749e569f1fef8fb9dd1cdf478e174753"><code>0244028</code></a></li>
+<li>TRIVIAL Add Vue 3 notice to Vue 2 README.md <a href="https://github.com/bloomreach/spa-sdk/commit/e0c36170dc30013e46c19fdeaf4db03b18628665"><code>e0c3617</code></a></li>
+<li>TRIVIAL Fix git credentials in Jenkinsfile <a href="https://github.com/bloomreach/spa-sdk/commit/f47e0030e642ee9338ba342c692b61c240803e50"><code>f47e003</code></a></li>
+<li>TRIVIAL Set debug state via env variable <a href="https://github.com/bloomreach/spa-sdk/commit/3a2329ad5f1e7ef1a75c1314b18fcebc07ab6a78"><code>3a2329a</code></a></li>
+<li>TRIVIAL Pin node version when working with volta <a href="https://github.com/bloomreach/spa-sdk/commit/1b9c7eb8e73cd31d665ac97dd6c73caee1720328"><code>1b9c7eb</code></a></li>
+<li>TRIVIAL Update reference to documentation.bloomreach.com <a href="https://github.com/bloomreach/spa-sdk/commit/0d7e22ee74c5a6f0cc5957b5c6d59d3a0b3ac1c9"><code>0d7e22e</code></a></li>
+<li>TRIVIAL Adjust glob for jenkins changeset clause <a href="https://github.com/bloomreach/spa-sdk/commit/021d6ca05a68a3d366cd7a7e7ef44fe258ef6adb"><code>021d6ca</code></a></li>
+<li>TRIVIAL Include reference to documentation.bloomreach.com <a href="https://github.com/bloomreach/spa-sdk/commit/f3aeced0c3e1dc3fae3b3fbd343b0d0af742aae5"><code>f3aeced</code></a></li>
 </ul>
-<h4 id="spa-sdk-2202">spa-sdk-22.0.2</h4>
+<h4 id="spa-sdk-2202"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-22.0.1...spa-sdk-22.0.2">spa-sdk-22.0.2</a></h4>
 <blockquote>
 <p>20 August 2023</p>
 </blockquote>
 <ul>
 <li>SPASDK-196 Bumping versions to 22.0.2 <a href="https://bloomreach.atlassian.net/browse/SPASDK-196"><code>#SPASDK-196</code></a></li>
-<li>TRIVIAL Fix changelog generation</li>
-<li>TRIVIAL Add step to release process</li>
+<li>TRIVIAL Fix changelog generation <a href="https://github.com/bloomreach/spa-sdk/commit/f87b5a8b07a1f859f475908c46137136389d344b"><code>f87b5a8</code></a></li>
+<li>TRIVIAL Add step to release process <a href="https://github.com/bloomreach/spa-sdk/commit/a9d5e7b7edd46e98d463b49f9d61b873ab12d8f7"><code>a9d5e7b</code></a></li>
 </ul>
-<h4 id="spa-sdk-2201">spa-sdk-22.0.1</h4>
+<h4 id="spa-sdk-2201"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-22.0.0...spa-sdk-22.0.1">spa-sdk-22.0.1</a></h4>
 <blockquote>
 <p>20 August 2023</p>
 </blockquote>
@@ -335,16 +344,16 @@
 <li>SPASDK-186 Temp disable the github jenkins script <a href="https://bloomreach.atlassian.net/browse/SPASDK-186"><code>#SPASDK-186</code></a></li>
 <li>SPASDK-186 Remove prepack scripts, we already build everything before release <a href="https://bloomreach.atlassian.net/browse/SPASDK-186"><code>#SPASDK-186</code></a></li>
 <li>SPASDK-186 Update Jenkinsfile to use lerna version instead of package version <a href="https://bloomreach.atlassian.net/browse/SPASDK-186"><code>#SPASDK-186</code></a></li>
-<li>TRIVIAL Update Heroku</li>
-<li>TRIVIAL Uncomment normal Jenkins steps</li>
-<li>TRIVIAL Distinguish sdk from example app name in scripts</li>
-<li>TRIVIAL Only build relevant app in Heroku deploy</li>
-<li>TRIVIAL Optimize deploy time</li>
-<li>TRIVIAL Add dist to packages/spa-sdk git ignore</li>
-<li>TRIVIAL Remove buildpacks plugins</li>
-<li>TRIVIAL Allow npm to install dev dependencies on heroku</li>
+<li>TRIVIAL Update Heroku <a href="https://github.com/bloomreach/spa-sdk/commit/ed12217de8a86a667a0c29d39a24391df3b36df3"><code>ed12217</code></a></li>
+<li>TRIVIAL Uncomment normal Jenkins steps <a href="https://github.com/bloomreach/spa-sdk/commit/61719361f94de25f16ecbe26c9a18566099ada89"><code>6171936</code></a></li>
+<li>TRIVIAL Distinguish sdk from example app name in scripts <a href="https://github.com/bloomreach/spa-sdk/commit/50b96095eca9c31aa5304b792bfac9289ee92fd2"><code>50b9609</code></a></li>
+<li>TRIVIAL Only build relevant app in Heroku deploy <a href="https://github.com/bloomreach/spa-sdk/commit/17848257403f324fcdaf6521aba6c9f754ad2fe5"><code>1784825</code></a></li>
+<li>TRIVIAL Optimize deploy time <a href="https://github.com/bloomreach/spa-sdk/commit/7420008682ddddbe6ee5a9ff3e7c889fade9921e"><code>7420008</code></a></li>
+<li>TRIVIAL Add dist to packages/spa-sdk git ignore <a href="https://github.com/bloomreach/spa-sdk/commit/5d62fc19f55f9622e5e90f0ff602df09306378a1"><code>5d62fc1</code></a></li>
+<li>TRIVIAL Remove buildpacks plugins <a href="https://github.com/bloomreach/spa-sdk/commit/ec04f4e9478e4b4eec032c1b43ba9980153f744c"><code>ec04f4e</code></a></li>
+<li>TRIVIAL Allow npm to install dev dependencies on heroku <a href="https://github.com/bloomreach/spa-sdk/commit/c44105e5a8fa7c390ba796fc3c97e20e58b23bfd"><code>c44105e</code></a></li>
 </ul>
-<h4 id="spa-sdk-2200">spa-sdk-22.0.0</h4>
+<h3 id="spa-sdk-2200"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-21.0.0...spa-sdk-22.0.0">spa-sdk-22.0.0</a></h3>
 <blockquote>
 <p>28 June 2023</p>
 </blockquote>
@@ -381,13 +390,13 @@
 <li>SPASDK-154 Merge branch ‘development’ into ‘main’ <a href="https://bloomreach.atlassian.net/browse/SPASDK-154"><code>#SPASDK-154</code></a></li>
 <li>SPASDK-154 Merge branch ‘development’ into ‘main’ <a href="https://bloomreach.atlassian.net/browse/SPASDK-154"><code>#SPASDK-154</code></a></li>
 <li>SPASDK-147 Merge branch ‘development’ into ‘main’ <a href="https://bloomreach.atlassian.net/browse/SPASDK-147"><code>#SPASDK-147</code></a></li>
-<li>TRIVIAL Merge branch ‘development’ into ‘main’</li>
-<li>TRIVIAL Merge branch ‘development’ into ‘main’</li>
-<li>TRIVIAL Merge branch ‘development’ into ‘main’</li>
-<li>TRIVIAL Merge branch ‘development’ into ‘main’</li>
-<li>TRIVIAL Merge branch ‘development’ into ‘main’</li>
+<li>TRIVIAL Merge branch ‘development’ into ‘main’ <a href="https://github.com/bloomreach/spa-sdk/commit/b3ef042dcb08a8af5421d33fe3758c45ab85758f"><code>b3ef042</code></a></li>
+<li>TRIVIAL Merge branch ‘development’ into ‘main’ <a href="https://github.com/bloomreach/spa-sdk/commit/17b3ebfb5e3fd0b18e56c2c9c0e07b9ef867913c"><code>17b3ebf</code></a></li>
+<li>TRIVIAL Merge branch ‘development’ into ‘main’ <a href="https://github.com/bloomreach/spa-sdk/commit/feae721c448e5636b350ae9ead60ff0cfe595470"><code>feae721</code></a></li>
+<li>TRIVIAL Merge branch ‘development’ into ‘main’ <a href="https://github.com/bloomreach/spa-sdk/commit/30137498740623a2bae135e7adb72b597b5fec8c"><code>3013749</code></a></li>
+<li>TRIVIAL Merge branch ‘development’ into ‘main’ <a href="https://github.com/bloomreach/spa-sdk/commit/ab29770b6ee908838c7d97de6b989496eeae10bc"><code>ab29770</code></a></li>
 </ul>
-<h4 id="spa-sdk-2100">spa-sdk-21.0.0</h4>
+<h4 id="spa-sdk-2100"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-21.0.0-alpha.0...spa-sdk-21.0.0">spa-sdk-21.0.0</a></h4>
 <blockquote>
 <p>26 April 2023</p>
 </blockquote>
@@ -400,7 +409,7 @@
 <li>SPASDK-182 Replace @xmldom/xmldom library with htmlparser2 <a href="https://bloomreach.atlassian.net/browse/SPASDK-182"><code>#SPASDK-182</code></a></li>
 <li>SPASDK-182 Remove the <code>sanitize</code> method from the Page object <a href="https://bloomreach.atlassian.net/browse/SPASDK-182"><code>#SPASDK-182</code></a></li>
 </ul>
-<h4 id="spa-sdk-2100-alpha0">spa-sdk-21.0.0-alpha.0</h4>
+<h4 id="spa-sdk-2100-alpha0"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-20.0.0...spa-sdk-21.0.0-alpha.0">spa-sdk-21.0.0-alpha.0</a></h4>
 <blockquote>
 <p>26 April 2023</p>
 </blockquote>
@@ -424,9 +433,9 @@
 <li>SPASDK-174 Render example react app with StrictMode <a href="https://bloomreach.atlassian.net/browse/SPASDK-174"><code>#SPASDK-174</code></a></li>
 <li>SPASDK-174 Only load CmsModule once <a href="https://bloomreach.atlassian.net/browse/SPASDK-174"><code>#SPASDK-174</code></a></li>
 <li>SPASDK-174 Let jest run tests in parallel <a href="https://bloomreach.atlassian.net/browse/SPASDK-174"><code>#SPASDK-174</code></a></li>
-<li>TRIVIAL Fix type docs generation by removing outdated dependency</li>
+<li>TRIVIAL Fix type docs generation by removing outdated dependency <a href="https://github.com/bloomreach/spa-sdk/commit/80c3b1e8940058050c19b447737a39d608a54ccd"><code>80c3b1e</code></a></li>
 </ul>
-<h4 id="spa-sdk-2000">spa-sdk-20.0.0</h4>
+<h3 id="spa-sdk-2000"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-19.0.2...spa-sdk-20.0.0">spa-sdk-20.0.0</a></h3>
 <blockquote>
 <p>5 April 2023</p>
 </blockquote>
@@ -490,7 +499,7 @@
 <li>SPASDK-153 Merge branch ‘feature/SPASDK-153-vue3-vite’ into ‘development’ <a href="https://bloomreach.atlassian.net/browse/SPASDK-153"><code>#SPASDK-153</code></a></li>
 <li>SPASDK-153 Add vite library <a href="https://bloomreach.atlassian.net/browse/SPASDK-153"><code>#SPASDK-153</code></a></li>
 </ul>
-<h4 id="spa-sdk-1902">spa-sdk-19.0.2</h4>
+<h4 id="spa-sdk-1902"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-19.0.1...spa-sdk-19.0.2">spa-sdk-19.0.2</a></h4>
 <blockquote>
 <p>22 February 2023</p>
 </blockquote>
@@ -499,7 +508,7 @@
 <li>SPASDK-168 Bumping versions to 19.0.2 <a href="https://bloomreach.atlassian.net/browse/SPASDK-168"><code>#SPASDK-168</code></a></li>
 <li>SPASDK-168 Change BrPageService to support multiple br-page components <a href="https://bloomreach.atlassian.net/browse/SPASDK-168"><code>#SPASDK-168</code></a></li>
 </ul>
-<h4 id="spa-sdk-1901">spa-sdk-19.0.1</h4>
+<h4 id="spa-sdk-1901"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-19.0.0...spa-sdk-19.0.1">spa-sdk-19.0.1</a></h4>
 <blockquote>
 <p>13 February 2023</p>
 </blockquote>
@@ -510,10 +519,10 @@
 <li>SPASDK-167 Restore ng-sdk package.json properties <a href="https://bloomreach.atlassian.net/browse/SPASDK-167"><code>#SPASDK-167</code></a></li>
 <li>SPASDK-154 Merge branch ‘typedoc-update’ into ‘development’ <a href="https://bloomreach.atlassian.net/browse/SPASDK-154"><code>#SPASDK-154</code></a></li>
 <li>SPASDK-154 Update typedoc to latest version supported by current typescript version 4.3.5 <a href="https://bloomreach.atlassian.net/browse/SPASDK-154"><code>#SPASDK-154</code></a></li>
-<li>feature/SPASDK-156 update tests to no longer use ‘example.com’ as domain as that is used internally as a DUMMY</li>
-<li>feature/SPASDK-156 lint formating</li>
+<li>feature/SPASDK-156 update tests to no longer use ‘example.com’ as domain as that is used internally as a DUMMY <a href="https://github.com/bloomreach/spa-sdk/commit/ab0737f4f4284606b4df66e6bed7ad3c09ed0f42"><code>ab0737f</code></a></li>
+<li>feature/SPASDK-156 lint formating <a href="https://github.com/bloomreach/spa-sdk/commit/8f645dd99d0f08d74aa2ceba3a27d5ff31749407"><code>8f645dd</code></a></li>
 </ul>
-<h4 id="spa-sdk-1900">spa-sdk-19.0.0</h4>
+<h3 id="spa-sdk-1900"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-18.0.1...spa-sdk-19.0.0">spa-sdk-19.0.0</a></h3>
 <blockquote>
 <p>1 February 2023</p>
 </blockquote>
@@ -547,7 +556,7 @@
 <li>SPASDK-122 Remove default apiVersion header value from PDA request <a href="https://bloomreach.atlassian.net/browse/SPASDK-122"><code>#SPASDK-122</code></a></li>
 <li>SPASDK-122 Adjust bump script for cross-env <a href="https://bloomreach.atlassian.net/browse/SPASDK-122"><code>#SPASDK-122</code></a></li>
 </ul>
-<h4 id="spa-sdk-1801">spa-sdk-18.0.1</h4>
+<h4 id="spa-sdk-1801"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-18.0.0...spa-sdk-18.0.1">spa-sdk-18.0.1</a></h4>
 <blockquote>
 <p>7 December 2022</p>
 </blockquote>
@@ -568,7 +577,7 @@
 <li>SPASDK-148 Output sourcemaps for ES modules <a href="https://bloomreach.atlassian.net/browse/SPASDK-148"><code>#SPASDK-148</code></a></li>
 <li>SPASDK-148 Allow field to be null <a href="https://bloomreach.atlassian.net/browse/SPASDK-148"><code>#SPASDK-148</code></a></li>
 </ul>
-<h4 id="spa-sdk-1800">spa-sdk-18.0.0</h4>
+<h3 id="spa-sdk-1800"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-17.2.0...spa-sdk-18.0.0">spa-sdk-18.0.0</a></h3>
 <blockquote>
 <p>28 November 2022</p>
 </blockquote>
@@ -584,7 +593,7 @@
 <li>SPASDK-126 Load the html sanitizer dynamically <a href="https://bloomreach.atlassian.net/browse/SPASDK-126"><code>#SPASDK-126</code></a></li>
 <li>SPASDK-126 Split DomParser and XMLDom dependencies from main bundle <a href="https://bloomreach.atlassian.net/browse/SPASDK-126"><code>#SPASDK-126</code></a></li>
 </ul>
-<h4 id="spa-sdk-1720">spa-sdk-17.2.0</h4>
+<h4 id="spa-sdk-1720"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-17.1.1...spa-sdk-17.2.0">spa-sdk-17.2.0</a></h4>
 <blockquote>
 <p>24 November 2022</p>
 </blockquote>
@@ -595,7 +604,7 @@
 <li>SPASDK-141 Add global environment file <a href="https://bloomreach.atlassian.net/browse/SPASDK-141"><code>#SPASDK-141</code></a></li>
 <li>SPASDK-141 Move SKIP_PREFLIGHT_CHECK from react-scripts to the environment file <a href="https://bloomreach.atlassian.net/browse/SPASDK-141"><code>#SPASDK-141</code></a></li>
 </ul>
-<h4 id="spa-sdk-1711">spa-sdk-17.1.1</h4>
+<h4 id="spa-sdk-1711"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-17.1.0...spa-sdk-17.1.1">spa-sdk-17.1.1</a></h4>
 <blockquote>
 <p>11 November 2022</p>
 </blockquote>
@@ -605,11 +614,11 @@
 <li>SPASDK-144 Bumping versions to 17.1.1 <a href="https://bloomreach.atlassian.net/browse/SPASDK-144"><code>#SPASDK-144</code></a></li>
 <li>SPASDK-144 Bump @xmldom/xmldom to patched 0.7.9 <a href="https://bloomreach.atlassian.net/browse/SPASDK-144"><code>#SPASDK-144</code></a></li>
 <li>SPASDK-138 Upgrade next, react examples to react 18 <a href="https://bloomreach.atlassian.net/browse/SPASDK-138"><code>#SPASDK-138</code></a></li>
-<li>TRIVIAL Merge branch ‘TRIVIAL/heroku-cleanup-scrip’ into ‘development’</li>
-<li>TRIVIAL add heroku app cleanup script</li>
-<li>TRIVIAL Update the description for the cleanup utility</li>
+<li>TRIVIAL Merge branch ‘TRIVIAL/heroku-cleanup-scrip’ into ‘development’ <a href="https://github.com/bloomreach/spa-sdk/commit/1ecf2e0d78069f3634a8a5cf1f169012f820c52d"><code>1ecf2e0</code></a></li>
+<li>TRIVIAL add heroku app cleanup script <a href="https://github.com/bloomreach/spa-sdk/commit/a9f66b356c83f8865dbbc7127c17a471ab8676f0"><code>a9f66b3</code></a></li>
+<li>TRIVIAL Update the description for the cleanup utility <a href="https://github.com/bloomreach/spa-sdk/commit/81316945f49fe34336a5330e09c46b755be31f3d"><code>8131694</code></a></li>
 </ul>
-<h4 id="spa-sdk-1710">spa-sdk-17.1.0</h4>
+<h4 id="spa-sdk-1710"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-17.0.1...spa-sdk-17.1.0">spa-sdk-17.1.0</a></h4>
 <blockquote>
 <p>28 October 2022</p>
 </blockquote>
@@ -623,7 +632,7 @@
 <li>SPASDK-137 Explicitly set children to component properties interface <a href="https://bloomreach.atlassian.net/browse/SPASDK-137"><code>#SPASDK-137</code></a></li>
 <li>SPASDK-137 Support React 18 <a href="https://bloomreach.atlassian.net/browse/SPASDK-137"><code>#SPASDK-137</code></a></li>
 </ul>
-<h4 id="spa-sdk-1701">spa-sdk-17.0.1</h4>
+<h4 id="spa-sdk-1701"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-17.0.0...spa-sdk-17.0.1">spa-sdk-17.0.1</a></h4>
 <blockquote>
 <p>18 October 2022</p>
 </blockquote>
@@ -647,12 +656,12 @@
 <li>SPASDK-118 Add changelog for 15.5.0 <a href="https://bloomreach.atlassian.net/browse/SPASDK-118"><code>#SPASDK-118</code></a></li>
 <li>SPASDK-118 Release 15.5.0 <a href="https://bloomreach.atlassian.net/browse/SPASDK-118"><code>#SPASDK-118</code></a></li>
 <li>SPASDK-116 Release 15.4.6 <a href="https://bloomreach.atlassian.net/browse/SPASDK-116"><code>#SPASDK-116</code></a></li>
-<li>TRIVIAL Merge branch ‘main’ into development</li>
-<li>TRIVIAL Merge branch ‘development’ into ‘main’</li>
-<li>TRIVIAL Merge branch ‘development’ into ‘main’</li>
-<li>TRIVIAL Merge branch ‘development’ into ‘main’</li>
+<li>TRIVIAL Merge branch ‘main’ into development <a href="https://github.com/bloomreach/spa-sdk/commit/c48825e35c7536354718ad2168971517da7f80dd"><code>c48825e</code></a></li>
+<li>TRIVIAL Merge branch ‘development’ into ‘main’ <a href="https://github.com/bloomreach/spa-sdk/commit/bd4ba15a2d771d208db3f7a0f88773b2384cc4d2"><code>bd4ba15</code></a></li>
+<li>TRIVIAL Merge branch ‘development’ into ‘main’ <a href="https://github.com/bloomreach/spa-sdk/commit/a540e23ddc5ee23d8dc82c60d969b1039dc656f9"><code>a540e23</code></a></li>
+<li>TRIVIAL Merge branch ‘development’ into ‘main’ <a href="https://github.com/bloomreach/spa-sdk/commit/3d91af742fcb528c062fc2fd284e10611469dd91"><code>3d91af7</code></a></li>
 </ul>
-<h4 id="spa-sdk-1700">spa-sdk-17.0.0</h4>
+<h3 id="spa-sdk-1700"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-16.0.0...spa-sdk-17.0.0">spa-sdk-17.0.0</a></h3>
 <blockquote>
 <p>19 September 2022</p>
 </blockquote>
@@ -661,9 +670,9 @@
 <li>SPASDK-129 Bumping versions to 17.0.0 <a href="https://bloomreach.atlassian.net/browse/SPASDK-129"><code>#SPASDK-129</code></a></li>
 <li>SPASDK-129 Fix lint warnings in vue-sdk and ng-sdk <a href="https://bloomreach.atlassian.net/browse/SPASDK-129"><code>#SPASDK-129</code></a></li>
 <li>SPASDK-129 Remove endpointQueryParameter <a href="https://bloomreach.atlassian.net/browse/SPASDK-129"><code>#SPASDK-129</code></a></li>
-<li>TRIVIAL Fix bash name substitution in heroku deploy script</li>
+<li>TRIVIAL Fix bash name substitution in heroku deploy script <a href="https://github.com/bloomreach/spa-sdk/commit/721b46871e938630f3f3a51ca9343425868f8c49"><code>721b468</code></a></li>
 </ul>
-<h4 id="spa-sdk-1600">spa-sdk-16.0.0</h4>
+<h3 id="spa-sdk-1600"><a href="https://github.com/bloomreach/spa-sdk/compare/v15.5.1...spa-sdk-16.0.0">spa-sdk-16.0.0</a></h3>
 <blockquote>
 <p>16 August 2022</p>
 </blockquote>
@@ -685,14 +694,14 @@
 <li>SPASDK-123 Add getLocale to Page object <a href="https://bloomreach.atlassian.net/browse/SPASDK-123"><code>#SPASDK-123</code></a></li>
 <li>SPASDK-119 Improve heroku deploy speed by using lerna filter flags <a href="https://bloomreach.atlassian.net/browse/SPASDK-119"><code>#SPASDK-119</code></a></li>
 </ul>
-<h4 id="v1551">v15.5.1</h4>
+<h4 id="v1551"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.5.0...v15.5.1">v15.5.1</a></h4>
 <blockquote>
 <p>24 June 2022</p>
 </blockquote>
 <ul>
-<li>TRIVIAL Bump versions to 15.5.1</li>
+<li>TRIVIAL Bump versions to 15.5.1 <a href="https://github.com/bloomreach/spa-sdk/commit/94d26991ce5e8d4f2916aa6756b0c927b721a25e"><code>94d2699</code></a></li>
 </ul>
-<h4 id="spa-sdk-1550">spa-sdk-15.5.0</h4>
+<h4 id="spa-sdk-1550"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.4.6...spa-sdk-15.5.0">spa-sdk-15.5.0</a></h4>
 <blockquote>
 <p>24 June 2022</p>
 </blockquote>
@@ -708,11 +717,11 @@
 <li>SPASDK-104 Bump versions to test react 17 <a href="https://bloomreach.atlassian.net/browse/SPASDK-104"><code>#SPASDK-104</code></a></li>
 <li>SPASDK-104 Allow react 17 to be used <a href="https://bloomreach.atlassian.net/browse/SPASDK-104"><code>#SPASDK-104</code></a></li>
 <li>SPASDK-116 Release 15.4.6 <a href="https://bloomreach.atlassian.net/browse/SPASDK-116"><code>#SPASDK-116</code></a></li>
-<li>TRIVIAL Merge branch ‘development’ into ‘main’</li>
-<li>TRIVIAL Merge branch ‘development’ into ‘main’</li>
-<li>TRIVIAL Merge branch ‘development’ into ‘main’</li>
+<li>TRIVIAL Merge branch ‘development’ into ‘main’ <a href="https://github.com/bloomreach/spa-sdk/commit/bd4ba15a2d771d208db3f7a0f88773b2384cc4d2"><code>bd4ba15</code></a></li>
+<li>TRIVIAL Merge branch ‘development’ into ‘main’ <a href="https://github.com/bloomreach/spa-sdk/commit/a540e23ddc5ee23d8dc82c60d969b1039dc656f9"><code>a540e23</code></a></li>
+<li>TRIVIAL Merge branch ‘development’ into ‘main’ <a href="https://github.com/bloomreach/spa-sdk/commit/3d91af742fcb528c062fc2fd284e10611469dd91"><code>3d91af7</code></a></li>
 </ul>
-<h4 id="spa-sdk-1546">spa-sdk-15.4.6</h4>
+<h4 id="spa-sdk-1546"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.4.5...spa-sdk-15.4.6">spa-sdk-15.4.6</a></h4>
 <blockquote>
 <p>23 June 2022</p>
 </blockquote>
@@ -729,7 +738,7 @@
 <li>SPASDK-114 Add ManageContentButton.pickerEnableUpload to ng-sdk and vue-sdk <a href="https://bloomreach.atlassian.net/browse/SPASDK-114"><code>#SPASDK-114</code></a></li>
 <li>SPASDK-114 Add pickerEnableUpload option to manage-content-btn <a href="https://bloomreach.atlassian.net/browse/SPASDK-114"><code>#SPASDK-114</code></a></li>
 </ul>
-<h4 id="spa-sdk-1545">spa-sdk-15.4.5</h4>
+<h4 id="spa-sdk-1545"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.4.4...spa-sdk-15.4.5">spa-sdk-15.4.5</a></h4>
 <blockquote>
 <p>13 April 2022</p>
 </blockquote>
@@ -737,9 +746,9 @@
 <li>Resolve SPASDK-110 “Change HttpClient interface to follow the axios api definition” <a href="https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/68"><code>#68</code></a></li>
 <li>SPASDK-110 Update axios in example apps to the latest version (0.26.1) <a href="https://bloomreach.atlassian.net/browse/SPASDK-110"><code>#SPASDK-110</code></a></li>
 <li>SPASDK-110 Make headers type in <code>HttpClient</code> compatible with latest axios (0.26.0) <a href="https://bloomreach.atlassian.net/browse/SPASDK-110"><code>#SPASDK-110</code></a></li>
-<li>TRIVIAL Bumping versions to 15.4.5</li>
+<li>TRIVIAL Bumping versions to 15.4.5 <a href="https://github.com/bloomreach/spa-sdk/commit/bccf5b4778e5d729ce8b23a861e3b9b302aad57f"><code>bccf5b4</code></a></li>
 </ul>
-<h4 id="spa-sdk-1544">spa-sdk-15.4.4</h4>
+<h4 id="spa-sdk-1544"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.4.3...spa-sdk-15.4.4">spa-sdk-15.4.4</a></h4>
 <blockquote>
 <p>4 April 2022</p>
 </blockquote>
@@ -751,11 +760,11 @@
 <li>SPASDK-107 Indicate that the change only applies to Content SaaS <a href="https://bloomreach.atlassian.net/browse/SPASDK-107"><code>#SPASDK-107</code></a></li>
 <li>SPASDK-107 Update template query names to correct ones in vue sdk doc <a href="https://bloomreach.atlassian.net/browse/SPASDK-107"><code>#SPASDK-107</code></a></li>
 <li>SPASDK-107 Describe template query formats in readme doc files <a href="https://bloomreach.atlassian.net/browse/SPASDK-107"><code>#SPASDK-107</code></a></li>
-<li>TRIVIAL Bumping versions to 15.4.4</li>
-<li>TRIVIAL Merge branch ‘fetch-tags-during-release-pipeline’ into ‘development’</li>
-<li>TRIVIAL Fetch all tags before mirroring to the github</li>
+<li>TRIVIAL Bumping versions to 15.4.4 <a href="https://github.com/bloomreach/spa-sdk/commit/2deeb623dfb9c666035342a75d9ac7e96461050b"><code>2deeb62</code></a></li>
+<li>TRIVIAL Merge branch ‘fetch-tags-during-release-pipeline’ into ‘development’ <a href="https://github.com/bloomreach/spa-sdk/commit/4048f73dce43c1d3f99a6b28533779c52a8839ca"><code>4048f73</code></a></li>
+<li>TRIVIAL Fetch all tags before mirroring to the github <a href="https://github.com/bloomreach/spa-sdk/commit/c7373de3213bf3a396d74efc74e0ad6ed11a07bd"><code>c7373de</code></a></li>
 </ul>
-<h4 id="spa-sdk-1543">spa-sdk-15.4.3</h4>
+<h4 id="spa-sdk-1543"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.4.2...spa-sdk-15.4.3">spa-sdk-15.4.3</a></h4>
 <blockquote>
 <p>18 January 2022</p>
 </blockquote>
@@ -769,9 +778,9 @@
 <li>SPASDK-82 Use heroku from dev dependencies and run deploy via scripts section <a href="https://bloomreach.atlassian.net/browse/SPASDK-82"><code>#SPASDK-82</code></a></li>
 <li>SPASDK-82 Setup release pipeline triggered by merge in main branch <a href="https://bloomreach.atlassian.net/browse/SPASDK-82"><code>#SPASDK-82</code></a></li>
 <li>SPASDK-80 Use origin from URL object instead of modifying incoming url <a href="https://bloomreach.atlassian.net/browse/SPASDK-80"><code>#SPASDK-80</code></a></li>
-<li>TRIVIAL Bumping versions to 15.4.3</li>
+<li>TRIVIAL Bumping versions to 15.4.3 <a href="https://github.com/bloomreach/spa-sdk/commit/34b67fa6a8144d2d0993d06c77320649ea19e8d0"><code>34b67fa</code></a></li>
 </ul>
-<h4 id="spa-sdk-1542">spa-sdk-15.4.2</h4>
+<h4 id="spa-sdk-1542"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.4.1...spa-sdk-15.4.2">spa-sdk-15.4.2</a></h4>
 <blockquote>
 <p>27 December 2021</p>
 </blockquote>
@@ -797,22 +806,22 @@
 <li>SPASDK-77 Add <code>getProperties</code> method as alias for <code>getParameters</code> in component <a href="https://bloomreach.atlassian.net/browse/SPASDK-77"><code>#SPASDK-77</code></a></li>
 <li>SPASDK-75 Update file header to replace Hippo with Bloomreach <a href="https://bloomreach.atlassian.net/browse/SPASDK-75"><code>#SPASDK-75</code></a></li>
 <li>SPASDK-75 Update file header to replace Hippo with Bloomreach <a href="https://bloomreach.atlassian.net/browse/SPASDK-75"><code>#SPASDK-75</code></a></li>
-<li>TRIVIAL Bumping version to 15.4.2</li>
-<li>TRIVIAL Merge branch ‘trivial/enhance-release-script’ into ‘development’</li>
-<li>TRIVIAL Stop execution of release in case build, lint or test has been finished with non zero result</li>
-<li>TRIVIAL Add reminder to post release actions about check typedoc</li>
-<li>TRIVIAL Merge branch ‘enhance-release-script’ into development</li>
-<li>TRIVIAL Add lint, test and build steps at the beginning of the script</li>
+<li>TRIVIAL Bumping version to 15.4.2 <a href="https://github.com/bloomreach/spa-sdk/commit/9e6391a5cb8381da2a41d6746b892fc18cb44d13"><code>9e6391a</code></a></li>
+<li>TRIVIAL Merge branch ‘trivial/enhance-release-script’ into ‘development’ <a href="https://github.com/bloomreach/spa-sdk/commit/0a0df958ff9274fdb366d8ebfc09952803c2a882"><code>0a0df95</code></a></li>
+<li>TRIVIAL Stop execution of release in case build, lint or test has been finished with non zero result <a href="https://github.com/bloomreach/spa-sdk/commit/35393c8b4046c91bf1ce5b12170c86eb17a39b75"><code>35393c8</code></a></li>
+<li>TRIVIAL Add reminder to post release actions about check typedoc <a href="https://github.com/bloomreach/spa-sdk/commit/49e01ce7df91a18a631744f1ad74bb435dddf326"><code>49e01ce</code></a></li>
+<li>TRIVIAL Merge branch ‘enhance-release-script’ into development <a href="https://github.com/bloomreach/spa-sdk/commit/f45e24c9c12201d0fce6b3c8ed51f0b7461d717f"><code>f45e24c</code></a></li>
+<li>TRIVIAL Add lint, test and build steps at the beginning of the script <a href="https://github.com/bloomreach/spa-sdk/commit/60dd9681110ab611e4efa62e3e4f859513a549d2"><code>60dd968</code></a></li>
 </ul>
-<h4 id="spa-sdk-1541">spa-sdk-15.4.1</h4>
+<h4 id="spa-sdk-1541"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.4.0...spa-sdk-15.4.1">spa-sdk-15.4.1</a></h4>
 <blockquote>
 <p>1 December 2021</p>
 </blockquote>
 <ul>
-<li>TRIVIAL Bumping version to 15.4.1</li>
-<li>TRIVIAL Update release script with build step before publising</li>
+<li>TRIVIAL Bumping version to 15.4.1 <a href="https://github.com/bloomreach/spa-sdk/commit/65dd1c38be90986df001eec1c28f74f76a6520fa"><code>65dd1c3</code></a></li>
+<li>TRIVIAL Update release script with build step before publising <a href="https://github.com/bloomreach/spa-sdk/commit/b377221d974138c1ee092610c037ee1987b765b6"><code>b377221</code></a></li>
 </ul>
-<h4 id="spa-sdk-1540">spa-sdk-15.4.0</h4>
+<h4 id="spa-sdk-1540"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.3.3...spa-sdk-15.4.0">spa-sdk-15.4.0</a></h4>
 <blockquote>
 <p>1 December 2021</p>
 </blockquote>
@@ -839,9 +848,9 @@
 <li>SPASDK-74 Load component via GET if payload is empty <a href="https://bloomreach.atlassian.net/browse/SPASDK-74"><code>#SPASDK-74</code></a></li>
 <li>SPASDK-73 Add “pickerSelectableNodeTypes” to examples <a href="https://bloomreach.atlassian.net/browse/SPASDK-73"><code>#SPASDK-73</code></a></li>
 <li>SPASDK-73 Add “picker” options to manage-content-button <a href="https://bloomreach.atlassian.net/browse/SPASDK-73"><code>#SPASDK-73</code></a></li>
-<li>TRIVIAL Bumping version to 15.4.0</li>
+<li>TRIVIAL Bumping version to 15.4.0 <a href="https://github.com/bloomreach/spa-sdk/commit/ba8e0adb0547e41e26d0691560884b340c7d512a"><code>ba8e0ad</code></a></li>
 </ul>
-<h4 id="spa-sdk-1533">spa-sdk-15.3.3</h4>
+<h4 id="spa-sdk-1533"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.3.2...spa-sdk-15.3.3">spa-sdk-15.3.3</a></h4>
 <blockquote>
 <p>1 November 2021</p>
 </blockquote>
@@ -851,9 +860,9 @@
 <li>SPASDK-71 Bumping version to 15.3.3 <a href="https://bloomreach.atlassian.net/browse/SPASDK-71"><code>#SPASDK-71</code></a></li>
 <li>SPASDK-69 Rework heroku deploy script <a href="https://bloomreach.atlassian.net/browse/SPASDK-69"><code>#SPASDK-69</code></a></li>
 <li>SPASDK-65 Warn for incompatibility of nomarkup container with vue-sdk <a href="https://bloomreach.atlassian.net/browse/SPASDK-65"><code>#SPASDK-65</code></a></li>
-<li>TRIVIAL Add force flag to remove all folders inside docs folder</li>
+<li>TRIVIAL Add force flag to remove all folders inside docs folder <a href="https://github.com/bloomreach/spa-sdk/commit/6f0f3bd625ab21440fd56b0ffc443404e17e6f65"><code>6f0f3bd</code></a></li>
 </ul>
-<h4 id="spa-sdk-1532">spa-sdk-15.3.2</h4>
+<h4 id="spa-sdk-1532"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.3.1...spa-sdk-15.3.2">spa-sdk-15.3.2</a></h4>
 <blockquote>
 <p>19 October 2021</p>
 </blockquote>
@@ -865,9 +874,9 @@
 <li>SPASDK-62 Retrieve segmentation cookies from request object in case SSR <a href="https://bloomreach.atlassian.net/browse/SPASDK-62"><code>#SPASDK-62</code></a></li>
 <li>SPASDK-63 Allow attribute “rel” in sanitize <a href="https://bloomreach.atlassian.net/browse/SPASDK-63"><code>#SPASDK-63</code></a></li>
 <li>SPASDK-49 Add <code>s</code> flag to regular expression to match body content <a href="https://bloomreach.atlassian.net/browse/SPASDK-49"><code>#SPASDK-49</code></a></li>
-<li>TRIVIAL Fix release script part related to the publishing TypyDoc</li>
+<li>TRIVIAL Fix release script part related to the publishing TypyDoc <a href="https://github.com/bloomreach/spa-sdk/commit/8faca440aed3751041e8f80d070366189072d2de"><code>8faca44</code></a></li>
 </ul>
-<h4 id="spa-sdk-1531">spa-sdk-15.3.1</h4>
+<h4 id="spa-sdk-1531"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.3.0...spa-sdk-15.3.1">spa-sdk-15.3.1</a></h4>
 <blockquote>
 <p>8 October 2021</p>
 </blockquote>
@@ -880,7 +889,7 @@
 <li>SPASDK-60 Additional fixes to the release script <a href="https://bloomreach.atlassian.net/browse/SPASDK-60"><code>#SPASDK-60</code></a></li>
 <li>SPASDK-60 Add heroku as dev dep to enforce version and all build packs are installed <a href="https://bloomreach.atlassian.net/browse/SPASDK-60"><code>#SPASDK-60</code></a></li>
 </ul>
-<h4 id="spa-sdk-1530">spa-sdk-15.3.0</h4>
+<h4 id="spa-sdk-1530"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.2.2-0...spa-sdk-15.3.0">spa-sdk-15.3.0</a></h4>
 <blockquote>
 <p>6 October 2021</p>
 </blockquote>
@@ -889,7 +898,7 @@
 <li>SPASDK-58 Remove release pipeline and use release script <a href="https://bloomreach.atlassian.net/browse/SPASDK-58"><code>#SPASDK-58</code></a></li>
 <li>SPASDK-38 Add page api to sanitize html content in SPA SDK <a href="https://bloomreach.atlassian.net/browse/SPASDK-38"><code>#SPASDK-38</code></a></li>
 </ul>
-<h4 id="spa-sdk-1522-0">spa-sdk-15.2.2-0</h4>
+<h4 id="spa-sdk-1522-0"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.2.1...spa-sdk-15.2.2-0">spa-sdk-15.2.2-0</a></h4>
 <blockquote>
 <p>30 September 2021</p>
 </blockquote>
@@ -898,7 +907,7 @@
 <li>SPASDK-58 Bump versions to 15.2.2-0 <a href="https://bloomreach.atlassian.net/browse/SPASDK-58"><code>#SPASDK-58</code></a></li>
 <li>SPASDK-58 Update push to github script in Jenkins <a href="https://bloomreach.atlassian.net/browse/SPASDK-58"><code>#SPASDK-58</code></a></li>
 </ul>
-<h4 id="spa-sdk-1521">spa-sdk-15.2.1</h4>
+<h4 id="spa-sdk-1521"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.1.2...spa-sdk-15.2.1">spa-sdk-15.2.1</a></h4>
 <blockquote>
 <p>30 September 2021</p>
 </blockquote>
@@ -910,7 +919,7 @@
 <li>SPASDK-53 Bump versions to 15.2.1 <a href="https://bloomreach.atlassian.net/browse/SPASDK-53"><code>#SPASDK-53</code></a></li>
 <li>SPASDK-53 Handle segmentation; Change campaign variant parameter; <a href="https://bloomreach.atlassian.net/browse/SPASDK-53"><code>#SPASDK-53</code></a></li>
 </ul>
-<h4 id="spa-sdk-1512">spa-sdk-15.1.2</h4>
+<h4 id="spa-sdk-1512"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.1.0...spa-sdk-15.1.2">spa-sdk-15.1.2</a></h4>
 <blockquote>
 <p>23 September 2021</p>
 </blockquote>
@@ -925,14 +934,14 @@
 <li>SPASDK-33 Merge branch ‘development’ into ‘main’ <a href="https://bloomreach.atlassian.net/browse/SPASDK-33"><code>#SPASDK-33</code></a></li>
 <li>SPASDK-33 Merge branch ‘development’ into ‘main’ <a href="https://bloomreach.atlassian.net/browse/SPASDK-33"><code>#SPASDK-33</code></a></li>
 <li>SPASDK-33 Merge branch ‘development’ into ‘main’ <a href="https://bloomreach.atlassian.net/browse/SPASDK-33"><code>#SPASDK-33</code></a></li>
-<li>TRIVIAL Update readme table</li>
-<li>TRIVIAL Update development rules about publishing test version to npm</li>
-<li>TRIVIAL Add more information about what should be in <code>dist-tag</code></li>
-<li>TRIVIAL Update readme table</li>
-<li>TRIVIAL Merge branch ‘development’ into main</li>
-<li>TRIVIAL Merge branch ‘development’ into ‘main’</li>
+<li>TRIVIAL Update readme table <a href="https://github.com/bloomreach/spa-sdk/commit/e7aacbed48bba8865def26d63e5f218f54cbb5d4"><code>e7aacbe</code></a></li>
+<li>TRIVIAL Update development rules about publishing test version to npm <a href="https://github.com/bloomreach/spa-sdk/commit/c40e06fd54738ef29eb293d7a3918d415653afe4"><code>c40e06f</code></a></li>
+<li>TRIVIAL Add more information about what should be in <code>dist-tag</code> <a href="https://github.com/bloomreach/spa-sdk/commit/4ca281831a0235a7a8ac5b70fe339f0f0b04eae8"><code>4ca2818</code></a></li>
+<li>TRIVIAL Update readme table <a href="https://github.com/bloomreach/spa-sdk/commit/0d6b7c292eae27e5b3ad95a68772421f1470106e"><code>0d6b7c2</code></a></li>
+<li>TRIVIAL Merge branch ‘development’ into main <a href="https://github.com/bloomreach/spa-sdk/commit/52412ae42ab0303cdf514081c3b254fde2cdab3c"><code>52412ae</code></a></li>
+<li>TRIVIAL Merge branch ‘development’ into ‘main’ <a href="https://github.com/bloomreach/spa-sdk/commit/f44624130fea51d553e2f1488ce433a11846f71a"><code>f446241</code></a></li>
 </ul>
-<h4 id="spa-sdk-1510">spa-sdk-15.1.0</h4>
+<h4 id="spa-sdk-1510"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.0.1-0...spa-sdk-15.1.0">spa-sdk-15.1.0</a></h4>
 <blockquote>
 <p>23 August 2021</p>
 </blockquote>
@@ -990,11 +999,11 @@
 <li>SPASDK-43 Provide request object to get campaign variant id method <a href="https://bloomreach.atlassian.net/browse/SPASDK-43"><code>#SPASDK-43</code></a></li>
 <li>SPASDK-43 Add new method to get cookies from the request object <a href="https://bloomreach.atlassian.net/browse/SPASDK-43"><code>#SPASDK-43</code></a></li>
 <li>SPASDK-34 Check if window variable is defined(Fix SSR issue) <a href="https://bloomreach.atlassian.net/browse/SPASDK-34"><code>#SPASDK-34</code></a></li>
-<li>Revert “SPASDK-22 Update xmldom to the latest version to fix security issue”</li>
-<li>TRIVIAL Add jenkins status to gitlab MRs</li>
-<li>TRIVIAL Update readme table</li>
+<li>Revert “SPASDK-22 Update xmldom to the latest version to fix security issue” <a href="https://github.com/bloomreach/spa-sdk/commit/abc33141c2579341a12a02f5b9b148d6c5ae7aa8"><code>abc3314</code></a></li>
+<li>TRIVIAL Add jenkins status to gitlab MRs <a href="https://github.com/bloomreach/spa-sdk/commit/4da07135f78485d4577c24b1320d22453028f3e0"><code>4da0713</code></a></li>
+<li>TRIVIAL Update readme table <a href="https://github.com/bloomreach/spa-sdk/commit/c4d00b2301485695717483d517ee299fd93998b9"><code>c4d00b2</code></a></li>
 </ul>
-<h4 id="spa-sdk-1501-0">spa-sdk-15.0.1-0</h4>
+<h4 id="spa-sdk-1501-0"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.0.0...spa-sdk-15.0.1-0">spa-sdk-15.0.1-0</a></h4>
 <blockquote>
 <p>9 August 2021</p>
 </blockquote>
@@ -1006,7 +1015,7 @@
 <li>SPASDK-33 Update git command to publish to github <a href="https://bloomreach.atlassian.net/browse/SPASDK-33"><code>#SPASDK-33</code></a></li>
 <li>SPASDK-22 Update xmldom to the latest version to fix security issue <a href="https://bloomreach.atlassian.net/browse/SPASDK-22"><code>#SPASDK-22</code></a></li>
 </ul>
-<h4 id="spa-sdk-1500">spa-sdk-15.0.0</h4>
+<h4 id="spa-sdk-1500"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.0.0-1...spa-sdk-15.0.0">spa-sdk-15.0.0</a></h4>
 <blockquote>
 <p>9 August 2021</p>
 </blockquote>
@@ -1043,7 +1052,7 @@
 <li>SPASDK-22 Update dependencies in spa-sdk <a href="https://bloomreach.atlassian.net/browse/SPASDK-22"><code>#SPASDK-22</code></a></li>
 <li>SPASDK-32 Use auto-changelog to generate CHANGELOG.md <a href="https://bloomreach.atlassian.net/browse/SPASDK-32"><code>#SPASDK-32</code></a></li>
 </ul>
-<h4 id="spa-sdk-1500-1">spa-sdk-15.0.0-1</h4>
+<h4 id="spa-sdk-1500-1"><a href="https://github.com/bloomreach/spa-sdk/compare/spa-sdk-0.3.0-saas...spa-sdk-15.0.0-1">spa-sdk-15.0.0-1</a></h4>
 <blockquote>
 <p>5 August 2021</p>
 </blockquote>
@@ -1092,8 +1101,6 @@
 <li>SPASDK-2 Log warning for unsupported method “getContentReference” in v0.9 <a href="https://bloomreach.atlassian.net/browse/SPASDK-2"><code>#SPASDK-2</code></a></li>
 <li>SPASDK-2 Add exported function “getContainerItemContent” <a href="https://bloomreach.atlassian.net/browse/SPASDK-2"><code>#SPASDK-2</code></a></li>
 <li>SPASDK-1 Bump to use node 14 <a href="https://bloomreach.atlassian.net/browse/SPASDK-1"><code>#SPASDK-1</code></a></li>
-<li>SPASDK-1 Remove maven files and update Jenkinsfile <a href="https://bloomreach.atlassian.net/browse/SPASDK-1"><code>#SPASDK-1</code></a></li>
-<li>SPASDK-1 Initial move from brxm monorepo <a href="https://bloomreach.atlassian.net/browse/SPASDK-1"><code>#SPASDK-1</code></a></li>
-<li>TRIVIAL Set branch name to ‘main’ in changesetBaseRefs</li>
-<li>TRIVIAL Skip telemetry check on nuxt startup</li>
-</ul>  </section> </article> </div> <aside class="hidden lg:block col-span-1"> <astro-island uid="ZktfrE" prefix="r1" component-url="/spa-sdk/docs/_astro/TableOfContents.BTxaqx1b.js" component-export="default" renderer-url="/spa-sdk/docs/_astro/client.Q67u01mC.js" props="{&quot;headings&quot;:[1,[[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;changelog&quot;],&quot;text&quot;:[0,&quot;Changelog&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;2411&quot;],&quot;text&quot;:[0,&quot;”24.1.1”&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2410&quot;],&quot;text&quot;:[0,&quot;spa-sdk-24.1.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2401&quot;],&quot;text&quot;:[0,&quot;spa-sdk-24.0.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2400&quot;],&quot;text&quot;:[0,&quot;spa-sdk-24.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2344&quot;],&quot;text&quot;:[0,&quot;spa-sdk-23.4.4&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2343&quot;],&quot;text&quot;:[0,&quot;spa-sdk-23.4.3&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2342&quot;],&quot;text&quot;:[0,&quot;spa-sdk-23.4.2&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2341&quot;],&quot;text&quot;:[0,&quot;spa-sdk-23.4.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2340&quot;],&quot;text&quot;:[0,&quot;spa-sdk-23.4.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2332&quot;],&quot;text&quot;:[0,&quot;spa-sdk-23.3.2&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2331&quot;],&quot;text&quot;:[0,&quot;spa-sdk-23.3.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2330&quot;],&quot;text&quot;:[0,&quot;spa-sdk-23.3.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2320&quot;],&quot;text&quot;:[0,&quot;spa-sdk-23.2.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2310&quot;],&quot;text&quot;:[0,&quot;spa-sdk-23.1.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2300&quot;],&quot;text&quot;:[0,&quot;spa-sdk-23.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2205&quot;],&quot;text&quot;:[0,&quot;spa-sdk-22.0.5&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2204&quot;],&quot;text&quot;:[0,&quot;spa-sdk-22.0.4&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2203&quot;],&quot;text&quot;:[0,&quot;spa-sdk-22.0.3&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2202&quot;],&quot;text&quot;:[0,&quot;spa-sdk-22.0.2&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2201&quot;],&quot;text&quot;:[0,&quot;spa-sdk-22.0.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2200&quot;],&quot;text&quot;:[0,&quot;spa-sdk-22.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2100&quot;],&quot;text&quot;:[0,&quot;spa-sdk-21.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2100-alpha0&quot;],&quot;text&quot;:[0,&quot;spa-sdk-21.0.0-alpha.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2000&quot;],&quot;text&quot;:[0,&quot;spa-sdk-20.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1902&quot;],&quot;text&quot;:[0,&quot;spa-sdk-19.0.2&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1901&quot;],&quot;text&quot;:[0,&quot;spa-sdk-19.0.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1900&quot;],&quot;text&quot;:[0,&quot;spa-sdk-19.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1801&quot;],&quot;text&quot;:[0,&quot;spa-sdk-18.0.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1800&quot;],&quot;text&quot;:[0,&quot;spa-sdk-18.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1720&quot;],&quot;text&quot;:[0,&quot;spa-sdk-17.2.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1711&quot;],&quot;text&quot;:[0,&quot;spa-sdk-17.1.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1710&quot;],&quot;text&quot;:[0,&quot;spa-sdk-17.1.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1701&quot;],&quot;text&quot;:[0,&quot;spa-sdk-17.0.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1700&quot;],&quot;text&quot;:[0,&quot;spa-sdk-17.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1600&quot;],&quot;text&quot;:[0,&quot;spa-sdk-16.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;v1551&quot;],&quot;text&quot;:[0,&quot;v15.5.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1550&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.5.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1546&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.4.6&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1545&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.4.5&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1544&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.4.4&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1543&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.4.3&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1542&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.4.2&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1541&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.4.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1540&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.4.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1533&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.3.3&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1532&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.3.2&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1531&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.3.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1530&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.3.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1522-0&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.2.2-0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1521&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.2.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1512&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.1.2&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1510&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.1.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1501-0&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.0.1-0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1500&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1500-1&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.0.0-1&quot;]}]]]}" ssr client="load" opts="{&quot;name&quot;:&quot;TableOfContents&quot;,&quot;value&quot;:true}" await-children><nav class="sticky top-0"><ul class="menu"><li><h2 id="on-this-page-heading" class="menu-title"><span class="">On this page</span></h2><ul><li><a href="#changelog" class="">Changelog</a></li></ul></li></ul><div class="divider lg:hidden"></div></nav><!--astro:end--></astro-island> </aside> </main> </body></html>
+<li>TRIVIAL Set branch name to ‘main’ in changesetBaseRefs <a href="https://github.com/bloomreach/spa-sdk/commit/4dacdcd2fdb0712e40dcb33b9809ae12786f9ab1"><code>4dacdcd</code></a></li>
+<li>TRIVIAL Skip telemetry check on nuxt startup <a href="https://github.com/bloomreach/spa-sdk/commit/15deb25b1edde3af3296d4dc34dba1483fe278f2"><code>15deb25</code></a></li>
+</ul>  </section> </article> </div> <aside class="hidden lg:block col-span-1"> <astro-island uid="17mzYX" prefix="r1" component-url="/spa-sdk/docs/_astro/TableOfContents.BTxaqx1b.js" component-export="default" renderer-url="/spa-sdk/docs/_astro/client.Q67u01mC.js" props="{&quot;headings&quot;:[1,[[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;changelog&quot;],&quot;text&quot;:[0,&quot;Changelog&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;2412&quot;],&quot;text&quot;:[0,&quot;”24.1.2”&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2411&quot;],&quot;text&quot;:[0,&quot;spa-sdk-24.1.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2410&quot;],&quot;text&quot;:[0,&quot;spa-sdk-24.1.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2401&quot;],&quot;text&quot;:[0,&quot;spa-sdk-24.0.1&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;spa-sdk-2400&quot;],&quot;text&quot;:[0,&quot;spa-sdk-24.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2344&quot;],&quot;text&quot;:[0,&quot;spa-sdk-23.4.4&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2343&quot;],&quot;text&quot;:[0,&quot;spa-sdk-23.4.3&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2342&quot;],&quot;text&quot;:[0,&quot;spa-sdk-23.4.2&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2341&quot;],&quot;text&quot;:[0,&quot;spa-sdk-23.4.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2340&quot;],&quot;text&quot;:[0,&quot;spa-sdk-23.4.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2332&quot;],&quot;text&quot;:[0,&quot;spa-sdk-23.3.2&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2331&quot;],&quot;text&quot;:[0,&quot;spa-sdk-23.3.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2330&quot;],&quot;text&quot;:[0,&quot;spa-sdk-23.3.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2320&quot;],&quot;text&quot;:[0,&quot;spa-sdk-23.2.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2310&quot;],&quot;text&quot;:[0,&quot;spa-sdk-23.1.0&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;spa-sdk-2300&quot;],&quot;text&quot;:[0,&quot;spa-sdk-23.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2205&quot;],&quot;text&quot;:[0,&quot;spa-sdk-22.0.5&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2204&quot;],&quot;text&quot;:[0,&quot;spa-sdk-22.0.4&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2203&quot;],&quot;text&quot;:[0,&quot;spa-sdk-22.0.3&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2202&quot;],&quot;text&quot;:[0,&quot;spa-sdk-22.0.2&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2201&quot;],&quot;text&quot;:[0,&quot;spa-sdk-22.0.1&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;spa-sdk-2200&quot;],&quot;text&quot;:[0,&quot;spa-sdk-22.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2100&quot;],&quot;text&quot;:[0,&quot;spa-sdk-21.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-2100-alpha0&quot;],&quot;text&quot;:[0,&quot;spa-sdk-21.0.0-alpha.0&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;spa-sdk-2000&quot;],&quot;text&quot;:[0,&quot;spa-sdk-20.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1902&quot;],&quot;text&quot;:[0,&quot;spa-sdk-19.0.2&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1901&quot;],&quot;text&quot;:[0,&quot;spa-sdk-19.0.1&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;spa-sdk-1900&quot;],&quot;text&quot;:[0,&quot;spa-sdk-19.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1801&quot;],&quot;text&quot;:[0,&quot;spa-sdk-18.0.1&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;spa-sdk-1800&quot;],&quot;text&quot;:[0,&quot;spa-sdk-18.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1720&quot;],&quot;text&quot;:[0,&quot;spa-sdk-17.2.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1711&quot;],&quot;text&quot;:[0,&quot;spa-sdk-17.1.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1710&quot;],&quot;text&quot;:[0,&quot;spa-sdk-17.1.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1701&quot;],&quot;text&quot;:[0,&quot;spa-sdk-17.0.1&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;spa-sdk-1700&quot;],&quot;text&quot;:[0,&quot;spa-sdk-17.0.0&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;spa-sdk-1600&quot;],&quot;text&quot;:[0,&quot;spa-sdk-16.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;v1551&quot;],&quot;text&quot;:[0,&quot;v15.5.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1550&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.5.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1546&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.4.6&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1545&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.4.5&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1544&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.4.4&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1543&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.4.3&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1542&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.4.2&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1541&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.4.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1540&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.4.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1533&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.3.3&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1532&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.3.2&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1531&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.3.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1530&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.3.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1522-0&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.2.2-0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1521&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.2.1&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1512&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.1.2&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1510&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.1.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1501-0&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.0.1-0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1500&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.0.0&quot;]}],[0,{&quot;depth&quot;:[0,4],&quot;slug&quot;:[0,&quot;spa-sdk-1500-1&quot;],&quot;text&quot;:[0,&quot;spa-sdk-15.0.0-1&quot;]}]]]}" ssr client="load" opts="{&quot;name&quot;:&quot;TableOfContents&quot;,&quot;value&quot;:true}" await-children><nav class="sticky top-0"><ul class="menu"><li><h2 id="on-this-page-heading" class="menu-title"><span class="">On this page</span></h2><ul><li><a href="#changelog" class="">Changelog</a></li><li><a href="#spa-sdk-2400" class="">spa-sdk-24.0.0</a></li><li><a href="#spa-sdk-2300" class="">spa-sdk-23.0.0</a></li><li><a href="#spa-sdk-2200" class="">spa-sdk-22.0.0</a></li><li><a href="#spa-sdk-2000" class="">spa-sdk-20.0.0</a></li><li><a href="#spa-sdk-1900" class="">spa-sdk-19.0.0</a></li><li><a href="#spa-sdk-1800" class="">spa-sdk-18.0.0</a></li><li><a href="#spa-sdk-1700" class="">spa-sdk-17.0.0</a></li><li><a href="#spa-sdk-1600" class="">spa-sdk-16.0.0</a></li></ul></li></ul><div class="divider lg:hidden"></div></nav><!--astro:end--></astro-island> </aside> </main> </body></html>
