@@ -84,6 +84,19 @@ const memoizedConfiguration = useMemo(() => {
   ...
 ````
 
+### Important Usage Notes
+
+#### Single BrPage Per Page/Route
+
+**Only use one `BrPage` component per page or route.** The `BrPage` component is designed to:
+
+- Fetch the page model from the Page Model API for a specific path
+- Set up CMS preview listeners for content updates
+- Provide page context to all child components
+- Manage the complete page state
+
+Using multiple `BrPage` components on the same page will cause conflicts and is not supported. If you need to render different page sections, use `BrComponent` within a single `BrPage` instead.
+
 ### Non-blocking render mode (NBRMode)
 
 Non-blocking rendering mode can be used to decrease the time for your application to load fully on the client side. By

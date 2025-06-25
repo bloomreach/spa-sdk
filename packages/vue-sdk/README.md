@@ -145,6 +145,20 @@ non-blocking render mode would allow this to be executed in parallel to requesti
   const mapping = {/* ... */};
 </script>
 ```
+
+### Important Usage Notes
+
+#### Single br-page Per Page/Route
+
+**Only use one `br-page` component per page or route.** The `br-page` component is designed to:
+
+- Fetch the page model from the Page Model API for a specific path
+- Set up CMS preview listeners for content updates
+- Provide page context to all child components
+- Manage the complete page state
+
+Using multiple `br-page` components on the same page will cause conflicts and is not supported. If you need to render different page sections, use `br-component` within a single `br-page` instead.
+
 ### Configuration
 
 The `br-page` component supports several options you may use to customize page
