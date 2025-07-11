@@ -18,7 +18,7 @@ pipeline {
   agent {
     docker {
       label 'docker'
-      image 'guergeiro/pnpm:18-8'
+              image 'guergeiro/pnpm:20-8'
       args '-v  /etc/passwd:/etc/passwd'
     }
   }

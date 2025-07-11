@@ -60,7 +60,7 @@
     "@angular/platform-server": "18.2.13",
     "@eslint/eslintrc": "3.2.0",
     "@types/jest": "29.5.12",
-    "@types/node": "18.11.9",
+    "@types/node": "20.17.9",
     "angular-eslint": "18.4.3",
     "eslint": "9.17.0",
     "eslint-plugin-import": "2.31.0",

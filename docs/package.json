@@ -26,7 +26,7 @@
     "@astrojs/react": "4.2.4",
     "@astrojs/tailwind": "6.0.2",
     "@types/html-escaper": "3.0.0",
-    "@types/node": "16.18.40",
+    "@types/node": "20.17.9",
     "@types/react": "19.1.2",
     "@types/react-dom": "19.1.2",
     "astro": "5.7.0",
