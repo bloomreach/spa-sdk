@@ -23,7 +23,6 @@ import { ParseUrlPipe } from '../../pipes/parse-url.pipe';
 
 @Component({
   selector: 'br-news-item',
-  standalone: true,
   imports: [
     CommonModule,
     BrSdkModule,
