@@ -22,6 +22,7 @@ import { BrProps } from './br-props.model';
 
 @Directive({
   selector: '[brNodeComponent]',
+  standalone: false,
 })
 export class BrNodeComponentDirective implements OnChanges, OnDestroy {
   @Input('brNodeComponent') component?: Component;

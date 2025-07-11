@@ -52,6 +52,7 @@ import { BrNodeContext, BrPageService } from './br-page.service';
   selector: 'br-page',
   templateUrl: './br-page.component.html',
   providers: [BrPageService],
+  standalone: false,
 })
 export class BrPageComponent implements AfterContentChecked, AfterContentInit, OnChanges, OnDestroy {
   /**

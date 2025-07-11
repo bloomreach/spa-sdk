@@ -19,7 +19,10 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MetaCollection } from '@bloomreach/spa-sdk';
 import { BrMetaDirective } from './br-meta.directive';
 
-@Directive({ selector: '[brMeta]' })
+@Directive({
+  selector: '[brMeta]',
+
+})
 class BrMetaTestDirective extends BrMetaDirective {
   @Input('brMeta') protected meta!: MetaCollection;
 }

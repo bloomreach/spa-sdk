@@ -33,12 +33,16 @@ jest.mock('@bloomreach/spa-sdk');
       <span>Template: {{ template }}</span>
     </ng-template>
   `,
+
 })
 class TemplateComponent {
   @ViewChild('template') template!: TemplateRef<BrComponentContext>;
 }
 
-@Component({ template: '<ng-container [brComponent]="component"></ng-container>' })
+@Component({
+  template: '<ng-container [brComponent]="component"></ng-container>',
+
+})
 class TestComponent {
   @Input() component?: SpaComponent | string;
 }

@@ -29,6 +29,7 @@ import { BrPageService } from './br-page/br-page.service';
     <span>Component: {{ component.getName() }}</span>
     <span>Page: {{ page.getTitle() }}</span>
   `,
+
 })
 class ComponentTestComponent {
   @Input() component!: SpaComponent;
@@ -49,12 +50,16 @@ class TestModule {}
       <span class="tail">Page: {{ page.getTitle() }}</span>
     </ng-template>
   `,
+
 })
 class TemplateComponent {
   @ViewChild('template') template!: TemplateRef<BrComponentContext>;
 }
 
-@Component({ template: '<ng-container #container [brNodeComponent]="component"></ng-container>' })
+@Component({
+  template: '<ng-container #container [brNodeComponent]="component"></ng-container>',
+
+})
 class TestComponent {
   @Input() component!: SpaComponent;
 

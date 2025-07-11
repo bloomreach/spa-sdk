@@ -41,6 +41,7 @@ Component({ selector: 'br-container-unordered-list', template: '' })(BrContainer
 @Component({
   selector: 'br-container-test',
   template: '<a></a>',
+
 })
 class ContainerTestComponent {}
 
@@ -55,7 +56,10 @@ class ContainerTestComponent {}
 })
 class TestModule {}
 
-@Component({ template: '<ng-container [brNodeContainer]="container"></ng-container>' })
+@Component({
+  template: '<ng-container [brNodeContainer]="container"></ng-container>',
+
+})
 class TestComponent {
   @Input() container!: Container;
 }

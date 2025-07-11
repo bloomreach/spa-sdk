@@ -22,7 +22,10 @@ import { BrPageComponent } from './br-page/br-page.component';
 /**
  * The button directive that opens for editing a content.
  */
-@Directive({ selector: '[brManageContentButton]' })
+@Directive({
+  selector: '[brManageContentButton]',
+  standalone: false,
+})
 export class BrManageContentButtonDirective extends BrMetaDirective implements OnChanges, ManageContentButton {
   @Input('brManageContentButton') content?: ManageContentButton['content'];
 

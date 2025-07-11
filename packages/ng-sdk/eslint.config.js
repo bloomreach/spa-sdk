@@ -139,6 +139,9 @@ module.exports = tseslint.config(
           markers: ['/', '!'],
         },
       ],
+      '@angular-eslint/prefer-standalone': [
+        'off'
+      ],
       '@angular-eslint/directive-selector': [
         'error',
         {

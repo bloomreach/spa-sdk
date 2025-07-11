@@ -22,7 +22,10 @@ import { BrPageComponent } from './br-page/br-page.component';
 /**
  * The button directive that opens a menu editor.
  */
-@Directive({ selector: '[brManageMenuButton]' })
+@Directive({
+  selector: '[brManageMenuButton]',
+  standalone: false,
+})
 export class BrManageMenuButtonDirective extends BrMetaDirective implements OnChanges {
   /**
    * The related menu model.

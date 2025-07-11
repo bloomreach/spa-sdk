@@ -34,6 +34,7 @@ import { BrProps } from './br-props.model';
 
 @Directive({
   selector: '[brNodeContainerItem]',
+  standalone: false,
 })
 export class BrNodeContainerItemDirective extends BrNodeComponentDirective implements OnChanges, OnDestroy {
   constructor(

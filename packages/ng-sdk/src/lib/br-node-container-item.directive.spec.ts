@@ -31,6 +31,7 @@ Component({
 @Component({
   selector: 'br-container-item-test',
   template: '<a>{{ component.getModels().data }}</a>',
+
 })
 class ContainerItemTestComponent {}
 
@@ -39,7 +40,10 @@ class ContainerItemTestComponent {}
 })
 class TestModule {}
 
-@Component({ template: '<ng-container [brNodeContainerItem]="containerItem"></ng-container>' })
+@Component({
+  template: '<ng-container [brNodeContainerItem]="containerItem"></ng-container>',
+
+})
 class TestComponent {
   @Input() containerItem!: ContainerItem;
 }

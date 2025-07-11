@@ -17,7 +17,9 @@
 import { Directive, OnChanges, OnDestroy, Optional, SimpleChanges, TemplateRef, ViewContainerRef } from '@angular/core';
 import { MetaCollection } from '@bloomreach/spa-sdk';
 
-@Directive()
+@Directive({
+  standalone: false,
+})
 export abstract class BrMetaDirective implements OnChanges, OnDestroy {
   protected meta?: MetaCollection | undefined;
 
