@@ -29,7 +29,7 @@ import { BrPageService } from './br-page/br-page.service';
     <span>Component: {{ component.getName() }}</span>
     <span>Page: {{ page.getTitle() }}</span>
   `,
-
+  standalone: false,
 })
 class ComponentTestComponent {
   @Input() component!: SpaComponent;
@@ -50,7 +50,7 @@ class TestModule {}
       <span class="tail">Page: {{ page.getTitle() }}</span>
     </ng-template>
   `,
-
+  standalone: false,
 })
 class TemplateComponent {
   @ViewChild('template') template!: TemplateRef<BrComponentContext>;
@@ -58,7 +58,7 @@ class TemplateComponent {
 
 @Component({
   template: '<ng-container #container [brNodeComponent]="component"></ng-container>',
-
+  standalone: false,
 })
 class TestComponent {
   @Input() component!: SpaComponent;

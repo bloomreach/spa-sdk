@@ -23,7 +23,7 @@ import { BrPageComponent } from './br-page/br-page.component';
 
 @Component({
   template: '<a [brManageMenuButton]="menu"></a>',
-
+  standalone: false,
 })
 class TestComponent {
   @Input() menu!: Menu;

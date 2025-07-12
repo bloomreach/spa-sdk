@@ -21,7 +21,7 @@ import { BrMetaDirective } from './br-meta.directive';
 
 @Directive({
   selector: '[brMeta]',
-
+  standalone: false,
 })
 class BrMetaTestDirective extends BrMetaDirective {
   @Input('brMeta') protected meta!: MetaCollection;
@@ -56,7 +56,7 @@ describe('BrMetaDirective', () => {
   describe('ngOnChanges', () => {
     describe('when there is no template', () => {
       beforeAll(() => {
-        Component({ template: '<a [brMeta]="meta"></a>' })(TestComponent);
+        Component({ template: '<a [brMeta]="meta"></a>', standalone: false })(TestComponent);
       });
 
       it('should surround the container with meta', () => {
@@ -89,6 +89,7 @@ describe('BrMetaDirective', () => {
               <span></span>
             </ng-template>
           `,
+          standalone: false,
         })(TestComponent);
       });
 
@@ -113,6 +114,7 @@ describe('BrMetaDirective', () => {
             <a></a>
           </ng-template>
         `,
+        standalone: false,
       })(TestComponent);
     });
 
