@@ -37,7 +37,14 @@
             "prerender": true,
             "ssr": {
               "entry": "server.ts"
-            }
+            },
+            "allowedCommonJsDependencies": [
+              "emittery",
+              "cookie",
+              "sanitize-html",
+              "inversify",
+              "reflect-metadata"
+            ]
           },
           "configurations": {
             "production": {
