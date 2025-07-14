@@ -86,7 +86,6 @@ module.exports = tseslint.config(
       'import-newlines/enforce': [
         'error',
         {
-          items: 8,
           'max-len': 120,
         },
       ],
