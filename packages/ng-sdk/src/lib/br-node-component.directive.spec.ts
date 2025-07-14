@@ -14,7 +14,14 @@
  * limitations under the License.
  */
 
-import { Component, ElementRef, Input, NgModule, TemplateRef, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  NgModule,
+  TemplateRef,
+  ViewChild,
+} from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component as SpaComponent, MetaCollection, Page } from '@bloomreach/spa-sdk';
 import { BehaviorSubject } from 'rxjs';

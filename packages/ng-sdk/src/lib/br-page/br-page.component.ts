@@ -93,8 +93,7 @@ export class BrPageComponent implements AfterContentChecked, AfterContentInit, O
    * By default, it equals to `brPage`.
    * If `false` is passed then the state transferring feature will be disabled.
    */
-  @Input() stateKey: StateKey<PageModel | undefined> | false =
-    makeStateKey('brPage');
+  @Input() stateKey: StateKey<PageModel | undefined> | false = makeStateKey('brPage');
 
   /**
    * The current state of the page component.
@@ -127,9 +126,7 @@ export class BrPageComponent implements AfterContentChecked, AfterContentInit, O
     this.state
       .pipe(
         filter(isPage),
-        switchMap((page) =>
-          this.afterContentChecked$.pipe(take(1), mapTo(page)),
-        ),
+        switchMap((page) => this.afterContentChecked$.pipe(take(1), mapTo(page))),
       )
       .subscribe((page) => zone.runOutsideAngular(() => page.sync()));
 
@@ -139,9 +136,8 @@ export class BrPageComponent implements AfterContentChecked, AfterContentInit, O
         filter(isPage),
       )
       .subscribe(
-        (page) =>
-          this.stateKey &&
-          this.transferState?.set(this.stateKey, page.toJSON()),
+        (page) => this.stateKey
+          && this.transferState?.set(this.stateKey, page.toJSON()),
       );
   }
 
@@ -168,12 +164,12 @@ export class BrPageComponent implements AfterContentChecked, AfterContentInit, O
     }
 
     if (
-      changes.stateKey?.previousValue &&
-      this.isPlatformServer(this.platform)
+      changes.stateKey?.previousValue
+      && this.isPlatformServer(this.platform)
     ) {
       if (
-        changes.stateKey.currentValue &&
-        this.transferState?.hasKey(changes.stateKey.previousValue)
+        changes.stateKey.currentValue
+        && this.transferState?.hasKey(changes.stateKey.previousValue)
       ) {
         this.transferState?.set(
           changes.stateKey.currentValue,
@@ -201,9 +197,9 @@ export class BrPageComponent implements AfterContentChecked, AfterContentInit, O
 
   private initialize(page: Page | PageModel | undefined): void {
     if (
-      this.stateKey &&
-      this.isPlatformBrowser(this.platform) &&
-      this.transferState?.hasKey(this.stateKey)
+      this.stateKey
+      && this.isPlatformBrowser(this.platform)
+      && this.transferState?.hasKey(this.stateKey)
     ) {
       page = page ?? this.transferState?.get(this.stateKey, undefined);
       this.transferState?.remove(this.stateKey);

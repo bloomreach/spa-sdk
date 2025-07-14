@@ -14,7 +14,13 @@
  * limitations under the License.
  */
 
-import { isContainer, isContainerItem, Component, Container, ContainerItem } from '@bloomreach/spa-sdk';
+import {
+  isContainer,
+  isContainerItem,
+  Component,
+  Container,
+  ContainerItem,
+} from '@bloomreach/spa-sdk';
 import { BrNodeTypePipe } from './br-node-type.pipe';
 
 jest.mock('@bloomreach/spa-sdk');

@@ -14,7 +14,16 @@
  * limitations under the License.
  */
 
-import { Directive, Injector, Input, OnChanges, OnDestroy, SimpleChanges, Type, ViewContainerRef } from '@angular/core';
+import {
+  Directive,
+  Injector,
+  Input,
+  OnChanges,
+  OnDestroy,
+  SimpleChanges,
+  Type,
+  ViewContainerRef,
+} from '@angular/core';
 import { Component, MetaCollection } from '@bloomreach/spa-sdk';
 import { BrNodeDirective } from './br-node.directive';
 import { BrPageService } from './br-page/br-page.service';
