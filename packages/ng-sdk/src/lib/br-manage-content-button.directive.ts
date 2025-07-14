@@ -14,7 +14,15 @@
  * limitations under the License.
  */
 
-import { Directive, Input, OnChanges, Optional, SimpleChanges, TemplateRef, ViewContainerRef } from '@angular/core';
+import {
+  Directive,
+  Input,
+  OnChanges,
+  Optional,
+  SimpleChanges,
+  TemplateRef,
+  ViewContainerRef,
+} from '@angular/core';
 import { ManageContentButton, TYPE_MANAGE_CONTENT_BUTTON } from '@bloomreach/spa-sdk';
 import { BrMetaDirective } from './br-meta.directive';
 import { BrPageComponent } from './br-page/br-page.component';
@@ -22,7 +30,10 @@ import { BrPageComponent } from './br-page/br-page.component';
 /**
  * The button directive that opens for editing a content.
  */
-@Directive({ selector: '[brManageContentButton]' })
+@Directive({
+  selector: '[brManageContentButton]',
+  standalone: false,
+})
 export class BrManageContentButtonDirective extends BrMetaDirective implements OnChanges, ManageContentButton {
   @Input('brManageContentButton') content?: ManageContentButton['content'];
 

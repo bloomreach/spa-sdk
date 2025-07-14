@@ -21,6 +21,7 @@ import { Container, Page } from '@bloomreach/spa-sdk';
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'ul.br-container-unordered-list',
   templateUrl: './br-container-unordered-list.component.html',
+  standalone: false,
 })
 export class BrContainerUnorderedListComponent {
   @Input() component!: Container;

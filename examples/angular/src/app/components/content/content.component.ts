@@ -22,7 +22,6 @@ import { sanitize } from '../../utils/sanitize';
 
 @Component({
   selector: 'br-content',
-  standalone: true,
   imports: [
     CommonModule,
     BrSdkModule,

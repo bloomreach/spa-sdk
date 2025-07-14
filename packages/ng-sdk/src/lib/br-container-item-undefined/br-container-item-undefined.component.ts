@@ -20,6 +20,7 @@ import { ContainerItem } from '@bloomreach/spa-sdk';
 @Component({
   selector: 'br-container-item-undefined',
   templateUrl: './br-container-item-undefined.component.html',
+  standalone: false,
 })
 export class BrContainerItemUndefinedComponent {
   @Input() component!: ContainerItem;

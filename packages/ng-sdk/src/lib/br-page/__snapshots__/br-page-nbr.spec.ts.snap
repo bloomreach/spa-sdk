@@ -5,7 +5,9 @@ exports[`BrPageComponent template render should not render children if there is 
   id="root0"
 >
   <div>
-    <br-page>
+    <br-page
+      ngskiphydration="true"
+    >
       
       
     </br-page>
@@ -18,7 +20,9 @@ exports[`BrPageComponent template render should render children if there is no p
   id="root1"
 >
   <div>
-    <br-page>
+    <br-page
+      ngskiphydration="true"
+    >
       
       
       

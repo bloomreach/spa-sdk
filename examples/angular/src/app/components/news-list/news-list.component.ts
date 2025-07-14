@@ -23,7 +23,6 @@ import { NewsItemComponent } from '../news-item/news-item.component';
 
 @Component({
   selector: 'br-news-list',
-  standalone: true,
   imports: [
     CommonModule,
     BrSdkModule,

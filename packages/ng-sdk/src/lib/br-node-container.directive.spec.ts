@@ -33,14 +33,27 @@ import { BrNodeContainerDirective } from './br-node-container.directive';
 import { BrNodeDirective } from './br-node.directive';
 import { BrPageService } from './br-page/br-page.service';
 
-Component({ selector: 'br-container-box', template: '' })(BrContainerBoxComponent);
-Component({ selector: 'br-container-inline', template: '' })(BrContainerInlineComponent);
-Component({ selector: 'br-container-ordered-list', template: '' })(BrContainerOrderedListComponent);
-Component({ selector: 'br-container-unordered-list', template: '' })(BrContainerUnorderedListComponent);
+Component({ selector: 'br-container-box', template: '', standalone: false })(
+  BrContainerBoxComponent,
+);
+Component({ selector: 'br-container-inline', template: '', standalone: false })(
+  BrContainerInlineComponent,
+);
+Component({
+  selector: 'br-container-ordered-list',
+  template: '',
+  standalone: false,
+})(BrContainerOrderedListComponent);
+Component({
+  selector: 'br-container-unordered-list',
+  template: '',
+  standalone: false,
+})(BrContainerUnorderedListComponent);
 
 @Component({
   selector: 'br-container-test',
   template: '<a></a>',
+  standalone: false,
 })
 class ContainerTestComponent {}
 
@@ -55,7 +68,10 @@ class ContainerTestComponent {}
 })
 class TestModule {}
 
-@Component({ template: '<ng-container [brNodeContainer]="container"></ng-container>' })
+@Component({
+  template: '<ng-container [brNodeContainer]="container"></ng-container>',
+  standalone: false,
+})
 class TestComponent {
   @Input() container!: Container;
 }
@@ -83,18 +99,16 @@ describe('BrNodeContainerDirective', () => {
     } as typeof page;
   });
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [TestComponent, BrNodeDirective, BrNodeContainerDirective],
-        imports: [TestModule],
-        providers: [
-          { provide: BrNodeDirective, useFactory: () => node },
-          { provide: BrPageService, useFactory: () => page },
-        ],
-      }).compileComponents();
-    }),
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [TestComponent, BrNodeDirective, BrNodeContainerDirective],
+      imports: [TestModule],
+      providers: [
+        { provide: BrNodeDirective, useFactory: () => node },
+        { provide: BrPageService, useFactory: () => page },
+      ],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TestComponent);

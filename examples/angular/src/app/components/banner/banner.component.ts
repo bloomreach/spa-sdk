@@ -24,7 +24,6 @@ import { ParseUrlPipe } from '../../pipes/parse-url.pipe';
 
 @Component({
   selector: 'br-banner',
-  standalone: true,
   imports: [
     CommonModule,
     BrSdkModule,

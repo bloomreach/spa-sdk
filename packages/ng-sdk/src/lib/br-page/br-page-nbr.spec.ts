@@ -65,6 +65,7 @@ describe('BrPageComponent', () => {
   @Component({
     selector: 'br-my-component',
     template: '<div>Hello World</div>',
+    standalone: false,
   })
   class MyComponent implements OnInit {
     ngOnInit(): void {
@@ -83,6 +84,7 @@ describe('BrPageComponent', () => {
         </br-page>
       </div>
     `,
+    standalone: false,
   })
   class WrapperComponent {
     configuration: BrPageComponent['configuration'] = {

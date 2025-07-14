@@ -14,7 +14,15 @@
  * limitations under the License.
  */
 
-import { Directive, Input, OnChanges, Optional, SimpleChanges, TemplateRef, ViewContainerRef } from '@angular/core';
+import {
+  Directive,
+  Input,
+  OnChanges,
+  Optional,
+  SimpleChanges,
+  TemplateRef,
+  ViewContainerRef,
+} from '@angular/core';
 import { Menu, TYPE_MANAGE_MENU_BUTTON } from '@bloomreach/spa-sdk';
 import { BrMetaDirective } from './br-meta.directive';
 import { BrPageComponent } from './br-page/br-page.component';
@@ -22,7 +30,10 @@ import { BrPageComponent } from './br-page/br-page.component';
 /**
  * The button directive that opens a menu editor.
  */
-@Directive({ selector: '[brManageMenuButton]' })
+@Directive({
+  selector: '[brManageMenuButton]',
+  standalone: false,
+})
 export class BrManageMenuButtonDirective extends BrMetaDirective implements OnChanges {
   /**
    * The related menu model.

@@ -32,7 +32,6 @@ import { environment } from '../../../environments/environment.development';
 
 @Component({
   selector: 'br-index',
-  standalone: true,
   imports: [
     CommonModule,
     BrSdkModule,

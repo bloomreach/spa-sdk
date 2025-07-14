@@ -21,6 +21,7 @@ import { Container, Page } from '@bloomreach/spa-sdk';
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'div.br-container-inline',
   templateUrl: './br-container-inline.component.html',
+  standalone: false,
 })
 export class BrContainerInlineComponent {
   @Input() component!: Container;

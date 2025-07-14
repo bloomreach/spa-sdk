@@ -38,9 +38,24 @@ import {
   StateKey,
   TransferState,
 } from '@angular/core';
-import { Configuration, destroy, initialize, isPage, Page, PageModel } from '@bloomreach/spa-sdk';
+import {
+  Configuration,
+  destroy,
+  initialize,
+  isPage,
+  Page,
+  PageModel,
+} from '@bloomreach/spa-sdk';
 import { from, of, Subject } from 'rxjs';
-import { filter, map, mapTo, pairwise, pluck, switchMap, take } from 'rxjs/operators';
+import {
+  filter,
+  map,
+  mapTo,
+  pairwise,
+  pluck,
+  switchMap,
+  take,
+} from 'rxjs/operators';
 import type { BrComponentContext } from '../br-component.directive';
 import { BrProps } from '../br-props.model';
 import { BrNodeContext, BrPageService } from './br-page.service';
@@ -52,6 +67,8 @@ import { BrNodeContext, BrPageService } from './br-page.service';
   selector: 'br-page',
   templateUrl: './br-page.component.html',
   providers: [BrPageService],
+  host: { ngSkipHydration: 'true' },
+  standalone: false,
 })
 export class BrPageComponent implements AfterContentChecked, AfterContentInit, OnChanges, OnDestroy {
   /**
@@ -90,7 +107,8 @@ export class BrPageComponent implements AfterContentChecked, AfterContentInit, O
 
   @ViewChild('brNode', { static: true }) node!: TemplateRef<BrNodeContext>;
 
-  @ContentChild(TemplateRef, { static: true }) private template?: TemplateRef<BrComponentContext>;
+  @ContentChild(TemplateRef, { static: true })
+  private template?: TemplateRef<BrComponentContext>;
 
   private afterContentChecked$ = new Subject();
 
@@ -117,7 +135,10 @@ export class BrPageComponent implements AfterContentChecked, AfterContentInit, O
         filter(() => this.isPlatformServer(this.platform)),
         filter(isPage),
       )
-      .subscribe((page) => this.stateKey && this.transferState?.set(this.stateKey, page.toJSON()));
+      .subscribe(
+        (page) => this.stateKey
+          && this.transferState?.set(this.stateKey, page.toJSON()),
+      );
   }
 
   get context(): BrNodeContext {
@@ -142,8 +163,14 @@ export class BrPageComponent implements AfterContentChecked, AfterContentInit, O
       this.pageService.mapping = this.mapping;
     }
 
-    if (changes.stateKey?.previousValue && this.isPlatformServer(this.platform)) {
-      if (changes.stateKey.currentValue && this.transferState?.hasKey(changes.stateKey.previousValue)) {
+    if (
+      changes.stateKey?.previousValue
+      && this.isPlatformServer(this.platform)
+    ) {
+      if (
+        changes.stateKey.currentValue
+        && this.transferState?.hasKey(changes.stateKey.previousValue)
+      ) {
         this.transferState?.set(
           changes.stateKey.currentValue,
           this.transferState?.get(changes.stateKey.previousValue, undefined),
@@ -169,20 +196,33 @@ export class BrPageComponent implements AfterContentChecked, AfterContentInit, O
   }
 
   private initialize(page: Page | PageModel | undefined): void {
-    if (this.stateKey && this.isPlatformBrowser(this.platform) && this.transferState?.hasKey(this.stateKey)) {
+    if (
+      this.stateKey
+      && this.isPlatformBrowser(this.platform)
+      && this.transferState?.hasKey(this.stateKey)
+    ) {
       page = page ?? this.transferState?.get(this.stateKey, undefined);
       this.transferState?.remove(this.stateKey);
     }
 
-    const configuration = { httpClient: this.request, ...this.configuration } as Configuration;
-    const observable = page ? of(initialize(configuration, page)) : from(initialize(configuration));
+    const configuration = {
+      httpClient: this.request,
+      ...this.configuration,
+    } as Configuration;
+    const observable = page
+      ? of(initialize(configuration, page))
+      : from(initialize(configuration));
 
     observable.pipe(take(1)).subscribe((state) => {
       this.state.next(state);
     });
   }
 
-  private request(...[{ data: body, headers, method, url }]: Parameters<Configuration['httpClient']>): Promise<void | {
+  private request(
+    ...[{ data: body, headers, method, url }]: Parameters<
+      Configuration['httpClient']
+    >
+  ): Promise<void | {
     data: PageModel;
   }> {
     return this.httpClient

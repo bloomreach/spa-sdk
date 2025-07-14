@@ -52,7 +52,10 @@ export interface BrComponentContext {
 /**
  * The brXM component.
  */
-@Directive({ selector: '[brComponent]' })
+@Directive({
+  selector: '[brComponent]',
+  standalone: false,
+})
 export class BrComponentDirective implements OnChanges, OnDestroy, OnInit {
   /**
    * The component instance or a path to a component.
