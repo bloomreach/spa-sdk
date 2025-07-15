@@ -89,6 +89,8 @@ packages:
 
 ## Development Commands
 
+**NOTE** For type checking just run the build command unless you are checking the vue-sdk which has a specific 'type-check' command to run.
+
 ### Root Level Commands
 ```bash
 pnpm install          # Install all dependencies

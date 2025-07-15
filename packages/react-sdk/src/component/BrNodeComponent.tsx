@@ -15,26 +15,19 @@
  */
 
 import { Component } from '@bloomreach/spa-sdk';
-import React from 'react';
+import React, { useContext } from 'react';
 import { BrMeta } from '../meta';
 import { BrMappingContext } from './BrMappingContext';
 import { BrProps } from './BrProps';
 
-export class BrNodeComponent<T extends Component> extends React.Component<React.PropsWithChildren<BrProps<T>>> {
-  static contextType = BrMappingContext;
+export function BrNodeComponent<T extends Component>(props: React.PropsWithChildren<BrProps<T>>): React.ReactElement {
+  const context = useContext(BrMappingContext);
+  const { component, children } = props;
 
-  context!: React.ContextType<typeof BrMappingContext>;
+  const mapping = component && (context[component.getName()] as React.ComponentType<BrProps>);
+  const meta = component?.getMeta();
 
-  protected getMapping(): React.ComponentType<BrProps> | undefined {
-    return this.props.component && (this.context[this.props.component.getName()] as React.ComponentType<BrProps>);
-  }
+  const content = mapping ? React.createElement(mapping, props) : children;
 
-  render(): React.ReactNode {
-    const mapping = this.getMapping();
-    const meta = this.props.component?.getMeta();
-
-    const children = mapping ? React.createElement(mapping, this.props) : this.props.children;
-
-    return React.createElement(BrMeta, { meta }, children);
-  }
+  return React.createElement(BrMeta, { meta }, content);
 }

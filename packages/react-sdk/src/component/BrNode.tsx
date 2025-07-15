@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import React from 'react';
+import React, { useContext } from 'react';
 import { isContainer, isContainerItem, Component } from '@bloomreach/spa-sdk';
 import { BrMeta } from '../meta';
 import { BrPageContext } from '../page';
@@ -27,14 +27,10 @@ interface BrNodeProps {
   component?: Component;
 }
 
-export class BrNode extends React.Component<React.PropsWithChildren<BrNodeProps>> {
-  static contextType = BrPageContext;
+export function BrNode({ children, component }: React.PropsWithChildren<BrNodeProps>): React.ReactElement {
+  const context = useContext(BrPageContext);
 
-  context: React.ContextType<typeof BrPageContext>;
-
-  private renderNode(): React.ReactElement | React.ReactNode {
-    const { children, component } = this.props;
-
+  function renderNode(): React.ReactElement | React.ReactNode {
     if (React.Children.count(children)) {
       return <BrMeta meta={component?.getMeta()}>{children}</BrMeta>;
     }
@@ -44,7 +40,7 @@ export class BrNode extends React.Component<React.PropsWithChildren<BrNodeProps>
 
     if (isContainer(component)) {
       return (
-        <BrNodeContainer component={component} page={this.context!}>
+        <BrNodeContainer component={component} page={context!}>
           {childrenList}
         </BrNodeContainer>
       );
@@ -52,22 +48,18 @@ export class BrNode extends React.Component<React.PropsWithChildren<BrNodeProps>
 
     if (isContainerItem(component)) {
       return (
-        <BrNodeContainerItem component={component} page={this.context!}>
+        <BrNodeContainerItem component={component} page={context!}>
           {childrenList}
         </BrNodeContainerItem>
       );
     }
 
     return (
-      <BrNodeComponent component={component} page={this.context!}>
+      <BrNodeComponent component={component} page={context!}>
         {childrenList}
       </BrNodeComponent>
     );
   }
 
-  render(): React.ReactElement {
-    const { component } = this.props;
-
-    return <BrComponentContext.Provider value={component}>{this.renderNode()}</BrComponentContext.Provider>;
-  }
+  return <BrComponentContext.Provider value={component}>{renderNode()}</BrComponentContext.Provider>;
 }
