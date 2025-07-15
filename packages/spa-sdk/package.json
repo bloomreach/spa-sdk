@@ -28,7 +28,7 @@
   ],
   "scripts": {
     "build": "rollup -c rollup.config.js",
-    "dev": "npm run build -- --watch",
+    "dev": "rollup -c rollup.config.js --watch",
     "docs": "typedoc",
     "lint": "eslint --ext js,ts src",
     "test": "jest"
