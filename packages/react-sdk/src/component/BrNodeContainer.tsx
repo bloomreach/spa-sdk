@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import React, { useContext } from 'react';
 import {
   Container,
   TYPE_CONTAINER_INLINE,
@@ -21,8 +22,9 @@ import {
   TYPE_CONTAINER_ORDERED_LIST,
   TYPE_CONTAINER_UNORDERED_LIST,
 } from '@bloomreach/spa-sdk';
-import { BrNodeComponent } from './BrNodeComponent';
 import { BrProps } from './BrProps';
+import { BrMappingContext } from './BrMappingContext';
+import { BrMeta } from '../meta';
 import {
   BrContainerBox,
   BrContainerInline,
@@ -31,12 +33,15 @@ import {
   BrContainerUnorderedList,
 } from '../cms';
 
-export class BrNodeContainer extends BrNodeComponent<Container> {
-  protected getMapping(): React.ComponentType<BrProps> {
-    const type = this.props.component?.getType();
+export function BrNodeContainer(props: React.PropsWithChildren<BrProps<Container>>): React.ReactElement {
+  const context = useContext(BrMappingContext);
+  const { component, children } = props;
 
-    if (type && type in this.context) {
-      return this.context[type] as React.ComponentType<BrProps>;
+  const getMapping = (): React.ComponentType<BrProps> => {
+    const type = component?.getType();
+
+    if (type && type in context) {
+      return context[type] as React.ComponentType<BrProps>;
     }
 
     switch (type) {
@@ -51,5 +56,11 @@ export class BrNodeContainer extends BrNodeComponent<Container> {
       default:
         return BrContainerBox;
     }
-  }
+  };
+
+  const mapping = getMapping();
+  const meta = component?.getMeta();
+  const content = mapping ? React.createElement(mapping, props) : children;
+
+  return React.createElement(BrMeta, { meta }, content);
 }

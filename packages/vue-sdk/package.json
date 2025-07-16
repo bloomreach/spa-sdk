@@ -45,8 +45,8 @@
     "test": "vitest --watch=false",
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit -p tsconfig.app.json --composite false",
-    "type-check:tests": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
-    "type-check:watch": "npm run type-check -- --watch"
+    "type-check:watch": "vue-tsc --noEmit -p tsconfig.app.json --composite false --watch",
+    "type-check:tests": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false"
   },
   "peerDependencies": {
     "vue": "^3.2.45"

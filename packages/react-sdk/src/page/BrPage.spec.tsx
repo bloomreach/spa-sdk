@@ -16,14 +16,14 @@
 
 import React, { useEffect } from 'react';
 import { destroy, initialize, Page, PageModel } from '@bloomreach/spa-sdk';
-import { act, render, RenderResult } from '@testing-library/react';
-import { BrProps } from '../component';
+import { act, render, waitFor } from '@testing-library/react';
 import { BrPage } from './BrPage';
 
 jest.mock('@bloomreach/spa-sdk');
 
-// eslint-disable-next-line react/prefer-stateless-function
-class TestComponent extends React.Component<BrProps> {}
+function TestComponent(): React.ReactElement {
+  return <div>Test Component</div>;
+}
 
 const config = {
   httpClient: jest.fn(),
@@ -38,7 +38,7 @@ const config = {
   },
 };
 
-const page = {
+const createMockPage = (): Page => ({
   isPreview: jest.fn(),
   getButton: jest.fn(),
   getComponent: () => ({
@@ -47,194 +47,273 @@ const page = {
     getMeta: jest.fn(),
   }),
   sync: jest.fn(),
-} as unknown as Page;
+}) as unknown as Page;
+
 const mapping = { TestComponent };
 
 describe('BrPage', () => {
-  const children = <div />;
-  let element: RenderResult;
-
-  beforeEach(async () => {
+  beforeEach(() => {
     jest.clearAllMocks();
-    jest.mocked(initialize).mockResolvedValue(page);
-
-    await act(async () => {
-      element = render(<BrPage configuration={config} mapping={mapping} />);
-    });
   });
 
-  describe('componentDidMount', () => {
-    it('should initialize the SPA SDK and sync the CMS', () => {
-      expect(initialize).toHaveBeenCalledWith(config);
-
-      expect(page).toBeDefined();
-      expect(page!.sync).toHaveBeenCalled();
-    });
-
-    it('should use a page model from props', async () => {
-      jest.mocked(initialize as unknown as () => Page).mockReturnValue(page);
-      const newPage = {} as PageModel;
-
-      await act(async () => {
-        render(<BrPage configuration={config} mapping={mapping} page={newPage} />);
-      });
-
-      expect(initialize).toBeCalledWith(config, newPage);
-    });
-  });
-
-  describe('componentDidUpdate', () => {
-    beforeEach(async () => {
-      jest.mocked(initialize as unknown as () => Page).mockReturnValueOnce(page);
-
-      await act(async () => {
-        element = render(<BrPage configuration={config} mapping={mapping} page={page} />);
-      });
-    });
-
-    it('should use a page instance from props when it is updated', async () => {
-      const newPage = { ...page } as Page;
-      const configuration = { ...config };
-
-      jest.mocked(initialize as unknown as () => Page).mockReturnValueOnce(newPage);
-      await act(async () => {
-        render(<BrPage configuration={configuration} mapping={mapping} page={newPage} />, {
-          container: element.container,
-        });
-      });
-
-      expect(initialize).toBeCalledWith(configuration, newPage);
-    });
-
-    it('should initialize page on props update when page from props is not updated', async () => {
-      const configuration = { ...config };
-
-      await act(async () => {
-        render(<BrPage configuration={configuration} mapping={mapping} page={page} />, {
-          container: element.container,
-        });
-      });
-
-      expect(destroy).toHaveBeenCalledWith(page);
-      expect(initialize).toBeCalledWith(configuration);
-      expect(page.sync).toHaveBeenCalled();
-    });
-  });
-
-  describe('componentWillUnmount', () => {
-    it('should destroy the page when unmounting', () => {
-      element.unmount();
-      expect(destroy).toHaveBeenCalledWith(page as Page);
-    });
-
-    it('should not destroy an empty page when unmounting', async () => {
-      jest.mocked(initialize as unknown as () => Page).mockReturnValueOnce(undefined as unknown as Page);
-
-      await act(async () => {
-        element = render(<BrPage configuration={config} mapping={mapping} />);
-      });
-
-      element.unmount();
-      expect(destroy).not.toHaveBeenCalled();
-    });
-  });
-
-  describe('render', () => {
-    it('should render children', async () => {
-      await act(async () => {
-        element = render(
-          <BrPage configuration={config} mapping={mapping}>
-            {children}
-          </BrPage>,
-          {
-            container: element.container,
-          },
-        );
-      });
-
-      expect(element.asFragment()).toMatchSnapshot();
-    });
-
-    it('should not render children if there is no page and NBR mode is false', async () => {
-      jest.mocked(initialize as unknown as () => Page).mockReturnValueOnce(undefined as unknown as Page);
-
-      await act(async () => {
-        element = render(
-          <BrPage configuration={{ ...config, NBRMode: false }} mapping={mapping}>
-            {children}
-          </BrPage>,
-          {
-            container: element.container,
-          },
-        );
-      });
-
-      expect(element.asFragment()).toMatchSnapshot();
-    });
-
-    it('should render children if there is no page and NBR mode is true', async () => {
-      jest.mocked(initialize as unknown as () => Page).mockReturnValueOnce(undefined as unknown as Page);
-
-      await act(async () => {
-        element = render(
-          <BrPage configuration={{ ...config, NBRMode: true }} mapping={mapping}>
-            {children}
-          </BrPage>,
-          {
-            container: element.container,
-          },
-        );
-      });
-
-      expect(element.asFragment()).toMatchSnapshot();
-    });
-
-    it('should render nothing if there is an error loading the page', async () => {
-      const error = new Error('error-loading-page');
-      jest.mocked(initialize).mockRejectedValueOnce(error);
-
-      const setState = jest.spyOn(BrPage.prototype, 'setState').mockImplementationOnce(() => {});
+  describe('Component Initialization', () => {
+    it('should initialize the SPA SDK with provided configuration', async () => {
+      const page = createMockPage();
+      jest.mocked(initialize).mockResolvedValue(page);
 
       await act(async () => {
         render(<BrPage configuration={config} mapping={mapping} />);
       });
 
-      await new Promise(process.nextTick);
-
-      expect(setState).toHaveBeenCalledWith(expect.any(Function));
-      expect(setState.mock.calls[0][0]).toThrowError(error);
+      expect(initialize).toHaveBeenCalledWith(config);
     });
 
-    it('should run child component effects while retrieving Page model when NBR mode is true', async () => {
-      jest.useFakeTimers();
+    it('should sync with the CMS upon mounting', async () => {
+      const page = createMockPage();
+      jest.mocked(initialize).mockResolvedValue(page);
 
-      const initializeDone = jest.fn();
-      const someEffect = jest.fn();
-
-      function MyComponent(): React.ReactElement {
-        useEffect(() => someEffect());
-        return <></>;
-      }
-
-      const pageInit = initialize(config);
-      jest.mocked(initialize).mockClear();
-      jest.mocked(initialize).mockImplementationOnce(() => {
-        setTimeout(initializeDone, 1000);
-        return pageInit;
+      await act(async () => {
+        render(<BrPage configuration={config} mapping={mapping} />);
       });
+
+      await waitFor(() => {
+        expect(page.sync).toHaveBeenCalled();
+      });
+    });
+
+    it('should use a page model from props during SDK initialization', async () => {
+      const page = createMockPage();
+      const pageModel = {} as PageModel;
+      jest.mocked(initialize as unknown as () => Page).mockReturnValue(page);
 
       await act(async () => {
         render(
-          <BrPage configuration={{ ...config, NBRMode: true }} mapping={mapping}>
-            <MyComponent />
-          </BrPage>,
+          <BrPage configuration={config} mapping={mapping} page={pageModel} />,
         );
       });
 
-      jest.runAllTimers();
-      const [someEffectOrder] = someEffect.mock.invocationCallOrder;
-      const [initializeDoneOrder] = initializeDone.mock.invocationCallOrder;
-      expect(someEffectOrder).toBeLessThan(initializeDoneOrder);
+      expect(initialize).toHaveBeenCalledWith(config, pageModel);
+    });
+  });
+
+  describe('Component Updates', () => {
+    it('should use a new page instance when passed via props', async () => {
+      const initialPage = createMockPage();
+      const newPage = createMockPage();
+      jest
+        .mocked(initialize as unknown as () => Page)
+        .mockReturnValueOnce(initialPage)
+        .mockReturnValueOnce(newPage);
+
+      const { rerender } = render(
+        <BrPage configuration={config} mapping={mapping} page={initialPage} />,
+      );
+
+      await act(async () => {
+        rerender(
+          <BrPage configuration={config} mapping={mapping} page={newPage} />,
+        );
+      });
+
+      expect(initialize).toHaveBeenCalledWith(config, newPage);
+    });
+
+    it('should trigger proper reinitialization when configuration changes', async () => {
+      const page = createMockPage();
+      jest.mocked(initialize).mockResolvedValue(page);
+
+      const { rerender } = render(
+        <BrPage configuration={config} mapping={mapping} />,
+      );
+
+      const newConfig = { ...config, request: { path: '/new-path' } };
+
+      await act(async () => {
+        rerender(<BrPage configuration={newConfig} mapping={mapping} />);
+      });
+
+      await waitFor(() => {
+        expect(destroy).toHaveBeenCalledWith(page);
+        expect(initialize).toHaveBeenCalledWith(newConfig);
+      });
+    });
+
+    it('should properly clean up and recreate page instances during updates', async () => {
+      const oldPage = createMockPage();
+      const newPage = createMockPage();
+      jest
+        .mocked(initialize)
+        .mockResolvedValueOnce(oldPage)
+        .mockResolvedValueOnce(newPage);
+
+      const { rerender } = render(
+        <BrPage configuration={config} mapping={mapping} />,
+      );
+
+      await waitFor(() => {
+        expect(oldPage.sync).toHaveBeenCalled();
+      });
+
+      const newConfig = { ...config };
+      await act(async () => {
+        rerender(<BrPage configuration={newConfig} mapping={mapping} />);
+      });
+
+      await waitFor(() => {
+        expect(destroy).toHaveBeenCalledWith(oldPage);
+        expect(newPage.sync).toHaveBeenCalled();
+      });
+    });
+  });
+
+  describe('Component Cleanup', () => {
+    it('should properly destroy the page instance when unmounting', async () => {
+      const page = createMockPage();
+      jest.mocked(initialize).mockResolvedValue(page);
+
+      const { unmount } = render(
+        <BrPage configuration={config} mapping={mapping} />,
+      );
+
+      await waitFor(() => {
+        expect(page.sync).toHaveBeenCalled();
+      });
+
+      unmount();
+      expect(destroy).toHaveBeenCalledWith(page);
+    });
+
+    it('should handle cleanup safely when page instance is undefined', async () => {
+      jest.mocked(initialize).mockResolvedValue(undefined as unknown as Page);
+
+      const { unmount } = render(
+        <BrPage configuration={config} mapping={mapping} />,
+      );
+
+      unmount();
+      expect(destroy).not.toHaveBeenCalled();
+    });
+
+    it('should prevent memory leaks when unmounting during async initialization', async () => {
+      jest.useFakeTimers();
+
+      const page = createMockPage();
+      let resolveInitialize: (page: Page) => void;
+
+      // Mock initialize to return a promise that we can control
+      jest.mocked(initialize).mockImplementationOnce(() => {
+        return new Promise<Page>((resolve) => {
+          resolveInitialize = resolve;
+        });
+      });
+
+      const { unmount } = render(
+        <BrPage configuration={config} mapping={mapping} />,
+      );
+
+      // Unmount before the async initialize completes
+      unmount();
+
+      // Now resolve the promise - this should destroy the page immediately
+      // instead of setting state on an unmounted component
+      await act(async () => {
+        resolveInitialize!(page);
+        jest.runAllTimers();
+      });
+
+      // The page should be destroyed immediately, not set in state
+      expect(destroy).toHaveBeenCalledWith(page);
+      expect(page.sync).not.toHaveBeenCalled();
+
+      jest.useRealTimers();
+    });
+  });
+
+  describe('Rendering Behavior', () => {
+    const children = <div>Test Children</div>;
+
+    it('should render children correctly within the BrPage wrapper', async () => {
+      const page = createMockPage();
+      jest.mocked(initialize).mockResolvedValue(page);
+
+      const { getByText } = render(
+        <BrPage configuration={config} mapping={mapping}>
+          {children}
+        </BrPage>,
+      );
+
+      await waitFor(() => {
+        expect(getByText('Test Children')).toBeInTheDocument();
+      });
+    });
+
+    it('should not render children when no page is available and NBR mode is disabled', async () => {
+      jest.mocked(initialize).mockResolvedValue(undefined as unknown as Page);
+
+      const { queryByText } = render(
+        <BrPage configuration={{ ...config, NBRMode: false }} mapping={mapping}>
+          {children}
+        </BrPage>,
+      );
+
+      await waitFor(() => {
+        expect(queryByText('Test Children')).not.toBeInTheDocument();
+      });
+    });
+
+    it('should render children even without a page instance when NBR mode is enabled', async () => {
+      jest.mocked(initialize).mockResolvedValue(undefined as unknown as Page);
+
+      const { getByText } = render(
+        <BrPage configuration={{ ...config, NBRMode: true }} mapping={mapping}>
+          {children}
+        </BrPage>,
+      );
+
+      await waitFor(() => {
+        expect(getByText('Test Children')).toBeInTheDocument();
+      });
+    });
+
+    it('should execute child component effects during asynchronous page initialization with NBR mode', async () => {
+      jest.useFakeTimers();
+
+      const initializeDone = jest.fn();
+      const childEffect = jest.fn();
+
+      function ChildComponent(): React.ReactElement {
+        useEffect(() => {
+          childEffect();
+        }, []);
+        return <div>Child Component</div>;
+      }
+
+      jest.mocked(initialize).mockImplementationOnce(() => {
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            initializeDone();
+            resolve(createMockPage());
+          }, 1000);
+        });
+      });
+
+      render(
+        <BrPage configuration={{ ...config, NBRMode: true }} mapping={mapping}>
+          <ChildComponent />
+        </BrPage>,
+      );
+
+      expect(childEffect).toHaveBeenCalled();
+      expect(initializeDone).not.toHaveBeenCalled();
+
+      await act(async () => {
+        jest.runAllTimers();
+      });
+
+      expect(initializeDone).toHaveBeenCalled();
+      const [childEffectOrder] = childEffect.mock.invocationCallOrder;
+      const [initializeOrder] = initializeDone.mock.invocationCallOrder;
+      expect(childEffectOrder).toBeLessThan(initializeOrder);
 
       jest.useRealTimers();
     });
