@@ -54,12 +54,6 @@ function usePage(
     let isMounted = true;
 
     const initializePage = async (): Promise<void> => {
-      // Clean up previous page if it exists
-      if (pageRef.current) {
-        destroy(pageRef.current);
-        pageRef.current = undefined;
-      }
-
       let newPage: Page;
       if (initialPage) {
         newPage = initialize(configuration, initialPage);
