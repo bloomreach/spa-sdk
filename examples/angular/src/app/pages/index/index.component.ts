@@ -23,12 +23,10 @@ import { Observable, filter } from 'rxjs';
 import { Request } from 'express';
 import { REQUEST } from '../../../express.tokens';
 import { ParseUrlPipe } from '../../pipes/parse-url.pipe';
-import { buildConfiguration } from '../../utils/buildConfiguration';
 import { MenuComponent } from '../../components/menu/menu.component';
 import { BannerComponent } from '../../components/banner/banner.component';
 import { ContentComponent } from '../../components/content/content.component';
 import { NewsListComponent } from '../../components/news-list/news-list.component';
-import { environment } from '../../../environments/environment.development';
 
 @Component({
   selector: 'br-index',
@@ -57,7 +55,15 @@ export class IndexComponent implements OnInit {
   private navigationEnd: Observable<NavigationEnd>;
 
   constructor(@Optional() @Inject(REQUEST) private request: Request) {
-    this.configuration = buildConfiguration(this.router.url, this.request, environment.endpoint);
+    this.configuration = {
+      path: this.router.url,
+      endpoint: import.meta.env.NG_APP_BRXM_ENDPOINT,
+      debug: true,
+    } as BrPageComponent['configuration'];
+
+    if (this.request) {
+      this.configuration.request = this.request;
+    }
 
     this.navigationEnd = this.router.events.pipe(
       filter((event) => event instanceof NavigationEnd),

@@ -23,12 +23,11 @@ import {Menu} from './Menu';
 import {Banner} from './Banner';
 import {Content} from './Content';
 import {NewsList} from './NewsList';
-import {ConfigurationBuilder} from '../utils/buildConfiguration';
-import {Page} from '@bloomreach/spa-sdk';
+import {Configuration, Page} from '@bloomreach/spa-sdk';
 import {useRelevance} from '../hooks/useRelevance';
 
 interface Props {
-  configuration: ConfigurationBuilder;
+  configuration: Omit<Configuration, 'httpClient'>;
   page?: Page;
 }
 

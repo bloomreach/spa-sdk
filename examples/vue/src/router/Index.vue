@@ -51,7 +51,6 @@ import BrBanner from '@/components/BrBanner.vue';
 import BrContent from '@/components/BrContent.vue';
 import BrMenu from '@/components/BrMenu.vue';
 import BrNewsList from '@/components/BrNewsList.vue';
-import { buildConfiguration } from '@/utils/buildConfiguration';
 import type { Configuration, Page } from '@bloomreach/spa-sdk';
 import type { BrMapping } from '@bloomreach/vue-sdk';
 import { BrComponent, BrPage } from '@bloomreach/vue-sdk';
@@ -60,10 +59,14 @@ import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 
 const route = useRoute();
-const configuration = computed<Configuration>(() => ({
-  ...buildConfiguration(`${route.fullPath}`, axios),
-  debug: true,
-}));
+const configuration = computed<Configuration>(() => {
+  return {
+    path: route.fullPath,
+    endpoint: import.meta.env.VITE_BRXM_ENDPOINT,
+    httpClient: axios,
+    debug: true,
+  };
+});
 
 const mapping: BrMapping = {
   Banner: BrBanner,

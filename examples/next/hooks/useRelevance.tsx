@@ -14,11 +14,10 @@
  * limitations under the License.
  */
 
-import {ConfigurationBuilder} from '../utils/buildConfiguration';
-import {Page} from '@bloomreach/spa-sdk';
+import {Configuration, Page} from '@bloomreach/spa-sdk';
 import useSWRImmutable from 'swr/immutable';
 
-export const useRelevance = (configuration: ConfigurationBuilder, page?: Page) => {
+export const useRelevance = (configuration: Omit<Configuration, 'httpClient'>, page?: Page) => {
   const RELEVANCE_API = '/api/relevance';
 
   useSWRImmutable(
