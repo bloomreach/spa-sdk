@@ -278,6 +278,10 @@ importers:
       vue-router:
         specifier: 4.5.0
         version: 4.5.0(vue@3.5.13)
+    devDependencies:
+      '@types/node':
+        specifier: '20'
+        version: 20.19.7
 
   examples/react:
     dependencies:
@@ -5369,7 +5373,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.26.10
-      '@babel/helper-annotate-as-pure': 7.27.3
+      '@babel/helper-annotate-as-pure': 7.25.9
       '@babel/helper-create-class-features-plugin': 7.25.9(@babel/core@7.26.10)
       '@babel/helper-plugin-utils': 7.26.5
       '@babel/plugin-syntax-typescript': 7.24.6(@babel/core@7.26.10)

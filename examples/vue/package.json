@@ -4,8 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "serve dist -sn",
-    "dev": "vite",
+    "start": "serve dist -sn --port 3006",
+    "dev": "vite --port 3006",
     "build": "run-p type-check build-only",
     "preview": "vite preview",
     "build-only": "vite build",

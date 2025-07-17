@@ -51,7 +51,7 @@ export default defineNuxtConfig({
  },
 
  devServer: {
-   port: (port && Number(port.substring(ARG_PORT.length + 1))) || 3000,
+   port: (port && Number(port.substring(ARG_PORT.length + 1))) || 3007,
  },
 
  devServerHandlers: [],

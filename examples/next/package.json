@@ -27,9 +27,9 @@
     "typescript": "5.7.3"
   },
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev --turbopack --port 3003",
     "build": "next build",
-    "start": "next start -p ${PORT:-3000}",
+    "start": "next start --port ${PORT:-3003}",
     "lint": "eslint --ext js,ts,tsx ."
   },
   "eslintConfig": {
