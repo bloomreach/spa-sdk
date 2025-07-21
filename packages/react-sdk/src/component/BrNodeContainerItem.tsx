@@ -14,32 +14,39 @@
  * limitations under the License.
  */
 
-import React, { useContext, useEffect, useReducer, useCallback } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { ContainerItem, TYPE_CONTAINER_ITEM_UNDEFINED } from '@bloomreach/spa-sdk';
 import { BrContainerItemUndefined } from '../cms';
 import { BrProps } from './BrProps';
 import { BrMappingContext } from './BrMappingContext';
 import { BrMeta } from '../meta';
 
-export function BrNodeContainerItem(props: React.PropsWithChildren<BrProps<ContainerItem>>): React.ReactElement {
+export function BrNodeContainerItem(
+  props: React.PropsWithChildren<BrProps<ContainerItem>>,
+): React.ReactElement {
   const context = useContext(BrMappingContext);
   const { component, page, children } = props;
-  const [, forceUpdate] = useReducer((x) => x + 1, 0);
+  const [forcedRerenders, setForcedRerenders] = useState(0);
 
-  const onUpdate = useCallback(() => {
-    forceUpdate();
-    page?.sync();
-  }, [page]);
+  const onUpdate = useCallback((): void => {
+    // Trigger a rerender of this component due to a non-react 3rd party event
+    setForcedRerenders((c) => c + 1);
+  }, []);
 
   useEffect(() => {
-    if (component) {
-      component.on('update', onUpdate);
+    component?.on('update', onUpdate);
 
-      return () => component?.off('update', onUpdate);
-    }
-
-    return undefined;
+    return () => {
+      component?.off('update', onUpdate);
+    };
   }, [component, onUpdate]);
+
+  useEffect(() => {
+    // Skip the mount event page sync as BrPage just called it
+    if (forcedRerenders > 0) {
+      page?.sync();
+    }
+  }, [page, forcedRerenders]);
 
   const getMapping = (): React.ComponentType<BrProps> => {
     const type = component?.getType();
@@ -49,7 +56,9 @@ export function BrNodeContainerItem(props: React.PropsWithChildren<BrProps<Conta
     }
 
     return (
-      (context[TYPE_CONTAINER_ITEM_UNDEFINED as any] as React.ComponentType<BrProps>) ?? BrContainerItemUndefined
+      (context[
+        TYPE_CONTAINER_ITEM_UNDEFINED as any
+      ] as React.ComponentType<BrProps>) ?? BrContainerItemUndefined
     );
   };
 

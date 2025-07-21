@@ -63,6 +63,11 @@ baseContainer.load(CmsModule(), LoggerModule());
 let container = baseContainer.createChild();
 
 function cleanupModules(): void {
+  if (container.isBound(SpaService)) {
+    const spa = container.get<Spa>(SpaService);
+    spa.destroy();
+  }
+
   // Create a new child container from the base to ensure clean state
   container = baseContainer.createChild();
 }
@@ -78,7 +83,6 @@ function initializeWithProxy(
   configuration: ConfigurationWithProxy,
   model?: PageModel,
 ): Page | Promise<Page> {
-  cleanupModules();
   const logger = container.get(Logger);
 
   logger.info('Enabled reverse-proxy based setup.');
@@ -112,7 +116,6 @@ function initializeWithJwt09(
   configuration: ConfigurationWithJwt09,
   model?: PageModel,
 ): Page | Promise<Page> {
-  cleanupModules();
   const logger = container.get(Logger);
 
   logger.info('Enabled token-based setup.');
@@ -165,7 +168,6 @@ function initializeWithJwt10(
   configuration: ConfigurationWithJwt10,
   model?: PageModel,
 ): Page | Promise<Page> {
-  cleanupModules();
   const logger = container.get(Logger);
 
   logger.info('Enabled token-based setup.');
@@ -276,6 +278,8 @@ export function initialize(configuration: Configuration, model?: Page | PageMode
     return model;
   }
 
+  cleanupModules();
+
   const logger = container.get(Logger);
   logger.level = configuration.debug ? Level.Debug : Level.Error;
   logger.debug('Configuration:', configuration);
@@ -295,9 +299,8 @@ export function initialize(configuration: Configuration, model?: Page | PageMode
 
 /**
  * Destroys the integration with the SPA page.
- * @param page Page instance to destroy.
  */
-export function destroy(_page: Page): void {
+export function destroy(): void {
   cleanupModules();
 }
 
