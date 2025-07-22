@@ -40,7 +40,6 @@ import {
 } from '@angular/core';
 import {
   Configuration,
-  destroy,
   initialize,
   isPage,
   Page,
@@ -51,8 +50,6 @@ import {
   filter,
   map,
   mapTo,
-  pairwise,
-  pluck,
   switchMap,
   take,
 } from 'rxjs/operators';
@@ -120,8 +117,6 @@ export class BrPageComponent implements AfterContentChecked, AfterContentInit, O
     @Optional() private transferState?: TransferState,
   ) {
     this.request = this.request.bind(this);
-
-    this.state.pipe(pairwise(), pluck(0), filter(isPage)).subscribe(destroy);
 
     this.state
       .pipe(

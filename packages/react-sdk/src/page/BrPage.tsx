@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import { Configuration, destroy, initialize, Page, PageModel } from '@bloomreach/spa-sdk';
-import React, { useEffect, useRef, useState } from 'react';
+import { Configuration, initialize, Page, PageModel } from '@bloomreach/spa-sdk';
+import React, { useEffect, useState } from 'react';
 import { BrMappingContext, BrNode } from '../component';
 import { BrPageContext } from './BrPageContext';
 
@@ -40,54 +40,12 @@ interface BrPageProps {
 }
 
 /**
- * Custom hook for managing Page lifecycle and state.
- * Handles async initialization, props changes, and cleanup.
+ * @typedef {Object} BrPageProps
+ * @property {Configuration} configuration The configuration of the SPA SDK.
+ * @property {Object} mapping The brXM and React components mapping.
+ * @property {Page | PageModel | undefined} page The pre-initialized page instance or prefetched page model.
+ * Mostly this property should be used to transfer state from the server-side to the client-side.
  */
-function usePage(
-  configuration: Configuration,
-  initialPage?: Page | PageModel,
-): Page | undefined {
-  const [page, setPage] = useState<Page | undefined>(undefined);
-  const pageRef = useRef<Page | undefined>(undefined);
-
-  useEffect(() => {
-    let isMounted = true;
-
-    const initializePage = async (): Promise<void> => {
-      let newPage: Page;
-      if (initialPage) {
-        newPage = initialize(configuration, initialPage);
-      } else {
-        newPage = await initialize(configuration);
-      }
-
-      if (isMounted) {
-        pageRef.current = newPage;
-        setPage(newPage);
-      } else {
-        destroy(newPage);
-      }
-    };
-
-    initializePage();
-
-    return () => {
-      isMounted = false;
-      if (pageRef.current) {
-        destroy(pageRef.current);
-        pageRef.current = undefined;
-      }
-    };
-  }, [configuration, initialPage]);
-
-  useEffect(() => {
-    if (page) {
-      page.sync();
-    }
-  }, [page]);
-
-  return page;
-}
 
 /**
  * The brXM page.
@@ -98,7 +56,34 @@ export function BrPage({
   page: initialPage,
   children,
 }: React.PropsWithChildren<BrPageProps>): React.ReactElement | null {
-  const page = usePage(configuration, initialPage);
+  const [page, setPage] = useState<Page | undefined>(() => {
+    return initialPage ? initialize(configuration, initialPage) : undefined;
+  });
+
+  useEffect(() => {
+    // This flag prevents state updates if the component unmounts during an async operation.
+    let isMounted = true;
+
+    const initializePage = async (): Promise<void> => {
+      // If a page model is provided (e.g., from SSR), initialize synchronously.
+      // Otherwise, fetch the page model asynchronously from the Page Model API.
+      const newPage = initialPage ? initialize(configuration, initialPage) : await initialize(configuration);
+
+      if (isMounted) {
+        setPage(newPage);
+      }
+    };
+
+    initializePage();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [configuration, initialPage]);
+
+  useEffect(() => {
+    page?.sync();
+  }, [page]);
 
   return (
     <BrPageContext.Provider value={page}>

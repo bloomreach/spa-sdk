@@ -16,7 +16,7 @@
 
 import BrPage from '@/BrPage.vue';
 import type { Component, Configuration, Page, PageModel } from '@bloomreach/spa-sdk';
-import { destroy, initialize } from '@bloomreach/spa-sdk';
+import { initialize } from '@bloomreach/spa-sdk';
 import { mount, shallowMount } from '@vue/test-utils';
 import type { Mocked } from 'vitest';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
@@ -143,31 +143,8 @@ describe('BrPage', () => {
       expect(initialize).toBeCalledWith({ request: { path: 'b' } });
     });
 
-    it('should destroy previously initialized page', async () => {
-      const configuration = {} as Configuration;
-      vi.mocked(initialize).mockResolvedValueOnce(page);
-
-      const wrapper = shallowMount(BrPage, { props: { configuration, mapping: {} as BrMapping } });
-      await new Promise(process.nextTick);
-
-      await wrapper.setProps({ configuration: { request: { path: 'b' }, mapping: {} as BrMapping } });
-      await new Promise(process.nextTick);
-
-      expect(destroy).toBeCalledWith(page);
-    });
   });
 
-  describe('destroyed', () => {
-    it('should destroy a page upon component destruction', async () => {
-      vi.mocked(initialize as unknown as () => Page).mockReturnValueOnce(page);
-
-      const wrapper = shallowMount(BrPage, { props: { configuration: {} as Configuration, mapping: {} as BrMapping } });
-      await wrapper.vm.$nextTick();
-      wrapper.unmount();
-
-      expect(destroy).toBeCalledWith(page);
-    });
-  });
 
   describe('mounted', () => {
     it('should sync a page on mount', async () => {

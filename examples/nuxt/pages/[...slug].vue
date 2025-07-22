@@ -51,15 +51,10 @@ import type { BrMapping } from '@bloomreach/vue-sdk';
 import { BrComponent, BrPage } from '@bloomreach/vue-sdk';
 import axios from 'axios';
 import { BrBanner, BrContent, BrMenu, BrNewsList } from '#components';
-import { buildConfiguration } from '~/utils/buildConfiguration';
 import { initialize } from '@bloomreach/spa-sdk';
 
 const config = useRuntimeConfig();
 const route = useRoute();
-
-const endpoint = config.public.NUXT_APP_BRXM_ENDPOINT ?? '';
-const baseUrl = config.public.BASE_URL !== '/' ? config.public.BASE_URL ?? '' : '';
-const hasMultiTenantSupport = config.public.NUXT_APP_BR_MULTI_TENANT_SUPPORT === 'true';
 
 const mapping: BrMapping = {
   Banner: BrBanner,
@@ -70,7 +65,10 @@ const mapping: BrMapping = {
 };
 
 const configuration = {
-  ...buildConfiguration(`${route.fullPath}`, axios, baseUrl, endpoint, hasMultiTenantSupport),
+  path: route.fullPath,
+  endpoint: config.public.NUXT_APP_BRXM_ENDPOINT,
+  httpClient: axios,
+  debug: true,
 };
 
 const { data } = await useAsyncData(async (context) => {

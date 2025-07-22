@@ -15,16 +15,22 @@
  */
 
 import { BrComponent, BrPage, BrPageContext } from '@bloomreach/react-sdk';
+import { Configuration } from '@bloomreach/spa-sdk';
 import axios from 'axios';
 import React, { JSX, StrictMode } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Banner, Content, Menu, NewsList } from './components';
-import { buildConfiguration } from './utils/buildConfiguration';
 
 export default function App(): JSX.Element {
   const location = useLocation();
 
-  const configuration = buildConfiguration(`${location.pathname}${location.search}`, axios);
+  const configuration: Configuration = {
+    path: `${location.pathname}${location.search}`,
+    endpoint: process.env.REACT_APP_BRXM_ENDPOINT,
+    httpClient: axios,
+    debug: true,
+  };
+
   const mapping = { Banner, Content, 'News List': NewsList, 'Simple Content': Content };
 
   return (

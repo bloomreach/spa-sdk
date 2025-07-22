@@ -61,7 +61,7 @@ heroku config:set --app=$NAME NPM_CONFIG_PRODUCTION=false \
 # Set project specific config options
 if [[ $APP_FRAMEWORK = "ng" ]]
 then
-  heroku config:set --app=$NAME EXAMPLE_NAME="angular" BR_MULTI_TENANT_SUPPORT=true
+  heroku config:set --app=$NAME EXAMPLE_NAME="angular"
 fi
 
 if [[ $APP_TYPE = "ssr" ]] && [[ $APP_FRAMEWORK = "ng" ]]
@@ -71,22 +71,22 @@ fi
 
 if [[ $APP_TYPE = "csr" ]] && [[ $APP_FRAMEWORK = "react" ]]
 then
-  heroku config:set --app=$NAME EXAMPLE_NAME="react" REACT_APP_BR_MULTI_TENANT_SUPPORT=true
+  heroku config:set --app=$NAME EXAMPLE_NAME="react"
 fi
 
 if [[ $APP_TYPE = "ssr" ]] && [[ $APP_FRAMEWORK = "react" ]]
 then
-  heroku config:set --app=$NAME EXAMPLE_NAME="next" NEXT_PUBLIC_BR_MULTI_TENANT_SUPPORT=true
+  heroku config:set --app=$NAME EXAMPLE_NAME="next"
 fi
 
 if [[ $APP_TYPE = "csr" ]] && [[ $APP_FRAMEWORK = "vue" ]]
 then
-  heroku config:set --app=$NAME EXAMPLE_NAME="vue" VITE_MULTI_TENANT_SUPPORT=true
+  heroku config:set --app=$NAME EXAMPLE_NAME="vue"
 fi
 
 if [[ $APP_TYPE = "ssr" ]] && [[ $APP_FRAMEWORK = "vue" ]]
 then
-  heroku config:set --app=$NAME EXAMPLE_NAME="nuxt" NUXT_APP_BR_MULTI_TENANT_SUPPORT=true HOST=0.0.0.0
+  heroku config:set --app=$NAME EXAMPLE_NAME="nuxt"
 fi
 
 git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/$NAME.git HEAD:refs/heads/main

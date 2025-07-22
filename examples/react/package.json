@@ -15,8 +15,8 @@
   "scripts": {
     "build": "cross-env GENERATE_SOURCEMAP=false SKIP_PREFLIGHT_CHECK=true react-scripts build",
     "lint": "eslint --ext js,ts,tsx src",
-    "start": "serve build -sn",
-    "dev": "cross-env GENERATE_SOURCEMAP=false SKIP_PREFLIGHT_CHECK=true react-scripts start"
+    "start": "serve build -sn -p 3002",
+    "dev": "cross-env BROWSER=NONE PORT=3002 GENERATE_SOURCEMAP=false SKIP_PREFLIGHT_CHECK=true react-scripts start"
   },
   "eslintConfig": {
     "extends": "@bloomreach/eslint-config-react"

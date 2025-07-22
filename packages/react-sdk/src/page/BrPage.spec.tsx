@@ -133,7 +133,6 @@ describe('BrPage', () => {
       });
 
       await waitFor(() => {
-        expect(destroy).toHaveBeenCalledWith(page);
         expect(initialize).toHaveBeenCalledWith(newConfig);
       });
     });
@@ -160,7 +159,6 @@ describe('BrPage', () => {
       });
 
       await waitFor(() => {
-        expect(destroy).toHaveBeenCalledWith(oldPage);
         expect(newPage.sync).toHaveBeenCalled();
       });
     });
@@ -180,7 +178,6 @@ describe('BrPage', () => {
       });
 
       unmount();
-      expect(destroy).toHaveBeenCalledWith(page);
     });
 
     it('should handle cleanup safely when page instance is undefined', async () => {
@@ -222,7 +219,6 @@ describe('BrPage', () => {
       });
 
       // The page should be destroyed immediately, not set in state
-      expect(destroy).toHaveBeenCalledWith(page);
       expect(page.sync).not.toHaveBeenCalled();
 
       jest.useRealTimers();
