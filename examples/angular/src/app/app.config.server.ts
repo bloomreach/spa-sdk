@@ -1,3 +1,4 @@
+import { provideServerRendering } from '@angular/ssr';
 /*
  * Copyright 2024-2025 Bloomreach
  *
@@ -15,7 +16,6 @@
  */
 
 import { mergeApplicationConfig, ApplicationConfig } from '@angular/core';
-import { provideServerRendering } from '@angular/platform-server';
 import { appConfig } from './app.config';
 
 const serverConfig: ApplicationConfig = {

@@ -20,6 +20,7 @@ import type { BrComponentContext } from './br-component.directive';
 
 @Directive({
   selector: '[brNode]',
+  standalone: false,
 })
 export class BrNodeDirective {
   @Input('brNode') component!: Component;

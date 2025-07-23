@@ -61,7 +61,7 @@ heroku config:set --app=$NAME NPM_CONFIG_PRODUCTION=false \
 # Set project specific config options
 if [[ $APP_FRAMEWORK = "ng" ]]
 then
-  heroku config:set --app=$NAME EXAMPLE_NAME="angular" BR_MULTI_TENANT_SUPPORT=true
+  heroku config:set --app=$NAME EXAMPLE_NAME="angular" NG_APP_BR_MULTI_TENANT_SUPPORT=true
 fi
 
 if [[ $APP_TYPE = "ssr" ]] && [[ $APP_FRAMEWORK = "ng" ]]
@@ -81,7 +81,7 @@ fi
 
 if [[ $APP_TYPE = "csr" ]] && [[ $APP_FRAMEWORK = "vue" ]]
 then
-  heroku config:set --app=$NAME EXAMPLE_NAME="vue" VITE_MULTI_TENANT_SUPPORT=true
+  heroku config:set --app=$NAME EXAMPLE_NAME="vue" VITE_BR_MULTI_TENANT_SUPPORT=true
 fi
 
 if [[ $APP_TYPE = "ssr" ]] && [[ $APP_FRAMEWORK = "vue" ]]

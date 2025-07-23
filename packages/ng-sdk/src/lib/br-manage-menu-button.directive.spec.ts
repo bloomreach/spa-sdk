@@ -21,7 +21,10 @@ import { Menu, MetaCollection, Page } from '@bloomreach/spa-sdk';
 import { BrManageMenuButtonDirective } from './br-manage-menu-button.directive';
 import { BrPageComponent } from './br-page/br-page.component';
 
-@Component({ template: '<a [brManageMenuButton]="menu"></a>' })
+@Component({
+  template: '<a [brManageMenuButton]="menu"></a>',
+  standalone: false,
+})
 class TestComponent {
   @Input() menu!: Menu;
 }

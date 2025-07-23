@@ -45,7 +45,7 @@ describe('initialize', () => {
   });
 
   afterEach(() => {
-    destroy(page);
+    destroy();
   });
 
   it('should initialize a reverse proxy-based setup', async () => {
@@ -63,7 +63,7 @@ describe('initialize', () => {
         },
       },
     });
-    destroy(pageWithReverseProxy);
+    destroy();
 
     expect(pageWithReverseProxy.getTitle()).toBe('Homepage');
   });
@@ -242,7 +242,7 @@ describe('initialize', () => {
     });
     const postMessageSpy = jest.spyOn(window.parent, 'postMessage');
     await pageWithApiBaseUrl.sync();
-    destroy(pageWithApiBaseUrl);
+    destroy();
 
     expect(postMessageSpy).toBeCalledWith(expect.anything(), 'https://api.example-domain.com');
   });
@@ -257,7 +257,7 @@ describe('initialize', () => {
     });
     const postMessageSpy = jest.spyOn(window.parent, 'postMessage');
     await pageWithCustomOrigin.sync();
-    destroy(pageWithCustomOrigin);
+    destroy();
 
     expect(postMessageSpy).toBeCalledWith(expect.anything(), 'http://localhost:12345');
   });

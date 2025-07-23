@@ -86,7 +86,6 @@ module.exports = tseslint.config(
       'import-newlines/enforce': [
         'error',
         {
-          items: 8,
           'max-len': 120,
         },
       ],
@@ -138,6 +137,9 @@ module.exports = tseslint.config(
           exceptions: ['*'],
           markers: ['/', '!'],
         },
+      ],
+      '@angular-eslint/prefer-standalone': [
+        'off'
       ],
       '@angular-eslint/directive-selector': [
         'error',

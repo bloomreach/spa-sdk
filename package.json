@@ -9,7 +9,7 @@
     "sdk"
   ],
   "engines": {
-    "node": "^18.0.0",
+    "node": "^20.0.0",
     "pnpm": "^8.0.0"
   },
   "author": "Bloomreach B.V.",
@@ -24,7 +24,6 @@
   },
   "scripts": {
     "audit": "pnpm -r --stream audit --prod --audit-level=critical",
-    "prebuild": "pnpm --filter @bloomreach/example-angular run prebuild:custom",
     "build": "pnpm -r --stream build",
     "dev": "pnpm -r --parallel --filter @bloomreach/${SDK_NAME:-*}-sdk run dev",
     "lint": "pnpm -r --workspace-concurrency=1 lint",
@@ -32,9 +31,9 @@
     "bump": "pnpm changeset && pnpm changeset version && pnpm install && pnpm postbump",
     "postbump": "pnpm changelog",
     "changelog": "auto-changelog --latest-version $(pnpm pkg get version -C ./packages/spa-sdk)",
-    "docs": "pnpm -r --stream docs",
+    "typedoc": "pnpm -F spa-sdk typedoc",
     "deploy-to-heroku": "./scripts/deploy_heroku_app.sh ${0} ${1} ${2}",
-    "heroku-postbuild": "pnpm prebuild && pnpm build && cd ${PROJECT_PATH:-.}",
+    "heroku-postbuild": "pnpm build && cd ${PROJECT_PATH:-.}",
     "release": "pnpm publish -r --filter \"./packages/**\" --no-git-checks"
   },
   "devDependencies": {

@@ -31,6 +31,7 @@ import { BrProps } from './br-props.model';
 
 @Directive({
   selector: '[brNodeContainer]',
+  standalone: false,
 })
 export class BrNodeContainerDirective extends BrNodeComponentDirective {
   @Input('brNodeContainer') component?: Container;

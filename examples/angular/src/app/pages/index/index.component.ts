@@ -18,21 +18,18 @@ import { CommonModule } from '@angular/common';
 import { Component, Inject, OnInit, Optional, PLATFORM_ID, inject } from '@angular/core';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { BrPageComponent, BrSdkModule } from '@bloomreach/ng-sdk';
-import { Page } from '@bloomreach/spa-sdk';
+import { extractSearchParams, Page } from '@bloomreach/spa-sdk';
 import { Observable, filter } from 'rxjs';
 import { Request } from 'express';
 import { REQUEST } from '../../../express.tokens';
 import { ParseUrlPipe } from '../../pipes/parse-url.pipe';
-import { buildConfiguration } from '../../utils/buildConfiguration';
 import { MenuComponent } from '../../components/menu/menu.component';
 import { BannerComponent } from '../../components/banner/banner.component';
 import { ContentComponent } from '../../components/content/content.component';
 import { NewsListComponent } from '../../components/news-list/news-list.component';
-import { environment } from '../../../environments/environment.development';
 
 @Component({
   selector: 'br-index',
-  standalone: true,
   imports: [
     CommonModule,
     BrSdkModule,
@@ -58,7 +55,26 @@ export class IndexComponent implements OnInit {
   private navigationEnd: Observable<NavigationEnd>;
 
   constructor(@Optional() @Inject(REQUEST) private request: Request) {
-    this.configuration = buildConfiguration(this.router.url, this.request, environment.endpoint);
+    this.configuration = {
+      path: this.router.url,
+      endpoint: import.meta.env.NG_APP_BRXM_ENDPOINT,
+      debug: true,
+    } as BrPageComponent['configuration'];
+
+    if (!import.meta.env.NG_APP_BRXM_ENDPOINT && import.meta.env.NG_APP_BR_MULTI_TENANT_SUPPORT) {
+      const endpointQueryParameter = 'endpoint';
+      const { searchParams } = extractSearchParams(this.configuration.path!, [endpointQueryParameter].filter(Boolean));
+
+      this.configuration = {
+        ...this.configuration,
+        endpoint: searchParams.get(endpointQueryParameter) ?? '',
+        baseUrl: `?${endpointQueryParameter}=${searchParams.get(endpointQueryParameter)}`,
+      } as BrPageComponent['configuration'];
+    }
+
+    if (this.request) {
+      this.configuration.request = this.request;
+    }
 
     this.navigationEnd = this.router.events.pipe(
       filter((event) => event instanceof NavigationEnd),

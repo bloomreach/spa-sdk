@@ -21,7 +21,10 @@ import { Document, MetaCollection, Page } from '@bloomreach/spa-sdk';
 import { BrManageContentButtonDirective } from './br-manage-content-button.directive';
 import { BrPageComponent } from './br-page/br-page.component';
 
-@Component({ template: '<a [brManageContentButton]="content"></a>' })
+@Component({
+  template: '<a [brManageContentButton]="content"></a>',
+  standalone: false,
+})
 class TestComponent {
   @Input() content!: Document;
 }

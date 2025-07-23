@@ -15,16 +15,33 @@
  */
 
 import { BrComponent, BrPage, BrPageContext } from '@bloomreach/react-sdk';
+import { Configuration, extractSearchParams } from '@bloomreach/spa-sdk';
 import axios from 'axios';
 import React, { JSX, StrictMode } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Banner, Content, Menu, NewsList } from './components';
-import { buildConfiguration } from './utils/buildConfiguration';
 
 export default function App(): JSX.Element {
   const location = useLocation();
 
-  const configuration = buildConfiguration(`${location.pathname}${location.search}`, axios);
+  let configuration: Configuration = {
+    path: `${location.pathname}${location.search}`,
+    endpoint: process.env.REACT_APP_BRXM_ENDPOINT,
+    httpClient: axios,
+    debug: true,
+  };
+
+  if (!process.env.REACT_APP_BRXM_ENDPOINT && process.env.REACT_APP_BR_MULTI_TENANT_SUPPORT) {
+    const endpointQueryParameter = 'endpoint';
+    const { searchParams } = extractSearchParams(configuration.path!, [endpointQueryParameter].filter(Boolean));
+
+    configuration = {
+      ...configuration,
+      endpoint: searchParams.get(endpointQueryParameter) ?? '',
+      baseUrl: `?${endpointQueryParameter}=${searchParams.get(endpointQueryParameter)}`,
+    };
+  }
+
   const mapping = { Banner, Content, 'News List': NewsList, 'Simple Content': Content };
 
   return (

@@ -26,11 +26,13 @@ import { BrPageService } from './br-page/br-page.service';
 Component({
   selector: 'br-container-item-undefined',
   template: '',
+  standalone: false,
 })(BrContainerItemUndefinedComponent);
 
 @Component({
   selector: 'br-container-item-test',
   template: '<a>{{ component.getModels().data }}</a>',
+  standalone: false,
 })
 class ContainerItemTestComponent {}
 
@@ -39,7 +41,10 @@ class ContainerItemTestComponent {}
 })
 class TestModule {}
 
-@Component({ template: '<ng-container [brNodeContainerItem]="containerItem"></ng-container>' })
+@Component({
+  template: '<ng-container [brNodeContainerItem]="containerItem"></ng-container>',
+  standalone: false,
+})
 class TestComponent {
   @Input() containerItem!: ContainerItem;
 }

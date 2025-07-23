@@ -49,7 +49,7 @@ describe('initialize', () => {
   });
 
   afterEach(() => {
-    destroy(defaultPage);
+    destroy();
 
     document.cookie = '__br__campaign_id=; Max-Age=0;';
     document.cookie = '__br__segment=; Max-Age=0;';
@@ -234,7 +234,7 @@ describe('initialize', () => {
     });
     const postMessageSpy = jest.spyOn(window.parent, 'postMessage');
     await page.sync();
-    destroy(page);
+    destroy();
 
     expect(postMessageSpy).toBeCalledWith(expect.anything(), 'http://localhost:12345');
   });
@@ -244,7 +244,7 @@ describe('initialize', () => {
   });
 
   it('should use campaign variant id as params from url', async () => {
-    const page = await initialize({
+    await initialize({
       httpClient,
       window,
       endpoint: 'http://localhost:8080/site/my-spa/resourceapi',
@@ -258,14 +258,14 @@ describe('initialize', () => {
       url: 'http://localhost:8080/site/my-spa/resourceapi/?__br__campaignVariant=12345%3Asilver',
     });
 
-    destroy(page);
+    destroy();
   });
 
   it('should use campaign variant id as params from cookie', async () => {
     document.cookie = '__br__segment=gold';
     document.cookie = '__br__campaign_id=12345';
 
-    const page = await initialize({
+    await initialize({
       httpClient,
       window,
       endpoint: 'http://localhost:8080/site/my-spa/resourceapi',
@@ -278,7 +278,7 @@ describe('initialize', () => {
       url: 'http://localhost:8080/site/my-spa/resourceapi/?__br__campaignVariant=12345%3Agold',
     });
 
-    destroy(page);
+    destroy();
   });
 
   it('should use campaign variant id as params from request cookie', async () => {
@@ -286,7 +286,7 @@ describe('initialize', () => {
       headers: { cookie: '__br__campaign_id=foo; __br__segment=bar' },
     };
 
-    const page = await initialize({
+    await initialize({
       httpClient,
       request,
       endpoint: 'http://localhost:8080/site/my-spa/resourceapi',
@@ -299,7 +299,7 @@ describe('initialize', () => {
       url: 'http://localhost:8080/site/my-spa/resourceapi/?__br__campaignVariant=foo%3Abar',
     });
 
-    destroy(page);
+    destroy();
   });
 
   it('should use campaign variant id as params from request cookie', async () => {
@@ -307,7 +307,7 @@ describe('initialize', () => {
       headers: { cookie: '__br__campaign_id=foo; __br__segment=bar' },
     };
 
-    const page = await initialize({
+    await initialize({
       httpClient,
       request,
       endpoint: 'http://localhost:8080/site/my-spa/resourceapi',
@@ -320,11 +320,11 @@ describe('initialize', () => {
       url: 'http://localhost:8080/site/my-spa/resourceapi/?__br__campaignVariant=foo%3Abar',
     });
 
-    destroy(page);
+    destroy();
   });
 
   it('should omit campaign variant id if no url params and window does not contain respective cookies', async () => {
-    const page = await initialize({
+    await initialize({
       httpClient,
       endpoint: 'http://localhost:8080/site/my-spa/resourceapi',
       origin: 'http://localhost:12345',
@@ -336,7 +336,7 @@ describe('initialize', () => {
       url: 'http://localhost:8080/site/my-spa/resourceapi/',
     });
 
-    destroy(page);
+    destroy();
   });
 
   it('should omit campaign variant id if no url params and request does not contain respective cookies', async () => {
@@ -344,7 +344,7 @@ describe('initialize', () => {
       headers: { cookie: '' },
     };
 
-    const page = await initialize({
+    await initialize({
       httpClient,
       request,
       endpoint: 'http://localhost:8080/site/my-spa/resourceapi',
@@ -357,7 +357,7 @@ describe('initialize', () => {
       url: 'http://localhost:8080/site/my-spa/resourceapi/',
     });
 
-    destroy(page);
+    destroy();
   });
 
   it('should omit campaign variant id if url query params contain ttl equal zero', async () => {
@@ -365,7 +365,7 @@ describe('initialize', () => {
       headers: undefined,
     };
 
-    const page = await initialize({
+    await initialize({
       httpClient,
       request,
       endpoint: 'http://localhost:8080/site/my-spa/resourceapi',
@@ -379,7 +379,7 @@ describe('initialize', () => {
       url: 'http://localhost:8080/site/my-spa/resourceapi/',
     });
 
-    destroy(page);
+    destroy();
   });
 
   it('should use segment ids as params from cookie', async () => {
@@ -387,7 +387,7 @@ describe('initialize', () => {
     document.cookie = '__br__campaign_id=12345';
     document.cookie = '__br__segment_ids=12345,2345';
 
-    const page = await initialize({
+    await initialize({
       httpClient,
       window,
       endpoint: 'http://localhost:8080/site/my-spa/resourceapi',
@@ -402,7 +402,7 @@ describe('initialize', () => {
         + '?__br__campaignVariant=12345%3Agold&__br__segmentIds=12345%2C2345',
     });
 
-    destroy(page);
+    destroy();
   });
 
   it('should use segment ids from request as a query param', async () => {
@@ -410,7 +410,7 @@ describe('initialize', () => {
       headers: { cookie: '__br__segment_ids=foo,bar' },
     };
 
-    const page = await initialize({
+    await initialize({
       httpClient,
       request,
       endpoint: 'http://localhost:8080/site/my-spa/resourceapi',
@@ -423,7 +423,7 @@ describe('initialize', () => {
       url: 'http://localhost:8080/site/my-spa/resourceapi/?__br__segmentIds=foo%2Cbar',
     });
 
-    destroy(page);
+    destroy();
   });
 
   it('should omi query param if request do not contains segment ids', async () => {
@@ -431,7 +431,7 @@ describe('initialize', () => {
       headers: { cookie: '' },
     };
 
-    const page = await initialize({
+    await initialize({
       httpClient,
       request,
       endpoint: 'http://localhost:8080/site/my-spa/resourceapi',
@@ -444,7 +444,7 @@ describe('initialize', () => {
       url: 'http://localhost:8080/site/my-spa/resourceapi/',
     });
 
-    destroy(page);
+    destroy();
   });
 });
 

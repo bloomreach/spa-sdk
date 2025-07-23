@@ -132,7 +132,7 @@ Pre release actions:
 * Check if all issues in the upcoming release are closed, any open issues must be moved to a different release, or the
     release must be postponed
 * Check out the `development` branch and make sure your local branch its up to date and the pipeline for `development` is green
-* Make sure that running `pnpm docs` can be done succesfully
+* Make sure that running `pnpm run typedoc` can be done succesfully
 
 Release actions:
 * Run `pnpm bump` in the workspace root to update the versions in all package files

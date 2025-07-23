@@ -1,7 +1,7 @@
 {
   "name": "@bloomreach/example-nuxt",
   "description": "Example Nuxt SPA for Bloomreach Experience",
-  "version": "24.1.2",
+  "version": "25.0.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -9,16 +9,19 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "start": "node .output/server/index.mjs",
+    "start": "PORT=3007 node .output/server/index.mjs",
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@bloomreach/spa-sdk": "24.1.2",
-    "@bloomreach/vue-sdk": "24.1.2",
+    "@bloomreach/spa-sdk": "25.0.0",
+    "@bloomreach/vue-sdk": "25.0.0",
     "axios": "1.7.9",
     "nuxt": "3.15.4",
     "sanitize-html": "2.14.0",
     "vue": "3.5.13",
     "vue-router": "4.5.0"
+  },
+  "devDependencies": {
+    "@types/node": "20"
   }
 }

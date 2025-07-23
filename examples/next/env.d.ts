@@ -1,5 +1,5 @@
 /*
- * Copyright 2022-2025 Bloomreach
+ * Copyright 2024-2025 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,5 +14,9 @@
  * limitations under the License.
  */
 
-export const BRXM_ENDPOINT = process.env.BRXM_ENDPOINT ?? '';
-export const NEXT_PUBLIC_BR_MULTI_TENANT_SUPPORT = process.env.NEXT_PUBLIC_BR_MULTI_TENANT_SUPPORT === 'true';
+declare namespace NodeJS {
+  interface ProcessEnv {
+    NEXT_APP_BRXM_ENDPOINT?: string;
+    NEXT_PUBLIC_BR_MULTI_TENANT_SUPPORT?: string;
+  }
+}

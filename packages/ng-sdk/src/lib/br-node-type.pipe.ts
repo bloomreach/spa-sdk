@@ -17,7 +17,10 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { isContainer, isContainerItem, Component } from '@bloomreach/spa-sdk';
 
-@Pipe({ name: 'brNodeType' })
+@Pipe({
+  name: 'brNodeType',
+  standalone: false,
+})
 export class BrNodeTypePipe implements PipeTransform {
   transform(component: Component): string {
     if (isContainerItem(component)) {

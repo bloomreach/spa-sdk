@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import { Configuration, destroy, initialize, Page, PageModel } from '@bloomreach/spa-sdk';
-import React from 'react';
+import { Configuration, initialize, Page, PageModel } from '@bloomreach/spa-sdk';
+import React, { useEffect, useState } from 'react';
 import { BrMappingContext, BrNode } from '../component';
 import { BrPageContext } from './BrPageContext';
 
@@ -39,10 +39,6 @@ interface BrPageProps {
   page?: Page | PageModel;
 }
 
-interface BrPageState {
-  page?: Page;
-}
-
 /**
  * @typedef {Object} BrPageProps
  * @property {Configuration} configuration The configuration of the SPA SDK.
@@ -54,82 +50,49 @@ interface BrPageState {
 /**
  * The brXM page.
  */
-export class BrPage extends React.Component<React.PropsWithChildren<BrPageProps>, BrPageState> {
-  /**
-   * @param props {BrPageProps}
-   */
-  constructor(props: BrPageProps) {
-    super(props);
+export function BrPage({
+  configuration,
+  mapping,
+  page: initialPage,
+  children,
+}: React.PropsWithChildren<BrPageProps>): React.ReactElement | null {
+  const [page, setPage] = useState<Page | undefined>(() => {
+    return initialPage ? initialize(configuration, initialPage) : undefined;
+  });
 
-    this.state = { page: props.page && initialize(props.configuration, props.page) };
-  }
+  useEffect(() => {
+    // This flag prevents state updates if the component unmounts during an async operation.
+    let isMounted = true;
 
-  componentDidMount(): void {
-    const { page } = this.props;
+    const initializePage = async (): Promise<void> => {
+      // If a page model is provided (e.g., from SSR), initialize synchronously.
+      // Otherwise, fetch the page model asynchronously from the Page Model API.
+      const newPage = initialPage ? initialize(configuration, initialPage) : await initialize(configuration);
 
-    if (!page) {
-      this.initialize();
-    }
+      if (isMounted) {
+        setPage(newPage);
+      }
+    };
 
-    const { page: pageInState } = this.state;
-    pageInState?.sync();
-  }
+    initializePage();
 
-  componentDidUpdate(prevProps: BrPageProps, prevState: BrPageState): void {
-    const { configuration, page } = this.props;
+    return () => {
+      isMounted = false;
+    };
+  }, [configuration, initialPage]);
 
-    if (configuration !== prevProps.configuration || page !== prevProps.page) {
-      this.destroy();
-      this.initialize(page === prevProps.page);
-    }
+  useEffect(() => {
+    page?.sync();
+  }, [page]);
 
-    const { page: pageInState } = this.state;
-
-    if (pageInState !== prevState.page) {
-      this.forceUpdate(() => pageInState?.sync());
-    }
-  }
-
-  componentWillUnmount(): void {
-    this.destroy();
-  }
-
-  private async initialize(force = false): Promise<void> {
-    const { page, configuration } = this.props;
-    const model = force ? undefined : page;
-
-    try {
-      this.setState({
-        page: model ? initialize(configuration, model) : await initialize(configuration),
-      });
-    } catch (error) {
-      this.setState(() => {
-        throw error;
-      });
-    }
-  }
-
-  private destroy(): void {
-    const { page } = this.state;
-
-    if (!page) {
-      return;
-    }
-
-    destroy(page);
-  }
-
-  render(): React.ReactElement | null {
-    const { page } = this.state;
-    const { configuration, mapping, children } = this.props;
-
-    return (
-      <BrPageContext.Provider value={page}>
-        <BrMappingContext.Provider value={mapping}>
-          {!page && !configuration.NBRMode && null}
-          {(page || configuration.NBRMode) && <BrNode component={page?.getComponent()}>{children}</BrNode>}
-        </BrMappingContext.Provider>
-      </BrPageContext.Provider>
-    );
-  }
+  return (
+    <BrPageContext.Provider value={page}>
+      <BrMappingContext.Provider value={mapping}>
+        {!page && !configuration.NBRMode && null}
+        {(page || configuration.NBRMode) && (
+          <BrNode component={page?.getComponent()}>{children}</BrNode>
+        )}
+      </BrMappingContext.Provider>
+    </BrPageContext.Provider>
+  );
 }

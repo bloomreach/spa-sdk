@@ -16,12 +16,10 @@
 
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { IndexComponent } from './pages/index/index.component';
 
 @Component({
   selector: 'br-app-root',
-  standalone: true,
-  imports: [RouterOutlet, IndexComponent],
+  imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

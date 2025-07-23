@@ -16,8 +16,7 @@
 
 import {headers} from 'next/headers';
 import BrxApp from '../../components/BrxApp';
-import {buildConfiguration} from '../../utils/buildConfiguration';
-import {initialize} from '@bloomreach/spa-sdk';
+import {Configuration, extractSearchParams, initialize} from '@bloomreach/spa-sdk';
 import axios from 'axios';
 import * as cookieUtils from 'cookie';
 import {DEFAULT_RELEVANCE_COOKIE_NAME} from '../../constants';
@@ -32,7 +31,22 @@ export default async function Page() {
   const { [DEFAULT_RELEVANCE_COOKIE_NAME]: value } = cookieUtils.parse(cookie ?? '');
   const visitor = value ? JSON.parse(value) : '';
 
-  const configuration = buildConfiguration(`${pathname}?${searchParams}`);
+  let configuration = {
+    path: `${pathname}?${searchParams}`,
+    endpoint: process.env.NEXT_APP_BRXM_ENDPOINT,
+    debug: true,
+  } as Configuration;
+
+  if (!process.env.NEXT_APP_BRXM_ENDPOINT && process.env.NEXT_PUBLIC_BR_MULTI_TENANT_SUPPORT) {
+    const endpointQueryParameter = 'endpoint';
+    const { searchParams: extractedParams } = extractSearchParams(configuration.path!, [endpointQueryParameter].filter(Boolean));
+
+    configuration = {
+      ...configuration,
+      endpoint: extractedParams.get(endpointQueryParameter) ?? '',
+      baseUrl: `?${endpointQueryParameter}=${extractedParams.get(endpointQueryParameter)}`,
+    };
+  }
 
   const page = await initialize({
     ...configuration,

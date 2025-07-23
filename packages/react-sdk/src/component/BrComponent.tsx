@@ -15,7 +15,7 @@
  */
 
 import { Component } from '@bloomreach/spa-sdk';
-import React from 'react';
+import React, { useContext } from 'react';
 import { BrComponentContext } from './BrComponentContext';
 import { BrNode } from './BrNode';
 
@@ -33,17 +33,10 @@ interface BrComponentProps {
 /**
  * The brXM component.
  */
-export class BrComponent extends React.Component<React.PropsWithChildren<BrComponentProps>> {
-  static contextType = BrComponentContext;
+export function BrComponent({ path, children }: React.PropsWithChildren<BrComponentProps>): React.ReactElement {
+  const context = useContext(BrComponentContext);
 
-  context: React.ContextType<typeof BrComponentContext>;
-
-  private getComponents(): Component[] {
-    const {
-      context,
-      props: { path },
-    } = this;
-
+  function getComponents(): Component[] {
     if (!context || Object.keys(context).length === 0) {
       return [];
     }
@@ -56,10 +49,8 @@ export class BrComponent extends React.Component<React.PropsWithChildren<BrCompo
     return component ? [component] : [];
   }
 
-  private renderComponents(): React.ReactElement[] {
-    const { children } = this.props;
-
-    return this.getComponents().map((component, index) => (
+  function renderComponents(): React.ReactElement[] {
+    return getComponents().map((component, index) => (
       // eslint-disable-next-line react/no-array-index-key
       <BrNode key={index} component={component}>
         {children}
@@ -67,7 +58,5 @@ export class BrComponent extends React.Component<React.PropsWithChildren<BrCompo
     ));
   }
 
-  render(): React.ReactElement {
-    return <>{this.renderComponents()}</>;
-  }
+  return <>{renderComponents()}</>;
 }

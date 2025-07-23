@@ -18,7 +18,14 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA, SimpleChange, TransferState } from '@angular/core';
 import { ComponentFixture, getTestBed, TestBed, waitForAsync } from '@angular/core/testing';
-import { Component, Configuration, destroy, initialize, isPage, Page, PageModel } from '@bloomreach/spa-sdk';
+import {
+  Component,
+  Configuration,
+  initialize,
+  isPage,
+  Page,
+  PageModel,
+} from '@bloomreach/spa-sdk';
 
 import { BrNodeTypePipe } from '../br-node-type.pipe';
 import { BrPageComponent } from './br-page.component';
@@ -109,22 +116,6 @@ describe('BrPageComponent', () => {
   });
 
   describe('ngOnChanges', () => {
-    it('should destroy a previous page', async () => {
-      const previousPage = {} as Page;
-
-      jest.mocked(isPage).mockImplementation(Array.prototype.includes.bind([page, previousPage]));
-      component.configuration = {} as Configuration;
-      component.page = page;
-      component.state.next(previousPage);
-
-      await component.ngOnChanges({
-        configuration: new SimpleChange({}, component.configuration, false),
-        page: new SimpleChange(previousPage, component.page, false),
-      });
-
-      expect(destroy).toBeCalledWith(previousPage);
-    });
-
     it('should initialize a new page when a page input was not changed', async () => {
       jest.mocked(initialize).mockResolvedValueOnce(page);
       component.configuration = {} as Configuration;
@@ -273,21 +264,6 @@ describe('BrPageComponent', () => {
       request.flush('something');
 
       expect(response).resolves.toEqual({ data: 'something' });
-    });
-  });
-
-  describe('ngOnDestroy', () => {
-    it('should destroy a stored page', () => {
-      component.state.next(page);
-      component.ngOnDestroy();
-
-      expect(destroy).toBeCalledWith(page);
-    });
-
-    it('should not destroy a page if it was not initialized', () => {
-      component.ngOnDestroy();
-
-      expect(destroy).not.toBeCalled();
     });
   });
 });

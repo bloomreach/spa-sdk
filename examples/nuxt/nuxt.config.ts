@@ -45,14 +45,13 @@ export default defineNuxtConfig({
 
  runtimeConfig: {
    public: {
-     NUXT_APP_BR_MULTI_TENANT_SUPPORT: process.env.NUXT_APP_BR_MULTI_TENANT_SUPPORT,
      NUXT_APP_BRXM_ENDPOINT: process.env.NUXT_APP_BRXM_ENDPOINT,
-     BASE_URL: process.env.BASE_URL,
+     NUXT_APP_BR_MULTI_TENANT_SUPPORT: process.env.NUXT_APP_BR_MULTI_TENANT_SUPPORT,
    },
  },
 
  devServer: {
-   port: (port && Number(port.substring(ARG_PORT.length + 1))) || 3000,
+   port: (port && Number(port.substring(ARG_PORT.length + 1))) || 3007,
  },
 
  devServerHandlers: [],

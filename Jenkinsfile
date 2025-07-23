@@ -18,7 +18,7 @@ pipeline {
   agent {
     docker {
       label 'docker'
-      image 'guergeiro/pnpm:18-8'
+              image 'guergeiro/pnpm:20-8'
       args '-v  /etc/passwd:/etc/passwd'
     }
   }
@@ -86,7 +86,7 @@ pipeline {
       stages {
         stage('Build TypeDoc') {
           steps {
-            sh 'pnpm --filter @bloomreach/spa-sdk run docs'
+            sh 'pnpm --filter @bloomreach/spa-sdk run typedoc'
           }
         }
         stage('Build docs') {

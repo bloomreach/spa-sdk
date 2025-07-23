@@ -24,12 +24,11 @@
 import BrNodeComponent from '@/BrNodeComponent.vue';
 import { mapping$, page$ } from '@/providerKeys';
 import type { Configuration, Page, PageModel } from '@bloomreach/spa-sdk';
-import { destroy, initialize } from '@bloomreach/spa-sdk';
+import { initialize } from '@bloomreach/spa-sdk';
 import {
   computed,
   onMounted,
   onServerPrefetch,
-  onUnmounted,
   onUpdated,
   provide,
   ref,
@@ -38,12 +37,6 @@ import {
   watch,
 } from 'vue';
 import type { BrMapping } from '../typings';
-
-function destroyPage() {
-  if (page.value) {
-    destroy(page.value);
-  }
-}
 
 const props = defineProps<{
   page?: Page | PageModel,
@@ -64,7 +57,6 @@ watch(configuration, async (current, previous) => {
     return;
   }
 
-  destroyPage();
   loading = initialize(current);
   page.value = await loading;
   loading = null;
@@ -78,6 +70,5 @@ onUpdated(() => {
   const sdkPage = toRaw(page.value);
   sdkPage?.sync();
 });
-onUnmounted(() => destroyPage());
 onServerPrefetch(async () => await loading);
 </script>

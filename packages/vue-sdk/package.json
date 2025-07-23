@@ -1,6 +1,6 @@
 {
   "name": "@bloomreach/vue-sdk",
-  "version": "24.1.2",
+  "version": "25.0.0",
   "description": "Bloomreach SPA SDK for Vue",
   "keywords": [
     "bloomreach",
@@ -45,15 +45,15 @@
     "test": "vitest --watch=false",
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit -p tsconfig.app.json --composite false",
-    "type-check:tests": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
-    "type-check:watch": "npm run type-check -- --watch"
+    "type-check:watch": "vue-tsc --noEmit -p tsconfig.app.json --composite false --watch",
+    "type-check:tests": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false"
   },
   "peerDependencies": {
     "vue": "^3.2.45"
   },
   "devDependencies": {
     "@types/jsdom": "21.1.1",
-    "@types/node": "18.16.14",
+    "@types/node": "20.17.9",
     "@vitejs/plugin-vue": "4.2.3",
     "@vitejs/plugin-vue-jsx": "3.0.1",
     "@vue/test-utils": "2.4.0-alpha.1",
@@ -66,6 +66,6 @@
     "vue-tsc": "1.6.5"
   },
   "dependencies": {
-    "@bloomreach/spa-sdk": "24.1.2"
+    "@bloomreach/spa-sdk": "25.0.0"
   }
 }

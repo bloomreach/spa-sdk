@@ -14,46 +14,57 @@
  * limitations under the License.
  */
 
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { ContainerItem, TYPE_CONTAINER_ITEM_UNDEFINED } from '@bloomreach/spa-sdk';
 import { BrContainerItemUndefined } from '../cms';
-import { BrNodeComponent } from './BrNodeComponent';
 import { BrProps } from './BrProps';
+import { BrMappingContext } from './BrMappingContext';
+import { BrMeta } from '../meta';
 
-export class BrNodeContainerItem extends BrNodeComponent<ContainerItem> {
-  constructor(props: BrProps<ContainerItem>) {
-    super(props);
+export function BrNodeContainerItem(
+  props: React.PropsWithChildren<BrProps<ContainerItem>>,
+): React.ReactElement {
+  const context = useContext(BrMappingContext);
+  const { component, page, children } = props;
+  const [forcedRerenders, setForcedRerenders] = useState(0);
 
-    this.onUpdate = this.onUpdate.bind(this);
-  }
+  const onUpdate = useCallback((): void => {
+    // Trigger a rerender of this component due to a non-react 3rd party event
+    setForcedRerenders((c) => c + 1);
+  }, []);
 
-  componentDidMount(): void {
-    this.props.component?.on('update', this.onUpdate);
-  }
+  useEffect(() => {
+    component?.on('update', onUpdate);
 
-  componentDidUpdate(prevProps: BrProps<ContainerItem>): void {
-    if (this.props.component !== prevProps.component) {
-      prevProps.component?.off('update', this.onUpdate);
-      this.props.component?.on('update', this.onUpdate);
+    return () => {
+      component?.off('update', onUpdate);
+    };
+  }, [component, onUpdate]);
+
+  useEffect(() => {
+    // Skip the mount event page sync as BrPage just called it
+    if (forcedRerenders > 0) {
+      page?.sync();
     }
-  }
+  }, [page, forcedRerenders]);
 
-  componentWillUnmount(): void {
-    this.props.component?.off('update', this.onUpdate);
-  }
+  const getMapping = (): React.ComponentType<BrProps> => {
+    const type = component?.getType();
 
-  protected getMapping(): React.ComponentType<BrProps> {
-    const type = this.props.component?.getType();
-
-    if (type && type in this.context) {
-      return this.context[type] as React.ComponentType<BrProps>;
+    if (type && type in context) {
+      return context[type] as React.ComponentType<BrProps>;
     }
 
     return (
-      (this.context[TYPE_CONTAINER_ITEM_UNDEFINED as any] as React.ComponentType<BrProps>) ?? BrContainerItemUndefined
+      (context[
+        TYPE_CONTAINER_ITEM_UNDEFINED as any
+      ] as React.ComponentType<BrProps>) ?? BrContainerItemUndefined
     );
-  }
+  };
 
-  protected onUpdate(): void {
-    this.forceUpdate(() => this.props.page?.sync());
-  }
+  const mapping = getMapping();
+  const meta = component?.getMeta();
+  const content = mapping ? React.createElement(mapping, props) : children;
+
+  return React.createElement(BrMeta, { meta }, content);
 }
