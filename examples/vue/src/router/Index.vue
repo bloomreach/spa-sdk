@@ -51,7 +51,7 @@ import BrBanner from '@/components/BrBanner.vue';
 import BrContent from '@/components/BrContent.vue';
 import BrMenu from '@/components/BrMenu.vue';
 import BrNewsList from '@/components/BrNewsList.vue';
-import type { Configuration, Page } from '@bloomreach/spa-sdk';
+import { extractSearchParams, type Configuration, type Page } from '@bloomreach/spa-sdk';
 import type { BrMapping } from '@bloomreach/vue-sdk';
 import { BrComponent, BrPage } from '@bloomreach/vue-sdk';
 import axios from 'axios';
@@ -60,12 +60,25 @@ import { useRoute } from 'vue-router';
 
 const route = useRoute();
 const configuration = computed<Configuration>(() => {
-  return {
+  let config: Configuration = {
     path: route.fullPath,
     endpoint: import.meta.env.VITE_BRXM_ENDPOINT,
     httpClient: axios,
     debug: true,
   };
+
+  if (!import.meta.env.VITE_BRXM_ENDPOINT && import.meta.env.VITE_BR_MULTI_TENANT_SUPPORT) {
+    const endpointQueryParameter = 'endpoint';
+    const { searchParams } = extractSearchParams(config.path!, [endpointQueryParameter].filter(Boolean));
+
+    config = {
+      ...config,
+      endpoint: searchParams.get(endpointQueryParameter) ?? '',
+      baseUrl: `?${endpointQueryParameter}=${searchParams.get(endpointQueryParameter)}`,
+    }
+  }
+
+  return config;
 });
 
 const mapping: BrMapping = {

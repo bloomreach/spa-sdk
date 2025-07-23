@@ -5,6 +5,7 @@ declare interface Env {
   // Example: NGX_VERSION: string;
   [key: string]: any;
   NG_APP_BRXM_ENDPOINT: string;
+  NG_APP_BR_MULTI_TENANT_SUPPORT: string;
 }
 
 declare interface ImportMeta {
