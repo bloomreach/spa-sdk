@@ -5,11 +5,11 @@
   "private": true,
   "scripts": {
     "ng": "ng",
-    "start": "mv dist/browser/index.csr.html dist/browser/index.html; serve dist/browser -sn --port 3004",
+    "start": "cp dist/browser/index.csr.html dist/browser/index.html; serve dist/browser -sn -p 3004",
     "build": "ng build",
     "dev": "ng serve",
     "lint": "ng lint",
-    "start:ssr": "node dist/server/server.mjs --port 3005"
+    "start:ssr": "PORT=3005 node dist/server/server.mjs"
   },
   "dependencies": {
     "@angular/animations": "20.1.0",

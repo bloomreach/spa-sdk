@@ -46,7 +46,7 @@ export default defineNuxtConfig({
  runtimeConfig: {
    public: {
      NUXT_APP_BRXM_ENDPOINT: process.env.NUXT_APP_BRXM_ENDPOINT,
-     BASE_URL: process.env.BASE_URL,
+     NUXT_APP_BR_MULTI_TENANT_SUPPORT: process.env.NUXT_APP_BR_MULTI_TENANT_SUPPORT,
    },
  },
 

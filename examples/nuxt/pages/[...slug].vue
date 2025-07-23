@@ -51,7 +51,7 @@ import type { BrMapping } from '@bloomreach/vue-sdk';
 import { BrComponent, BrPage } from '@bloomreach/vue-sdk';
 import axios from 'axios';
 import { BrBanner, BrContent, BrMenu, BrNewsList } from '#components';
-import { initialize } from '@bloomreach/spa-sdk';
+import { extractSearchParams, initialize, Configuration } from '@bloomreach/spa-sdk';
 
 const config = useRuntimeConfig();
 const route = useRoute();
@@ -64,12 +64,23 @@ const mapping: BrMapping = {
   'Simple Content': BrContent,
 };
 
-const configuration = {
+let configuration = {
   path: route.fullPath,
   endpoint: config.public.NUXT_APP_BRXM_ENDPOINT,
-  httpClient: axios,
   debug: true,
-};
+} as Configuration;
+
+if (!config.public.NUXT_APP_BRXM_ENDPOINT && config.public.NUXT_APP_BR_MULTI_TENANT_SUPPORT) {
+  const endpointQueryParameter = 'endpoint';
+  const { searchParams } = extractSearchParams(configuration.path!, [endpointQueryParameter].filter(Boolean));
+
+  configuration = {
+    ...configuration,
+    httpClient: axios,
+    endpoint: searchParams.get(endpointQueryParameter) ?? '',
+    baseUrl: `?${endpointQueryParameter}=${searchParams.get(endpointQueryParameter)}`,
+  }
+}
 
 const { data } = await useAsyncData(async (context) => {
   const page = await initialize({
