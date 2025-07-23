@@ -2,9 +2,47 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### ["24.1.2"](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-24.1.1..."24.1.2")
+#### ["25.0.0"](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-24.1.2..."25.0.0")
+
+- SPASDK-246 Improvements to previous changes for Angular & React FC [`#210`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/210)
+- SPASDK-246 restore typedoc generation functionality [`#SPASDK-246`](https://bloomreach.atlassian.net/browse/SPASDK-246)
+- SPASDK-246 Merge branch 'feature/SPASDK-246-improvements' into 'development' [`#SPASDK-246`](https://bloomreach.atlassian.net/browse/SPASDK-246)
+- SPASDK-246 chore: enable multi-tenant support in heroku deployments [`#SPASDK-246`](https://bloomreach.atlassian.net/browse/SPASDK-246)
+- SPASDK-246 feat: restore multi-tenant support in example applications [`#SPASDK-246`](https://bloomreach.atlassian.net/browse/SPASDK-246)
+- SPASDK-246 fix: correct port configuration in example applications [`#SPASDK-246`](https://bloomreach.atlassian.net/browse/SPASDK-246)
+- SPASDK-246 Fix and simplify eventbus subscription lifecycle [`#SPASDK-246`](https://bloomreach.atlassian.net/browse/SPASDK-246)
+- SPASDK-246 Add default ports to example apps similar to the ones in HAP [`#SPASDK-246`](https://bloomreach.atlassian.net/browse/SPASDK-246)
+- SPASDK-246 remove multi-tenant support from example apps [`#SPASDK-246`](https://bloomreach.atlassian.net/browse/SPASDK-246)
+- SPASDK-246 refactor: remove redundant page cleanup code [`#SPASDK-246`](https://bloomreach.atlassian.net/browse/SPASDK-246)
+- SPASDK-246 Merge branch 'feature/SPASDK-246-rfc' into 'development' [`#SPASDK-246`](https://bloomreach.atlassian.net/browse/SPASDK-246)
+- SPASDK-246 Remove ai context files after feature completion [`#SPASDK-246`](https://bloomreach.atlassian.net/browse/SPASDK-246)
+- SPASDK-246 Convert React Class components to functional components [`#SPASDK-246`](https://bloomreach.atlassian.net/browse/SPASDK-246)
+- SPASDK-246 Update package.json scripts to not use npm [`#SPASDK-246`](https://bloomreach.atlassian.net/browse/SPASDK-246)
+- SPASDK-246 Add CLAUDE.md context file [`#SPASDK-246`](https://bloomreach.atlassian.net/browse/SPASDK-246)
+- SPASDK-246 Gather context and create technical design [`#SPASDK-246`](https://bloomreach.atlassian.net/browse/SPASDK-246)
+- SPASDK-228 add null checks for content processing in angular example [`#SPASDK-228`](https://bloomreach.atlassian.net/browse/SPASDK-228)
+- SPASDK-228 Merge branch 'feature/SPASDK-228-angular-upgrade' into 'development' [`#SPASDK-228`](https://bloomreach.atlassian.net/browse/SPASDK-228)
+- SPASDK-228 Update test snapshots [`#SPASDK-228`](https://bloomreach.atlassian.net/browse/SPASDK-228)
+- SPASDK-228 Fix eslint warnings [`#SPASDK-228`](https://bloomreach.atlassian.net/browse/SPASDK-228)
+- SPASDK-228 Fix hydration warnings in example app [`#SPASDK-228`](https://bloomreach.atlassian.net/browse/SPASDK-228)
+- SPASDK-228 Remove redundant dependences in example angular [`#SPASDK-228`](https://bloomreach.atlassian.net/browse/SPASDK-228)
+- SPASDK-228 Add allowed commonjs dependencies in example angular [`#SPASDK-228`](https://bloomreach.atlassian.net/browse/SPASDK-228)
+- SPASDK-228 Update ng-sdk jest dependency [`#SPASDK-228`](https://bloomreach.atlassian.net/browse/SPASDK-228)
+- SPASDK-228 fix test compatibility for angular 20 [`#SPASDK-228`](https://bloomreach.atlassian.net/browse/SPASDK-228)
+- SPASDK-228 update angular configuration for v20 compatibility [`#SPASDK-228`](https://bloomreach.atlassian.net/browse/SPASDK-228)
+- SPASDK-228 upgrade angular dependencies from 19 to 20 [`#SPASDK-228`](https://bloomreach.atlassian.net/browse/SPASDK-228)
+- SPASDK-228 update pnpm lock file for angular 19 [`#SPASDK-228`](https://bloomreach.atlassian.net/browse/SPASDK-228)
+- SPASDK-228 upgrade angular example to angular 19 [`#SPASDK-228`](https://bloomreach.atlassian.net/browse/SPASDK-228)
+- SPASDK-228 upgrade ng-sdk to angular 19 [`#SPASDK-228`](https://bloomreach.atlassian.net/browse/SPASDK-228)
+- SPASDK-228 add packageManager to angular cli config [`#SPASDK-228`](https://bloomreach.atlassian.net/browse/SPASDK-228)
+- SPASDK-228 upgrade node.js from v18 to v20 [`#SPASDK-228`](https://bloomreach.atlassian.net/browse/SPASDK-228)
+
+#### [spa-sdk-24.1.2](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-24.1.1...spa-sdk-24.1.2)
+
+> 25 June 2025
 
 - SPASDK-242 Improve SPA SDK initialization and cleanup to support single BrPage per route [`#206`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/206)
+- SPASDK-242 Bumping versions to 24.1.2 [`#SPASDK-242`](https://bloomreach.atlassian.net/browse/SPASDK-242)
 - SPASDK-242 Improve SPA SDK initialization and cleanup to support single BrPage per route [`#SPASDK-242`](https://bloomreach.atlassian.net/browse/SPASDK-242)
 
 #### [spa-sdk-24.1.1](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-24.1.0...spa-sdk-24.1.1)
