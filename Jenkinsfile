@@ -86,7 +86,7 @@ pipeline {
       stages {
         stage('Build TypeDoc') {
           steps {
-            sh 'pnpm --filter @bloomreach/spa-sdk run docs'
+            sh 'pnpm --filter @bloomreach/spa-sdk run typedoc'
           }
         }
         stage('Build docs') {
