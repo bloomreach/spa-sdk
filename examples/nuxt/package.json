@@ -9,7 +9,7 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "start": "node .output/server/index.mjs",
+    "start": "PORT=3007 node .output/server/index.mjs",
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
