@@ -17,7 +17,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Inject, OnInit, Optional, PLATFORM_ID, inject } from '@angular/core';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
-import { BrPageComponent, BrSdkModule } from '@bloomreach/ng-sdk';
+import { BrSdkModule } from '@bloomreach/ng-sdk';
 import { extractSearchParams, Page } from '@bloomreach/spa-sdk';
 import { Observable, filter } from 'rxjs';
 import { Request } from 'express';
