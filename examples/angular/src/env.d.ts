@@ -4,8 +4,8 @@ declare interface Env {
   // Replace the following with your own environment variables.
   // Example: NGX_VERSION: string;
   [key: string]: any;
-  NG_APP_BRXM_ENDPOINT: string;
-  NG_APP_BR_MULTI_TENANT_SUPPORT: string;
+  NG_APP_BRXM_ENDPOINT?: string;
+  NG_APP_BR_MULTI_TENANT_SUPPORT?: string;
 }
 
 declare interface ImportMeta {

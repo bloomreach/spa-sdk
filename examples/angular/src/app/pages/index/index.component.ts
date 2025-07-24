@@ -41,7 +41,7 @@ import { NewsListComponent } from '../../components/news-list/news-list.componen
 })
 export class IndexComponent implements OnInit {
   router = inject(Router);
-  configuration!: BrPageComponent['configuration'];
+  configuration!: any;
   platformId = inject(PLATFORM_ID);
 
   mapping = {
@@ -57,11 +57,11 @@ export class IndexComponent implements OnInit {
   constructor(@Optional() @Inject(REQUEST) private request: Request) {
     this.configuration = {
       path: this.router.url,
-      endpoint: import.meta.env.NG_APP_BRXM_ENDPOINT,
+      endpoint: import.meta.env?.NG_APP_BRXM_ENDPOINT,
       debug: true,
-    } as BrPageComponent['configuration'];
+    };
 
-    if (!import.meta.env.NG_APP_BRXM_ENDPOINT && import.meta.env.NG_APP_BR_MULTI_TENANT_SUPPORT) {
+    if (!this.configuration.endpoint && import.meta.env?.NG_APP_BR_MULTI_TENANT_SUPPORT) {
       const endpointQueryParameter = 'endpoint';
       const { searchParams } = extractSearchParams(this.configuration.path!, [endpointQueryParameter].filter(Boolean));
 
@@ -69,7 +69,7 @@ export class IndexComponent implements OnInit {
         ...this.configuration,
         endpoint: searchParams.get(endpointQueryParameter) ?? '',
         baseUrl: `?${endpointQueryParameter}=${searchParams.get(endpointQueryParameter)}`,
-      } as BrPageComponent['configuration'];
+      };
     }
 
     if (this.request) {

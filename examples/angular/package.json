@@ -7,7 +7,7 @@
     "ng": "ng",
     "start": "cp dist/browser/index.csr.html dist/browser/index.html; serve dist/browser -sn -p 3004",
     "build": "ng build",
-    "dev": "ng serve",
+    "dev": "ng serve --port 3004",
     "lint": "ng lint",
     "start:ssr": "PORT=3005 node dist/server/server.mjs"
   },
