@@ -2,9 +2,17 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### ["25.0.0"](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-24.1.2..."25.0.0")
+#### ["25.0.1"](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-25.0.0..."25.0.1")
+
+- SPASDK-246 Fix lint [`#SPASDK-246`](https://bloomreach.atlassian.net/browse/SPASDK-246)
+- SPASDK-246 Fix ng app for internal multi tenant builds [`#SPASDK-246`](https://bloomreach.atlassian.net/browse/SPASDK-246)
+
+### [spa-sdk-25.0.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-24.1.2...spa-sdk-25.0.0)
+
+> 23 July 2025
 
 - SPASDK-246 Improvements to previous changes for Angular & React FC [`#210`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/210)
+- SPASDK-246 Bumping versions to 25.0.0 [`#SPASDK-246`](https://bloomreach.atlassian.net/browse/SPASDK-246)
 - SPASDK-246 restore typedoc generation functionality [`#SPASDK-246`](https://bloomreach.atlassian.net/browse/SPASDK-246)
 - SPASDK-246 Merge branch 'feature/SPASDK-246-improvements' into 'development' [`#SPASDK-246`](https://bloomreach.atlassian.net/browse/SPASDK-246)
 - SPASDK-246 chore: enable multi-tenant support in heroku deployments [`#SPASDK-246`](https://bloomreach.atlassian.net/browse/SPASDK-246)

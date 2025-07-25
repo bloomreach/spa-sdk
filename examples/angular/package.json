@@ -1,13 +1,13 @@
 {
   "name": "@bloomreach/example-angular",
   "description": "Example Angular SPA for Bloomreach Experience",
-  "version": "25.0.0",
+  "version": "25.0.1",
   "private": true,
   "scripts": {
     "ng": "ng",
     "start": "cp dist/browser/index.csr.html dist/browser/index.html; serve dist/browser -sn -p 3004",
     "build": "ng build",
-    "dev": "ng serve",
+    "dev": "ng serve --port 3004",
     "lint": "ng lint",
     "start:ssr": "PORT=3005 node dist/server/server.mjs"
   },
@@ -22,8 +22,8 @@
     "@angular/platform-server": "20.1.0",
     "@angular/router": "20.1.0",
     "@angular/ssr": "20.1.0",
-    "@bloomreach/ng-sdk": "25.0.0",
-    "@bloomreach/spa-sdk": "25.0.0",
+    "@bloomreach/ng-sdk": "25.0.1",
+    "@bloomreach/spa-sdk": "25.0.1",
     "dotenv": "16.4.5",
     "emittery": "0.7.2",
     "express": "4.19.2",
