@@ -47,7 +47,7 @@ export default function App(): JSX.Element {
   return (
     <StrictMode>
       <BrPage configuration={configuration} mapping={mapping}>
-        {({ page, mapping: pageMapping }) => (
+        {({ page, mapping: pageMapping, component }) => (
           <>
             <header>
               <nav className="navbar navbar-expand-sm navbar-dark sticky-top bg-dark" role="navigation">
@@ -58,21 +58,21 @@ export default function App(): JSX.Element {
                     </Link>
                   )}
                   <div className="collapse navbar-collapse">
-                    <BrComponent path="menu" page={page!} mapping={pageMapping}>
-                      <Menu page={page!} mapping={pageMapping} />
+                    <BrComponent path="menu" page={page!} mapping={pageMapping} component={component}>
+                      {({ page: menuPage, mapping: menuMapping }) => <Menu page={menuPage} mapping={menuMapping} />}
                     </BrComponent>
                   </div>
                 </div>
               </nav>
             </header>
             <section className="container flex-fill pt-3">
-              <BrComponent path="main" page={page!} mapping={pageMapping} />
+              <BrComponent path="main" page={page!} mapping={pageMapping} component={component} />
             </section>
             <footer className="bg-dark text-light py-3">
               <div className="container clearfix">
                 <div className="float-left pr-3">&copy; Bloomreach</div>
                 <div className="overflow-hidden">
-                  <BrComponent path="footer" page={page!} mapping={pageMapping} />
+                  <BrComponent path="footer" page={page!} mapping={pageMapping} component={component} />
                 </div>
               </div>
             </footer>
