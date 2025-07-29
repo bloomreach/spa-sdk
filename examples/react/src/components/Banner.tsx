@@ -20,7 +20,7 @@ import React, { JSX } from 'react';
 import { Link } from 'react-router-dom';
 import { sanitize } from '../utils/sanitize';
 
-export function Banner({ component, page }: BrProps): JSX.Element | null {
+export function Banner({ component, page, mapping }: BrProps): JSX.Element | null {
   const documentRef = component?.getModels().document;
   const document = !!documentRef && page?.getContent(documentRef);
 
@@ -42,6 +42,8 @@ export function Banner({ component, page }: BrProps): JSX.Element | null {
         root="banners"
         relative
         pickerSelectableNodeTypes="best:banner,hap:bannerdocument"
+        page={page}
+        mapping={mapping}
       />
       {title && <h1>{title}</h1>}
       {image && <img className="img-fluid" src={image.getOriginal()?.getUrl()} alt={title} />}

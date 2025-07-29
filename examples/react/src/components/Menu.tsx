@@ -17,7 +17,7 @@
 import React, { JSX } from 'react';
 import { Link } from 'react-router-dom';
 import { MenuItem, Menu as BrMenu, TYPE_LINK_EXTERNAL, isMenu } from '@bloomreach/spa-sdk';
-import { BrComponentContext, BrManageMenuButton, BrPageContext } from '@bloomreach/react-sdk';
+import { BrManageMenuButton, BrProps } from '@bloomreach/react-sdk';
 
 interface MenuLinkProps {
   item: MenuItem;
@@ -45,9 +45,7 @@ function MenuLink({ item }: MenuLinkProps): JSX.Element {
   );
 }
 
-export function Menu(): JSX.Element | null {
-  const component = React.useContext(BrComponentContext);
-  const page = React.useContext(BrPageContext);
+export function Menu({ component, page, mapping }: BrProps): JSX.Element | null {
   const menuRef = component?.getModels<MenuModels>()?.menu;
   const menu = menuRef && page?.getContent<BrMenu>(menuRef);
 
@@ -57,7 +55,7 @@ export function Menu(): JSX.Element | null {
 
   return (
     <ul className={`navbar-nav col-12 ${page?.isPreview() ? 'has-edit-button' : ''}`}>
-      <BrManageMenuButton menu={menu} />
+      <BrManageMenuButton menu={menu} page={page} mapping={mapping} />
       {menu.getItems().map((item, index) => (
         // eslint-disable-next-line react/no-array-index-key
         <li key={index} className={`nav-item ${item.isSelected() ? 'active' : ''}`}>

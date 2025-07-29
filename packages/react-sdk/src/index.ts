@@ -14,6 +14,6 @@
  * limitations under the License.
  */
 
-export { BrComponent, BrProps } from './component';
+export { BrComponent, BrProps, BrMapping } from './component';
 export { BrManageContentButton, BrManageMenuButton } from './cms';
 export { BrPage } from './page';
