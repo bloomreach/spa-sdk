@@ -35,56 +35,77 @@ import {
 } from '../cms';
 import { BrNodeContainer } from './BrNodeContainer';
 import { BrMeta } from '../meta';
-import { withMappingContextProvider } from '../utils/withContextProvider';
+import { BrMapping } from './BrProps';
 
 describe('BrNodeContainer', () => {
-  const props = {
-    component: { getType: jest.fn(), getMeta: jest.fn() } as unknown as jest.Mocked<Container>,
-    page: { isPreview: jest.fn(() => false) } as unknown as jest.Mocked<Page>,
+  const mockMapping: BrMapping = {
+    test: ({ children }: React.PropsWithChildren<any>) => <div>{children}</div>,
   };
+
+  const mockComponent = {
+    getType: jest.fn(),
+    getMeta: jest.fn(),
+  } as unknown as jest.Mocked<Container>;
+
+  const mockPage = {
+    isPreview: jest.fn(() => false),
+  } as unknown as jest.Mocked<Page>;
 
   const emptyMeta = {} as MetaCollection;
 
   beforeEach(() => {
     jest.resetAllMocks();
 
-    props.component.getMeta.mockReturnValue(emptyMeta);
+    mockComponent.getMeta.mockReturnValue(emptyMeta);
   });
 
-  describe('getMapping', () => {
+  describe('Container type mapping', () => {
     it('should use container type for mapping', () => {
-      render(<BrNodeContainer {...props} />);
+      render(
+        <BrNodeContainer
+          component={mockComponent}
+          page={mockPage}
+          mapping={mockMapping}
+        />,
+      );
 
-      expect(props.component.getType).toBeCalled();
+      expect(mockComponent.getType).toBeCalled();
     });
 
     it('should render a mapped container', () => {
-      props.component.getType.mockReturnValue('test' as ReturnType<Container['getType']>);
+      mockComponent.getType.mockReturnValue('test' as ReturnType<Container['getType']>);
       const element = render(
-        withMappingContextProvider(
-          {
-            test: ({ children }: React.PropsWithChildren<typeof props>) => <div>{children}</div>,
-          },
-          <BrNodeContainer {...props}>
-            <a />
-          </BrNodeContainer>,
-        ),
+        <BrNodeContainer
+          component={mockComponent}
+          page={mockPage}
+          mapping={mockMapping}
+        >
+          <a />
+        </BrNodeContainer>,
       );
 
       expect(element.asFragment()).toMatchSnapshot();
     });
 
     it('should render inline container', () => {
-      props.component.getType.mockReturnValue(TYPE_CONTAINER_INLINE);
+      mockComponent.getType.mockReturnValue(TYPE_CONTAINER_INLINE);
       const element = render(
-        <BrNodeContainer {...props}>
+        <BrNodeContainer
+          component={mockComponent}
+          page={mockPage}
+          mapping={mockMapping}
+        >
           <a />
         </BrNodeContainer>,
       );
 
       const nodeMeta = render(
         <BrMeta meta={emptyMeta}>
-          <BrContainerInline {...props}>
+          <BrContainerInline
+            component={mockComponent}
+            page={mockPage}
+            mapping={mockMapping}
+          >
             <a />
           </BrContainerInline>
         </BrMeta>,
@@ -95,16 +116,24 @@ describe('BrNodeContainer', () => {
     });
 
     it('should render no markup container', () => {
-      props.component.getType.mockReturnValue(TYPE_CONTAINER_NO_MARKUP);
+      mockComponent.getType.mockReturnValue(TYPE_CONTAINER_NO_MARKUP);
       const element = render(
-        <BrNodeContainer {...props}>
+        <BrNodeContainer
+          component={mockComponent}
+          page={mockPage}
+          mapping={mockMapping}
+        >
           <a />
         </BrNodeContainer>,
       );
 
       const nodeMeta = render(
         <BrMeta meta={emptyMeta}>
-          <BrContainerNoMarkup {...props}>
+          <BrContainerNoMarkup
+            component={mockComponent}
+            page={mockPage}
+            mapping={mockMapping}
+          >
             <a />
           </BrContainerNoMarkup>
         </BrMeta>,
@@ -115,16 +144,24 @@ describe('BrNodeContainer', () => {
     });
 
     it('should render ordered list container', () => {
-      props.component.getType.mockReturnValue(TYPE_CONTAINER_ORDERED_LIST);
+      mockComponent.getType.mockReturnValue(TYPE_CONTAINER_ORDERED_LIST);
       const element = render(
-        <BrNodeContainer {...props}>
+        <BrNodeContainer
+          component={mockComponent}
+          page={mockPage}
+          mapping={mockMapping}
+        >
           <a />
         </BrNodeContainer>,
       );
 
       const nodeMeta = render(
         <BrMeta meta={emptyMeta}>
-          <BrContainerOrderedList {...props}>
+          <BrContainerOrderedList
+            component={mockComponent}
+            page={mockPage}
+            mapping={mockMapping}
+          >
             <a />
           </BrContainerOrderedList>
         </BrMeta>,
@@ -135,16 +172,24 @@ describe('BrNodeContainer', () => {
     });
 
     it('should render unordered list container', () => {
-      props.component.getType.mockReturnValue(TYPE_CONTAINER_UNORDERED_LIST);
+      mockComponent.getType.mockReturnValue(TYPE_CONTAINER_UNORDERED_LIST);
       const element = render(
-        <BrNodeContainer {...props}>
+        <BrNodeContainer
+          component={mockComponent}
+          page={mockPage}
+          mapping={mockMapping}
+        >
           <a />
         </BrNodeContainer>,
       );
 
       const nodeMeta = render(
         <BrMeta meta={emptyMeta}>
-          <BrContainerUnorderedList {...props}>
+          <BrContainerUnorderedList
+            component={mockComponent}
+            page={mockPage}
+            mapping={mockMapping}
+          >
             <a />
           </BrContainerUnorderedList>
         </BrMeta>,
@@ -155,16 +200,24 @@ describe('BrNodeContainer', () => {
     });
 
     it('should render box container', () => {
-      props.component.getType.mockReturnValue(TYPE_CONTAINER_BOX);
+      mockComponent.getType.mockReturnValue(TYPE_CONTAINER_BOX);
       const element = render(
-        <BrNodeContainer {...props}>
+        <BrNodeContainer
+          component={mockComponent}
+          page={mockPage}
+          mapping={mockMapping}
+        >
           <a />
         </BrNodeContainer>,
       );
 
       const nodeMeta = render(
         <BrMeta meta={emptyMeta}>
-          <BrContainerBox {...props}>
+          <BrContainerBox
+            component={mockComponent}
+            page={mockPage}
+            mapping={mockMapping}
+          >
             <a />
           </BrContainerBox>
         </BrMeta>,
@@ -175,11 +228,21 @@ describe('BrNodeContainer', () => {
     });
 
     it('should render box container on an unknown type', () => {
-      const element = render(<BrNodeContainer {...props} />);
+      const element = render(
+        <BrNodeContainer
+          component={mockComponent}
+          page={mockPage}
+          mapping={mockMapping}
+        />,
+      );
 
       const nodeMeta = render(
         <BrMeta meta={emptyMeta}>
-          <BrContainerBox {...props} />
+          <BrContainerBox
+            component={mockComponent}
+            page={mockPage}
+            mapping={mockMapping}
+          />
         </BrMeta>,
       );
 

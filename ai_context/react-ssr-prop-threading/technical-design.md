@@ -118,28 +118,17 @@ export function BrPage({
 
   const component = page?.getComponent();
 
-  // Support both render props and regular children
-  if (typeof children === 'function') {
-    return (
-      <>
-        {children({ page, component, mapping })}
-        <BrNode 
-          page={page!} 
-          mapping={mapping} 
-          component={component}
-        />
-      </>
-    );
-  }
-
-  // Pure prop drilling - no context providers
+  // Always wrap children with BrNode - support both render props and regular children
   return (
     <BrNode 
       page={page!} 
       mapping={mapping} 
       component={component}
     >
-      {children}
+      {typeof children === 'function' 
+        ? children({ page, component, mapping })
+        : children
+      }
     </BrNode>
   );
 }
@@ -472,19 +461,21 @@ export function BrNodeComponent<T extends Component>({
   )}
 </BrPage>
 
-// Alternative: Mixed usage with regular children
+// Alternative: Mixed usage with regular children  
 <BrPage configuration={configuration} mapping={mapping}>
   {({ page }) => (
-    <header>
-      {page && (
-        <Link to={page.getUrl('/')} className="navbar-brand">
-          {page.getTitle() || 'brXM + React = ♥️'}
-        </Link>
-      )}
-    </header>
+    <>
+      <header>
+        {page && (
+          <Link to={page.getUrl('/')} className="navbar-brand">
+            {page.getTitle() || 'brXM + React = ♥️'}
+          </Link>
+        )}
+      </header>
+      {/* Regular children components still receive props via BrNode */}
+      <BrComponent path="main" />
+    </>
   )}
-  {/* Regular children are rendered after render props */}
-  <BrComponent path="main" />
 </BrPage>
 ```
 
@@ -524,18 +515,6 @@ export default async function Page() {
   );
 }
 ```
-
-### 5. Performance Optimizations
-
-#### Bundle Size Reduction
-- **Context code removal** reduces bundle size by eliminating context providers and utilities
-- **Simplified component tree** with no context provider wrapping
-- **Direct prop access** eliminates context lookup overhead
-
-#### Runtime Performance
-- **Prop drilling** provides direct prop access without context traversal
-- **Predictable re-renders** since props flow explicitly down the tree
-- **Better tree shaking** opportunities without context dependencies
 
 ## Testing Strategy
 
@@ -595,12 +574,6 @@ describe('React Server Components', () => {
   });
 });
 ```
-
-### 4. Integration Testing
-- **Next.js App Router integration** with actual RSC environment
-- **Performance benchmarks** comparing before/after prop drilling
-- **Bundle size analysis** after context removal
-- **Example application validation** across all framework targets
 
 ## Breaking Changes Assessment
 

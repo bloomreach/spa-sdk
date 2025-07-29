@@ -20,83 +20,132 @@ import { act, render } from '@testing-library/react';
 import { BrContainerItemUndefined } from '../cms';
 import { BrNodeContainerItem } from './BrNodeContainerItem';
 import { BrMeta } from '../meta';
-import { withMappingContextProvider } from '../utils/withContextProvider';
+import { BrMapping } from './BrProps';
 
 jest.mock('@bloomreach/spa-sdk', () => () => ({ [TYPE_CONTAINER_ITEM_UNDEFINED]: 'StringValue' }));
 
 describe('BrNodeContainerItem', () => {
-  const props = {
-    component: {
-      getType: jest.fn(),
-      on: jest.fn(),
-      off: jest.fn(),
-      getMeta: jest.fn(),
-    } as unknown as jest.Mocked<ContainerItem>,
-    page: { sync: jest.fn() } as unknown as jest.Mocked<Page>,
+  const mockMapping: BrMapping = {
+    test: () => <div>Test</div>,
+    [TYPE_CONTAINER_ITEM_UNDEFINED]: ({ children }: React.PropsWithChildren<any>) => <div>{children}</div>,
   };
+
+  const mockComponent = {
+    getType: jest.fn(),
+    on: jest.fn(),
+    off: jest.fn(),
+    getMeta: jest.fn(),
+  } as unknown as jest.Mocked<ContainerItem>;
+
+  const mockPage = {
+    sync: jest.fn(),
+  } as unknown as jest.Mocked<Page>;
 
   const emptyMeta = {} as MetaCollection;
 
   beforeEach(() => {
     jest.clearAllMocks();
 
-    props.component.getMeta.mockReturnValue(emptyMeta);
+    mockComponent.getMeta.mockReturnValue(emptyMeta);
   });
 
-  describe('componentDidMount', () => {
+  describe('Event handling', () => {
     it('should subscribe for update event on mount', () => {
-      render(<BrNodeContainerItem {...props} />);
-
-      expect(props.component.on).toBeCalledWith('update', expect.any(Function));
-    });
-  });
-
-  describe('componentDidUpdate', () => {
-    it('should resubscribe on component update', () => {
-      const element = render(<BrNodeContainerItem {...props} />);
-
-      jest.clearAllMocks();
-      render(<BrNodeContainerItem component={{ ...props.component }} />, { container: element.container });
-
-      expect(props.component.off).toBeCalledWith('update', expect.any(Function));
-      expect(props.component.on).toBeCalledWith('update', expect.any(Function));
-    });
-  });
-
-  describe('componentWillUnmount', () => {
-    it('should unsubscribe from update event on unmount', () => {
-      const element = render(<BrNodeContainerItem {...props} />);
-      element.unmount();
-
-      expect(props.component.off).toBeCalledWith('update', props.component.on.mock.calls[0][1]);
-    });
-  });
-
-  describe('getMapping', () => {
-    it('should use container item type for mapping', () => {
-      props.component.getType.mockReturnValueOnce('test');
       render(
-        withMappingContextProvider(
-          {
-            test: () => <div>Test</div>,
-          },
-          <BrNodeContainerItem {...props} />,
-        ),
+        <BrNodeContainerItem
+          component={mockComponent}
+          page={mockPage}
+          mapping={mockMapping}
+        />,
       );
 
-      expect(props.component.getType).toBeCalled();
+      expect(mockComponent.on).toBeCalledWith('update', expect.any(Function));
+    });
+
+    it('should resubscribe on component update', () => {
+      const newComponent = { ...mockComponent } as jest.Mocked<ContainerItem>;
+      const { rerender } = render(
+        <BrNodeContainerItem
+          component={mockComponent}
+          page={mockPage}
+          mapping={mockMapping}
+        />,
+      );
+
+      jest.clearAllMocks();
+      rerender(
+        <BrNodeContainerItem
+          component={newComponent}
+          page={mockPage}
+          mapping={mockMapping}
+        />,
+      );
+
+      expect(mockComponent.off).toBeCalledWith('update', expect.any(Function));
+      expect(newComponent.on).toBeCalledWith('update', expect.any(Function));
+    });
+
+    it('should unsubscribe from update event on unmount', () => {
+      const element = render(
+        <BrNodeContainerItem
+          component={mockComponent}
+          page={mockPage}
+          mapping={mockMapping}
+        />,
+      );
+
+      element.unmount();
+
+      expect(mockComponent.off).toBeCalledWith('update', mockComponent.on.mock.calls[0][1]);
+    });
+
+    it('should trigger sync on update event', async () => {
+      render(
+        <BrNodeContainerItem
+          component={mockComponent}
+          page={mockPage}
+          mapping={mockMapping}
+        />,
+      );
+
+      await act(() => mockComponent.on.mock.calls[0][1]({}));
+
+      expect(mockPage.sync).toBeCalled();
+    });
+  });
+
+  describe('Container item mapping', () => {
+    it('should use container item type for mapping', () => {
+      mockComponent.getType.mockReturnValueOnce('test');
+      render(
+        <BrNodeContainerItem
+          component={mockComponent}
+          page={mockPage}
+          mapping={mockMapping}
+        />,
+      );
+
+      expect(mockComponent.getType).toBeCalled();
     });
 
     it('should render undefined container item', () => {
       const element = render(
-        <BrNodeContainerItem {...props}>
+        <BrNodeContainerItem
+          component={mockComponent}
+          page={mockPage}
+          mapping={{}}
+        >
           <a />
         </BrNodeContainerItem>,
       );
 
       const nodeMeta = render(
         <BrMeta meta={emptyMeta}>
-          <BrContainerItemUndefined {...props}>
+          <BrContainerItemUndefined
+            component={mockComponent}
+            page={mockPage}
+            mapping={{}}
+          >
             <a />
           </BrContainerItemUndefined>
         </BrMeta>,
@@ -106,32 +155,32 @@ describe('BrNodeContainerItem', () => {
       expect(element.asFragment()).toMatchSnapshot();
     });
 
-    it('should override undefined container item', () => {
-      props.component.getType.mockReturnValueOnce('test');
+    it('should override undefined container item when mapping provided', () => {
+      mockComponent.getType.mockReturnValueOnce('test');
       const element = render(
-        withMappingContextProvider(
-          {
-            [TYPE_CONTAINER_ITEM_UNDEFINED]: ({ children }: React.PropsWithChildren<typeof props>) => (
-              <div>{children}</div>
-            ),
-          },
-          <BrNodeContainerItem {...props}>
-            <a />
-          </BrNodeContainerItem>,
-        ),
+        <BrNodeContainerItem
+          component={mockComponent}
+          page={mockPage}
+          mapping={mockMapping}
+        >
+          <a />
+        </BrNodeContainerItem>,
       );
 
       expect(element.asFragment()).toMatchSnapshot();
     });
-  });
 
-  describe('onUpdate', () => {
-    it('should trigger sync on update event', async () => {
-      render(<BrNodeContainerItem {...props} />);
+    it('should render mapped component when type matches', () => {
+      mockComponent.getType.mockReturnValueOnce('test');
+      const element = render(
+        <BrNodeContainerItem
+          component={mockComponent}
+          page={mockPage}
+          mapping={mockMapping}
+        />,
+      );
 
-      await act(() => props.component.on.mock.calls[0][1]({}));
-
-      expect(props.page.sync).toBeCalled();
+      expect(element.getByText('Test')).toBeInTheDocument();
     });
   });
 });

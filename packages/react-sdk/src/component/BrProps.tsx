@@ -17,12 +17,12 @@
 import React from 'react';
 import { Component, Container, ContainerItem, Page } from '@bloomreach/spa-sdk';
 
-type BrComponent =
+export type BrMappedComponent =
   | React.ComponentType<BrProps<Component>>
   | React.ComponentType<BrProps<Container>>
   | React.ComponentType<BrProps<ContainerItem>>;
 
-type BrMapping = Record<keyof any, BrComponent>;
+export type BrMapping = Record<keyof any, BrMappedComponent>;
 
 /**
  * Core properties required by all Bloomreach React SDK components.
@@ -62,7 +62,20 @@ export interface BrComponentProps<T extends Component = Component> extends BrCor
  * Allows child functions to receive page, mapping, and component data
  * as function parameters for flexible rendering patterns.
  */
-export interface BrPageRenderProps extends BrCoreProps {
+export interface BrPageRenderProps {
+  /**
+   * The current page instance from the Bloomreach Page Model API.
+   * May be undefined during initial page loading.
+   */
+  page?: Page;
+
+  /**
+   * Component mapping object that defines how brXM component types
+   * are mapped to React components. Used for dynamic component resolution
+   * during page rendering.
+   */
+  mapping: BrMapping;
+
   /**
    * The root component of the current page, if available.
    * Represents the top-level container component that holds
@@ -72,23 +85,36 @@ export interface BrPageRenderProps extends BrCoreProps {
 }
 
 /**
- * The mapped component properties.
- * @deprecated Use BrComponentProps instead. This interface will be updated
- * to require page and mapping props in the next major version.
+ * Render props pattern interface for BrComponent component.
+ * Allows child functions to receive page, mapping, and component data
+ * as function parameters for flexible rendering patterns.
  */
-export interface BrProps<T extends Component = Component> {
+export interface BrComponentRenderProps {
   /**
-   * The mapped component.
+   * The current page instance from the Bloomreach Page Model API.
    */
-  component?: T;
+  page: Page;
 
   /**
-   * The current page.
+   * Component mapping object that defines how brXM component types
+   * are mapped to React components. Used for dynamic component resolution
+   * during page rendering.
    */
-  page?: Page;
+  mapping: BrMapping;
 
   /**
-   * Component mapping for dynamic component resolution.
+   * The specific brXM component instance for the current iteration.
+   * Contains component-specific data, configuration, and metadata.
    */
-  mapping?: BrMapping;
+  component: Component;
 }
+
+/**
+ * The mapped component properties for Bloomreach React SDK components.
+ *
+ * This interface requires page and mapping props for React Server Components (RSC)
+ * compatibility. Context-based state management has been removed in favor of explicit prop drilling.
+ *
+ * @since 25.0.0
+ */
+export type BrProps<T extends Component = Component> = BrComponentProps<T>

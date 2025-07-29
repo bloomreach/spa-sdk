@@ -15,45 +15,59 @@
  */
 
 import { Component } from '@bloomreach/spa-sdk';
-import React, { useContext } from 'react';
-import { BrComponentContext } from './BrComponentContext';
+import React from 'react';
 import { BrNode } from './BrNode';
+import { BrComponentProps as BrCoreComponentProps, BrComponentRenderProps } from './BrProps';
 
-interface BrComponentProps {
+interface BrComponentProps extends BrCoreComponentProps {
   /**
    * The path to a component.
    * The path is defined as a slash-separated components name chain
    * relative to the current component (e.g. `main/container`).
    * If it is omitted, all the children will be rendered.
    */
-  // eslint-disable-next-line react/require-default-props
   path?: string;
+
+  /**
+   * Child components or render function that receives page, component, and mapping data.
+   * Supports both regular React children and render props pattern for accessing component data.
+   */
+  children?: React.ReactNode | ((props: BrComponentRenderProps) => React.ReactNode);
 }
 
 /**
- * The brXM component.
+ * The brXM component with prop-based data access.
  */
-export function BrComponent({ path, children }: React.PropsWithChildren<BrComponentProps>): React.ReactElement {
-  const context = useContext(BrComponentContext);
-
+export function BrComponent({
+  path,
+  children,
+  component,
+  page,
+  mapping,
+}: BrComponentProps): React.ReactElement {
   function getComponents(): Component[] {
-    if (!context || Object.keys(context).length === 0) {
+    if (!component || Object.keys(component).length === 0) {
       return [];
     }
     if (!path) {
-      return context.getChildren();
+      return component.getChildren();
     }
 
-    const component = context.getComponent(...path.split('/'));
-
-    return component ? [component] : [];
+    const targetComponent = component.getComponent(...path.split('/'));
+    return targetComponent ? [targetComponent] : [];
   }
 
   function renderComponents(): React.ReactElement[] {
-    return getComponents().map((component, index) => (
-      // eslint-disable-next-line react/no-array-index-key
-      <BrNode key={index} component={component}>
-        {children}
+    return getComponents().map((comp) => (
+      <BrNode
+        key={comp.getId()}
+        component={comp}
+        page={page}
+        mapping={mapping}
+      >
+        {typeof children === 'function'
+          ? children({ page, component: comp, mapping })
+          : children}
       </BrNode>
     ));
   }

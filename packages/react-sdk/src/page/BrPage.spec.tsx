@@ -314,4 +314,100 @@ describe('BrPage', () => {
       jest.useRealTimers();
     });
   });
+
+  describe('Render Props Pattern', () => {
+    it('should support render props pattern with page, component, and mapping', async () => {
+      const page = createMockPage();
+      jest.mocked(initialize).mockResolvedValue(page);
+
+      const renderProp = jest.fn(({ page: renderPage, component, mapping: renderMapping }) => (
+        <div>
+          Page:
+          {' '}
+          {renderPage ? 'exists' : 'missing'}
+          Component:
+          {' '}
+          {component ? 'exists' : 'missing'}
+          Mapping:
+          {' '}
+          {renderMapping ? 'exists' : 'missing'}
+        </div>
+      ));
+
+      const { getByText } = render(
+        <BrPage configuration={config} mapping={mapping}>
+          {renderProp}
+        </BrPage>,
+      );
+
+      await waitFor(() => {
+        expect(renderProp).toHaveBeenCalledWith({
+          page,
+          component: expect.any(Object),
+          mapping,
+        });
+        expect(getByText('Page: exists', { exact: false })).toBeInTheDocument();
+        expect(getByText('Component: exists', { exact: false })).toBeInTheDocument();
+        expect(getByText('Mapping: exists', { exact: false })).toBeInTheDocument();
+      });
+    });
+
+    it('should pass undefined page in render props when page is not initialized', async () => {
+      jest.mocked(initialize).mockResolvedValue(undefined as unknown as Page);
+
+      const renderProp = jest.fn(({ page: renderPage }) => (
+        <div>
+          Page:
+          {renderPage ? 'exists' : 'missing'}
+        </div>
+      ));
+
+      const { getByText } = render(
+        <BrPage configuration={{ ...config, NBRMode: true }} mapping={mapping}>
+          {renderProp}
+        </BrPage>,
+      );
+
+      await waitFor(() => {
+        expect(renderProp).toHaveBeenCalledWith({
+          page: undefined,
+          component: undefined,
+          mapping,
+        });
+        expect(getByText(/Page:.*missing/)).toBeInTheDocument();
+      });
+    });
+
+    it('should work with both render props and regular children patterns', async () => {
+      const page = createMockPage();
+      jest.mocked(initialize).mockResolvedValue(page);
+
+      // Test regular children
+      const { rerender, getByText } = render(
+        <BrPage configuration={config} mapping={mapping}>
+          <div>Regular children</div>
+        </BrPage>,
+      );
+
+      await waitFor(() => {
+        expect(getByText('Regular children')).toBeInTheDocument();
+      });
+
+      // Test render props
+      rerender(
+        <BrPage configuration={config} mapping={mapping}>
+          {({ page: renderPage }) => (
+            <div>
+              Render prop:
+              {renderPage ? 'with page' : 'no page'}
+            </div>
+          )}
+        </BrPage>,
+      );
+
+      await waitFor(() => {
+        expect(getByText(/Render prop:.*with page/)).toBeInTheDocument();
+      });
+    });
+  });
 });

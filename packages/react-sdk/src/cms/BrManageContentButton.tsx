@@ -14,16 +14,25 @@
  * limitations under the License.
  */
 
-import React, { useContext } from 'react';
+import React from 'react';
 import { ManageContentButton, TYPE_MANAGE_CONTENT_BUTTON } from '@bloomreach/spa-sdk';
 import { BrMeta } from '../meta';
-import { BrPageContext } from '../page/BrPageContext';
+import { BrCoreProps } from '../component/BrProps';
+
+interface BrManageContentButtonProps extends BrCoreProps, ManageContentButton {
+  // Inherits page and mapping from BrCoreProps
+  // Inherits ManageContentButton properties
+}
 
 /**
  * The button component that opens for editing a content.
+ *
+ * This component requires page prop for RSC compatibility.
+ *
+ * @since 25.0.0
  */
-export function BrManageContentButton(props: ManageContentButton): React.ReactElement | null {
-  const page = useContext(BrPageContext);
+export function BrManageContentButton(props: BrManageContentButtonProps): React.ReactElement | null {
+  const { page, ...buttonProps } = props;
 
-  return page?.isPreview() ? <BrMeta meta={page.getButton(TYPE_MANAGE_CONTENT_BUTTON, props)} /> : null;
+  return page?.isPreview() ? <BrMeta meta={page.getButton(TYPE_MANAGE_CONTENT_BUTTON, buttonProps)} /> : null;
 }

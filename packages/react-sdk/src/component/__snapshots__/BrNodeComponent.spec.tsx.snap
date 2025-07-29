@@ -1,15 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`BrNodeComponent render should render a mapped component 1`] = `
+exports[`BrNodeComponent Component mapping resolution should render children when no mapping provided 1`] = `
+<DocumentFragment>
+  <b />
+</DocumentFragment>
+`;
+
+exports[`BrNodeComponent Component mapping resolution should render mapped component when mapping exists 1`] = `
 <DocumentFragment>
   <a>
     <b />
   </a>
-</DocumentFragment>
-`;
-
-exports[`BrNodeComponent render should render children on a fallback 1`] = `
-<DocumentFragment>
-  <b />
 </DocumentFragment>
 `;

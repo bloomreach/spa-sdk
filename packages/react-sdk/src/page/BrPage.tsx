@@ -16,8 +16,7 @@
 
 import { Configuration, initialize, Page, PageModel } from '@bloomreach/spa-sdk';
 import React, { useEffect, useState } from 'react';
-import { BrMappingContext, BrNode } from '../component';
-import { BrPageContext } from './BrPageContext';
+import { BrNode, BrPageRenderProps, BrMapping } from '../component';
 
 interface BrPageProps {
   /**
@@ -29,33 +28,35 @@ interface BrPageProps {
   /**
    * The brXM and React components mapping.
    */
-  mapping: React.ContextType<typeof BrMappingContext>;
+  mapping: BrMapping;
 
   /**
    * The pre-initialized page instance or prefetched page model.
    * Mostly this property should be used to transfer state from the server-side to the client-side.
    */
-  // eslint-disable-next-line react/require-default-props
   page?: Page | PageModel;
+
+  /**
+   * Child components or render function that receives page, component, and mapping data.
+   * Supports both regular React children and render props pattern for accessing page data.
+   */
+  children?: React.ReactNode | ((props: BrPageRenderProps) => React.ReactNode);
 }
 
 /**
- * @typedef {Object} BrPageProps
- * @property {Configuration} configuration The configuration of the SPA SDK.
- * @property {Object} mapping The brXM and React components mapping.
- * @property {Page | PageModel | undefined} page The pre-initialized page instance or prefetched page model.
- * Mostly this property should be used to transfer state from the server-side to the client-side.
- */
-
-/**
- * The brXM page.
+ * The brXM page component with React Server Components (RSC) support.
+ *
+ * This component uses prop drilling and supports render props pattern for accessing page data.
+ * This change enables React Server Components compatibility.
+ *
+ * @since 25.0.0
  */
 export function BrPage({
   configuration,
   mapping,
   page: initialPage,
   children,
-}: React.PropsWithChildren<BrPageProps>): React.ReactElement | null {
+}: BrPageProps): React.ReactElement | null {
   const [page, setPage] = useState<Page | undefined>(() => {
     return initialPage ? initialize(configuration, initialPage) : undefined;
   });
@@ -85,14 +86,35 @@ export function BrPage({
     page?.sync();
   }, [page]);
 
+  // In NBRMode, render children even if page is not loaded yet
+  // Otherwise, wait for page to be loaded
+  if (!page && !configuration.NBRMode) {
+    return null;
+  }
+
+  const component = page?.getComponent();
+
+  // In NBRMode without page, render children directly without BrNode wrapper
+  if (!page && configuration.NBRMode) {
+    return (
+      <>
+        {typeof children === 'function'
+          ? children({ page, component, mapping })
+          : children}
+      </>
+    );
+  }
+
+  // Normal mode with page loaded - wrap children with BrNode
   return (
-    <BrPageContext.Provider value={page}>
-      <BrMappingContext.Provider value={mapping}>
-        {!page && !configuration.NBRMode && null}
-        {(page || configuration.NBRMode) && (
-          <BrNode component={page?.getComponent()}>{children}</BrNode>
-        )}
-      </BrMappingContext.Provider>
-    </BrPageContext.Provider>
+    <BrNode
+      page={page!}
+      mapping={mapping}
+      component={component}
+    >
+      {typeof children === 'function'
+        ? children({ page, component, mapping })
+        : children}
+    </BrNode>
   );
 }

@@ -15,19 +15,23 @@
  */
 
 import { Component } from '@bloomreach/spa-sdk';
-import React, { useContext } from 'react';
+import React from 'react';
 import { BrMeta } from '../meta';
-import { BrMappingContext } from './BrMappingContext';
 import { BrProps } from './BrProps';
 
-export function BrNodeComponent<T extends Component>(props: React.PropsWithChildren<BrProps<T>>): React.ReactElement {
-  const context = useContext(BrMappingContext);
-  const { component, children } = props;
+/**
+ * Node component for rendering brXM components with prop-based mapping resolution.
+ */
+export function BrNodeComponent<T extends Component>(
+  props: React.PropsWithChildren<BrProps<T>>,
+): React.ReactElement {
+  const { component, mapping, children } = props;
 
-  const mapping = component && (context[component.getName()] as React.ComponentType<BrProps>);
+  const componentName = component?.getName();
+  const resolvedMapping = component && componentName && (mapping[componentName] as React.ComponentType<BrProps>);
   const meta = component?.getMeta();
 
-  const content = mapping ? React.createElement(mapping, props) : children;
+  const content = resolvedMapping ? React.createElement(resolvedMapping, props) : children;
 
   return React.createElement(BrMeta, { meta }, content);
 }

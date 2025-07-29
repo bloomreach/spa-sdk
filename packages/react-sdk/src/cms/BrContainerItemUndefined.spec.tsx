@@ -23,6 +23,7 @@ describe('BrContainerItemUndefined', () => {
   const props = {
     component: { getType: () => 'something' } as unknown as jest.Mocked<ContainerItem>,
     page: {} as unknown as jest.Mocked<Page>,
+    mapping: {},
   };
 
   it('should render a message', () => {

@@ -14,33 +14,43 @@
  * limitations under the License.
  */
 
-import React, { useContext } from 'react';
-import { isContainer, isContainerItem, Component } from '@bloomreach/spa-sdk';
+import React from 'react';
+import { isContainer, isContainerItem } from '@bloomreach/spa-sdk';
 import { BrMeta } from '../meta';
-import { BrPageContext } from '../page';
-import { BrComponentContext } from './BrComponentContext';
 import { BrNodeContainer } from './BrNodeContainer';
 import { BrNodeContainerItem } from './BrNodeContainerItem';
 import { BrNodeComponent } from './BrNodeComponent';
+import { BrComponentProps } from './BrProps';
 
-interface BrNodeProps {
-  component?: Component;
-}
+type BrNodeProps = BrComponentProps
 
-export function BrNode({ children, component }: React.PropsWithChildren<BrNodeProps>): React.ReactElement {
-  const context = useContext(BrPageContext);
-
+/**
+ * Core node component for rendering brXM components with prop drilling.
+ */
+export function BrNode({
+  children,
+  component,
+  page,
+  mapping,
+}: React.PropsWithChildren<BrNodeProps>): React.ReactElement {
   function renderNode(): React.ReactElement | React.ReactNode {
     if (React.Children.count(children)) {
       return <BrMeta meta={component?.getMeta()}>{children}</BrMeta>;
     }
 
-    // eslint-disable-next-line react/no-array-index-key
-    const childrenList = component?.getChildren().map((child, index) => <BrNode key={index} component={child} />);
+    // Pass down all props to child components
+    const childrenList = component?.getChildren().map((child) => (
+      <BrNode
+        key={child.getId()}
+        component={child}
+        page={page}
+        mapping={mapping}
+      />
+    ));
 
     if (isContainer(component)) {
       return (
-        <BrNodeContainer component={component} page={context!}>
+        <BrNodeContainer component={component} page={page} mapping={mapping}>
           {childrenList}
         </BrNodeContainer>
       );
@@ -48,18 +58,18 @@ export function BrNode({ children, component }: React.PropsWithChildren<BrNodePr
 
     if (isContainerItem(component)) {
       return (
-        <BrNodeContainerItem component={component} page={context!}>
+        <BrNodeContainerItem component={component} page={page} mapping={mapping}>
           {childrenList}
         </BrNodeContainerItem>
       );
     }
 
     return (
-      <BrNodeComponent component={component} page={context!}>
+      <BrNodeComponent component={component} page={page} mapping={mapping}>
         {childrenList}
       </BrNodeComponent>
     );
   }
 
-  return <BrComponentContext.Provider value={component}>{renderNode()}</BrComponentContext.Provider>;
+  return <>{renderNode()}</>;
 }

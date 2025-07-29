@@ -21,25 +21,29 @@ import { BrNode } from './BrNode';
 import { BrNodeComponent } from './BrNodeComponent';
 import { BrNodeContainer } from './BrNodeContainer';
 import { BrNodeContainerItem } from './BrNodeContainerItem';
-import { withPageContextProvider } from '../utils/withContextProvider';
 import { BrMeta } from '../meta';
+import { BrMapping } from './BrProps';
 
 jest.mock('@bloomreach/spa-sdk');
 
 describe('BrNode', () => {
-  const context = {
+  const mockPage = {
     isPreview: jest.fn(),
   } as unknown as jest.Mocked<Page>;
-  const props = {
-    component: {
-      getChildren: jest.fn(() => []),
-      getMeta: jest.fn(() => []),
-      getName: jest.fn(),
-      getType: jest.fn(),
-      on: jest.fn(),
-      off: jest.fn(),
-    } as unknown as jest.Mocked<Component>,
+
+  const mockMapping: BrMapping = {
+    TestComponent: () => <div>Test Component</div>,
   };
+
+  const mockComponent = {
+    getChildren: jest.fn(() => []),
+    getMeta: jest.fn(() => []),
+    getName: jest.fn(),
+    getId: jest.fn(() => 'mock-component-id'),
+    getType: jest.fn(),
+    on: jest.fn(),
+    off: jest.fn(),
+  } as unknown as jest.Mocked<Component>;
 
   beforeEach(() => {
     jest.restoreAllMocks();
@@ -47,19 +51,37 @@ describe('BrNode', () => {
 
   it('should render a component meta-data', () => {
     const meta = {} as MetaCollection;
-    props.component.getMeta.mockReturnValueOnce(meta);
-    const element = render(<BrNode {...props} />);
+    mockComponent.getMeta.mockReturnValueOnce(meta);
+    const element = render(
+      <BrNode
+        component={mockComponent}
+        page={mockPage}
+        mapping={mockMapping}
+      />,
+    );
 
-    const nodeMeta = render(withPageContextProvider(context, <BrMeta meta={props.component.getMeta()} />));
+    const nodeMeta = render(<BrMeta meta={mockComponent.getMeta()} />);
 
     expect(element.container.isEqualNode(nodeMeta.container)).toBe(true);
     expect(element.asFragment()).toMatchSnapshot();
   });
 
   it('should render a component', () => {
-    const element = render(withPageContextProvider(context, <BrNode {...props} />));
+    const element = render(
+      <BrNode
+        component={mockComponent}
+        page={mockPage}
+        mapping={mockMapping}
+      />,
+    );
 
-    const nodeComponent = render(withPageContextProvider(context, <BrNodeComponent {...props} />));
+    const nodeComponent = render(
+      <BrNodeComponent
+        component={mockComponent}
+        page={mockPage}
+        mapping={mockMapping}
+      />,
+    );
 
     expect(element.container.isEqualNode(nodeComponent.container)).toBe(true);
     expect(element.asFragment()).toMatchSnapshot();
@@ -67,9 +89,21 @@ describe('BrNode', () => {
 
   it('should render a container', () => {
     jest.mocked(isContainer).mockReturnValueOnce(true);
-    const element = render(withPageContextProvider(context, <BrNode {...props} />));
+    const element = render(
+      <BrNode
+        component={mockComponent}
+        page={mockPage}
+        mapping={mockMapping}
+      />,
+    );
 
-    const nodeContainer = render(<BrNodeContainer page={context} component={props.component as any} />);
+    const nodeContainer = render(
+      <BrNodeContainer
+        page={mockPage}
+        component={mockComponent as any}
+        mapping={mockMapping}
+      />,
+    );
 
     expect(element.container.isEqualNode(nodeContainer.container)).toBe(true);
     expect(element.asFragment()).toMatchSnapshot();
@@ -77,9 +111,21 @@ describe('BrNode', () => {
 
   it('should render a container item', () => {
     jest.mocked(isContainerItem).mockReturnValueOnce(true);
-    const element = render(withPageContextProvider(context, <BrNode {...props} />));
+    const element = render(
+      <BrNode
+        component={mockComponent}
+        page={mockPage}
+        mapping={mockMapping}
+      />,
+    );
 
-    const nodeContainerItem = render(<BrNodeContainerItem page={context} component={props.component as any} />);
+    const nodeContainerItem = render(
+      <BrNodeContainerItem
+        page={mockPage}
+        component={mockComponent as any}
+        mapping={mockMapping}
+      />,
+    );
 
     expect(element.container.isEqualNode(nodeContainerItem.container)).toBe(true);
     expect(element.asFragment()).toMatchSnapshot();
@@ -87,7 +133,11 @@ describe('BrNode', () => {
 
   it('should render children if present', () => {
     const element = render(
-      <BrNode {...props}>
+      <BrNode
+        component={mockComponent}
+        page={mockPage}
+        mapping={mockMapping}
+      >
         <a />
         <b />
       </BrNode>,
@@ -97,11 +147,75 @@ describe('BrNode', () => {
   });
 
   it('should render model children if component children are not present', () => {
-    const component1 = { ...props.component } as Component;
-    const component2 = { ...props.component } as Component;
-    props.component.getChildren.mockReturnValueOnce([component1, component2]);
-    const element = render(<BrNode {...props} />);
+    const component1 = { ...mockComponent } as Component;
+    const component2 = { ...mockComponent } as Component;
+    mockComponent.getChildren.mockReturnValueOnce([component1, component2]);
+    const element = render(
+      <BrNode
+        component={mockComponent}
+        page={mockPage}
+        mapping={mockMapping}
+      />,
+    );
 
     expect(element.asFragment()).toMatchSnapshot();
+  });
+
+  it('should properly thread props to child BrNode components', () => {
+    const childComponent = {
+      ...mockComponent,
+      getName: jest.fn(() => 'ChildComponent'),
+    } as unknown as Component;
+
+    mockComponent.getChildren.mockReturnValueOnce([childComponent]);
+
+    const { container } = render(
+      <BrNode
+        component={mockComponent}
+        page={mockPage}
+        mapping={mockMapping}
+      />,
+    );
+
+    // Verify that child components are rendered
+    expect(container).toMatchSnapshot();
+  });
+
+  it('should handle component type resolution correctly', () => {
+    // Test component type
+    jest.mocked(isContainer).mockReturnValue(false);
+    jest.mocked(isContainerItem).mockReturnValue(false);
+
+    const { rerender } = render(
+      <BrNode
+        component={mockComponent}
+        page={mockPage}
+        mapping={mockMapping}
+      />,
+    );
+
+    // Test container type
+    jest.mocked(isContainer).mockReturnValue(true);
+    jest.mocked(isContainerItem).mockReturnValue(false);
+
+    rerender(
+      <BrNode
+        component={mockComponent}
+        page={mockPage}
+        mapping={mockMapping}
+      />,
+    );
+
+    // Test container item type
+    jest.mocked(isContainer).mockReturnValue(false);
+    jest.mocked(isContainerItem).mockReturnValue(true);
+
+    rerender(
+      <BrNode
+        component={mockComponent}
+        page={mockPage}
+        mapping={mockMapping}
+      />,
+    );
   });
 });
