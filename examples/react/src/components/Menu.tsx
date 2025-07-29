@@ -46,7 +46,15 @@ function MenuLink({ item }: MenuLinkProps): JSX.Element {
 }
 
 export function Menu({ component, page, mapping }: BrProps): JSX.Element | null {
-  const menuRef = component?.getModels<MenuModels>()?.menu;
+  // Try getting menu from component first (if available)
+  let menuRef = component?.getModels<MenuModels>()?.menu;
+
+  // If no component or no menu ref, try getting menu directly from page
+  if (!menuRef && page) {
+    const menuComponent = page.getComponent('menu');
+    menuRef = menuComponent?.getModels<MenuModels>()?.menu;
+  }
+
   const menu = menuRef && page?.getContent<BrMenu>(menuRef);
 
   if (!isMenu(menu)) {
