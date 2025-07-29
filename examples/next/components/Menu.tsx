@@ -17,7 +17,7 @@
 import React, {JSX} from 'react';
 import Link from 'next/link';
 import { MenuItem, Menu as BrMenu, TYPE_LINK_EXTERNAL, isMenu } from '@bloomreach/spa-sdk';
-import { BrComponentContext, BrManageMenuButton, BrPageContext } from '@bloomreach/react-sdk';
+import { BrManageMenuButton, BrProps } from '@bloomreach/react-sdk';
 
 interface MenuLinkProps {
   item: MenuItem;
@@ -45,10 +45,16 @@ function MenuLink({ item }: MenuLinkProps): JSX.Element {
   );
 }
 
-export function Menu(): JSX.Element | null {
-  const component = React.useContext(BrComponentContext);
-  const page = React.useContext(BrPageContext);
-  const menuRef = component?.getModels<MenuModels>()?.menu;
+export function Menu({ component, page, mapping }: BrProps): JSX.Element | null {
+  // Try getting menu from component first (if available)
+  let menuRef = component?.getModels<MenuModels>()?.menu;
+
+  // If no component or no menu ref, try getting menu directly from page
+  if (!menuRef && page) {
+    const menuComponent = page.getComponent('menu');
+    menuRef = menuComponent?.getModels<MenuModels>()?.menu;
+  }
+
   const menu = menuRef && page?.getContent<BrMenu>(menuRef);
 
   if (!isMenu(menu)) {
@@ -56,9 +62,10 @@ export function Menu(): JSX.Element | null {
   }
 
   return (
-    <ul className={`navbar-nav col-12 ${page!.isPreview() ? 'has-edit-button' : ''}`}>
-      <BrManageMenuButton menu={menu} />
+    <ul className={`navbar-nav col-12 ${page?.isPreview() ? 'has-edit-button' : ''}`}>
+      <BrManageMenuButton menu={menu} page={page} mapping={mapping} />
       {menu.getItems().map((item, index) => (
+        // eslint-disable-next-line react/no-array-index-key
         <li key={index} className={`nav-item ${item.isSelected() ? 'active' : ''}`}>
           <MenuLink item={item} />
         </li>

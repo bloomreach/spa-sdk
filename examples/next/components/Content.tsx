@@ -19,11 +19,11 @@ import {Document, ImageSet} from '@bloomreach/spa-sdk';
 import React, {JSX} from 'react';
 import {sanitize} from "../utils/sanitize";
 
-export function Content(props: BrProps): JSX.Element | null {
-  const documentRef = props.component?.getModels<DocumentModels>().document;
-  const document = documentRef && props.page?.getContent<Document>(documentRef);
+export function Content({ component, page, mapping }: BrProps): JSX.Element | null {
+  const documentRef = component?.getModels<DocumentModels>().document;
+  const document = documentRef && page?.getContent<Document>(documentRef);
 
-  if (!document) {
+  if (!document || !page) {
     return null;
   }
 
@@ -35,18 +35,18 @@ export function Content(props: BrProps): JSX.Element | null {
     image: imageRef,
     title,
   } = document.getData<DocumentData>();
-  const image = imageRef && props.page?.getContent<ImageSet>(imageRef);
+  const image = imageRef && page.getContent<ImageSet>(imageRef);
 
   return (
-    <div className={props.page?.isPreview() ? 'has-edit-button' : ''}>
-      <BrManageContentButton content={document}/>
+    <div className={page.isPreview() ? 'has-edit-button' : ''}>
+      <BrManageContentButton content={document} page={page} mapping={mapping}/>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       {image && <img className="img-fluid mb-3" src={image.getOriginal()?.getUrl()} alt={title}/>}
       {title && <h1>{title}</h1>}
       {author && <p className="mb-3 text-muted">{author}</p>}
       {date && <p className="mb-3 small text-muted">{new Date(date).toDateString()}</p>}
       {content && (
-        <div dangerouslySetInnerHTML={{__html: props.page!.rewriteLinks(sanitize(content.value))}}/>
+        <div dangerouslySetInnerHTML={{__html: page.rewriteLinks(sanitize(content.value))}}/>
       )}
     </div>
   );

@@ -17,7 +17,7 @@
  */
 
 import axios from 'axios';
-import {BrComponent, BrPage, BrPageContext} from '@bloomreach/react-sdk';
+import {BrComponent, BrPage} from '@bloomreach/react-sdk';
 import Link from 'next/link';
 import {Menu} from './Menu';
 import {Banner} from './Banner';
@@ -37,35 +37,37 @@ const BrxApp = ({configuration, page}: Props) => {
   useRelevance(configuration, page);
 
   return <BrPage configuration={{ ...configuration, httpClient: axios }} mapping={mapping} page={page}>
-    <header>
-      <nav className="navbar navbar-expand-sm navbar-dark sticky-top bg-dark" role="navigation">
-        <div className="container">
-          <BrPageContext.Consumer>
-            {(contextPage) => (
-              <Link className="navbar-brand" href={contextPage?.getUrl('/') ?? ''}>
-                {contextPage?.getTitle() || 'brXM + Next.js = ♥️'}
-              </Link>
-            )}
-          </BrPageContext.Consumer>
-          <div className="collapse navbar-collapse">
-            <BrComponent path="menu">
-              <Menu />
-            </BrComponent>
+    {({ page: contextPage, mapping: pageMapping, component }) => (
+      <>
+        <header>
+          <nav className="navbar navbar-expand-sm navbar-dark sticky-top bg-dark" role="navigation">
+            <div className="container">
+              {contextPage && (
+                <Link className="navbar-brand" href={contextPage.getUrl('/')}>
+                  {contextPage.getTitle() || 'brXM + Next.js = ♥️'}
+                </Link>
+              )}
+              <div className="collapse navbar-collapse">
+                <BrComponent path="menu" page={contextPage!} mapping={pageMapping} component={component}>
+                  {({ page: menuPage, mapping: menuMapping }) => <Menu page={menuPage} mapping={menuMapping} />}
+                </BrComponent>
+              </div>
+            </div>
+          </nav>
+        </header>
+        <section className="container flex-fill pt-3">
+          <BrComponent path="main" page={contextPage!} mapping={pageMapping} component={component} />
+        </section>
+        <footer className="bg-dark text-light py-3">
+          <div className="container clearfix">
+            <div className="float-left pr-3">&copy; Bloomreach</div>
+            <div className="overflow-hidden">
+              <BrComponent path="footer" page={contextPage!} mapping={pageMapping} component={component} />
+            </div>
           </div>
-        </div>
-      </nav>
-    </header>
-    <section className="container flex-fill pt-3">
-      <BrComponent path="main" />
-    </section>
-    <footer className="bg-dark text-light py-3">
-      <div className="container clearfix">
-        <div className="float-left pr-3">&copy; Bloomreach</div>
-        <div className="overflow-hidden">
-          <BrComponent path="footer" />
-        </div>
-      </div>
-    </footer>
+        </footer>
+      </>
+    )}
   </BrPage>
 }
 
