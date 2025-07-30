@@ -11,9 +11,9 @@ exposes a simplified declarative React interface over the Page Model.
 - Bloomreach Component component;
 - Manage Content Button;
 - Manage Menu Button;
-- [Context API](https://reactjs.org/docs/context.html) support;
-- [Hooks API](https://reactjs.org/docs/hooks-intro.html) support;
-- [Next.js](https://nextjs.org/) support;
+- Render Props pattern support;
+- [React Server Components](https://react.dev/reference/rsc/server-components) support;
+- [Next.js](https://nextjs.org/) App Router support;
 - [React Router](https://reacttraining.com/react-router/) and [Next Routes](https://github.com/fridays/next-routes) support;
 - [React Native](https://reactnative.dev/) support;
 - [Enzyme](https://airbnb.io/enzyme/) and [Jest](https://jestjs.io/) support.
@@ -43,9 +43,9 @@ component.
 ```jsx
 import React from 'react';
 import axios from 'axios';
-import { BrComponent, BrPage, BrPageContext, BrProps } from '@bloomreach/react-sdk';
+import { BrComponent, BrPage, BrProps } from '@bloomreach/react-sdk';
 
-function Banner({ component }: BrProps) {
+function Banner({ component, page, mapping }: BrProps) {
   return <div>Banner: {component.getName()}</div>;
 }
 
@@ -54,18 +54,24 @@ export default function App() {
 
   return (
     <BrPage configuration={configuration} mapping={{ Banner }}>
-      <header>
-        <BrPageContext.Consumer>
-          { page => <Link to={page.getUrl('/')} />Home</Link> }
-        </BrPageContext.Consumer>
-        <BrComponent path="menu"><Menu /></BrComponent>
-      </header>
-      <section>
-        <BrComponent path="main" />
-      </section>
-      <BrComponent path="footer">
-        <footer><BrComponent /></footer>
-      </BrComponent>
+      {({ page, mapping, component }) => (
+        <>
+          <header>
+            {page && <Link to={page.getUrl('/')}>Home</Link>}
+            <BrComponent path="menu" page={page} mapping={mapping} component={component}>
+              <Menu page={page} mapping={mapping} />
+            </BrComponent>
+          </header>
+          <section>
+            <BrComponent path="main" page={page} mapping={mapping} component={component} />
+          </section>
+          <BrComponent path="footer" page={page} mapping={mapping} component={component}>
+            <footer>
+              <BrComponent page={page} mapping={mapping} component={component} />
+            </footer>
+          </BrComponent>
+        </>
+      )}
     </BrPage>
   );
 }
@@ -92,7 +98,7 @@ const memoizedConfiguration = useMemo(() => {
 
 - Fetch the page model from the Page Model API for a specific path
 - Set up CMS preview listeners for content updates
-- Provide page context to all child components
+- Provide page and mapping data to all child components via render props
 - Manage the complete page state
 
 Using multiple `BrPage` components on the same page will cause conflicts and is not supported. If you need to render different page sections, use `BrComponent` within a single `BrPage` instead.
@@ -212,8 +218,8 @@ component mapping.
 
 ```jsx
 return (
-  <BrComponent path="menu">
-    <Menu />
+  <BrComponent path="menu" page={page} mapping={mapping} component={component}>
+    <Menu page={page} mapping={mapping} />
   </BrComponent>
 );
 ```
@@ -223,40 +229,33 @@ placed.
 
 ```jsx
 return (
-  <BrComponent path="footer">
+  <BrComponent path="footer" page={page} mapping={mapping} component={component}>
     <footer>
-      <BrComponent />
+      <BrComponent page={page} mapping={mapping} />
     </footer>
   </BrComponent>
 );
 ```
 
-The component data in case of inline mapping can be accessed via the
-`BrComponentContext`.
+The component data in case of inline mapping can be accessed via render props.
 
 ```jsx
 return (
-  <BrComponentContext.Consumer>
-    {(component) => (
-      <BrComponent path="footer">
-        <footer>
-          &copy; {component.getName()}
-          <BrComponent />
-        </footer>
-      </BrComponent>
+  <BrComponent path="footer" page={page} mapping={mapping} component={component}>
+    {({ component: footerComponent }) => (
+      <footer>
+        &copy; {footerComponent.getName()}
+        <BrComponent page={page} mapping={mapping} component={footerComponent} />
+      </footer>
     )}
-  </BrComponentContext.Consumer>
+  </BrComponent>
 );
 ```
 
-Or by using React Hooks.
+Or by passing the component data as props.
 
 ```jsx
-import { BrComponentContext } from "@bloomreach/react-sdk";
-
-export default function Menu() {
-  const component = React.useContext(BrComponentContext);
-
+export default function Menu({ component, page, mapping }) {
   return <ul>{component.getName()}</ul>;
 }
 ```
@@ -272,19 +271,13 @@ Manage menu button can be placed inside a menu component using
 ```tsx
 import React from "react";
 import { Menu, Reference } from "@bloomreach/spa-sdk";
-import {
-  BrComponentContext,
-  BrManageMenuButton,
-  BrPageContext,
-} from "@bloomreach/react-sdk";
+import { BrManageMenuButton, BrProps } from "@bloomreach/react-sdk";
 
 interface MenuModels {
   menu: Reference;
 }
 
-export default function MenuComponent() {
-  const component = React.useContext(BrComponentContext);
-  const page = React.useContext(BrPageContext);
+export default function MenuComponent({ component, page, mapping }: BrProps) {
   const menuRef = component?.getModels<MenuModels>().menu;
   const menu = menuRef && page?.getContent<Menu>(menuRef);
 
@@ -296,7 +289,7 @@ export default function MenuComponent() {
     <ul className={page?.isPreview() ? "has-edit-button" : ""}>
       {/* ... */}
 
-      <BrManageMenuButton menu={menu} />
+      <BrManageMenuButton menu={menu} page={page} mapping={mapping} />
     </ul>
   );
 }
@@ -314,7 +307,7 @@ interface BannerModels {
   document: Reference;
 }
 
-export default function Banner({ component, page }: BrProps) {
+export default function Banner({ component, page, mapping }: BrProps) {
   const { document: documentRef } = component.getModels<BannerModels>();
   const document = documentRef && page.getContent<Document>(documentRef);
 
@@ -329,6 +322,8 @@ export default function Banner({ component, page }: BrProps) {
         parameter="document"
         root="banners"
         relative
+        page={page}
+        mapping={mapping}
       />
     </div>
   );
@@ -342,7 +337,7 @@ Add new content button can be placed inside a component using
 import React from "react";
 import { BrManageContentButton, BrProps } from "@bloomreach/react-sdk";
 
-export default function News({ component, page }: BrProps) {
+export default function News({ component, page, mapping }: BrProps) {
   // ...
 
   return (
@@ -353,6 +348,8 @@ export default function News({ component, page }: BrProps) {
         documentTemplateQuery="new-news-document"
         folderTemplateQuery="new-news-folder"
         root="news"
+        page={page}
+        mapping={mapping}
       />
     </div>
   );
@@ -402,7 +399,7 @@ framework, but there are some of the best practices.
   import { Text } from "react-native";
   import { TYPE_CONTAINER_ITEM_UNDEFINED } from "@bloomreach/spa-sdk";
 
-  function Fallback({ component, page }) {
+  function Fallback({ component, page, mapping }) {
     return (
       page.isPreview() && (
         <Text>Component "{component.getType()}" is not defined.</Text>
@@ -458,26 +455,31 @@ with Bloomreach Content.
 ### BrPage
 
 This is the entry point to the page model. This component requests and
-initializes the page model, and then renders the page root component with React
-children passed to this component. The component also sets the page object into
-`BrPageContext`.
+initializes the page model, and then provides page and mapping data to its children
+via render props pattern. The component renders the page root component with the
+received render function.
 
 | Property        | Required | Description                                                                                                                                  |
 | --------------- | :------: | -------------------------------------------------------------------------------------------------------------------------------------------- |
 | `configuration` |  _yes_   | The [configuration](#configuration) of the SPA SDK.                                                                                          |
 | `mapping`       |  _yes_   | The brXM and React components [mapping](#mapping).                                                                                           |
 | `page`          |   _no_   | Preinitialized page instance or prefetched page model. Mostly that should be used to transfer state from the server-side to the client-side. |
+| `children`      |   _no_   | Render function that receives `{ page, mapping, component }` parameters, or regular React children.                                         |
 
 ### BrComponent
 
 This component points to where children or some component should be placed.
 `BrComponent` can be used inside `BrPage` or mapped components only. If React
-children are passed, then they will be rendered [as-are](#inline-mapping).
+children are passed, then they will be rendered [as-is](#inline-mapping).
 Otherwise, it will try to render all children components recursively.
 
-| Property | Required | Description                                                                                                                                                                                             |
-| -------- | :------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `path`   |   _no_   | The path to a component. The path is defined as a slash-separated components name chain relative to the current component (e.g. `main/container`). If it is omitted, all the children will be rendered. |
+| Property    | Required | Description                                                                                                                                                                                             |
+| ----------- | :------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `path`      |   _no_   | The path to a component. The path is defined as a slash-separated components name chain relative to the current component (e.g. `main/container`). If it is omitted, all the children will be rendered. |
+| `page`      |  _yes_   | The current page instance from the Page Model API.                                                                                                                                                     |
+| `mapping`   |  _yes_   | The component mapping object for dynamic component resolution.                                                                                                                                          |
+| `component` |   _no_   | The parent component context. Required when used inside other components.                                                                                                                               |
+| `children`  |   _no_   | Render function that receives `{ page, mapping, component }` parameters, or regular React children.                                                                                                    |
 
 ### BrManageContentButton
 
@@ -487,6 +489,8 @@ only be shown in preview mode.
 
 | Property                    | Required | Description                                                                                     |
 | --------------------------- | :------: | ----------------------------------------------------------------------------------------------- |
+| `page`                      |  _yes_   | The current page instance for preview mode detection and button rendering.                      |
+| `mapping`                   |  _yes_   | The component mapping object (required for consistency).                                        |
 | `content`                   |   _no_   | The content entity to open for editing.                                                         |
 | `documentTemplateQuery`     |   _no_   | Template query to use for creating new documents. For Content SaaS, the key is like `new-banner-document` for `banner` document type. In case the document type is in a namespace other than `brxsaas`, the key also includes namespace prefix, such as `new-vuestorefront-accordion-document` for `accordion` document type in `vuestorefront` namespace. |
 | `folderTemplateQuery`       |   _no_   | Template query to use in case folders specified by `path` do not yet exist and must be created. For Content SaaS, the key is like `new-banner-folder` for `banner` document type. In case the document type is in a namespace other than `brxsaas`, the key also includes namespace prefix, such as `new-vuestorefront-accordion-folder` for `accordion` document type in `vuestorefront` namespace. |
@@ -506,14 +510,20 @@ only be shown in preview mode.
 This component places a button on the page that opens the linked menu in the
 menu editor. The button will only be shown in preview mode.
 
-| Property | Required | Description             |
-| -------- | :------: | ----------------------- |
-| `menu`   |  _yes_   | The related menu model. |
+| Property  | Required | Description                                                             |
+| --------- | :------: | ----------------------------------------------------------------------- |
+| `page`    |  _yes_   | The current page instance for preview mode detection and button rendering. |
+| `mapping` |  _yes_   | The component mapping object (required for consistency).                  |
+| `menu`    |  _yes_   | The related menu model.                                                 |
 
-### BrComponentContext
+### BrProps Interface
 
-The [React Context](https://reactjs.org/docs/context.html) holding the current brXM [Component](https://bloomreach.github.io/spa-sdk/interfaces/index.Component.html).
+The base interface that all mapped components should implement to receive page, mapping, and component data.
 
-### BrPageContext
-
-The [React Context](https://reactjs.org/docs/context.html) holding the current brXM [Page](https://www.npmjs.com/package/@bloomreach/spa-sdk#page).
+```typescript
+interface BrProps<T extends Component = Component> {
+  component?: T;      // The brXM component instance
+  page: Page;         // The current page (required)
+  mapping: BrMapping; // Component mapping object (required)
+}
+```
