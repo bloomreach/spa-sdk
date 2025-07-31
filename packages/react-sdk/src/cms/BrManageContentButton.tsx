@@ -26,13 +26,9 @@ interface BrManageContentButtonProps extends BrCoreProps, ManageContentButton {
 
 /**
  * The button component that opens for editing a content.
- *
- * This component requires page prop for RSC compatibility.
- *
- * @since 25.0.0
  */
 export function BrManageContentButton(props: BrManageContentButtonProps): React.ReactElement | null {
   const { page, ...buttonProps } = props;
 
-  return page?.isPreview() ? <BrMeta meta={page.getButton(TYPE_MANAGE_CONTENT_BUTTON, buttonProps)} /> : null;
+  return page.isPreview() ? <BrMeta meta={page.getButton(TYPE_MANAGE_CONTENT_BUTTON, buttonProps)} /> : null;
 }

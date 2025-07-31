@@ -28,11 +28,7 @@ interface BrManageMenuButtonProps extends BrCoreProps {
 
 /**
  * The button component that opens a menu editor.
- *
- * This component requires page prop for RSC compatibility.
- *
- * @since 25.0.0
  */
 export function BrManageMenuButton({ page, menu }: BrManageMenuButtonProps): React.ReactElement | null {
-  return page?.isPreview() ? <BrMeta meta={page.getButton(TYPE_MANAGE_MENU_BUTTON, menu)} /> : null;
+  return page.isPreview() ? <BrMeta meta={page.getButton(TYPE_MANAGE_MENU_BUTTON, menu)} /> : null;
 }
