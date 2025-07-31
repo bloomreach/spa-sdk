@@ -50,19 +50,19 @@ export function Menu({ component, page, mapping }: BrProps): JSX.Element | null 
   let menuRef = component?.getModels<MenuModels>()?.menu;
 
   // If no component or no menu ref, try getting menu directly from page
-  if (!menuRef && page) {
+  if (!menuRef) {
     const menuComponent = page.getComponent('menu');
     menuRef = menuComponent?.getModels<MenuModels>()?.menu;
   }
 
-  const menu = menuRef && page?.getContent<BrMenu>(menuRef);
+  const menu = menuRef && page.getContent<BrMenu>(menuRef);
 
   if (!isMenu(menu)) {
     return null;
   }
 
   return (
-    <ul className={`navbar-nav col-12 ${page?.isPreview() ? 'has-edit-button' : ''}`}>
+    <ul className={`navbar-nav col-12 ${page.isPreview() ? 'has-edit-button' : ''}`}>
       <BrManageMenuButton menu={menu} page={page} mapping={mapping} />
       {menu.getItems().map((item, index) => (
         // eslint-disable-next-line react/no-array-index-key

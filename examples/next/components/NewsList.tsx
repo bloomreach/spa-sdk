@@ -52,7 +52,7 @@ interface NewsListPaginationProps extends Pageable {
 }
 
 export function NewsListPagination({ page, ...props }: NewsListPaginationProps): JSX.Element | null {
-  if (!page || !props.showPagination) {
+  if (!props.showPagination) {
     return null;
   }
 
@@ -88,7 +88,7 @@ export function NewsListPagination({ page, ...props }: NewsListPaginationProps):
 export function NewsList({ component, page, mapping }: BrProps): JSX.Element | null {
   const pageable = component?.getModels<PageableModels>().pageable;
 
-  if (!pageable || !page) {
+  if (!pageable) {
     return null;
   }
 

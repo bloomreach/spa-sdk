@@ -23,7 +23,7 @@ export function Content({ component, page, mapping }: BrProps): JSX.Element | nu
   const documentRef = component?.getModels<DocumentModels>().document;
   const document = documentRef && page?.getContent<Document>(documentRef);
 
-  if (!document || !page) {
+  if (!document) {
     return null;
   }
 

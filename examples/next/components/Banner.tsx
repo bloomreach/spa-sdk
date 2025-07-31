@@ -24,7 +24,7 @@ export function Banner({ component, page, mapping }: BrProps): JSX.Element | nul
   const documentRef = component?.getModels().document;
   const document = !!documentRef && page?.getContent(documentRef);
 
-  if (!document || !page) {
+  if (!document) {
     return null;
   }
 
