@@ -15,11 +15,17 @@
  */
 
 import React from 'react';
-import { Menu, TYPE_MANAGE_MENU_BUTTON } from '@bloomreach/spa-sdk';
+import { Menu, Page, TYPE_MANAGE_MENU_BUTTON } from '@bloomreach/spa-sdk';
 import { BrMeta } from '../meta';
-import { BrCoreProps } from '../component/BrProps';
 
-interface BrManageMenuButtonProps extends BrCoreProps {
+interface BrManageMenuButtonProps {
+  /**
+   * The current page instance from the Bloomreach Page Model API.
+   * Contains all page-level data, metadata, and configuration needed
+   * for rendering and preview mode integration.
+   */
+  page: Page;
+
   /**
    * The related menu model.
    */

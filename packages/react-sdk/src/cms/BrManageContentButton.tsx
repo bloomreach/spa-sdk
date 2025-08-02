@@ -15,13 +15,16 @@
  */
 
 import React from 'react';
-import { ManageContentButton, TYPE_MANAGE_CONTENT_BUTTON } from '@bloomreach/spa-sdk';
+import { ManageContentButton, Page, TYPE_MANAGE_CONTENT_BUTTON } from '@bloomreach/spa-sdk';
 import { BrMeta } from '../meta';
-import { BrCoreProps } from '../component/BrProps';
 
-interface BrManageContentButtonProps extends BrCoreProps, ManageContentButton {
-  // Inherits page and mapping from BrCoreProps
-  // Inherits ManageContentButton properties
+interface BrManageContentButtonProps extends ManageContentButton {
+  /**
+   * The current page instance from the Bloomreach Page Model API.
+   * Contains all page-level data, metadata, and configuration needed
+   * for rendering and preview mode integration.
+   */
+  page: Page;
 }
 
 /**
