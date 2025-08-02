@@ -74,6 +74,7 @@
     "rules": {
       "react/require-default-props": "off",
       "react/static-property-placement": "off",
+      "react/jsx-props-no-spreading": "off",
       "import/no-cycle": "off"
     },
     "overrides": [
