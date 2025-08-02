@@ -51,9 +51,10 @@ describe('BrComponent', () => {
     jest.restoreAllMocks();
   });
 
-  it('should render nothing if there is no component', () => {
+  it('should render nothing if component has no children', () => {
     const element = render(
       <BrComponent
+        component={mockComponent}
         page={mockPage}
         mapping={mockMapping}
       />,
@@ -172,7 +173,9 @@ describe('BrComponent', () => {
   });
 
   it('should handle empty component object', () => {
-    const emptyComponent = {} as Component;
+    const emptyComponent = {
+      getComponent: jest.fn(() => null),
+    } as unknown as Component;
     const element = render(
       <BrComponent
         path="a/b"

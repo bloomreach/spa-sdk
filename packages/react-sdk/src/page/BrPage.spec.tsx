@@ -352,29 +352,39 @@ describe('BrPage', () => {
       });
     });
 
-    it('should pass undefined page in render props when page is not initialized', async () => {
+    it('should not call render props when page is not initialized in NBRMode', async () => {
       jest.mocked(initialize).mockResolvedValue(undefined as unknown as Page);
 
-      const renderProp = jest.fn(({ page: renderPage }) => (
-        <div>
-          Page:
-          {renderPage ? 'exists' : 'missing'}
-        </div>
+      const renderProp = jest.fn(() => (
+        <div>Should not be called</div>
       ));
 
-      const { getByText } = render(
+      const { container } = render(
         <BrPage configuration={{ ...config, NBRMode: true }} mapping={mapping}>
           {renderProp}
         </BrPage>,
       );
 
       await waitFor(() => {
-        expect(renderProp).toHaveBeenCalledWith({
-          page: undefined,
-          component: undefined,
-          mapping,
-        });
-        expect(getByText(/Page:.*missing/)).toBeInTheDocument();
+        // Render props should not be called when page is undefined
+        expect(renderProp).not.toHaveBeenCalled();
+        // Container should be empty since render props weren't called
+        expect(container.firstChild).toBe(null);
+      });
+    });
+
+    it('should render regular children in NBRMode when page is not initialized', async () => {
+      jest.mocked(initialize).mockResolvedValue(undefined as unknown as Page);
+
+      const { getByText } = render(
+        <BrPage configuration={{ ...config, NBRMode: true }} mapping={mapping}>
+          <div>Loading content...</div>
+        </BrPage>,
+      );
+
+      await waitFor(() => {
+        // Regular children should render immediately in NBRMode
+        expect(getByText('Loading content...')).toBeInTheDocument();
       });
     });
 

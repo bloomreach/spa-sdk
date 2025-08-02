@@ -25,13 +25,12 @@ describe('BrManageMenuButton', () => {
     getButton: jest.fn(),
   } as unknown as jest.Mocked<Page>;
 
-  const mockMapping = {};
   let props: React.ComponentProps<typeof BrManageMenuButton>;
 
   beforeEach(() => {
     jest.restoreAllMocks();
 
-    props = { page: mockPage, mapping: mockMapping, menu: {} as Menu };
+    props = { page: mockPage, menu: {} as Menu };
   });
 
   it('should only render in preview mode', () => {

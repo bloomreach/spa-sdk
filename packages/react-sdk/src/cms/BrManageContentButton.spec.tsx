@@ -25,15 +25,13 @@ describe('BrManageContentButton', () => {
     getButton: jest.fn(),
   } as unknown as jest.Mocked<Page>;
 
-  const mockMapping = {};
-
   beforeEach(() => {
     jest.restoreAllMocks();
   });
 
   it('should only render in preview mode', () => {
     mockPage.isPreview.mockReturnValueOnce(false);
-    const element = render(<BrManageContentButton page={mockPage} mapping={mockMapping} />);
+    const element = render(<BrManageContentButton page={mockPage} />);
 
     expect(element.container.firstChild).toBe(null);
   });
@@ -44,8 +42,8 @@ describe('BrManageContentButton', () => {
 
     mockPage.isPreview.mockReturnValueOnce(true);
     mockPage.getButton.mockReturnValueOnce(meta);
-    render(<BrManageContentButton page={mockPage} mapping={mockMapping} content={content} root="content" />);
+    render(<BrManageContentButton page={mockPage} content={content} root="content" />);
 
-    expect(mockPage.getButton).toBeCalledWith(expect.any(String), { content, root: 'content', mapping: mockMapping });
+    expect(mockPage.getButton).toBeCalledWith(expect.any(String), { content, root: 'content' });
   });
 });
