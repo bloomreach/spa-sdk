@@ -352,27 +352,6 @@ describe('BrPage', () => {
       });
     });
 
-    it('should not call render props when page is not initialized in NBRMode', async () => {
-      jest.mocked(initialize).mockResolvedValue(undefined as unknown as Page);
-
-      const renderProp = jest.fn(() => (
-        <div>Should not be called</div>
-      ));
-
-      const { container } = render(
-        <BrPage configuration={{ ...config, NBRMode: true }} mapping={mapping}>
-          {renderProp}
-        </BrPage>,
-      );
-
-      await waitFor(() => {
-        // Render props should not be called when page is undefined
-        expect(renderProp).not.toHaveBeenCalled();
-        // Container should be empty since render props weren't called
-        expect(container.firstChild).toBe(null);
-      });
-    });
-
     it('should render regular children in NBRMode when page is not initialized', async () => {
       jest.mocked(initialize).mockResolvedValue(undefined as unknown as Page);
 

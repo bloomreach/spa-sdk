@@ -26,7 +26,6 @@ import { BrNode, BrMapping } from '../component';
 export interface BrPageRenderProps {
   /**
    * The current page instance from the Bloomreach Page Model API.
-   * May be undefined during initial page loading.
    */
   page: Page;
 
@@ -38,7 +37,7 @@ export interface BrPageRenderProps {
   mapping: BrMapping;
 
   /**
-   * The root component of the current page, if available.
+   * The root component of the current page.
    * Represents the top-level container component that holds
    * all page content and layout structure.
    */
@@ -66,8 +65,9 @@ interface BrPageProps {
   /**
    * Child components or render function that receives page, component, and mapping data.
    * Supports both regular React children and render props pattern for accessing page data.
+   * In NBRMode, also supports simple functions that return React components without requiring parameters.
    */
-  children?: React.ReactNode | ((props: BrPageRenderProps) => React.ReactNode);
+  children?: React.ReactNode | ((props: BrPageRenderProps) => React.ReactNode) | (() => React.ReactNode);
 }
 
 /**
