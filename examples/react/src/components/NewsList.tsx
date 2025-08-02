@@ -17,20 +17,19 @@
 import React, { JSX } from 'react';
 import { Link } from 'react-router-dom';
 import { Document, Page } from '@bloomreach/spa-sdk';
-import { BrManageContentButton, BrProps, BrMapping } from '@bloomreach/react-sdk';
+import { BrManageContentButton, BrProps } from '@bloomreach/react-sdk';
 
 interface NewsListItemProps {
   item: Document;
   page: Page;
-  mapping: BrMapping;
 }
 
-export function NewsListItem({ item, page, mapping }: NewsListItemProps): JSX.Element {
+export function NewsListItem({ item, page }: NewsListItemProps): JSX.Element {
   const { author, date, introduction, title } = item.getData<DocumentData>();
 
   return (
     <div className="card mb-3">
-      <BrManageContentButton content={item} page={page} mapping={mapping} />
+      <BrManageContentButton content={item} page={page} />
       <div className="card-body">
         {title && (
           <h2 className="card-title">
@@ -94,7 +93,7 @@ export function NewsListPagination({
   );
 }
 
-export function NewsList({ component, page, mapping }: BrProps): JSX.Element | null {
+export function NewsList({ component, page }: BrProps): JSX.Element | null {
   const pageable = component?.getModels<PageableModels>().pageable;
 
   if (!pageable) {
@@ -105,7 +104,7 @@ export function NewsList({ component, page, mapping }: BrProps): JSX.Element | n
     <div>
       {pageable.items.map((reference, key) => (
         // eslint-disable-next-line react/no-array-index-key
-        <NewsListItem key={key} item={page.getContent<Document>(reference) as Document} page={page} mapping={mapping} />
+        <NewsListItem key={key} item={page.getContent<Document>(reference) as Document} page={page} />
       ))}
       {page.isPreview() && (
         <div className="has-edit-button float-right">
@@ -114,7 +113,6 @@ export function NewsList({ component, page, mapping }: BrProps): JSX.Element | n
             folderTemplateQuery="new-news-folder"
             root="news"
             page={page}
-            mapping={mapping}
           />
         </div>
       )}
