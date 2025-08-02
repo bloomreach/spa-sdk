@@ -283,6 +283,6 @@ All framework SDKs provide an identical set of core components with framework-sp
 - **Preview Mode**: Live editing capabilities
 - **URL Generation**: SEO-friendly URL building
 
-# Notes
+## Notes
 - **When importing from other modules in the same folder ALWAYS use a relative path instead of importing from '.'**
 
