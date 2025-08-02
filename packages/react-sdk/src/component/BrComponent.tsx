@@ -14,12 +14,37 @@
  * limitations under the License.
  */
 
-import { Component } from '@bloomreach/spa-sdk';
+import { Component, Page } from '@bloomreach/spa-sdk';
 import React from 'react';
 import { BrNode } from './BrNode';
-import { BrComponentProps as BrCoreComponentProps, BrComponentRenderProps } from './BrProps';
+import { BrProps, BrMapping } from './BrProps';
 
-interface BrComponentProps extends BrCoreComponentProps {
+/**
+ * Render props pattern interface for BrComponent component.
+ * Allows child functions to receive page, mapping, and component data
+ * as function parameters for flexible rendering patterns.
+ */
+export interface BrComponentRenderProps {
+  /**
+   * The current page instance from the Bloomreach Page Model API.
+   */
+  page: Page;
+
+  /**
+   * Component mapping object that defines how brXM component types
+   * are mapped to React components. Used for dynamic component resolution
+   * during page rendering.
+   */
+  mapping: BrMapping;
+
+  /**
+   * The specific brXM component instance for the current iteration.
+   * Contains component-specific data, configuration, and metadata.
+   */
+  component: Component;
+}
+
+interface BrComponentProps extends BrProps {
   /**
    * The path to a component.
    * The path is defined as a slash-separated components name chain
@@ -27,6 +52,12 @@ interface BrComponentProps extends BrCoreComponentProps {
    * If it is omitted, all the children will be rendered.
    */
   path?: string;
+
+  /**
+   * The brXM component instance containing component-specific data,
+   * configuration, and metadata from the Bloomreach Experience Manager.
+   */
+  component: Component;
 
   /**
    * Child components or render function that receives page, component, and mapping data.
@@ -46,14 +77,13 @@ export function BrComponent({
   mapping,
 }: BrComponentProps): React.ReactElement {
   function getComponents(): Component[] {
-    if (!component || Object.keys(component).length === 0) {
-      return [];
-    }
+    // If no path was provided render all the components children
     if (!path) {
       return component.getChildren();
     }
 
     const targetComponent = component.getComponent(...path.split('/'));
+    // If the provided path did not result in a component in this tree render nothing
     return targetComponent ? [targetComponent] : [];
   }
 
@@ -65,9 +95,7 @@ export function BrComponent({
         page={page}
         mapping={mapping}
       >
-        {typeof children === 'function'
-          ? children({ page, component: comp, mapping })
-          : children}
+        {typeof children === 'function' ? children({ page, component: comp, mapping }) : children}
       </BrNode>
     ));
   }

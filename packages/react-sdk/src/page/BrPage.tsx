@@ -14,9 +14,36 @@
  * limitations under the License.
  */
 
-import { Configuration, initialize, Page, PageModel } from '@bloomreach/spa-sdk';
+import { Component, Configuration, initialize, Page, PageModel } from '@bloomreach/spa-sdk';
 import React, { useEffect, useState } from 'react';
-import { BrNode, BrPageRenderProps, BrMapping } from '../component';
+import { BrNode, BrMapping } from '../component';
+
+/**
+ * Render props pattern interface for BrPage component.
+ * Allows child functions to receive page, mapping, and component data
+ * as function parameters for flexible rendering patterns.
+ */
+export interface BrPageRenderProps {
+  /**
+   * The current page instance from the Bloomreach Page Model API.
+   * May be undefined during initial page loading.
+   */
+  page: Page;
+
+  /**
+   * Component mapping object that defines how brXM component types
+   * are mapped to React components. Used for dynamic component resolution
+   * during page rendering.
+   */
+  mapping: BrMapping;
+
+  /**
+   * The root component of the current page, if available.
+   * Represents the top-level container component that holds
+   * all page content and layout structure.
+   */
+  component: Component;
+}
 
 interface BrPageProps {
   /**
@@ -45,11 +72,6 @@ interface BrPageProps {
 
 /**
  * The brXM page component with React Server Components (RSC) support.
- *
- * This component uses prop drilling and supports render props pattern for accessing page data.
- * This change enables React Server Components compatibility.
- *
- * @since 25.0.0
  */
 export function BrPage({
   configuration,
@@ -88,27 +110,22 @@ export function BrPage({
 
   // In NBRMode, render children even if page is not loaded yet
   // Otherwise, wait for page to be loaded
-  if (!page && !configuration.NBRMode) {
+  if (!page) {
+    if (configuration.NBRMode) {
+      return (
+        <>{children}</>
+      );
+    }
+
     return null;
   }
 
-  const component = page?.getComponent();
-
-  // In NBRMode without page, render children directly without BrNode wrapper
-  if (!page && configuration.NBRMode) {
-    return (
-      <>
-        {typeof children === 'function'
-          ? children({ page, component, mapping })
-          : children}
-      </>
-    );
-  }
+  const component = page.getComponent();
 
   // Normal mode with page loaded - wrap children with BrNode
   return (
     <BrNode
-      page={page!}
+      page={page}
       mapping={mapping}
       component={component}
     >

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import {
   Container,
   TYPE_CONTAINER_INLINE,
@@ -32,14 +32,22 @@ import {
   BrContainerUnorderedList,
 } from '../cms';
 
+interface BrContainerProps extends PropsWithChildren, BrProps {
+  /**
+   * The brXM component instance containing component-specific data,
+   * configuration, and metadata from the Bloomreach Experience Manager.
+   */
+  component: Container;
+}
+
 /**
  * Node container component for rendering brXM container components with prop-based mapping.
  */
-export function BrNodeContainer(props: React.PropsWithChildren<BrProps<Container>>): React.ReactElement {
+export function BrNodeContainer(props: BrContainerProps): React.ReactElement {
   const { component, mapping, children } = props;
 
   const getMapping = (): React.ComponentType<BrProps> => {
-    const type = component?.getType();
+    const type = component.getType();
 
     if (type && type in mapping) {
       return mapping[type] as React.ComponentType<BrProps>;
@@ -60,7 +68,7 @@ export function BrNodeContainer(props: React.PropsWithChildren<BrProps<Container
   };
 
   const containerMapping = getMapping();
-  const meta = component?.getMeta();
+  const meta = component.getMeta();
   const content = containerMapping ? React.createElement(containerMapping, props) : children;
 
   return React.createElement(BrMeta, { meta }, content);
