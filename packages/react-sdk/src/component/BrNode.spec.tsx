@@ -147,8 +147,14 @@ describe('BrNode', () => {
   });
 
   it('should render model children if component children are not present', () => {
-    const component1 = { ...mockComponent } as Component;
-    const component2 = { ...mockComponent } as Component;
+    const component1 = { 
+      ...mockComponent,
+      getId: jest.fn(() => 'mock-component-id-1'),
+    } as unknown as Component;
+    const component2 = { 
+      ...mockComponent,
+      getId: jest.fn(() => 'mock-component-id-2'),
+    } as unknown as Component;
     mockComponent.getChildren.mockReturnValueOnce([component1, component2]);
     const element = render(
       <BrNode
