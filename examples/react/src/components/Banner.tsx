@@ -24,7 +24,7 @@ export function Banner({ component, page }: BrProps): JSX.Element | null {
   const documentRef = component?.getModels().document;
   const document = !!documentRef && page?.getContent(documentRef);
 
-  if (!document || !page) {
+  if (!document) {
     return null;
   }
 
@@ -42,6 +42,7 @@ export function Banner({ component, page }: BrProps): JSX.Element | null {
         root="banners"
         relative
         pickerSelectableNodeTypes="best:banner,hap:bannerdocument"
+        page={page}
       />
       {title && <h1>{title}</h1>}
       {image && <img className="img-fluid" src={image.getOriginal()?.getUrl()} alt={title} />}

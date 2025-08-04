@@ -14,18 +14,39 @@
  * limitations under the License.
  */
 
-import React, { useCallback, useContext, useEffect, useState } from 'react';
-import { ContainerItem, TYPE_CONTAINER_ITEM_UNDEFINED } from '@bloomreach/spa-sdk';
+import React, { PropsWithChildren, useCallback, useEffect, useState } from 'react';
+import { ContainerItem, Page, TYPE_CONTAINER_ITEM_UNDEFINED } from '@bloomreach/spa-sdk';
 import { BrContainerItemUndefined } from '../cms';
-import { BrProps } from './BrProps';
-import { BrMappingContext } from './BrMappingContext';
+import { BrProps, BrMapping } from './BrProps';
 import { BrMeta } from '../meta';
 
+interface BrContainerItemProps extends PropsWithChildren {
+  /**
+   * The current page instance from the Bloomreach Page Model API.
+   */
+  page: Page;
+
+  /**
+   * Component mapping object that defines how brXM component types
+   * are mapped to React components. Used for dynamic component resolution
+   * during page rendering.
+   */
+  mapping: BrMapping;
+
+  /**
+   * The brXM component instance containing component-specific data,
+   * configuration, and metadata from the Bloomreach Experience Manager.
+   */
+  component: ContainerItem;
+}
+
+/**
+ * Node container item component for rendering brXM container items with prop-based mapping.
+ */
 export function BrNodeContainerItem(
-  props: React.PropsWithChildren<BrProps<ContainerItem>>,
+  props: BrContainerItemProps,
 ): React.ReactElement {
-  const context = useContext(BrMappingContext);
-  const { component, page, children } = props;
+  const { component, page, mapping, children } = props;
   const [forcedRerenders, setForcedRerenders] = useState(0);
 
   const onUpdate = useCallback((): void => {
@@ -51,20 +72,20 @@ export function BrNodeContainerItem(
   const getMapping = (): React.ComponentType<BrProps> => {
     const type = component?.getType();
 
-    if (type && type in context) {
-      return context[type] as React.ComponentType<BrProps>;
+    if (type && type in mapping) {
+      return mapping[type] as React.ComponentType<BrProps>;
     }
 
     return (
-      (context[
+      (mapping[
         TYPE_CONTAINER_ITEM_UNDEFINED as any
       ] as React.ComponentType<BrProps>) ?? BrContainerItemUndefined
     );
   };
 
-  const mapping = getMapping();
+  const containerItemMapping = getMapping();
   const meta = component?.getMeta();
-  const content = mapping ? React.createElement(mapping, props) : children;
+  const content = containerItemMapping ? React.createElement(containerItemMapping, props) : children;
 
   return React.createElement(BrMeta, { meta }, content);
 }

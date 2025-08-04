@@ -14,16 +14,24 @@
  * limitations under the License.
  */
 
-import React, { useContext } from 'react';
-import { ManageContentButton, TYPE_MANAGE_CONTENT_BUTTON } from '@bloomreach/spa-sdk';
+import React from 'react';
+import { ManageContentButton, Page, TYPE_MANAGE_CONTENT_BUTTON } from '@bloomreach/spa-sdk';
 import { BrMeta } from '../meta';
-import { BrPageContext } from '../page/BrPageContext';
+
+interface BrManageContentButtonProps extends ManageContentButton {
+  /**
+   * The current page instance from the Bloomreach Page Model API.
+   * Contains all page-level data, metadata, and configuration needed
+   * for rendering and preview mode integration.
+   */
+  page: Page;
+}
 
 /**
  * The button component that opens for editing a content.
  */
-export function BrManageContentButton(props: ManageContentButton): React.ReactElement | null {
-  const page = useContext(BrPageContext);
+export function BrManageContentButton(props: BrManageContentButtonProps): React.ReactElement {
+  const { page, ...buttonProps } = props;
 
-  return page?.isPreview() ? <BrMeta meta={page.getButton(TYPE_MANAGE_CONTENT_BUTTON, props)} /> : null;
+  return page.isPreview() ? <BrMeta meta={page.getButton(TYPE_MANAGE_CONTENT_BUTTON, buttonProps)} /> : <></>;
 }

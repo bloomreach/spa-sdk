@@ -23,7 +23,7 @@ export function Content({ component, page }: BrProps): JSX.Element | null {
   const documentRef = component?.getModels<DocumentModels>().document;
   const document = documentRef && page?.getContent<Document>(documentRef);
 
-  if (!document || !page) {
+  if (!document) {
     return null;
   }
 
@@ -39,7 +39,7 @@ export function Content({ component, page }: BrProps): JSX.Element | null {
 
   return (
     <div className={page.isPreview() ? 'has-edit-button' : ''}>
-      <BrManageContentButton content={document} />
+      <BrManageContentButton content={document} page={page} />
       {image && <img className="img-fluid mb-3" src={image.getOriginal()?.getUrl()} alt={title} />}
       {title && <h1>{title}</h1>}
       {author && <p className="mb-3 text-muted">{author}</p>}

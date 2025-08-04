@@ -14,10 +14,35 @@
  * limitations under the License.
  */
 
-import { Configuration, initialize, Page, PageModel } from '@bloomreach/spa-sdk';
+import { Component, Configuration, initialize, Page, PageModel } from '@bloomreach/spa-sdk';
 import React, { useEffect, useState } from 'react';
-import { BrMappingContext, BrNode } from '../component';
-import { BrPageContext } from './BrPageContext';
+import { BrNode, BrMapping } from '../component';
+
+/**
+ * Render props pattern interface for BrPage component.
+ * Allows child functions to receive page, mapping, and component data
+ * as function parameters for flexible rendering patterns.
+ */
+export interface BrPageRenderProps {
+  /**
+   * The current page instance from the Bloomreach Page Model API.
+   */
+  page: Page;
+
+  /**
+   * Component mapping object that defines how brXM component types
+   * are mapped to React components. Used for dynamic component resolution
+   * during page rendering.
+   */
+  mapping: BrMapping;
+
+  /**
+   * The root component of the current page.
+   * Represents the top-level container component that holds
+   * all page content and layout structure.
+   */
+  component: Component;
+}
 
 interface BrPageProps {
   /**
@@ -29,33 +54,31 @@ interface BrPageProps {
   /**
    * The brXM and React components mapping.
    */
-  mapping: React.ContextType<typeof BrMappingContext>;
+  mapping: BrMapping;
 
   /**
    * The pre-initialized page instance or prefetched page model.
    * Mostly this property should be used to transfer state from the server-side to the client-side.
    */
-  // eslint-disable-next-line react/require-default-props
   page?: Page | PageModel;
+
+  /**
+   * Child components or render function that receives page, component, and mapping data.
+   * Supports both regular React children and render props pattern for accessing page data.
+   * In NBRMode, also supports simple functions that return React components without requiring parameters.
+   */
+  children?: React.ReactNode | ((props: BrPageRenderProps) => React.ReactNode) | (() => React.ReactNode);
 }
 
 /**
- * @typedef {Object} BrPageProps
- * @property {Configuration} configuration The configuration of the SPA SDK.
- * @property {Object} mapping The brXM and React components mapping.
- * @property {Page | PageModel | undefined} page The pre-initialized page instance or prefetched page model.
- * Mostly this property should be used to transfer state from the server-side to the client-side.
- */
-
-/**
- * The brXM page.
+ * The brXM page component with React Server Components (RSC) support.
  */
 export function BrPage({
   configuration,
   mapping,
   page: initialPage,
   children,
-}: React.PropsWithChildren<BrPageProps>): React.ReactElement | null {
+}: BrPageProps): React.ReactElement | null {
   const [page, setPage] = useState<Page | undefined>(() => {
     return initialPage ? initialize(configuration, initialPage) : undefined;
   });
@@ -85,14 +108,30 @@ export function BrPage({
     page?.sync();
   }, [page]);
 
+  // In NBRMode, render children even if page is not loaded yet
+  // Otherwise, wait for page to be loaded
+  if (!page) {
+    if (configuration.NBRMode) {
+      return (
+        <>{children}</>
+      );
+    }
+
+    return null;
+  }
+
+  const component = page.getComponent();
+
+  // Normal mode with page loaded - wrap children with BrNode
   return (
-    <BrPageContext.Provider value={page}>
-      <BrMappingContext.Provider value={mapping}>
-        {!page && !configuration.NBRMode && null}
-        {(page || configuration.NBRMode) && (
-          <BrNode component={page?.getComponent()}>{children}</BrNode>
-        )}
-      </BrMappingContext.Provider>
-    </BrPageContext.Provider>
+    <BrNode
+      page={page}
+      mapping={mapping}
+      component={component}
+    >
+      {typeof children === 'function'
+        ? children({ page, component, mapping })
+        : children}
+    </BrNode>
   );
 }

@@ -14,19 +14,37 @@
  * limitations under the License.
  */
 
-import { Component, Page } from '@bloomreach/spa-sdk';
+import React from 'react';
+import { Component, Container, ContainerItem, Page } from '@bloomreach/spa-sdk';
+
+export type BrMappedComponent =
+  | React.ComponentType<BrProps<Component>>
+  | React.ComponentType<BrProps<Container>>
+  | React.ComponentType<BrProps<ContainerItem>>;
+
+export type BrMapping = Record<keyof any, BrMappedComponent>;
 
 /**
- * The mapped component properties.
+ * The mapped component properties for Bloomreach React SDK components.
  */
 export interface BrProps<T extends Component = Component> {
   /**
-   * The mapped component.
+   * The brXM component instance containing component-specific data,
+   * configuration, and metadata from the Bloomreach Experience Manager.
    */
   component?: T;
 
   /**
-   * The current page.
+   * The current page instance from the Bloomreach Page Model API.
+   * Contains all page-level data, metadata, and configuration needed
+   * for rendering and preview mode integration.
    */
-  page?: Page;
+  page: Page;
+
+  /**
+   * Component mapping object that defines how brXM component types
+   * are mapped to React components. Used for dynamic component resolution
+   * during page rendering.
+   */
+  mapping: BrMapping;
 }
