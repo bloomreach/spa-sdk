@@ -28,7 +28,7 @@ import {useRelevance} from '../hooks/useRelevance';
 
 interface Props {
   configuration: Omit<Configuration, 'httpClient'>;
-  page?: Page;
+  page: Page;
 }
 
 const BrxApp = ({configuration, page}: Props) => {
@@ -42,13 +42,11 @@ const BrxApp = ({configuration, page}: Props) => {
         <header>
           <nav className="navbar navbar-expand-sm navbar-dark sticky-top bg-dark" role="navigation">
             <div className="container">
-              {contextPage && (
-                <Link className="navbar-brand" href={contextPage.getUrl('/')}>
-                  {contextPage.getTitle() || 'brXM + Next.js = ♥️'}
-                </Link>
-              )}
+              <Link className="navbar-brand" href={contextPage.getUrl('/')}>
+                {contextPage.getTitle() || 'brXM + Next.js = ♥️'}
+              </Link>
               <div className="collapse navbar-collapse">
-                <BrComponent path="menu" page={contextPage!} mapping={pageMapping} component={component}>
+                <BrComponent path="menu" page={contextPage} mapping={pageMapping} component={component}>
                   {({ page: menuPage, mapping: menuMapping }) => <Menu page={menuPage} mapping={menuMapping} />}
                 </BrComponent>
               </div>
@@ -56,13 +54,13 @@ const BrxApp = ({configuration, page}: Props) => {
           </nav>
         </header>
         <section className="container flex-fill pt-3">
-          <BrComponent path="main" page={contextPage!} mapping={pageMapping} component={component} />
+          <BrComponent path="main" page={contextPage} mapping={pageMapping} component={component} />
         </section>
         <footer className="bg-dark text-light py-3">
           <div className="container clearfix">
             <div className="float-left pr-3">&copy; Bloomreach</div>
             <div className="overflow-hidden">
-              <BrComponent path="footer" page={contextPage!} mapping={pageMapping} component={component} />
+              <BrComponent path="footer" page={contextPage} mapping={pageMapping} component={component} />
             </div>
           </div>
         </footer>
