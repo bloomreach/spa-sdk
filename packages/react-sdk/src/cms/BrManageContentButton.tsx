@@ -30,8 +30,8 @@ interface BrManageContentButtonProps extends ManageContentButton {
 /**
  * The button component that opens for editing a content.
  */
-export function BrManageContentButton(props: BrManageContentButtonProps): React.ReactElement | null {
+export function BrManageContentButton(props: BrManageContentButtonProps): React.ReactElement {
   const { page, ...buttonProps } = props;
 
-  return page.isPreview() ? <BrMeta meta={page.getButton(TYPE_MANAGE_CONTENT_BUTTON, buttonProps)} /> : null;
+  return page.isPreview() ? <BrMeta meta={page.getButton(TYPE_MANAGE_CONTENT_BUTTON, buttonProps)} /> : <></>;
 }
