@@ -20,20 +20,20 @@ import Link from 'next/link';
 import React, {JSX} from 'react';
 import {sanitize} from '../utils/sanitize';
 
-export function Banner(props: BrProps): JSX.Element | null {
-  const documentRef = props.component?.getModels().document;
-  const document = !!documentRef && props.page?.getContent(documentRef);
+export function Banner({ component, page }: BrProps): JSX.Element | null {
+  const documentRef = component?.getModels().document;
+  const document = !!documentRef && page?.getContent(documentRef);
 
   if (!document) {
     return null;
   }
 
   const {content, image: imageRef, link: linkRef, title} = document.getData<DocumentData>();
-  const image = imageRef && props.page?.getContent<ImageSet>(imageRef);
-  const link = linkRef && props.page?.getContent<Document>(linkRef);
+  const image = imageRef && page.getContent<ImageSet>(imageRef);
+  const link = linkRef && page.getContent<Document>(linkRef);
 
   return (
-    <div className={`jumbotron mb-3 ${props.page?.isPreview() ? 'has-edit-button' : ''}`}>
+    <div className={`jumbotron mb-3 ${page.isPreview() ? 'has-edit-button' : ''}`}>
       <BrManageContentButton
         content={document}
         documentTemplateQuery="new-banner-document"
@@ -42,12 +42,13 @@ export function Banner(props: BrProps): JSX.Element | null {
         root="banners"
         relative
         pickerSelectableNodeTypes="best:banner,hap:bannerdocument"
+        page={page}
       />
       {title && <h1>{title}</h1>}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       {image && <img className="img-fluid" src={image.getOriginal()?.getUrl()} alt={title}/>}
-      {content && props.page && (
-        <div dangerouslySetInnerHTML={{__html: props.page.rewriteLinks(sanitize(content.value))}}/>
+      {content && page && (
+        <div dangerouslySetInnerHTML={{__html: page.rewriteLinks(sanitize(content.value))}}/>
       )}
       {link && (
         <p className="lead">

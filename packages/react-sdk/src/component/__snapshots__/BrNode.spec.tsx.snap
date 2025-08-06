@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`BrNode should properly thread props to child BrNode components 1`] = `<div />`;
+
 exports[`BrNode should render a component 1`] = `<DocumentFragment />`;
 
 exports[`BrNode should render a component meta-data 1`] = `<DocumentFragment />`;

@@ -14,52 +14,84 @@
  * limitations under the License.
  */
 
-import React, { useContext } from 'react';
-import { isContainer, isContainerItem, Component } from '@bloomreach/spa-sdk';
+import React, { PropsWithChildren } from 'react';
+import { Component, isContainer, isContainerItem, Page } from '@bloomreach/spa-sdk';
 import { BrMeta } from '../meta';
-import { BrPageContext } from '../page';
-import { BrComponentContext } from './BrComponentContext';
 import { BrNodeContainer } from './BrNodeContainer';
 import { BrNodeContainerItem } from './BrNodeContainerItem';
 import { BrNodeComponent } from './BrNodeComponent';
+import { BrMapping } from '.';
 
-interface BrNodeProps {
-  component?: Component;
+export interface BrNodeProps extends PropsWithChildren {
+  /**
+   * The brXM component instance containing component-specific data,
+   * configuration, and metadata from the Bloomreach Experience Manager.
+   */
+  component: Component;
+
+  /**
+   * The current page instance from the Bloomreach Page Model API.
+   * Contains all page-level data, metadata, and configuration needed
+   * for rendering and preview mode integration.
+   */
+  page: Page;
+
+  /**
+   * Component mapping object that defines how brXM component types
+   * are mapped to React components. Used for dynamic component resolution
+   * during page rendering.
+   */
+  mapping: BrMapping;
 }
 
-export function BrNode({ children, component }: React.PropsWithChildren<BrNodeProps>): React.ReactElement {
-  const context = useContext(BrPageContext);
-
-  function renderNode(): React.ReactElement | React.ReactNode {
-    if (React.Children.count(children)) {
-      return <BrMeta meta={component?.getMeta()}>{children}</BrMeta>;
-    }
-
-    // eslint-disable-next-line react/no-array-index-key
-    const childrenList = component?.getChildren().map((child, index) => <BrNode key={index} component={child} />);
-
-    if (isContainer(component)) {
-      return (
-        <BrNodeContainer component={component} page={context!}>
-          {childrenList}
-        </BrNodeContainer>
-      );
-    }
-
-    if (isContainerItem(component)) {
-      return (
-        <BrNodeContainerItem component={component} page={context!}>
-          {childrenList}
-        </BrNodeContainerItem>
-      );
-    }
-
+/**
+ * Core node component for rendering brXM components with prop drilling.
+ */
+export function BrNode({
+  children,
+  component,
+  page,
+  mapping,
+}: BrNodeProps): React.ReactElement {
+  if (React.Children.count(children)) {
     return (
-      <BrNodeComponent component={component} page={context!}>
-        {childrenList}
-      </BrNodeComponent>
+      <BrMeta meta={component.getMeta()}>
+        {children}
+      </BrMeta>
     );
   }
 
-  return <BrComponentContext.Provider value={component}>{renderNode()}</BrComponentContext.Provider>;
+  const props = {
+    page,
+    mapping,
+  };
+
+  // Pass down all props to child components
+  const childrenList = component
+    .getChildren()
+    .map((child) => (
+      <BrNode key={child.getId()} component={child} {...props} />
+    ));
+
+  if (isContainer(component)) {
+    return (
+      <BrNodeContainer component={component} {...props}>
+        {childrenList}
+      </BrNodeContainer>
+    );
+  }
+
+  if (isContainerItem(component)) {
+    return (
+      <BrNodeContainerItem component={component} {...props}>
+        {childrenList}
+      </BrNodeContainerItem>
+    );
+  }
+
+  return (
+    <BrNodeComponent component={component} {...props}>
+      {childrenList}
+    </BrNodeComponent>
+  );
 }

@@ -14,12 +14,18 @@
  * limitations under the License.
  */
 
-import React, { useContext } from 'react';
-import { Menu, TYPE_MANAGE_MENU_BUTTON } from '@bloomreach/spa-sdk';
+import React from 'react';
+import { Menu, Page, TYPE_MANAGE_MENU_BUTTON } from '@bloomreach/spa-sdk';
 import { BrMeta } from '../meta';
-import { BrPageContext } from '../page/BrPageContext';
 
 interface BrManageMenuButtonProps {
+  /**
+   * The current page instance from the Bloomreach Page Model API.
+   * Contains all page-level data, metadata, and configuration needed
+   * for rendering and preview mode integration.
+   */
+  page: Page;
+
   /**
    * The related menu model.
    */
@@ -29,8 +35,6 @@ interface BrManageMenuButtonProps {
 /**
  * The button component that opens a menu editor.
  */
-export function BrManageMenuButton({ menu }: BrManageMenuButtonProps): React.ReactElement | null {
-  const page = useContext(BrPageContext);
-
-  return page?.isPreview() ? <BrMeta meta={page.getButton(TYPE_MANAGE_MENU_BUTTON, menu)} /> : null;
+export function BrManageMenuButton({ page, menu }: BrManageMenuButtonProps): React.ReactElement {
+  return page.isPreview() ? <BrMeta meta={page.getButton(TYPE_MANAGE_MENU_BUTTON, menu)} /> : <></>;
 }

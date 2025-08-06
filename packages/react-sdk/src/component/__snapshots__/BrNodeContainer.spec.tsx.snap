@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`BrNodeContainer getMapping should render a mapped container 1`] = `
+exports[`BrNodeContainer Container type mapping should render a mapped container 1`] = `
 <DocumentFragment>
   <div>
     <a />
@@ -8,7 +8,7 @@ exports[`BrNodeContainer getMapping should render a mapped container 1`] = `
 </DocumentFragment>
 `;
 
-exports[`BrNodeContainer getMapping should render box container 1`] = `
+exports[`BrNodeContainer Container type mapping should render box container 1`] = `
 <DocumentFragment>
   <div>
     <div>
@@ -18,13 +18,13 @@ exports[`BrNodeContainer getMapping should render box container 1`] = `
 </DocumentFragment>
 `;
 
-exports[`BrNodeContainer getMapping should render box container on an unknown type 1`] = `
+exports[`BrNodeContainer Container type mapping should render box container on an unknown type 1`] = `
 <DocumentFragment>
   <div />
 </DocumentFragment>
 `;
 
-exports[`BrNodeContainer getMapping should render inline container 1`] = `
+exports[`BrNodeContainer Container type mapping should render inline container 1`] = `
 <DocumentFragment>
   <div>
     <span>
@@ -34,13 +34,13 @@ exports[`BrNodeContainer getMapping should render inline container 1`] = `
 </DocumentFragment>
 `;
 
-exports[`BrNodeContainer getMapping should render no markup container 1`] = `
+exports[`BrNodeContainer Container type mapping should render no markup container 1`] = `
 <DocumentFragment>
   <a />
 </DocumentFragment>
 `;
 
-exports[`BrNodeContainer getMapping should render ordered list container 1`] = `
+exports[`BrNodeContainer Container type mapping should render ordered list container 1`] = `
 <DocumentFragment>
   <ol>
     <li>
@@ -50,7 +50,7 @@ exports[`BrNodeContainer getMapping should render ordered list container 1`] = `
 </DocumentFragment>
 `;
 
-exports[`BrNodeContainer getMapping should render unordered list container 1`] = `
+exports[`BrNodeContainer Container type mapping should render unordered list container 1`] = `
 <DocumentFragment>
   <ul>
     <li>

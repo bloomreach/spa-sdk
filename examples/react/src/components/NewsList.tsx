@@ -16,19 +16,20 @@
 
 import React, { JSX } from 'react';
 import { Link } from 'react-router-dom';
-import { Document } from '@bloomreach/spa-sdk';
-import { BrManageContentButton, BrPageContext, BrProps } from '@bloomreach/react-sdk';
+import { Document, Page } from '@bloomreach/spa-sdk';
+import { BrManageContentButton, BrProps } from '@bloomreach/react-sdk';
 
 interface NewsListItemProps {
   item: Document;
+  page: Page;
 }
 
-export function NewsListItem({ item }: NewsListItemProps): JSX.Element {
+export function NewsListItem({ item, page }: NewsListItemProps): JSX.Element {
   const { author, date, introduction, title } = item.getData<DocumentData>();
 
   return (
     <div className="card mb-3">
-      <BrManageContentButton content={item} />
+      <BrManageContentButton content={item} page={page} />
       <div className="card-body">
         {title && (
           <h2 className="card-title">
@@ -46,7 +47,9 @@ export function NewsListItem({ item }: NewsListItemProps): JSX.Element {
 type NewsListPaginationProps = Pick<
   Pageable,
   'showPagination' | 'previous' | 'previousPage' | 'pageNumbersArray' | 'currentPage' | 'next' | 'nextPage'
->;
+> & {
+  page: Page;
+};
 
 export function NewsListPagination({
   showPagination,
@@ -56,9 +59,8 @@ export function NewsListPagination({
   currentPage,
   next,
   nextPage,
+  page,
 }: NewsListPaginationProps): JSX.Element | null {
-  const page = React.useContext(BrPageContext);
-
   if (!page || !showPagination) {
     return null;
   }
@@ -94,7 +96,7 @@ export function NewsListPagination({
 export function NewsList({ component, page }: BrProps): JSX.Element | null {
   const pageable = component?.getModels<PageableModels>().pageable;
 
-  if (!pageable || !page) {
+  if (!pageable) {
     return null;
   }
 
@@ -102,7 +104,7 @@ export function NewsList({ component, page }: BrProps): JSX.Element | null {
     <div>
       {pageable.items.map((reference, key) => (
         // eslint-disable-next-line react/no-array-index-key
-        <NewsListItem key={key} item={page.getContent<Document>(reference) as Document} />
+        <NewsListItem key={key} item={page.getContent<Document>(reference) as Document} page={page} />
       ))}
       {page.isPreview() && (
         <div className="has-edit-button float-right">
@@ -110,6 +112,7 @@ export function NewsList({ component, page }: BrProps): JSX.Element | null {
             documentTemplateQuery="new-news-document"
             folderTemplateQuery="new-news-folder"
             root="news"
+            page={page}
           />
         </div>
       )}
@@ -121,6 +124,7 @@ export function NewsList({ component, page }: BrProps): JSX.Element | null {
         nextPage={pageable.nextPage}
         next={pageable.next}
         previous={pageable.previous}
+        page={page}
       />
     </div>
   );

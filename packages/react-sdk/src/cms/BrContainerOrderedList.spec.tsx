@@ -23,6 +23,7 @@ describe('BrContainerOrderedList', () => {
   const props = {
     component: {} as jest.Mocked<Container>,
     page: { isPreview: jest.fn() } as unknown as jest.Mocked<Page>,
+    mapping: {},
   };
 
   beforeEach(() => {

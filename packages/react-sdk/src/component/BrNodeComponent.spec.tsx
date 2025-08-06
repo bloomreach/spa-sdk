@@ -19,43 +19,66 @@ import { Component, MetaCollection, Page } from '@bloomreach/spa-sdk';
 import { render } from '@testing-library/react';
 import { BrNodeComponent } from './BrNodeComponent';
 import { BrMeta } from '../meta';
-import { withMappingContextProvider } from '../utils/withContextProvider';
+import { BrMapping } from './BrProps';
 
 describe('BrNodeComponent', () => {
-  const context = {
-    test: ({ children }: React.PropsWithChildren<typeof props>) => <a>{children}</a>,
+  const mockMapping: BrMapping = {
+    test: ({ children }: React.PropsWithChildren<any>) => <a>{children}</a>,
   };
-  const props = {
-    component: { getName: jest.fn(), getMeta: jest.fn() } as unknown as jest.Mocked<Component>,
-    page: {} as jest.Mocked<Page>,
-  };
+
+  const mockComponent = {
+    getName: jest.fn(),
+    getMeta: jest.fn(),
+  } as unknown as jest.Mocked<Component>;
+
+  const mockPage = {} as jest.Mocked<Page>;
 
   const emptyMeta = {} as MetaCollection;
 
   beforeEach(() => {
     jest.resetAllMocks();
 
-    props.component.getMeta.mockReturnValue(emptyMeta);
+    mockComponent.getMeta.mockReturnValue(emptyMeta);
   });
 
-  describe('getMapping', () => {
+  describe('Component mapping resolution', () => {
     it('should use component name for mapping', () => {
-      render(<BrNodeComponent {...props} />);
+      render(
+        <BrNodeComponent
+          component={mockComponent}
+          page={mockPage}
+          mapping={mockMapping}
+        />,
+      );
 
-      expect(props.component.getName).toBeCalled();
+      expect(mockComponent.getName).toBeCalled();
     });
-  });
 
-  describe('render', () => {
-    it('should fallback when there is no mapping', () => {
-      props.component.getName.mockReturnValue('something');
+    it('should render mapped component when mapping exists', () => {
+      mockComponent.getName.mockReturnValue('test');
       const element = render(
-        withMappingContextProvider(
-          context,
-          <BrNodeComponent {...props}>
-            <b />
-          </BrNodeComponent>,
-        ),
+        <BrNodeComponent
+          component={mockComponent}
+          page={mockPage}
+          mapping={mockMapping}
+        >
+          <b />
+        </BrNodeComponent>,
+      );
+
+      expect(element.asFragment()).toMatchSnapshot();
+    });
+
+    it('should fallback to children when there is no mapping', () => {
+      mockComponent.getName.mockReturnValue('something');
+      const element = render(
+        <BrNodeComponent
+          component={mockComponent}
+          page={mockPage}
+          mapping={mockMapping}
+        >
+          <b />
+        </BrNodeComponent>,
       );
 
       const nodeMeta = render(
@@ -67,23 +90,13 @@ describe('BrNodeComponent', () => {
       expect(element.container.isEqualNode(nodeMeta.container)).toBe(true);
     });
 
-    it('should render a mapped component', () => {
-      props.component.getName.mockReturnValue('test');
+    it('should render children when no mapping provided', () => {
       const element = render(
-        withMappingContextProvider(
-          context,
-          <BrNodeComponent {...props}>
-            <b />
-          </BrNodeComponent>,
-        ),
-      );
-
-      expect(element.asFragment()).toMatchSnapshot();
-    });
-
-    it('should render children on a fallback', () => {
-      const element = render(
-        <BrNodeComponent {...props}>
+        <BrNodeComponent
+          component={mockComponent}
+          page={mockPage}
+          mapping={{}}
+        >
           <b />
         </BrNodeComponent>,
       );
@@ -96,6 +109,30 @@ describe('BrNodeComponent', () => {
 
       expect(element.container.isEqualNode(nodeMeta.container)).toBe(true);
       expect(element.asFragment()).toMatchSnapshot();
+    });
+
+    it('should pass props correctly to mapped component', () => {
+      const TestComponent = jest.fn(() => <div>Test</div>);
+      const testMapping = { test: TestComponent };
+
+      mockComponent.getName.mockReturnValue('test');
+
+      render(
+        <BrNodeComponent
+          component={mockComponent}
+          page={mockPage}
+          mapping={testMapping}
+        />,
+      );
+
+      expect(TestComponent).toHaveBeenCalledWith(
+        expect.objectContaining({
+          component: mockComponent,
+          page: mockPage,
+          mapping: testMapping,
+        }),
+        undefined,
+      );
     });
   });
 });

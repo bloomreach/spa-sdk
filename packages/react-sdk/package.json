@@ -1,6 +1,6 @@
 {
   "name": "@bloomreach/react-sdk",
-  "version": "25.0.1",
+  "version": "26.0.0",
   "description": "Bloomreach SPA SDK for React",
   "keywords": [
     "bloomreach",
@@ -74,6 +74,7 @@
     "rules": {
       "react/require-default-props": "off",
       "react/static-property-placement": "off",
+      "react/jsx-props-no-spreading": "off",
       "import/no-cycle": "off"
     },
     "overrides": [
@@ -111,6 +112,6 @@
     "outputName": "TEST-react-sdk.xml"
   },
   "dependencies": {
-    "@bloomreach/spa-sdk": "25.0.1"
+    "@bloomreach/spa-sdk": "26.0.0"
   }
 }

@@ -58,7 +58,7 @@ export default async function Page() {
     httpClient: axios
   });
 
-  const pageModel = page.isPreview() ? undefined : page.toJSON();
+  const pageModel = page.toJSON();
 
   return (
     <BrxApp configuration={configuration} page={pageModel} />

@@ -15,92 +15,262 @@
  */
 
 import React from 'react';
-import { Component } from '@bloomreach/spa-sdk';
+import { Component, Page } from '@bloomreach/spa-sdk';
 import { render } from '@testing-library/react';
 import { BrComponent } from './BrComponent';
 import { BrNode } from './BrNode';
-import { withComponentContextProvider } from '../utils/withContextProvider';
+import { BrMapping } from './BrProps';
 
 jest.mock('@bloomreach/spa-sdk');
 
 describe('BrComponent', () => {
-  const context = {
+  const mockPage = {
+    isPreview: jest.fn(),
+  } as unknown as jest.Mocked<Page>;
+
+  const mockMapping: BrMapping = {
+    TestComponent: () => <div>Test Component</div>,
+  };
+
+  const mockComponent = {
     getChildren: jest.fn(() => []),
     getMeta: jest.fn(),
     getComponent: jest.fn(),
+    getName: jest.fn(),
+    getId: jest.fn(() => 'mock-component-id'),
   } as unknown as jest.Mocked<Component>;
-  const component = {
+
+  const childComponent = {
     getChildren: jest.fn(() => []),
     getMeta: jest.fn(),
     getName: jest.fn(),
+    getId: jest.fn(() => 'mock-child-component-id'),
   } as unknown as Component;
 
   beforeEach(() => {
     jest.restoreAllMocks();
   });
 
-  it('should render nothing if there is no context', () => {
-    const element = render(<BrComponent />);
+  it('should render nothing if component has no children', () => {
+    const element = render(
+      <BrComponent
+        component={mockComponent}
+        page={mockPage}
+        mapping={mockMapping}
+      />,
+    );
 
     expect(element.container.firstChild).toBe(null);
   });
 
   it('should render children if path is not set', () => {
-    const component1 = { ...component } as Component;
-    const component2 = { ...component } as Component;
-    context.getChildren.mockReturnValueOnce([component1, component2]);
-    const element = render(withComponentContextProvider(context, <BrComponent />));
+    const component1 = { ...childComponent, getId: jest.fn(() => 'component-1-id') } as Component;
+    const component2 = { ...childComponent, getId: jest.fn(() => 'component-2-id') } as Component;
+    mockComponent.getChildren.mockReturnValueOnce([component1, component2]);
 
-    expect(context.getChildren).toBeCalled();
+    const element = render(
+      <BrComponent
+        component={mockComponent}
+        page={mockPage}
+        mapping={mockMapping}
+      />,
+    );
 
-    const node1 = render(withComponentContextProvider(context, <BrNode component={component1} />));
-    const node2 = render(withComponentContextProvider(context, <BrNode component={component2} />));
+    expect(mockComponent.getChildren).toBeCalled();
+
+    const node1 = render(
+      <BrNode
+        component={component1}
+        page={mockPage}
+        mapping={mockMapping}
+      />,
+    );
+    const node2 = render(
+      <BrNode
+        component={component2}
+        page={mockPage}
+        mapping={mockMapping}
+      />,
+    );
 
     expect(element.container).toContainHTML(node1.container.innerHTML);
     expect(element.container).toContainHTML(node2.container.innerHTML);
   });
 
   it('should split path by slashes', () => {
-    render(withComponentContextProvider(context, <BrComponent path="a/b" />));
+    render(
+      <BrComponent
+        path="a/b"
+        component={mockComponent}
+        page={mockPage}
+        mapping={mockMapping}
+      />,
+    );
 
-    expect(context.getComponent).toBeCalledWith('a', 'b');
+    expect(mockComponent.getComponent).toBeCalledWith('a', 'b');
   });
 
   it('should render nothing if no component found', () => {
-    const element = render(withComponentContextProvider(context, <BrComponent path="a/b" />));
+    const element = render(
+      <BrComponent
+        path="a/b"
+        component={mockComponent}
+        page={mockPage}
+        mapping={mockMapping}
+      />,
+    );
 
     expect(element.container.firstChild).toBe(null);
     expect(element.asFragment()).toMatchSnapshot();
   });
 
   it('should render found component', () => {
-    context.getComponent.mockReturnValueOnce(component);
-    const element = render(withComponentContextProvider(context, <BrComponent path="a/b" />));
+    mockComponent.getComponent.mockReturnValueOnce(childComponent);
+    const element = render(
+      <BrComponent
+        path="a/b"
+        component={mockComponent}
+        page={mockPage}
+        mapping={mockMapping}
+      />,
+    );
 
-    const node = render(withComponentContextProvider(context, <BrNode component={component} />));
+    const node = render(
+      <BrNode
+        component={childComponent}
+        page={mockPage}
+        mapping={mockMapping}
+      />,
+    );
 
     expect(element.container).toContainHTML(node.container.innerHTML);
   });
 
   it('should pass children down', () => {
-    context.getComponent.mockReturnValueOnce(component);
+    mockComponent.getComponent.mockReturnValueOnce(childComponent);
     const element = render(
-      withComponentContextProvider(
-        context,
-        <BrComponent path="a/b">
-          <a />
-        </BrComponent>,
-      ),
+      <BrComponent
+        path="a/b"
+        component={mockComponent}
+        page={mockPage}
+        mapping={mockMapping}
+      >
+        <a />
+      </BrComponent>,
     );
+
     const node = render(
-      withComponentContextProvider(
-        context,
-        <BrNode component={component}>
-          <a />
-        </BrNode>,
-      ),
+      <BrNode
+        component={childComponent}
+        page={mockPage}
+        mapping={mockMapping}
+      >
+        <a />
+      </BrNode>,
     );
 
     expect(element.container).toContainHTML(node.container.innerHTML);
+  });
+
+  it('should handle empty component object', () => {
+    const emptyComponent = {
+      getComponent: jest.fn(() => null),
+    } as unknown as Component;
+    const element = render(
+      <BrComponent
+        path="a/b"
+        component={emptyComponent}
+        page={mockPage}
+        mapping={mockMapping}
+      />,
+    );
+
+    expect(element.container.firstChild).toBe(null);
+  });
+
+  it('should handle nested component paths', () => {
+    const nestedComponent = { ...childComponent, getId: jest.fn(() => 'nested-component-id') } as Component;
+    mockComponent.getComponent.mockReturnValueOnce(nestedComponent);
+
+    render(
+      <BrComponent
+        path="main/content/header"
+        component={mockComponent}
+        page={mockPage}
+        mapping={mockMapping}
+      />,
+    );
+
+    expect(mockComponent.getComponent).toBeCalledWith('main', 'content', 'header');
+  });
+
+  it('should support render props pattern', () => {
+    mockComponent.getComponent.mockReturnValueOnce(childComponent);
+
+    const renderFunction = jest.fn(() => <div>Render Props Test</div>);
+
+    render(
+      <BrComponent
+        path="a/b"
+        component={mockComponent}
+        page={mockPage}
+        mapping={mockMapping}
+      >
+        {renderFunction}
+      </BrComponent>,
+    );
+
+    expect(renderFunction).toHaveBeenCalledWith({
+      page: mockPage,
+      component: childComponent,
+      mapping: mockMapping,
+    });
+  });
+
+  it('should handle render props with multiple components', () => {
+    const component1 = { ...childComponent, getId: jest.fn(() => 'component-1-id') } as Component;
+    const component2 = { ...childComponent, getId: jest.fn(() => 'component-2-id') } as Component;
+    mockComponent.getChildren.mockReturnValueOnce([component1, component2]);
+
+    const renderFunction = jest.fn(() => <div>Multiple Components</div>);
+
+    render(
+      <BrComponent
+        component={mockComponent}
+        page={mockPage}
+        mapping={mockMapping}
+      >
+        {renderFunction}
+      </BrComponent>,
+    );
+
+    expect(renderFunction).toHaveBeenCalledTimes(2);
+    expect(renderFunction).toHaveBeenNthCalledWith(1, {
+      page: mockPage,
+      component: component1,
+      mapping: mockMapping,
+    });
+    expect(renderFunction).toHaveBeenNthCalledWith(2, {
+      page: mockPage,
+      component: component2,
+      mapping: mockMapping,
+    });
+  });
+
+  it('should maintain backward compatibility with regular children', () => {
+    mockComponent.getComponent.mockReturnValueOnce(childComponent);
+
+    const element = render(
+      <BrComponent
+        path="a/b"
+        component={mockComponent}
+        page={mockPage}
+        mapping={mockMapping}
+      >
+        <div>Regular Child</div>
+      </BrComponent>,
+    );
+
+    expect(element.getByText('Regular Child')).toBeInTheDocument();
   });
 });
