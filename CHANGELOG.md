@@ -2,8 +2,39 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### ["25.0.1"](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-25.0.0..."25.0.1")
+#### ["26.0.0"](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-25.0.1..."26.0.0")
 
+- SPASDK-250 Support React Server Components in React SDK [`#215`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/215)
+- SPASDK-250 refactor: Remove unnecessary checks for null page [`#SPASDK-250`](https://bloomreach.atlassian.net/browse/SPASDK-250)
+- SPASDK-250 refactor: return empty component instead of `null` for BrManageContentButton and BrManageMenuButton [`#SPASDK-250`](https://bloomreach.atlassian.net/browse/SPASDK-250)
+- SPASDK-250 refactor: enhance NBRMode support for function children [`#SPASDK-250`](https://bloomreach.atlassian.net/browse/SPASDK-250)
+- SPASDK-250 test: fix component mocking in BrNode tests [`#SPASDK-250`](https://bloomreach.atlassian.net/browse/SPASDK-250)
+- SPASDK-250 refactor: align next example with react sdk [`#SPASDK-250`](https://bloomreach.atlassian.net/browse/SPASDK-250)
+- SPASDK-250 test: fix react sdk tests for required page prop [`#SPASDK-250`](https://bloomreach.atlassian.net/browse/SPASDK-250)
+- SPASDK-250 docs: fix heading level in claude.md [`#SPASDK-250`](https://bloomreach.atlassian.net/browse/SPASDK-250)
+- SPASDK-250 Disable jsx-props-no-spreading eslint rule [`#SPASDK-250`](https://bloomreach.atlassian.net/browse/SPASDK-250)
+- SPASDK-250 Update react examples to remove mapping prop [`#SPASDK-250`](https://bloomreach.atlassian.net/browse/SPASDK-250)
+- SPASDK-250 Update cms buttons to use explicit page prop [`#SPASDK-250`](https://bloomreach.atlassian.net/browse/SPASDK-250)
+- SPASDK-250 simplify react sdk prop interfaces [`#SPASDK-250`](https://bloomreach.atlassian.net/browse/SPASDK-250)
+- SPASDK-250 refactor: update examples to use required page prop [`#SPASDK-250`](https://bloomreach.atlassian.net/browse/SPASDK-250)
+- SPASDK-250 refactor: make page prop required in react-sdk cms components [`#SPASDK-250`](https://bloomreach.atlassian.net/browse/SPASDK-250)
+- SPASDK-250 Update react sdk readme for prop-based api [`#SPASDK-250`](https://bloomreach.atlassian.net/browse/SPASDK-250)
+- SPASDK-250 Add claude commands used to build this feature [`#SPASDK-250`](https://bloomreach.atlassian.net/browse/SPASDK-250)
+- SPASDK-250 Clean up ai_context [`#SPASDK-250`](https://bloomreach.atlassian.net/browse/SPASDK-250)
+- SPASDK-250 Enable server-side rendering in preview mode [`#SPASDK-250`](https://bloomreach.atlassian.net/browse/SPASDK-250)
+- SPASDK-250 Migrate next example to prop drilling [`#SPASDK-250`](https://bloomreach.atlassian.net/browse/SPASDK-250)
+- SPASDK-250 Add menu fallback logic for react ssr [`#SPASDK-250`](https://bloomreach.atlassian.net/browse/SPASDK-250)
+- SPASDK-250 Add missing component prop in react example [`#SPASDK-250`](https://bloomreach.atlassian.net/browse/SPASDK-250)
+- SPASDK-250 Migrate react example to use prop drilling [`#SPASDK-250`](https://bloomreach.atlassian.net/browse/SPASDK-250)
+- SPASDK-250 Implement rsc support via prop drilling [`#SPASDK-250`](https://bloomreach.atlassian.net/browse/SPASDK-250)
+- SPASDK-250 Add typescript interfaces for prop drilling [`#SPASDK-250`](https://bloomreach.atlassian.net/browse/SPASDK-250)
+- SPASDK-250 Create technical design and implementation plan [`#SPASDK-250`](https://bloomreach.atlassian.net/browse/SPASDK-250)
+
+#### [spa-sdk-25.0.1](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-25.0.0...spa-sdk-25.0.1)
+
+> 24 July 2025
+
+- SPASDK-246 Bumping versions to 25.0.1 [`#SPASDK-246`](https://bloomreach.atlassian.net/browse/SPASDK-246)
 - SPASDK-246 Fix lint [`#SPASDK-246`](https://bloomreach.atlassian.net/browse/SPASDK-246)
 - SPASDK-246 Fix ng app for internal multi tenant builds [`#SPASDK-246`](https://bloomreach.atlassian.net/browse/SPASDK-246)
 
@@ -673,7 +704,7 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-129 Remove endpointQueryParameter [`#SPASDK-129`](https://bloomreach.atlassian.net/browse/SPASDK-129)
 - TRIVIAL Fix bash name substitution in heroku deploy script [`721b468`](https://github.com/bloomreach/spa-sdk/commit/721b46871e938630f3f3a51ca9343425868f8c49)
 
-### [spa-sdk-16.0.0](https://github.com/bloomreach/spa-sdk/compare/v15.5.1...spa-sdk-16.0.0)
+### [spa-sdk-16.0.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.5.0...spa-sdk-16.0.0)
 
 > 16 August 2022
 
@@ -693,12 +724,6 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-124 Add 'dev' script to all packages for easy development start [`#SPASDK-124`](https://bloomreach.atlassian.net/browse/SPASDK-124)
 - SPASDK-123 Add getLocale to Page object [`#SPASDK-123`](https://bloomreach.atlassian.net/browse/SPASDK-123)
 - SPASDK-119 Improve heroku deploy speed by using lerna filter flags [`#SPASDK-119`](https://bloomreach.atlassian.net/browse/SPASDK-119)
-
-#### [v15.5.1](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.5.0...v15.5.1)
-
-> 24 June 2022
-
-- TRIVIAL Bump versions to 15.5.1 [`94d2699`](https://github.com/bloomreach/spa-sdk/commit/94d26991ce5e8d4f2916aa6756b0c927b721a25e)
 
 #### [spa-sdk-15.5.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.4.6...spa-sdk-15.5.0)
 
@@ -884,14 +909,23 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-59 Bumping versions to 15.3.0 [`#SPASDK-59`](https://bloomreach.atlassian.net/browse/SPASDK-59)
 - SPASDK-58 Remove release pipeline and use release script [`#SPASDK-58`](https://bloomreach.atlassian.net/browse/SPASDK-58)
 - SPASDK-38 Add page api to sanitize html content in SPA SDK [`#SPASDK-38`](https://bloomreach.atlassian.net/browse/SPASDK-38)
-
-#### [spa-sdk-15.2.2-0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.2.1...spa-sdk-15.2.2-0)
-
-> 30 September 2021
-
 - SPASDK-58 Merge branch 'development' [`#SPASDK-58`](https://bloomreach.atlassian.net/browse/SPASDK-58)
 - SPASDK-58 Bump versions to 15.2.2-0 [`#SPASDK-58`](https://bloomreach.atlassian.net/browse/SPASDK-58)
 - SPASDK-58 Update push to github script in Jenkins [`#SPASDK-58`](https://bloomreach.atlassian.net/browse/SPASDK-58)
+- SPASDK-53 Merge branch 'development' into 'main' [`#SPASDK-53`](https://bloomreach.atlassian.net/browse/SPASDK-53)
+- SPASDK-58 Adjust README according to release process [`#SPASDK-58`](https://bloomreach.atlassian.net/browse/SPASDK-58)
+- SPASDK-58 Adjust jenkins file so github push works [`#SPASDK-58`](https://bloomreach.atlassian.net/browse/SPASDK-58)
+- SPASDK-52 Merge branch 'development' into 'main' [`#SPASDK-52`](https://bloomreach.atlassian.net/browse/SPASDK-52)
+
+#### [spa-sdk-15.2.2-0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.2.1...spa-sdk-15.2.2-0)
+
+> 5 October 2021
+
+- SPASDK-58 Fix release pipeline [`#SPASDK-58`](https://bloomreach.atlassian.net/browse/SPASDK-58)
+- SPASDK-58 Bump versions to 15.2.2-0 [`#SPASDK-58`](https://bloomreach.atlassian.net/browse/SPASDK-58)
+- SPASDK-58 Update push to github script in Jenkins [`#SPASDK-58`](https://bloomreach.atlassian.net/browse/SPASDK-58)
+- SPASDK-58 Adjust README according to release process [`#SPASDK-58`](https://bloomreach.atlassian.net/browse/SPASDK-58)
+- SPASDK-58 Adjust jenkins file so github push works [`#SPASDK-58`](https://bloomreach.atlassian.net/browse/SPASDK-58)
 
 #### [spa-sdk-15.2.1](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.1.2...spa-sdk-15.2.1)
 
@@ -997,14 +1031,20 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-33 Update git command to publish to github [`#SPASDK-33`](https://bloomreach.atlassian.net/browse/SPASDK-33)
 - SPASDK-22 Update xmldom to the latest version to fix security issue [`#SPASDK-22`](https://bloomreach.atlassian.net/browse/SPASDK-22)
 
-#### [spa-sdk-15.0.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.0.0-1...spa-sdk-15.0.0)
+#### [spa-sdk-15.0.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.0.0-2...spa-sdk-15.0.0)
 
 > 9 August 2021
 
-- SPASDK-32 Auto generate a changelog and setup release notes process [`#15`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/15)
-- Resolve SPASDK-22 "Update and lock spa sdk dependencies" [`#10`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/10)
 - SPASDK-33 Bump versions to SPASDK-33 [`#SPASDK-33`](https://bloomreach.atlassian.net/browse/SPASDK-33)
 - SPASDK-33 Remove 'main' branch specification [`#SPASDK-33`](https://bloomreach.atlassian.net/browse/SPASDK-33)
+
+#### [spa-sdk-15.0.0-2](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.0.0-1...spa-sdk-15.0.0-2)
+
+> 6 August 2021
+
+- SPASDK-32 Auto generate a changelog and setup release notes process [`#15`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/15)
+- Resolve SPASDK-22 "Update and lock spa sdk dependencies" [`#10`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/10)
+- SPASDK-33 Update Jenkinsfile and package.json for release testing [`#SPASDK-33`](https://bloomreach.atlassian.net/browse/SPASDK-33)
 - SPASDK-32 Bump versions to 15.0.0-2 [`#SPASDK-32`](https://bloomreach.atlassian.net/browse/SPASDK-32)
 - SPASDK-32 Add version to workspace so auto-changelog can detect it [`#SPASDK-32`](https://bloomreach.atlassian.net/browse/SPASDK-32)
 - SPASDK-22 Set explicit version for node types in next example [`#SPASDK-22`](https://bloomreach.atlassian.net/browse/SPASDK-22)
@@ -1081,5 +1121,7 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-2 Log warning for unsupported method "getContentReference" in v0.9 [`#SPASDK-2`](https://bloomreach.atlassian.net/browse/SPASDK-2)
 - SPASDK-2 Add exported function "getContainerItemContent" [`#SPASDK-2`](https://bloomreach.atlassian.net/browse/SPASDK-2)
 - SPASDK-1 Bump to use node 14 [`#SPASDK-1`](https://bloomreach.atlassian.net/browse/SPASDK-1)
+- SPASDK-1 Remove maven files and update Jenkinsfile [`#SPASDK-1`](https://bloomreach.atlassian.net/browse/SPASDK-1)
+- SPASDK-1 Initial move from brxm monorepo [`#SPASDK-1`](https://bloomreach.atlassian.net/browse/SPASDK-1)
 - TRIVIAL Set branch name to 'main' in changesetBaseRefs [`4dacdcd`](https://github.com/bloomreach/spa-sdk/commit/4dacdcd2fdb0712e40dcb33b9809ae12786f9ab1)
 - TRIVIAL Skip telemetry check on nuxt startup [`15deb25`](https://github.com/bloomreach/spa-sdk/commit/15deb25b1edde3af3296d4dc34dba1483fe278f2)
