@@ -29,10 +29,12 @@ import { LinkFactory } from './link-factory';
 import { MetaCollectionFactory } from './meta-collection-factory';
 import { MetaCollection } from './meta-collection';
 import { Page, PageModel } from './page';
+import { ApiOptions } from '../spa';
 
 let eventBus: PageEventBus;
 let linkFactory: jest.Mocked<LinkFactory>;
 let metaFactory: jest.MockedFunction<MetaCollectionFactory>;
+let apiOptions: ApiOptions = {} as ApiOptions;
 
 const model = {
   meta: {},
@@ -41,13 +43,14 @@ const model = {
 } as ContainerItemModel;
 
 function createContainerItem(containerItemModel = model) {
-  return new ContainerItemImpl(containerItemModel, linkFactory, metaFactory, eventBus);
+  return new ContainerItemImpl(containerItemModel, linkFactory, metaFactory, apiOptions, eventBus);
 }
 
 beforeEach(() => {
   eventBus = new Typed<PageEvents>();
   linkFactory = { create: jest.fn() } as unknown as typeof linkFactory;
   metaFactory = jest.fn();
+  apiOptions = {} as ApiOptions;
 });
 
 describe('ContainerItemImpl', () => {

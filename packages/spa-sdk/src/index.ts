@@ -178,6 +178,7 @@ function initializeWithJwt10(
   const campaignParameter = DEFAULT_CAMPAIGN_VARIANT_PARAMETER_URL;
   const segmentParameter = DEFAULT_SEGMENT_PARAMETER_URL;
   const ttlParameter = DEFAULT_TTL_PARAMETER_URL;
+  const refPrefix = configuration.refPrefix ?? '';
 
   const { url: path, searchParams } = extractSearchParams(
     configuration.path ?? configuration.request?.path ?? '/',
@@ -202,6 +203,9 @@ function initializeWithJwt10(
   }
   if (segmentIds) {
     params.append(DEFAULT_SEGMENT_IDS_PARAMETER_API, segmentIds);
+  }
+  if (refPrefix) {
+    params.append('refPrefix', refPrefix);
   }
   endpointUrl = appendSearchParams(endpointUrl ?? '', params);
 

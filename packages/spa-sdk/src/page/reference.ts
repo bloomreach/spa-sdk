@@ -29,6 +29,16 @@ export function isReference(value: any): value is Reference {
   return !!value?.$ref;
 }
 
-export function resolve<T>(object: Record<string, any>, reference: Reference): T | undefined {
-  return reference.$ref.split('/').reduce((value, key) => (key ? value?.[key] : object), object) as T;
+export function resolve<T>(object: Record<string, any>, reference: Reference, refPrefix?: string): T | undefined {
+  const splitString = refPrefix ?? '/';
+  const test = reference.$ref.split(splitString).reduce(
+    (value, key) => {
+      if (key) {
+        return refPrefix ? object.page[key] : value?.[key];
+      }
+      return object;
+    },
+    object,
+  ) as T;
+  return test;
 }

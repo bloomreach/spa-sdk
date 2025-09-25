@@ -27,6 +27,7 @@ import { LinkRewriter } from './link-rewriter';
 import { MetaCollectionFactory } from './meta-collection-factory';
 import { isPage, Page, PageImpl, PageModel } from './page';
 import { PageEventBus } from './page-events';
+import { ApiOptions } from '../spa';
 
 let buttonFactory: jest.Mocked<ButtonFactory>;
 let componentFactory: jest.Mocked<ComponentFactory>;
@@ -34,6 +35,7 @@ let content: unknown;
 let contentFactory: jest.Mocked<ContentFactory>;
 let cmsEventBus: CmsEventBus;
 let eventBus: PageEventBus;
+let apiOptions: ApiOptions = {} as ApiOptions;
 let linkFactory: jest.Mocked<LinkFactory>;
 let linkRewriter: jest.Mocked<LinkRewriter>;
 let metaFactory: jest.MockedFunction<MetaCollectionFactory>;
@@ -66,6 +68,7 @@ function createPage(pageModel = model) {
     linkRewriter,
     metaFactory,
     cmsEventBus,
+    apiOptions,
     eventBus,
   );
 }
@@ -77,6 +80,7 @@ beforeEach(() => {
   contentFactory = { create: jest.fn(() => content) } as unknown as typeof contentFactory;
   cmsEventBus = new Typed();
   eventBus = new Typed();
+  apiOptions = {} as ApiOptions;
   linkFactory = { create: jest.fn() } as unknown as typeof linkFactory;
   linkRewriter = { rewrite: jest.fn() } as unknown as jest.Mocked<LinkRewriter>;
   metaFactory = jest.fn();
