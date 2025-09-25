@@ -31,6 +31,7 @@ import { Logger } from '../logger';
 import { MetaCollectionFactory } from './meta-collection-factory';
 import { Page, PageModel } from './page';
 import { Reference, resolve } from './reference';
+import { ApiOptions, ApiOptionsToken } from '../spa/api';
 
 /**
  * A container item without mapping.
@@ -152,6 +153,7 @@ export class ContainerItemImpl
     @inject(ComponentModelToken) protected model: ContainerItemModel,
     @inject(LinkFactory) linkFactory: LinkFactory,
     @inject(MetaCollectionFactory) private metaFactory: MetaCollectionFactory,
+    @inject(ApiOptionsToken) private apiOptions: ApiOptions,
     @inject(PageEventBusService) @optional() eventBus?: PageEventBus,
     @inject(Logger) @optional() private logger?: Logger,
   ) {
@@ -162,7 +164,7 @@ export class ContainerItemImpl
 
   protected onPageUpdate(event: PageUpdateEvent): void {
     const page = event.page as PageModel;
-    const model = resolve<ContainerItemModel>(page, page.root);
+    const model = resolve<ContainerItemModel>(page, page.root, this.apiOptions.refPrefix);
     if (model?.id !== this.getId()) {
       return;
     }
