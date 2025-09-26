@@ -36,6 +36,7 @@ import { MetaCollectionFactory } from './meta-collection-factory';
 import { PageEventBus, PageEventBusService, PageUpdateEvent } from './page-events';
 import { isReference, Reference, resolve } from './reference';
 import { Visit, Visitor } from './relevance';
+import { ApiOptions, ApiOptionsToken } from '../spa/api';
 
 export const PageModelToken = Symbol.for('PageModelToken');
 
@@ -274,12 +275,13 @@ export class PageImpl implements Page {
     @inject(LinkRewriterService) private linkRewriter: LinkRewriter,
     @inject(MetaCollectionFactory) private metaFactory: MetaCollectionFactory,
     @inject(CmsEventBusService) @optional() private cmsEventBus: CmsEventBus,
+    @inject(ApiOptionsToken) private apiOptions: ApiOptions,
     @inject(PageEventBusService) @optional() pageEventBus?: PageEventBus,
     @inject(Logger) @optional() private logger?: Logger,
   ) {
     pageEventBus?.on('page.update', this.onPageUpdate.bind(this));
 
-    this.root = componentFactory.create(model);
+    this.root = componentFactory.create(model, this.apiOptions.refPrefix);
   }
 
   protected onPageUpdate(event: PageUpdateEvent): void {
@@ -308,7 +310,8 @@ export class PageImpl implements Page {
   getContent(reference: Reference | string): unknown | undefined {
     const model = resolve<ContentModel>(
       this.model,
-      isReference(reference) ? reference : { $ref: `/page/${reference}` },
+      isReference(reference) ? reference : { $ref: `${this.apiOptions.refPrefix ?? '/page/'}${reference}` },
+      this.apiOptions.refPrefix,
     );
 
     if (!model) {
@@ -335,7 +338,7 @@ export class PageImpl implements Page {
   }
 
   getTitle(): string | undefined {
-    return resolve<PageRootModel>(this.model, this.model.root)?.meta?.pageTitle;
+    return resolve<PageRootModel>(this.model, this.model.root, this.apiOptions.refPrefix)?.meta?.pageTitle;
   }
 
   getUrl(link?: Link): string | undefined;

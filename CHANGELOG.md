@@ -2,9 +2,16 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### ["26.0.0"](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-25.0.1..."26.0.0")
+#### ["26.0.1"](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-26.0.0..."26.0.1")
+
+- SPASDK-252 Add refPrefix configuration property for the equivalent refPrefix query parameter of the PDA. [`#SPASDK-252`](https://bloomreach.atlassian.net/browse/SPASDK-252)
+
+### [spa-sdk-26.0.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-25.0.1...spa-sdk-26.0.0)
+
+> 6 August 2025
 
 - SPASDK-250 Support React Server Components in React SDK [`#215`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/215)
+- SPASDK-250 Bumping versions to 26.0.0 [`#SPASDK-250`](https://bloomreach.atlassian.net/browse/SPASDK-250)
 - SPASDK-250 refactor: Remove unnecessary checks for null page [`#SPASDK-250`](https://bloomreach.atlassian.net/browse/SPASDK-250)
 - SPASDK-250 refactor: return empty component instead of `null` for BrManageContentButton and BrManageMenuButton [`#SPASDK-250`](https://bloomreach.atlassian.net/browse/SPASDK-250)
 - SPASDK-250 refactor: enhance NBRMode support for function children [`#SPASDK-250`](https://bloomreach.atlassian.net/browse/SPASDK-250)
@@ -1122,6 +1129,5 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-2 Add exported function "getContainerItemContent" [`#SPASDK-2`](https://bloomreach.atlassian.net/browse/SPASDK-2)
 - SPASDK-1 Bump to use node 14 [`#SPASDK-1`](https://bloomreach.atlassian.net/browse/SPASDK-1)
 - SPASDK-1 Remove maven files and update Jenkinsfile [`#SPASDK-1`](https://bloomreach.atlassian.net/browse/SPASDK-1)
-- SPASDK-1 Initial move from brxm monorepo [`#SPASDK-1`](https://bloomreach.atlassian.net/browse/SPASDK-1)
 - TRIVIAL Set branch name to 'main' in changesetBaseRefs [`4dacdcd`](https://github.com/bloomreach/spa-sdk/commit/4dacdcd2fdb0712e40dcb33b9809ae12786f9ab1)
 - TRIVIAL Skip telemetry check on nuxt startup [`15deb25`](https://github.com/bloomreach/spa-sdk/commit/15deb25b1edde3af3296d4dc34dba1483fe278f2)

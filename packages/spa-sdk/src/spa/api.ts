@@ -82,6 +82,15 @@ export interface ApiOptions {
    * This parameter takes precedence over `request.visitor`.
    */
   visitor?: HttpRequest['visitor'];
+
+  /**
+   * API query parameter that contains a string which is used to prefix $ref values.
+   * For example, if the value of this parameter is `//`, a reference to a component
+   * within the page model will look like `$ref: '//u{$uuid}'`.
+   * If the parameter is not set, the default prefix `/page/` will be used or whichever
+   * default prefix is configured in the CMS.
+   */
+  refPrefix?: string;
 }
 
 export interface Api {

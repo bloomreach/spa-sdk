@@ -31,18 +31,20 @@ export class ComponentFactory extends SimpleFactory<ComponentType, ComponentBuil
    * Produces a component based on the page model.
    * @param page The page model.
    */
-  create(page: PageModel): Component | undefined {
+  create(page: PageModel, refPrefix?: string): Component | undefined {
     const heap = [page.root];
     const pool = new Map<ComponentModel, Component>();
 
     // eslint-disable-next-line no-plusplus
     for (let i = 0; i < heap.length; i++) {
-      heap.push(...(resolve<ComponentModel>(page, heap[i])?.children ?? []));
+      heap.push(...(resolve<ComponentModel>(page, heap[i], refPrefix)?.children ?? []));
     }
 
     return heap.reverse().reduce<Component | undefined>((previous, reference) => {
-      const model = resolve<ComponentModel>(page, reference)!;
-      const children = model?.children?.map((child) => pool.get(resolve<ComponentModel>(page, child)!)!) ?? [];
+      const model = resolve<ComponentModel>(page, reference, refPrefix)!;
+      const children = model?.children?.map(
+        (child) => pool.get(resolve<ComponentModel>(page, child, refPrefix)!)!,
+      ) ?? [];
       const component = this.buildComponent(model, children);
 
       pool.set(model, component);
