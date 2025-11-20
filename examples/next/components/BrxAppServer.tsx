@@ -1,7 +1,5 @@
-'use client'
-
 /*
- * Copyright 2024-2025 Bloomreach
+ * Copyright 2025 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,26 +15,24 @@
  */
 
 import axios from 'axios';
-import {BrComponent, BrPage} from '@bloomreach/react-sdk';
+import {BrComponentServer, BrPageServer} from '@bloomreach/react-sdk/server';
 import Link from 'next/link';
 import {Menu} from './Menu';
 import {Banner} from './Banner';
 import {Content} from './Content';
 import {NewsList} from './NewsList';
 import {Configuration, Page} from '@bloomreach/spa-sdk';
-import {useRelevance} from '../hooks/useRelevance';
+import {Relevance} from './Relevance';
 
 interface Props {
   configuration: Omit<Configuration, 'httpClient'>;
   page: Page;
 }
 
-const BrxApp = ({configuration, page}: Props) => {
+const BrxAppServer = async ({configuration, page}: Props) => {
   const mapping = { Banner, Content, 'News List': NewsList, 'Simple Content': Content };
 
-  useRelevance(configuration, page);
-
-  return <BrPage configuration={{ ...configuration, httpClient: axios }} mapping={mapping} page={page}>
+  return <BrPageServer configuration={{ ...configuration, httpClient: axios }} mapping={mapping} page={page}>
     {({ page: contextPage, mapping: pageMapping, component }) => (
       <>
         <header>
@@ -46,27 +42,27 @@ const BrxApp = ({configuration, page}: Props) => {
                 {contextPage.getTitle() || 'brXM + Next.js = ♥️'}
               </Link>
               <div className="collapse navbar-collapse">
-                <BrComponent path="menu" page={contextPage} mapping={pageMapping} component={component}>
+                <BrComponentServer path="menu" page={contextPage} mapping={pageMapping} component={component}>
                   {({ page: menuPage, mapping: menuMapping }) => <Menu page={menuPage} mapping={menuMapping} />}
-                </BrComponent>
+                </BrComponentServer>
               </div>
             </div>
           </nav>
         </header>
         <section className="container flex-fill pt-3">
-          <BrComponent path="main" page={contextPage} mapping={pageMapping} component={component} />
+          <BrComponentServer path="main" page={contextPage} mapping={pageMapping} component={component} />
         </section>
         <footer className="bg-dark text-light py-3">
           <div className="container clearfix">
             <div className="float-left pr-3">&copy; Bloomreach</div>
             <div className="overflow-hidden">
-              <BrComponent path="footer" page={contextPage} mapping={pageMapping} component={component} />
+              <BrComponentServer path="footer" page={contextPage} mapping={pageMapping} component={component} />
             </div>
           </div>
         </footer>
       </>
     )}
-  </BrPage>
+  </BrPageServer>
 }
 
-export default BrxApp;
+export default BrxAppServer;

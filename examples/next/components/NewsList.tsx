@@ -29,7 +29,7 @@ export function NewsListItem({ item, page }: NewsListItemProps): JSX.Element {
 
   return (
     <div className="card mb-3">
-      <BrManageContentButton content={item} page={page} />
+      {page.isPreview() && <BrManageContentButton content={item} page={page} />}
       <div className="card-body">
         {title && (
           <h2 className="card-title">

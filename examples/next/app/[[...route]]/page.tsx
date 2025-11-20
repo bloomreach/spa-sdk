@@ -15,11 +15,13 @@
  */
 
 import {headers} from 'next/headers';
-import BrxApp from '../../components/BrxApp';
+import BrxAppClient from '../../components/BrxAppClient';
+import BrxAppServer from '../../components/BrxAppServer';
 import {Configuration, extractSearchParams, initialize} from '@bloomreach/spa-sdk';
 import axios from 'axios';
 import * as cookieUtils from 'cookie';
 import {DEFAULT_RELEVANCE_COOKIE_NAME} from '../../constants';
+import {Relevance} from '../../components/Relevance';
 
 export default async function Page() {
   const headersList = await headers();
@@ -60,7 +62,19 @@ export default async function Page() {
 
   const pageModel = page.toJSON();
 
+  if (configuration.NBRMode || page.isPreview()) {
+    console.log('Non-RSC mode');
+    return (
+      <BrxAppClient configuration={configuration} page={pageModel} />
+    );
+  }
+
+  console.log('RSC mode');
+  // You can only set cookies from client side in server components
   return (
-    <BrxApp configuration={configuration} page={pageModel} />
-  )
+    <>
+      <Relevance configuration={configuration} page={pageModel} />
+      <BrxAppServer configuration={configuration} page={page} />
+    </>
+  );
 }

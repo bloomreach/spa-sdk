@@ -34,16 +34,18 @@ export function Banner({ component, page }: BrProps): JSX.Element | null {
 
   return (
     <div className={`jumbotron mb-3 ${page.isPreview() ? 'has-edit-button' : ''}`}>
-      <BrManageContentButton
-        content={document}
-        documentTemplateQuery="new-banner-document"
-        folderTemplateQuery="new-banner-folder"
-        parameter="document"
-        root="banners"
-        relative
-        pickerSelectableNodeTypes="best:banner,hap:bannerdocument"
-        page={page}
-      />
+      {page.isPreview() && 
+        <BrManageContentButton
+          content={document}
+          documentTemplateQuery="new-banner-document"
+          folderTemplateQuery="new-banner-folder"
+          parameter="document"
+          root="banners"
+          relative
+          pickerSelectableNodeTypes="best:banner,hap:bannerdocument"
+          page={page}
+        />
+      }
       {title && <h1>{title}</h1>}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       {image && <img className="img-fluid" src={image.getOriginal()?.getUrl()} alt={title}/>}

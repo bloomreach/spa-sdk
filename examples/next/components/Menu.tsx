@@ -63,7 +63,7 @@ export function Menu({ component, page }: BrProps): JSX.Element | null {
 
   return (
     <ul className={`navbar-nav col-12 ${page.isPreview() ? 'has-edit-button' : ''}`}>
-      <BrManageMenuButton menu={menu} page={page} />
+      {page.isPreview() && <BrManageMenuButton menu={menu} page={page} />}
       {menu.getItems().map((item, index) => (
         // eslint-disable-next-line react/no-array-index-key
         <li key={index} className={`nav-item ${item.isSelected() ? 'active' : ''}`}>
