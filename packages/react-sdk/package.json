@@ -19,10 +19,25 @@
     "url": "https://bloomreach.atlassian.net/projects/SPASDK/issues"
   },
   "main": "dist/index.umd.js",
-  "browser": "dist/index.js",
+  "browser": "dist/index.client.js",
   "module": "dist/index.js",
   "es2015": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.umd.js"
+    },
+    "./server": {
+      "types": "./dist/index.server.d.ts",
+      "import": "./dist/index.server.js"
+    },
+    "./client": {
+      "types": "./dist/index.client.d.ts",
+      "import": "./dist/index.client.js"
+    }
+  },
   "files": [
     "dist/"
   ],

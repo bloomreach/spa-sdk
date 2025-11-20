@@ -20,7 +20,7 @@ import { BrMeta } from '../meta';
 import { BrNodeContainer } from './BrNodeContainer';
 import { BrNodeContainerItem } from './BrNodeContainerItem';
 import { BrNodeComponent } from './BrNodeComponent';
-import { BrMapping } from '.';
+import { BrMapping } from './BrProps';
 
 export interface BrNodeProps extends PropsWithChildren {
   /**

@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BrNodeContainerItemServer Container item mapping should override undefined container item when mapping provided 1`] = `
+<DocumentFragment>
+  <div>
+    Test
+  </div>
+</DocumentFragment>
+`;
+
+exports[`BrNodeContainerItemServer Container item mapping should render undefined container item 1`] = `
+<DocumentFragment>
+  <div>
+    Component "undefined" is not defined.
+  </div>
+</DocumentFragment>
+`;

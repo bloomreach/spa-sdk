@@ -50,8 +50,9 @@ export default [
     ],
   },
 
+  // Server build (RSC compatible)
   {
-    input: 'src/index.ts',
+    input: 'src/index.server.ts',
     output: [
       {
         dir: 'dist',
@@ -64,6 +65,67 @@ export default [
     plugins: [typescript({ clean: true }), terser(terserOptions)],
   },
 
+  // Client build (with hooks, browser APIs, etc.)
+  {
+    input: 'src/index.client.ts',
+    output: [
+      {
+        dir: 'dist',
+        entryFileNames: '[name].js',
+        format: 'es',
+        sourcemap: true,
+        banner: "'use client';",
+      },
+    ],
+    external: [...Object.keys(pkg.dependencies || {}), ...Object.keys(pkg.peerDependencies || {})],
+    plugins: [typescript({ clean: false }), terser(terserOptions)],
+  },
+
+  // keep for backward compatibility
+  {
+    input: 'src/index.ts',
+    output: [
+      {
+        dir: 'dist',
+        entryFileNames: '[name].js',
+        format: 'es',
+        sourcemap: true,
+        banner: "'use client';",
+      },
+    ],
+    external: [...Object.keys(pkg.dependencies || {}), ...Object.keys(pkg.peerDependencies || {})],
+    plugins: [typescript({ clean: false }), terser(terserOptions)],
+  },
+
+  // Type definitions for server
+  {
+    input: 'src/index.server.ts',
+    output: [
+      {
+        dir: 'dist',
+        entryFileNames: '[name].d.ts',
+        format: 'es',
+      },
+    ],
+    external: [...Object.keys(pkg.dependencies || {}), ...Object.keys(pkg.peerDependencies || {})],
+    plugins: [dts()],
+  },
+
+  // Type definitions for client
+  {
+    input: 'src/index.client.ts',
+    output: [
+      {
+        dir: 'dist',
+        entryFileNames: '[name].d.ts',
+        format: 'es',
+      },
+    ],
+    external: [...Object.keys(pkg.dependencies || {}), ...Object.keys(pkg.peerDependencies || {})],
+    plugins: [dts()],
+  },
+
+  // keep for backward compatibility
   {
     input: 'src/index.ts',
     output: [
