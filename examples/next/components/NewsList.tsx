@@ -29,7 +29,8 @@ export function NewsListItem({ item, page }: NewsListItemProps): JSX.Element {
 
   return (
     <div className="card mb-3">
-      {page.isPreview() && <BrManageContentButton content={item} page={page} />}
+      {/* buttons should only be rendered on the client side */}
+      {typeof window !== 'undefined' && <BrManageContentButton content={item} page={page} />}
       <div className="card-body">
         {title && (
           <h2 className="card-title">
@@ -96,7 +97,8 @@ export function NewsList({ component, page }: BrProps): JSX.Element | null {
       {pageable.items.map(
         (reference, key) => <NewsListItem key={key} item={page.getContent<Document>(reference)!} page={page} />,
       )}
-      {page.isPreview() && (
+      {/* buttons should only be rendered on the client side */}
+      {typeof window !== 'undefined' && page.isPreview() && (
         <div className="has-edit-button float-right">
           <BrManageContentButton
             documentTemplateQuery="new-news-document"

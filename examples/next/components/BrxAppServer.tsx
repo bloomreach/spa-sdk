@@ -22,7 +22,6 @@ import {Banner} from './Banner';
 import {Content} from './Content';
 import {NewsList} from './NewsList';
 import {Configuration, Page} from '@bloomreach/spa-sdk';
-import {Relevance} from './Relevance';
 
 interface Props {
   configuration: Omit<Configuration, 'httpClient'>;

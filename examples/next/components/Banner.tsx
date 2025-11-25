@@ -34,7 +34,8 @@ export function Banner({ component, page }: BrProps): JSX.Element | null {
 
   return (
     <div className={`jumbotron mb-3 ${page.isPreview() ? 'has-edit-button' : ''}`}>
-      {page.isPreview() && 
+      {/* buttons should only be rendered on the client side */}
+      {typeof window !== 'undefined' && 
         <BrManageContentButton
           content={document}
           documentTemplateQuery="new-banner-document"

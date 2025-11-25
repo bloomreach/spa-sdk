@@ -39,7 +39,8 @@ export function Content({ component, page }: BrProps): JSX.Element | null {
 
   return (
     <div className={page.isPreview() ? 'has-edit-button' : ''}>
-      {page.isPreview() && <BrManageContentButton content={document} page={page} />}
+      {/* buttons should only be rendered on the client side */}
+      {typeof window !== 'undefined' && <BrManageContentButton content={document} page={page} />}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       {image && <img className="img-fluid mb-3" src={image.getOriginal()?.getUrl()} alt={title}/>}
       {title && <h1>{title}</h1>}
