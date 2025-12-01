@@ -44,7 +44,7 @@ export interface BrContainerProps extends PropsWithChildren, BrProps {
  * Node container component for rendering brXM container components with prop-based mapping.
  */
 export function BrNodeContainer(props: BrContainerProps): React.ReactElement {
-  const { component, mapping, children } = props;
+  const { component, mapping } = props;
 
   const getMapping = (): React.ComponentType<BrProps> => {
     const type = component.getType();
@@ -69,7 +69,7 @@ export function BrNodeContainer(props: BrContainerProps): React.ReactElement {
 
   const containerMapping = getMapping();
   const meta = component.getMeta();
-  const content = containerMapping ? React.createElement(containerMapping, props) : children;
+  const content = React.createElement(containerMapping, props);
 
   return React.createElement(BrMeta, { meta }, content);
 }

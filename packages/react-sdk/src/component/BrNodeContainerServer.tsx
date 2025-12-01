@@ -35,7 +35,7 @@ import type { BrContainerProps } from './BrNodeContainer';
  * Node container component for rendering brXM container components with prop-based mapping.
  */
 export function BrNodeContainerServer(props: BrContainerProps): React.ReactElement {
-  const { component, mapping, children } = props;
+  const { component, mapping } = props;
 
   const getMapping = (): React.ComponentType<BrProps> => {
     const type = component.getType();
@@ -58,8 +58,5 @@ export function BrNodeContainerServer(props: BrContainerProps): React.ReactEleme
     }
   };
 
-  const containerMapping = getMapping();
-  const content = containerMapping ? React.createElement(containerMapping, props) : children;
-
-  return (content as React.ReactElement);
+  return React.createElement(getMapping(), props);
 }

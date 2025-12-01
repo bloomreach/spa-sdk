@@ -268,7 +268,7 @@ export default function BrxAppClient({configuration, pageModel}: Props) {
 import React from 'react';
 import axios from 'axios';
 import { Banner } from './Banner';
-import { Configuration, PageModel } from '@bloomreach/spa-sdk';
+import { Configuration, Page } from '@bloomreach/spa-sdk';
 import { BrComponentServer, BrPageServer } from '@bloomreach/react-sdk/server';
 
 interface Props {

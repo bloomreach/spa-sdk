@@ -46,7 +46,7 @@ export interface BrContainerItemProps extends PropsWithChildren {
 export function BrNodeContainerItem(
   props: BrContainerItemProps,
 ): React.ReactElement {
-  const { component, page, mapping, children } = props;
+  const { component, page, mapping } = props;
   const [forcedRerenders, setForcedRerenders] = useState(0);
 
   const onUpdate = useCallback((): void => {
@@ -85,7 +85,7 @@ export function BrNodeContainerItem(
 
   const containerItemMapping = getMapping();
   const meta = component?.getMeta();
-  const content = containerItemMapping ? React.createElement(containerItemMapping, props) : children;
+  const content = React.createElement(containerItemMapping, props);
 
   return React.createElement(BrMeta, { meta }, content);
 }

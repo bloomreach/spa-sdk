@@ -28,7 +28,7 @@ import type { BrContainerItemProps } from './BrNodeContainerItem';
 export function BrNodeContainerItemServer(
   props: BrContainerItemProps,
 ): React.ReactElement {
-  const { component, mapping, children } = props;
+  const { component, mapping } = props;
 
   const getMapping = (): React.ComponentType<BrProps> => {
     const type = component?.getType();
@@ -44,8 +44,5 @@ export function BrNodeContainerItemServer(
     );
   };
 
-  const containerItemMapping = getMapping();
-  const content = containerItemMapping ? React.createElement(containerItemMapping, props) : children;
-
-  return (content as React.ReactElement);
+  return React.createElement(getMapping(), props);
 }
