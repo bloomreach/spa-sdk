@@ -197,6 +197,9 @@ In many cases, you want your react app to work both on the live site (using serv
 **page.tsx**
 ```tsx
 import axios from 'axios';
+import { initialize } from '@bloomreach/spa-sdk';
+import BrxAppClient from '@/components/BrxAppClient';
+import BrxAppServer from '@/components/BrxAppServer';
 
 export default async function Page() {
   const configuration = { /* ... */ };
