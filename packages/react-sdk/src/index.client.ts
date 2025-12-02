@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2025 Bloomreach
+ * Copyright 2025 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,14 +14,7 @@
  * limitations under the License.
  */
 
-export * from './BrComponent';
-export * from './BrComponentServer';
-export * from './BrNode';
-export * from './BrNodeServer';
-export * from './BrNodeComponent';
-export * from './BrNodeComponentServer';
-export * from './BrNodeContainer';
-export * from './BrNodeContainerServer';
-export * from './BrNodeContainerItem';
-export * from './BrNodeContainerItemServer';
-export * from './BrProps';
+// Client-side exports (with hooks, browser APIs, etc.)
+export { BrComponent, BrProps, BrMapping } from './component';
+export { BrManageContentButton, BrManageMenuButton } from './cms';
+export { BrPage } from './page';

@@ -16,7 +16,8 @@
 
 import { Component, Configuration, initialize, Page, PageModel } from '@bloomreach/spa-sdk';
 import React, { useEffect, useState } from 'react';
-import { BrNode, BrMapping } from '../component';
+import { BrNode } from '../component';
+import type { BrMapping } from '../component';
 
 /**
  * Render props pattern interface for BrPage component.
@@ -44,7 +45,7 @@ export interface BrPageRenderProps {
   component: Component;
 }
 
-interface BrPageProps {
+export interface BrPageProps {
   /**
    * The configuration of the SPA SDK.
    * @see https://www.npmjs.com/package/@bloomreach/spa-sdk#configuration
@@ -71,7 +72,8 @@ interface BrPageProps {
 }
 
 /**
- * The brXM page component with React Server Components (RSC) support.
+ * Client-side implementation for BrPage that handles lifecycle and syncing.
+ * For backwards compatibility
  */
 export function BrPage({
   configuration,
@@ -80,7 +82,7 @@ export function BrPage({
   children,
 }: BrPageProps): React.ReactElement | null {
   const [page, setPage] = useState<Page | undefined>(() => {
-    return initialPage ? initialize(configuration, initialPage) : undefined;
+    return initialPage ? initialize(configuration, initialPage as PageModel) : undefined;
   });
 
   useEffect(() => {
@@ -88,9 +90,11 @@ export function BrPage({
     let isMounted = true;
 
     const initializePage = async (): Promise<void> => {
-      // If a page model is provided (e.g., from SSR), initialize synchronously.
-      // Otherwise, fetch the page model asynchronously from the Page Model API.
-      const newPage = initialPage ? initialize(configuration, initialPage) : await initialize(configuration);
+      // If a page model was provided (e.g., from server), initialize synchronously without fetching.
+      // Otherwise, fetch on the client (e.g., NBRMode or client-only scenarios).
+      const newPage = initialPage
+        ? initialize(configuration, initialPage as PageModel)
+        : await initialize(configuration);
 
       if (isMounted) {
         setPage(newPage);
@@ -112,9 +116,8 @@ export function BrPage({
   // Otherwise, wait for page to be loaded
   if (!page) {
     if (configuration.NBRMode) {
-      return (
-        <>{children}</>
-      );
+      const regularChildren = typeof children === 'function' ? undefined : (children as React.ReactNode);
+      return <>{regularChildren}</>;
     }
 
     return null;
@@ -122,16 +125,13 @@ export function BrPage({
 
   const component = page.getComponent();
 
-  // Normal mode with page loaded - wrap children with BrNode
+  const renderedChildren = typeof children === 'function'
+    ? (children as (props: BrPageRenderProps) => React.ReactNode)({ page, component, mapping: mapping as BrMapping })
+    : children;
+
   return (
-    <BrNode
-      page={page}
-      mapping={mapping}
-      component={component}
-    >
-      {typeof children === 'function'
-        ? children({ page, component, mapping })
-        : children}
+    <BrNode page={page} mapping={mapping as BrMapping} component={component}>
+      {renderedChildren}
     </BrNode>
   );
 }

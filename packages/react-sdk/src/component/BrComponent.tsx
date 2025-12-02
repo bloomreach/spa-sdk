@@ -44,7 +44,7 @@ export interface BrComponentRenderProps {
   component: Component;
 }
 
-interface BrComponentProps extends BrProps {
+export interface BrComponentProps extends BrProps {
   /**
    * The path to a component.
    * The path is defined as a slash-separated components name chain

@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2025 Bloomreach
+ * Copyright 2025 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import { BrContainerItemUndefined } from '../cms';
 import { BrProps, BrMapping } from './BrProps';
 import { BrMeta } from '../meta';
 
-interface BrContainerItemProps extends PropsWithChildren {
+export interface BrContainerItemProps extends PropsWithChildren {
   /**
    * The current page instance from the Bloomreach Page Model API.
    */
@@ -46,7 +46,7 @@ interface BrContainerItemProps extends PropsWithChildren {
 export function BrNodeContainerItem(
   props: BrContainerItemProps,
 ): React.ReactElement {
-  const { component, page, mapping, children } = props;
+  const { component, page, mapping } = props;
   const [forcedRerenders, setForcedRerenders] = useState(0);
 
   const onUpdate = useCallback((): void => {
@@ -85,7 +85,7 @@ export function BrNodeContainerItem(
 
   const containerItemMapping = getMapping();
   const meta = component?.getMeta();
-  const content = containerItemMapping ? React.createElement(containerItemMapping, props) : children;
+  const content = React.createElement(containerItemMapping, props);
 
   return React.createElement(BrMeta, { meta }, content);
 }

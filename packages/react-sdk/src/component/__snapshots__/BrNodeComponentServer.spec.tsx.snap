@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BrNodeComponentServer Component mapping resolution should fallback to children when there is no mapping 1`] = `
+<DocumentFragment>
+  <b />
+</DocumentFragment>
+`;
+
+exports[`BrNodeComponentServer Component mapping resolution should render children when no mapping provided 1`] = `
+<DocumentFragment>
+  <b />
+</DocumentFragment>
+`;
+
+exports[`BrNodeComponentServer Component mapping resolution should render mapped component when mapping exists 1`] = `
+<DocumentFragment>
+  <a>
+    <b />
+  </a>
+</DocumentFragment>
+`;
