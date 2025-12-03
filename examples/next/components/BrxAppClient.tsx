@@ -32,6 +32,8 @@ interface Props {
 }
 
 const BrxAppClient = ({configuration, page}: Props) => {
+  console.log('Using BrxAppClient');
+  
   const mapping = { Banner, Content, 'News List': NewsList, 'Simple Content': Content };
 
   useRelevance(configuration, page);

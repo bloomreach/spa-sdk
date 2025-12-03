@@ -29,6 +29,8 @@ interface Props {
 }
 
 const BrxAppServer = async ({configuration, page}: Props) => {
+  console.log('Using BrxAppServer');
+
   const mapping = { Banner, Content, 'News List': NewsList, 'Simple Content': Content };
 
   return <BrPageServer configuration={{ ...configuration, httpClient: axios }} mapping={mapping} page={page}>

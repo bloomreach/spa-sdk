@@ -63,13 +63,11 @@ export default async function Page() {
   const pageModel = page.toJSON();
 
   if (configuration.NBRMode || page.isPreview()) {
-    console.log('Non-RSC mode');
     return (
       <BrxAppClient configuration={configuration} page={pageModel} />
     );
   }
 
-  console.log('RSC mode');
   // You can only set cookies from client side in server components
   return (
     <>
