@@ -28,7 +28,9 @@ export function BrNodeComponentServer<T extends Component>(
 
   const componentName = component?.getName();
   const resolvedMapping = component && componentName && (mapping[componentName] as React.ComponentType<BrProps>);
-  const content = resolvedMapping ? React.createElement(resolvedMapping, props) : children;
+  const content = resolvedMapping
+    ? React.createElement(resolvedMapping, { ...props, isClientComponent: false })
+    : children;
 
   return (content as React.ReactElement);
 }

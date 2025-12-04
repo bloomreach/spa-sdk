@@ -224,6 +224,7 @@ describe('BrComponentServer', () => {
       page: mockPage,
       component: childComponent,
       mapping: mockMapping,
+      isClientComponent: false,
     });
   });
 
@@ -249,11 +250,13 @@ describe('BrComponentServer', () => {
       page: mockPage,
       component: component1,
       mapping: mockMapping,
+      isClientComponent: false,
     });
     expect(renderFunction).toHaveBeenNthCalledWith(2, {
       page: mockPage,
       component: component2,
       mapping: mockMapping,
+      isClientComponent: false,
     });
   });
 

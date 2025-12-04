@@ -48,7 +48,12 @@ export function BrComponentServer({
         page={page}
         mapping={mapping}
       >
-        {typeof children === 'function' ? children({ page, component: comp, mapping }) : children}
+        {typeof children === 'function' ? children({
+          page,
+          component: comp,
+          mapping,
+          isClientComponent: false,
+        }) : children}
       </BrNodeServer>
     ));
   }

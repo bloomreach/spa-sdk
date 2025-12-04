@@ -22,7 +22,7 @@ import {
   TYPE_CONTAINER_ORDERED_LIST,
   TYPE_CONTAINER_UNORDERED_LIST,
 } from '@bloomreach/spa-sdk';
-import { BrProps } from './BrProps';
+import type { BrProps } from './BrProps';
 import { BrMeta } from '../meta';
 import {
   BrContainerBox,
@@ -32,7 +32,7 @@ import {
   BrContainerUnorderedList,
 } from '../cms';
 
-export interface BrContainerProps extends PropsWithChildren, BrProps {
+export interface BrContainerProps extends PropsWithChildren, BrProps<Container> {
   /**
    * The brXM component instance containing component-specific data,
    * configuration, and metadata from the Bloomreach Experience Manager.
@@ -69,7 +69,7 @@ export function BrNodeContainer(props: BrContainerProps): React.ReactElement {
 
   const containerMapping = getMapping();
   const meta = component.getMeta();
-  const content = React.createElement(containerMapping, props);
+  const content = React.createElement(containerMapping, { ...props, isClientComponent: true });
 
   return React.createElement(BrMeta, { meta }, content);
 }

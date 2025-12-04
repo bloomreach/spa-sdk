@@ -17,7 +17,7 @@
 import { Component } from '@bloomreach/spa-sdk';
 import React from 'react';
 import { BrMeta } from '../meta';
-import { BrProps } from './BrProps';
+import type { BrProps } from './BrProps';
 
 /**
  * Node component for rendering brXM components with prop-based mapping resolution.
@@ -31,7 +31,9 @@ export function BrNodeComponent<T extends Component>(
   const resolvedMapping = component && componentName && (mapping[componentName] as React.ComponentType<BrProps>);
   const meta = component?.getMeta();
 
-  const content = resolvedMapping ? React.createElement(resolvedMapping, props) : children;
+  const content = resolvedMapping
+    ? React.createElement(resolvedMapping, { ...props, isClientComponent: true })
+    : children;
 
   return React.createElement(BrMeta, { meta }, content);
 }

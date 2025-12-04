@@ -58,5 +58,5 @@ export function BrNodeContainerServer(props: BrContainerProps): React.ReactEleme
     }
   };
 
-  return React.createElement(getMapping(), props);
+  return React.createElement(getMapping(), { ...props, isClientComponent: false });
 }

@@ -17,32 +17,25 @@
 import { Component, Configuration, initialize, Page, PageModel } from '@bloomreach/spa-sdk';
 import React, { useEffect, useState } from 'react';
 import { BrNode } from '../component';
-import type { BrMapping } from '../component';
+import type { BrMapping, BrProps } from '../component';
 
 /**
  * Render props pattern interface for BrPage component.
  * Allows child functions to receive page, mapping, and component data
  * as function parameters for flexible rendering patterns.
  */
-export interface BrPageRenderProps {
-  /**
-   * The current page instance from the Bloomreach Page Model API.
-   */
-  page: Page;
-
-  /**
-   * Component mapping object that defines how brXM component types
-   * are mapped to React components. Used for dynamic component resolution
-   * during page rendering.
-   */
-  mapping: BrMapping;
-
+export interface BrPageRenderProps extends BrProps<Component> {
   /**
    * The root component of the current page.
    * Represents the top-level container component that holds
    * all page content and layout structure.
    */
   component: Component;
+
+  /**
+   * Whether the component is rendered as a client component.
+   */
+  isClientComponent: boolean;
 }
 
 export interface BrPageProps {
@@ -126,11 +119,11 @@ export function BrPage({
   const component = page.getComponent();
 
   const renderedChildren = typeof children === 'function'
-    ? (children as (props: BrPageRenderProps) => React.ReactNode)({ page, component, mapping: mapping as BrMapping })
+    ? children({ page, component, mapping, isClientComponent: true })
     : children;
 
   return (
-    <BrNode page={page} mapping={mapping as BrMapping} component={component}>
+    <BrNode page={page} mapping={mapping} component={component}>
       {renderedChildren}
     </BrNode>
   );

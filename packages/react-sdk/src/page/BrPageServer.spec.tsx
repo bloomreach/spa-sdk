@@ -153,7 +153,7 @@ describe('BrPageServer', () => {
       const page = createMockPage();
       jest.mocked(initialize).mockResolvedValue(page);
 
-      const renderProp = jest.fn(({ page: renderPage, component, mapping: renderMapping }) => (
+      const renderProp = jest.fn(({ page: renderPage, component, mapping: renderMapping, isClientComponent }) => (
         <div>
           Page:
           {' '}
@@ -164,6 +164,9 @@ describe('BrPageServer', () => {
           Mapping:
           {' '}
           {renderMapping ? 'exists' : 'missing'}
+          Is Client Component:
+          {' '}
+          {isClientComponent ? 'true' : 'false'}
         </div>
       ));
 
@@ -174,10 +177,12 @@ describe('BrPageServer', () => {
         page,
         component: expect.any(Object),
         mapping,
+        isClientComponent: false,
       });
       expect(getByText('Page: exists', { exact: false })).toBeInTheDocument();
       expect(getByText('Component: exists', { exact: false })).toBeInTheDocument();
       expect(getByText('Mapping: exists', { exact: false })).toBeInTheDocument();
+      expect(getByText('Is Client Component: false', { exact: false })).toBeInTheDocument();
     });
 
     it('should work with both render props and regular children patterns', async () => {

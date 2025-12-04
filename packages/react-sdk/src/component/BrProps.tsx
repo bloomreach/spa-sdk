@@ -47,4 +47,9 @@ export interface BrProps<T extends Component = Component> {
    * during page rendering.
    */
   mapping: BrMapping;
+
+  /**
+   * Whether the component is rendered as a client component.
+   */
+  isClientComponent?: boolean;
 }

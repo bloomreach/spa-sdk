@@ -17,7 +17,7 @@
 import { Page, initialize } from '@bloomreach/spa-sdk';
 import React from 'react';
 import { BrNodeServer } from '../component';
-import type { BrPageProps, BrPageRenderProps } from './BrPage';
+import type { BrPageProps } from './BrPage';
 
 /**
  * The brXM page component with React Server Components (RSC) support.
@@ -40,7 +40,7 @@ export async function BrPageServer(props: BrPageProps): Promise<React.ReactEleme
   const component = page.getComponent();
 
   const renderedChildren = typeof children === 'function'
-    ? (children as (props: BrPageRenderProps) => React.ReactNode)({ page, component, mapping })
+    ? children({ page, component, mapping, isClientComponent: false })
     : children;
 
   return (
