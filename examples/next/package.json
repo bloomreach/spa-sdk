@@ -10,9 +10,9 @@
     "@bloomreach/spa-sdk": "27.0.0-beta.2",
     "axios": "1.8.4",
     "cookie": "1.0.2",
-    "next": "15.3.0",
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
+    "next": "15.3.6",
+    "react": "19.1.2",
+    "react-dom": "19.1.2",
     "sanitize-html": "2.15.0",
     "swr": "2.2.5"
   },
@@ -22,7 +22,7 @@
     "@types/react": "19.1.2",
     "@types/react-dom": "19.1.2",
     "eslint": "8.57.1",
-    "eslint-config-next": "15.3.0",
+    "eslint-config-next": "15.3.6",
     "postcss": "8.5.3",
     "typescript": "5.7.3"
   },
