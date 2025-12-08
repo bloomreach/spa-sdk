@@ -320,7 +320,7 @@ describe('BrPage', () => {
       const page = createMockPage();
       jest.mocked(initialize).mockResolvedValue(page);
 
-      const renderProp = jest.fn(({ page: renderPage, component, mapping: renderMapping }) => (
+      const renderProp = jest.fn(({ page: renderPage, component, mapping: renderMapping, isClientComponent }) => (
         <div>
           Page:
           {' '}
@@ -331,6 +331,9 @@ describe('BrPage', () => {
           Mapping:
           {' '}
           {renderMapping ? 'exists' : 'missing'}
+          Is Client Component:
+          {' '}
+          {isClientComponent ? 'true' : 'false'}
         </div>
       ));
 
@@ -345,10 +348,12 @@ describe('BrPage', () => {
           page,
           component: expect.any(Object),
           mapping,
+          isClientComponent: true,
         });
         expect(getByText('Page: exists', { exact: false })).toBeInTheDocument();
         expect(getByText('Component: exists', { exact: false })).toBeInTheDocument();
         expect(getByText('Mapping: exists', { exact: false })).toBeInTheDocument();
+        expect(getByText('Is Client Component: true', { exact: false })).toBeInTheDocument();
       });
     });
 

@@ -20,7 +20,7 @@ import Link from 'next/link';
 import React, {JSX} from 'react';
 import {sanitize} from '../utils/sanitize';
 
-export function Banner({ component, page }: BrProps): JSX.Element | null {
+export function Banner({ component, page, isClientComponent }: BrProps): JSX.Element | null {
   const documentRef = component?.getModels().document;
   const document = !!documentRef && page?.getContent(documentRef);
 
@@ -35,7 +35,7 @@ export function Banner({ component, page }: BrProps): JSX.Element | null {
   return (
     <div className={`jumbotron mb-3 ${page.isPreview() ? 'has-edit-button' : ''}`}>
       {/* buttons should only be rendered on the client side */}
-      {typeof window !== 'undefined' && 
+      {isClientComponent && 
         <BrManageContentButton
           content={document}
           documentTemplateQuery="new-banner-document"

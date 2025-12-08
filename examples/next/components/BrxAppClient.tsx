@@ -49,7 +49,7 @@ const BrxAppClient = ({configuration, page}: Props) => {
               </Link>
               <div className="collapse navbar-collapse">
                 <BrComponent path="menu" page={contextPage} mapping={pageMapping} component={component}>
-                  {({ page: menuPage, mapping: menuMapping }) => <Menu page={menuPage} mapping={menuMapping} />}
+                  {({ page: menuPage, mapping: menuMapping, isClientComponent }) => <Menu page={menuPage} mapping={menuMapping} isClientComponent={isClientComponent} />}
                 </BrComponent>
               </div>
             </div>

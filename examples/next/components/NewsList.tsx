@@ -22,15 +22,16 @@ import React, {JSX} from 'react';
 interface NewsListItemProps {
   item: Document;
   page: Page;
+  isClientComponent?: boolean;
 }
 
-export function NewsListItem({ item, page }: NewsListItemProps): JSX.Element {
+export function NewsListItem({ item, page, isClientComponent }: NewsListItemProps): JSX.Element {
   const { author, date, introduction, title } = item.getData<DocumentData>();
 
   return (
     <div className="card mb-3">
       {/* buttons should only be rendered on the client side */}
-      {typeof window !== 'undefined' && <BrManageContentButton content={item} page={page} />}
+      {isClientComponent && <BrManageContentButton content={item} page={page} />}
       <div className="card-body">
         {title && (
           <h2 className="card-title">
@@ -85,7 +86,7 @@ export function NewsListPagination({ page, ...props }: NewsListPaginationProps):
   );
 }
 
-export function NewsList({ component, page }: BrProps): JSX.Element | null {
+export function NewsList({ component, page, isClientComponent }: BrProps): JSX.Element | null {
   const pageable = component?.getModels<PageableModels>().pageable;
 
   if (!pageable) {
@@ -95,10 +96,10 @@ export function NewsList({ component, page }: BrProps): JSX.Element | null {
   return (
     <div>
       {pageable.items.map(
-        (reference, key) => <NewsListItem key={key} item={page.getContent<Document>(reference)!} page={page} />,
+        (reference, key) => <NewsListItem key={key} item={page.getContent<Document>(reference)!} page={page} isClientComponent={isClientComponent} />,
       )}
       {/* buttons should only be rendered on the client side */}
-      {typeof window !== 'undefined' && page.isPreview() && (
+      {isClientComponent && page.isPreview() && (
         <div className="has-edit-button float-right">
           <BrManageContentButton
             documentTemplateQuery="new-news-document"

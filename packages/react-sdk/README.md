@@ -318,7 +318,7 @@ export default function Banner({ component, page, mapping }: BrProps) {
 
 > [!NOTE] 
 > - You must put `'use client'` at the beginning of your client entry point component (`BrxAppClient` in the above example), to [mark the boundary for client modules](https://react.dev/reference/rsc/use-client).
-> - Normally you don't need to write separate client/server components for your mapped components (`Banner` in the example above). Because your entry point component has marked the boundary.
+> - Normally you don't need to write separate client/server components for your mapped components (`Banner` in the example above). Because your entry point component has marked the boundary. For your convenience, you can use the new boolean property `isClientComponent` from `BrProps` interface to check whether your component is rendered as client or server component.
 > - If you want to use Manage Content/Menu buttons in your mapped components, make sure they will only be rendered when the components are client-rendered. See [Buttons](#buttons) section below.
 > - Check the sample project under `examples/next` for a reference implementation.
 
@@ -402,8 +402,18 @@ component mapping.
 ```jsx
 return (
   <BrComponent path="menu" page={page} mapping={mapping} component={component}>
-    <Menu page={page} mapping={mapping} />
+    <Menu page={page} mapping={mapping} isClientComponent />
   </BrComponent>
+);
+```
+
+Or, if you are using server components:
+
+```jsx
+return (
+  <BrComponentServer path="menu" page={page} mapping={mapping} component={component}>
+    <Menu page={page} mapping={mapping} isClientComponent={false} />
+  </BrComponentServer>
 );
 ```
 
@@ -539,7 +549,7 @@ export default function News({ component, page, mapping }: BrProps) {
 }
 ```
 
-- If your components can be rendered as both server/client components, make sure your Manage Content/Menu buttons are only rendered in client components. You can detect this by checking if `window` object is undefined. For example:
+- If your components can be rendered as both server/client components, make sure your Manage Content/Menu buttons are only rendered in client components. You can detect this by checking the `isClientComponent` property. For example:
 
 ```tsx
 import React from "react";
@@ -550,7 +560,7 @@ interface BannerModels {
   document: Reference;
 }
 
-export default function Banner({ component, page, mapping }: BrProps) {
+export default function Banner({ component, page, mapping, isClientComponent }: BrProps) {
   const { document: documentRef } = component.getModels<BannerModels>();
   const document = documentRef && page.getContent<Document>(documentRef);
 
@@ -558,7 +568,7 @@ export default function Banner({ component, page, mapping }: BrProps) {
     <div className={page.isPreview() ? "has-edit-button" : ""}>
       {/* ... */}
 
-      {typeof window !== 'undefined' &&
+      {isClientComponent &&
         <BrManageContentButton
           content={document}
           documentTemplateQuery="new-banner-document"
@@ -683,7 +693,7 @@ received render function.
 | `configuration` |  _yes_   | The [configuration](#configuration) of the SPA SDK.                                                                                          |
 | `mapping`       |  _yes_   | The brXM and React components [mapping](#mapping).                                                                                           |
 | `page`          |   _no_   | Preinitialized page instance or prefetched page model. Mostly that should be used to transfer state from the server-side to the client-side. |
-| `children`      |   _no_   | Render function that receives `{ page, mapping, component }` parameters, or regular React children.                                         |
+| `children`      |   _no_   | Render function that receives `{ page, mapping, component, isClientComponent }` parameters, or regular React children.                                         |
 
 ### BrComponent/BrComponentServer
 
@@ -698,7 +708,7 @@ Otherwise, it will try to render all children components recursively.
 | `page`      |  _yes_   | The current page instance from the Page Model API.                                                                                                                                                     |
 | `mapping`   |  _yes_   | The component mapping object for dynamic component resolution.                                                                                                                                          |
 | `component` |   _no_   | The parent component context. Required when used inside other components.                                                                                                                               |
-| `children`  |   _no_   | Render function that receives `{ page, mapping, component }` parameters, or regular React children.                                                                                                    |
+| `children`  |   _no_   | Render function that receives `{ page, mapping, component, isClientComponent }` parameters, or regular React children.                                                                                                    |
 
 ### BrManageContentButton
 
@@ -744,5 +754,6 @@ interface BrProps<T extends Component = Component> {
   component?: T;      // The brXM component instance
   page: Page;         // The current page (required)
   mapping: BrMapping; // Component mapping object (required)
+  isClientComponent?: boolean // Whether the component is rendered as a client component
 }
 ```

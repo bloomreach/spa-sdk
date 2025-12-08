@@ -20,28 +20,14 @@ import { BrMeta } from '../meta';
 import { BrNodeContainer } from './BrNodeContainer';
 import { BrNodeContainerItem } from './BrNodeContainerItem';
 import { BrNodeComponent } from './BrNodeComponent';
-import { BrMapping } from './BrProps';
+import type { BrProps } from './BrProps';
 
-export interface BrNodeProps extends PropsWithChildren {
+export interface BrNodeProps extends PropsWithChildren<BrProps<Component>> {
   /**
    * The brXM component instance containing component-specific data,
    * configuration, and metadata from the Bloomreach Experience Manager.
    */
   component: Component;
-
-  /**
-   * The current page instance from the Bloomreach Page Model API.
-   * Contains all page-level data, metadata, and configuration needed
-   * for rendering and preview mode integration.
-   */
-  page: Page;
-
-  /**
-   * Component mapping object that defines how brXM component types
-   * are mapped to React components. Used for dynamic component resolution
-   * during page rendering.
-   */
-  mapping: BrMapping;
 }
 
 /**

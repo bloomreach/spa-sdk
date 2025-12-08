@@ -44,5 +44,5 @@ export function BrNodeContainerItemServer(
     );
   };
 
-  return React.createElement(getMapping(), props);
+  return React.createElement(getMapping(), { ...props, isClientComponent: false });
 }
