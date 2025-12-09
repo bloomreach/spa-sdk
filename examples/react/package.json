@@ -7,8 +7,8 @@
     "@bloomreach/react-sdk": "27.0.0-beta.2",
     "@bloomreach/spa-sdk": "27.0.0-beta.2",
     "axios": "1.8.4",
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
+    "react": "19.1.2",
+    "react-dom": "19.1.2",
     "react-router-dom": "7.5.0",
     "sanitize-html": "2.14.0"
   },
