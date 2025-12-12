@@ -127,10 +127,10 @@ importers:
         specifier: 20.1.0
         version: 20.1.0(@angular/common@20.1.0)(@angular/core@20.1.0)(@angular/platform-server@20.1.0)(@angular/router@20.1.0)
       '@bloomreach/ng-sdk':
-        specifier: 27.0.0-beta.2
+        specifier: 27.0.0-beta.3
         version: link:../../packages/ng-sdk
       '@bloomreach/spa-sdk':
-        specifier: 27.0.0-beta.2
+        specifier: 27.0.0-beta.3
         version: link:../../packages/spa-sdk
       dotenv:
         specifier: 16.4.5
@@ -203,10 +203,10 @@ importers:
   examples/next:
     dependencies:
       '@bloomreach/react-sdk':
-        specifier: 27.0.0-beta.2
+        specifier: 27.0.0-beta.3
         version: link:../../packages/react-sdk
       '@bloomreach/spa-sdk':
-        specifier: 27.0.0-beta.2
+        specifier: 27.0.0-beta.3
         version: link:../../packages/spa-sdk
       axios:
         specifier: 1.8.4
@@ -215,20 +215,20 @@ importers:
         specifier: 1.0.2
         version: 1.0.2
       next:
-        specifier: 15.3.6
-        version: 15.3.6(@opentelemetry/api@1.8.0)(react-dom@19.1.2)(react@19.1.2)
+        specifier: 15.3.8
+        version: 15.3.8(@opentelemetry/api@1.8.0)(react-dom@19.1.4)(react@19.1.4)
       react:
-        specifier: 19.1.2
-        version: 19.1.2
+        specifier: 19.1.4
+        version: 19.1.4
       react-dom:
-        specifier: 19.1.2
-        version: 19.1.2(react@19.1.2)
+        specifier: 19.1.4
+        version: 19.1.4(react@19.1.4)
       sanitize-html:
         specifier: 2.15.0
         version: 2.15.0
       swr:
         specifier: 2.2.5
-        version: 2.2.5(react@19.1.2)
+        version: 2.2.5(react@19.1.4)
     devDependencies:
       '@types/cookie':
         specifier: 1.0.0
@@ -258,10 +258,10 @@ importers:
   examples/nuxt:
     dependencies:
       '@bloomreach/spa-sdk':
-        specifier: 27.0.0-beta.2
+        specifier: 27.0.0-beta.3
         version: link:../../packages/spa-sdk
       '@bloomreach/vue-sdk':
-        specifier: 27.0.0-beta.2
+        specifier: 27.0.0-beta.3
         version: link:../../packages/vue-sdk
       axios:
         specifier: 1.7.9
@@ -286,23 +286,23 @@ importers:
   examples/react:
     dependencies:
       '@bloomreach/react-sdk':
-        specifier: 27.0.0-beta.2
+        specifier: 27.0.0-beta.3
         version: link:../../packages/react-sdk
       '@bloomreach/spa-sdk':
-        specifier: 27.0.0-beta.2
+        specifier: 27.0.0-beta.3
         version: link:../../packages/spa-sdk
       axios:
         specifier: 1.8.4
         version: 1.8.4
       react:
-        specifier: 19.1.2
-        version: 19.1.2
+        specifier: 19.1.4
+        version: 19.1.4
       react-dom:
-        specifier: 19.1.2
-        version: 19.1.2(react@19.1.2)
+        specifier: 19.1.4
+        version: 19.1.4(react@19.1.4)
       react-router-dom:
         specifier: 7.5.0
-        version: 7.5.0(react-dom@19.1.2)(react@19.1.2)
+        version: 7.5.0(react-dom@19.1.4)(react@19.1.4)
       sanitize-html:
         specifier: 2.14.0
         version: 2.14.0
@@ -336,7 +336,7 @@ importers:
         version: 3.5.5(@typescript-eslint/parser@5.62.0)(eslint-plugin-import@2.31.0)(eslint@7.32.0)
       react-scripts:
         specifier: 5.0.1
-        version: 5.0.1(@babel/plugin-syntax-flow@7.26.0)(@babel/plugin-transform-react-jsx@7.25.9)(eslint-import-resolver-typescript@3.5.5)(eslint@7.32.0)(react@19.1.2)(typescript@4.1.6)
+        version: 5.0.1(@babel/plugin-syntax-flow@7.26.0)(@babel/plugin-transform-react-jsx@7.25.9)(eslint-import-resolver-typescript@3.5.5)(eslint@7.32.0)(react@19.1.4)(typescript@4.1.6)
       serve:
         specifier: 14.2.0
         version: 14.2.0
@@ -347,10 +347,10 @@ importers:
   examples/vue:
     dependencies:
       '@bloomreach/spa-sdk':
-        specifier: 27.0.0-beta.2
+        specifier: 27.0.0-beta.3
         version: link:../../packages/spa-sdk
       '@bloomreach/vue-sdk':
-        specifier: 27.0.0-beta.2
+        specifier: 27.0.0-beta.3
         version: link:../../packages/vue-sdk
       axios:
         specifier: 1.7.9
@@ -399,7 +399,7 @@ importers:
   packages/ng-sdk:
     dependencies:
       '@bloomreach/spa-sdk':
-        specifier: 27.0.0-beta.2
+        specifier: 27.0.0-beta.3
         version: link:../spa-sdk
       tslib:
         specifier: ^2.6.2
@@ -499,7 +499,7 @@ importers:
   packages/react-sdk:
     dependencies:
       '@bloomreach/spa-sdk':
-        specifier: 27.0.0-beta.2
+        specifier: 27.0.0-beta.3
         version: link:../spa-sdk
     devDependencies:
       '@babel/core':
@@ -525,7 +525,7 @@ importers:
         version: 6.6.3
       '@testing-library/react':
         specifier: 16.2.0
-        version: 16.2.0(@testing-library/dom@10.4.0)(@types/react-dom@19.1.2)(@types/react@19.1.2)(react-dom@19.1.2)(react@19.1.2)
+        version: 16.2.0(@testing-library/dom@10.4.0)(@types/react-dom@19.1.2)(@types/react@19.1.2)(react-dom@19.1.4)(react@19.1.4)
       '@types/jest':
         specifier: 28.1.8
         version: 28.1.8
@@ -560,8 +560,8 @@ importers:
         specifier: 15.8.1
         version: 15.8.1
       react:
-        specifier: 19.1.2
-        version: 19.1.2
+        specifier: 19.1.4
+        version: 19.1.4
       rollup:
         specifier: 2.79.2
         version: 2.79.2
@@ -693,7 +693,7 @@ importers:
   packages/vue-sdk:
     dependencies:
       '@bloomreach/spa-sdk':
-        specifier: 27.0.0-beta.2
+        specifier: 27.0.0-beta.3
         version: link:../spa-sdk
     devDependencies:
       '@types/jsdom':
@@ -9760,8 +9760,8 @@ packages:
       urlpattern-polyfill: 8.0.2
     dev: false
 
-  /@next/env@15.3.6:
-    resolution: {integrity: sha512-/cK+QPcfRbDZxmI/uckT4lu9pHCfRIPBLqy88MhE+7Vg5hKrEYc333Ae76dn/cw2FBP2bR/GoK/4DU+U7by/Nw==}
+  /@next/env@15.3.8:
+    resolution: {integrity: sha512-SAfHg0g91MQVMPioeFeDjE+8UPF3j3BvHjs8ZKJAUz1BG7eMPvfCKOAgNWJ6s1MLNeP6O2InKQRTNblxPWuq+Q==}
     dev: false
 
   /@next/eslint-plugin-next@15.3.6:
@@ -11884,7 +11884,7 @@ packages:
       redent: 3.0.0
     dev: true
 
-  /@testing-library/react@16.2.0(@testing-library/dom@10.4.0)(@types/react-dom@19.1.2)(@types/react@19.1.2)(react-dom@19.1.2)(react@19.1.2):
+  /@testing-library/react@16.2.0(@testing-library/dom@10.4.0)(@types/react-dom@19.1.2)(@types/react@19.1.2)(react-dom@19.1.4)(react@19.1.4):
     resolution: {integrity: sha512-2cSskAvA1QNtKc8Y9VJQRv0tm3hLVgxRGDB+KYhIaPQJ1I+RHbhIXcM+zClKXzMes/wshsMVzf4B9vS4IZpqDQ==}
     engines: {node: '>=18'}
     peerDependencies:
@@ -11903,8 +11903,8 @@ packages:
       '@testing-library/dom': 10.4.0
       '@types/react': 19.1.2
       '@types/react-dom': 19.1.2(@types/react@19.1.2)
-      react: 19.1.2
-      react-dom: 19.1.2(react@19.1.2)
+      react: 19.1.4
+      react-dom: 19.1.4(react@19.1.4)
     dev: true
 
   /@tootallnate/once@1.1.2:
@@ -14915,7 +14915,7 @@ packages:
   /axios@1.7.9:
     resolution: {integrity: sha512-LhLcE7Hbiryz8oMDdDptSrWowmB4Bl6RCt6sIJKpRB4XtVf0iEgewX3au/pJqm+Py1kCASkb/FFKjxQaLtxJvw==}
     dependencies:
-      follow-redirects: 1.15.6(debug@4.4.1)
+      follow-redirects: 1.15.6(debug@4.3.4)
       form-data: 4.0.0
       proxy-from-env: 1.1.0
     transitivePeerDependencies:
@@ -14925,7 +14925,7 @@ packages:
   /axios@1.8.4:
     resolution: {integrity: sha512-eBSYY4Y68NNlHbHBMdeDmKNtDgXWhQsJcGqzO3iLUM0GraQFSS9cVgPX5I9b3lbdFKyYoAEGAZF1DwhTaljNAw==}
     dependencies:
-      follow-redirects: 1.15.6(debug@4.4.1)
+      follow-redirects: 1.15.6(debug@4.3.4)
       form-data: 4.0.0
       proxy-from-env: 1.1.0
     transitivePeerDependencies:
@@ -17340,7 +17340,6 @@ packages:
         optional: true
     dependencies:
       ms: 2.1.2
-    dev: true
 
   /debug@4.3.5:
     resolution: {integrity: sha512-pt0bNEmneDIvdL1Xsd9oDQ/wrQRkXDT4AUWlNZNPKvW5x/jyO9VFXkJUP07vQ2upmw5PlaITaPKc31jK13V+jg==}
@@ -18615,14 +18614,14 @@ packages:
       eslint: '*'
       eslint-plugin-import: '*'
     dependencies:
-      debug: 4.4.1(supports-color@9.4.0)
-      enhanced-resolve: 5.17.1
+      debug: 4.3.5
+      enhanced-resolve: 5.16.1
       eslint: 8.57.1
-      eslint-module-utils: 2.12.0(@typescript-eslint/parser@8.36.0)(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.5.5)(eslint@8.57.1)
+      eslint-module-utils: 2.8.1(@typescript-eslint/parser@8.36.0)(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.5.5)(eslint@8.57.1)
       eslint-plugin-import: 2.31.0(@typescript-eslint/parser@8.36.0)(eslint-import-resolver-typescript@3.5.5)(eslint@8.57.1)
       get-tsconfig: 4.7.5
       globby: 13.2.2
-      is-core-module: 2.16.0
+      is-core-module: 2.13.1
       is-glob: 4.0.3
       synckit: 0.8.8
     transitivePeerDependencies:
@@ -18865,6 +18864,36 @@ packages:
       debug: 3.2.7(supports-color@5.5.0)
       eslint: 7.32.0
       eslint-import-resolver-typescript: 3.5.5(@typescript-eslint/parser@5.62.0)(eslint-plugin-import@2.31.0)(eslint@7.32.0)
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
+  /eslint-module-utils@2.8.1(@typescript-eslint/parser@8.36.0)(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.5.5)(eslint@8.57.1):
+    resolution: {integrity: sha512-rXDXR3h7cs7dy9RNpUlQf80nX31XWJEyGq1tRMo+6GsO5VmTe4UTwtmonAD4ZkAsrfMVDA2wlGJ3790Ys+D49Q==}
+    engines: {node: '>=4'}
+    peerDependencies:
+      '@typescript-eslint/parser': '*'
+      eslint: '*'
+      eslint-import-resolver-node: '*'
+      eslint-import-resolver-typescript: '*'
+      eslint-import-resolver-webpack: '*'
+    peerDependenciesMeta:
+      '@typescript-eslint/parser':
+        optional: true
+      eslint:
+        optional: true
+      eslint-import-resolver-node:
+        optional: true
+      eslint-import-resolver-typescript:
+        optional: true
+      eslint-import-resolver-webpack:
+        optional: true
+    dependencies:
+      '@typescript-eslint/parser': 8.36.0(eslint@8.57.1)(typescript@5.7.3)
+      debug: 3.2.7(supports-color@5.5.0)
+      eslint: 8.57.1
+      eslint-import-resolver-node: 0.3.9
+      eslint-import-resolver-typescript: 3.5.5(@typescript-eslint/parser@8.36.0)(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.31.0)(eslint@8.57.1)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -20303,7 +20332,6 @@ packages:
         optional: true
     dependencies:
       debug: 4.3.4
-    dev: true
 
   /follow-redirects@1.15.6(debug@4.4.1):
     resolution: {integrity: sha512-wWN62YITEaOpSK584EZXJafH1AGpO8RVgElfkuXbTOrPX4fIfOyEpW/CsiNd8JdYrAoOvafRTOEnvsO++qCqFA==}
@@ -20315,6 +20343,7 @@ packages:
         optional: true
     dependencies:
       debug: 4.4.1(supports-color@9.4.0)
+    dev: true
 
   /fontkit@2.0.4:
     resolution: {integrity: sha512-syetQadaUEDNdxdugga9CpEYVaQIxOwk7GlwZWWZ19//qW4zE5bknOKeMBDYAASwnpaSHKJITRLMF9m1fp3s6g==}
@@ -21509,7 +21538,7 @@ packages:
     dependencies:
       '@types/express': 4.17.21
       '@types/http-proxy': 1.17.15
-      http-proxy: 1.18.1(debug@4.4.1)
+      http-proxy: 1.18.1(debug@4.3.4)
       is-glob: 4.0.3
       is-plain-obj: 3.0.0
       micromatch: 4.0.8
@@ -25669,7 +25698,6 @@ packages:
 
   /ms@2.1.2:
     resolution: {integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==}
-    dev: true
 
   /ms@2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
@@ -25813,8 +25841,8 @@ packages:
       - supports-color
     dev: true
 
-  /next@15.3.6(@opentelemetry/api@1.8.0)(react-dom@19.1.2)(react@19.1.2):
-    resolution: {integrity: sha512-oI6D1zbbsh6JzzZFDCSHnnx6Qpvd1fSkVJu/5d8uluqnxzuoqtodVZjYvNovooznUq8udSAiKp7MbwlfZ8Gm6w==}
+  /next@15.3.8(@opentelemetry/api@1.8.0)(react-dom@19.1.4)(react@19.1.4):
+    resolution: {integrity: sha512-L+4c5Hlr84fuaNADZbB9+ceRX9/CzwxJ+obXIGHupboB/Q1OLbSUapFs4bO8hnS/E6zV/JDX7sG1QpKVR2bguA==}
     engines: {node: ^18.18.0 || ^19.8.0 || >= 20.0.0}
     hasBin: true
     peerDependencies:
@@ -25834,16 +25862,16 @@ packages:
       sass:
         optional: true
     dependencies:
-      '@next/env': 15.3.6
+      '@next/env': 15.3.8
       '@opentelemetry/api': 1.8.0
       '@swc/counter': 0.1.3
       '@swc/helpers': 0.5.15
       busboy: 1.6.0
       caniuse-lite: 1.0.30001727
       postcss: 8.4.31
-      react: 19.1.2
-      react-dom: 19.1.2(react@19.1.2)
-      styled-jsx: 5.1.6(react@19.1.2)
+      react: 19.1.4
+      react-dom: 19.1.4(react@19.1.4)
+      styled-jsx: 5.1.6(react@19.1.4)
     optionalDependencies:
       '@next/swc-darwin-arm64': 15.3.5
       '@next/swc-darwin-x64': 15.3.5
@@ -28963,12 +28991,12 @@ packages:
       react: 19.1.0
       scheduler: 0.26.0
 
-  /react-dom@19.1.2(react@19.1.2):
-    resolution: {integrity: sha512-dEoydsCp50i7kS1xHOmPXq4zQYoGWedUsvqv9H6zdif2r7yLHygyfP9qou71TulRN0d6ng9EbRVsQhSqfUc19g==}
+  /react-dom@19.1.4(react@19.1.4):
+    resolution: {integrity: sha512-s2868ab/xo2SI6H4106A7aFI8Mrqa4xC6HZT/pBzYyQ3cBLqa88hu47xYD8xf+uECleN698Awn7RCWlkTiKnqQ==}
     peerDependencies:
-      react: ^19.1.2
+      react: ^19.1.4
     dependencies:
-      react: 19.1.2
+      react: 19.1.4
       scheduler: 0.26.0
 
   /react-error-overlay@6.0.11:
@@ -28997,19 +29025,19 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /react-router-dom@7.5.0(react-dom@19.1.2)(react@19.1.2):
+  /react-router-dom@7.5.0(react-dom@19.1.4)(react@19.1.4):
     resolution: {integrity: sha512-fFhGFCULy4vIseTtH5PNcY/VvDJK5gvOWcwJVHQp8JQcWVr85ENhJ3UpuF/zP1tQOIFYNRJHzXtyhU1Bdgw0RA==}
     engines: {node: '>=20.0.0'}
     peerDependencies:
       react: '>=18'
       react-dom: '>=18'
     dependencies:
-      react: 19.1.2
-      react-dom: 19.1.2(react@19.1.2)
-      react-router: 7.5.0(react-dom@19.1.2)(react@19.1.2)
+      react: 19.1.4
+      react-dom: 19.1.4(react@19.1.4)
+      react-router: 7.5.0(react-dom@19.1.4)(react@19.1.4)
     dev: false
 
-  /react-router@7.5.0(react-dom@19.1.2)(react@19.1.2):
+  /react-router@7.5.0(react-dom@19.1.4)(react@19.1.4):
     resolution: {integrity: sha512-estOHrRlDMKdlQa6Mj32gIks4J+AxNsYoE0DbTTxiMy2mPzZuWSDU+N85/r1IlNR7kGfznF3VCUlvc5IUO+B9g==}
     engines: {node: '>=20.0.0'}
     peerDependencies:
@@ -29021,13 +29049,13 @@ packages:
     dependencies:
       '@types/cookie': 0.6.0
       cookie: 1.0.2
-      react: 19.1.2
-      react-dom: 19.1.2(react@19.1.2)
+      react: 19.1.4
+      react-dom: 19.1.4(react@19.1.4)
       set-cookie-parser: 2.7.1
       turbo-stream: 2.4.0
     dev: false
 
-  /react-scripts@5.0.1(@babel/plugin-syntax-flow@7.26.0)(@babel/plugin-transform-react-jsx@7.25.9)(eslint-import-resolver-typescript@3.5.5)(eslint@7.32.0)(react@19.1.2)(typescript@4.1.6):
+  /react-scripts@5.0.1(@babel/plugin-syntax-flow@7.26.0)(@babel/plugin-transform-react-jsx@7.25.9)(eslint-import-resolver-typescript@3.5.5)(eslint@7.32.0)(react@19.1.4)(typescript@4.1.6):
     resolution: {integrity: sha512-8VAmEm/ZAwQzJ+GOMLbBsTdDKOpuZh7RPs0UymvBR2vRk4iZWCskjbFnxqjrzoIvlNNRZ3QJFx6/qDSi6zSnaQ==}
     engines: {node: '>=14.0.0'}
     hasBin: true
@@ -29071,7 +29099,7 @@ packages:
       postcss-normalize: 10.0.1(browserslist@4.23.0)(postcss@8.5.3)
       postcss-preset-env: 7.8.3(postcss@8.5.3)
       prompts: 2.4.2
-      react: 19.1.2
+      react: 19.1.4
       react-app-polyfill: 3.0.0
       react-dev-utils: 12.0.1(eslint@7.32.0)(typescript@4.1.6)(webpack@5.91.0)
       react-refresh: 0.11.0
@@ -29129,8 +29157,8 @@ packages:
     resolution: {integrity: sha512-FS+XFBNvn3GTAWq26joslQgWNoFu08F4kl0J4CgdNKADkdSGXQyTCnKteIAJy96Br6YbpEU1LSzV5dYtjMkMDg==}
     engines: {node: '>=0.10.0'}
 
-  /react@19.1.2:
-    resolution: {integrity: sha512-MdWVitvLbQULD+4DP8GYjZUrepGW7d+GQkNVqJEzNxE+e9WIa4egVFE/RDfVb1u9u/Jw7dNMmPB4IqxzbFYJ0w==}
+  /react@19.1.4:
+    resolution: {integrity: sha512-DHINL3PAmPUiK1uszfbKiXqfE03eszdt5BpVSuEAHb5nfmNPwnsy7g39h2t8aXFc/Bv99GH81s+j8dobtD+jOw==}
     engines: {node: '>=0.10.0'}
 
   /read-cache@1.0.0:
@@ -31353,7 +31381,7 @@ packages:
       inline-style-parser: 0.2.4
     dev: true
 
-  /styled-jsx@5.1.6(react@19.1.2):
+  /styled-jsx@5.1.6(react@19.1.4):
     resolution: {integrity: sha512-qSVyDTeMotdvQYoHWLNGwRFJHC+i+ZvdBRYosOFgC+Wg1vx4frN2/RG/NA7SYqqvKNLf39P2LSRA2pu6n0XYZA==}
     engines: {node: '>= 12.0.0'}
     peerDependencies:
@@ -31367,7 +31395,7 @@ packages:
         optional: true
     dependencies:
       client-only: 0.0.1
-      react: 19.1.2
+      react: 19.1.4
     dev: false
 
   /stylehacks@5.1.1(postcss@8.5.3):
@@ -31521,14 +31549,14 @@ packages:
       picocolors: 1.1.1
     dev: false
 
-  /swr@2.2.5(react@19.1.2):
+  /swr@2.2.5(react@19.1.4):
     resolution: {integrity: sha512-QtxqyclFeAsxEUeZIYmsaQ0UjimSq1RZ9Un7I68/0ClKK/U3LoyQunwkQfJZr2fc22DfIXLNDc2wFyTEikCUpg==}
     peerDependencies:
       react: ^16.11.0 || ^17.0.0 || ^18.0.0
     dependencies:
       client-only: 0.0.1
-      react: 19.1.2
-      use-sync-external-store: 1.2.2(react@19.1.2)
+      react: 19.1.4
+      use-sync-external-store: 1.2.2(react@19.1.4)
     dev: false
 
   /symbol-tree@3.2.4:
@@ -33108,12 +33136,12 @@ packages:
     resolution: {integrity: sha512-Qp95D4TPJl1kC9SKigDcqgyM2VDVO4RiJc2d4qe5GrYm+zbIQCWWKAFaJNQ4BhdFeDGwBmAxqJBwWSJDb9T3BQ==}
     dev: false
 
-  /use-sync-external-store@1.2.2(react@19.1.2):
+  /use-sync-external-store@1.2.2(react@19.1.4):
     resolution: {integrity: sha512-PElTlVMwpblvbNqQ82d2n6RjStvdSoNe9FG28kNfz3WiXilJm4DdNkEzRhCZuIDwY8U08WVihhGR5iRqAwfDiw==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      react: 19.1.2
+      react: 19.1.4
     dev: false
 
   /util-deprecate@1.0.2:
