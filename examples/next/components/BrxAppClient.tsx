@@ -1,7 +1,7 @@
-'use client'
+'use client';
 
 /*
- * Copyright 2024-2025 Bloomreach
+ * Copyright 2025 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,21 +17,23 @@
  */
 
 import axios from 'axios';
-import {BrComponent, BrPage} from '@bloomreach/react-sdk';
+import {BrComponent, BrPage} from '@bloomreach/react-sdk/client';
 import Link from 'next/link';
 import {Menu} from './Menu';
 import {Banner} from './Banner';
 import {Content} from './Content';
 import {NewsList} from './NewsList';
-import {Configuration, Page} from '@bloomreach/spa-sdk';
+import {Configuration, PageModel} from '@bloomreach/spa-sdk';
 import {useRelevance} from '../hooks/useRelevance';
 
 interface Props {
   configuration: Omit<Configuration, 'httpClient'>;
-  page: Page;
+  page: PageModel;
 }
 
-const BrxApp = ({configuration, page}: Props) => {
+const BrxAppClient = ({configuration, page}: Props) => {
+  console.log('Using BrxAppClient');
+  
   const mapping = { Banner, Content, 'News List': NewsList, 'Simple Content': Content };
 
   useRelevance(configuration, page);
@@ -47,7 +49,7 @@ const BrxApp = ({configuration, page}: Props) => {
               </Link>
               <div className="collapse navbar-collapse">
                 <BrComponent path="menu" page={contextPage} mapping={pageMapping} component={component}>
-                  {({ page: menuPage, mapping: menuMapping }) => <Menu page={menuPage} mapping={menuMapping} />}
+                  {({ page: menuPage, mapping: menuMapping, isClientComponent }) => <Menu page={menuPage} mapping={menuMapping} isClientComponent={isClientComponent} />}
                 </BrComponent>
               </div>
             </div>
@@ -69,4 +71,4 @@ const BrxApp = ({configuration, page}: Props) => {
   </BrPage>
 }
 
-export default BrxApp;
+export default BrxAppClient;

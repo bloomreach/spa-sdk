@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BrNodeContainerServer Container type mapping should render a mapped container 1`] = `
+<DocumentFragment>
+  <div>
+    <a />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`BrNodeContainerServer Container type mapping should render box container 1`] = `
+<DocumentFragment>
+  <div>
+    <div>
+      <a />
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`BrNodeContainerServer Container type mapping should render box container on an unknown type 1`] = `
+<DocumentFragment>
+  <div />
+</DocumentFragment>
+`;
+
+exports[`BrNodeContainerServer Container type mapping should render inline container 1`] = `
+<DocumentFragment>
+  <div>
+    <span>
+      <a />
+    </span>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`BrNodeContainerServer Container type mapping should render no markup container 1`] = `
+<DocumentFragment>
+  <a />
+</DocumentFragment>
+`;
+
+exports[`BrNodeContainerServer Container type mapping should render ordered list container 1`] = `
+<DocumentFragment>
+  <ol>
+    <li>
+      <a />
+    </li>
+  </ol>
+</DocumentFragment>
+`;
+
+exports[`BrNodeContainerServer Container type mapping should render unordered list container 1`] = `
+<DocumentFragment>
+  <ul>
+    <li>
+      <a />
+    </li>
+  </ul>
+</DocumentFragment>
+`;

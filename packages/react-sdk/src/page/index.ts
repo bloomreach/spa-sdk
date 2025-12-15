@@ -15,3 +15,4 @@
  */
 
 export * from './BrPage';
+export * from './BrPageServer';

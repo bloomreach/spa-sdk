@@ -14,26 +14,17 @@
  * limitations under the License.
  */
 
-import React, { PropsWithChildren } from 'react';
-import { Component, isContainer, isContainerItem, Page } from '@bloomreach/spa-sdk';
-import { BrMeta } from '../meta';
-import { BrNodeContainer } from './BrNodeContainer';
-import { BrNodeContainerItem } from './BrNodeContainerItem';
-import { BrNodeComponent } from './BrNodeComponent';
-import type { BrProps } from './BrProps';
-
-export interface BrNodeProps extends PropsWithChildren<BrProps<Component>> {
-  /**
-   * The brXM component instance containing component-specific data,
-   * configuration, and metadata from the Bloomreach Experience Manager.
-   */
-  component: Component;
-}
+import React from 'react';
+import { isContainer, isContainerItem } from '@bloomreach/spa-sdk';
+import { BrNodeComponentServer } from './BrNodeComponentServer';
+import { BrNodeContainerItemServer } from './BrNodeContainerItemServer';
+import { BrNodeContainerServer } from './BrNodeContainerServer';
+import type { BrNodeProps } from './BrNode';
 
 /**
  * Core node component for rendering brXM components with prop drilling.
  */
-export function BrNode({
+export function BrNodeServer({
   children,
   component,
   page,
@@ -41,9 +32,9 @@ export function BrNode({
 }: BrNodeProps): React.ReactElement {
   if (React.Children.count(children)) {
     return (
-      <BrMeta meta={component.getMeta()}>
+      <>
         {children}
-      </BrMeta>
+      </>
     );
   }
 
@@ -56,28 +47,28 @@ export function BrNode({
   const childrenList = component
     .getChildren()
     .map((child) => (
-      <BrNode key={child.getId()} component={child} {...props} />
+      <BrNodeServer key={child.getId()} component={child} {...props} />
     ));
 
   if (isContainer(component)) {
     return (
-      <BrNodeContainer component={component} {...props}>
+      <BrNodeContainerServer component={component} {...props}>
         {childrenList}
-      </BrNodeContainer>
+      </BrNodeContainerServer>
     );
   }
 
   if (isContainerItem(component)) {
     return (
-      <BrNodeContainerItem component={component} {...props}>
+      <BrNodeContainerItemServer component={component} {...props}>
         {childrenList}
-      </BrNodeContainerItem>
+      </BrNodeContainerItemServer>
     );
   }
 
   return (
-    <BrNodeComponent component={component} {...props}>
+    <BrNodeComponentServer component={component} {...props}>
       {childrenList}
-    </BrNodeComponent>
+    </BrNodeComponentServer>
   );
 }

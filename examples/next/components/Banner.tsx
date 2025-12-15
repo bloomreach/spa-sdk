@@ -20,7 +20,7 @@ import Link from 'next/link';
 import React, {JSX} from 'react';
 import {sanitize} from '../utils/sanitize';
 
-export function Banner({ component, page }: BrProps): JSX.Element | null {
+export function Banner({ component, page, isClientComponent }: BrProps): JSX.Element | null {
   const documentRef = component?.getModels().document;
   const document = !!documentRef && page?.getContent(documentRef);
 
@@ -34,16 +34,19 @@ export function Banner({ component, page }: BrProps): JSX.Element | null {
 
   return (
     <div className={`jumbotron mb-3 ${page.isPreview() ? 'has-edit-button' : ''}`}>
-      <BrManageContentButton
-        content={document}
-        documentTemplateQuery="new-banner-document"
-        folderTemplateQuery="new-banner-folder"
-        parameter="document"
-        root="banners"
-        relative
-        pickerSelectableNodeTypes="best:banner,hap:bannerdocument"
-        page={page}
-      />
+      {/* buttons should only be rendered on the client side */}
+      {isClientComponent && 
+        <BrManageContentButton
+          content={document}
+          documentTemplateQuery="new-banner-document"
+          folderTemplateQuery="new-banner-folder"
+          parameter="document"
+          root="banners"
+          relative
+          pickerSelectableNodeTypes="best:banner,hap:bannerdocument"
+          page={page}
+        />
+      }
       {title && <h1>{title}</h1>}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       {image && <img className="img-fluid" src={image.getOriginal()?.getUrl()} alt={title}/>}

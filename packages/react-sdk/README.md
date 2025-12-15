@@ -139,9 +139,192 @@ export default function App() {
 }
 ```
 
+### React Server Components (RSC) Support
+
+To support component editing in the [Experience Manager](https://xmdocumentation.bloomreach.com/library/end-user-manual/channel-manager/manage-page-components.html), the page and components must be rendered dynamically on the client side using react hooks. Therefore, the default `BrPage` and `BrComponent` are both implemented as client components. However, such restrictions do not apply on the live site, and it's perfectly safe to render your react app using server components. To support such use case, the `BrPageServer` and `BrComponentServer` components from `@bloomreach/react-sdk/server` package are provided as counterparts. 
+
+#### Usage
+
+To use server components in your react app, simply replace all occurrences of `BrPage` and `BrComponent` with `BrPageServer` and `BrComponentServer` respectively. For example:
+
+```jsx
+import React from 'react';
+import axios from 'axios';
+import { BrComponentServer, BrPageServer, BrProps } from '@bloomreach/react-sdk/server';
+
+function Banner({ component, page, mapping }: BrProps) {
+  return <div>Banner: {component.getName()}</div>;
+}
+
+export default function Page() {
+  const configuration = { /* ... */ };
+
+  return (
+    <BrPageServer configuration={configuration} mapping={{ Banner }}>
+      {({ page, mapping, component }) => (
+        <>
+          <header>
+            {page && <Link to={page.getUrl('/')}>Home</Link>}
+            <BrComponentServer path="menu" page={page} mapping={mapping} component={component}>
+              <Menu page={page} mapping={mapping} />
+            </BrComponentServer>
+          </header>
+          <section>
+            <BrComponentServer path="main" page={page} mapping={mapping} component={component} />
+          </section>
+          <BrComponentServer path="footer" page={page} mapping={mapping} component={component}>
+            <footer>
+              <BrComponentServer page={page} mapping={mapping} component={component} />
+            </footer>
+          </BrComponentServer>
+        </>
+      )}
+    </BrPageServer>
+  );
+}
+```
+
+> [!NOTE] 
+> - Server components will not work correctly in Experience Manager (see below for more information).
+> - By its nature, you cannot use server components in NBRMode!
+> - Manage Content/Menu Buttons are not supported in server components. Because they should only be rendered in Experience Manager. 
+> - `BrPageServer` and `BrComponentServer` have the same interfaces and configuration options as `BrPage` and `BrComponent`, respectively.
+
+#### Mixing server and client components
+
+In many cases, you want your react app to work both on the live site (using server components) and in the Experience Manager (using client components). To achieve this, the easiest way is to create two entry points in your app, and detect the environments using [`page.isPreview()`](https://bloomreach.github.io/spa-sdk/interfaces/index.Page.html#isPreview) utility function from the spa-sdk. Following is an example using Next.js:
+
+**page.tsx**
+```tsx
+import axios from 'axios';
+import { initialize } from '@bloomreach/spa-sdk';
+import BrxAppClient from '@/components/BrxAppClient';
+import BrxAppServer from '@/components/BrxAppServer';
+
+export default async function Page() {
+  const configuration = { /* ... */ };
+
+  const page = await initialize({
+    ...configuration,
+    httpClient: axios,
+  });
+
+  const pageModel = page.toJSON();
+  if (configuration.NBRMode || page.isPreview()) {
+    // Props passed to Client Components need to be serializable by React.
+    return (
+      <BrxAppClient configuration={configuration} pageModel={pageModel} />
+    );
+  }
+
+  return (
+    <BrxAppServer configuration={configuration} page={page} />
+  );
+}
+```
+
+**BrxAppClient.tsx**
+```tsx
+'use client';
+
+import React from 'react';
+import axios from 'axios';
+import { Banner } from './Banner';
+import { Configuration, PageModel } from '@bloomreach/spa-sdk';
+import { BrComponent, BrPage, BrProps } from '@bloomreach/react-sdk';
+
+interface Props {
+  configuration: Omit<Configuration, 'httpClient'>;
+  pageModel: PageModel;
+}
+
+export default function BrxAppClient({configuration, pageModel}: Props) {
+  const mapping = { Banner };
+
+  return (
+    <BrPage configuration={{ ...configuration, httpClient: axios }} mapping={mapping} page={pageModel}>
+      {({ page, mapping: pageMapping, component }) => (
+        <>
+          <header>
+            {page && <Link to={page.getUrl('/')}>Home</Link>}
+            <BrComponent path="menu" page={page} mapping={pageMapping} component={component}>
+              <Menu page={page} mapping={pageMapping} />
+            </BrComponent>
+          </header>
+          <section>
+            <BrComponent path="main" page={page} mapping={pageMapping} component={component} />
+          </section>
+          <BrComponent path="footer" page={page} mapping={pageMapping} component={component}>
+            <footer>
+              <BrComponent page={page} mapping={pageMapping} component={component} />
+            </footer>
+          </BrComponent>
+        </>
+      )}
+    </BrPage>
+  );
+}
+```
+
+**BrxAppServer.tsx**
+```tsx
+import React from 'react';
+import axios from 'axios';
+import { Banner } from './Banner';
+import { Configuration, Page } from '@bloomreach/spa-sdk';
+import { BrComponentServer, BrPageServer } from '@bloomreach/react-sdk/server';
+
+interface Props {
+  configuration: Omit<Configuration, 'httpClient'>;
+  page: Page;
+}
+
+export default function BrxAppServer({configuration, page}: Props) {
+  const mapping = { Banner };
+
+  return (
+    <BrPageServer configuration={{ ...configuration, httpClient: axios }} mapping={mapping} page={page}>
+      {({ page: contextPage, mapping: pageMapping, component }) => (
+        <>
+          <header>
+            {contextPage && <Link to={contextPage.getUrl('/')}>Home</Link>}
+            <BrComponentServer path="menu" page={contextPage} mapping={pageMapping} component={component}>
+              <Menu page={contextPage} mapping={pageMapping} />
+            </BrComponentServer>
+          </header>
+          <section>
+            <BrComponentServer path="main" page={contextPage} mapping={pageMapping} component={component} />
+          </section>
+          <BrComponentServer path="footer" page={contextPage} mapping={pageMapping} component={component}>
+            <footer>
+              <BrComponentServer page={contextPage} mapping={pageMapping} component={component} />
+            </footer>
+          </BrComponentServer>
+        </>
+      )}
+    </BrPageServer>
+  );
+}
+```
+
+**Banner.tsx**
+```tsx
+import { BrProps } from '@bloomreach/react-sdk';
+
+export default function Banner({ component, page, mapping }: BrProps) {
+  return <div>Banner: {component.getName()}</div>;
+}
+```
+
+> [!NOTE] 
+> - You must put `'use client'` at the beginning of your client entry point component (`BrxAppClient` in the above example), to [mark the boundary for client modules](https://react.dev/reference/rsc/use-client).
+> - Normally you don't need to write separate client/server components for your mapped components (`Banner` in the example above). Because your entry point component has marked the boundary. For your convenience, you can use the new boolean property `isClientComponent` from `BrProps` interface to check whether your component is rendered as client or server component.
+> - If you want to use Manage Content/Menu buttons in your mapped components, make sure they will only be rendered when the components are client-rendered. See [Buttons](#buttons) section below.
+> - Check the sample project under `examples/next` for a reference implementation.
+
 ### Configuration
 
-The `BrPage` component supports several options you may use to customize page
+The `BrPage`/`BrPageServer` component supports several options you may use to customize page
 initialization. These options will be passed to the `initialize` function from
 [`@bloomreach/spa-sdk`](https://www.npmjs.com/package/@bloomreach/spa-sdk). See
 [here](https://bloomreach.github.io/spa-sdk/modules/index.html#Configuration) for the
@@ -149,7 +332,7 @@ full configuration documentation in the SPA SDK Typedocs.
 
 ### Mapping
 
-The `BrPage` component provides a way to link React components with the brXM
+The `BrPage`/`BrPageServer` component provides a way to link React components with the brXM
 ones. It requires to pass the `mapping` property that maps the component type
 with its representation.
 
@@ -219,8 +402,18 @@ component mapping.
 ```jsx
 return (
   <BrComponent path="menu" page={page} mapping={mapping} component={component}>
-    <Menu page={page} mapping={mapping} />
+    <Menu page={page} mapping={mapping} isClientComponent />
   </BrComponent>
+);
+```
+
+Or, if you are using server components:
+
+```jsx
+return (
+  <BrComponentServer path="menu" page={page} mapping={mapping} component={component}>
+    <Menu page={page} mapping={mapping} isClientComponent={false} />
+  </BrComponentServer>
 );
 ```
 
@@ -262,10 +455,10 @@ export default function Menu({ component, page, mapping }) {
 
 ### Buttons
 
-It is recommended to add the css style `position: relative` to the Buttons
+- It is recommended to add the css style `position: relative` to the Buttons
 so they will position correctly within their parent container component.
 
-Manage menu button can be placed inside a menu component using
+- Manage menu button can be placed inside a menu component using
 `BrManageMenuButton` component.
 
 ```tsx
@@ -295,7 +488,7 @@ export default function MenuComponent({ component, page, mapping }: BrProps) {
 }
 ```
 
-Manage content button can be placed inside a component using
+- Manage content button can be placed inside a component using
 `BrManageContentButton` component with non-empty `content` property.
 
 ```tsx
@@ -330,7 +523,7 @@ export default function Banner({ component, page, mapping }: BrProps) {
 }
 ```
 
-Add new content button can be placed inside a component using
+- Add new content button can be placed inside a component using
 `BrManageContentButton` directive but without passing a content entity.
 
 ```tsx
@@ -351,6 +544,42 @@ export default function News({ component, page, mapping }: BrProps) {
         page={page}
         mapping={mapping}
       />
+    </div>
+  );
+}
+```
+
+- If your components can be rendered as both server/client components, make sure your Manage Content/Menu buttons are only rendered in client components. You can detect this by checking the `isClientComponent` property. For example:
+
+```tsx
+import React from "react";
+import { Document, Reference } from "@bloomreach/spa-sdk";
+import { BrManageContentButton, BrProps } from "@bloomreach/react-sdk";
+
+interface BannerModels {
+  document: Reference;
+}
+
+export default function Banner({ component, page, mapping, isClientComponent }: BrProps) {
+  const { document: documentRef } = component.getModels<BannerModels>();
+  const document = documentRef && page.getContent<Document>(documentRef);
+
+  return (
+    <div className={page.isPreview() ? "has-edit-button" : ""}>
+      {/* ... */}
+
+      {isClientComponent &&
+        <BrManageContentButton
+          content={document}
+          documentTemplateQuery="new-banner-document"
+          folderTemplateQuery="new-banner-folder"
+          parameter="document"
+          root="banners"
+          relative
+          page={page}
+          mapping={mapping}
+        />
+      }
     </div>
   );
 }
@@ -452,7 +681,7 @@ license.
 The React SDK is using [Bloomreach SPA SDK](https://www.npmjs.com/package/@bloomreach/spa-sdk) to interact
 with Bloomreach Content.
 
-### BrPage
+### BrPage/BrPageServer
 
 This is the entry point to the page model. This component requests and
 initializes the page model, and then provides page and mapping data to its children
@@ -464,13 +693,13 @@ received render function.
 | `configuration` |  _yes_   | The [configuration](#configuration) of the SPA SDK.                                                                                          |
 | `mapping`       |  _yes_   | The brXM and React components [mapping](#mapping).                                                                                           |
 | `page`          |   _no_   | Preinitialized page instance or prefetched page model. Mostly that should be used to transfer state from the server-side to the client-side. |
-| `children`      |   _no_   | Render function that receives `{ page, mapping, component }` parameters, or regular React children.                                         |
+| `children`      |   _no_   | Render function that receives `{ page, mapping, component, isClientComponent }` parameters, or regular React children.                                         |
 
-### BrComponent
+### BrComponent/BrComponentServer
 
 This component points to where children or some component should be placed.
-`BrComponent` can be used inside `BrPage` or mapped components only. If React
-children are passed, then they will be rendered [as-is](#inline-mapping).
+`BrComponent`/`BrComponentServer` can be used inside `BrPage`/`BrPageServer` or mapped components only. 
+If React children are passed, then they will be rendered [as-is](#inline-mapping).
 Otherwise, it will try to render all children components recursively.
 
 | Property    | Required | Description                                                                                                                                                                                             |
@@ -479,7 +708,7 @@ Otherwise, it will try to render all children components recursively.
 | `page`      |  _yes_   | The current page instance from the Page Model API.                                                                                                                                                     |
 | `mapping`   |  _yes_   | The component mapping object for dynamic component resolution.                                                                                                                                          |
 | `component` |   _no_   | The parent component context. Required when used inside other components.                                                                                                                               |
-| `children`  |   _no_   | Render function that receives `{ page, mapping, component }` parameters, or regular React children.                                                                                                    |
+| `children`  |   _no_   | Render function that receives `{ page, mapping, component, isClientComponent }` parameters, or regular React children.                                                                                                    |
 
 ### BrManageContentButton
 
@@ -525,5 +754,6 @@ interface BrProps<T extends Component = Component> {
   component?: T;      // The brXM component instance
   page: Page;         // The current page (required)
   mapping: BrMapping; // Component mapping object (required)
+  isClientComponent?: boolean // Whether the component is rendered as a client component
 }
 ```

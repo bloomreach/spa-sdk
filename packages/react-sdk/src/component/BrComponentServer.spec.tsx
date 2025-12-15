@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2025 Bloomreach
+ * Copyright 2025 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,13 +17,13 @@
 import React from 'react';
 import { Component, Page } from '@bloomreach/spa-sdk';
 import { render } from '@testing-library/react';
-import { BrComponent } from './BrComponent';
-import { BrNode } from './BrNode';
+import { BrComponentServer } from './BrComponentServer';
+import { BrNodeServer } from './BrNodeServer';
 import { BrMapping } from './BrProps';
 
 jest.mock('@bloomreach/spa-sdk');
 
-describe('BrComponent', () => {
+describe('BrComponentServer', () => {
   const mockPage = {
     isPreview: jest.fn(),
   } as unknown as jest.Mocked<Page>;
@@ -53,7 +53,7 @@ describe('BrComponent', () => {
 
   it('should render nothing if component has no children', () => {
     const element = render(
-      <BrComponent
+      <BrComponentServer
         component={mockComponent}
         page={mockPage}
         mapping={mockMapping}
@@ -69,7 +69,7 @@ describe('BrComponent', () => {
     mockComponent.getChildren.mockReturnValueOnce([component1, component2]);
 
     const element = render(
-      <BrComponent
+      <BrComponentServer
         component={mockComponent}
         page={mockPage}
         mapping={mockMapping}
@@ -79,14 +79,14 @@ describe('BrComponent', () => {
     expect(mockComponent.getChildren).toBeCalled();
 
     const node1 = render(
-      <BrNode
+      <BrNodeServer
         component={component1}
         page={mockPage}
         mapping={mockMapping}
       />,
     );
     const node2 = render(
-      <BrNode
+      <BrNodeServer
         component={component2}
         page={mockPage}
         mapping={mockMapping}
@@ -99,7 +99,7 @@ describe('BrComponent', () => {
 
   it('should split path by slashes', () => {
     render(
-      <BrComponent
+      <BrComponentServer
         path="a/b"
         component={mockComponent}
         page={mockPage}
@@ -112,7 +112,7 @@ describe('BrComponent', () => {
 
   it('should render nothing if no component found', () => {
     const element = render(
-      <BrComponent
+      <BrComponentServer
         path="a/b"
         component={mockComponent}
         page={mockPage}
@@ -127,7 +127,7 @@ describe('BrComponent', () => {
   it('should render found component', () => {
     mockComponent.getComponent.mockReturnValueOnce(childComponent);
     const element = render(
-      <BrComponent
+      <BrComponentServer
         path="a/b"
         component={mockComponent}
         page={mockPage}
@@ -136,7 +136,7 @@ describe('BrComponent', () => {
     );
 
     const node = render(
-      <BrNode
+      <BrNodeServer
         component={childComponent}
         page={mockPage}
         mapping={mockMapping}
@@ -149,24 +149,24 @@ describe('BrComponent', () => {
   it('should pass children down', () => {
     mockComponent.getComponent.mockReturnValueOnce(childComponent);
     const element = render(
-      <BrComponent
+      <BrComponentServer
         path="a/b"
         component={mockComponent}
         page={mockPage}
         mapping={mockMapping}
       >
         <a />
-      </BrComponent>,
+      </BrComponentServer>,
     );
 
     const node = render(
-      <BrNode
+      <BrNodeServer
         component={childComponent}
         page={mockPage}
         mapping={mockMapping}
       >
         <a />
-      </BrNode>,
+      </BrNodeServer>,
     );
 
     expect(element.container).toContainHTML(node.container.innerHTML);
@@ -177,7 +177,7 @@ describe('BrComponent', () => {
       getComponent: jest.fn(() => null),
     } as unknown as Component;
     const element = render(
-      <BrComponent
+      <BrComponentServer
         path="a/b"
         component={emptyComponent}
         page={mockPage}
@@ -193,7 +193,7 @@ describe('BrComponent', () => {
     mockComponent.getComponent.mockReturnValueOnce(nestedComponent);
 
     render(
-      <BrComponent
+      <BrComponentServer
         path="main/content/header"
         component={mockComponent}
         page={mockPage}
@@ -210,21 +210,21 @@ describe('BrComponent', () => {
     const renderFunction = jest.fn(() => <div>Render Props Test</div>);
 
     render(
-      <BrComponent
+      <BrComponentServer
         path="a/b"
         component={mockComponent}
         page={mockPage}
         mapping={mockMapping}
       >
         {renderFunction}
-      </BrComponent>,
+      </BrComponentServer>,
     );
 
     expect(renderFunction).toHaveBeenCalledWith({
       page: mockPage,
       component: childComponent,
       mapping: mockMapping,
-      isClientComponent: true,
+      isClientComponent: false,
     });
   });
 
@@ -236,13 +236,13 @@ describe('BrComponent', () => {
     const renderFunction = jest.fn(() => <div>Multiple Components</div>);
 
     render(
-      <BrComponent
+      <BrComponentServer
         component={mockComponent}
         page={mockPage}
         mapping={mockMapping}
       >
         {renderFunction}
-      </BrComponent>,
+      </BrComponentServer>,
     );
 
     expect(renderFunction).toHaveBeenCalledTimes(2);
@@ -250,13 +250,13 @@ describe('BrComponent', () => {
       page: mockPage,
       component: component1,
       mapping: mockMapping,
-      isClientComponent: true,
+      isClientComponent: false,
     });
     expect(renderFunction).toHaveBeenNthCalledWith(2, {
       page: mockPage,
       component: component2,
       mapping: mockMapping,
-      isClientComponent: true,
+      isClientComponent: false,
     });
   });
 
@@ -264,14 +264,14 @@ describe('BrComponent', () => {
     mockComponent.getComponent.mockReturnValueOnce(childComponent);
 
     const element = render(
-      <BrComponent
+      <BrComponentServer
         path="a/b"
         component={mockComponent}
         page={mockPage}
         mapping={mockMapping}
       >
         <div>Regular Child</div>
-      </BrComponent>,
+      </BrComponentServer>,
     );
 
     expect(element.getByText('Regular Child')).toBeInTheDocument();

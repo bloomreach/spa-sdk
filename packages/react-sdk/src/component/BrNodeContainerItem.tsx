@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2025 Bloomreach
+ * Copyright 2025 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,24 +15,12 @@
  */
 
 import React, { PropsWithChildren, useCallback, useEffect, useState } from 'react';
-import { ContainerItem, Page, TYPE_CONTAINER_ITEM_UNDEFINED } from '@bloomreach/spa-sdk';
+import { ContainerItem, TYPE_CONTAINER_ITEM_UNDEFINED } from '@bloomreach/spa-sdk';
 import { BrContainerItemUndefined } from '../cms';
-import { BrProps, BrMapping } from './BrProps';
+import type { BrProps } from './BrProps';
 import { BrMeta } from '../meta';
 
-interface BrContainerItemProps extends PropsWithChildren {
-  /**
-   * The current page instance from the Bloomreach Page Model API.
-   */
-  page: Page;
-
-  /**
-   * Component mapping object that defines how brXM component types
-   * are mapped to React components. Used for dynamic component resolution
-   * during page rendering.
-   */
-  mapping: BrMapping;
-
+export interface BrContainerItemProps extends PropsWithChildren, BrProps<ContainerItem> {
   /**
    * The brXM component instance containing component-specific data,
    * configuration, and metadata from the Bloomreach Experience Manager.
@@ -46,7 +34,7 @@ interface BrContainerItemProps extends PropsWithChildren {
 export function BrNodeContainerItem(
   props: BrContainerItemProps,
 ): React.ReactElement {
-  const { component, page, mapping, children } = props;
+  const { component, page, mapping } = props;
   const [forcedRerenders, setForcedRerenders] = useState(0);
 
   const onUpdate = useCallback((): void => {
@@ -85,7 +73,7 @@ export function BrNodeContainerItem(
 
   const containerItemMapping = getMapping();
   const meta = component?.getMeta();
-  const content = containerItemMapping ? React.createElement(containerItemMapping, props) : children;
+  const content = React.createElement(containerItemMapping, { ...props, isClientComponent: true });
 
   return React.createElement(BrMeta, { meta }, content);
 }

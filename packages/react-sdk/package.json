@@ -1,6 +1,6 @@
 {
   "name": "@bloomreach/react-sdk",
-  "version": "26.0.1",
+  "version": "27.0.0",
   "description": "Bloomreach SPA SDK for React",
   "keywords": [
     "bloomreach",
@@ -19,10 +19,25 @@
     "url": "https://bloomreach.atlassian.net/projects/SPASDK/issues"
   },
   "main": "dist/index.umd.js",
-  "browser": "dist/index.js",
+  "browser": "dist/index.client.js",
   "module": "dist/index.js",
   "es2015": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.umd.js"
+    },
+    "./server": {
+      "types": "./dist/index.server.d.ts",
+      "import": "./dist/index.server.js"
+    },
+    "./client": {
+      "types": "./dist/index.client.d.ts",
+      "import": "./dist/index.client.js"
+    }
+  },
   "files": [
     "dist/"
   ],
@@ -61,7 +76,7 @@
     "jest-environment-jsdom": "28.1.3",
     "jest-junit": "13.2.0",
     "prop-types": "15.8.1",
-    "react": "19.1.0",
+    "react": "19.1.4",
     "rollup": "2.79.2",
     "rollup-plugin-dts": "3.0.2",
     "rollup-plugin-terser": "7.0.2",
@@ -112,6 +127,6 @@
     "outputName": "TEST-react-sdk.xml"
   },
   "dependencies": {
-    "@bloomreach/spa-sdk": "26.0.1"
+    "@bloomreach/spa-sdk": "27.0.0"
   }
 }

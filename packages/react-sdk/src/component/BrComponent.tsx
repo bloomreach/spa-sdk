@@ -24,27 +24,20 @@ import { BrProps, BrMapping } from './BrProps';
  * Allows child functions to receive page, mapping, and component data
  * as function parameters for flexible rendering patterns.
  */
-export interface BrComponentRenderProps {
-  /**
-   * The current page instance from the Bloomreach Page Model API.
-   */
-  page: Page;
-
-  /**
-   * Component mapping object that defines how brXM component types
-   * are mapped to React components. Used for dynamic component resolution
-   * during page rendering.
-   */
-  mapping: BrMapping;
-
+export interface BrComponentRenderProps extends BrProps<Component> {
   /**
    * The specific brXM component instance for the current iteration.
    * Contains component-specific data, configuration, and metadata.
    */
   component: Component;
+
+  /**
+   * Whether the component is rendered as a client component.
+   */
+  isClientComponent: boolean;
 }
 
-interface BrComponentProps extends BrProps {
+export interface BrComponentProps extends BrProps<Component> {
   /**
    * The path to a component.
    * The path is defined as a slash-separated components name chain
@@ -95,7 +88,12 @@ export function BrComponent({
         page={page}
         mapping={mapping}
       >
-        {typeof children === 'function' ? children({ page, component: comp, mapping }) : children}
+        {typeof children === 'function' ? children({
+          page,
+          component: comp,
+          mapping,
+          isClientComponent: true,
+        }) : children}
       </BrNode>
     ));
   }

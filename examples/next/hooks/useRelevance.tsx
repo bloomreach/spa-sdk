@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import {Configuration, Page} from '@bloomreach/spa-sdk';
+import {Configuration, PageModel} from '@bloomreach/spa-sdk';
 import useSWRImmutable from 'swr/immutable';
 
-export const useRelevance = (configuration: Omit<Configuration, 'httpClient'>, page?: Page) => {
+export const useRelevance = (configuration: Omit<Configuration, 'httpClient'>, page?: PageModel) => {
   const RELEVANCE_API = '/api/relevance';
 
   useSWRImmutable(

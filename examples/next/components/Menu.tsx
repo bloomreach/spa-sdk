@@ -45,7 +45,7 @@ function MenuLink({ item }: MenuLinkProps): JSX.Element {
   );
 }
 
-export function Menu({ component, page }: BrProps): JSX.Element | null {
+export function Menu({ component, page, isClientComponent }: BrProps): JSX.Element | null {
   // Try getting menu from component first (if available)
   let menuRef = component?.getModels<MenuModels>()?.menu;
 
@@ -63,7 +63,8 @@ export function Menu({ component, page }: BrProps): JSX.Element | null {
 
   return (
     <ul className={`navbar-nav col-12 ${page.isPreview() ? 'has-edit-button' : ''}`}>
-      <BrManageMenuButton menu={menu} page={page} />
+      {/* buttons should only be rendered on the client side */}
+      {isClientComponent && <BrManageMenuButton menu={menu} page={page} />}
       {menu.getItems().map((item, index) => (
         // eslint-disable-next-line react/no-array-index-key
         <li key={index} className={`nav-item ${item.isSelected() ? 'active' : ''}`}>
