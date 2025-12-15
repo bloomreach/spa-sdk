@@ -127,10 +127,10 @@ importers:
         specifier: 20.1.0
         version: 20.1.0(@angular/common@20.1.0)(@angular/core@20.1.0)(@angular/platform-server@20.1.0)(@angular/router@20.1.0)
       '@bloomreach/ng-sdk':
-        specifier: 27.0.0-beta.3
+        specifier: 27.0.0
         version: link:../../packages/ng-sdk
       '@bloomreach/spa-sdk':
-        specifier: 27.0.0-beta.3
+        specifier: 27.0.0
         version: link:../../packages/spa-sdk
       dotenv:
         specifier: 16.4.5
@@ -203,10 +203,10 @@ importers:
   examples/next:
     dependencies:
       '@bloomreach/react-sdk':
-        specifier: 27.0.0-beta.3
+        specifier: 27.0.0
         version: link:../../packages/react-sdk
       '@bloomreach/spa-sdk':
-        specifier: 27.0.0-beta.3
+        specifier: 27.0.0
         version: link:../../packages/spa-sdk
       axios:
         specifier: 1.8.4
@@ -258,10 +258,10 @@ importers:
   examples/nuxt:
     dependencies:
       '@bloomreach/spa-sdk':
-        specifier: 27.0.0-beta.3
+        specifier: 27.0.0
         version: link:../../packages/spa-sdk
       '@bloomreach/vue-sdk':
-        specifier: 27.0.0-beta.3
+        specifier: 27.0.0
         version: link:../../packages/vue-sdk
       axios:
         specifier: 1.7.9
@@ -286,10 +286,10 @@ importers:
   examples/react:
     dependencies:
       '@bloomreach/react-sdk':
-        specifier: 27.0.0-beta.3
+        specifier: 27.0.0
         version: link:../../packages/react-sdk
       '@bloomreach/spa-sdk':
-        specifier: 27.0.0-beta.3
+        specifier: 27.0.0
         version: link:../../packages/spa-sdk
       axios:
         specifier: 1.8.4
@@ -347,10 +347,10 @@ importers:
   examples/vue:
     dependencies:
       '@bloomreach/spa-sdk':
-        specifier: 27.0.0-beta.3
+        specifier: 27.0.0
         version: link:../../packages/spa-sdk
       '@bloomreach/vue-sdk':
-        specifier: 27.0.0-beta.3
+        specifier: 27.0.0
         version: link:../../packages/vue-sdk
       axios:
         specifier: 1.7.9
@@ -399,7 +399,7 @@ importers:
   packages/ng-sdk:
     dependencies:
       '@bloomreach/spa-sdk':
-        specifier: 27.0.0-beta.3
+        specifier: 27.0.0
         version: link:../spa-sdk
       tslib:
         specifier: ^2.6.2
@@ -499,7 +499,7 @@ importers:
   packages/react-sdk:
     dependencies:
       '@bloomreach/spa-sdk':
-        specifier: 27.0.0-beta.3
+        specifier: 27.0.0
         version: link:../spa-sdk
     devDependencies:
       '@babel/core':
@@ -693,7 +693,7 @@ importers:
   packages/vue-sdk:
     dependencies:
       '@bloomreach/spa-sdk':
-        specifier: 27.0.0-beta.3
+        specifier: 27.0.0
         version: link:../spa-sdk
     devDependencies:
       '@types/jsdom':

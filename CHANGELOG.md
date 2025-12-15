@@ -2,11 +2,38 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### ["26.0.1"](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-26.0.0..."26.0.1")
+#### ["27.0.0"](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-26.0.1..."27.0.0")
 
+- SPASDK-222: Add `isClientComponent` property to `BrProps` interface for easier... [`#221`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/221)
+- SPASDK-222 Support RSC in react-sdk [`#220`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/220)
+- SPASDK-222: Fix for CVE-2025-55183, CVE-2025-55184, and CVE-2025-67779 [`#SPASDK-222`](https://bloomreach.atlassian.net/browse/SPASDK-222)
+- SPASDK-222: Fix QA issue by using the same react versions in react CSR example [`#SPASDK-222`](https://bloomreach.atlassian.net/browse/SPASDK-222)
+- SPASDK-222: Update lock file [`#SPASDK-222`](https://bloomreach.atlassian.net/browse/SPASDK-222)
+- SPASDK-222: Fix test issues [`#SPASDK-222`](https://bloomreach.atlassian.net/browse/SPASDK-222)
+- SPASDK-222: Update next and react versions to fix vulnerability CVE-2025-55182 [`#SPASDK-222`](https://bloomreach.atlassian.net/browse/SPASDK-222)
+- SPASDK-222: Update lock file [`#SPASDK-222`](https://bloomreach.atlassian.net/browse/SPASDK-222)
+- SPASDK-222: Set pre-release versions [`#SPASDK-222`](https://bloomreach.atlassian.net/browse/SPASDK-222)
+- SPASDK-222: Update example nextJS app to use the new `isClientComponent` property [`#SPASDK-222`](https://bloomreach.atlassian.net/browse/SPASDK-222)
+- SPASDK-222: Add `isClientComponent` property to `BrProps` interface for easier detecting server/client component [`#SPASDK-222`](https://bloomreach.atlassian.net/browse/SPASDK-222)
+- SPASDK-222: Better logging in example app [`#SPASDK-222`](https://bloomreach.atlassian.net/browse/SPASDK-222)
+- SPASDK-222: Pre-release versions [`#SPASDK-222`](https://bloomreach.atlassian.net/browse/SPASDK-222)
+- SPASDK-222: Improve accuracy in README file [`#SPASDK-222`](https://bloomreach.atlassian.net/browse/SPASDK-222)
+- SPASDK-222: Small code improvements by Coderabbit [`#SPASDK-222`](https://bloomreach.atlassian.net/browse/SPASDK-222)
+- SPASDK-222: Update README file for react-sdk for RSC change [`#SPASDK-222`](https://bloomreach.atlassian.net/browse/SPASDK-222)
+- SPASDK-222: Update the example app for RSC [`#SPASDK-222`](https://bloomreach.atlassian.net/browse/SPASDK-222)
+- SPASDK-222: Fix lint issues [`#SPASDK-222`](https://bloomreach.atlassian.net/browse/SPASDK-222)
+- SPASDK-222: Update next example app to support RSC [`#SPASDK-222`](https://bloomreach.atlassian.net/browse/SPASDK-222)
+- SPASDK-222: Support RSC in react-sdk [`#SPASDK-222`](https://bloomreach.atlassian.net/browse/SPASDK-222)
+
+#### [spa-sdk-26.0.1](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-26.0.0...spa-sdk-26.0.1)
+
+> 26 September 2025
+
+- SPASDK-252 Bumping versions to 26.0.1 [`#SPASDK-252`](https://bloomreach.atlassian.net/browse/SPASDK-252)
+- SPASDK-252 Add refPrefix configuration property for the equivalent refPrefix query parameter of the PDA. [`#SPASDK-252`](https://bloomreach.atlassian.net/browse/SPASDK-252)
 - SPASDK-252 Add refPrefix configuration property for the equivalent refPrefix query parameter of the PDA. [`#SPASDK-252`](https://bloomreach.atlassian.net/browse/SPASDK-252)
 
-### [spa-sdk-26.0.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-25.0.1...spa-sdk-26.0.0)
+### [spa-sdk-26.0.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-25.0.2...spa-sdk-26.0.0)
 
 > 6 August 2025
 
@@ -36,6 +63,14 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-250 Implement rsc support via prop drilling [`#SPASDK-250`](https://bloomreach.atlassian.net/browse/SPASDK-250)
 - SPASDK-250 Add typescript interfaces for prop drilling [`#SPASDK-250`](https://bloomreach.atlassian.net/browse/SPASDK-250)
 - SPASDK-250 Create technical design and implementation plan [`#SPASDK-250`](https://bloomreach.atlassian.net/browse/SPASDK-250)
+
+#### [spa-sdk-25.0.2](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-25.0.1...spa-sdk-25.0.2)
+
+> 2 October 2025
+
+- SPASDK-252 Add refPrefix configuration property for the equivalent refPrefix... [`#219`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/219)
+- SPASDK-252 Bumping versions to 25.0.2 [`#SPASDK-252`](https://bloomreach.atlassian.net/browse/SPASDK-252)
+- SPASDK-252 Add refPrefix configuration property for the equivalent refPrefix query parameter of the PDA. [`#SPASDK-252`](https://bloomreach.atlassian.net/browse/SPASDK-252)
 
 #### [spa-sdk-25.0.1](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-25.0.0...spa-sdk-25.0.1)
 
@@ -1129,5 +1164,6 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-2 Add exported function "getContainerItemContent" [`#SPASDK-2`](https://bloomreach.atlassian.net/browse/SPASDK-2)
 - SPASDK-1 Bump to use node 14 [`#SPASDK-1`](https://bloomreach.atlassian.net/browse/SPASDK-1)
 - SPASDK-1 Remove maven files and update Jenkinsfile [`#SPASDK-1`](https://bloomreach.atlassian.net/browse/SPASDK-1)
+- SPASDK-1 Initial move from brxm monorepo [`#SPASDK-1`](https://bloomreach.atlassian.net/browse/SPASDK-1)
 - TRIVIAL Set branch name to 'main' in changesetBaseRefs [`4dacdcd`](https://github.com/bloomreach/spa-sdk/commit/4dacdcd2fdb0712e40dcb33b9809ae12786f9ab1)
 - TRIVIAL Skip telemetry check on nuxt startup [`15deb25`](https://github.com/bloomreach/spa-sdk/commit/15deb25b1edde3af3296d4dc34dba1483fe278f2)
