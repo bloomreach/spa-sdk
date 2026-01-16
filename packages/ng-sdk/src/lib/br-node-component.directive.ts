@@ -23,6 +23,7 @@ import {
   SimpleChanges,
   Type,
   ViewContainerRef,
+  inject,
 } from '@angular/core';
 import { Component, MetaCollection } from '@bloomreach/spa-sdk';
 import { BrNodeDirective } from './br-node.directive';
@@ -34,18 +35,14 @@ import { BrProps } from './br-props.model';
   standalone: false,
 })
 export class BrNodeComponentDirective implements OnChanges, OnDestroy {
+  private container = inject(ViewContainerRef);
+  private injector = inject(Injector);
+  private node = inject(BrNodeDirective);
+  protected page = inject(BrPageService);
+
   @Input('brNodeComponent') component?: Component;
 
   private clear?: ReturnType<MetaCollection['render']>;
-
-  constructor(
-    private container: ViewContainerRef,
-    private injector: Injector,
-    private node: BrNodeDirective,
-    protected page: BrPageService,
-  ) {
-    // Constructor intentionally left empty
-  }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   ngOnChanges(changes: SimpleChanges): void {

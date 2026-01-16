@@ -16,11 +16,17 @@
 
 <ng-template #brNode let-component let-template="template">
   <ng-container [brNode]="component" [brNodeTemplate]="template">
-    <ng-container [ngSwitch]="component | brNodeType">
-      <ng-container *ngSwitchCase="'container-item'" [brNodeContainerItem]="component"></ng-container>
-      <ng-container *ngSwitchCase="'container'" [brNodeContainer]="component"></ng-container>
-      <ng-container *ngSwitchDefault [brNodeComponent]="component"></ng-container>
-    </ng-container>
+    @switch (component | brNodeType) {
+      @case ('container-item') {
+        <ng-container [brNodeContainerItem]="component"></ng-container>
+      }
+      @case ('container') {
+        <ng-container [brNodeContainer]="component"></ng-container>
+      }
+      @default {
+        <ng-container [brNodeComponent]="component"></ng-container>
+      }
+    }
   </ng-container>
 </ng-template>
 

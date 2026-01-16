@@ -22,12 +22,10 @@ import {
   Component,
   ContentChild,
   EventEmitter,
-  Inject,
   Input,
   NgZone,
   OnChanges,
   OnDestroy,
-  Optional,
   Output,
   PLATFORM_ID,
   SimpleChanges,
@@ -37,6 +35,7 @@ import {
   makeStateKey,
   StateKey,
   TransferState,
+  inject,
 } from '@angular/core';
 import {
   Configuration,
@@ -68,6 +67,11 @@ import { BrNodeContext, BrPageService } from './br-page.service';
   standalone: false,
 })
 export class BrPageComponent implements AfterContentChecked, AfterContentInit, OnChanges, OnDestroy {
+  private httpClient = inject(HttpClient);
+  private pageService = inject(BrPageService);
+  private platform = inject(PLATFORM_ID);
+  private transferState = inject(TransferState, { optional: true });
+
   /**
    * The configuration of the SPA SDK.
    * @see https://www.npmjs.com/package/@bloomreach/spa-sdk#configuration
@@ -109,13 +113,9 @@ export class BrPageComponent implements AfterContentChecked, AfterContentInit, O
 
   private afterContentChecked$ = new Subject();
 
-  constructor(
-    private httpClient: HttpClient,
-    private pageService: BrPageService,
-    zone: NgZone,
-    @Inject(PLATFORM_ID) private platform: any,
-    @Optional() private transferState?: TransferState,
-  ) {
+  constructor() {
+    const zone = inject(NgZone);
+
     this.request = this.request.bind(this);
 
     this.state

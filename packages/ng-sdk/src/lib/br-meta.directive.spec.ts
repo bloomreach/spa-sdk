@@ -69,7 +69,7 @@ describe('BrMetaDirective', () => {
       it('should clear the previously rendered meta', () => {
         const newClear = jest.fn();
         const newMeta: jest.Mocked<MetaCollection> = {
-          render: jest.fn(() => newClear)
+          render: jest.fn(() => newClear),
         } as unknown as jest.Mocked<MetaCollection>;
         fixture.componentInstance.meta = newMeta;
         fixture.detectChanges();
