@@ -67,7 +67,7 @@
     "@angular/platform-browser-dynamic": "21.1.0",
     "@angular/platform-server": "21.1.0",
     "@eslint/eslintrc": "3.2.0",
-    "@types/jest": "29.5.12",
+    "@types/jest": "30.0.0",
     "@types/node": "20.19.7",
     "angular-eslint": "21.1.0",
     "eslint": "9.17.0",
