@@ -1,9 +1,7 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`BrNodeContainerDirective getMapping should render a mapped container 1`] = `
-<div
-  id="root0"
->
+<div>
   <br-container-test>
     <a />
   </br-container-test>
@@ -12,44 +10,34 @@ exports[`BrNodeContainerDirective getMapping should render a mapped container 1`
 `;
 
 exports[`BrNodeContainerDirective getMapping should render a no markup container 1`] = `
-<div
-  id="root5"
->
+<div>
   
 </div>
 `;
 
 exports[`BrNodeContainerDirective getMapping should render an inline container 1`] = `
-<div
-  id="root2"
->
+<div>
   <br-container-inline />
   
 </div>
 `;
 
 exports[`BrNodeContainerDirective getMapping should render an ordered list container 1`] = `
-<div
-  id="root3"
->
+<div>
   <br-container-ordered-list />
   
 </div>
 `;
 
 exports[`BrNodeContainerDirective getMapping should render an unordered list container 1`] = `
-<div
-  id="root4"
->
+<div>
   <br-container-unordered-list />
   
 </div>
 `;
 
 exports[`BrNodeContainerDirective getMapping should render box container by default 1`] = `
-<div
-  id="root1"
->
+<div>
   <br-container-box />
   
 </div>

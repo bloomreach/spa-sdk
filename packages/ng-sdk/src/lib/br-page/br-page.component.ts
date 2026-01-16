@@ -45,7 +45,7 @@ import {
   Page,
   PageModel,
 } from '@bloomreach/spa-sdk';
-import { from, of, Subject } from 'rxjs';
+import { from, lastValueFrom, of, Subject } from 'rxjs';
 import {
   filter,
   map,
@@ -220,15 +220,19 @@ export class BrPageComponent implements AfterContentChecked, AfterContentInit, O
   ): Promise<void | {
     data: PageModel;
   }> {
-    return this.httpClient
+    const request$ = this.httpClient
       .request<PageModel>(method, url, {
         body,
         headers: headers as Record<string, string | string[]>,
         responseType: 'json',
       })
-      .pipe(map((data) => ({ data })))
-      .toPromise()
-      .catch((error) => this.httpError.emit(error));
+      .pipe(map((data) => ({ data })));
+
+    return lastValueFrom(request$)
+      .catch((error) => {
+        this.httpError.emit(error);
+        return undefined;
+      });
   }
 
   isPlatformBrowser(platform: object): boolean {

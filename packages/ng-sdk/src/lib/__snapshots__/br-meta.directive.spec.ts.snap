@@ -1,9 +1,7 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`BrMetaDirective ngOnChanges when there is a template should surround the template with meta 1`] = `
-<div
-  id="root3"
->
+<div>
   <span />
   <span />
   
@@ -11,9 +9,7 @@ exports[`BrMetaDirective ngOnChanges when there is a template should surround th
 `;
 
 exports[`BrMetaDirective ngOnDestroy should clear the container 1`] = `
-<div
-  id="root5"
->
+<div>
   
 </div>
 `;

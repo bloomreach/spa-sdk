@@ -56,7 +56,7 @@ describe('BrManageContentButtonDirective', () => {
 
   describe('ngOnChanges', () => {
     it('should render a meta', () => {
-      expect(meta.render).toBeCalledWith(
+      expect(meta.render).toHaveBeenCalledWith(
         fixture.nativeElement.querySelector('a'),
         fixture.nativeElement.querySelector('a'),
       );

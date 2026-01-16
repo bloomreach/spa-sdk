@@ -56,8 +56,8 @@ describe('BrManageMenuButtonDirective', () => {
 
   describe('ngOnChanges', () => {
     it('should use a menu meta entity', () => {
-      expect(page.getButton).toBeCalledWith(expect.any(String), menu);
-      expect(meta.render).toBeCalledWith(
+      expect(page.getButton).toHaveBeenCalledWith(expect.any(String), menu);
+      expect(meta.render).toHaveBeenCalledWith(
         fixture.nativeElement.querySelector('a'),
         fixture.nativeElement.querySelector('a'),
       );

@@ -15,6 +15,8 @@
  */
 
 module.exports = {
+  preset: 'jest-preset-angular',
+  setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
   collectCoverage: true,
   modulePathIgnorePatterns: ['<rootDir>/dist'],
   reporters: [

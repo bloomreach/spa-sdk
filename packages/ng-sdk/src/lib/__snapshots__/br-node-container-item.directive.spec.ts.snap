@@ -1,9 +1,7 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`BrNodeContainerItemDirective getMapping should override undefined container item 1`] = `
-<div
-  id="root2"
->
+<div>
   <br-container-item-test>
     <a>
       something
@@ -14,9 +12,7 @@ exports[`BrNodeContainerItemDirective getMapping should override undefined conta
 `;
 
 exports[`BrNodeContainerItemDirective getMapping should render a mapped container item 1`] = `
-<div
-  id="root0"
->
+<div>
   <br-container-item-test>
     <a>
       something
@@ -27,18 +23,14 @@ exports[`BrNodeContainerItemDirective getMapping should render a mapped containe
 `;
 
 exports[`BrNodeContainerItemDirective getMapping should render undefined container item 1`] = `
-<div
-  id="root1"
->
+<div>
   <br-container-item-undefined />
   
 </div>
 `;
 
 exports[`BrNodeContainerItemDirective ngOnChanges should react on update events 1`] = `
-<div
-  id="root3"
->
+<div>
   <br-container-item-test>
     <a>
       updated
