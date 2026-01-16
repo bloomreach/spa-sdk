@@ -5,7 +5,10 @@
     "types": [
       "jest",
       "node"
-    ]
+    ],
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true
   },
   "include": [
     "**/*.spec.ts",
