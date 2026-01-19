@@ -125,7 +125,7 @@ describe('BrNodeComponentDirective', () => {
       fixture.detectChanges();
 
       expect(fixture.nativeElement).toMatchSnapshot();
-      expect(meta.render).toBeCalledWith(
+      expect(meta.render).toHaveBeenCalledWith(
         fixture.nativeElement.querySelector('.head'),
         fixture.nativeElement.querySelector('.tail'),
       );
@@ -139,7 +139,7 @@ describe('BrNodeComponentDirective', () => {
       fixture.detectChanges();
 
       expect(fixture.nativeElement).toMatchSnapshot();
-      expect(meta.render).toBeCalledWith(
+      expect(meta.render).toHaveBeenCalledWith(
         fixture.nativeElement.querySelectorAll('.head')[0],
         fixture.nativeElement.querySelectorAll('.tail')[1],
       );
@@ -148,7 +148,7 @@ describe('BrNodeComponentDirective', () => {
     it('should surround the container with meta-data when there is no children to render', () => {
       fixture.detectChanges();
 
-      expect(meta.render).toBeCalledWith(
+      expect(meta.render).toHaveBeenCalledWith(
         fixture.componentInstance.container.nativeElement,
         fixture.componentInstance.container.nativeElement,
       );
@@ -159,7 +159,7 @@ describe('BrNodeComponentDirective', () => {
       fixture.detectChanges();
 
       expect(fixture.nativeElement).toMatchSnapshot();
-      expect(meta.render).toBeCalledWith(
+      expect(meta.render).toHaveBeenCalledWith(
         fixture.nativeElement.querySelector('br-component-test'),
         fixture.nativeElement.querySelector('br-component-test'),
       );
@@ -173,7 +173,7 @@ describe('BrNodeComponentDirective', () => {
       fixture.destroy();
 
       expect(fixture.nativeElement).toMatchSnapshot();
-      expect(clear).toBeCalled();
+      expect(clear).toHaveBeenCalled();
     });
   });
 });

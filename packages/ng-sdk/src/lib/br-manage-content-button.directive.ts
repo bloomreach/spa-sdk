@@ -18,10 +18,8 @@ import {
   Directive,
   Input,
   OnChanges,
-  Optional,
   SimpleChanges,
-  TemplateRef,
-  ViewContainerRef,
+  inject,
 } from '@angular/core';
 import { ManageContentButton, TYPE_MANAGE_CONTENT_BUTTON } from '@bloomreach/spa-sdk';
 import { BrMetaDirective } from './br-meta.directive';
@@ -35,6 +33,8 @@ import { BrPageComponent } from './br-page/br-page.component';
   standalone: false,
 })
 export class BrManageContentButtonDirective extends BrMetaDirective implements OnChanges, ManageContentButton {
+  private page = inject(BrPageComponent, { optional: true });
+
   @Input('brManageContentButton') content?: ManageContentButton['content'];
 
   @Input() documentTemplateQuery?: ManageContentButton['documentTemplateQuery'];
@@ -60,14 +60,6 @@ export class BrManageContentButtonDirective extends BrMetaDirective implements O
   @Input() relative?: ManageContentButton['relative'];
 
   @Input() root?: ManageContentButton['root'];
-
-  constructor(
-    container: ViewContainerRef,
-    @Optional() template?: TemplateRef<never>,
-    @Optional() private page?: BrPageComponent,
-  ) {
-    super(container, template);
-  }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.meta = this.page?.state.getValue()?.getButton(TYPE_MANAGE_CONTENT_BUTTON, this);

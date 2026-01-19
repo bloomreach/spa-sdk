@@ -16,9 +16,9 @@
 
 import {
   Directive,
+  inject,
   OnChanges,
   OnDestroy,
-  Optional,
   SimpleChanges,
   TemplateRef,
   ViewContainerRef,
@@ -33,9 +33,8 @@ export abstract class BrMetaDirective implements OnChanges, OnDestroy {
 
   private clear?: ReturnType<MetaCollection['render']>;
 
-  constructor(private container: ViewContainerRef, @Optional() private template?: TemplateRef<never>) {
-    // Constructor intentionally left empty
-  }
+  private container = inject(ViewContainerRef);
+  private template = inject(TemplateRef<never>, { optional: true });
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   ngOnChanges(changes: SimpleChanges): void {

@@ -19,8 +19,8 @@ import { CommonEngine } from '@angular/ssr/node';
 import express from 'express';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
-import bootstrap from './src/main.server';
 import { relevance } from '@bloomreach/spa-sdk/dist/express';
+import bootstrap from './src/main.server';
 import { REQUEST } from './src/express.tokens';
 
 const ARG_PORT = '--port';
@@ -41,8 +41,17 @@ export function app(): express.Express {
   // server.get('/api/**', (req, res) => { });
   // Serve static files from /browser
   server.get('*.*', express.static(browserDistFolder, {
-    maxAge: '1y'
+    maxAge: '1y',
   }));
+
+  // Handle Chrome DevTools well-known requests to prevent SSR crashes
+  server.use((req, res, next) => {
+    if (req.path.includes('/.well-known/')) {
+      res.status(404).end();
+      return;
+    }
+    next();
+  });
 
   // All regular routes use the Angular engine
   server.get('*', (req, res, next) => {

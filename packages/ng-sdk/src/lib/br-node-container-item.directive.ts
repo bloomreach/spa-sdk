@@ -17,19 +17,16 @@
 import {
   ChangeDetectorRef,
   Directive,
-  Injector,
   Input,
   OnChanges,
   OnDestroy,
   SimpleChanges,
   Type,
-  ViewContainerRef,
+  inject,
 } from '@angular/core';
 import { ContainerItem, TYPE_CONTAINER_ITEM_UNDEFINED } from '@bloomreach/spa-sdk';
 import { BrContainerItemUndefinedComponent } from './br-container-item-undefined/br-container-item-undefined.component';
 import { BrNodeComponentDirective } from './br-node-component.directive';
-import { BrNodeDirective } from './br-node.directive';
-import { BrPageService } from './br-page/br-page.service';
 import { BrProps } from './br-props.model';
 
 @Directive({
@@ -37,14 +34,10 @@ import { BrProps } from './br-props.model';
   standalone: false,
 })
 export class BrNodeContainerItemDirective extends BrNodeComponentDirective implements OnChanges, OnDestroy {
-  constructor(
-    container: ViewContainerRef,
-    injector: Injector,
-    node: BrNodeDirective,
-    page: BrPageService,
-    private changeDetectorRef: ChangeDetectorRef,
-  ) {
-    super(container, injector, node, page);
+  private changeDetectorRef = inject(ChangeDetectorRef);
+
+  constructor() {
+    super();
 
     this.onUpdate = this.onUpdate.bind(this);
   }

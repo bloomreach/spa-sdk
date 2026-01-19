@@ -150,7 +150,7 @@ describe('BrComponentDirective', () => {
       fixture.detectChanges();
 
       expect(fixture.nativeElement).toMatchSnapshot();
-      expect(component.getComponent).toBeCalledWith('a', 'b', 'c');
+      expect(component.getComponent).toHaveBeenCalledWith('a', 'b', 'c');
     });
 
     it('should render nothing if no component was found by the specified path', () => {
@@ -158,7 +158,7 @@ describe('BrComponentDirective', () => {
       fixture.detectChanges();
 
       expect(fixture.nativeElement).toMatchSnapshot();
-      expect(component.getComponent).toBeCalledWith('a', 'b', 'c');
+      expect(component.getComponent).toHaveBeenCalledWith('a', 'b', 'c');
     });
 
     it('should render current node children if the component is not set', () => {

@@ -156,7 +156,7 @@ describe('BrNodeContainerDirective', () => {
       fixture.detectChanges();
 
       expect(fixture.nativeElement).toMatchSnapshot();
-      expect(container.getChildren).toBeCalled();
+      expect(container.getChildren).toHaveBeenCalled();
     });
   });
 });

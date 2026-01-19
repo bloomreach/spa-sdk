@@ -15,12 +15,11 @@
  */
 
 import { CommonModule } from '@angular/common';
-import { Component, Inject, OnInit, Optional, PLATFORM_ID, inject } from '@angular/core';
+import { Component, OnInit, PLATFORM_ID, inject } from '@angular/core';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { BrSdkModule } from '@bloomreach/ng-sdk';
 import { extractSearchParams, Page } from '@bloomreach/spa-sdk';
 import { Observable, filter } from 'rxjs';
-import { Request } from 'express';
 import { REQUEST } from '../../../express.tokens';
 import { ParseUrlPipe } from '../../pipes/parse-url.pipe';
 import { MenuComponent } from '../../components/menu/menu.component';
@@ -41,8 +40,8 @@ import { NewsListComponent } from '../../components/news-list/news-list.componen
 })
 export class IndexComponent implements OnInit {
   router = inject(Router);
-  configuration!: any;
   platformId = inject(PLATFORM_ID);
+  private request = inject(REQUEST, { optional: true });
 
   mapping = {
     menu: MenuComponent,
@@ -52,34 +51,34 @@ export class IndexComponent implements OnInit {
     'Simple Content': ContentComponent,
   };
 
-  private navigationEnd: Observable<NavigationEnd>;
-
-  constructor(@Optional() @Inject(REQUEST) private request: Request) {
-    this.configuration = {
+  configuration = (() => {
+    const config: any = {
       path: this.router.url,
       endpoint: import.meta.env?.NG_APP_BRXM_ENDPOINT,
       debug: true,
     };
 
-    if (!this.configuration.endpoint && import.meta.env?.NG_APP_BR_MULTI_TENANT_SUPPORT) {
+    if (!config.endpoint && import.meta.env?.NG_APP_BR_MULTI_TENANT_SUPPORT) {
       const endpointQueryParameter = 'endpoint';
-      const { searchParams } = extractSearchParams(this.configuration.path!, [endpointQueryParameter].filter(Boolean));
+      const { searchParams } = extractSearchParams(config.path!, [endpointQueryParameter].filter(Boolean));
 
-      this.configuration = {
-        ...this.configuration,
+      return {
+        ...config,
         endpoint: searchParams.get(endpointQueryParameter) ?? '',
         baseUrl: `?${endpointQueryParameter}=${searchParams.get(endpointQueryParameter)}`,
       };
     }
 
     if (this.request) {
-      this.configuration.request = this.request;
+      config.request = this.request;
     }
 
-    this.navigationEnd = this.router.events.pipe(
-      filter((event) => event instanceof NavigationEnd),
-    ) as Observable<NavigationEnd>;
-  }
+    return config;
+  })();
+
+  private navigationEnd = this.router.events.pipe(
+    filter((event) => event instanceof NavigationEnd),
+  ) as Observable<NavigationEnd>;
 
   ngOnInit(): void {
     this.navigationEnd.subscribe((event) => {

@@ -164,7 +164,7 @@ module.exports = tseslint.config(
     },
   },
   {
-    files: ['**/*.spec.ts'],
+    files: ['**/*.spec.ts', 'setup-jest.ts'],
     rules: {
       '@typescript-eslint/explicit-function-return-type': 'off',
       '@typescript-eslint/unbound-method': 'off',

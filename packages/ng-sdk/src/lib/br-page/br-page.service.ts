@@ -21,7 +21,7 @@ import type { BrComponentContext } from '../br-component.directive';
 import { BrProps } from '../br-props.model';
 
 export interface BrNodeContext extends BrComponentContext {
-  template?: TemplateRef<BrComponentContext>;
+  template?: TemplateRef<BrComponentContext> | null;
 }
 
 @Injectable()

@@ -20,10 +20,10 @@ import {
   OnChanges,
   OnDestroy,
   OnInit,
-  Optional,
   SimpleChanges,
   TemplateRef,
   ViewContainerRef,
+  inject,
 } from '@angular/core';
 import { isComponent, Component, Page } from '@bloomreach/spa-sdk';
 import { BrNodeDirective } from './br-node.directive';
@@ -57,6 +57,11 @@ export interface BrComponentContext {
   standalone: false,
 })
 export class BrComponentDirective implements OnChanges, OnDestroy, OnInit {
+  private container = inject(ViewContainerRef);
+  private template = inject<TemplateRef<BrComponentContext>>(TemplateRef, { optional: true });
+  private node = inject(BrNodeDirective, { optional: true });
+  private page = inject(BrPageService, { optional: true });
+
   /**
    * The component instance or a path to a component.
    * The path is defined as a slash-separated components name chain
@@ -64,15 +69,6 @@ export class BrComponentDirective implements OnChanges, OnDestroy, OnInit {
    * If it is omitted, all the children will be rendered.
    */
   @Input('brComponent') component?: Component | string;
-
-  constructor(
-    private container: ViewContainerRef,
-    @Optional() private template?: TemplateRef<BrComponentContext>,
-    @Optional() private node?: BrNodeDirective,
-    @Optional() private page?: BrPageService,
-  ) {
-    // Constructor intentionally left empty
-  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (!changes.component || changes.component.isFirstChange()) {
