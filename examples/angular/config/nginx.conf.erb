@@ -49,5 +49,13 @@ http {
 		client_max_body_size <%= ENV['NGINX_CLIENT_MAX_BODY_SIZE'] || 1 %>M;
 
 		root dist/browser; # path to your app
+		index index.csr.html;
+
+		# All requests are routed through Angular
+    location / {
+        try_files $uri $uri/ /index.csr.html;
+    }
+
+    error_page 404 /index.csr.html;
 	}
 }
