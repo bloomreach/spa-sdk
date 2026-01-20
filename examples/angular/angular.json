@@ -34,7 +34,7 @@
             ],
             "scripts": [],
             "server": "src/main.server.ts",
-            "prerender": false,
+            "outputMode": "server",
             "ssr": {
               "entry": "server.ts"
             },

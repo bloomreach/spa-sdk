@@ -9,7 +9,7 @@
     "build": "ng build",
     "dev": "ng serve --port 3004",
     "lint": "ng lint",
-    "start:ssr": "PORT=3005 node dist/server/server.mjs"
+    "start:ssr": "node dist/server/server.mjs --port=${PORT:-3005}"
   },
   "dependencies": {
     "@angular/animations": "21.1.0",
