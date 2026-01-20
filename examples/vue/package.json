@@ -1,6 +1,6 @@
 {
   "name": "@bloomreach/example-vue",
-  "version": "27.0.0",
+  "version": "27.1.0-beta.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -13,8 +13,8 @@
     "type-check:watch": "npm run type-check -- --watch"
   },
   "dependencies": {
-    "@bloomreach/spa-sdk": "27.0.0",
-    "@bloomreach/vue-sdk": "27.0.0",
+    "@bloomreach/spa-sdk": "27.1.0-beta.0",
+    "@bloomreach/vue-sdk": "27.1.0-beta.0",
     "axios": "1.7.9",
     "sanitize-html": "2.14.0",
     "vue": "3.3.4",
