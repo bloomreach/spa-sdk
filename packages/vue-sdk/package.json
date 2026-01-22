@@ -1,6 +1,6 @@
 {
   "name": "@bloomreach/vue-sdk",
-  "version": "27.1.0-beta.0",
+  "version": "27.1.0",
   "description": "Bloomreach SPA SDK for Vue",
   "keywords": [
     "bloomreach",
@@ -66,6 +66,6 @@
     "vue-tsc": "1.6.5"
   },
   "dependencies": {
-    "@bloomreach/spa-sdk": "27.1.0-beta.0"
+    "@bloomreach/spa-sdk": "27.1.0"
   }
 }
