@@ -15,7 +15,7 @@
   -->
 
 <template>
-  <br-page :configuration="configuration" :mapping="mapping" :page="page">
+  <br-page :configuration="{ ...configuration, httpClient: axios }" :mapping="mapping" :page="page">
     <template v-slot="{ page }">
       <template v-if="page">
         <header>
