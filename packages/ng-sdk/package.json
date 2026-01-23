@@ -56,7 +56,7 @@
     "@angular-builders/jest": "21.0.3",
     "@angular-devkit/architect": "0.2101.0",
     "@angular/animations": "21.1.0",
-    "@angular/build": "^21.1.0",
+    "@angular/build": "21.1.0",
     "@angular/cli": "21.1.0",
     "@angular/common": "21.1.0",
     "@angular/compiler": "21.1.0",
