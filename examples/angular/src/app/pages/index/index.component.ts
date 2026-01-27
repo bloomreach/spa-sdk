@@ -15,12 +15,11 @@
  */
 
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, PLATFORM_ID, inject } from '@angular/core';
+import { Component, OnInit, PLATFORM_ID, inject, REQUEST } from '@angular/core';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { BrSdkModule } from '@bloomreach/ng-sdk';
 import { extractSearchParams, Page } from '@bloomreach/spa-sdk';
 import { Observable, filter } from 'rxjs';
-import { REQUEST } from '../../../express.tokens';
 import { ParseUrlPipe } from '../../pipes/parse-url.pipe';
 import { MenuComponent } from '../../components/menu/menu.component';
 import { BannerComponent } from '../../components/banner/banner.component';
@@ -61,12 +60,22 @@ export class IndexComponent implements OnInit {
     if (!config.endpoint && import.meta.env?.NG_APP_BR_MULTI_TENANT_SUPPORT) {
       const endpointQueryParameter = 'endpoint';
       const { searchParams } = extractSearchParams(config.path!, [endpointQueryParameter].filter(Boolean));
+      const endpointValue = searchParams.get(endpointQueryParameter);
 
-      return {
-        ...config,
-        endpoint: searchParams.get(endpointQueryParameter) ?? '',
-        baseUrl: `?${endpointQueryParameter}=${searchParams.get(endpointQueryParameter)}`,
-      };
+      // Only set endpoint if the query parameter exists and has a value
+      // This prevents SSR loops when the endpoint parameter is missing
+      if (endpointValue) {
+        return {
+          ...config,
+          endpoint: endpointValue,
+          baseUrl: `?${endpointQueryParameter}=${endpointValue}`,
+        };
+      }
+
+      throw new Error(
+        'Endpoint is missing. Please provide an endpoint via query parameter "?endpoint=..."'
+        + 'or configure NG_APP_BRXM_ENDPOINT in the environment variables.',
+      );
     }
 
     if (this.request) {
