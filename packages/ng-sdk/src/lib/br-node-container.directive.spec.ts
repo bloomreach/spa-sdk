@@ -1,5 +1,5 @@
 /*
- * Copyright 2020-2025 Bloomreach
+ * Copyright 2020-2026 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -156,7 +156,7 @@ describe('BrNodeContainerDirective', () => {
       fixture.detectChanges();
 
       expect(fixture.nativeElement).toMatchSnapshot();
-      expect(container.getChildren).toBeCalled();
+      expect(container.getChildren).toHaveBeenCalled();
     });
   });
 });

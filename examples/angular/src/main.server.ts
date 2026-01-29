@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-2025 Bloomreach
+ * Copyright 2024-2026 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,11 +14,13 @@
  * limitations under the License.
  */
 
-import { bootstrapApplication } from '@angular/platform-browser';
+import { bootstrapApplication, BootstrapContext } from '@angular/platform-browser';
 import { ApplicationRef } from '@angular/core';
 import { AppComponent } from './app/app.component';
 import { config } from './app/app.config.server';
 
-const bootstrap = (): Promise<ApplicationRef> => bootstrapApplication(AppComponent, config);
+const bootstrap = (context: BootstrapContext): Promise<ApplicationRef> => {
+  return bootstrapApplication(AppComponent, config, context);
+};
 
 export default bootstrap;

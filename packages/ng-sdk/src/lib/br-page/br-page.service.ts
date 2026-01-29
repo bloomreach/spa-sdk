@@ -1,5 +1,5 @@
 /*
- * Copyright 2023-2025 Bloomreach
+ * Copyright 2023-2026 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ import type { BrComponentContext } from '../br-component.directive';
 import { BrProps } from '../br-props.model';
 
 export interface BrNodeContext extends BrComponentContext {
-  template?: TemplateRef<BrComponentContext>;
+  template?: TemplateRef<BrComponentContext> | null;
 }
 
 @Injectable()

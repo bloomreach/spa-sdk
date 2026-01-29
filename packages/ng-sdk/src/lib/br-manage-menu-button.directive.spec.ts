@@ -1,5 +1,5 @@
 /*
- * Copyright 2020-2025 Bloomreach
+ * Copyright 2020-2026 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,8 +56,8 @@ describe('BrManageMenuButtonDirective', () => {
 
   describe('ngOnChanges', () => {
     it('should use a menu meta entity', () => {
-      expect(page.getButton).toBeCalledWith(expect.any(String), menu);
-      expect(meta.render).toBeCalledWith(
+      expect(page.getButton).toHaveBeenCalledWith(expect.any(String), menu);
+      expect(meta.render).toHaveBeenCalledWith(
         fixture.nativeElement.querySelector('a'),
         fixture.nativeElement.querySelector('a'),
       );

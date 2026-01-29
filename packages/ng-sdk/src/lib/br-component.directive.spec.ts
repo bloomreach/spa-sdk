@@ -1,5 +1,5 @@
 /*
- * Copyright 2020-2025 Bloomreach
+ * Copyright 2020-2026 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -150,7 +150,7 @@ describe('BrComponentDirective', () => {
       fixture.detectChanges();
 
       expect(fixture.nativeElement).toMatchSnapshot();
-      expect(component.getComponent).toBeCalledWith('a', 'b', 'c');
+      expect(component.getComponent).toHaveBeenCalledWith('a', 'b', 'c');
     });
 
     it('should render nothing if no component was found by the specified path', () => {
@@ -158,7 +158,7 @@ describe('BrComponentDirective', () => {
       fixture.detectChanges();
 
       expect(fixture.nativeElement).toMatchSnapshot();
-      expect(component.getComponent).toBeCalledWith('a', 'b', 'c');
+      expect(component.getComponent).toHaveBeenCalledWith('a', 'b', 'c');
     });
 
     it('should render current node children if the component is not set', () => {

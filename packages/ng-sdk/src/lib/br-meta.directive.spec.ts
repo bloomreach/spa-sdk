@@ -1,5 +1,5 @@
 /*
- * Copyright 2020-2025 Bloomreach
+ * Copyright 2020-2026 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -60,23 +60,27 @@ describe('BrMetaDirective', () => {
       });
 
       it('should surround the container with meta', () => {
-        expect(meta.render).toBeCalledWith(
+        expect(meta.render).toHaveBeenCalledWith(
           fixture.nativeElement.querySelector('a'),
           fixture.nativeElement.querySelector('a'),
         );
       });
 
       it('should clear the previously rendered meta', () => {
-        fixture.componentInstance.meta = { ...meta };
+        const newClear = jest.fn();
+        const newMeta: jest.Mocked<MetaCollection> = {
+          render: jest.fn(() => newClear),
+        } as unknown as jest.Mocked<MetaCollection>;
+        fixture.componentInstance.meta = newMeta;
         fixture.detectChanges();
 
-        expect(clear).toBeCalled();
+        expect(clear).toHaveBeenCalled();
       });
 
       it('should not rerender if the meta was not changed', () => {
         fixture.detectChanges();
 
-        expect(clear).not.toBeCalled();
+        expect(clear).not.toHaveBeenCalled();
       });
     });
 
@@ -98,7 +102,7 @@ describe('BrMetaDirective', () => {
       });
 
       it('should render the template', () => {
-        expect(meta.render).toBeCalledWith(
+        expect(meta.render).toHaveBeenCalledWith(
           fixture.nativeElement.querySelectorAll('span')[0],
           fixture.nativeElement.querySelectorAll('span')[1],
         );
@@ -127,7 +131,7 @@ describe('BrMetaDirective', () => {
     });
 
     it('should clear the meta', () => {
-      expect(clear).toBeCalled();
+      expect(clear).toHaveBeenCalled();
     });
   });
 });

@@ -1,9 +1,7 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`BrPageComponent template render should not render children if there is no page and NBR mode is false 1`] = `
-<div
-  id="root0"
->
+<div>
   <div>
     <br-page
       ngskiphydration="true"
@@ -16,9 +14,7 @@ exports[`BrPageComponent template render should not render children if there is 
 `;
 
 exports[`BrPageComponent template render should render children if there is no page and NBR mode is true 1`] = `
-<div
-  id="root1"
->
+<div>
   <div>
     <br-page
       ngskiphydration="true"
@@ -31,7 +27,6 @@ exports[`BrPageComponent template render should render children if there is no p
           Hello World
         </div>
       </br-my-component>
-      
       
       
       

@@ -1,5 +1,5 @@
 /*
- * Copyright 2020-2025 Bloomreach
+ * Copyright 2020-2026 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -99,7 +99,7 @@ describe('BrPageComponent', () => {
       component.state.next(page);
       component.ngAfterContentChecked();
 
-      expect(page.sync).toBeCalled();
+      expect(page.sync).toHaveBeenCalled();
     });
 
     it('should not sync a page twice', () => {
@@ -107,7 +107,7 @@ describe('BrPageComponent', () => {
       component.ngAfterContentChecked();
       component.ngAfterContentChecked();
 
-      expect(page.sync).toBeCalledTimes(1);
+      expect(page.sync).toHaveBeenCalledTimes(1);
     });
 
     it('should not fail if the page is not ready', () => {
@@ -124,7 +124,7 @@ describe('BrPageComponent', () => {
         configuration: new SimpleChange({}, component.configuration, false),
       });
 
-      expect(initialize).toBeCalled();
+      expect(initialize).toHaveBeenCalled();
     });
 
     it('should initialize a page from the configuration', async () => {
@@ -136,7 +136,7 @@ describe('BrPageComponent', () => {
 
       await new Promise(process.nextTick);
 
-      expect(initialize).toBeCalledWith(
+      expect(initialize).toHaveBeenCalledWith(
         expect.objectContaining({
           cmsBaseUrl: 'something',
           httpClient: expect.any(Function),
@@ -154,7 +154,7 @@ describe('BrPageComponent', () => {
         page: new SimpleChange(undefined, component.page, true),
       });
 
-      expect(initialize).toBeCalledWith(expect.any(Object), component.page);
+      expect(initialize).toHaveBeenCalledWith(expect.any(Object), component.page);
       expect(component.state.getValue()).toBe(page);
     });
 
@@ -171,9 +171,9 @@ describe('BrPageComponent', () => {
         configuration: new SimpleChange(undefined, component.configuration, true),
       });
 
-      expect(transferState.get).toBeCalledWith(component.stateKey, undefined);
-      expect(transferState.remove).toBeCalledWith(component.stateKey);
-      expect(initialize).toBeCalledWith(expect.any(Object), state);
+      expect(transferState.get).toHaveBeenCalledWith(component.stateKey, undefined);
+      expect(transferState.remove).toHaveBeenCalledWith(component.stateKey);
+      expect(initialize).toHaveBeenCalledWith(expect.any(Object), state);
       expect(component.state.getValue()).toBe(page);
     });
 
@@ -189,8 +189,8 @@ describe('BrPageComponent', () => {
         page: new SimpleChange(undefined, component.page, true),
       });
 
-      expect(transferState.remove).toBeCalledWith(component.stateKey);
-      expect(initialize).toBeCalledWith(expect.any(Object), component.page);
+      expect(transferState.remove).toHaveBeenCalledWith(component.stateKey);
+      expect(initialize).toHaveBeenCalledWith(expect.any(Object), component.page);
     });
 
     it('should not initialize from the transferred state if the stateKey is false', async () => {
@@ -205,10 +205,10 @@ describe('BrPageComponent', () => {
 
       await new Promise(process.nextTick);
 
-      expect(transferState.hasKey).not.toBeCalled();
-      expect(transferState.get).not.toBeCalled();
-      expect(transferState.remove).not.toBeCalled();
-      expect(initialize).toBeCalledWith(expect.any(Object));
+      expect(transferState.hasKey).not.toHaveBeenCalled();
+      expect(transferState.get).not.toHaveBeenCalled();
+      expect(transferState.remove).not.toHaveBeenCalled();
+      expect(initialize).toHaveBeenCalledWith(expect.any(Object));
     });
 
     it('should update a page in the transferred state', async () => {
@@ -225,7 +225,7 @@ describe('BrPageComponent', () => {
         page: new SimpleChange(undefined, component.page, true),
       });
 
-      expect(transferState.set).toBeCalledWith(component.stateKey, model);
+      expect(transferState.set).toHaveBeenCalledWith(component.stateKey, model);
     });
 
     it('should update the transferred state on the stateKey update', () => {
@@ -237,8 +237,8 @@ describe('BrPageComponent', () => {
         stateKey: new SimpleChange('old-key', 'new-key', true),
       });
 
-      expect(transferState.set).toBeCalledWith('new-key', 'state');
-      expect(transferState.remove).toBeCalledWith('old-key');
+      expect(transferState.set).toHaveBeenCalledWith('new-key', 'state');
+      expect(transferState.remove).toHaveBeenCalledWith('old-key');
     });
 
     it('should pass a compatible http client', () => {

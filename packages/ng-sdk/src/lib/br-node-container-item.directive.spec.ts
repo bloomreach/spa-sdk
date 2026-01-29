@@ -1,5 +1,5 @@
 /*
- * Copyright 2020-2025 Bloomreach
+ * Copyright 2020-2026 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -126,16 +126,26 @@ describe('BrNodeContainerItemDirective', () => {
       onUpdate({});
       fixture.detectChanges();
 
-      expect(page.state.getValue()?.sync).toBeCalled();
+      expect(page.state.getValue()?.sync).toHaveBeenCalled();
       expect(fixture.nativeElement).toMatchSnapshot();
     });
 
     it('should unsubscribe from the old container item', () => {
       const [[, onUpdate]] = jest.mocked(containerItem.on).mock.calls;
-      component.containerItem = { ...containerItem };
+      const newContainerItem: ContainerItem = {
+        getType: jest.fn(() => 'something'),
+        getMeta: () => ({
+          clear: jest.fn(),
+          render: jest.fn(),
+        }),
+        getModels: jest.fn(() => ({ data: 'something' })),
+        off: jest.fn(),
+        on: jest.fn(),
+      } as unknown as ContainerItem;
+      component.containerItem = newContainerItem;
       fixture.detectChanges();
 
-      expect(containerItem.off).toBeCalledWith('update', onUpdate);
+      expect(containerItem.off).toHaveBeenCalledWith('update', onUpdate);
     });
   });
 
@@ -144,7 +154,7 @@ describe('BrNodeContainerItemDirective', () => {
       const [[, onUpdate]] = jest.mocked(containerItem.on).mock.calls;
       fixture.destroy();
 
-      expect(containerItem.off).toBeCalledWith('update', onUpdate);
+      expect(containerItem.off).toHaveBeenCalledWith('update', onUpdate);
     });
   });
 });

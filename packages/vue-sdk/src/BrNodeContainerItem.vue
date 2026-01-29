@@ -1,5 +1,5 @@
 <!--
-  Copyright 2023-2025 Bloomreach
+  Copyright 2023-2026 Bloomreach
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -39,7 +39,7 @@ import { component$, mapping$, page$ } from '@/providerKeys';
 import type { ContainerItem } from '@bloomreach/spa-sdk';
 import { TYPE_CONTAINER_ITEM_UNDEFINED } from '@bloomreach/spa-sdk';
 import type { Ref } from 'vue';
-import { computed, inject, onUnmounted, ref, toRaw, watch } from 'vue';
+import { computed, inject, onUnmounted, shallowRef, toRaw, watch } from 'vue';
 import BrMeta from '@/BrMeta.vue';
 import BrContainerItemUndefined from '@/BrContainerItemUndefined.vue';
 
@@ -59,7 +59,7 @@ function shallowClone(value: ContainerItem): ContainerItem {
 // will not trigger updates in child components
 // https://vuejs.org/guide/essentials/reactivity-fundamentals.html#ref-unwrapping-in-templates
 // https://vuejs.org/api/reactivity-utilities.html#unref
-const passedComponent = ref<ContainerItem>(component.value);
+const passedComponent = shallowRef<ContainerItem>(component.value);
 const meta = computed(() => passedComponent.value.getMeta());
 const updateHook = () => {
   passedComponent.value = shallowClone(component.value);
@@ -71,6 +71,7 @@ onUnmounted(() => unsubscribe?.());
 watch(
   component,
   () => {
+    passedComponent.value = shallowClone(component.value);
     unsubscribe?.();
     unsubscribe = component.value.on('update', updateHook);
   }, { immediate: true, deep: true },

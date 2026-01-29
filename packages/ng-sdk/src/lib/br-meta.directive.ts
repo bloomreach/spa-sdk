@@ -1,5 +1,5 @@
 /*
- * Copyright 2020-2025 Bloomreach
+ * Copyright 2020-2026 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,9 @@
 
 import {
   Directive,
+  inject,
   OnChanges,
   OnDestroy,
-  Optional,
   SimpleChanges,
   TemplateRef,
   ViewContainerRef,
@@ -33,9 +33,8 @@ export abstract class BrMetaDirective implements OnChanges, OnDestroy {
 
   private clear?: ReturnType<MetaCollection['render']>;
 
-  constructor(private container: ViewContainerRef, @Optional() private template?: TemplateRef<never>) {
-    // Constructor intentionally left empty
-  }
+  private container = inject(ViewContainerRef);
+  private template = inject(TemplateRef<never>, { optional: true });
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   ngOnChanges(changes: SimpleChanges): void {

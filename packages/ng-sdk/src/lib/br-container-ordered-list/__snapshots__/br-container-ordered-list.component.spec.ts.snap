@@ -1,9 +1,8 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`BrContainerOrderedListComponent isPreview should add "hst-container-*" classes in preview 1`] = `
 <div
   class="hst-container"
-  id="root1"
 >
   <li
     class="hst-container-item"
@@ -20,9 +19,7 @@ exports[`BrContainerOrderedListComponent isPreview should add "hst-container-*" 
 `;
 
 exports[`BrContainerOrderedListComponent should render a container 1`] = `
-<div
-  id="root0"
->
+<div>
   <li>
     
   </li>

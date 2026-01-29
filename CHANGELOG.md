@@ -2,10 +2,44 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### ["27.0.0"](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-26.0.1..."27.0.0")
+#### [spa-sdk-27.1.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-27.0.0...spa-sdk-27.1.0)
+
+> 29 January 2026
+
+- SPASDK-254: Update ng-sdk and angular example app to support Angular 21 [`#225`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/225)
+- SPASDK-256 Update copyright headers [`#224`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/224)
+- SPASDK-255: Fix for CVE-2025-66478 in docs [`#223`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/223)
+- SPASDK-257 Merge branch 'feature/SPASDK-257_update_example_app_to_nuxt_4' into 'development' [`#SPASDK-257`](https://bloomreach.atlassian.net/browse/SPASDK-257)
+- SPASDK-257: Update lock file [`#SPASDK-257`](https://bloomreach.atlassian.net/browse/SPASDK-257)
+- SPASDK-257: Merge branch 'development' into feature/SPASDK-257_update_example_app_to_nuxt_4 [`#SPASDK-257`](https://bloomreach.atlassian.net/browse/SPASDK-257)
+- SPASDK-258: Fix pagination issue in vue-sdk [`#SPASDK-258`](https://bloomreach.atlassian.net/browse/SPASDK-258)
+- SPASDK-257: Fix TS compilation issue [`#SPASDK-257`](https://bloomreach.atlassian.net/browse/SPASDK-257)
+- SPASDK-257: Fix vue ssr app on Heroku [`#SPASDK-257`](https://bloomreach.atlassian.net/browse/SPASDK-257)
+- SPASDK-257: Fix Nuxt preview issue [`#SPASDK-257`](https://bloomreach.atlassian.net/browse/SPASDK-257)
+- SPASDK-257: Fix Nuxt route issue [`#SPASDK-257`](https://bloomreach.atlassian.net/browse/SPASDK-257)
+- SPASDK-254: Pin the `@angular/build` version [`#SPASDK-254`](https://bloomreach.atlassian.net/browse/SPASDK-254)
+- SPASDK-254: Bumping versions to 27.1.0 [`#SPASDK-254`](https://bloomreach.atlassian.net/browse/SPASDK-254)
+- SPASDK-257: updat pnpm lockfile [`#SPASDK-257`](https://bloomreach.atlassian.net/browse/SPASDK-257)
+- SPASDK-257: upgrade to nuxt 4 [`#SPASDK-257`](https://bloomreach.atlassian.net/browse/SPASDK-257)
+- SPASDK-243: Fix Angular SSR app on Heroku [`#SPASDK-243`](https://bloomreach.atlassian.net/browse/SPASDK-243)
+- SPASDK-243: Fix Angular CSR app on Heroku [`#SPASDK-243`](https://bloomreach.atlassian.net/browse/SPASDK-243)
+- SPASDK-254: Pre-release 27.1.0 [`#SPASDK-254`](https://bloomreach.atlassian.net/browse/SPASDK-254)
+- SPASDK-254: Try fixing test issues in pipeline [`#SPASDK-254`](https://bloomreach.atlassian.net/browse/SPASDK-254)
+- SPASDK-254: Replaced constructor injection with Angular's inject() function [`#SPASDK-254`](https://bloomreach.atlassian.net/browse/SPASDK-254)
+- SPASDK-254: Fix lint issues [`#SPASDK-254`](https://bloomreach.atlassian.net/browse/SPASDK-254)
+- SPASDK-254: Update pnpm lock file [`#SPASDK-254`](https://bloomreach.atlassian.net/browse/SPASDK-254)
+- SPASDK-254: Update @types/jest dependency [`#SPASDK-254`](https://bloomreach.atlassian.net/browse/SPASDK-254)
+- SPASDK-254: Update ng-sdk and angular example app to support Angular 21 [`#SPASDK-254`](https://bloomreach.atlassian.net/browse/SPASDK-254)
+- SPASDK-256 Update copyright headers [`#SPASDK-256`](https://bloomreach.atlassian.net/browse/SPASDK-256)
+- SPASDK-255: Fix for CVE-2025-66478 in docs [`#SPASDK-255`](https://bloomreach.atlassian.net/browse/SPASDK-255)
+
+### [spa-sdk-27.0.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-26.0.1...spa-sdk-27.0.0)
+
+> 15 December 2025
 
 - SPASDK-222: Add `isClientComponent` property to `BrProps` interface for easier... [`#221`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/221)
 - SPASDK-222 Support RSC in react-sdk [`#220`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/220)
+- SPASDK-222: Bumping versions to 27.0.0 [`#SPASDK-222`](https://bloomreach.atlassian.net/browse/SPASDK-222)
 - SPASDK-222: Fix for CVE-2025-55183, CVE-2025-55184, and CVE-2025-67779 [`#SPASDK-222`](https://bloomreach.atlassian.net/browse/SPASDK-222)
 - SPASDK-222: Fix QA issue by using the same react versions in react CSR example [`#SPASDK-222`](https://bloomreach.atlassian.net/browse/SPASDK-222)
 - SPASDK-222: Update lock file [`#SPASDK-222`](https://bloomreach.atlassian.net/browse/SPASDK-222)
@@ -160,16 +194,21 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-231 Fix security vulnerabilities [`#SPASDK-231`](https://bloomreach.atlassian.net/browse/SPASDK-231)
 - TRIVIAL Update README.md [`fa6e9e1`](https://github.com/bloomreach/spa-sdk/commit/fa6e9e15d075bc360c8bd6bf91aac8b04ed87d00)
 
-### [spa-sdk-24.0.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-23.4.4...spa-sdk-24.0.0)
+### [spa-sdk-24.0.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-23.5.0...spa-sdk-24.0.0)
 
 > 8 January 2025
 
 - SPASDK-230 Update the license headers [`#192`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/192)
+- SPASDK-227: Bumping versions to 24.0.0 [`#SPASDK-227`](https://bloomreach.atlassian.net/browse/SPASDK-227)
+- SPASDK-230 Update the license headers [`#SPASDK-230`](https://bloomreach.atlassian.net/browse/SPASDK-230)
+
+#### [spa-sdk-23.5.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-23.4.4...spa-sdk-23.5.0)
+
+> 7 January 2025
+
 - SPASDK-227: Change start script to fix CSR app [`#191`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/191)
 - SPASDK-227 Upgrade spa-sdk to support angular 18 [`#190`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/190)
-- SPASDK-227: Bumping versions to 24.0.0 [`#SPASDK-227`](https://bloomreach.atlassian.net/browse/SPASDK-227)
 - SPASDK-227: Bumping versions to 23.5.0 [`#SPASDK-227`](https://bloomreach.atlassian.net/browse/SPASDK-227)
-- SPASDK-230 Update the license headers [`#SPASDK-230`](https://bloomreach.atlassian.net/browse/SPASDK-230)
 - SPASDK-227: Change start script to fix CSR app [`#SPASDK-227`](https://bloomreach.atlassian.net/browse/SPASDK-227)
 - SPASDK-227: Update README file [`#SPASDK-227`](https://bloomreach.atlassian.net/browse/SPASDK-227)
 - SPASDK-227: Fix react example build error [`#SPASDK-227`](https://bloomreach.atlassian.net/browse/SPASDK-227)
@@ -1164,6 +1203,5 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-2 Add exported function "getContainerItemContent" [`#SPASDK-2`](https://bloomreach.atlassian.net/browse/SPASDK-2)
 - SPASDK-1 Bump to use node 14 [`#SPASDK-1`](https://bloomreach.atlassian.net/browse/SPASDK-1)
 - SPASDK-1 Remove maven files and update Jenkinsfile [`#SPASDK-1`](https://bloomreach.atlassian.net/browse/SPASDK-1)
-- SPASDK-1 Initial move from brxm monorepo [`#SPASDK-1`](https://bloomreach.atlassian.net/browse/SPASDK-1)
 - TRIVIAL Set branch name to 'main' in changesetBaseRefs [`4dacdcd`](https://github.com/bloomreach/spa-sdk/commit/4dacdcd2fdb0712e40dcb33b9809ae12786f9ab1)
 - TRIVIAL Skip telemetry check on nuxt startup [`15deb25`](https://github.com/bloomreach/spa-sdk/commit/15deb25b1edde3af3296d4dc34dba1483fe278f2)

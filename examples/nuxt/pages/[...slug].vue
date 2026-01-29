@@ -1,5 +1,5 @@
 <!--
-  Copyright 2024-2025 Bloomreach
+  Copyright 2024-2026 Bloomreach
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -15,15 +15,15 @@
   -->
 
 <template>
-  <br-page :configuration="configuration" :mapping="mapping" :page="page">
+  <br-page :configuration="{ ...configuration, httpClient: axios }" :mapping="mapping" :page="page">
     <template v-slot="{ page }">
       <template v-if="page">
         <header>
           <nav class="navbar navbar-expand-sm navbar-dark sticky-top bg-dark" role="navigation">
             <div class="container">
-              <router-link :to="page.getUrl('/')" class="navbar-brand">
+              <nuxt-link :to="page.getUrl('/')" class="navbar-brand">
                 {{ page.getTitle() || 'brXM + Nuxt = ♥' }}
-              </router-link>
+              </nuxt-link>
               <div class="collapse navbar-collapse">
                 <br-component component="menu"/>
               </div>
@@ -51,7 +51,7 @@ import type { BrMapping } from '@bloomreach/vue-sdk';
 import { BrComponent, BrPage } from '@bloomreach/vue-sdk';
 import axios from 'axios';
 import { BrBanner, BrContent, BrMenu, BrNewsList } from '#components';
-import { extractSearchParams, initialize, Configuration } from '@bloomreach/spa-sdk';
+import { extractSearchParams, initialize, type Configuration } from '@bloomreach/spa-sdk';
 
 const config = useRuntimeConfig();
 const route = useRoute();
@@ -64,34 +64,40 @@ const mapping: BrMapping = {
   'Simple Content': BrContent,
 };
 
-let configuration = {
-  path: route.fullPath,
-  endpoint: config.public.NUXT_APP_BRXM_ENDPOINT,
-  debug: true,
-} as Configuration;
+const configuration = computed(() => {
+  const configObj = {
+    path: route.fullPath,
+    endpoint: config.public.NUXT_APP_BRXM_ENDPOINT,
+    debug: true,
+  } as Configuration;
 
-if (!config.public.NUXT_APP_BRXM_ENDPOINT && config.public.NUXT_APP_BR_MULTI_TENANT_SUPPORT) {
-  const endpointQueryParameter = 'endpoint';
-  const { searchParams } = extractSearchParams(configuration.path!, [endpointQueryParameter].filter(Boolean));
+  if (!config.public.NUXT_APP_BRXM_ENDPOINT && config.public.NUXT_APP_BR_MULTI_TENANT_SUPPORT) {
+    const endpointQueryParameter = 'endpoint';
+    const { searchParams } = extractSearchParams(configObj.path!, [endpointQueryParameter].filter(Boolean));
 
-  configuration = {
-    ...configuration,
-    httpClient: axios,
-    endpoint: searchParams.get(endpointQueryParameter) ?? '',
-    baseUrl: `?${endpointQueryParameter}=${searchParams.get(endpointQueryParameter)}`,
+    return {
+      ...configObj,
+      endpoint: searchParams.get(endpointQueryParameter) ?? '',
+      baseUrl: `?${endpointQueryParameter}=${searchParams.get(endpointQueryParameter)}`,
+    }
   }
-}
 
-const { data } = await useAsyncData(async (context) => {
-  const page = await initialize({
-    ...configuration,
-    httpClient: axios,
-    request: context?.ssrContext?.event?.node?.req,
-  });
+  return configObj;
+});
 
-  return { page: page.toJSON() };
-})
+const { data } = await useAsyncData(
+  `page-${route.fullPath}`,
+  async (context) => {
+    const page = await initialize({
+      ...configuration.value,
+      httpClient: axios,
+      request: context?.ssrContext?.event?.node?.req,
+    });
 
-const page = data.value?.page;
+    return { page: page.toJSON() };
+  }
+)
+
+const page = computed(() => data.value?.page);
 
 </script>
