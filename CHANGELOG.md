@@ -2,11 +2,25 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### ["27.1.0"](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-27.0.0..."27.1.0")
+#### [spa-sdk-27.1.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-27.0.0...spa-sdk-27.1.0)
+
+> 29 January 2026
 
 - SPASDK-254: Update ng-sdk and angular example app to support Angular 21 [`#225`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/225)
 - SPASDK-256 Update copyright headers [`#224`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/224)
 - SPASDK-255: Fix for CVE-2025-66478 in docs [`#223`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/223)
+- SPASDK-257 Merge branch 'feature/SPASDK-257_update_example_app_to_nuxt_4' into 'development' [`#SPASDK-257`](https://bloomreach.atlassian.net/browse/SPASDK-257)
+- SPASDK-257: Update lock file [`#SPASDK-257`](https://bloomreach.atlassian.net/browse/SPASDK-257)
+- SPASDK-257: Merge branch 'development' into feature/SPASDK-257_update_example_app_to_nuxt_4 [`#SPASDK-257`](https://bloomreach.atlassian.net/browse/SPASDK-257)
+- SPASDK-258: Fix pagination issue in vue-sdk [`#SPASDK-258`](https://bloomreach.atlassian.net/browse/SPASDK-258)
+- SPASDK-257: Fix TS compilation issue [`#SPASDK-257`](https://bloomreach.atlassian.net/browse/SPASDK-257)
+- SPASDK-257: Fix vue ssr app on Heroku [`#SPASDK-257`](https://bloomreach.atlassian.net/browse/SPASDK-257)
+- SPASDK-257: Fix Nuxt preview issue [`#SPASDK-257`](https://bloomreach.atlassian.net/browse/SPASDK-257)
+- SPASDK-257: Fix Nuxt route issue [`#SPASDK-257`](https://bloomreach.atlassian.net/browse/SPASDK-257)
+- SPASDK-254: Pin the `@angular/build` version [`#SPASDK-254`](https://bloomreach.atlassian.net/browse/SPASDK-254)
+- SPASDK-254: Bumping versions to 27.1.0 [`#SPASDK-254`](https://bloomreach.atlassian.net/browse/SPASDK-254)
+- SPASDK-257: updat pnpm lockfile [`#SPASDK-257`](https://bloomreach.atlassian.net/browse/SPASDK-257)
+- SPASDK-257: upgrade to nuxt 4 [`#SPASDK-257`](https://bloomreach.atlassian.net/browse/SPASDK-257)
 - SPASDK-243: Fix Angular SSR app on Heroku [`#SPASDK-243`](https://bloomreach.atlassian.net/browse/SPASDK-243)
 - SPASDK-243: Fix Angular CSR app on Heroku [`#SPASDK-243`](https://bloomreach.atlassian.net/browse/SPASDK-243)
 - SPASDK-254: Pre-release 27.1.0 [`#SPASDK-254`](https://bloomreach.atlassian.net/browse/SPASDK-254)
@@ -1189,6 +1203,5 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-2 Add exported function "getContainerItemContent" [`#SPASDK-2`](https://bloomreach.atlassian.net/browse/SPASDK-2)
 - SPASDK-1 Bump to use node 14 [`#SPASDK-1`](https://bloomreach.atlassian.net/browse/SPASDK-1)
 - SPASDK-1 Remove maven files and update Jenkinsfile [`#SPASDK-1`](https://bloomreach.atlassian.net/browse/SPASDK-1)
-- SPASDK-1 Initial move from brxm monorepo [`#SPASDK-1`](https://bloomreach.atlassian.net/browse/SPASDK-1)
 - TRIVIAL Set branch name to 'main' in changesetBaseRefs [`4dacdcd`](https://github.com/bloomreach/spa-sdk/commit/4dacdcd2fdb0712e40dcb33b9809ae12786f9ab1)
 - TRIVIAL Skip telemetry check on nuxt startup [`15deb25`](https://github.com/bloomreach/spa-sdk/commit/15deb25b1edde3af3296d4dc34dba1483fe278f2)
