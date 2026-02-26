@@ -39,12 +39,6 @@ pipeline {
     )
   }
 
-  post {
-    cleanup {
-      deleteDir()
-    }
-  }
-
   stages {
     stage('Install') {
       steps {
