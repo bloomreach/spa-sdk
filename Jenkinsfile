@@ -17,9 +17,9 @@
 pipeline {
   agent {
     kubernetes {
-      label 'pnpm'
-              defaultContainer 'guergeiro/pnpm:20-8'
-    }
+      label 'brxm-spa-sdk-pnpm-20-8'
+              defaultContainer 'pnpm'
+    }
   }
 
   environment {
