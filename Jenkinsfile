@@ -19,7 +19,6 @@ pipeline {
     kubernetes {
       label 'pnpm'
               defaultContainer 'guergeiro/pnpm:20-8'
-      args '-v  /etc/passwd:/etc/passwd'
     }
   }
 
