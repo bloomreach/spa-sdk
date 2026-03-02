@@ -52,7 +52,7 @@ This is a **pnpm workspace** monorepo defined in `pnpm-workspace.yaml`:
 packages:
   - 'packages/*'     # SDK packages (spa-sdk, react-sdk, vue-sdk, ng-sdk)
   - 'examples/*'     # Example applications
-  - 'docs'          # Documentation site
+  - 'docs'          # Documentation site 
 ```
 
 **Project Dependencies & Linking:**
