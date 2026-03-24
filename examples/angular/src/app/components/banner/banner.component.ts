@@ -15,7 +15,7 @@
  */
 
 import { Component, Input, OnInit } from '@angular/core';
-import { Component as BrComponent, Document, ImageSet, Page } from '@bloomreach/spa-sdk';
+import { Component as BrComponent, Document, ImageSet, Image, Page } from '@bloomreach/spa-sdk';
 import { CommonModule } from '@angular/common';
 import { BrSdkModule } from '@bloomreach/ng-sdk';
 import { RouterModule } from '@angular/router';
@@ -57,11 +57,16 @@ export class BannerComponent implements OnInit {
     return this.document?.getData<DocumentData>();
   }
 
-  get image(): ImageSet | undefined {
-    return this.data?.image && this.page.getContent<ImageSet>(this.data.image);
+  get image(): Image | undefined {
+    const imageSet = this.data?.image && this.page.getContent<ImageSet>(this.data.image);
+    return imageSet && (this.imageVariant ? imageSet.getVariant(this.imageVariant) : imageSet.getOriginal());
   }
 
   get link(): Document | undefined {
     return this.data?.link && this.page.getContent<Document>(this.data.link);
+  }
+
+  get imageVariant(): string | undefined {
+    return this.component.getParameters<BannerParameters>().imageVariant;
   }
 }

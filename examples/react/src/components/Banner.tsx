@@ -21,15 +21,17 @@ import { Link } from 'react-router-dom';
 import { sanitize } from '../utils/sanitize';
 
 export function Banner({ component, page }: BrProps): JSX.Element | null {
-  const documentRef = component?.getModels().document;
+  const documentRef = component?.getModels<DocumentModels>().document;
   const document = !!documentRef && page?.getContent(documentRef);
+  const imageVariant = component?.getParameters<BannerParameters>().imageVariant;
 
   if (!document) {
     return null;
   }
 
   const { content, image: imageRef, link: linkRef, title } = document.getData<DocumentData>();
-  const image = imageRef && page.getContent<ImageSet>(imageRef);
+  const imageSet = imageRef && page.getContent<ImageSet>(imageRef);
+  const image = imageSet && (imageVariant ? imageSet.getVariant(imageVariant) : imageSet.getOriginal());
   const link = linkRef && page.getContent<Document>(linkRef);
 
   return (
@@ -45,7 +47,7 @@ export function Banner({ component, page }: BrProps): JSX.Element | null {
         page={page}
       />
       {title && <h1>{title}</h1>}
-      {image && <img className="img-fluid" src={image.getOriginal()?.getUrl()} alt={title} />}
+      {image && <img className="img-fluid" src={image.getUrl()} alt={title} />}
       {/* eslint-disable-next-line react/no-danger */}
       {content && page && <div dangerouslySetInnerHTML={{ __html: page.rewriteLinks(sanitize(content.value)) }} />}
       {link && (

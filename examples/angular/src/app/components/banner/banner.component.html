@@ -24,7 +24,7 @@
   <h1>{{ data!.title }}</h1>
   }
   @if (image) {
-  <img class="img-fluid" [src]="image.getOriginal()?.getUrl()" [alt]="data?.title || ''" />
+  <img class="img-fluid" [src]="image.getUrl()" [alt]="data?.title || ''" />
   }
   @if (data?.content) {
   <div [innerHTML]="safeHTML"></div>

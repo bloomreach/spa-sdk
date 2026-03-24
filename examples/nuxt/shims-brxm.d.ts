@@ -19,12 +19,13 @@ interface BannerParameters {
 }
 
 interface DocumentModels {
-  document: import('@bloomreach/spa-sdk').Reference;
+  document?: import('@bloomreach/spa-sdk').Reference;
 }
 
 interface DocumentContent {
   value: string;
 }
+
 interface DocumentData {
   author: string;
   content: DocumentContent;
@@ -38,7 +39,7 @@ interface DocumentData {
 }
 
 interface MenuModels {
-  menu: import('@bloomreach/spa-sdk').Reference;
+  menu?: import('@bloomreach/spa-sdk').Reference;
 }
 
 interface Pageable {
