@@ -14,6 +14,10 @@
  * limitations under the License.
  */
 
+interface BannerParameters {
+  imageVariant?: string;
+}
+
 interface DocumentModels {
   document?: import('@bloomreach/spa-sdk').Reference;
 }
