@@ -26,7 +26,7 @@
       :relative="true"
     />
     <h1 v-if="data?.title">{{ data.title }}</h1>
-    <img v-if="image" class="img-fluid" :src="image.getOriginal()?.getUrl()" :alt="data?.title" />
+    <img v-if="image" class="img-fluid" :src="image.getUrl()" :alt="data?.title" />
     <div v-if="html" v-html="html"/>
     <p v-if="link" className="lead">
       <router-link :to="link.getUrl()" class="btn btn-primary btn-lg" role="button">Learn more</router-link>
@@ -47,7 +47,11 @@ const props = defineProps<{
 const documentRef = computed(() => props.component.getModels<DocumentModels>().document);
 const document = computed(() => documentRef.value && props.page.getContent<Document>(documentRef.value));
 const data = computed(() => document.value?.getData<DocumentData>());
-const image = computed(() => data.value?.image && props.page.getContent<ImageSet>(data.value?.image));
+const image = computed(() => {
+  const imageVariant = props.component.getParameters<BannerParameters>().imageVariant;
+  const imageSet = data.value?.image && props.page.getContent<ImageSet>(data.value?.image);
+  return imageSet && (imageVariant ? imageSet.getVariant(imageVariant) : imageSet.getOriginal());
+});
 const link = computed(() => data.value?.link && props.page.getContent<Document>(data.value?.link));
 const isPreview = computed(() => props.page.isPreview());
 const html = ref<string | null>();

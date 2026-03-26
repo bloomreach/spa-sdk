@@ -16,11 +16,10 @@
 
 pipeline {
   agent {
-    docker {
-      label 'docker'
-              image 'guergeiro/pnpm:20-8'
-      args '-v  /etc/passwd:/etc/passwd'
-    }
+    kubernetes {
+                    label "brxm-spa-sdk-pnpm-20-8"
+                    defaultContainer 'pnpm'
+                }
   }
 
   environment {
@@ -37,12 +36,6 @@ pipeline {
       triggerOnPush: true,
       pendingBuildName: 'SPA SDK'
     )
-  }
-
-  post {
-    cleanup {
-      deleteDir()
-    }
   }
 
   stages {

@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
+#### ["27.2.0"](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-27.1.0..."27.2.0")
+
+- SPASDK-234: Add `getVariant()` and `getVariants()` methods to ImageSet [`#232`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/232)
+- SPASDK-234: Enhance Banner component to support image variants across Angular, React, Vue, and Nuxt examples. [`#SPASDK-234`](https://bloomreach.atlassian.net/browse/SPASDK-234)
+- SPASDK-234: Add `getVariant()` and `getVariants()` methods to ImageSet [`#SPASDK-234`](https://bloomreach.atlassian.net/browse/SPASDK-234)
+- TRIVIAL: Add browserslist configuration to package.json for improved compatibility [`f9953fe`](https://github.com/bloomreach/spa-sdk/commit/f9953fe7bf35b18106bc6abccd54c26d79a94952)
+- TRIVIAL Test new Jenkins push webhook [`3db28f9`](https://github.com/bloomreach/spa-sdk/commit/3db28f98bac79402d3ec13f9ac730b9483dd3f9a)
+- TRIVIAL Add Kubernetes containers for the new Jenkins [`bd965c4`](https://github.com/bloomreach/spa-sdk/commit/bd965c482ef58d5920edb6bc47e6eb7173be6d87)
+- TRIVIAL Edit CLAUDE.md [`112073c`](https://github.com/bloomreach/spa-sdk/commit/112073c92bb2dc557ad4666216101ce4dc67932e)
+- TRIVIAL Merge branch 'test' into 'development' [`122647d`](https://github.com/bloomreach/spa-sdk/commit/122647d20538c309d50656ab18319b0c77d9635e)
+- TRIVIAL Remove the part for folder cleanup [`78db4d2`](https://github.com/bloomreach/spa-sdk/commit/78db4d2fe5d82a61068fa5046413a123c3f7aa4c)
+- TRIVIAL Edit CLAUDE.md [`43cd4d7`](https://github.com/bloomreach/spa-sdk/commit/43cd4d785fe4c6f23aa77dbeb4862a8577c8dede)
+- TRIVIAL Merge branch 'jenkins-change' into 'development' [`3ad5ac3`](https://github.com/bloomreach/spa-sdk/commit/3ad5ac3c94922a331a7d401a07d5eb1463305188)
+- TRIVIAL Use the correct label for Jenkins [`046d5ae`](https://github.com/bloomreach/spa-sdk/commit/046d5aec2c19accbbe9d1ce1bdc4f020ab2ec892)
+- TRIVIAL Modify file to fit the new Jenkins [`bdb77c8`](https://github.com/bloomreach/spa-sdk/commit/bdb77c8ebb99d2739de896ec3c1f7eb1323893a0)
+- TRIVIAL Modify Jenkins file for the new Jenkins [`e47ae78`](https://github.com/bloomreach/spa-sdk/commit/e47ae7895867ff71ba7b287f103778451187b6ff)
+
 #### [spa-sdk-27.1.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-27.0.0...spa-sdk-27.1.0)
 
 > 29 January 2026
@@ -18,6 +35,7 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-257: Fix Nuxt preview issue [`#SPASDK-257`](https://bloomreach.atlassian.net/browse/SPASDK-257)
 - SPASDK-257: Fix Nuxt route issue [`#SPASDK-257`](https://bloomreach.atlassian.net/browse/SPASDK-257)
 - SPASDK-254: Pin the `@angular/build` version [`#SPASDK-254`](https://bloomreach.atlassian.net/browse/SPASDK-254)
+- SPASDK-234: Add `getVariant()` and `getVariants()` methods to ImageSet [`#SPASDK-234`](https://bloomreach.atlassian.net/browse/SPASDK-234)
 - SPASDK-254: Bumping versions to 27.1.0 [`#SPASDK-254`](https://bloomreach.atlassian.net/browse/SPASDK-254)
 - SPASDK-257: updat pnpm lockfile [`#SPASDK-257`](https://bloomreach.atlassian.net/browse/SPASDK-257)
 - SPASDK-257: upgrade to nuxt 4 [`#SPASDK-257`](https://bloomreach.atlassian.net/browse/SPASDK-257)
@@ -32,6 +50,8 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-254: Update ng-sdk and angular example app to support Angular 21 [`#SPASDK-254`](https://bloomreach.atlassian.net/browse/SPASDK-254)
 - SPASDK-256 Update copyright headers [`#SPASDK-256`](https://bloomreach.atlassian.net/browse/SPASDK-256)
 - SPASDK-255: Fix for CVE-2025-66478 in docs [`#SPASDK-255`](https://bloomreach.atlassian.net/browse/SPASDK-255)
+- Revert "SPASDK-234: Add `getVariant()` and `getVariants()` methods to ImageSet" [`11b6a46`](https://github.com/bloomreach/spa-sdk/commit/11b6a46028005301160d7d8c340af0f434dde924)
+- TRIVIAL: Update changelog [`6246157`](https://github.com/bloomreach/spa-sdk/commit/6246157c03d6d9fa09944363dcbdaadf10058701)
 
 ### [spa-sdk-27.0.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-26.0.1...spa-sdk-27.0.0)
 
@@ -1202,6 +1222,5 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-2 Log warning for unsupported method "getContentReference" in v0.9 [`#SPASDK-2`](https://bloomreach.atlassian.net/browse/SPASDK-2)
 - SPASDK-2 Add exported function "getContainerItemContent" [`#SPASDK-2`](https://bloomreach.atlassian.net/browse/SPASDK-2)
 - SPASDK-1 Bump to use node 14 [`#SPASDK-1`](https://bloomreach.atlassian.net/browse/SPASDK-1)
-- SPASDK-1 Remove maven files and update Jenkinsfile [`#SPASDK-1`](https://bloomreach.atlassian.net/browse/SPASDK-1)
 - TRIVIAL Set branch name to 'main' in changesetBaseRefs [`4dacdcd`](https://github.com/bloomreach/spa-sdk/commit/4dacdcd2fdb0712e40dcb33b9809ae12786f9ab1)
 - TRIVIAL Skip telemetry check on nuxt startup [`15deb25`](https://github.com/bloomreach/spa-sdk/commit/15deb25b1edde3af3296d4dc34dba1483fe278f2)

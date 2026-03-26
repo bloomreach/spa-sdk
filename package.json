@@ -12,6 +12,11 @@
     "node": "^20.0.0",
     "pnpm": "^8.0.0"
   },
+  "browserslist": [
+    "last 2 versions",
+    "not dead",
+    "> 0.5%"
+  ],
   "author": "Bloomreach B.V.",
   "license": "Apache-2.0",
   "homepage": "https://www.bloomreach.com",

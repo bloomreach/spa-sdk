@@ -30,6 +30,7 @@ interface ImageSetDataModel {
   name: string;
   original: ImageModel | null;
   thumbnail: ImageModel | null;
+  [property: string]: any;
 }
 
 /**
@@ -80,6 +81,18 @@ export interface ImageSet {
    * @return The thumbnail.
    */
   getThumbnail(): Image | undefined;
+
+  /**
+   * @param variant The variant name.
+   * @return The image variant, or undefined if it doesn't exist.
+   */
+  getVariant(variant: string): Image | undefined;
+
+  /**
+   * @param variants Optional array of variant names to retrieve. If not provided, returns all variants.
+   * @return A map of variant names to Image objects.
+   */
+  getVariants(variants?: string[]): Record<string, Image>;
 }
 
 @injectable()
@@ -88,6 +101,8 @@ export class ImageSetImpl implements ImageSet {
 
   private thumbnail?: Image;
 
+  private variants: Record<string, Image> = {};
+
   constructor(
     @inject(ImageSetModelToken) protected model: ImageSetModel,
     @inject(ImageFactory) imageFactory: ImageFactory,
@@ -95,6 +110,8 @@ export class ImageSetImpl implements ImageSet {
     this.original = model.data.original ? imageFactory(model.data.original) : undefined;
 
     this.thumbnail = model.data.thumbnail ? imageFactory(model.data.thumbnail) : undefined;
+
+    this.loadVariants(imageFactory);
   }
 
   getDescription(): string | undefined {
@@ -127,6 +144,48 @@ export class ImageSetImpl implements ImageSet {
 
   getThumbnail(): Image | undefined {
     return this.thumbnail;
+  }
+
+  getVariant(variant: string): Image | undefined {
+    return this.variants[variant] ?? undefined;
+  }
+
+  getVariants(variants?: string[]): Record<string, Image> {
+    if (variants) {
+      // Return only the requested variants
+      return variants.reduce((acc, variant) => {
+        const variantImage = this.variants[variant];
+        if (variantImage) {
+          acc[variant] = variantImage;
+        }
+        return acc;
+      }, {} as Record<string, Image>);
+    }
+
+    // Return a copy of all variants
+    return { ...this.variants };
+  }
+
+  private loadVariants(imageFactory: ImageFactory): void {
+    this.variants = {};
+    const knownImageSetProperties = [
+      'name',
+      'displayName',
+      'fileName',
+      'description',
+      'contentType',
+      'localeString',
+      'id',
+    ];
+
+    Object.keys(this.model.data)
+      .filter((key) => !knownImageSetProperties.includes(key))
+      .forEach((variant) => {
+        const variantData = this.model.data[variant];
+        if (variantData != null && typeof variantData === 'object') {
+          this.variants[variant] = imageFactory(variantData as ImageModel);
+        }
+      });
   }
 }
 
