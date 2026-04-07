@@ -2,12 +2,12 @@
 
 ## Project Overview
 
-This is a monorepo containing the Bloomreach SPA SDKs for integrating Single Page Applications with Bloomreach Experience Manager. The repository provides framework-specific SDKs (React, Vue, Angular) built on top of a core framework-agnostic SPA SDK.
+This is a monorepo containing the Bloomreach SPA SDKs for integrating Single Page Applications with Bloomreach Experience Manager. The repository provides framework-specific SDKs (React, Vue, Angular, Lit) built on top of a core framework-agnostic SPA SDK.
 
 ### Core Purpose
 - **SPA SDK**: Framework-independent core library for Page Model API integration and preview mode support
-- **Framework SDKs**: React, Vue, and Angular-specific components and utilities
-- **Examples**: Reference implementations for React (CSR/Next.js), Vue (CSR/Nuxt), and Angular (CSR/Universal)
+- **Framework SDKs**: React, Vue, Angular, and Lit-specific components and utilities
+- **Examples**: Reference implementations for React (CSR/Next.js), Vue (CSR/Nuxt), Angular (CSR/Universal), and Lit (CSR)
 
 
 ## Repository Structure
@@ -17,6 +17,7 @@ This is a monorepo containing the Bloomreach SPA SDKs for integrating Single Pag
 - **`react-sdk/`**: React components and hooks for brXM integration
 - **`vue-sdk/`**: Vue 3 components and composables for brXM integration  
 - **`ng-sdk/`**: Angular directives, components, and services for brXM integration
+- **`lit-sdk/`**: Lit custom elements and context-based state management for brXM integration
 
 ### Examples (`examples/`)
 - **`react/`**: Client-side rendered React app
@@ -24,6 +25,7 @@ This is a monorepo containing the Bloomreach SPA SDKs for integrating Single Pag
 - **`vue/`**: Vue 3 client-side rendered app
 - **`nuxt/`**: Nuxt SSR/SSG implementation
 - **`angular/`**: Angular Universal SSR/CSR implementation
+- **`lit/`**: Lit web components client-side rendered app
 
 ### Documentation (`docs/`)
 - Astro-based documentation site deployed to GitHub Pages
@@ -36,6 +38,7 @@ Each package contains detailed README files with specific usage instructions:
 - [`packages/react-sdk/README.md`](./packages/react-sdk/README.md) - React component usage and patterns
 - [`packages/vue-sdk/README.md`](./packages/vue-sdk/README.md) - Vue composables and component setup
 - [`packages/ng-sdk/README.md`](./packages/ng-sdk/README.md) - Angular directives and service integration
+- [`packages/lit-sdk/README.md`](./packages/lit-sdk/README.md) - Lit custom elements and web components setup
 
 **Example Applications:**
 - [`examples/react/README.md`](./examples/react/README.md) - React CSR implementation guide
@@ -43,6 +46,7 @@ Each package contains detailed README files with specific usage instructions:
 - [`examples/vue/README.md`](./examples/vue/README.md) - Vue 3 CSR setup and routing
 - [`examples/nuxt/README.md`](./examples/nuxt/README.md) - Nuxt SSR/SSG configuration
 - [`examples/angular/README.md`](./examples/angular/README.md) - Angular Universal setup
+- [`examples/lit/README.md`](./examples/lit/README.md) - Lit web components CSR implementation guide
 
 ## Package Management & Build System
 
@@ -50,7 +54,7 @@ Each package contains detailed README files with specific usage instructions:
 This is a **pnpm workspace** monorepo defined in `pnpm-workspace.yaml`:
 ```yaml
 packages:
-  - 'packages/*'     # SDK packages (spa-sdk, react-sdk, vue-sdk, ng-sdk)
+  - 'packages/*'     # SDK packages (spa-sdk, react-sdk, vue-sdk, ng-sdk, lit-sdk)
   - 'examples/*'     # Example applications
   - 'docs'          # Documentation site 
 ```
@@ -68,7 +72,8 @@ packages:
 │                         └── @bloomreach/example-next
 ├── @bloomreach/vue-sdk   → @bloomreach/example-vue  
 │                         └── @bloomreach/example-nuxt
-└── @bloomreach/ng-sdk    → @bloomreach/example-angular
+├── @bloomreach/ng-sdk    → @bloomreach/example-angular
+└── @bloomreach/lit-sdk   → @bloomreach/example-lit
 ```
 
 **Dependency Flow:**
@@ -82,11 +87,13 @@ packages:
 - **React SDK**: Rollup with TypeScript, Babel, and Terser (UMD + ES modules)
 - **Vue SDK**: Vite with TypeScript and Vue SFC support
 - **Angular SDK**: Angular CLI with ng-packagr
+- **Lit SDK**: Vite with TypeScript and vite-plugin-dts (UMD + ES modules)
 
 ### Output Formats
 - **SPA/React SDKs**: UMD (`dist/index.umd.js`) and ES modules (`dist/index.js`) with TypeScript declarations
 - **Vue SDK**: ES modules (`dist/index.js`) and UMD (`dist/index.umd.cjs`) with TypeScript declarations
 - **Angular SDK**: Angular Package Format with FESM2022 bundles
+- **Lit SDK**: ES modules (`dist/index.js`) and UMD (`dist/index.umd.cjs`) with TypeScript declarations
 
 ## Development Commands
 
@@ -191,6 +198,12 @@ All framework SDKs provide an identical set of core components with framework-sp
 - **Component Mapping**: `Record<keyof any, Type<BrProps>>`
 - **Pattern**: Angular services with dependency injection and structural directives
 
+#### Lit SDK
+- **State Management**: `@lit/context` with three contexts (`brPageContext`, `brComponentContext`, `brMappingContext`)
+- **Component Architecture**: Custom elements with decorators, light DOM for EM compatibility
+- **Component Mapping**: `Record<string, string>` (ctype to custom element tag name)
+- **Pattern**: Lit Context provide/consume with `@property` and `@state` decorators
+
 ### Common Patterns Across SDKs
 - **Container Management**: Unified container types (box, inline, lists, etc.)
 - **Component Mapping**: Dynamic component resolution based on brXM component types
@@ -204,6 +217,7 @@ All framework SDKs provide an identical set of core components with framework-sp
 - **React SDK**: Jest with @testing-library/react, snapshot testing
 - **Vue SDK**: Vitest with @vue/test-utils
 - **Angular SDK**: Jest with jest-preset-angular
+- **Lit SDK**: Vitest with jsdom environment
 
 ### Testing Patterns
 - **Unit Tests**: Component behavior, utility functions, service logic
@@ -224,6 +238,7 @@ All framework SDKs provide an identical set of core components with framework-sp
 - **React SDK**: JSX support, React typings
 - **Vue SDK**: Vue SFC support with separate configs for app/tests
 - **Angular SDK**: Angular-specific TypeScript configuration
+- **Lit SDK**: ES2021 target, bundler moduleResolution, experimentalDecorators
 
 ## Release & Deployment
 
@@ -267,6 +282,7 @@ All framework SDKs provide an identical set of core components with framework-sp
 - **React**: Supports v16.14+ through v19.0 (peer dependency)
 - **Vue**: Requires Vue 3.2.45+ (peer dependency)
 - **Angular**: Supports Angular 20+ (peer dependency)
+- **Lit**: Requires Lit 3.2+ and @lit/context 1.1+ (peer dependencies)
 - **Node.js**: Requires v20.0.0+ for development
 
 ## Key Integration Points
