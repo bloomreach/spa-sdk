@@ -1,0 +1,22 @@
+{
+  "name": "@bloomreach/lit-sdk",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "lit": "^3.2.0",
+    "@lit/context": "^1.1.0",
+    "@bloomreach/spa-sdk": "^27.1.0"
+  },
+  "devDependencies": {
+    "typescript": "~5.6.0",
+    "vitest": "^3.0.0",
+    "jsdom": "^26.0.0"
+  }
+}
