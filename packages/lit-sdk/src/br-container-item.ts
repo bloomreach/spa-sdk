@@ -68,17 +68,17 @@ export class BrContainerItem extends LitElement {
   }
 
   updated() {
-    // Inject meta comments around the mapped element for EM overlays
+    // Inject meta comments around <br-container-item> itself so they end up
+    // as direct children of the .hst-container-item wrapper div created by
+    // br-container. meta.render(head, tail) inserts begin comments before
+    // head and end comments after tail in head.parentNode — so using `this`
+    // places them in the wrapper div, matching the Angular SDK's DOM structure
+    // and enabling EM drag-and-drop reordering.
     this._clearMeta?.();
     if (this.component && this._page?.isPreview()) {
       const meta = this.component.getMeta();
       if (meta.length > 0) {
-        const mappedEl = this.firstElementChild;
-        if (mappedEl) {
-          this._clearMeta = meta.render(mappedEl, mappedEl);
-        } else {
-          this._clearMeta = meta.render(this, this);
-        }
+        this._clearMeta = meta.render(this, this);
       }
     }
 

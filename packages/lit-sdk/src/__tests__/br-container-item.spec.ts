@@ -236,9 +236,9 @@ describe('br-container-item', () => {
       await el.updateComplete;
 
       expect(meta.render).toHaveBeenCalled();
-      // Should be called with the mapped child element
-      const mappedEl = el.querySelector('test-banner');
-      expect(meta.render).toHaveBeenCalledWith(mappedEl, mappedEl);
+      // Should be called with the br-container-item element itself so comments
+      // end up in its parentNode (the .hst-container-item wrapper div)
+      expect(meta.render).toHaveBeenCalledWith(el, el);
     });
 
     it('does NOT inject meta in live mode', async () => {
