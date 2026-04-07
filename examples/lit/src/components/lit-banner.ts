@@ -1,7 +1,7 @@
 import { LitElement, html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
-import { type ContainerItem, type Page, type Document, type ImageSet } from '@bloomreach/spa-sdk';
+import { type ContainerItem, type Page, type Content, type Document, type ImageSet } from '@bloomreach/spa-sdk';
 import '@bloomreach/lit-sdk';
 import { sanitize } from '../utils/sanitize.js';
 
@@ -21,9 +21,25 @@ export class LitBanner extends LitElement {
     const documentRef = this.component.getModels<DocumentModels>().document;
     const document = documentRef && this.page.getContent(documentRef);
 
-    if (!document) return nothing;
+    if (!document) {
+      if (!this.page.isPreview()) return nothing;
+      return html`
+        <div class="jumbotron mb-3 has-edit-button">
+          <br-manage-content-button
+            documentTemplateQuery="new-banner-document"
+            folderTemplateQuery="new-banner-folder"
+            parameter="document"
+            root="banners"
+            ?relative=${true}
+            pickerSelectableNodeTypes="best:banner,hap:bannerdocument"
+            .page=${this.page}
+          ></br-manage-content-button>
+          <p class="text-muted">Click to select a banner document</p>
+        </div>
+      `;
+    }
 
-    const { content, image: imageRef, link: linkRef, title } = (document as any).getData<DocumentData>();
+    const { content, image: imageRef, link: linkRef, title } = (document as Content).getData<DocumentData>();
     const imageVariant = this.component.getParameters<BannerParameters>().imageVariant;
     const imageSet = imageRef && this.page.getContent<ImageSet>(imageRef);
     const image = imageSet && (imageVariant ? imageSet.getVariant(imageVariant) : imageSet.getOriginal());

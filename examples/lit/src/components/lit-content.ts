@@ -21,7 +21,15 @@ export class LitContent extends LitElement {
     const documentRef = this.component.getModels<DocumentModels>().document;
     const document = documentRef && this.page.getContent<Document>(documentRef);
 
-    if (!document) return nothing;
+    if (!document) {
+      if (!this.page.isPreview()) return nothing;
+      return html`
+        <div class="has-edit-button">
+          <br-manage-content-button .page=${this.page}></br-manage-content-button>
+          <p class="text-muted">Click to select a content document</p>
+        </div>
+      `;
+    }
 
     const {
       author,

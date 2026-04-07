@@ -87,7 +87,20 @@ export class LitNewsList extends LitElement {
     if (!this.component || !this.page) return nothing;
 
     const pageable = this.component.getModels<PageableModels>().pageable;
-    if (!pageable) return nothing;
+    if (!pageable) {
+      if (!this.page.isPreview()) return nothing;
+      return html`
+        <div class="has-edit-button">
+          <br-manage-content-button
+            documentTemplateQuery="new-news-document"
+            folderTemplateQuery="new-news-folder"
+            root="news"
+            .page=${this.page}
+          ></br-manage-content-button>
+          <p class="text-muted">No news items yet</p>
+        </div>
+      `;
+    }
 
     return html`
       <div>
