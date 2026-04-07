@@ -1,8 +1,6 @@
-# Lit SDK for Bloomreach XM
+# Bloomreach SPA SDK for Lit
 
-A custom integration layer that connects [Lit](https://lit.dev/) web components with [Bloomreach Experience Manager (brXM)](https://documentation.bloomreach.com/) via the `@bloomreach/spa-sdk` core library.
-
-There is no official `@bloomreach/lit-sdk`. This package fills that gap by providing the same component set as the React, Angular, and Vue SDKs — but built with Lit patterns: custom elements, decorators, and `@lit/context` for state propagation.
+Bloomreach SPA SDK integration for [Lit](https://lit.dev/) web components. This package provides the same component set as the React, Angular, and Vue SDKs — built with Lit patterns: custom elements, decorators, and `@lit/context` for state propagation.
 
 ## Table of Contents
 
@@ -32,7 +30,7 @@ There is no official `@bloomreach/lit-sdk`. This package fills that gap by provi
 
 ```
 +---------------------------------------------+
-|          Your Lit Web Components             |  <-- bank-hero, bank-features, etc.
+|          Your Lit Web Components             |  <-- lit-banner, lit-content, etc.
 +---------------------------------------------+
 |       lit-sdk (this package)                 |  <-- br-page, br-component, etc.
 +---------------------------------------------+
@@ -55,56 +53,22 @@ The SDK sits between your application components and the core `@bloomreach/spa-s
 
 ## Installation
 
-### Dependencies
-
-The SDK requires three peer dependencies:
+### Install the SDK and its peer dependencies
 
 ```bash
-npm install lit @lit/context @bloomreach/spa-sdk
+npm install @bloomreach/lit-sdk lit @lit/context @bloomreach/spa-sdk
 ```
 
-### Project Setup
+### Usage
 
-The SDK is designed to be consumed as source (no build step required). Configure your bundler and TypeScript to resolve the `lit-sdk` alias.
-
-**tsconfig.json** — Add path aliases and include the SDK source:
-
-```json
-{
-  "compilerOptions": {
-    "paths": {
-      "lit-sdk": ["./lit-sdk/src/index.ts"],
-      "lit-sdk/*": ["./lit-sdk/src/*"]
-    }
-  },
-  "include": ["src", "lit-sdk/src"]
-}
-```
-
-**vite.config.ts** — Add resolve aliases so Vite compiles the SDK source directly (including sub-path imports like `lit-sdk/br-manage-content-button.js`):
-
-```typescript
-import { defineConfig } from 'vite';
-import { resolve } from 'path';
-
-export default defineConfig({
-  resolve: {
-    alias: [
-      { find: /^lit-sdk\/(.+)\.js$/, replacement: resolve(__dirname, 'lit-sdk/src/$1.ts') },
-      { find: 'lit-sdk', replacement: resolve(__dirname, 'lit-sdk/src/index.ts') },
-    ],
-  },
-});
-```
-
-After this setup, you can import from `lit-sdk` anywhere in your project:
+Import from `@bloomreach/lit-sdk` anywhere in your project:
 
 ```typescript
 // Barrel import (components, utilities, contexts, types)
-import { BrPage, getDocumentData } from 'lit-sdk';
+import { BrPage, getDocumentData, brPageContext } from '@bloomreach/lit-sdk';
 
-// Direct component import (for side-effect registration)
-import 'lit-sdk/br-manage-content-button.js';
+// Side-effect import registers all custom elements
+import '@bloomreach/lit-sdk';
 ```
 
 ---
@@ -119,15 +83,15 @@ import { customElement } from 'lit/decorators.js';
 import type { Configuration } from '@bloomreach/spa-sdk';
 
 // Register SDK custom elements
-import 'lit-sdk';
+import '@bloomreach/lit-sdk';
 
 // Register your mapped components
-import './my-hero.js';
 import './my-banner.js';
+import './my-content.js';
 
 const MAPPING: Record<string, string> = {
-  'Hero': 'my-hero',
   'Banner': 'my-banner',
+  'Content': 'my-content',
 };
 
 @customElement('my-app')
@@ -171,7 +135,7 @@ export class MyApp extends LitElement {
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import type { ContainerItem, Page } from '@bloomreach/spa-sdk';
-import { getDocumentData } from 'lit-sdk';
+import { getDocumentData } from '@bloomreach/lit-sdk';
 
 interface HeroData {
   headline: string;
@@ -435,8 +399,8 @@ The `page` property is resolved in this order: explicit `page` prop → Lit Cont
 **Usage:**
 
 ```typescript
-import { getDocumentData } from 'lit-sdk';
-import 'lit-sdk/br-manage-menu-button.js';
+import { getDocumentData } from '@bloomreach/lit-sdk';
+import '@bloomreach/lit-sdk';
 
 // Inside a mapped component's render():
 render() {
@@ -466,12 +430,10 @@ The `mapping` property on `<br-page>` maps brXM `ctype` strings to Lit custom el
 
 ```typescript
 const MAPPING: Record<string, string> = {
-  'BankHero': 'bank-hero',
-  'BankFeatures': 'bank-features',
-  'BankStats': 'bank-stats',
-  'BankTestimonials': 'bank-testimonials',
-  'BankCtaBanner': 'bank-cta-banner',
-  'News List': 'bank-news-list',   // uses label fallback (no ctype set)
+  'Banner': 'my-banner',
+  'Content': 'my-content',
+  'News List': 'my-news-list',      // uses label fallback (no ctype set)
+  'Simple Content': 'my-content',   // multiple ctypes can map to one element
 };
 ```
 
@@ -508,7 +470,7 @@ Every mapped component receives two properties from the SDK:
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import type { ContainerItem, Page } from '@bloomreach/spa-sdk';
-import { getDocumentData } from 'lit-sdk';
+import { getDocumentData } from '@bloomreach/lit-sdk';
 
 interface MyData {
   title: string;
@@ -617,7 +579,7 @@ The SDK provides two utility functions for extracting content from container ite
 These components store a document reference in `models.document` (a `$ref` pointer), not in the `content` field.
 
 ```typescript
-import { getDocumentData } from 'lit-sdk';
+import { getDocumentData } from '@bloomreach/lit-sdk';
 
 const data = getDocumentData<HeroData>(component, page);
 ```
@@ -632,7 +594,7 @@ const data = getDocumentData<HeroData>(component, page);
 Wraps the core SDK's `getContainerItemContent`. Resolves content from the `content` field on the container item model. Use this when your component stores content directly rather than via a document reference.
 
 ```typescript
-import { getContainerItemContent } from 'lit-sdk';
+import { getContainerItemContent } from '@bloomreach/lit-sdk';
 
 const data = getContainerItemContent<BannerData>(component, page);
 ```
@@ -719,7 +681,7 @@ You typically don't need to consume these contexts directly — the SDK passes `
 
 ```typescript
 import { consume } from '@lit/context';
-import { brPageContext } from 'lit-sdk';
+import { brPageContext } from '@bloomreach/lit-sdk';
 import type { Page } from '@bloomreach/spa-sdk';
 
 @customElement('my-component')
