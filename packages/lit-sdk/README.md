@@ -152,6 +152,8 @@ Renders an "Edit content" overlay in Experience Manager preview mode.
 | `relative` | `boolean` | No | Store as relative path |
 | `root` | `string` | No | Root folder path |
 | `pickerSelectableNodeTypes` | `string` | No | Selectable node types for picker |
+| `pickerConfiguration` | `string` | No | CMS picker configuration path |
+| `pickerInitialPath` | `string` | No | Initial path for the picker |
 
 ### `<br-manage-menu-button>`
 

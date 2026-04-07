@@ -16,7 +16,7 @@ import { brPageContext } from './context.js';
  *    ```
  *    Meta comments are injected around this element itself.
  *
- * 2. **Shadow DOM** (inside mapped components like bank-hero):
+ * 2. **Shadow DOM** (inside mapped components using Shadow DOM):
  *    ```html
  *    <br-manage-content-button
  *      .content=${document}
