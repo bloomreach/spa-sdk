@@ -54,6 +54,15 @@ export class BrManageContentButton extends LitElement {
   @property({ type: String })
   root?: string;
 
+  @property({ type: String })
+  pickerSelectableNodeTypes?: string;
+
+  @property({ type: String })
+  pickerConfiguration?: string;
+
+  @property({ type: String })
+  pickerInitialPath?: string;
+
   /** Direct page reference (use when inside Shadow DOM where context may not reach) */
   @property({ type: Object })
   page?: Page;
@@ -101,6 +110,9 @@ export class BrManageContentButton extends LitElement {
       parameter: this.parameter,
       relative: this.relative,
       root: this.root,
+      pickerSelectableNodeTypes: this.pickerSelectableNodeTypes,
+      pickerConfiguration: this.pickerConfiguration,
+      pickerInitialPath: this.pickerInitialPath,
     });
     if (meta && meta.length > 0) {
       // If renderTarget is set, inject meta around that element (light DOM).
