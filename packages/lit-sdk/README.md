@@ -1,6 +1,6 @@
-# Bloomreach SPA SDK for Lit
+# Bloomreach Lit SDK
 
-Bloomreach SPA SDK integration for [Lit](https://lit.dev/) web components. This package provides the same component set as the React, Angular, and Vue SDKs — built with Lit patterns: custom elements, decorators, and `@lit/context` for state propagation.
+Bloomreach LIT SDK integration for [Lit](https://lit.dev/) web components. This package provides the same component set as the React, Angular, and Vue SDKs — built with Lit patterns: custom elements, decorators, and `@lit/context` for state propagation.
 
 ## Table of Contents
 
