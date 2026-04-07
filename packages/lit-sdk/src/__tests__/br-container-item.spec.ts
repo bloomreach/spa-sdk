@@ -1,5 +1,12 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { createMockContainerItem, createMockPage, createMockMeta, cleanup } from './mocks.js';
+import {
+  describe, it, expect, vi, beforeEach, afterEach,
+} from 'vitest';
+import {
+  createMockContainerItem, createMockPage, createMockMeta, cleanup,
+} from './mocks.js';
+
+import '../br-container-item.js';
+import type { BrContainerItem } from '../br-container-item.js';
 
 vi.mock('@bloomreach/spa-sdk', () => ({
   initialize: vi.fn(),
@@ -13,9 +20,6 @@ vi.mock('@bloomreach/spa-sdk', () => ({
   TYPE_MANAGE_CONTENT_BUTTON: 'MANAGE_CONTENT_BUTTON',
   TYPE_MANAGE_MENU_BUTTON: 'MANAGE_MENU_BUTTON',
 }));
-
-import '../br-container-item.js';
-import type { BrContainerItem } from '../br-container-item.js';
 
 // Register a dummy mapped component for testing
 if (!customElements.get('test-banner')) {
@@ -33,7 +37,7 @@ describe('br-container-item', () => {
   const defaultMapping = { Banner: 'test-banner' };
 
   afterEach(() => {
-    if (el?.parentNode) cleanup(el);
+    if (el?.parentNode) { cleanup(el); }
     vi.restoreAllMocks();
   });
 

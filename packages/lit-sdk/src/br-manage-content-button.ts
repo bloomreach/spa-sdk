@@ -34,38 +34,38 @@ import { brPageContext } from './context.js';
 @customElement('br-manage-content-button')
 export class BrManageContentButton extends LitElement {
   @property({ type: Object })
-  content?: ManageContentButton['content'];
+    content?: ManageContentButton['content'];
 
   @property({ type: String })
-  documentTemplateQuery?: string;
+    documentTemplateQuery?: string;
 
   @property({ type: String })
-  folderTemplateQuery?: string;
+    folderTemplateQuery?: string;
 
   @property({ type: String })
-  path?: string;
+    path?: string;
 
   @property({ type: String })
-  parameter?: string;
+    parameter?: string;
 
   @property({ type: Boolean })
-  relative?: boolean;
+    relative?: boolean;
 
   @property({ type: String })
-  root?: string;
+    root?: string;
 
   @property({ type: String })
-  pickerSelectableNodeTypes?: string;
+    pickerSelectableNodeTypes?: string;
 
   @property({ type: String })
-  pickerConfiguration?: string;
+    pickerConfiguration?: string;
 
   @property({ type: String })
-  pickerInitialPath?: string;
+    pickerInitialPath?: string;
 
   /** Direct page reference (use when inside Shadow DOM where context may not reach) */
   @property({ type: Object })
-  page?: Page;
+    page?: Page;
 
   /**
    * Light DOM element to inject meta comments around.
@@ -73,7 +73,7 @@ export class BrManageContentButton extends LitElement {
    * end up in the light DOM where the Experience Manager can find them.
    */
   @property({ type: Object })
-  renderTarget?: HTMLElement;
+    renderTarget?: HTMLElement;
 
   @consume({ context: brPageContext, subscribe: true })
   private _contextPage?: Page;
@@ -97,7 +97,7 @@ export class BrManageContentButton extends LitElement {
   updated() {
     this._clearMeta?.();
 
-    if (!this._page?.isPreview()) return;
+    if (!this._page?.isPreview()) { return; }
 
     // Use page.getButton() to create proper manage content button meta.
     // This merges the content's meta with button config (documentTemplateQuery, etc.)
@@ -123,7 +123,7 @@ export class BrManageContentButton extends LitElement {
   }
 
   render() {
-    if (!this._page?.isPreview()) return nothing;
+    if (!this._page?.isPreview()) { return nothing; }
     return html``;
   }
 }

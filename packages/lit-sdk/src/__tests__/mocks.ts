@@ -15,7 +15,7 @@ export function createMockMeta(length = 0, renderFn?: () => () => void): MockMet
   return {
     render: vi.fn(renderFn ?? (() => clearFn)),
     length,
-    [Symbol.iterator]: function* () {},
+    * [Symbol.iterator]() {},
   };
 }
 
@@ -51,7 +51,7 @@ export function createMockContainerItem(overrides: Record<string, any> = {}) {
     getType: vi.fn(() => 'Banner'),
     isHidden: vi.fn(() => false),
     on: vi.fn((event: string, handler: Function) => {
-      if (!listeners[event]) listeners[event] = [];
+      if (!listeners[event]) { listeners[event] = []; }
       listeners[event].push(handler);
     }),
     off: vi.fn((event: string, handler: Function) => {

@@ -38,7 +38,7 @@ import './br-container-item.js';
 export class BrComponent extends LitElement {
   /** Optional: name of the child component to resolve */
   @property({ type: String })
-  name?: string;
+    name?: string;
 
   @consume({ context: brComponentContext, subscribe: true })
   private _parentComponent?: Component;
@@ -52,7 +52,7 @@ export class BrComponent extends LitElement {
   }
 
   private _resolve(): Component | undefined {
-    if (!this._parentComponent) return undefined;
+    if (!this._parentComponent) { return undefined; }
 
     if (this.name) {
       return this._parentComponent.getComponent(this.name);
@@ -63,7 +63,7 @@ export class BrComponent extends LitElement {
 
   render() {
     const component = this._resolve();
-    if (!component) return nothing;
+    if (!component) { return nothing; }
 
     // Update provided context for children
     this._resolvedComponent = component;
@@ -98,7 +98,7 @@ export class BrComponent extends LitElement {
 @customElement('br-component-node')
 export class BrComponentNode extends LitElement {
   @property({ type: Object })
-  component?: Component;
+    component?: Component;
 
   @consume({ context: brPageContext, subscribe: true })
   private _page?: Page;
@@ -130,7 +130,7 @@ export class BrComponentNode extends LitElement {
   }
 
   render() {
-    if (!this.component) return nothing;
+    if (!this.component) { return nothing; }
 
     this._providedComponent = this.component;
 

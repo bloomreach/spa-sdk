@@ -18,7 +18,6 @@ import {
   type ContainerItem,
   type Page,
   type Content,
-  type Link,
   type Reference,
 } from '@bloomreach/spa-sdk';
 
@@ -81,7 +80,7 @@ export function getDocumentData<T>(
 
   // Strategy 2: content $ref (getContainerItemContent pattern)
   const contentData = sdkGetContainerItemContent<T>(component, page);
-  if (contentData) return contentData;
+  if (contentData) { return contentData; }
 
   return undefined;
 }

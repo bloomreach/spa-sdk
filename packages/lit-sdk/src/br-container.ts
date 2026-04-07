@@ -32,7 +32,7 @@ import './br-container-item.js';
 @customElement('br-container')
 export class BrContainer extends LitElement {
   @property({ type: Object })
-  component?: Container;
+    component?: Container;
 
   @consume({ context: brPageContext, subscribe: true })
   private _page?: Page;
@@ -64,7 +64,7 @@ export class BrContainer extends LitElement {
   }
 
   render() {
-    if (!this.component) return nothing;
+    if (!this.component) { return nothing; }
 
     const isPreview = this._page?.isPreview() ?? false;
     const containerType = this.component.getType();

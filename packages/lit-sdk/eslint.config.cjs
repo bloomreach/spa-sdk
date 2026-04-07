@@ -56,7 +56,7 @@ module.exports = tseslint.config(
         'error',
         'ignorePackages',
         {
-          js: 'never',
+          js: 'always',
           ts: 'never',
         },
       ],
@@ -76,6 +76,10 @@ module.exports = tseslint.config(
       'no-unused-vars': 'off',
       'no-use-before-define': 'off',
       'no-useless-constructor': 'off',
+      'no-restricted-syntax': 'off',
+      'no-promise-executor-return': 'off',
+      'no-console': ['warn', { allow: ['warn', 'error'] }],
+      'default-param-last': 'off',
       'prefer-destructuring': [
         'error',
         {
@@ -89,9 +93,11 @@ module.exports = tseslint.config(
     files: ['**/*.spec.ts', '**/__tests__/**/*.ts'],
     rules: {
       '@typescript-eslint/explicit-function-return-type': 'off',
+      '@typescript-eslint/no-unused-vars': 'off',
       '@typescript-eslint/unbound-method': 'off',
       'import/no-extraneous-dependencies': 'off',
       '@typescript-eslint/no-empty-function': 'off',
+      '@typescript-eslint/no-unsafe-function-type': 'off',
     },
   },
   {

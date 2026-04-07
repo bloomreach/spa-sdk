@@ -1,6 +1,14 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import {
+  describe, it, expect, vi, beforeEach, afterEach,
+} from 'vitest';
 import { initialize, destroy } from '@bloomreach/spa-sdk';
-import { createMockPage, createMockComponent, createMockMeta, cleanup } from './mocks.js';
+import {
+  createMockPage, createMockComponent, createMockMeta, cleanup,
+} from './mocks.js';
+
+// Import component after mock
+import '../br-page.js';
+import type { BrPage } from '../br-page.js';
 
 // Mock @bloomreach/spa-sdk before importing the component
 vi.mock('@bloomreach/spa-sdk', () => ({
@@ -15,10 +23,6 @@ vi.mock('@bloomreach/spa-sdk', () => ({
   TYPE_MANAGE_CONTENT_BUTTON: 'MANAGE_CONTENT_BUTTON',
   TYPE_MANAGE_MENU_BUTTON: 'MANAGE_MENU_BUTTON',
 }));
-
-// Import component after mock
-import '../br-page.js';
-import type { BrPage } from '../br-page.js';
 
 describe('br-page', () => {
   let el: BrPage;
@@ -38,7 +42,7 @@ describe('br-page', () => {
   });
 
   afterEach(() => {
-    if (el?.parentNode) cleanup(el);
+    if (el?.parentNode) { cleanup(el); }
   });
 
   async function createBrPage(config = mockConfig, mapping = {}): Promise<BrPage> {

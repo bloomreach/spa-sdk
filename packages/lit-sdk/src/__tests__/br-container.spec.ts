@@ -1,11 +1,18 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import {
+  describe, it, expect, vi, beforeEach, afterEach,
+} from 'vitest';
 import {
   TYPE_CONTAINER_INLINE,
   TYPE_CONTAINER_NO_MARKUP,
   TYPE_CONTAINER_ORDERED_LIST,
   TYPE_CONTAINER_UNORDERED_LIST,
 } from '@bloomreach/spa-sdk';
-import { createMockContainer, createMockContainerItem, createMockPage, createMockMeta, cleanup } from './mocks.js';
+import {
+  createMockContainer, createMockContainerItem, createMockPage, createMockMeta, cleanup,
+} from './mocks.js';
+
+import '../br-container.js';
+import type { BrContainer } from '../br-container.js';
 
 vi.mock('@bloomreach/spa-sdk', () => ({
   initialize: vi.fn(),
@@ -21,18 +28,15 @@ vi.mock('@bloomreach/spa-sdk', () => ({
   TYPE_MANAGE_MENU_BUTTON: 'MANAGE_MENU_BUTTON',
 }));
 
-import '../br-container.js';
-import type { BrContainer } from '../br-container.js';
-
 describe('br-container', () => {
   let el: BrContainer;
 
   afterEach(() => {
-    if (el?.parentNode) cleanup(el);
+    if (el?.parentNode) { cleanup(el); }
   });
 
   async function createContainer(
-    containerType: string = 'hst.vbox',
+    containerType = 'hst.vbox',
     children: any[] = [],
     isPreview = false,
   ): Promise<BrContainer> {

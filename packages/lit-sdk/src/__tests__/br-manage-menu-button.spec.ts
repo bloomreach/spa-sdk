@@ -1,6 +1,11 @@
-import { describe, it, expect, vi, afterEach } from 'vitest';
+import {
+  describe, it, expect, vi, afterEach,
+} from 'vitest';
 import { TYPE_MANAGE_MENU_BUTTON } from '@bloomreach/spa-sdk';
 import { createMockPage, createMockMeta, cleanup } from './mocks.js';
+
+import '../br-manage-menu-button.js';
+import type { BrManageMenuButton } from '../br-manage-menu-button.js';
 
 vi.mock('@bloomreach/spa-sdk', () => ({
   initialize: vi.fn(),
@@ -15,14 +20,11 @@ vi.mock('@bloomreach/spa-sdk', () => ({
   TYPE_MANAGE_MENU_BUTTON: 'MANAGE_MENU_BUTTON',
 }));
 
-import '../br-manage-menu-button.js';
-import type { BrManageMenuButton } from '../br-manage-menu-button.js';
-
 describe('br-manage-menu-button', () => {
   let el: BrManageMenuButton;
 
   afterEach(() => {
-    if (el?.parentNode) cleanup(el);
+    if (el?.parentNode) { cleanup(el); }
   });
 
   describe('live mode', () => {

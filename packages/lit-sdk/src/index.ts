@@ -10,7 +10,9 @@ export { BrManageMenuButton } from './br-manage-menu-button.js';
 export { brPageContext, brComponentContext, brMappingContext } from './context.js';
 
 // Utilities
-export { getContainerItemContent, getDocumentData, isInternalLink, isExternalLink } from './utils.js';
+export {
+  getContainerItemContent, getDocumentData, isInternalLink, isExternalLink,
+} from './utils.js';
 
 // Re-export type guards from utils
 export {

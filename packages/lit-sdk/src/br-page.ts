@@ -24,11 +24,11 @@ import './br-component.js';
 export class BrPage extends LitElement {
   /** SPA SDK configuration (endpoint, request, etc.) */
   @property({ type: Object })
-  configuration!: Configuration;
+    configuration!: Configuration;
 
   /** Maps brXM ctype strings to Lit custom element tag names */
   @property({ type: Object })
-  mapping: Record<string, string> = {};
+    mapping: Record<string, string> = {};
 
   @provide({ context: brPageContext })
   @state()
@@ -69,8 +69,8 @@ export class BrPage extends LitElement {
     if (this._page?.isPreview()) {
       this.removeEventListener('br-request-sync', this._onSyncRequested);
     }
-    if (this._syncRAF) cancelAnimationFrame(this._syncRAF);
-    if (this._syncTimeout) clearTimeout(this._syncTimeout);
+    if (this._syncRAF) { cancelAnimationFrame(this._syncRAF); }
+    if (this._syncTimeout) { clearTimeout(this._syncTimeout); }
     this._scriptObserver?.disconnect();
     destroy();
   }
@@ -82,7 +82,7 @@ export class BrPage extends LitElement {
   }
 
   updated() {
-    if (!this._page?.isPreview()) return;
+    if (!this._page?.isPreview()) { return; }
 
     // Render page-level meta comments around the <br-page> element.
     // These are inserted into br-page's PARENT (light DOM) via
@@ -110,7 +110,7 @@ export class BrPage extends LitElement {
    * Coalesces multiple rapid sync requests into one.
    */
   private _scheduleSync() {
-    if (!this._page) return;
+    if (!this._page) { return; }
 
     // Clear any pending scheduled sync
     if (this._syncRAF) {
@@ -155,7 +155,7 @@ export class BrPage extends LitElement {
    * manager isn't ready to handle the sync.
    */
   private _watchForInjectScript() {
-    if (!document.body) return;
+    if (!document.body) { return; }
     this._scriptObserver = new MutationObserver((mutations) => {
       for (const mutation of mutations) {
         for (const node of mutation.addedNodes) {

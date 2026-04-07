@@ -1,6 +1,13 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import {
+  describe, it, expect, vi, beforeEach, afterEach,
+} from 'vitest';
 import { isContainer, isContainerItem } from '@bloomreach/spa-sdk';
-import { createMockComponent, createMockContainerItem, createMockPage, createMockMeta, cleanup, elementUpdated } from './mocks.js';
+import {
+  createMockComponent, createMockContainerItem, createMockPage, createMockMeta, cleanup, elementUpdated,
+} from './mocks.js';
+
+import '../br-component.js';
+import type { BrComponent, BrComponentNode } from '../br-component.js';
 
 vi.mock('@bloomreach/spa-sdk', () => ({
   initialize: vi.fn(),
@@ -15,14 +22,11 @@ vi.mock('@bloomreach/spa-sdk', () => ({
   TYPE_MANAGE_MENU_BUTTON: 'MANAGE_MENU_BUTTON',
 }));
 
-import '../br-component.js';
-import type { BrComponent, BrComponentNode } from '../br-component.js';
-
 describe('br-component', () => {
   let el: BrComponent;
 
   afterEach(() => {
-    if (el?.parentNode) cleanup(el);
+    if (el?.parentNode) { cleanup(el); }
   });
 
   describe('without name', () => {
@@ -57,7 +61,7 @@ describe('br-component', () => {
     it('resolves named child via getComponent(name)', async () => {
       const namedChild = createMockComponent({ getName: vi.fn(() => 'main') });
       const parent = createMockComponent({
-        getComponent: vi.fn((name: string) => name === 'main' ? namedChild : undefined),
+        getComponent: vi.fn((name: string) => (name === 'main' ? namedChild : undefined)),
         getChildren: vi.fn(() => [namedChild]),
       });
 
@@ -157,7 +161,7 @@ describe('br-component-node', () => {
   let el: BrComponentNode;
 
   afterEach(() => {
-    if (el?.parentNode) cleanup(el);
+    if (el?.parentNode) { cleanup(el); }
   });
 
   it('renders children recursively', async () => {

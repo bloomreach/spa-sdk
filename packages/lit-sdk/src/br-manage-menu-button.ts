@@ -30,11 +30,11 @@ import { brPageContext } from './context.js';
 export class BrManageMenuButton extends LitElement {
   /** The menu model to generate the edit button for */
   @property({ type: Object })
-  menu?: Menu;
+    menu?: Menu;
 
   /** Direct page reference (use when inside Shadow DOM where context may not reach) */
   @property({ type: Object })
-  page?: Page;
+    page?: Page;
 
   /**
    * Light DOM element to inject meta comments around.
@@ -42,7 +42,7 @@ export class BrManageMenuButton extends LitElement {
    * end up in the light DOM where the Experience Manager can find them.
    */
   @property({ type: Object })
-  renderTarget?: HTMLElement;
+    renderTarget?: HTMLElement;
 
   @consume({ context: brPageContext, subscribe: true })
   private _contextPage?: Page;
@@ -67,7 +67,7 @@ export class BrManageMenuButton extends LitElement {
     this._clearMeta?.();
     this._clearMeta = undefined;
 
-    if (!this._page?.isPreview() || !this.menu) return;
+    if (!this._page?.isPreview() || !this.menu) { return; }
 
     const meta = this._page.getButton(TYPE_MANAGE_MENU_BUTTON, this.menu);
     if (meta && meta.length > 0) {
@@ -77,7 +77,7 @@ export class BrManageMenuButton extends LitElement {
   }
 
   render() {
-    if (!this._page?.isPreview()) return nothing;
+    if (!this._page?.isPreview()) { return nothing; }
     return html``;
   }
 }

@@ -25,7 +25,7 @@ import { brPageContext, brMappingContext } from './context.js';
 @customElement('br-container-item')
 export class BrContainerItem extends LitElement {
   @property({ type: Object })
-  component?: ContainerItem;
+    component?: ContainerItem;
 
   @consume({ context: brPageContext, subscribe: true })
   private _page?: Page;
@@ -49,7 +49,7 @@ export class BrContainerItem extends LitElement {
     if (this.component) {
       this._updateHandler = () => {
         // Only act on updates in preview mode (Experience Manager editing)
-        if (!this._page?.isPreview()) return;
+        if (!this._page?.isPreview()) { return; }
         this._pendingComponentUpdate = true;
         this.requestUpdate();
         // Request sync from br-page (which applies cooldown to prevent loops)
@@ -96,13 +96,13 @@ export class BrContainerItem extends LitElement {
   }
 
   render() {
-    if (!this.component || !this._page) return nothing;
+    if (!this.component || !this._page) { return nothing; }
 
     // Hidden components render nothing (Relevance feature)
-    if (this.component.isHidden()) return nothing;
+    if (this.component.isHidden()) { return nothing; }
 
     const ctype = this.component.getType();
-    if (!ctype) return nothing;
+    if (!ctype) { return nothing; }
 
     const tagName = this._mapping[ctype];
     if (!tagName) {
