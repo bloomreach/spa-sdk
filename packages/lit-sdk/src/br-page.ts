@@ -57,14 +57,17 @@ export class BrPage extends LitElement {
   private _scriptObserver?: MutationObserver;
 
   private static SYNC_COOLDOWN_MS = 300;
+  private _isConnected = false;
 
   async connectedCallback() {
     super.connectedCallback();
+    this._isConnected = true;
     await this._initialize();
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
+    this._isConnected = false;
     this._clearPageMeta?.();
     if (this._page?.isPreview()) {
       this.removeEventListener('br-request-sync', this._onSyncRequested);
@@ -78,6 +81,9 @@ export class BrPage extends LitElement {
   willUpdate(changedProps: Map<PropertyKey, unknown>) {
     if (changedProps.has('mapping')) {
       this._mapping = this.mapping;
+    }
+    if (changedProps.has('configuration') && changedProps.get('configuration') !== undefined) {
+      this._reinitialize();
     }
   }
 
@@ -174,11 +180,34 @@ export class BrPage extends LitElement {
     this._scriptObserver.observe(document.body, { childList: true });
   }
 
+  private _reinitialize() {
+    // Clean up previous page state before re-initializing
+    this._clearPageMeta?.();
+    this._clearPageMeta = undefined;
+    if (this._page?.isPreview()) {
+      this.removeEventListener('br-request-sync', this._onSyncRequested);
+    }
+    if (this._syncRAF) { cancelAnimationFrame(this._syncRAF); }
+    if (this._syncTimeout) { clearTimeout(this._syncTimeout); }
+    this._scriptObserver?.disconnect();
+    destroy();
+    this._page = undefined;
+    this._rootComponent = undefined;
+    this._initialize();
+  }
+
   private async _initialize() {
     try {
-      this._page = await initialize(this.configuration);
+      const page = await initialize(this.configuration);
+
+      // Guard against disconnect during async initialization
+      if (!this._isConnected) {
+        destroy();
+        return;
+      }
+
+      this._page = page;
       this._rootComponent = this._page.getComponent();
-      this._mapping = this.mapping;
 
       // Preview mode: set up EM integration (sync scheduling, inject script detection)
       if (this._page.isPreview()) {

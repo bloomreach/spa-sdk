@@ -57,6 +57,7 @@ export class BrManageMenuButton extends LitElement {
   disconnectedCallback() {
     super.disconnectedCallback();
     this._clearMeta?.();
+    this._clearMeta = undefined;
   }
 
   private get _page(): Page | undefined {

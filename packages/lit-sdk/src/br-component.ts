@@ -1,5 +1,5 @@
 import { LitElement, html, nothing } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
 import { consume, provide } from '@lit/context';
 import type { Component, Page } from '@bloomreach/spa-sdk';
 import { isContainer, isContainerItem } from '@bloomreach/spa-sdk';
@@ -44,6 +44,7 @@ export class BrComponent extends LitElement {
   private _parentComponent?: Component;
 
   @provide({ context: brComponentContext })
+  @state()
   private _resolvedComponent?: Component;
 
   // Light DOM for Experience Manager compatibility
@@ -61,12 +62,13 @@ export class BrComponent extends LitElement {
     return this._parentComponent;
   }
 
-  render() {
-    const component = this._resolve();
-    if (!component) { return nothing; }
+  willUpdate() {
+    this._resolvedComponent = this._resolve();
+  }
 
-    // Update provided context for children
-    this._resolvedComponent = component;
+  render() {
+    const component = this._resolvedComponent;
+    if (!component) { return nothing; }
 
     // When a name was given, render the resolved component itself
     // (it could be a container, container-item, or regular component)
@@ -104,6 +106,7 @@ export class BrComponentNode extends LitElement {
   private _page?: Page;
 
   @provide({ context: brComponentContext })
+  @state()
   private _providedComponent?: Component;
 
   // Light DOM
@@ -116,11 +119,17 @@ export class BrComponentNode extends LitElement {
   disconnectedCallback() {
     super.disconnectedCallback();
     this._clearMeta?.();
+    this._clearMeta = undefined;
+  }
+
+  willUpdate() {
+    this._providedComponent = this.component;
   }
 
   updated() {
     // Inject meta comments for Experience Manager
     this._clearMeta?.();
+    this._clearMeta = undefined;
     if (this.component && this._page?.isPreview()) {
       const meta = this.component.getMeta();
       if (meta.length > 0) {
@@ -131,8 +140,6 @@ export class BrComponentNode extends LitElement {
 
   render() {
     if (!this.component) { return nothing; }
-
-    this._providedComponent = this.component;
 
     const children = this.component.getChildren();
     return html`${children.map((child) => this._renderChild(child))}`;

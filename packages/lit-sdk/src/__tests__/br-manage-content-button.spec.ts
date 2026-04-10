@@ -88,6 +88,9 @@ describe('br-manage-content-button', () => {
       el.parameter = 'document';
       el.relative = true;
       el.root = 'banners';
+      el.pickerSelectableNodeTypes = 'best:banner,hap:bannerdocument';
+      el.pickerConfiguration = 'cms-pickers/documents';
+      el.pickerInitialPath = '/content/documents/myproject';
       document.body.appendChild(el);
       await el.updateComplete;
 
@@ -99,6 +102,9 @@ describe('br-manage-content-button', () => {
         parameter: 'document',
         relative: true,
         root: 'banners',
+        pickerSelectableNodeTypes: 'best:banner,hap:bannerdocument',
+        pickerConfiguration: 'cms-pickers/documents',
+        pickerInitialPath: '/content/documents/myproject',
       });
     });
 

@@ -1,5 +1,4 @@
 import { fileURLToPath, URL } from 'node:url';
-import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
 
@@ -13,7 +12,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@bloomreach/spa-sdk': resolve(__dirname, '../spa-sdk/src/index.ts'),
+      '@bloomreach/spa-sdk': fileURLToPath(new URL('../spa-sdk/src/index.ts', import.meta.url)),
     },
   },
   build: {

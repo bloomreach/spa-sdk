@@ -88,6 +88,7 @@ export class BrManageContentButton extends LitElement {
   disconnectedCallback() {
     super.disconnectedCallback();
     this._clearMeta?.();
+    this._clearMeta = undefined;
   }
 
   private get _page(): Page | undefined {
@@ -96,6 +97,7 @@ export class BrManageContentButton extends LitElement {
 
   updated() {
     this._clearMeta?.();
+    this._clearMeta = undefined;
 
     if (!this._page?.isPreview()) { return; }
 

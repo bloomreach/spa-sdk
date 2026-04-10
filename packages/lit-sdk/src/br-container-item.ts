@@ -1,4 +1,6 @@
-import { LitElement, nothing, type ReactiveElement } from 'lit';
+import {
+  LitElement, nothing, type PropertyValues, type ReactiveElement,
+} from 'lit';
 import { html, unsafeStatic } from 'lit/static-html.js';
 import { customElement, property } from 'lit/decorators.js';
 import { consume } from '@lit/context';
@@ -45,26 +47,40 @@ export class BrContainerItem extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    // Listen for live editing updates from Experience Manager
-    if (this.component) {
-      this._updateHandler = () => {
-        // Only act on updates in preview mode (Experience Manager editing)
-        if (!this._page?.isPreview()) { return; }
-        this._pendingComponentUpdate = true;
-        this.requestUpdate();
-        // Request sync from br-page (which applies cooldown to prevent loops)
-        this.dispatchEvent(new Event('br-request-sync', { bubbles: true, composed: true }));
-      };
-      this.component.on('update', this._updateHandler);
-    }
+    this._subscribeToComponent();
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     this._clearMeta?.();
+    this._clearMeta = undefined;
+    this._unsubscribeFromComponent();
+  }
+
+  willUpdate(changedProps: PropertyValues) {
+    if (changedProps.has('component')) {
+      // Re-subscribe when component reference changes
+      this._unsubscribeFromComponent();
+      this._subscribeToComponent();
+    }
+  }
+
+  private _subscribeToComponent() {
+    if (!this.component) { return; }
+    this._updateHandler = () => {
+      if (!this._page?.isPreview()) { return; }
+      this._pendingComponentUpdate = true;
+      this.requestUpdate();
+      this.dispatchEvent(new Event('br-request-sync', { bubbles: true, composed: true }));
+    };
+    this.component.on('update', this._updateHandler);
+  }
+
+  private _unsubscribeFromComponent() {
     if (this.component && this._updateHandler) {
       this.component.off('update', this._updateHandler);
     }
+    this._updateHandler = undefined;
   }
 
   updated() {
@@ -75,6 +91,7 @@ export class BrContainerItem extends LitElement {
     // places them in the wrapper div, matching the Angular SDK's DOM structure
     // and enabling EM drag-and-drop reordering.
     this._clearMeta?.();
+    this._clearMeta = undefined;
     if (this.component && this._page?.isPreview()) {
       const meta = this.component.getMeta();
       if (meta.length > 0) {

@@ -186,10 +186,10 @@ describe('br-page', () => {
       // Dispatch a sync request from a child
       el.dispatchEvent(new Event('br-request-sync', { bubbles: true }));
 
-      // Wait for the scheduled sync
-      await new Promise((r) => requestAnimationFrame(r));
-
-      expect(mockPage.sync).toHaveBeenCalled();
+      // Wait for the scheduled sync (may go through cooldown timeout path)
+      await vi.waitFor(() => {
+        expect(mockPage.sync).toHaveBeenCalled();
+      });
     });
 
     it('cleans up meta on disconnect', async () => {

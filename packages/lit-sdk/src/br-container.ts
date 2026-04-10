@@ -47,11 +47,13 @@ export class BrContainer extends LitElement {
   disconnectedCallback() {
     super.disconnectedCallback();
     this._clearMeta?.();
+    this._clearMeta = undefined;
   }
 
   updated() {
     // Inject container-level meta comments (for "Add component" button in EM)
     this._clearMeta?.();
+    this._clearMeta = undefined;
     if (this.component && this._page?.isPreview()) {
       const meta = this.component.getMeta();
       if (meta.length > 0) {
