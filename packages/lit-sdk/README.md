@@ -13,7 +13,7 @@ Bloomreach Lit SDK integration for [Lit](https://lit.dev/) web components. This 
 ## Installation
 
 ```bash
-npm install @bloomreach/lit-sdk lit @lit/context @bloomreach/spa-sdk
+npm install @bloomreach/lit-sdk @bloomreach/spa-sdk
 ```
 
 ## Quick Start
