@@ -4,9 +4,6 @@ import { consume } from '@lit/context';
 import { type Configuration, type Page, extractSearchParams } from '@bloomreach/spa-sdk';
 import { brPageContext } from '@bloomreach/lit-sdk';
 
-// Import SDK components (registers custom elements)
-import '@bloomreach/lit-sdk';
-
 // Import mapped components (registers custom elements)
 import './lit-banner.js';
 import './lit-content.js';
@@ -48,12 +45,15 @@ export class LitApp extends LitElement {
     if (!import.meta.env.VITE_BRXM_ENDPOINT && import.meta.env.VITE_BR_MULTI_TENANT_SUPPORT) {
       const endpointQueryParameter = 'endpoint';
       const { searchParams } = extractSearchParams(configuration.path!, [endpointQueryParameter].filter(Boolean));
+      const endpoint = searchParams.get(endpointQueryParameter);
 
-      configuration = {
-        ...configuration,
-        endpoint: searchParams.get(endpointQueryParameter) ?? '',
-        baseUrl: `?${endpointQueryParameter}=${searchParams.get(endpointQueryParameter)}`,
-      };
+      if (endpoint) {
+        configuration = {
+          ...configuration,
+          endpoint,
+          baseUrl: `?${new URLSearchParams({ [endpointQueryParameter]: endpoint })}`,
+        };
+      }
     }
 
     return configuration;

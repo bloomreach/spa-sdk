@@ -60,7 +60,7 @@ export class LitBanner extends LitElement {
         ${title ? html`<h1>${title}</h1>` : nothing}
         ${image ? html`<img class="img-fluid" src=${image.getUrl()} alt=${title || ''} />` : nothing}
         ${content && this.page
-          ? html`<div>${unsafeHTML(this.page.rewriteLinks(sanitize(content.value)))}</div>`
+          ? html`<div>${unsafeHTML(sanitize(this.page.rewriteLinks(content.value)))}</div>`
           : nothing}
         ${link
           ? html`

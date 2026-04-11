@@ -48,7 +48,7 @@ export class LitContent extends LitElement {
         ${title ? html`<h1>${title}</h1>` : nothing}
         ${author ? html`<p class="mb-3 text-muted">${author}</p>` : nothing}
         ${date ? html`<p class="mb-3 small text-muted">${new Date(date).toDateString()}</p>` : nothing}
-        ${content ? html`<div>${unsafeHTML(this.page.rewriteLinks(sanitize(content.value)))}</div>` : nothing}
+        ${content ? html`<div>${unsafeHTML(sanitize(this.page.rewriteLinks(content.value)))}</div>` : nothing}
       </div>
     `;
   }

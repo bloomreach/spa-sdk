@@ -15,9 +15,9 @@ interface DocumentContent {
 interface DocumentData {
   author: string;
   content: DocumentContent;
-  date: number;
-  publicationDate: number;
-  image: import('@bloomreach/spa-sdk').Reference;
+  date?: number;
+  publicationDate?: number;
+  image?: import('@bloomreach/spa-sdk').Reference;
   introduction: string;
   title: string;
   link: import('@bloomreach/spa-sdk').Reference;

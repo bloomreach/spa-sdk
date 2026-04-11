@@ -52,10 +52,13 @@ export class LitNewsListPagination extends LitElement {
       <nav aria-label="News List Pagination">
         <ul class="pagination">
           <li class="page-item ${previous ? '' : 'disabled'}">
-            <a href=${previous ? this.page.getUrl(`?page=${previousPage}`) : '#'} class="page-link" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-              <span class="sr-only">Previous</span>
-            </a>
+            ${previous
+              ? html`<a href=${this.page.getUrl(`?page=${previousPage}`)} class="page-link" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span><span class="sr-only">Previous</span>
+                </a>`
+              : html`<span class="page-link" aria-disabled="true" tabindex="-1">
+                  <span aria-hidden="true">&laquo;</span><span class="sr-only">Previous</span>
+                </span>`}
           </li>
           ${pageNumbersArray.map((pageNumber) => html`
             <li class="page-item ${pageNumber === currentPage ? 'active' : ''}">
@@ -63,10 +66,13 @@ export class LitNewsListPagination extends LitElement {
             </li>
           `)}
           <li class="page-item ${next ? '' : 'disabled'}">
-            <a href=${next ? this.page.getUrl(`?page=${nextPage}`) : '#'} class="page-link" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-              <span class="sr-only">Next</span>
-            </a>
+            ${next
+              ? html`<a href=${this.page.getUrl(`?page=${nextPage}`)} class="page-link" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span><span class="sr-only">Next</span>
+                </a>`
+              : html`<span class="page-link" aria-disabled="true" tabindex="-1">
+                  <span aria-hidden="true">&raquo;</span><span class="sr-only">Next</span>
+                </span>`}
           </li>
         </ul>
       </nav>

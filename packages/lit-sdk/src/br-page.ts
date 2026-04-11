@@ -55,6 +55,7 @@ export class BrPage extends LitElement {
   private _syncRAF?: number;
   private _syncTimeout?: number;
   private _scriptObserver?: MutationObserver;
+  private _scriptLoadCleanup?: () => void;
 
   private static SYNC_COOLDOWN_MS = 300;
   private _isConnected = false;
@@ -74,6 +75,8 @@ export class BrPage extends LitElement {
     }
     if (this._syncRAF) { cancelAnimationFrame(this._syncRAF); }
     if (this._syncTimeout) { clearTimeout(this._syncTimeout); }
+    this._scriptLoadCleanup?.();
+    this._scriptLoadCleanup = undefined;
     this._scriptObserver?.disconnect();
     destroy();
   }
@@ -169,9 +172,12 @@ export class BrPage extends LitElement {
             // Found an injected script — wait for it to load, then sync
             this._scriptObserver?.disconnect();
             this._scriptObserver = undefined;
-            node.addEventListener('load', () => {
+            const handler = () => {
+              this._scriptLoadCleanup = undefined;
               this._scheduleSync();
-            });
+            };
+            node.addEventListener('load', handler, { once: true });
+            this._scriptLoadCleanup = () => node.removeEventListener('load', handler);
             return;
           }
         }
@@ -189,6 +195,8 @@ export class BrPage extends LitElement {
     }
     if (this._syncRAF) { cancelAnimationFrame(this._syncRAF); }
     if (this._syncTimeout) { clearTimeout(this._syncTimeout); }
+    this._scriptLoadCleanup?.();
+    this._scriptLoadCleanup = undefined;
     this._scriptObserver?.disconnect();
     destroy();
     this._page = undefined;
