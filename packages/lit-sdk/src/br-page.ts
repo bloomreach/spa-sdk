@@ -212,7 +212,12 @@ export class BrPage extends LitElement {
 
       // Guard against disconnect or superseded initialization
       if (!this._isConnected || generation !== this._initGeneration) {
-        destroy();
+        // Only destroy on disconnect — stale pages are garbage collected.
+        // Calling destroy() for stale generations would wipe the global
+        // spa-sdk singleton state used by the newer active initialization.
+        if (!this._isConnected) {
+          destroy();
+        }
         return;
       }
 
