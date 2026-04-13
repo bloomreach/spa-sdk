@@ -128,6 +128,8 @@ Two rendering modes:
 - **Auto-render** (no children) — renders the full component tree
 - **Custom layout** (with children) — you control layout with `<br-component name="...">`
 
+> **Note:** Auto-render mode uses a slot fallback internally. Ensure no whitespace or text nodes exist between the opening and closing `<br-page>` tags, as any light DOM content (including whitespace) will suppress the fallback. This is not an issue when using Lit template bindings.
+
 ### `<br-component>`
 
 Traverses the brXM component tree by name and renders children recursively.
