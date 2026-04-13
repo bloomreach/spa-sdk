@@ -56,6 +56,7 @@ export class BrPage extends LitElement {
   private _syncTimeout?: number;
   private _scriptObserver?: MutationObserver;
   private _scriptLoadCleanup?: () => void;
+  private _initGeneration = 0;
 
   private static SYNC_COOLDOWN_MS = 300;
   private _isConnected = false;
@@ -85,7 +86,7 @@ export class BrPage extends LitElement {
     if (changedProps.has('mapping')) {
       this._mapping = this.mapping;
     }
-    if (changedProps.has('configuration') && changedProps.get('configuration') !== undefined) {
+    if (changedProps.has('configuration') && this._page) {
       this._reinitialize();
     }
   }
@@ -205,11 +206,12 @@ export class BrPage extends LitElement {
   }
 
   private async _initialize() {
+    const generation = ++this._initGeneration;
     try {
       const page = await initialize(this.configuration);
 
-      // Guard against disconnect during async initialization
-      if (!this._isConnected) {
+      // Guard against disconnect or superseded initialization
+      if (!this._isConnected || generation !== this._initGeneration) {
         destroy();
         return;
       }
