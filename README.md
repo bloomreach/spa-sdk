@@ -15,6 +15,7 @@ The SDKs:
 - [React SDK](./packages/react-sdk/README.md)
 - [Vue SDK](./packages/vue-sdk/README.md)
 - [Angular SDK](./packages/ng-sdk/README.md)
+- [Lit SDK](./packages/lit-sdk/README.md)
 
 The examples:
 
@@ -23,6 +24,7 @@ The examples:
 - [Vue CSR example](./examples/vue/README.md)
 - [Nuxt example](./examples/nuxt/README.md)
 - [Angular CSR/Universal example](./examples/angular/README.md)
+- [Lit CSR example](./examples/lit/README.md)
 
 ### Bloomreach support
 
@@ -37,6 +39,7 @@ The supported frameworks are currently:
 - React and Next.js
 - Vue (3) and Nuxt
 - Angular and Angular Universal
+- Lit (web components)
 
 The versions of these frameworks that the SDKs currently is verified to work
 with are indicated in the release notes of each package and the minimum required
