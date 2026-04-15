@@ -28,6 +28,9 @@ then
 elif [[ $APP_TYPE = "csr" ]] && [[ $APP_FRAMEWORK = "react" ]]
 then
   APP_PATH="examples/react"
+elif [[ $APP_TYPE = "csr" ]] && [[ $APP_FRAMEWORK = "lit" ]]
+then
+  APP_PATH="examples/lit"
 fi
 
 APP_PACKAGE=$(node -p -e "require('./$APP_PATH/package.json').name")
@@ -87,6 +90,11 @@ fi
 if [[ $APP_TYPE = "ssr" ]] && [[ $APP_FRAMEWORK = "vue" ]]
 then
   heroku config:set --app=$NAME EXAMPLE_NAME="nuxt" NUXT_APP_BR_MULTI_TENANT_SUPPORT=true HOST=0.0.0.0
+fi
+
+if [[ $APP_TYPE = "csr" ]] && [[ $APP_FRAMEWORK = "lit" ]]
+then
+  heroku config:set --app=$NAME EXAMPLE_NAME="lit" VITE_BR_MULTI_TENANT_SUPPORT=true
 fi
 
 git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/$NAME.git HEAD:refs/heads/main

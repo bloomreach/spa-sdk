@@ -170,7 +170,19 @@ pipeline {
                   }
                   axis {
                     name 'APP_NAME'
-                    values 'ng', 'react', 'vue'
+                    values 'ng', 'react', 'vue', 'lit'
+                  }
+                }
+                excludes {
+                  exclude {
+                    axis {
+                      name 'APP_TYPE'
+                      values 'ssr'
+                    }
+                    axis {
+                      name 'APP_NAME'
+                      values 'lit'
+                    }
                   }
                 }
                 stages {
