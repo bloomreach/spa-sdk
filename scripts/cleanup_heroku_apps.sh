@@ -1,4 +1,4 @@
-#!/bin/bash
+ #!/bin/bash
 # Utility that prompts you to delete the example apps hosted on Heroku. It goes through all the apps that match a pattern and asks if that app should be deleted.
 
 set -e

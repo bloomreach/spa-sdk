@@ -31,6 +31,9 @@ then
 elif [[ $APP_TYPE = "csr" ]] && [[ $APP_FRAMEWORK = "lit" ]]
 then
   APP_PATH="examples/lit"
+else
+  echo "Unsupported deployment target: APP_TYPE=${APP_TYPE}, APP_FRAMEWORK=${APP_FRAMEWORK}" >&2
+  exit 1
 fi
 
 APP_PACKAGE=$(node -p -e "require('./$APP_PATH/package.json').name")
