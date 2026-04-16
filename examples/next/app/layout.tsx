@@ -26,7 +26,7 @@ export default function RootLayout({children}: { children: ReactNode }) {
       <meta name="description" content="Example Next.js SPA for Bloomreach Experience"/>
       <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-      <link rel="shortcut icon" type="image/png" href="/favicon.png" sizes="64x64"/>
+      <link rel="icon" type="image/svg+xml" href="/bloomreach-logo-icon.svg"/>
       <link
         rel="stylesheet"
         media="screen"
