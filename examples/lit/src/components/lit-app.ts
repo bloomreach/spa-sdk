@@ -35,7 +35,9 @@ export class LitApp extends LitElement {
         const response = await fetch(config.url, {
           method: config.method,
           headers: config.headers as Record<string, string>,
-          body: config.data,
+          ...(config.data !== undefined && config.method !== 'GET' && config.method !== 'HEAD'
+            ? { body: config.data }
+            : {}),
         });
         const data = await response.json();
         return { data };
@@ -65,7 +67,7 @@ export class LitApp extends LitElement {
         <header>
           <nav class="navbar navbar-expand-sm navbar-dark sticky-top bg-dark" role="navigation">
             <div class="container">
-              <a href=${this._page?.getUrl('/') ?? '/'} class="navbar-brand">
+              <a href=${this._page?.getUrl('/')} class="navbar-brand">
                 ${this._page?.getTitle() || 'brXM + Lit = \u2764\uFE0F'}
               </a>
               <div class="collapse navbar-collapse">
