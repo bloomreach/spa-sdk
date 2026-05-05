@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
+#### [spa-sdk-27.3.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-27.2.0...spa-sdk-27.3.0)
+
+> 5 May 2026
+
+- SPASDK-259: Add Lit SDK and Lit CSR example application [`#234`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/234)
+- SPASDK-259: Fix logo link, httpClient GET requests, and EM edit button overlap in Lit example [`#237`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/237)
+- SPASDK-260: Replace SPA favicons with Bloomreach SVG logo icon [`#235`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/235)
+- SPASDK-261: Add Heroku deployment support for Lit CSR example [`#236`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/236)
+
 #### ["27.2.0"](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-27.1.0..."27.2.0")
 
 - SPASDK-234: Add `getVariant()` and `getVariants()` methods to ImageSet [`#232`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/232)
