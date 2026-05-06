@@ -147,8 +147,8 @@ pipeline {
         }
         stage('Publish to NPM') {
           steps {
-            withCredentials([[$class: 'StringBinding', credentialsId: 'NPM_AUTH_TOKEN', variable: 'NPM_AUTH_TOKEN']]) {
-              sh 'echo "//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}" >> ~/.npmrc'
+            withCredentials([[$class: 'StringBinding', credentialsId: 'SPASDK_NPM_AUTH_TOKEN', variable: 'SPASDK_NPM_AUTH_TOKEN']]) {
+              sh 'echo "//registry.npmjs.org/:_authToken=${SPASDK_NPM_AUTH_TOKEN}" >> ~/.npmrc'
               sh 'pnpm release -- --yes'
             }
           }
@@ -170,7 +170,19 @@ pipeline {
                   }
                   axis {
                     name 'APP_NAME'
-                    values 'ng', 'react', 'vue'
+                    values 'ng', 'react', 'vue', 'lit'
+                  }
+                }
+                excludes {
+                  exclude {
+                    axis {
+                      name 'APP_TYPE'
+                      values 'ssr'
+                    }
+                    axis {
+                      name 'APP_NAME'
+                      values 'lit'
+                    }
                   }
                 }
                 stages {

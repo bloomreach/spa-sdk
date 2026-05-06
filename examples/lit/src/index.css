@@ -1,0 +1,20 @@
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.has-edit-button {
+  position: relative;
+}
+
+/* Hide manage button elements from layout — they only inject EM meta comments,
+   matching the display:none approach used in the Vue/React SDKs */
+br-manage-menu-button,
+br-manage-content-button {
+  display: none;
+}
+
+/* Give the EM edit button room in preview mode so it doesn't overlap the last nav item */
+.navbar-nav.has-edit-button {
+  padding-right: 40px;
+}
