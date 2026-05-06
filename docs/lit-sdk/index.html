@@ -1,0 +1,416 @@
+<!DOCTYPE html><html> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><meta name="generator" content="Astro v5.7.0"><link rel="icon" type="image/svg+xml" href="/spa-sdk/docs/favicon.svg"><link rel="sitemap" href="/sitemap.xml"><title data-pagefind-meta="title">
+      Lit SDK
+    </title><script>
+      if (localStorage.getItem('theme') === null) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      } else document.documentElement.setAttribute('data-theme', localStorage.getItem('theme'));
+    </script><script type="module">var l={exports:{}},d;function h(){return d||(d=1,function(n,f){function r(){var c=document.querySelector("[data-toggle-theme]"),e=c?c.getAttribute("data-key"):null;(function(t=localStorage.getItem(e||"theme")){localStorage.getItem(e||"theme")&&(document.documentElement.setAttribute("data-theme",t),c&&[...document.querySelectorAll("[data-toggle-theme]")].forEach(a=>{a.classList.add(c.getAttribute("data-act-class"))}))})(),c&&[...document.querySelectorAll("[data-toggle-theme]")].forEach(t=>{t.addEventListener("click",function(){var a=t.getAttribute("data-toggle-theme");if(a){var o=a.split(",");document.documentElement.getAttribute("data-theme")==o[0]?o.length==1?(document.documentElement.removeAttribute("data-theme"),localStorage.removeItem(e||"theme")):(document.documentElement.setAttribute("data-theme",o[1]),localStorage.setItem(e||"theme",o[1])):(document.documentElement.setAttribute("data-theme",o[0]),localStorage.setItem(e||"theme",o[0]))}[...document.querySelectorAll("[data-toggle-theme]")].forEach(i=>{i.classList.toggle(this.getAttribute("data-act-class"))})})})}function m(){var c=document.querySelector("[data-set-theme='']"),e=c?c.getAttribute("data-key"):null;(function(t=localStorage.getItem(e||"theme")){if(t!=null&&t!="")if(localStorage.getItem(e||"theme")&&localStorage.getItem(e||"theme")!=""){document.documentElement.setAttribute("data-theme",t);var a=document.querySelector("[data-set-theme='"+t.toString()+"']");a&&([...document.querySelectorAll("[data-set-theme]")].forEach(o=>{o.classList.remove(o.getAttribute("data-act-class"))}),a.getAttribute("data-act-class")&&a.classList.add(a.getAttribute("data-act-class")))}else{var a=document.querySelector("[data-set-theme='']");a.getAttribute("data-act-class")&&a.classList.add(a.getAttribute("data-act-class"))}})(),[...document.querySelectorAll("[data-set-theme]")].forEach(t=>{t.addEventListener("click",function(){document.documentElement.setAttribute("data-theme",this.getAttribute("data-set-theme")),localStorage.setItem(e||"theme",document.documentElement.getAttribute("data-theme")),[...document.querySelectorAll("[data-set-theme]")].forEach(a=>{a.classList.remove(a.getAttribute("data-act-class"))}),t.getAttribute("data-act-class")&&t.classList.add(t.getAttribute("data-act-class"))})})}function u(){var c=document.querySelector("select[data-choose-theme]"),e=c?c.getAttribute("data-key"):null;(function(t=localStorage.getItem(e||"theme")){if(localStorage.getItem(e||"theme")){document.documentElement.setAttribute("data-theme",t);var a=document.querySelector("select[data-choose-theme] [value='"+t.toString()+"']");a&&[...document.querySelectorAll("select[data-choose-theme] [value='"+t.toString()+"']")].forEach(o=>{o.selected=!0})}})(),c&&[...document.querySelectorAll("select[data-choose-theme]")].forEach(t=>{t.addEventListener("change",function(){document.documentElement.setAttribute("data-theme",this.value),localStorage.setItem(e||"theme",document.documentElement.getAttribute("data-theme")),[...document.querySelectorAll("select[data-choose-theme] [value='"+localStorage.getItem(e||"theme")+"']")].forEach(a=>{a.selected=!0})})})}function s(c=!0){c===!0?document.addEventListener("DOMContentLoaded",function(e){r(),u(),m()}):(r(),u(),m())}n.exports={themeChange:s}}(l)),l.exports}var g=h();g.themeChange();</script><link rel="stylesheet" href="/spa-sdk/docs/_astro/changelog.Daom8_R6.css"></head> <body> <header id="header"> <div class="navbar"> <div class="navbar-start"> <div class="dropdown"> <label tabindex="0" class="btn btn-ghost btn-circle lg:hidden"> <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path> </svg> </label> <ul class="menu dropdown-content bg-base-100 dark:bg-base-200 rounded-box shadow w-max z-10" }> <li class="nav-link"> <a href="/spa-sdk/docs/getting-started"> Getting started </a> </li><li class="nav-link"> <a href="/spa-sdk/docs/spa-sdk"> SPA SDK </a> </li><li class="nav-link"> <a href="/spa-sdk/docs/react-sdk"> React SDK </a> </li><li class="nav-link"> <a href="/spa-sdk/docs/ng-sdk"> Angular SDK </a> </li><li class="nav-link"> <a href="/spa-sdk/docs/vue-sdk"> Vue SDK </a> </li><li class="nav-link"> <a href="/spa-sdk/docs/lit-sdk" class="active"> Lit SDK </a> </li><li class="nav-link"> <a href="/spa-sdk/docs/migration-guide"> Migration guide </a> </li><li class="nav-link"> <a href="/spa-sdk/docs/changelog"> Changelog </a> </li> <li> <a href="https://github.com/bloomreach/spa-sdk/releases" target="_blank">Releases</a> </li> <li> <a href="https://bloomreach.github.io/spa-sdk/" target="_blank">Typedoc</a> </li> </ul> </div> <a class="btn btn-ghost" href="/spa-sdk/docs/"> <svg width="24" height="24" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg"> <defs> <style>
+      .cls-1 {
+        fill: hsl(var(--nc));
+      }
+      .cls-2 {
+        fill: hsl(var(--s));
+      }
+    </style> </defs> <circle class="cls-2" cx="35.94" cy="35.94" r="35.94"></circle> <path class="cls-1" d="M43.22,28.47,41.46,33a6.6,6.6,0,0,1,3,5.64,6.38,6.38,0,1,1-12.76,0A6.36,6.36,0,0,1,37.83,32l1.65-4.6A11,11,0,0,0,26.71,38.29h0V49.84h5V48a11.7,11.7,0,0,0,6.38,1.82,11.26,11.26,0,0,0,5.11-21.37Z"></path> <path class="cls-1" d="M26.69,27.92a15.51,15.51,0,0,1,5-3.41V17.27h-5Z"></path> </svg> <h1>SDK Documentation Portal</h1> </a> </div> <div class="navbar-center"></div> <div class="navbar-end"> <button class="btn btn-ghost btn-circle" id="searchModalTrigger"> <svg viewBox="0 0 24 24" width="24" height="24" astro-icon="mdi:magnify"><path fill="currentColor" d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg> </button> <label class="btn btn-ghost btn-circle swap swap-rotate"> <!-- this hidden checkbox controls the state --> <input type="checkbox" data-toggle-theme="light,dark"> <!-- sun icon --> <svg class="swap-on" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"> <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path> </svg> <!-- moon icon --> <svg class="swap-off" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"> <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path> </svg> </label> </div> </div> </header> <dialog id="searchModal" class="modal"> <form method="dialog" class="modal-box p-10"> <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"> <svg viewBox="0 0 24 24" width="24" height="24" astro-icon="mdi:close"><path fill="currentColor" d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg> </button> <div class="search mt-5"> <div class="pagefind-init" data-pagefind-ui data-bundle-path="/spa-sdk/docspagefind/" data-ui-options="{}"></div> <script type="module" src="/spa-sdk/docs/_astro/Search.astro_astro_type_script_index_0_lang.CCY9Nbtr.js"></script> </div> </form> <form method="dialog" class="modal-backdrop"> <button>Close</button> </form> </dialog> <script type="module">const e=document.querySelector("#searchModalTrigger"),c=document.querySelector("#searchModal");e?.addEventListener("click",()=>{c?.showModal(),document.querySelector(".pagefind-ui__search-input")?.focus()});</script>  <main class="grid lg:grid-cols-4 gap-x-10 p-10"> <aside class="hidden lg:block col-span-1"> <nav class="sticky top-0"> <ul class="menu z-10" }> <li class="nav-link"> <a href="/spa-sdk/docs/getting-started"> Getting started </a> </li><li class="nav-link"> <a href="/spa-sdk/docs/spa-sdk"> SPA SDK </a> </li><li class="nav-link"> <a href="/spa-sdk/docs/react-sdk"> React SDK </a> </li><li class="nav-link"> <a href="/spa-sdk/docs/ng-sdk"> Angular SDK </a> </li><li class="nav-link"> <a href="/spa-sdk/docs/vue-sdk"> Vue SDK </a> </li><li class="nav-link"> <a href="/spa-sdk/docs/lit-sdk" class="active"> Lit SDK </a> </li><li class="nav-link"> <a href="/spa-sdk/docs/migration-guide"> Migration guide </a> </li><li class="nav-link"> <a href="/spa-sdk/docs/changelog"> Changelog </a> </li> <li> <a href="https://github.com/bloomreach/spa-sdk/releases" target="_blank">Releases</a> </li> <li> <a href="https://bloomreach.github.io/spa-sdk/" target="_blank">Typedoc</a> </li> </ul> </nav> </aside> <div class="col-span-3 lg:col-span-2"> <article> <div class="block lg:hidden"> <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();;(()=>{var A=Object.defineProperty;var g=(i,o,a)=>o in i?A(i,o,{enumerable:!0,configurable:!0,writable:!0,value:a}):i[o]=a;var d=(i,o,a)=>g(i,typeof o!="symbol"?o+"":o,a);{let i={0:t=>m(t),1:t=>a(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(a(t)),5:t=>new Set(a(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>1/0*t},o=t=>{let[l,e]=t;return l in i?i[l](e):void 0},a=t=>t.map(o),m=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([l,e])=>[l,o(e)]));class y extends HTMLElement{constructor(){super(...arguments);d(this,"Component");d(this,"hydrator");d(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let c=this.querySelectorAll("astro-slot"),n={},h=this.querySelectorAll("template[data-astro-template]");for(let r of h){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(n[r.getAttribute("data-astro-template")||"default"]=r.innerHTML,r.remove())}for(let r of c){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(n[r.getAttribute("name")||"default"]=r.innerHTML)}let p;try{p=this.hasAttribute("props")?m(JSON.parse(this.getAttribute("props"))):{}}catch(r){let s=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(s+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${s}`,this.getAttribute("props"),r),r}let u;await this.hydrator(this)(this.Component,p,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});d(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),c.disconnect(),this.childrenConnectedCallback()},c=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});c.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}async start(){let e=JSON.parse(this.getAttribute("opts")),c=this.getAttribute("client");if(Astro[c]===void 0){window.addEventListener(`astro:${c}`,()=>this.start(),{once:!0});return}try{await Astro[c](async()=>{let n=this.getAttribute("renderer-url"),[h,{default:p}]=await Promise.all([import(this.getAttribute("component-url")),n?import(n):()=>()=>{}]),u=this.getAttribute("component-export")||"default";if(!u.includes("."))this.Component=h[u];else{this.Component=h;for(let f of u.split("."))this.Component=this.Component[f]}return this.hydrator=p,this.hydrate},e,this)}catch(n){console.error(`[astro-island] Error hydrating ${this.getAttribute("component-url")}`,n)}}attributeChangedCallback(){this.hydrate()}}d(y,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",y)}})();</script><astro-island uid="Z27Az6G" prefix="r0" component-url="/spa-sdk/docs/_astro/TableOfContents.B9PDi3Y8.js" component-export="default" renderer-url="/spa-sdk/docs/_astro/client.9yUtRPVz.js" props="{&quot;headings&quot;:[1,[[0,{&quot;depth&quot;:[0,1],&quot;slug&quot;:[0,&quot;bloomreach-lit-sdk&quot;],&quot;text&quot;:[0,&quot;Bloomreach Lit SDK&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;features&quot;],&quot;text&quot;:[0,&quot;Features&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;installation&quot;],&quot;text&quot;:[0,&quot;Installation&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;quick-start&quot;],&quot;text&quot;:[0,&quot;Quick Start&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;1-create-the-app-shell&quot;],&quot;text&quot;:[0,&quot;1. Create the app shell&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;2-create-a-mapped-component&quot;],&quot;text&quot;:[0,&quot;2. Create a mapped component&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;components&quot;],&quot;text&quot;:[0,&quot;Components&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;br-page&quot;],&quot;text&quot;:[0,&quot;&lt;br-page&gt;&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;br-component&quot;],&quot;text&quot;:[0,&quot;&lt;br-component&gt;&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;br-manage-content-button&quot;],&quot;text&quot;:[0,&quot;&lt;br-manage-content-button&gt;&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;br-manage-menu-button&quot;],&quot;text&quot;:[0,&quot;&lt;br-manage-menu-button&gt;&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;component-mapping&quot;],&quot;text&quot;:[0,&quot;Component Mapping&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;data-extraction&quot;],&quot;text&quot;:[0,&quot;Data Extraction&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;getdocumentdatatcomponent-page&quot;],&quot;text&quot;:[0,&quot;getDocumentData&lt;T&gt;(component, page)&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;getcontaineritemcontenttcomponent-page&quot;],&quot;text&quot;:[0,&quot;getContainerItemContent&lt;T&gt;(component, page)&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;context-system&quot;],&quot;text&quot;:[0,&quot;Context System&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;experience-manager-preview&quot;],&quot;text&quot;:[0,&quot;Experience Manager Preview&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;advanced-topics&quot;],&quot;text&quot;:[0,&quot;Advanced Topics&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;internal-components&quot;],&quot;text&quot;:[0,&quot;Internal components&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;shadow-dom-vs-light-dom&quot;],&quot;text&quot;:[0,&quot;Shadow DOM vs Light DOM&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;shadow-dom-manage-button-rendertarget&quot;],&quot;text&quot;:[0,&quot;Shadow DOM manage button (renderTarget)&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;field-name-mapping&quot;],&quot;text&quot;:[0,&quot;Field name mapping&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;dual-mode-components&quot;],&quot;text&quot;:[0,&quot;Dual-mode components&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;api-reference&quot;],&quot;text&quot;:[0,&quot;API Reference&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;troubleshooting&quot;],&quot;text&quot;:[0,&quot;Troubleshooting&quot;]}]]]}" ssr client="load" opts="{&quot;name&quot;:&quot;TableOfContents&quot;,&quot;value&quot;:true}" await-children><nav class="sticky top-0"><ul class="menu"><li><h2 id="on-this-page-heading" class="menu-title"><span class="">On this page</span></h2><ul><li><a href="#features" class="">Features</a></li><li><a href="#installation" class="">Installation</a></li><li><a href="#quick-start" class="">Quick Start</a></li><li><a href="#1-create-the-app-shell" class="">1. Create the app shell</a></li><li><a href="#2-create-a-mapped-component" class="">2. Create a mapped component</a></li><li><a href="#components" class="">Components</a></li><li><a href="#br-page" class="">&lt;br-page&gt;</a></li><li><a href="#br-component" class="">&lt;br-component&gt;</a></li><li><a href="#br-manage-content-button" class="">&lt;br-manage-content-button&gt;</a></li><li><a href="#br-manage-menu-button" class="">&lt;br-manage-menu-button&gt;</a></li><li><a href="#component-mapping" class="">Component Mapping</a></li><li><a href="#data-extraction" class="">Data Extraction</a></li><li><a href="#getdocumentdatatcomponent-page" class="">getDocumentData&lt;T&gt;(component, page)</a></li><li><a href="#getcontaineritemcontenttcomponent-page" class="">getContainerItemContent&lt;T&gt;(component, page)</a></li><li><a href="#context-system" class="">Context System</a></li><li><a href="#experience-manager-preview" class="">Experience Manager Preview</a></li><li><a href="#advanced-topics" class="">Advanced Topics</a></li><li><a href="#internal-components" class="">Internal components</a></li><li><a href="#shadow-dom-vs-light-dom" class="">Shadow DOM vs Light DOM</a></li><li><a href="#shadow-dom-manage-button-rendertarget" class="">Shadow DOM manage button (renderTarget)</a></li><li><a href="#field-name-mapping" class="">Field name mapping</a></li><li><a href="#dual-mode-components" class="">Dual-mode components</a></li><li><a href="#api-reference" class="">API Reference</a></li><li><a href="#troubleshooting" class="">Troubleshooting</a></li></ul></li></ul><div class="divider lg:hidden"></div></nav><!--astro:end--></astro-island> </div> <section class="prose" data-pagefind-body>  <h1 id="bloomreach-lit-sdk">Bloomreach Lit SDK</h1>
+<p>Bloomreach Lit SDK integration for <a href="https://lit.dev/">Lit</a> web components. This package provides the same component set as the React, Angular, and Vue SDKs — built with Lit patterns: custom elements, decorators, and <code>@lit/context</code> for state propagation.</p>
+<h2 id="features">Features</h2>
+<ul>
+<li>Lit custom elements for Bloomreach page rendering</li>
+<li>Dynamic component mapping (brXM <code>ctype</code> to Lit tag name)</li>
+<li>Experience Manager preview integration with live editing</li>
+<li>Context-based state propagation via <code>@lit/context</code></li>
+<li>Full TypeScript support with re-exported spa-sdk types</li>
+</ul>
+<h2 id="installation">Installation</h2>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">npm</span><span style="color:#9ECBFF"> install</span><span style="color:#9ECBFF"> @bloomreach/lit-sdk</span><span style="color:#9ECBFF"> @bloomreach/spa-sdk</span></span></code></pre>
+<h2 id="quick-start">Quick Start</h2>
+<h3 id="1-create-the-app-shell">1. Create the app shell</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { LitElement, html } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> 'lit'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { customElement } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> 'lit/decorators.js'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#F97583"> type</span><span style="color:#E1E4E8"> { Configuration } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> '@bloomreach/spa-sdk'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#9ECBFF"> '@bloomreach/lit-sdk'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#9ECBFF"> './my-banner.js'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#9ECBFF"> './my-content.js'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> MAPPING</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Record</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#79B8FF">string</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">string</span><span style="color:#E1E4E8">> </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#9ECBFF">  'Banner'</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">'my-banner'</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">  'Content'</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">'my-content'</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">@</span><span style="color:#B392F0">customElement</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'my-app'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> MyApp</span><span style="color:#F97583"> extends</span><span style="color:#B392F0"> LitElement</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  private</span><span style="color:#F97583"> get</span><span style="color:#B392F0"> _config</span><span style="color:#E1E4E8">()</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Configuration</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">      endpoint: </span><span style="color:#9ECBFF">'http://localhost:8080/site/resourceapi'</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#B392F0">      httpClient</span><span style="color:#E1E4E8">: </span><span style="color:#F97583">async</span><span style="color:#E1E4E8"> (</span><span style="color:#FFAB70">config</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#79B8FF"> response</span><span style="color:#F97583"> =</span><span style="color:#F97583"> await</span><span style="color:#B392F0"> fetch</span><span style="color:#E1E4E8">(config.url, {</span></span>
+<span class="line"><span style="color:#E1E4E8">          method: config.method,</span></span>
+<span class="line"><span style="color:#E1E4E8">          headers: config.headers </span><span style="color:#F97583">as</span><span style="color:#B392F0"> Record</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#79B8FF">string</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">string</span><span style="color:#E1E4E8">>,</span></span>
+<span class="line"><span style="color:#E1E4E8">          body: config.data,</span></span>
+<span class="line"><span style="color:#E1E4E8">        });</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> { data: </span><span style="color:#F97583">await</span><span style="color:#E1E4E8"> response.</span><span style="color:#B392F0">json</span><span style="color:#E1E4E8">() };</span></span>
+<span class="line"><span style="color:#E1E4E8">      },</span></span>
+<span class="line"><span style="color:#E1E4E8">      path: </span><span style="color:#9ECBFF">`${</span><span style="color:#E1E4E8">window</span><span style="color:#9ECBFF">.</span><span style="color:#E1E4E8">location</span><span style="color:#9ECBFF">.</span><span style="color:#E1E4E8">pathname</span><span style="color:#9ECBFF">}${</span><span style="color:#E1E4E8">window</span><span style="color:#9ECBFF">.</span><span style="color:#E1E4E8">location</span><span style="color:#9ECBFF">.</span><span style="color:#E1E4E8">search</span><span style="color:#9ECBFF">}`</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    } </span><span style="color:#F97583">as</span><span style="color:#B392F0"> Configuration</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">  createRenderRoot</span><span style="color:#E1E4E8">() { </span><span style="color:#F97583">return</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">; }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">  render</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#B392F0"> html</span><span style="color:#9ECBFF">`</span></span>
+<span class="line"><span style="color:#9ECBFF">      &#x3C;br-page .configuration=${</span><span style="color:#79B8FF">this</span><span style="color:#9ECBFF">.</span><span style="color:#E1E4E8">_config</span><span style="color:#9ECBFF">} .mapping=${</span><span style="color:#79B8FF">MAPPING</span><span style="color:#9ECBFF">}></span></span>
+<span class="line"><span style="color:#9ECBFF">        &#x3C;header></span></span>
+<span class="line"><span style="color:#9ECBFF">          &#x3C;br-component name="menu">&#x3C;/br-component></span></span>
+<span class="line"><span style="color:#9ECBFF">        &#x3C;/header></span></span>
+<span class="line"><span style="color:#9ECBFF">        &#x3C;main></span></span>
+<span class="line"><span style="color:#9ECBFF">          &#x3C;br-component name="main">&#x3C;/br-component></span></span>
+<span class="line"><span style="color:#9ECBFF">        &#x3C;/main></span></span>
+<span class="line"><span style="color:#9ECBFF">        &#x3C;footer></span></span>
+<span class="line"><span style="color:#9ECBFF">          &#x3C;br-component name="footer">&#x3C;/br-component></span></span>
+<span class="line"><span style="color:#9ECBFF">        &#x3C;/footer></span></span>
+<span class="line"><span style="color:#9ECBFF">      &#x3C;/br-page></span></span>
+<span class="line"><span style="color:#9ECBFF">    `</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h3 id="2-create-a-mapped-component">2. Create a mapped component</h3>
+<p>Every mapped component receives <code>component</code> (ContainerItem) and <code>page</code> (Page) properties from the SDK:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { LitElement, html, nothing } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> 'lit'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { customElement, property } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> 'lit/decorators.js'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#F97583"> type</span><span style="color:#E1E4E8"> { ContainerItem, Page } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> '@bloomreach/spa-sdk'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { getDocumentData } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> '@bloomreach/lit-sdk'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">interface</span><span style="color:#B392F0"> BannerData</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#FFAB70">  title</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> string</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#FFAB70">  content</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> { </span><span style="color:#FFAB70">value</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> string</span><span style="color:#E1E4E8"> };</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">@</span><span style="color:#B392F0">customElement</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'my-banner'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> MyBanner</span><span style="color:#F97583"> extends</span><span style="color:#B392F0"> LitElement</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">  @</span><span style="color:#B392F0">property</span><span style="color:#E1E4E8">({ type: Object }) </span><span style="color:#FFAB70">component</span><span style="color:#F97583">?:</span><span style="color:#B392F0"> ContainerItem</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">  @</span><span style="color:#B392F0">property</span><span style="color:#E1E4E8">({ type: Object }) </span><span style="color:#FFAB70">page</span><span style="color:#F97583">?:</span><span style="color:#B392F0"> Page</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">  createRenderRoot</span><span style="color:#E1E4E8">() { </span><span style="color:#F97583">return</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">; }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">  render</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.component </span><span style="color:#F97583">||</span><span style="color:#F97583"> !</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.page) </span><span style="color:#F97583">return</span><span style="color:#E1E4E8"> nothing;</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> data</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> getDocumentData</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">BannerData</span><span style="color:#E1E4E8">>(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.component, </span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.page);</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#E1E4E8">data) </span><span style="color:#F97583">return</span><span style="color:#E1E4E8"> nothing;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#B392F0"> html</span><span style="color:#9ECBFF">`</span></span>
+<span class="line"><span style="color:#9ECBFF">      &#x3C;div class="banner"></span></span>
+<span class="line"><span style="color:#9ECBFF">        &#x3C;br-manage-content-button</span></span>
+<span class="line"><span style="color:#9ECBFF">          .content=${</span><span style="color:#79B8FF">this</span><span style="color:#9ECBFF">.</span><span style="color:#E1E4E8">page</span><span style="color:#9ECBFF">.</span><span style="color:#B392F0">getContent</span><span style="color:#9ECBFF">(</span><span style="color:#79B8FF">this</span><span style="color:#9ECBFF">.</span><span style="color:#E1E4E8">component</span><span style="color:#9ECBFF">.</span><span style="color:#B392F0">getModels</span><span style="color:#9ECBFF">().</span><span style="color:#E1E4E8">document</span><span style="color:#9ECBFF">)</span><span style="color:#9ECBFF">}</span></span>
+<span class="line"><span style="color:#9ECBFF">          .page=${</span><span style="color:#79B8FF">this</span><span style="color:#9ECBFF">.</span><span style="color:#E1E4E8">page</span><span style="color:#9ECBFF">}</span></span>
+<span class="line"><span style="color:#9ECBFF">        >&#x3C;/br-manage-content-button></span></span>
+<span class="line"><span style="color:#9ECBFF">        &#x3C;h1>${</span><span style="color:#E1E4E8">data</span><span style="color:#9ECBFF">.</span><span style="color:#E1E4E8">title</span><span style="color:#9ECBFF">}&#x3C;/h1></span></span>
+<span class="line"><span style="color:#9ECBFF">      &#x3C;/div></span></span>
+<span class="line"><span style="color:#9ECBFF">    `</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<blockquote>
+<p><strong>Note:</strong> Use <code>createRenderRoot() { return this; }</code> (light DOM) on components that need <code>&#x3C;br-manage-content-button></code> or <code>&#x3C;br-manage-menu-button></code>, so the Experience Manager can find the meta comments.</p>
+</blockquote>
+<h2 id="components">Components</h2>
+<h3 id="br-page"><code>&#x3C;br-page></code></h3>
+<p>Root SDK component. Initializes the SPA SDK and provides Page, Component, and mapping to descendants via Lit Context.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Property</th><th>Type</th><th>Required</th><th>Description</th></tr></thead><tbody><tr><td><code>configuration</code></td><td><code>Configuration</code></td><td>Yes</td><td>SPA SDK configuration (endpoint, httpClient, etc.)</td></tr><tr><td><code>mapping</code></td><td><code>Record&#x3C;string, string></code></td><td>Yes</td><td>Maps brXM <code>ctype</code> strings to Lit custom element tag names</td></tr></tbody></table>
+<p>Two rendering modes:</p>
+<ul>
+<li><strong>Auto-render</strong> (no children) — renders the full component tree</li>
+<li><strong>Custom layout</strong> (with children) — you control layout with <code>&#x3C;br-component name="..."></code></li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> Auto-render mode uses a slot fallback internally. Ensure no whitespace or text nodes exist between the opening and closing <code>&#x3C;br-page></code> tags, as any light DOM content (including whitespace) will suppress the fallback. This is not an issue when using Lit template bindings.</p>
+</blockquote>
+<h3 id="br-component"><code>&#x3C;br-component></code></h3>
+<p>Traverses the brXM component tree by name and renders children recursively.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Property</th><th>Type</th><th>Required</th><th>Description</th></tr></thead><tbody><tr><td><code>name</code></td><td><code>string</code></td><td>No</td><td>Name of the child component to resolve</td></tr></tbody></table>
+<p>The <code>name</code> values correspond to component names in the brXM page layout (e.g., <code>menu</code>, <code>main</code>, <code>footer</code>).</p>
+<h3 id="br-manage-content-button"><code>&#x3C;br-manage-content-button></code></h3>
+<p>Renders an “Edit content” overlay in Experience Manager preview mode.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Property</th><th>Type</th><th>Required</th><th>Description</th></tr></thead><tbody><tr><td><code>content</code></td><td><code>Content</code></td><td>No</td><td>The content object to edit</td></tr><tr><td><code>page</code></td><td><code>Page</code></td><td>No</td><td>Direct page reference</td></tr><tr><td><code>documentTemplateQuery</code></td><td><code>string</code></td><td>No</td><td>Template query for new documents</td></tr><tr><td><code>folderTemplateQuery</code></td><td><code>string</code></td><td>No</td><td>Template query for new folders</td></tr><tr><td><code>parameter</code></td><td><code>string</code></td><td>No</td><td>Component parameter name</td></tr><tr><td><code>relative</code></td><td><code>boolean</code></td><td>No</td><td>Store as relative path</td></tr><tr><td><code>root</code></td><td><code>string</code></td><td>No</td><td>Root folder path</td></tr><tr><td><code>pickerSelectableNodeTypes</code></td><td><code>string</code></td><td>No</td><td>Selectable node types for picker</td></tr><tr><td><code>pickerConfiguration</code></td><td><code>string</code></td><td>No</td><td>CMS picker configuration path</td></tr><tr><td><code>pickerInitialPath</code></td><td><code>string</code></td><td>No</td><td>Initial path for the picker</td></tr></tbody></table>
+<h3 id="br-manage-menu-button"><code>&#x3C;br-manage-menu-button></code></h3>
+<p>Renders an “Edit menu” overlay in Experience Manager preview mode.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Property</th><th>Type</th><th>Required</th><th>Description</th></tr></thead><tbody><tr><td><code>menu</code></td><td><code>Menu</code></td><td>Yes</td><td>The menu model to edit</td></tr><tr><td><code>page</code></td><td><code>Page</code></td><td>No</td><td>Direct page reference</td></tr></tbody></table>
+<h2 id="component-mapping">Component Mapping</h2>
+<p>The <code>mapping</code> property on <code>&#x3C;br-page></code> maps brXM <code>ctype</code> strings to Lit custom element tag names:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> MAPPING</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Record</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#79B8FF">string</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">string</span><span style="color:#E1E4E8">> </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#9ECBFF">  'Banner'</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">'my-banner'</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">  'Content'</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">'my-content'</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">  'News List'</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">'my-news-list'</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">  'Simple Content'</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">'my-content'</span><span style="color:#E1E4E8">,   </span><span style="color:#6A737D">// multiple ctypes can map to one element</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span></code></pre>
+<p>The <code>ctype</code> is read from <code>ContainerItem.getType()</code> (falls back to the component label). Unmapped ctypes produce a console warning.</p>
+<h2 id="data-extraction">Data Extraction</h2>
+<h3 id="getdocumentdatatcomponent-page"><code>getDocumentData&#x3C;T>(component, page)</code></h3>
+<p>Resolves document data for container items using the standard <code>models.document</code> pattern:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { getDocumentData } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> '@bloomreach/lit-sdk'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> data</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> getDocumentData</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">BannerData</span><span style="color:#E1E4E8">>(component, page);</span></span></code></pre>
+<h3 id="getcontaineritemcontenttcomponent-page"><code>getContainerItemContent&#x3C;T>(component, page)</code></h3>
+<p>Resolves content from the <code>content</code> field pattern (alternative to document references):</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { getContainerItemContent } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> '@bloomreach/lit-sdk'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> data</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> getContainerItemContent</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">BannerData</span><span style="color:#E1E4E8">>(component, page);</span></span></code></pre>
+<h2 id="context-system">Context System</h2>
+<p>The SDK uses <code>@lit/context</code> to propagate state without prop-drilling:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Context</th><th>Type</th><th>Provider</th><th>Description</th></tr></thead><tbody><tr><td><code>brPageContext</code></td><td><code>Page</code></td><td><code>&#x3C;br-page></code></td><td>The initialized Page object</td></tr><tr><td><code>brComponentContext</code></td><td><code>Component</code></td><td><code>&#x3C;br-page></code>, <code>&#x3C;br-component></code></td><td>Current component in the tree</td></tr><tr><td><code>brMappingContext</code></td><td><code>Record&#x3C;string, string></code></td><td><code>&#x3C;br-page></code></td><td>The ctype-to-tag-name mapping</td></tr></tbody></table>
+<p>You typically don’t consume these directly — the SDK passes <code>component</code> and <code>page</code> as properties to mapped elements. For components outside the mapping (e.g., a menu), consume the context:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { consume } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> '@lit/context'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { brPageContext } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> '@bloomreach/lit-sdk'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">@</span><span style="color:#B392F0">customElement</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'my-menu'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> MyMenu</span><span style="color:#F97583"> extends</span><span style="color:#B392F0"> LitElement</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">  @</span><span style="color:#B392F0">consume</span><span style="color:#E1E4E8">({ context: brPageContext, subscribe: </span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8"> })</span></span>
+<span class="line"><span style="color:#F97583">  private</span><span style="color:#FFAB70"> page</span><span style="color:#F97583">?:</span><span style="color:#B392F0"> Page</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h2 id="experience-manager-preview">Experience Manager Preview</h2>
+<p>When running in the Experience Manager iframe, the SDK automatically handles:</p>
+<ol>
+<li><strong>JWT Authentication</strong> — Token from <code>?token=</code> included in API requests</li>
+<li><strong>DOM Comments</strong> — Meta comments injected for editing overlays</li>
+<li><strong><code>page.sync()</code></strong> — Called after renders to reposition overlays</li>
+<li><strong>Live updates</strong> — Re-renders on content editor changes</li>
+</ol>
+<hr>
+<h2 id="advanced-topics">Advanced Topics</h2>
+<h3 id="internal-components">Internal components</h3>
+<p><code>&#x3C;br-container></code> and <code>&#x3C;br-container-item></code> are internal components instantiated automatically by <code>&#x3C;br-component></code>. You don’t use them directly. <code>&#x3C;br-container-item></code> resolves the <code>ctype</code>, creates the mapped element, sets <code>component</code>/<code>page</code> properties, and handles the <code>isHidden()</code> Relevance feature.</p>
+<h3 id="shadow-dom-vs-light-dom">Shadow DOM vs Light DOM</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Component</th><th>DOM Mode</th><th>Reason</th></tr></thead><tbody><tr><td><code>&#x3C;br-page></code></td><td>Shadow DOM</td><td>Uses <code>&#x3C;slot></code> for layout projection</td></tr><tr><td><code>&#x3C;br-component></code>, <code>&#x3C;br-container></code>, <code>&#x3C;br-container-item></code></td><td>Light DOM</td><td>EM meta comments need light DOM</td></tr><tr><td><code>&#x3C;br-manage-content-button></code>, <code>&#x3C;br-manage-menu-button></code></td><td>Light DOM</td><td>EM meta comments need light DOM</td></tr><tr><td><strong>Your mapped components</strong></td><td>Either</td><td>Use light DOM if the component needs a manage button</td></tr></tbody></table>
+<p>Your app shell should also use light DOM (<code>createRenderRoot() { return this; }</code>).</p>
+<h3 id="shadow-dom-manage-button-rendertarget">Shadow DOM manage button (<code>renderTarget</code>)</h3>
+<p>If your mapped component must use Shadow DOM but needs a manage button, pass <code>renderTarget</code> to inject meta comments in the light DOM:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="html"><code><span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">br-manage-content-button</span></span>
+<span class="line"><span style="color:#B392F0">  .content</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">${document}</span></span>
+<span class="line"><span style="color:#B392F0">  .page</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">${this.page}</span></span>
+<span class="line"><span style="color:#B392F0">  .renderTarget</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">${this}</span></span>
+<span class="line"><span style="color:#E1E4E8">>&#x3C;/</span><span style="color:#85E89D">br-manage-content-button</span><span style="color:#E1E4E8">></span></span></code></pre>
+<h3 id="field-name-mapping">Field name mapping</h3>
+<p>brXM compound fields may use type-specific names (e.g., <code>featureitem</code> instead of <code>items</code>). Inspect the Delivery API response and map fields in your component:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> raw</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> getDocumentData</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#79B8FF">any</span><span style="color:#E1E4E8">>(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.component, </span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.page);</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> data</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> { </span><span style="color:#F97583">...</span><span style="color:#E1E4E8">raw, items: raw.featureitem </span><span style="color:#F97583">??</span><span style="color:#E1E4E8"> raw.items </span><span style="color:#F97583">??</span><span style="color:#E1E4E8"> [] };</span></span></code></pre>
+<h3 id="dual-mode-components">Dual-mode components</h3>
+<p>Components that work both with the SDK and standalone data props:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#E1E4E8">@</span><span style="color:#B392F0">customElement</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'my-component'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> MyComponent</span><span style="color:#F97583"> extends</span><span style="color:#B392F0"> LitElement</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">  @</span><span style="color:#B392F0">property</span><span style="color:#E1E4E8">({ type: Object }) </span><span style="color:#FFAB70">data</span><span style="color:#F97583">?:</span><span style="color:#B392F0"> MyData</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">  @</span><span style="color:#B392F0">property</span><span style="color:#E1E4E8">({ type: Object }) </span><span style="color:#FFAB70">component</span><span style="color:#F97583">?:</span><span style="color:#B392F0"> ContainerItem</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">  @</span><span style="color:#B392F0">property</span><span style="color:#E1E4E8">({ type: Object }) </span><span style="color:#FFAB70">page</span><span style="color:#F97583">?:</span><span style="color:#B392F0"> Page</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  private</span><span style="color:#B392F0"> _getData</span><span style="color:#E1E4E8">()</span><span style="color:#F97583">:</span><span style="color:#B392F0"> MyData</span><span style="color:#F97583"> |</span><span style="color:#79B8FF"> undefined</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.component </span><span style="color:#F97583">&#x26;&#x26;</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.page) {</span></span>
+<span class="line"><span style="color:#F97583">      return</span><span style="color:#B392F0"> getDocumentData</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">MyData</span><span style="color:#E1E4E8">>(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.component, </span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.page);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.data;</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h3 id="api-reference">API Reference</h3>
+<p><strong>Components:</strong> <code>BrPage</code>, <code>BrComponent</code>, <code>BrComponentNode</code>, <code>BrContainer</code>, <code>BrContainerItem</code>, <code>BrManageContentButton</code>, <code>BrManageMenuButton</code></p>
+<p><strong>Contexts:</strong> <code>brPageContext</code>, <code>brComponentContext</code>, <code>brMappingContext</code></p>
+<p><strong>Utilities:</strong> <code>getDocumentData</code>, <code>getContainerItemContent</code>, <code>isInternalLink</code>, <code>isExternalLink</code></p>
+<p><strong>Type guards</strong> (re-exported from <code>@bloomreach/spa-sdk</code>): <code>isComponent</code>, <code>isContainer</code>, <code>isContainerItem</code>, <code>isContent</code>, <code>isDocument</code>, <code>isImageSet</code>, <code>isLink</code>, <code>isMenu</code>, <code>isMetaComment</code>, <code>isMeta</code>, <code>isPage</code>, <code>isPagination</code>, <code>isReference</code></p>
+<p><strong>Types</strong> (re-exported from <code>@bloomreach/spa-sdk</code>): <code>Page</code>, <code>Component</code>, <code>ContainerItem</code>, <code>Container</code>, <code>Content</code>, <code>Document</code>, <code>ImageSet</code>, <code>Image</code>, <code>Link</code>, <code>Menu</code>, <code>Menu10</code>, <code>MenuItem</code>, <code>MetaCollection</code>, <code>MetaComment</code>, <code>Meta</code>, <code>PageModel</code>, <code>Configuration</code>, <code>ManageContentButton</code>, <code>Reference</code></p>
+<p><strong>Functions</strong> (re-exported from <code>@bloomreach/spa-sdk</code>): <code>initialize</code>, <code>destroy</code></p>
+<h3 id="troubleshooting">Troubleshooting</h3>
+<ul>
+<li><strong>“this.httpClient is not a function”</strong> — Provide an <code>httpClient</code> in the configuration. See <a href="#quick-start">Quick Start</a>.</li>
+<li><strong>“No mapping found for ctype”</strong> — The <code>ctype</code> from brXM doesn’t match your mapping keys. Check the Delivery API response for exact values (case-sensitive).</li>
+<li><strong>Components render empty</strong> — Verify <code>getDocumentData()</code> returns data. Check the Network tab for API responses.</li>
+<li><strong>Context not reaching components</strong> — Ensure your app shell uses light DOM.</li>
+<li><strong>EM overlays not appearing</strong> — Check <code>page.isPreview()</code>, CORS headers, and preview URL configuration.</li>
+</ul>  </section> </article> </div> <aside class="hidden lg:block col-span-1"> <astro-island uid="Z27Az6G" prefix="r1" component-url="/spa-sdk/docs/_astro/TableOfContents.B9PDi3Y8.js" component-export="default" renderer-url="/spa-sdk/docs/_astro/client.9yUtRPVz.js" props="{&quot;headings&quot;:[1,[[0,{&quot;depth&quot;:[0,1],&quot;slug&quot;:[0,&quot;bloomreach-lit-sdk&quot;],&quot;text&quot;:[0,&quot;Bloomreach Lit SDK&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;features&quot;],&quot;text&quot;:[0,&quot;Features&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;installation&quot;],&quot;text&quot;:[0,&quot;Installation&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;quick-start&quot;],&quot;text&quot;:[0,&quot;Quick Start&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;1-create-the-app-shell&quot;],&quot;text&quot;:[0,&quot;1. Create the app shell&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;2-create-a-mapped-component&quot;],&quot;text&quot;:[0,&quot;2. Create a mapped component&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;components&quot;],&quot;text&quot;:[0,&quot;Components&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;br-page&quot;],&quot;text&quot;:[0,&quot;&lt;br-page&gt;&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;br-component&quot;],&quot;text&quot;:[0,&quot;&lt;br-component&gt;&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;br-manage-content-button&quot;],&quot;text&quot;:[0,&quot;&lt;br-manage-content-button&gt;&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;br-manage-menu-button&quot;],&quot;text&quot;:[0,&quot;&lt;br-manage-menu-button&gt;&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;component-mapping&quot;],&quot;text&quot;:[0,&quot;Component Mapping&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;data-extraction&quot;],&quot;text&quot;:[0,&quot;Data Extraction&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;getdocumentdatatcomponent-page&quot;],&quot;text&quot;:[0,&quot;getDocumentData&lt;T&gt;(component, page)&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;getcontaineritemcontenttcomponent-page&quot;],&quot;text&quot;:[0,&quot;getContainerItemContent&lt;T&gt;(component, page)&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;context-system&quot;],&quot;text&quot;:[0,&quot;Context System&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;experience-manager-preview&quot;],&quot;text&quot;:[0,&quot;Experience Manager Preview&quot;]}],[0,{&quot;depth&quot;:[0,2],&quot;slug&quot;:[0,&quot;advanced-topics&quot;],&quot;text&quot;:[0,&quot;Advanced Topics&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;internal-components&quot;],&quot;text&quot;:[0,&quot;Internal components&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;shadow-dom-vs-light-dom&quot;],&quot;text&quot;:[0,&quot;Shadow DOM vs Light DOM&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;shadow-dom-manage-button-rendertarget&quot;],&quot;text&quot;:[0,&quot;Shadow DOM manage button (renderTarget)&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;field-name-mapping&quot;],&quot;text&quot;:[0,&quot;Field name mapping&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;dual-mode-components&quot;],&quot;text&quot;:[0,&quot;Dual-mode components&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;api-reference&quot;],&quot;text&quot;:[0,&quot;API Reference&quot;]}],[0,{&quot;depth&quot;:[0,3],&quot;slug&quot;:[0,&quot;troubleshooting&quot;],&quot;text&quot;:[0,&quot;Troubleshooting&quot;]}]]]}" ssr client="load" opts="{&quot;name&quot;:&quot;TableOfContents&quot;,&quot;value&quot;:true}" await-children><nav class="sticky top-0"><ul class="menu"><li><h2 id="on-this-page-heading" class="menu-title"><span class="">On this page</span></h2><ul><li><a href="#features" class="">Features</a></li><li><a href="#installation" class="">Installation</a></li><li><a href="#quick-start" class="">Quick Start</a></li><li><a href="#1-create-the-app-shell" class="">1. Create the app shell</a></li><li><a href="#2-create-a-mapped-component" class="">2. Create a mapped component</a></li><li><a href="#components" class="">Components</a></li><li><a href="#br-page" class="">&lt;br-page&gt;</a></li><li><a href="#br-component" class="">&lt;br-component&gt;</a></li><li><a href="#br-manage-content-button" class="">&lt;br-manage-content-button&gt;</a></li><li><a href="#br-manage-menu-button" class="">&lt;br-manage-menu-button&gt;</a></li><li><a href="#component-mapping" class="">Component Mapping</a></li><li><a href="#data-extraction" class="">Data Extraction</a></li><li><a href="#getdocumentdatatcomponent-page" class="">getDocumentData&lt;T&gt;(component, page)</a></li><li><a href="#getcontaineritemcontenttcomponent-page" class="">getContainerItemContent&lt;T&gt;(component, page)</a></li><li><a href="#context-system" class="">Context System</a></li><li><a href="#experience-manager-preview" class="">Experience Manager Preview</a></li><li><a href="#advanced-topics" class="">Advanced Topics</a></li><li><a href="#internal-components" class="">Internal components</a></li><li><a href="#shadow-dom-vs-light-dom" class="">Shadow DOM vs Light DOM</a></li><li><a href="#shadow-dom-manage-button-rendertarget" class="">Shadow DOM manage button (renderTarget)</a></li><li><a href="#field-name-mapping" class="">Field name mapping</a></li><li><a href="#dual-mode-components" class="">Dual-mode components</a></li><li><a href="#api-reference" class="">API Reference</a></li><li><a href="#troubleshooting" class="">Troubleshooting</a></li></ul></li></ul><div class="divider lg:hidden"></div></nav><!--astro:end--></astro-island> </aside> </main> </body></html>
