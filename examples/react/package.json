@@ -10,7 +10,7 @@
     "react": "19.1.4",
     "react-dom": "19.1.4",
     "react-router-dom": "7.5.0",
-    "sanitize-html": "2.14.0"
+    "sanitize-html": "2.17.4"
   },
   "scripts": {
     "build": "cross-env GENERATE_SOURCEMAP=false SKIP_PREFLIGHT_CHECK=true react-scripts build",
@@ -38,7 +38,7 @@
     "@bloomreach/eslint-config-react": "1.2.0",
     "@types/react": "19.1.2",
     "@types/react-dom": "19.1.2",
-    "@types/sanitize-html": "2.11.0",
+    "@types/sanitize-html": "2.16.1",
     "@typescript-eslint/eslint-plugin": "5.49.0",
     "cross-env": "7.0.3",
     "eslint": "7.32.0",

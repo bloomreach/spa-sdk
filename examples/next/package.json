@@ -13,7 +13,7 @@
     "next": "15.3.8",
     "react": "19.1.4",
     "react-dom": "19.1.4",
-    "sanitize-html": "2.15.0",
+    "sanitize-html": "2.17.4",
     "swr": "2.2.5"
   },
   "devDependencies": {
