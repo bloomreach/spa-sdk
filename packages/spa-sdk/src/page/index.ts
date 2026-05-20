@@ -15,72 +15,35 @@
  */
 
 import { Typed } from 'emittery';
-import { isComponent as isComponent10, Component } from './component';
-import { isComponent as isComponent09 } from './component09';
-import { isContainer as isContainer10, Container } from './container';
-import { isContainer as isContainer09 } from './container09';
-import { isContainerItem as isContainerItem10, ContainerItem } from './container-item';
-import { isContainerItem as isContainerItem09 } from './container-item09';
-import { PageModel as PageModel10, Page, isPage as isPage10 } from './page';
-
-/**
- * Checks whether a value is a page component.
- * @param value The value to check.
- */
-export function isComponent(value: any): value is Component {
-  return isComponent10(value) || isComponent09(value);
-}
-
-/**
- * Checks whether a value is a page container.
- * @param value The value to check.
- */
-export function isContainer(value: any): value is Container {
-  return isContainer10(value) || isContainer09(value);
-}
-
-/**
- * Checks whether a value is a page container item.
- * @param value The value to check.
- */
-export function isContainerItem(value: any): value is ContainerItem {
-  return isContainerItem10(value) || isContainerItem09(value);
-}
-
-/**
- * Checks whether a value is a page.
- * @param value The value to check.
- */
-export function isPage(value: any): value is Page {
-  return isPage10(value);
-}
-
-/**
- * Model of a page.
- */
-export type PageModel = PageModel10;
+import { PageModel } from './page';
 
 export type EventBus = Typed<{ 'page.update': { page: PageModel } }>;
 
-export { Component, TYPE_COMPONENT, TYPE_COMPONENT_CONTAINER, TYPE_COMPONENT_CONTAINER_ITEM } from './component';
 export {
-  TYPE_COMPONENT as TYPE_COMPONENT_09,
-  TYPE_COMPONENT_CONTAINER as TYPE_COMPONENT_CONTAINER_09,
-  TYPE_COMPONENT_CONTAINER_ITEM as TYPE_COMPONENT_CONTAINER_ITEM_09,
-} from './component09';
-export { ContainerItem, TYPE_CONTAINER_ITEM_UNDEFINED } from './container-item';
+  Component,
+  isComponent,
+  TYPE_COMPONENT,
+  TYPE_COMPONENT_CONTAINER,
+  TYPE_COMPONENT_CONTAINER_ITEM,
+} from './component';
 export {
   Container,
+  isContainer,
   TYPE_CONTAINER_BOX,
   TYPE_CONTAINER_INLINE,
   TYPE_CONTAINER_NO_MARKUP,
   TYPE_CONTAINER_ORDERED_LIST,
   TYPE_CONTAINER_UNORDERED_LIST,
 } from './container';
-export { Content, isContent } from './content09';
+export {
+  ContainerItem,
+  getContainerItemContent,
+  isContainerItem,
+  TYPE_CONTAINER_ITEM_UNDEFINED,
+} from './container-item';
+export { Content, isContent } from './content';
 export { Document, TYPE_DOCUMENT, isDocument } from './document';
 export { PageEventBusService } from './page-events';
-export { getContainerItemContent } from './container-item';
 export { ImageSet, TYPE_IMAGE_SET, isImageSet } from './image-set';
 export { Image } from './image';
 export { Link, TYPE_LINK_EXTERNAL, TYPE_LINK_INTERNAL, TYPE_LINK_RESOURCE, isLink } from './link';
@@ -92,7 +55,7 @@ export { MetaComment, isMetaComment } from './meta-comment';
 export { Meta, META_POSITION_BEGIN, META_POSITION_END, isMeta } from './meta';
 export { PageFactory } from './page-factory';
 export { PageModule } from './module';
-export { Page } from './page';
+export { Page, PageModel, isPage } from './page';
 export { PaginationItem } from './pagination-item';
 export { Pagination, isPagination } from './pagination';
 export { Reference, isReference } from './reference';

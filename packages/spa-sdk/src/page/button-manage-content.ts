@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { Content } from './content09';
+import { Content } from './content';
 import { Document } from './document';
 import { Meta, MetaModel, META_POSITION_BEGIN, META_POSITION_END, TYPE_META_COMMENT } from './meta';
 import { MetaCollectionModel, MetaCollection } from './meta-collection';
