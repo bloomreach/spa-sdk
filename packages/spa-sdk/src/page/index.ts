@@ -21,7 +21,6 @@ import { isContainer as isContainer10, Container } from './container';
 import { isContainer as isContainer09 } from './container09';
 import { isContainerItem as isContainerItem10, ContainerItem } from './container-item';
 import { isContainerItem as isContainerItem09 } from './container-item09';
-import { Menu as Menu10 } from './menu';
 import { PageModel as PageModel10, Page, isPage as isPage10 } from './page';
 
 /**
@@ -63,11 +62,6 @@ export type PageModel = PageModel10;
 
 export type EventBus = Typed<{ 'page.update': { page: PageModel } }>;
 
-/**
- * Menu content model.
- */
-export type Menu = Menu10;
-
 export { Component, TYPE_COMPONENT, TYPE_COMPONENT_CONTAINER, TYPE_COMPONENT_CONTAINER_ITEM } from './component';
 export {
   TYPE_COMPONENT as TYPE_COMPONENT_09,
@@ -92,7 +86,7 @@ export { Image } from './image';
 export { Link, TYPE_LINK_EXTERNAL, TYPE_LINK_INTERNAL, TYPE_LINK_RESOURCE, isLink } from './link';
 export { ManageContentButton, TYPE_MANAGE_CONTENT_BUTTON } from './button-manage-content';
 export { MenuItem } from './menu-item';
-export { TYPE_MANAGE_MENU_BUTTON, TYPE_MENU, isMenu, Menu as Menu10 } from './menu';
+export { TYPE_MANAGE_MENU_BUTTON, TYPE_MENU, isMenu, Menu } from './menu';
 export { MetaCollection } from './meta-collection';
 export { MetaComment, isMetaComment } from './meta-comment';
 export { Meta, META_POSITION_BEGIN, META_POSITION_END, isMeta } from './meta';

@@ -43,7 +43,6 @@ export type {
   Image,
   Link,
   Menu,
-  Menu10,
   MenuItem,
   MetaCollection,
   MetaComment,
