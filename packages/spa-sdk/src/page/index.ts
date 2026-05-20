@@ -22,9 +22,7 @@ import { isContainer as isContainer09 } from './container09';
 import { isContainerItem as isContainerItem10, ContainerItem } from './container-item';
 import { isContainerItem as isContainerItem09 } from './container-item09';
 import { Menu as Menu10 } from './menu';
-import { Menu as Menu09 } from './menu09';
 import { PageModel as PageModel10, Page, isPage as isPage10 } from './page';
-import { PageModel as PageModel09, isPage as isPage09 } from './page09';
 
 /**
  * Checks whether a value is a page component.
@@ -55,20 +53,20 @@ export function isContainerItem(value: any): value is ContainerItem {
  * @param value The value to check.
  */
 export function isPage(value: any): value is Page {
-  return isPage10(value) || isPage09(value);
+  return isPage10(value);
 }
 
 /**
  * Model of a page.
  */
-export type PageModel = PageModel10 | PageModel09;
+export type PageModel = PageModel10;
 
 export type EventBus = Typed<{ 'page.update': { page: PageModel } }>;
 
 /**
  * Menu content model.
  */
-export type Menu = Menu09 | (Menu09 & Menu10);
+export type Menu = Menu10;
 
 export { Component, TYPE_COMPONENT, TYPE_COMPONENT_CONTAINER, TYPE_COMPONENT_CONTAINER_ITEM } from './component';
 export {
@@ -100,7 +98,6 @@ export { MetaComment, isMetaComment } from './meta-comment';
 export { Meta, META_POSITION_BEGIN, META_POSITION_END, isMeta } from './meta';
 export { PageFactory } from './page-factory';
 export { PageModule } from './module';
-export { PageModule as PageModule09 } from './module09';
 export { Page } from './page';
 export { PaginationItem } from './pagination-item';
 export { Pagination, isPagination } from './pagination';
