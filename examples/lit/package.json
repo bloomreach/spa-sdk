@@ -1,7 +1,7 @@
 {
   "name": "@bloomreach/example-lit",
   "description": "Example Lit SPA for Bloomreach Experience",
-  "version": "27.3.0",
+  "version": "27.3.1",
   "private": true,
   "type": "module",
   "scripts": {
@@ -11,14 +11,14 @@
     "start": "serve dist -sn -p 3010"
   },
   "dependencies": {
-    "@bloomreach/lit-sdk": "27.3.0",
-    "@bloomreach/spa-sdk": "27.3.0",
+    "@bloomreach/lit-sdk": "27.3.1",
+    "@bloomreach/spa-sdk": "27.3.1",
     "lit": "^3.2.0",
     "@lit/context": "^1.1.0",
-    "sanitize-html": "2.14.0"
+    "sanitize-html": "2.17.4"
   },
   "devDependencies": {
-    "@types/sanitize-html": "2.11.0",
+    "@types/sanitize-html": "2.16.1",
     "serve": "14.2.0",
     "typescript": "~5.9.0",
     "vite": "^6.3.0",
