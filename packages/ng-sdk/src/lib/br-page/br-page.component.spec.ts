@@ -129,7 +129,7 @@ describe('BrPageComponent', () => {
 
     it('should initialize a page from the configuration', async () => {
       jest.mocked(initialize).mockResolvedValueOnce(page);
-      component.configuration = { cmsBaseUrl: 'something' } as Configuration;
+      component.configuration = { endpoint: 'something' } as Configuration;
       await component.ngOnChanges({
         configuration: new SimpleChange(undefined, component.configuration, true),
       });
@@ -138,7 +138,7 @@ describe('BrPageComponent', () => {
 
       expect(initialize).toHaveBeenCalledWith(
         expect.objectContaining({
-          cmsBaseUrl: 'something',
+          endpoint: 'something',
           httpClient: expect.any(Function),
         }),
       );
@@ -147,7 +147,7 @@ describe('BrPageComponent', () => {
 
     it('should initialize a page from the page model', async () => {
       jest.mocked(initialize as unknown as () => Page).mockReturnValueOnce(page);
-      component.configuration = { cmsBaseUrl: 'something' } as Configuration;
+      component.configuration = { endpoint: 'something' } as Configuration;
       component.page = {} as PageModel;
       await component.ngOnChanges({
         configuration: new SimpleChange(undefined, component.configuration, true),

@@ -28,14 +28,7 @@ function TestComponent(): React.ReactElement {
 const config = {
   httpClient: jest.fn(),
   request: { path: '/' },
-  options: {
-    live: {
-      cmsBaseUrl: 'http://localhost:8080/site/my-spa',
-    },
-    preview: {
-      cmsBaseUrl: 'http://localhost:8080/site/_cmsinternal/my-spa',
-    },
-  },
+  endpoint: 'http://localhost:8080/delivery/site/v1/channels/brxsaas/pages',
 };
 
 const createMockPage = (): Page => ({
