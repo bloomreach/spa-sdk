@@ -28,13 +28,7 @@ import { isPage, Page, PageModel, PageModule } from './page';
 import { Campaign } from './services/campaign';
 import { Segmentation } from './services/segmentation';
 import { ApiOptionsToken, Spa, SpaModule, SpaService } from './spa';
-import {
-  appendSearchParams,
-  extractSearchParams,
-  parseUrl,
-  UrlBuilderOptionsToken,
-  UrlModule,
-} from './url';
+import { appendSearchParams, extractSearchParams, parseUrl, UrlBuilderOptionsToken, UrlModule } from './url';
 
 const DEFAULT_AUTHORIZATION_PARAMETER = 'token';
 const DEFAULT_SERVER_ID_PARAMETER = 'server-id';
