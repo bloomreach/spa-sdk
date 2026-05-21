@@ -2,18 +2,55 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
+#### ["27.3.1"](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-27.3.0..."27.3.1")
+
+- SPASDK-263 fix: bump sanitize-html to 2.17.4 to resolve CVE-2026-44990 [`#240`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/240)
+- SPASDK-263 fix: bump sanitize-html to 2.17.4 to resolve CVE-2026-44990 [`#SPASDK-263`](https://bloomreach.atlassian.net/browse/SPASDK-263)
+
 #### [spa-sdk-27.3.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-27.2.0...spa-sdk-27.3.0)
 
-> 5 May 2026
+> 6 May 2026
 
+- SPASDK-259 fix: Lit example QA fixes (issues 1 and 3) [`#237`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/237)
+- SPASDK-261 feat: add Heroku deployment for Lit example [`#236`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/236)
+- SPASDK-260 chore: replace favicons with SVG [`#235`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/235)
 - SPASDK-259: Add Lit SDK and Lit CSR example application [`#234`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/234)
-- SPASDK-259: Fix logo link, httpClient GET requests, and EM edit button overlap in Lit example [`#237`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/237)
-- SPASDK-260: Replace SPA favicons with Bloomreach SVG logo icon [`#235`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/235)
-- SPASDK-261: Add Heroku deployment support for Lit CSR example [`#236`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/236)
+- SPASDK-262 update lockfile for 27.3.0 version bump [`#SPASDK-262`](https://bloomreach.atlassian.net/browse/SPASDK-262)
+- SPASDK-262 Bumping versions to 27.3.0 [`#SPASDK-262`](https://bloomreach.atlassian.net/browse/SPASDK-262)
+- SPASDK-259 fix: fix EM edit button overlap in preview mode [`#SPASDK-259`](https://bloomreach.atlassian.net/browse/SPASDK-259)
+- SPASDK-259 fix: fix logo link and httpClient for GET requests [`#SPASDK-259`](https://bloomreach.atlassian.net/browse/SPASDK-259)
+- SPASDK-261 fix: add deploy script fail-fast guard [`#SPASDK-261`](https://bloomreach.atlassian.net/browse/SPASDK-261)
+- SPASDK-261 fix: add nginx config and cleanup script [`#SPASDK-261`](https://bloomreach.atlassian.net/browse/SPASDK-261)
+- SPASDK-261 feat: add Heroku deployment for Lit example [`#SPASDK-261`](https://bloomreach.atlassian.net/browse/SPASDK-261)
+- SPASDK-260 chore: replace favicons with SVG [`#SPASDK-260`](https://bloomreach.atlassian.net/browse/SPASDK-260)
+- SPASDK-259 docs: document br-page slot fallback behavior [`#SPASDK-259`](https://bloomreach.atlassian.net/browse/SPASDK-259)
+- SPASDK-259 fix: only destroy on disconnect, not stale generation [`#SPASDK-259`](https://bloomreach.atlassian.net/browse/SPASDK-259)
+- SPASDK-259 fix: guard br-page against config edge cases [`#SPASDK-259`](https://bloomreach.atlassian.net/browse/SPASDK-259)
+- SPASDK-259 fix: address MR !234 review feedback for lit example [`#SPASDK-259`](https://bloomreach.atlassian.net/browse/SPASDK-259)
+- SPASDK-259 docs: remove lit peer deps from install command [`#SPASDK-259`](https://bloomreach.atlassian.net/browse/SPASDK-259)
+- SPASDK-259 fix: address MR !234 review feedback for lit-sdk [`#SPASDK-259`](https://bloomreach.atlassian.net/browse/SPASDK-259)
+- SPASDK-259 fix: resolve eslint CI failures in lit-sdk [`#SPASDK-259`](https://bloomreach.atlassian.net/browse/SPASDK-259)
+- SPASDK-259 docs: add missing picker props and remove banking ref [`#SPASDK-259`](https://bloomreach.atlassian.net/browse/SPASDK-259)
+- SPASDK-259 fix: render container item meta at wrapper level [`#SPASDK-259`](https://bloomreach.atlassian.net/browse/SPASDK-259)
+- SPASDK-259 fix: improve lit example EM preview and type safety [`#SPASDK-259`](https://bloomreach.atlassian.net/browse/SPASDK-259)
+- SPASDK-259 chore: bump typescript and vite in lit packages [`#SPASDK-259`](https://bloomreach.atlassian.net/browse/SPASDK-259)
+- SPASDK-259 docs: simplify lit-sdk README [`#SPASDK-259`](https://bloomreach.atlassian.net/browse/SPASDK-259)
+- SPASDK-259 docs: update lit-sdk README title and description [`#SPASDK-259`](https://bloomreach.atlassian.net/browse/SPASDK-259)
+- SPASDK-259 docs: add lit-sdk references across repo documentation [`#SPASDK-259`](https://bloomreach.atlassian.net/browse/SPASDK-259)
+- SPASDK-259 docs: update lit-sdk and example README files [`#SPASDK-259`](https://bloomreach.atlassian.net/browse/SPASDK-259)
+- SPASDK-259 feat: add lit example application [`#SPASDK-259`](https://bloomreach.atlassian.net/browse/SPASDK-259)
+- SPASDK-259 feat: add picker properties to lit-sdk manage content button [`#SPASDK-259`](https://bloomreach.atlassian.net/browse/SPASDK-259)
+- SPASDK-259 chore: align lit-sdk with other sdk packages [`#SPASDK-259`](https://bloomreach.atlassian.net/browse/SPASDK-259)
+- SPASDK-259 feat: add initial lit sdk [`#SPASDK-259`](https://bloomreach.atlassian.net/browse/SPASDK-259)
+- TRIVIAL update NPM credential ID to SPASDK_NPM_AUTH_TOKEN [`f729ee9`](https://github.com/bloomreach/spa-sdk/commit/f729ee9d75e2196b2209e156c82674c11346dad3)
+- TRIVIAL: revert temporary gitignore entry [`22d7246`](https://github.com/bloomreach/spa-sdk/commit/22d7246246e2cbd4ed72e9c01438619f15f116cd)
 
-#### ["27.2.0"](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-27.1.0..."27.2.0")
+#### [spa-sdk-27.2.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-27.1.0...spa-sdk-27.2.0)
+
+> 26 March 2026
 
 - SPASDK-234: Add `getVariant()` and `getVariants()` methods to ImageSet [`#232`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/232)
+- SPASDK-234: Bumping versions to 27.2.0 [`#SPASDK-234`](https://bloomreach.atlassian.net/browse/SPASDK-234)
 - SPASDK-234: Enhance Banner component to support image variants across Angular, React, Vue, and Nuxt examples. [`#SPASDK-234`](https://bloomreach.atlassian.net/browse/SPASDK-234)
 - SPASDK-234: Add `getVariant()` and `getVariants()` methods to ImageSet [`#SPASDK-234`](https://bloomreach.atlassian.net/browse/SPASDK-234)
 - TRIVIAL: Add browserslist configuration to package.json for improved compatibility [`f9953fe`](https://github.com/bloomreach/spa-sdk/commit/f9953fe7bf35b18106bc6abccd54c26d79a94952)
@@ -1231,5 +1268,7 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-2 Log warning for unsupported method "getContentReference" in v0.9 [`#SPASDK-2`](https://bloomreach.atlassian.net/browse/SPASDK-2)
 - SPASDK-2 Add exported function "getContainerItemContent" [`#SPASDK-2`](https://bloomreach.atlassian.net/browse/SPASDK-2)
 - SPASDK-1 Bump to use node 14 [`#SPASDK-1`](https://bloomreach.atlassian.net/browse/SPASDK-1)
+- SPASDK-1 Remove maven files and update Jenkinsfile [`#SPASDK-1`](https://bloomreach.atlassian.net/browse/SPASDK-1)
+- SPASDK-1 Initial move from brxm monorepo [`#SPASDK-1`](https://bloomreach.atlassian.net/browse/SPASDK-1)
 - TRIVIAL Set branch name to 'main' in changesetBaseRefs [`4dacdcd`](https://github.com/bloomreach/spa-sdk/commit/4dacdcd2fdb0712e40dcb33b9809ae12786f9ab1)
 - TRIVIAL Skip telemetry check on nuxt startup [`15deb25`](https://github.com/bloomreach/spa-sdk/commit/15deb25b1edde3af3296d4dc34dba1483fe278f2)
