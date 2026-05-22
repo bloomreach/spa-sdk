@@ -75,7 +75,11 @@ export default defineNuxtConfig({
  },
 
  nitro: {
-   moduleSideEffects: ['reflect-metadata']
+   moduleSideEffects: ['reflect-metadata'],
+   // Bundle domutils so Nitro does not trace a partial copy missing lib/esm/.
+   externals: {
+     inline: ['domutils'],
+   },
  },
 
  compatibilityDate: '2025-02-05'
