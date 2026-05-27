@@ -41,7 +41,6 @@ export {
   isContainerItem,
   TYPE_CONTAINER_ITEM_UNDEFINED,
 } from './container-item';
-export { Content, isContent } from './content';
 export { Document, TYPE_DOCUMENT, isDocument } from './document';
 export { PageEventBusService } from './page-events';
 export { ImageSet, TYPE_IMAGE_SET, isImageSet } from './image-set';

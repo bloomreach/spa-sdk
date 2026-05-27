@@ -24,8 +24,9 @@ import { Component, ComponentMeta, ComponentModel } from './component';
 import { ComponentFactory } from './component-factory';
 import { ContainerModel } from './container';
 import { ContainerItemModel } from './container-item';
-import { Content, ContentModel } from './content';
+import { ContentModel } from './content';
 import { ContentFactory } from './content-factory';
+import { Document } from './document';
 import { isLink, Link } from './link';
 import { LinkFactory } from './link-factory';
 import { LinkRewriter, LinkRewriterService } from './link-rewriter';
@@ -160,14 +161,7 @@ export interface Page {
    * @param reference The reference to the content. It can be an object containing
    * an [RFC-6901](https://tools.ietf.org/html/rfc6901) JSON Pointer.
    */
-  getContent(reference: Reference | string): Content | undefined;
-
-  /**
-   * Gets a custom content item used on the page.
-   * @param reference The reference to the content. It can be an object containing
-   * an [RFC-6901](https://tools.ietf.org/html/rfc6901) JSON Pointer.
-   */
-  getContent<T>(reference: Reference | string): T | undefined;
+  getContent<T = Document>(reference: Reference | string): T | undefined;
 
   /**
    * Gets the page root document.

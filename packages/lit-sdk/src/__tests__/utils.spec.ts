@@ -15,7 +15,6 @@ import {
   isComponent,
   isContainer,
   isContainerItem,
-  isContent,
   isDocument,
   isImageSet,
   isMenu,
@@ -32,7 +31,6 @@ vi.mock('@bloomreach/spa-sdk', () => ({
   isComponent: vi.fn(() => false),
   isContainer: vi.fn(() => false),
   isContainerItem: vi.fn(() => false),
-  isContent: vi.fn(() => false),
   isDocument: vi.fn(() => false),
   isImageSet: vi.fn(() => false),
   isLink: vi.fn(() => false),
@@ -205,10 +203,6 @@ describe('utils', () => {
 
     it('exports isContainerItem as a function', () => {
       expect(typeof isContainerItem).toBe('function');
-    });
-
-    it('exports isContent as a function', () => {
-      expect(typeof isContent).toBe('function');
     });
 
     it('exports isDocument as a function', () => {
