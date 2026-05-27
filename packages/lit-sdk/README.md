@@ -305,7 +305,7 @@ export class MyComponent extends LitElement {
 
 **Type guards** (re-exported from `@bloomreach/spa-sdk`): `isComponent`, `isContainer`, `isContainerItem`, `isContent`, `isDocument`, `isImageSet`, `isLink`, `isMenu`, `isMetaComment`, `isMeta`, `isPage`, `isPagination`, `isReference`
 
-**Types** (re-exported from `@bloomreach/spa-sdk`): `Page`, `Component`, `ContainerItem`, `Container`, `Content`, `Document`, `ImageSet`, `Image`, `Link`, `Menu`, `Menu10`, `MenuItem`, `MetaCollection`, `MetaComment`, `Meta`, `PageModel`, `Configuration`, `ManageContentButton`, `Reference`
+**Types** (re-exported from `@bloomreach/spa-sdk`): `Page`, `Component`, `ContainerItem`, `Container`, `Content`, `Document`, `ImageSet`, `Image`, `Link`, `Menu`, `MenuItem`, `MetaCollection`, `MetaComment`, `Meta`, `PageModel`, `Configuration`, `ManageContentButton`, `Reference`
 
 **Functions** (re-exported from `@bloomreach/spa-sdk`): `initialize`, `destroy`
 
