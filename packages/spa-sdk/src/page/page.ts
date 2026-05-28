@@ -158,6 +158,9 @@ export interface Page {
 
   /**
    * Gets a content item used on the page.
+   * @typeParam T The expected content type. Defaults to {@link Document}.
+   * Pass an explicit type for non-document content — e.g. {@link ImageSet},
+   * {@link Menu}, or {@link Pagination} — to get a correctly typed result.
    * @param reference The reference to the content. It can be an object containing
    * an [RFC-6901](https://tools.ietf.org/html/rfc6901) JSON Pointer.
    */
