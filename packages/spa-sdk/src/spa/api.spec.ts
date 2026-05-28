@@ -14,12 +14,10 @@
  * limitations under the License.
  */
 
-import { isConfigurationWithProxy } from '../configuration';
 import { PageModel } from '../page';
 import { UrlBuilder } from '../url';
 import { ApiImpl } from './api';
 
-jest.mock('../configuration');
 jest.mock('../url');
 
 const model = {} as PageModel;
@@ -78,21 +76,6 @@ describe('ApiImpl', () => {
 
     it('should return a page model', async () => {
       expect(await API.getPage(config.path)).toBe(model);
-    });
-
-    it('should forward cookie header if the setup is using a reverse proxy', async () => {
-      jest.mocked(isConfigurationWithProxy).mockReturnValueOnce(true);
-
-      const api = new ApiImpl(urlBuilder, config);
-      await api.getPage(config.path);
-
-      expect(config.httpClient).toBeCalledWith(
-        expect.objectContaining({
-          headers: expect.objectContaining({
-            Cookie: 'JSESSIONID=1234',
-          }),
-        }),
-      );
     });
 
     it('should not include x-forwarded-for header when the remote address could not be determined', async () => {

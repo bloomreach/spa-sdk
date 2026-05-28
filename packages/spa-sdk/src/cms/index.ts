@@ -17,7 +17,6 @@
 import { ContainerModule } from 'inversify';
 import { Typed } from 'emittery';
 import { CmsImpl, CmsService } from './cms';
-import { Cms14Impl } from './cms14';
 import { CmsEventBusService } from './cms-events';
 import { PostMessageService, PostMessage } from './post-message';
 import { RpcClientService, RpcServerService } from './rpc';
@@ -31,8 +30,7 @@ export function CmsModule(): ContainerModule {
     bind(PostMessageService).to(PostMessage).inSingletonScope();
     bind(RpcClientService).toService(PostMessageService);
     bind(RpcServerService).toService(PostMessageService);
-    bind(CmsService).to(CmsImpl).inSingletonScope().whenTargetIsDefault();
-    bind(CmsService).to(Cms14Impl).inSingletonScope().whenTargetNamed('cms14');
+    bind(CmsService).to(CmsImpl).inSingletonScope();
   });
 }
 

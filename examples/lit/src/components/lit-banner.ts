@@ -1,7 +1,7 @@
 import { LitElement, html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
-import { type ContainerItem, type Page, type Content, type Document, type ImageSet } from '@bloomreach/spa-sdk';
+import { type ContainerItem, type Page, type Document, type ImageSet } from '@bloomreach/spa-sdk';
 import '@bloomreach/lit-sdk';
 import { sanitize } from '../utils/sanitize.js';
 
@@ -39,7 +39,7 @@ export class LitBanner extends LitElement {
       `;
     }
 
-    const { content, image: imageRef, link: linkRef, title } = (document as Content).getData<DocumentData>();
+    const { content, image: imageRef, link: linkRef, title } = (document as Document).getData<DocumentData>();
     const imageVariant = this.component.getParameters<BannerParameters>().imageVariant;
     const imageSet = imageRef && this.page.getContent<ImageSet>(imageRef);
     const image = imageSet && (imageVariant ? imageSet.getVariant(imageVariant) : imageSet.getOriginal());

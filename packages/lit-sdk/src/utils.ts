@@ -3,7 +3,6 @@ import {
   isComponent,
   isContainer,
   isContainerItem,
-  isContent,
   isDocument,
   isImageSet,
   isLink,
@@ -16,8 +15,8 @@ import {
   TYPE_LINK_EXTERNAL,
   TYPE_LINK_INTERNAL,
   type ContainerItem,
+  type Document,
   type Page,
-  type Content,
   type Reference,
 } from '@bloomreach/spa-sdk';
 
@@ -26,7 +25,6 @@ export {
   isComponent,
   isContainer,
   isContainerItem,
-  isContent,
   isDocument,
   isImageSet,
   isLink,
@@ -68,9 +66,9 @@ export function getDocumentData<T>(
   // Strategy 1: models.document $ref (BaseHstDynamicComponent pattern)
   const models = component.getModels<{ document?: Reference }>();
   if (models?.document) {
-    const content = page.getContent<Content>(models.document);
+    const content = page.getContent<Document>(models.document);
     if (content && typeof content === 'object' && 'getData' in content) {
-      return (content as Content).getData() as T;
+      return (content as Document).getData() as T;
     }
     // If getContent returned raw data directly
     if (content && typeof content === 'object') {

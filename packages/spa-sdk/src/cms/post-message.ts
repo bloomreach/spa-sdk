@@ -27,7 +27,7 @@ export interface PostMessageOptions {
   /**
    * The brXM origin to verify an integration with the Experience Manager.
    * This option should be used when the brXM is accessible from a host other than the Page Model API.
-   * By default, the origin from the `apiBaseUrl` or `endpoint` parameters is used.
+   * By default, the origin from the `endpoint` parameter is used.
    */
   origin?: string;
 

@@ -146,7 +146,7 @@ Renders an "Edit content" overlay in Experience Manager preview mode.
 
 | Property | Type | Required | Description |
 |---|---|---|---|
-| `content` | `Content` | No | The content object to edit |
+| `content` | `Document` | No | The content object to edit |
 | `page` | `Page` | No | Direct page reference |
 | `documentTemplateQuery` | `string` | No | Template query for new documents |
 | `folderTemplateQuery` | `string` | No | Template query for new folders |
@@ -303,9 +303,9 @@ export class MyComponent extends LitElement {
 
 **Utilities:** `getDocumentData`, `getContainerItemContent`, `isInternalLink`, `isExternalLink`
 
-**Type guards** (re-exported from `@bloomreach/spa-sdk`): `isComponent`, `isContainer`, `isContainerItem`, `isContent`, `isDocument`, `isImageSet`, `isLink`, `isMenu`, `isMetaComment`, `isMeta`, `isPage`, `isPagination`, `isReference`
+**Type guards** (re-exported from `@bloomreach/spa-sdk`): `isComponent`, `isContainer`, `isContainerItem`, `isDocument`, `isImageSet`, `isLink`, `isMenu`, `isMetaComment`, `isMeta`, `isPage`, `isPagination`, `isReference`
 
-**Types** (re-exported from `@bloomreach/spa-sdk`): `Page`, `Component`, `ContainerItem`, `Container`, `Content`, `Document`, `ImageSet`, `Image`, `Link`, `Menu`, `Menu10`, `MenuItem`, `MetaCollection`, `MetaComment`, `Meta`, `PageModel`, `Configuration`, `ManageContentButton`, `Reference`
+**Types** (re-exported from `@bloomreach/spa-sdk`): `Page`, `Component`, `ContainerItem`, `Container`, `Document`, `ImageSet`, `Image`, `Link`, `Menu`, `MenuItem`, `MetaCollection`, `MetaComment`, `Meta`, `PageModel`, `Configuration`, `ManageContentButton`, `Reference`
 
 **Functions** (re-exported from `@bloomreach/spa-sdk`): `initialize`, `destroy`
 

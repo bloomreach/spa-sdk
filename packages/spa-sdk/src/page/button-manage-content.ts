@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import { Content } from './content09';
 import { Document } from './document';
 import { Meta, MetaModel, META_POSITION_BEGIN, META_POSITION_END, TYPE_META_COMMENT } from './meta';
 import { MetaCollectionModel, MetaCollection } from './meta-collection';
@@ -28,7 +27,7 @@ export interface ManageContentButton {
   /**
    * The content entity to open for editing.
    */
-  content?: Content | Document;
+  content?: Document;
 
   /**
    * Template query to use for creating new documents.

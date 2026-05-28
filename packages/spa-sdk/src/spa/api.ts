@@ -15,7 +15,6 @@
  */
 
 import { inject, injectable, optional } from 'inversify';
-import { isConfigurationWithProxy } from '../configuration';
 import { Logger } from '../logger';
 import { PageModel } from '../page';
 import { UrlBuilderService, UrlBuilder } from '../url';
@@ -115,8 +114,6 @@ export interface Api {
 export class ApiImpl implements Api {
   private static getHeaders(options: ApiOptions): HttpHeaders {
     const {
-      /** @deprecated The cookie header should be ignored when the proxy-based setup is removed. */
-      cookie,
       referer,
       'x-forwarded-for': ip = options.request?.connection?.remoteAddress,
       'user-agent': userAgent,
@@ -135,7 +132,6 @@ export class ApiImpl implements Api {
       ...(ip && { 'X-Forwarded-For': ip }),
       ...(apiVersion && { [apiVersionHeader]: apiVersion }),
       ...(authorizationToken && { [authorizationHeader]: `Bearer ${authorizationToken}` }),
-      ...(isConfigurationWithProxy(options) && cookie && { Cookie: cookie }),
       ...(referer && { Referer: referer }),
       ...(serverId && { [serverIdHeader]: serverId }),
       ...(userAgent && { 'User-Agent': userAgent }),

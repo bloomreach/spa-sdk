@@ -26,7 +26,7 @@ import { ContainerModel } from './container';
 import { ContainerItemModel } from './container-item';
 import { ContentModel } from './content';
 import { ContentFactory } from './content-factory';
-import { Content } from './content09';
+import { Document } from './document';
 import { isLink, Link } from './link';
 import { LinkFactory } from './link-factory';
 import { LinkRewriter, LinkRewriterService } from './link-rewriter';
@@ -158,17 +158,13 @@ export interface Page {
 
   /**
    * Gets a content item used on the page.
+   * @typeParam T The expected content type. Defaults to {@link Document}.
+   * Pass an explicit type for non-document content — e.g. {@link ImageSet},
+   * {@link Menu}, or {@link Pagination} — to get a correctly typed result.
    * @param reference The reference to the content. It can be an object containing
    * an [RFC-6901](https://tools.ietf.org/html/rfc6901) JSON Pointer.
    */
-  getContent(reference: Reference | string): Content | undefined;
-
-  /**
-   * Gets a custom content item used on the page.
-   * @param reference The reference to the content. It can be an object containing
-   * an [RFC-6901](https://tools.ietf.org/html/rfc6901) JSON Pointer.
-   */
-  getContent<T>(reference: Reference | string): T | undefined;
+  getContent<T = Document>(reference: Reference | string): T | undefined;
 
   /**
    * Gets the page root document.
@@ -195,11 +191,7 @@ export interface Page {
 
   /**
    * Generates a URL for a link object.
-   * - If the link object type is internal, then it will prepend `spaBaseUrl` or `baseUrl`.
-   *   In case when the link starts with the same path as in `cmsBaseUrl`, this part will be removed.
-   *   For example, for link `/site/_cmsinternal/spa/about` with configuration options
-   *   `cmsBaseUrl = "http://localhost:8080/site/_cmsinternal/spa"` and `spaBaseUrl = "http://example.com"`
-   *   it will generate `http://example.com/about`.
+   * - If the link object type is internal, then it will prepend `baseUrl`.
    * - If the link object type is unknown, then it will return `undefined`.
    * - If the link parameter is omitted, then the link to the current page will be returned.
    * - In other cases, the link will be returned as-is.
@@ -209,13 +201,8 @@ export interface Page {
 
   /**
    * Generates an SPA URL for the path.
-   * - If it is a relative path and `cmsBaseUrl` is present, then it will prepend `spaBaseUrl`.
-   * - If it is an absolute path and `cmsBaseUrl` is present,
-   *   then the behavior will be similar to internal link generation.
-   * - If it is a relative path and `endpoint` is present,
-   *   then it will resolve this link relative to the current page URL.
-   * - If it is an absolute path and `endpoint` is present,
-   *   then it will resolve this link relative to the `baseUrl` option.
+   * - If it is a relative path, it will resolve relative to the current page URL.
+   * - If it is an absolute path, it will resolve relative to the `baseUrl` option.
    * @param path The path to generate URL.
    */
   getUrl(path: string): string;
