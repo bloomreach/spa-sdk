@@ -59,6 +59,28 @@ export interface HttpResponse<T> {
 
 /**
  * Fetches the page model data.
+ *
+ * Axios satisfies this type directly and can be passed as-is:
+ * ```typescript
+ * import axios from 'axios';
+ * initialize({ httpClient: axios, ... });
+ * ```
+ *
+ * When using the native `fetch` API, a thin wrapper is required because `fetch`
+ * takes `(url, init)` as separate arguments, returns `Response` instead of
+ * `{ data: T }`, and only accepts `string` header values:
+ * ```typescript
+ * import { HttpClient } from '@bloomreach/spa-sdk';
+ *
+ * const httpClient: HttpClient<PageModel> = async ({ method, url, headers, data }) => {
+ *   const response = await fetch(url, {
+ *     method,
+ *     headers: headers as Record<string, string>,
+ *     body: data !== undefined ? JSON.stringify(data) : undefined,
+ *   });
+ *   return { data: await response.json() };
+ * };
+ * ```
  */
 export type HttpClient<T> = (config: HttpClientConfig) => Promise<HttpResponse<T>>;
 
