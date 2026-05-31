@@ -112,7 +112,7 @@ describe('PageImpl', () => {
       const page = createPage();
       page.getComponent('a', 'b');
 
-      expect(root.getComponent).toBeCalledWith('a', 'b');
+      expect(root.getComponent).toHaveBeenCalledWith('a', 'b');
     });
   });
 
@@ -133,7 +133,7 @@ describe('PageImpl', () => {
     it('should return a content item', () => {
       expect(page.getContent('content1')).toBe(content);
       expect(page.getContent('content1')).toBe(content);
-      expect(contentFactory.create).toBeCalledTimes(1);
+      expect(contentFactory.create).toHaveBeenCalledTimes(1);
       expect(contentFactory.create).toHaveBeenCalledWith({ id: 'id1', type: 'document' });
     });
 
@@ -200,7 +200,7 @@ describe('PageImpl', () => {
       linkFactory.create.mockReturnValueOnce('url');
 
       expect(page.getUrl(link)).toBe('url');
-      expect(linkFactory.create).toBeCalledWith(link);
+      expect(linkFactory.create).toHaveBeenCalledWith(link);
     });
 
     it('should pass the current page link', () => {
@@ -208,7 +208,7 @@ describe('PageImpl', () => {
       linkFactory.create.mockReturnValueOnce('url');
 
       expect(page.getUrl()).toBe('url');
-      expect(linkFactory.create).toBeCalledWith({ href: 'site-url', type: TYPE_LINK_INTERNAL });
+      expect(linkFactory.create).toHaveBeenCalledWith({ href: 'site-url', type: TYPE_LINK_INTERNAL });
     });
 
     it.each`
@@ -346,7 +346,7 @@ describe('PageImpl', () => {
       });
 
       expect(page.getContent('content')).toBe(content);
-      expect(contentFactory.create).toBeCalledWith({ id: 'id', type: 'document' });
+      expect(contentFactory.create).toHaveBeenCalledWith({ id: 'id', type: 'document' });
     });
   });
 
@@ -357,7 +357,7 @@ describe('PageImpl', () => {
       const page = createPage();
 
       expect(page.rewriteLinks('something', 'text/html')).toBe('rewritten');
-      expect(linkRewriter.rewrite).toBeCalledWith('something', 'text/html');
+      expect(linkRewriter.rewrite).toHaveBeenCalledWith('something', 'text/html');
     });
   });
 
@@ -368,7 +368,7 @@ describe('PageImpl', () => {
       const page = createPage();
       page.sync();
 
-      expect(cmsEventBus.emit).toBeCalledWith('page.ready', {});
+      expect(cmsEventBus.emit).toHaveBeenCalledWith('page.ready', {});
     });
   });
 

@@ -29,7 +29,7 @@ describe('ConsoleLogger', () => {
     it('should use the console to log a message', () => {
       logger.error('something');
 
-      expect(console.error).toBeCalledWith(expect.any(String), expect.any(String), 'something');
+      expect(console.error).toHaveBeenCalledWith(expect.any(String), expect.any(String), 'something');
     });
   });
 });

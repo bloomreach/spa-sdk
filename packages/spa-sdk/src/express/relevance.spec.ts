@@ -31,7 +31,7 @@ describe('relevance', () => {
 
       relevance.withOptions({ name: 'visitor' })(request, response);
 
-      expect(parse).toBeCalledWith('something');
+      expect(parse).toHaveBeenCalledWith('something');
       expect(request.visitor).toEqual({ id: 'some-id', header: 'visitor-header' });
     });
 
@@ -75,7 +75,7 @@ describe('relevance', () => {
     it('should not proceed if there is no visitor', () => {
       relevance(request, response);
 
-      expect(response.setHeader).not.toBeCalled();
+      expect(response.setHeader).not.toHaveBeenCalled();
     });
 
     it('should serialize returned visitor', () => {
@@ -89,7 +89,7 @@ describe('relevance', () => {
         name: 'visitor',
       })(request, response);
 
-      expect(serialize).toBeCalledWith(
+      expect(serialize).toHaveBeenCalledWith(
         'visitor',
         JSON.stringify({ id: 'some-id', header: 'some-header' }),
         expect.objectContaining({
@@ -98,7 +98,7 @@ describe('relevance', () => {
           maxAge: 1000,
         }),
       );
-      expect(response.setHeader).toBeCalledWith('Set-Cookie', ['visitor=something']);
+      expect(response.setHeader).toHaveBeenCalledWith('Set-Cookie', ['visitor=something']);
     });
 
     it('should append to other Set-Cookie headers', () => {
@@ -108,7 +108,7 @@ describe('relevance', () => {
 
       relevance(request, response);
 
-      expect(response.setHeader).toBeCalledWith('Set-Cookie', ['cookie=value', 'visitor=something']);
+      expect(response.setHeader).toHaveBeenCalledWith('Set-Cookie', ['cookie=value', 'visitor=something']);
     });
 
     it('should append to another Set-Cookie header', () => {
@@ -118,7 +118,7 @@ describe('relevance', () => {
 
       relevance(request, response);
 
-      expect(response.setHeader).toBeCalledWith('Set-Cookie', ['cookie=value', 'visitor=something']);
+      expect(response.setHeader).toHaveBeenCalledWith('Set-Cookie', ['cookie=value', 'visitor=something']);
     });
   });
 
@@ -128,6 +128,6 @@ describe('relevance', () => {
     const next = jest.fn();
     relevance({}, {}, next);
 
-    expect(next).toBeCalled();
+    expect(next).toHaveBeenCalled();
   });
 });

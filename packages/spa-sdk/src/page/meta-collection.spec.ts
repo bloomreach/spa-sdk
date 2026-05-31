@@ -45,8 +45,8 @@ describe('MetaCollectionImpl', () => {
         ],
       });
 
-      expect(factory.create).toBeCalledWith({ data: 'meta1', type: 'type1' }, expect.anything());
-      expect(factory.create).toBeCalledWith({ data: 'meta2', type: 'type2' }, expect.anything());
+      expect(factory.create).toHaveBeenCalledWith({ data: 'meta1', type: 'type1' }, expect.anything());
+      expect(factory.create).toHaveBeenCalledWith({ data: 'meta2', type: 'type2' }, expect.anything());
     });
 
     it('should pass a position of the meta', () => {
@@ -55,8 +55,8 @@ describe('MetaCollectionImpl', () => {
         endNodeSpan: [{ data: 'meta2', type: 'type2' as MetaType }],
       });
 
-      expect(factory.create).toBeCalledWith({ data: 'meta1', type: 'type1' }, META_POSITION_BEGIN);
-      expect(factory.create).toBeCalledWith({ data: 'meta2', type: 'type2' }, META_POSITION_END);
+      expect(factory.create).toHaveBeenCalledWith({ data: 'meta1', type: 'type1' }, META_POSITION_BEGIN);
+      expect(factory.create).toHaveBeenCalledWith({ data: 'meta2', type: 'type2' }, META_POSITION_END);
     });
 
     it('should hold meta-data items', () => {

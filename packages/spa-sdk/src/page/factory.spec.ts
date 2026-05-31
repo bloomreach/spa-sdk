@@ -33,7 +33,7 @@ describe('SimpleFactory', () => {
       factory.register('something', builder);
       factory.create('something');
 
-      expect(builder).toBeCalledWith('something');
+      expect(builder).toHaveBeenCalledWith('something');
     });
   });
 });

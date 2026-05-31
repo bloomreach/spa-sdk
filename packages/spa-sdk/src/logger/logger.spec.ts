@@ -33,20 +33,20 @@ describe('Logger', () => {
       logger.debug('something');
       logger.info('something');
 
-      expect(logger.write).not.toBeCalled();
+      expect(logger.write).not.toHaveBeenCalled();
     });
 
     it('should log messages above log level', () => {
       logger.warn('something');
       logger.error('something');
 
-      expect(logger.write).toBeCalledTimes(2);
+      expect(logger.write).toHaveBeenCalledTimes(2);
     });
 
     it('should log a message', () => {
       logger.warn('a', 'b');
 
-      expect(logger.write).toBeCalledWith('warn', expect.any(String), '[WARN]', 'a', 'b');
+      expect(logger.write).toHaveBeenCalledWith('warn', expect.any(String), '[WARN]', 'a', 'b');
     });
   });
 });

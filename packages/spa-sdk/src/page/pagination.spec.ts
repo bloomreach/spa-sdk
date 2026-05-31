@@ -50,14 +50,14 @@ describe('PaginationImpl', () => {
   describe('getCurrent', () => {
     it('should return the current page', () => {
       expect(pagination.getCurrent()).toBe(model.current);
-      expect(paginationItemFactory).toBeCalledWith(model.current);
+      expect(paginationItemFactory).toHaveBeenCalledWith(model.current);
     });
   });
 
   describe('getFirst', () => {
     it('should return the first page', () => {
       expect(pagination.getFirst()).toBe(model.first);
-      expect(paginationItemFactory).toBeCalledWith(model.first);
+      expect(paginationItemFactory).toHaveBeenCalledWith(model.first);
     });
   });
 
@@ -70,7 +70,7 @@ describe('PaginationImpl', () => {
   describe('getLast', () => {
     it('should return the last page', () => {
       expect(pagination.getLast()).toBe(model.last);
-      expect(paginationItemFactory).toBeCalledWith(model.last);
+      expect(paginationItemFactory).toHaveBeenCalledWith(model.last);
     });
   });
 
@@ -84,7 +84,7 @@ describe('PaginationImpl', () => {
       const paginationWithNext = createPagination({ ...model, next });
 
       expect(paginationWithNext.getNext()).toBe(next);
-      expect(paginationItemFactory).toBeCalledWith(next);
+      expect(paginationItemFactory).toHaveBeenCalledWith(next);
     });
   });
 
@@ -97,8 +97,8 @@ describe('PaginationImpl', () => {
   describe('getPages', () => {
     it('should return currently listed pages', () => {
       expect(pagination.getPages()).toEqual(model.pages);
-      expect(paginationItemFactory).toBeCalledWith(model.pages[0]);
-      expect(paginationItemFactory).toBeCalledWith(model.pages[1]);
+      expect(paginationItemFactory).toHaveBeenCalledWith(model.pages[0]);
+      expect(paginationItemFactory).toHaveBeenCalledWith(model.pages[1]);
     });
   });
 
@@ -112,7 +112,7 @@ describe('PaginationImpl', () => {
       const paginationWithPrevius = createPagination({ ...model, previous });
 
       expect(paginationWithPrevius.getPrevious()).toBe(previous);
-      expect(paginationItemFactory).toBeCalledWith(previous);
+      expect(paginationItemFactory).toHaveBeenCalledWith(previous);
     });
   });
 

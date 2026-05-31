@@ -1,7 +1,7 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`initialize should contain components meta-data 1`] = `
-Object {
+{
   "HST-Label": "Banner",
   "HST-LastModified": "1568281400490",
   "HST-Render-Variant": "",
@@ -13,21 +13,21 @@ Object {
 `;
 
 exports[`initialize should contain components meta-data 2`] = `
-Object {
+{
   "HST-End": "true",
   "uuid": "03c65ab8-06cc-47d3-b6bd-adc928937c8d",
 }
 `;
 
 exports[`initialize should contain content meta-data 1`] = `
-Object {
+{
   "HST-Type": "MANAGE_CONTENT_LINK",
   "uuid": "895fb1b6-410d-4972-9894-6b6a06d2b361",
 }
 `;
 
 exports[`initialize should contain page meta-data 1`] = `
-Object {
+{
   "HST-Channel-Id": "my-spa-preview",
   "HST-Context-Path": "/site",
   "HST-Mount-Id": "76e65e84-b0b2-4676-8ec0-9893273020de",
@@ -42,10 +42,10 @@ Object {
 `;
 
 exports[`initialize should contain page meta-data 2`] = `
-Object {
-  "HST-Page-Request-Variants": Object {},
+{
+  "HST-Page-Request-Variants": {},
   "HST-Type": "PAGE-META-DATA",
 }
 `;
 
-exports[`initialize should rewrite links in the HTML blob 1`] = `"Some text containing <a href=\\"//example-domain.com/news?token=something\\" data-type=\\"internal\\">link1</a>, <a href=\\"//example-domain.com/about?token=something\\" data-type=\\"internal\\">link2</a>, <a href=\\"https://example.com\\">link3</a>, and the image: <img src=\\"http://127.0.0.1/binaries/image.jpg\\" />"`;
+exports[`initialize should rewrite links in the HTML blob 1`] = `"Some text containing <a href="//example-domain.com/news?token=something" data-type="internal">link1</a>, <a href="//example-domain.com/about?token=something" data-type="internal">link2</a>, <a href="https://example.com">link3</a>, and the image: <img src="http://127.0.0.1/binaries/image.jpg" />"`;

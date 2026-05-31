@@ -97,7 +97,7 @@ describe('ImageImpl', () => {
       linkFactory.create.mockReturnValueOnce('url');
 
       expect(image.getUrl()).toBe('url');
-      expect(linkFactory.create).toBeCalledWith({ href: 'url', type: TYPE_LINK_RESOURCE });
+      expect(linkFactory.create).toHaveBeenCalledWith({ href: 'url', type: TYPE_LINK_RESOURCE });
     });
   });
 

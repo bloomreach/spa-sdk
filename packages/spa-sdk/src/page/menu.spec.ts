@@ -62,7 +62,7 @@ describe('MenuImpl', () => {
 
       const menu = createMenu({ ...model, meta: metaModel });
 
-      expect(metaFactory).toBeCalledWith(metaModel);
+      expect(metaFactory).toHaveBeenCalledWith(metaModel);
       expect(menu.getMeta()).toEqual(meta);
     });
   });

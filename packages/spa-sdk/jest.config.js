@@ -31,4 +31,9 @@ module.exports = {
   ],
   setupFiles: ['reflect-metadata'],
   testEnvironment: 'jsdom',
+  transform: {
+    '^.+\\.ts$': 'ts-jest',
+    '^.+\\.js$': 'babel-jest',
+  },
+  transformIgnorePatterns: ['node_modules/(?!.*(htmlparser2|dom-serializer|domutils|domhandler|domelementtype|entities))'],
 };

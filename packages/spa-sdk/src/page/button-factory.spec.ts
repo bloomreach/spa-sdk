@@ -46,12 +46,12 @@ describe('ButtonFactory', () => {
       factory.create('type1', { id: 'id1' });
       factory.create('type2', { id: 'id2' });
 
-      expect(builder1).toBeCalledWith({ id: 'id1' });
-      expect(builder2).toBeCalledWith({ id: 'id2' });
+      expect(builder1).toHaveBeenCalledWith({ id: 'id1' });
+      expect(builder2).toHaveBeenCalledWith({ id: 'id2' });
     });
 
     it('should throw an error on unknown button type', () => {
-      expect(() => factory.create('type3')).toThrowError();
+      expect(() => factory.create('type3')).toThrow();
     });
 
     it('should create a meta-collection instance', () => {
@@ -62,7 +62,7 @@ describe('ButtonFactory', () => {
 
       factory.create('type1', { id: 'id1' });
 
-      expect(metaCollectionFactory).toBeCalledWith(button);
+      expect(metaCollectionFactory).toHaveBeenCalledWith(button);
     });
 
     it('should create a meta-collection instance', () => {

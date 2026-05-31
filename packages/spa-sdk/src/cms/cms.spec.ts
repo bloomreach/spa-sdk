@@ -119,17 +119,19 @@ describe('CmsImpl', () => {
 
   describe('inject', () => {
     let inject: (string: any) => Promise<void>;
-    const sourceDocument = document;
-    const getDocument = jest.fn<Document | undefined, []>(() => sourceDocument);
+    let testDocument: Document | undefined;
+    let windowLike: Window & typeof globalThis;
 
     beforeEach(() => {
+      testDocument = document;
+      windowLike = Object.create(window) as Window & typeof globalThis;
+      Object.defineProperty(windowLike, 'document', { get: () => testDocument, configurable: true });
       [[, inject]] = rpcServer.register.mock.calls;
-      cms.initialize({ window });
-      Object.defineProperty(window, 'document', { get: getDocument });
+      cms.initialize({ window: windowLike });
     });
 
     it('should not proceed if there is no window', async () => {
-      getDocument.mockReturnValueOnce(undefined);
+      testDocument = undefined;
 
       await expect(inject('something')).rejects.toThrow('SPA document is not ready.');
     });
@@ -139,7 +141,7 @@ describe('CmsImpl', () => {
 
       await new Promise(process.nextTick);
 
-      const script = window.document.querySelector('script[src="url1"]');
+      const script = document.querySelector('script[src="url1"]');
 
       expect(script).not.toBeNull();
       expect(script).toMatchSnapshot();
@@ -149,7 +151,7 @@ describe('CmsImpl', () => {
       const promise = inject('url2');
 
       await new Promise(process.nextTick);
-      const element = window.document.querySelector('script[src="url2"]');
+      const element = document.querySelector('script[src="url2"]');
       element?.dispatchEvent(new Event('load'));
 
       await expect(promise).resolves.toBeUndefined();
@@ -159,7 +161,7 @@ describe('CmsImpl', () => {
       const promise = inject('url3');
 
       await new Promise(process.nextTick);
-      const element = window.document.querySelector('script[src="url3"]');
+      const element = document.querySelector('script[src="url3"]');
       element?.dispatchEvent(new Event('error'));
 
       await expect(promise).rejects.toThrow("Failed to load resource 'url3'.");

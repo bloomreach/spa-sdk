@@ -162,7 +162,7 @@ describe('ContainerItemImpl', () => {
         } as unknown as PageModel,
       });
 
-      expect(metaFactory).not.toBeCalled();
+      expect(metaFactory).not.toHaveBeenCalled();
       expect(containerItem.getType()).toBe('a');
     });
 
@@ -177,7 +177,7 @@ describe('ContainerItemImpl', () => {
         } as unknown as PageModel,
       });
 
-      expect(metaFactory).toBeCalledWith(metaModel);
+      expect(metaFactory).toHaveBeenCalledWith(metaModel);
       expect(containerItem.getMeta()).toBe(meta);
     });
 
@@ -204,7 +204,7 @@ describe('ContainerItemImpl', () => {
       });
       await new Promise(process.nextTick);
 
-      expect(listener).toBeCalledWith({});
+      expect(listener).toHaveBeenCalledWith({});
     });
   });
 
