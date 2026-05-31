@@ -39,7 +39,7 @@ describe('BrMeta', () => {
       </div>,
     );
 
-    expect(meta.render).toBeCalled();
+    expect(meta.render).toHaveBeenCalled();
 
     const [[head, tail]] = meta.render.mock.calls;
 
@@ -64,8 +64,8 @@ describe('BrMeta', () => {
       </BrMeta>,
     );
 
-    expect(clear).toBeCalled();
-    expect(newMeta.render).toBeCalled();
+    expect(clear).toHaveBeenCalled();
+    expect(newMeta.render).toHaveBeenCalled();
   });
 
   it('should clear meta-data when the component unmounts', () => {
@@ -79,7 +79,7 @@ describe('BrMeta', () => {
     );
     element.unmount();
 
-    expect(clear).toBeCalled();
+    expect(clear).toHaveBeenCalled();
   });
 
   it('should render only children if there is no meta', () => {

@@ -51,7 +51,7 @@ describe('BrNodeComponent', () => {
         />,
       );
 
-      expect(mockComponent.getName).toBeCalled();
+      expect(mockComponent.getName).toHaveBeenCalled();
     });
 
     it('should render mapped component when mapping exists', () => {

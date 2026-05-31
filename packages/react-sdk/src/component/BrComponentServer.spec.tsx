@@ -76,7 +76,7 @@ describe('BrComponentServer', () => {
       />,
     );
 
-    expect(mockComponent.getChildren).toBeCalled();
+    expect(mockComponent.getChildren).toHaveBeenCalled();
 
     const node1 = render(
       <BrNodeServer
@@ -107,7 +107,7 @@ describe('BrComponentServer', () => {
       />,
     );
 
-    expect(mockComponent.getComponent).toBeCalledWith('a', 'b');
+    expect(mockComponent.getComponent).toHaveBeenCalledWith('a', 'b');
   });
 
   it('should render nothing if no component found', () => {
@@ -201,7 +201,7 @@ describe('BrComponentServer', () => {
       />,
     );
 
-    expect(mockComponent.getComponent).toBeCalledWith('main', 'content', 'header');
+    expect(mockComponent.getComponent).toHaveBeenCalledWith('main', 'content', 'header');
   });
 
   it('should support render props pattern', () => {
