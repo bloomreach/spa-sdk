@@ -19,6 +19,7 @@ module.exports = {
   setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
   collectCoverage: true,
   modulePathIgnorePatterns: ['<rootDir>/dist'],
+  transformIgnorePatterns: ['node_modules/(?!.*(dom-serializer|domutils|htmlparser2|domhandler|domelementtype|entities|\\.mjs|@angular/common/locales))'],
   reporters: [
     'default',
     ['jest-junit', {
