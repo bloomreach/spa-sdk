@@ -55,6 +55,8 @@ export interface ApiOptions {
 
   /**
    * HTTP client that will be used to fetch the page model.
+   * Axios satisfies this type directly. For the native `fetch` API, a wrapper
+   * is required — see {@link HttpClient} for examples.
    */
   httpClient: HttpClient<PageModel>;
 

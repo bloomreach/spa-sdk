@@ -54,6 +54,33 @@ async function showPage(path) {
 showPage(`${window.location.pathname}${window.location.search}`);
 ```
 
+Alternatively, using the native `fetch` API (a wrapper is needed since `fetch` is not directly compatible with the `HttpClient` signature):
+
+```javascript
+import { initialize } from "@bloomreach/spa-sdk";
+
+const httpClient = async ({ method, url, headers, data }) => {
+  const response = await fetch(url, {
+    method,
+    headers: headers,
+    body: data !== undefined ? JSON.stringify(data) : undefined,
+  });
+  return { data: await response.json() };
+};
+
+async function showPage(path) {
+  const page = await initialize({
+    path,
+    endpoint: "http://localhost:8080/delivery/site/v1/channels/brxsaas/pages",
+    httpClient,
+  });
+
+  document.querySelector("#title").innerText = page.getTitle();
+}
+
+showPage(`${window.location.pathname}${window.location.search}`);
+```
+
 ### Relevance Integration
 
 (not applicable to Content SaaS)
@@ -171,6 +198,53 @@ export default function buildConfiguration(): Configuration {
   return configuration;
 };
 
+```
+
+Alternatively, using the native `fetch` API:
+
+```typescript
+import cookie from 'cookie';
+import { Configuration, HttpClient } from '@bloomreach/spa-sdk';
+
+const httpClient: HttpClient<any> = async ({ method, url, headers, data }) => {
+  const response = await fetch(url, {
+    method,
+    headers: headers as Record<string, string>,
+    body: data !== undefined ? JSON.stringify(data) : undefined,
+  });
+  return { data: await response.json() };
+};
+
+export default function buildConfiguration(): Configuration {
+  const PREVIEW_TOKEN_KEY = 'token';
+  const PREVIEW_SERVER_ID_KEY = 'server-id';
+  const searchParams = new URLSearchParams(window.location.search);
+  const queryToken = searchParams.get(PREVIEW_TOKEN_KEY);
+  const queryServerId = searchParams.get(PREVIEW_SERVER_ID_KEY);
+
+  const cookies = cookie.parse(document.cookie);
+
+  const authorizationToken = queryToken ?? cookies[PREVIEW_TOKEN_KEY];
+  const serverId = queryServerId ?? cookies[PREVIEW_SERVER_ID_KEY];
+
+  if (queryToken) {
+    document.cookie = cookie.serialize(PREVIEW_TOKEN_KEY, queryToken);
+  }
+
+  if (queryServerId) {
+    document.cookie = cookie.serialize(PREVIEW_SERVER_ID_KEY, queryServerId);
+  }
+
+  const configuration = {
+    endpoint: 'your-pda-endpoint',
+    httpClient,
+    path: `${location.pathname}${location.search}`,
+    ...(authorizationToken ? { authorizationToken } : {}),
+    ...(serverId ? { serverId } : {}),
+  };
+
+  return configuration;
+};
 ```
 
 ## License

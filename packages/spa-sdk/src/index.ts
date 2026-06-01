@@ -221,6 +221,7 @@ export function destroy(): void {
 }
 
 export { Configuration } from './configuration';
+export type { HttpClient, HttpClientConfig, HttpResponse, HttpHeaders } from './spa/http';
 export {
   Component,
   ContainerItem,
