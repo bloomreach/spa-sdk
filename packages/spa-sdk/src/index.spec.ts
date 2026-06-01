@@ -211,17 +211,17 @@ describe('initialize', () => {
   //   );
   //   await new Promise((resolve) => setTimeout(resolve, 0));
   //
-  //   expect(httpClient).toBeCalled();
+  //   expect(httpClient).toHaveBeenCalled();
   //   expect(httpClient.mock.calls[0]).toMatchSnapshot();
-  //   expect(listener0).toBeCalled();
-  //   expect(listener1).not.toBeCalled();
+  //   expect(listener0).toHaveBeenCalled();
+  //   expect(listener1).not.toHaveBeenCalled();
   // });
 
   it('should use an origin from the endpoint', async () => {
     const postMessageSpy = jest.spyOn(window.parent, 'postMessage');
     await defaultPage.sync();
 
-    expect(postMessageSpy).toBeCalledWith(expect.anything(), 'http://localhost:8080');
+    expect(postMessageSpy).toHaveBeenCalledWith(expect.anything(), 'http://localhost:8080');
   });
 
   it('should use a custom origin', async () => {
@@ -236,11 +236,11 @@ describe('initialize', () => {
     await page.sync();
     destroy();
 
-    expect(postMessageSpy).toBeCalledWith(expect.anything(), 'http://localhost:12345');
+    expect(postMessageSpy).toHaveBeenCalledWith(expect.anything(), 'http://localhost:12345');
   });
 
   it('should emit a request event', async () => {
-    expect(emit).toBeCalledWith('br:spa:initialized', defaultPage);
+    expect(emit).toHaveBeenCalledWith('br:spa:initialized', defaultPage);
   });
 
   it('should use campaign variant id as params from url', async () => {
@@ -252,7 +252,7 @@ describe('initialize', () => {
       path: '/?btm_campaign_id=12345&btm_segment=silver',
     });
 
-    expect(httpClient).toBeCalledWith({
+    expect(httpClient).toHaveBeenCalledWith({
       headers: {},
       method: 'GET',
       url: 'http://localhost:8080/site/my-spa/resourceapi/?__br__campaignVariant=12345%3Asilver',
@@ -272,7 +272,7 @@ describe('initialize', () => {
       origin: 'http://localhost:12345',
     });
 
-    expect(httpClient).toBeCalledWith({
+    expect(httpClient).toHaveBeenCalledWith({
       headers: {},
       method: 'GET',
       url: 'http://localhost:8080/site/my-spa/resourceapi/?__br__campaignVariant=12345%3Agold',
@@ -293,7 +293,7 @@ describe('initialize', () => {
       origin: 'http://localhost:12345',
     });
 
-    expect(httpClient).toBeCalledWith({
+    expect(httpClient).toHaveBeenCalledWith({
       headers: {},
       method: 'GET',
       url: 'http://localhost:8080/site/my-spa/resourceapi/?__br__campaignVariant=foo%3Abar',
@@ -314,7 +314,7 @@ describe('initialize', () => {
       origin: 'http://localhost:12345',
     });
 
-    expect(httpClient).toBeCalledWith({
+    expect(httpClient).toHaveBeenCalledWith({
       headers: {},
       method: 'GET',
       url: 'http://localhost:8080/site/my-spa/resourceapi/?__br__campaignVariant=foo%3Abar',
@@ -330,7 +330,7 @@ describe('initialize', () => {
       origin: 'http://localhost:12345',
     });
 
-    expect(httpClient).toBeCalledWith({
+    expect(httpClient).toHaveBeenCalledWith({
       headers: {},
       method: 'GET',
       url: 'http://localhost:8080/site/my-spa/resourceapi/',
@@ -351,7 +351,7 @@ describe('initialize', () => {
       origin: 'http://localhost:12345',
     });
 
-    expect(httpClient).toBeCalledWith({
+    expect(httpClient).toHaveBeenCalledWith({
       headers: {},
       method: 'GET',
       url: 'http://localhost:8080/site/my-spa/resourceapi/',
@@ -373,7 +373,7 @@ describe('initialize', () => {
       path: '/?btm_campaign_id=12345&btm_segment=silver&btm_ttl=0',
     });
 
-    expect(httpClient).toBeCalledWith({
+    expect(httpClient).toHaveBeenCalledWith({
       headers: {},
       method: 'GET',
       url: 'http://localhost:8080/site/my-spa/resourceapi/',
@@ -394,7 +394,7 @@ describe('initialize', () => {
       origin: 'http://localhost:12345',
     });
 
-    expect(httpClient).toBeCalledWith({
+    expect(httpClient).toHaveBeenCalledWith({
       headers: {},
       method: 'GET',
       url:
@@ -417,7 +417,7 @@ describe('initialize', () => {
       origin: 'http://localhost:12345',
     });
 
-    expect(httpClient).toBeCalledWith({
+    expect(httpClient).toHaveBeenCalledWith({
       headers: {},
       method: 'GET',
       url: 'http://localhost:8080/site/my-spa/resourceapi/?__br__segmentIds=foo%2Cbar',
@@ -438,7 +438,7 @@ describe('initialize', () => {
       origin: 'http://localhost:12345',
     });
 
-    expect(httpClient).toBeCalledWith({
+    expect(httpClient).toHaveBeenCalledWith({
       headers: {},
       method: 'GET',
       url: 'http://localhost:8080/site/my-spa/resourceapi/',

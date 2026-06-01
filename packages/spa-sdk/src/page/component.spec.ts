@@ -54,7 +54,7 @@ describe('ComponentImpl', () => {
       metaFactory.mockReturnValueOnce(meta);
       const component = createComponent();
 
-      expect(metaFactory).toBeCalledWith(model.meta);
+      expect(metaFactory).toHaveBeenCalledWith(model.meta);
       expect(component.getMeta()).toEqual(meta);
     });
   });
@@ -80,7 +80,7 @@ describe('ComponentImpl', () => {
       linkFactory.create.mockReturnValueOnce('url');
 
       expect(component.getUrl()).toBe('url');
-      expect(linkFactory.create).toBeCalledWith({ href: 'url' });
+      expect(linkFactory.create).toHaveBeenCalledWith({ href: 'url' });
     });
 
     it('should return undefined when component links are missing', () => {

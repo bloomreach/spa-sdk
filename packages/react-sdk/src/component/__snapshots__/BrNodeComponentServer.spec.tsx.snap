@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`BrNodeComponentServer Component mapping resolution should fallback to children when there is no mapping 1`] = `
 <DocumentFragment>

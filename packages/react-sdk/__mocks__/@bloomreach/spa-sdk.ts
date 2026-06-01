@@ -50,6 +50,6 @@ const page = new class implements Page {
 };
 
 module.exports = {
-  ...jest.genMockFromModule('@bloomreach/spa-sdk'),
+  ...jest.createMockFromModule('@bloomreach/spa-sdk'),
   initialize: jest.fn(() => page),
 };

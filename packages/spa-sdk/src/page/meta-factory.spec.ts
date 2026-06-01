@@ -32,12 +32,12 @@ describe('MetaFactory', () => {
       factory.create({ data: 'meta1', type: 'type1' as MetaType }, META_POSITION_BEGIN);
       factory.create({ data: 'meta2', type: 'type2' as MetaType }, META_POSITION_END);
 
-      expect(builder1).toBeCalledWith({ data: 'meta1', type: 'type1' }, META_POSITION_BEGIN);
-      expect(builder2).toBeCalledWith({ data: 'meta2', type: 'type2' }, META_POSITION_END);
+      expect(builder1).toHaveBeenCalledWith({ data: 'meta1', type: 'type1' }, META_POSITION_BEGIN);
+      expect(builder2).toHaveBeenCalledWith({ data: 'meta2', type: 'type2' }, META_POSITION_END);
     });
 
     it('should throw an exception on unknown component type', () => {
-      expect(() => factory.create({ data: 'data0', type: 'type0' as MetaType }, META_POSITION_BEGIN)).toThrowError();
+      expect(() => factory.create({ data: 'data0', type: 'type0' as MetaType }, META_POSITION_BEGIN)).toThrow();
     });
   });
 });

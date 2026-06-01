@@ -47,6 +47,6 @@ describe('BrManageMenuButton', () => {
     mockPage.getButton.mockReturnValueOnce(meta);
     render(<BrManageMenuButton {...props} />);
 
-    expect(mockPage.getButton).toBeCalledWith(expect.any(String), props.menu);
+    expect(mockPage.getButton).toHaveBeenCalledWith(expect.any(String), props.menu);
   });
 });

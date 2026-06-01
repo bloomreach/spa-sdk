@@ -55,7 +55,7 @@ describe('BrNodeContainerItemServer', () => {
         />,
       );
 
-      expect(mockComponent.getType).toBeCalled();
+      expect(mockComponent.getType).toHaveBeenCalled();
     });
 
     it('should render undefined container item', () => {

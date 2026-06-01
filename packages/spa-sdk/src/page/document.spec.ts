@@ -71,14 +71,14 @@ describe('DocumentImpl', () => {
 
       const document = createDocument({ ...model, meta: metaModel });
 
-      expect(metaFactory).toBeCalledWith(metaModel);
+      expect(metaFactory).toHaveBeenCalledWith(metaModel);
       expect(document.getMeta()).toEqual(meta);
     });
 
     it('should pass an empty object if there is no meta-data', () => {
       createDocument();
 
-      expect(metaFactory).toBeCalledWith({});
+      expect(metaFactory).toHaveBeenCalledWith({});
     });
   });
 
@@ -104,7 +104,7 @@ describe('DocumentImpl', () => {
       linkFactory.create.mockReturnValueOnce('url');
 
       expect(document.getUrl()).toBe('url');
-      expect(linkFactory.create).toBeCalledWith({ href: 'url' });
+      expect(linkFactory.create).toHaveBeenCalledWith({ href: 'url' });
     });
   });
 });

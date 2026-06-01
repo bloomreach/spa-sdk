@@ -27,8 +27,8 @@ describe('ContentFactory', () => {
       factory.create({ id: 'id1', type: 'type1' } as ContentModel);
       factory.create({ id: 'id2', type: 'type2' } as ContentModel);
 
-      expect(builder1).toBeCalledWith({ id: 'id1', type: 'type1' });
-      expect(builder2).toBeCalledWith({ id: 'id2', type: 'type2' });
+      expect(builder1).toHaveBeenCalledWith({ id: 'id1', type: 'type1' });
+      expect(builder2).toHaveBeenCalledWith({ id: 'id2', type: 'type2' });
     });
 
     it('should return model as-is on unknown component type', () => {

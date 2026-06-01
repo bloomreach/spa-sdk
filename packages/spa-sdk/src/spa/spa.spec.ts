@@ -70,7 +70,7 @@ describe('Spa', () => {
     beforeEach(async () => spa.initialize(config.request.path));
 
     it('should get page through an API', () => {
-      expect(api.getPage).toBeCalledWith(config.request.path);
+      expect(api.getPage).toHaveBeenCalledWith(config.request.path);
     });
 
     it('should use a page model from the arguments', () => {
@@ -78,19 +78,19 @@ describe('Spa', () => {
       const pageModel = {} as PageModel;
 
       spa.initialize(pageModel);
-      expect(api.getPage).not.toBeCalled();
-      expect(pageFactory).toBeCalledWith(pageModel);
+      expect(api.getPage).not.toHaveBeenCalled();
+      expect(pageFactory).toHaveBeenCalledWith(pageModel);
     });
 
     it('should create a page instance', () => {
-      expect(pageFactory).toBeCalledWith(model);
+      expect(pageFactory).toHaveBeenCalledWith(model);
     });
 
     it('should subscribe for cms.update event', async () => {
       jest.spyOn(cmsEventBus, 'on');
       page.isPreview.mockReturnValue(true);
       await spa.initialize(config.request.path);
-      expect(cmsEventBus.on).toBeCalledWith('cms.update', expect.any(Function));
+      expect(cmsEventBus.on).toHaveBeenCalledWith('cms.update', expect.any(Function));
     });
 
     it('should reject a promise when fetching the page model fails', () => {
@@ -125,9 +125,9 @@ describe('Spa', () => {
     it('should not proceed if a component does not exist', async () => {
       await cmsEventBus.emitSerial('cms.update', { id: 'some-component', properties: {} });
 
-      expect(root.getComponentById).toBeCalledWith('some-component');
-      expect(api.getComponent).not.toBeCalled();
-      expect(eventBus.emit).not.toBeCalledWith('page.update', expect.anything());
+      expect(root.getComponentById).toHaveBeenCalledWith('some-component');
+      expect(api.getComponent).not.toHaveBeenCalled();
+      expect(eventBus.emit).not.toHaveBeenCalledWith('page.update', expect.anything());
     });
 
     describe('on component update', () => {
@@ -138,12 +138,12 @@ describe('Spa', () => {
       });
 
       it('should request a component model', () => {
-        expect(component.getUrl).toBeCalled();
-        expect(api.getComponent).toBeCalledWith('some-url', { a: 'b' });
+        expect(component.getUrl).toHaveBeenCalled();
+        expect(api.getComponent).toHaveBeenCalledWith('some-url', { a: 'b' });
       });
 
       it('should emit page.update event', () => {
-        expect(eventBus.emit).toBeCalledWith('page.update', { page: model });
+        expect(eventBus.emit).toHaveBeenCalledWith('page.update', { page: model });
       });
     });
   });
@@ -156,7 +156,7 @@ describe('Spa', () => {
 
       spa.destroy();
 
-      expect(cmsEventBus.off).toBeCalledWith('cms.update', expect.any(Function));
+      expect(cmsEventBus.off).toHaveBeenCalledWith('cms.update', expect.any(Function));
     });
 
     it('should remove all page events', async () => {
@@ -164,7 +164,7 @@ describe('Spa', () => {
 
       spa.destroy();
 
-      expect(eventBus.clearListeners).toBeCalled();
+      expect(eventBus.clearListeners).toHaveBeenCalled();
     });
   });
 });

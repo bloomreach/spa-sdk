@@ -44,6 +44,6 @@ describe('BrManageContentButton', () => {
     mockPage.getButton.mockReturnValueOnce(meta);
     render(<BrManageContentButton page={mockPage} content={content} root="content" />);
 
-    expect(mockPage.getButton).toBeCalledWith(expect.any(String), { content, root: 'content' });
+    expect(mockPage.getButton).toHaveBeenCalledWith(expect.any(String), { content, root: 'content' });
   });
 });

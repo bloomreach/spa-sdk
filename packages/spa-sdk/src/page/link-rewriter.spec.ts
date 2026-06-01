@@ -33,14 +33,14 @@ describe('LinkRewriterImpl', () => {
       const html = '<a name="something" data-type="internal">something</a>';
 
       expect(linkRewriter.rewrite(html)).toBe(html);
-      expect(linkFactory.create).not.toBeCalled();
+      expect(linkFactory.create).not.toHaveBeenCalled();
     });
 
     it('should ignore anchors without data-type attribute', () => {
       const html = '<a href="http://example.com">something</a>';
 
       expect(linkRewriter.rewrite(html)).toBe(html);
-      expect(linkFactory.create).not.toBeCalled();
+      expect(linkFactory.create).not.toHaveBeenCalled();
     });
 
     it('should rewrite anchor links', () => {
@@ -49,7 +49,7 @@ describe('LinkRewriterImpl', () => {
       expect(linkRewriter.rewrite('<a href="/some/path" data-type="internal">something</a>')).toBe(
         '<a href="url" data-type="internal">something</a>',
       );
-      expect(linkFactory.create).toBeCalledWith({ href: '/some/path', type: TYPE_LINK_INTERNAL });
+      expect(linkFactory.create).toHaveBeenCalledWith({ href: '/some/path', type: TYPE_LINK_INTERNAL });
     });
 
     it('should rewrite anchor links if content has line breaks', () => {
@@ -67,7 +67,7 @@ describe('LinkRewriterImpl', () => {
       const html = '<img alt="something" />';
 
       expect(linkRewriter.rewrite(html)).toBe(html);
-      expect(linkFactory.create).not.toBeCalled();
+      expect(linkFactory.create).not.toHaveBeenCalled();
     });
 
     it('should rewrite images links', () => {
@@ -76,7 +76,7 @@ describe('LinkRewriterImpl', () => {
       expect(linkRewriter.rewrite('<img src="/some/path" alt="something" />')).toBe(
         '<img src="url" alt="something" />',
       );
-      expect(linkFactory.create).toBeCalledWith({ href: '/some/path', type: TYPE_LINK_RESOURCE });
+      expect(linkFactory.create).toHaveBeenCalledWith({ href: '/some/path', type: TYPE_LINK_RESOURCE });
     });
   });
 });

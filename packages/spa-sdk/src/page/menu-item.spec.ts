@@ -86,7 +86,7 @@ describe('MenuItemImpl', () => {
       linkFactory.create.mockReturnValueOnce('url');
 
       expect(item.getUrl()).toBe('url');
-      expect(linkFactory.create).toBeCalledWith({ href: 'url', type: TYPE_LINK_INTERNAL });
+      expect(linkFactory.create).toHaveBeenCalledWith({ href: 'url', type: TYPE_LINK_INTERNAL });
     });
   });
 
