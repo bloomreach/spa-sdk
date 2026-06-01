@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import { injectable, inject } from 'inversify';
 import { Builder } from './factory';
 import { LinkFactory } from './link-factory';
 import { Link } from './link';
@@ -43,11 +42,10 @@ export interface PaginationItem {
 
 export type PaginationItemFactory = Builder<[PaginationItemModel], PaginationItem>;
 
-@injectable()
 export class PaginationItemImpl implements PaginationItem {
   constructor(
-    @inject(PaginationItemModelToken) protected model: PaginationItemModel,
-    @inject(LinkFactory) private linkFactory: LinkFactory,
+    protected model: PaginationItemModel,
+    private linkFactory: LinkFactory,
   ) {}
 
   getNumber(): number {

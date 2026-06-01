@@ -14,8 +14,7 @@
  * limitations under the License.
  */
 
-import { inject, injectable, optional } from 'inversify';
-import { CmsEventBus, CmsEventBusService } from '../cms';
+import { CmsEventBus } from '../cms';
 import { Logger } from '../logger';
 import { isAbsoluteUrl, resolveUrl } from '../url';
 import { ButtonFactory } from './button-factory';
@@ -29,14 +28,14 @@ import { ContentFactory } from './content-factory';
 import { Document } from './document';
 import { isLink, Link } from './link';
 import { LinkFactory } from './link-factory';
-import { LinkRewriter, LinkRewriterService } from './link-rewriter';
+import { LinkRewriter } from './link-rewriter';
 import { Menu, TYPE_MANAGE_MENU_BUTTON } from './menu';
 import { MetaCollection, MetaCollectionModel } from './meta-collection';
 import { MetaCollectionFactory } from './meta-collection-factory';
-import { PageEventBus, PageEventBusService, PageUpdateEvent } from './page-events';
+import { PageEventBus, PageUpdateEvent } from './page-events';
 import { isReference, Reference, resolve } from './reference';
 import { Visit, Visitor } from './relevance';
-import { ApiOptions, ApiOptionsToken } from '../spa/api';
+import { ApiOptions } from '../spa/api';
 
 export const PageModelToken = Symbol.for('PageModelToken');
 
@@ -247,24 +246,23 @@ export interface Page {
   toJSON(): any;
 }
 
-@injectable()
 export class PageImpl implements Page {
   protected content = new WeakMap<Record<string, any>, unknown>();
 
   protected root?: Component;
 
   constructor(
-    @inject(PageModelToken) protected model: PageModel,
-    @inject(ButtonFactory) private buttonFactory: ButtonFactory,
-    @inject(ComponentFactory) componentFactory: ComponentFactory,
-    @inject(ContentFactory) private contentFactory: ContentFactory,
-    @inject(LinkFactory) private linkFactory: LinkFactory,
-    @inject(LinkRewriterService) private linkRewriter: LinkRewriter,
-    @inject(MetaCollectionFactory) private metaFactory: MetaCollectionFactory,
-    @inject(CmsEventBusService) @optional() private cmsEventBus: CmsEventBus,
-    @inject(ApiOptionsToken) private apiOptions: ApiOptions,
-    @inject(PageEventBusService) @optional() pageEventBus?: PageEventBus,
-    @inject(Logger) @optional() private logger?: Logger,
+    protected model: PageModel,
+    private buttonFactory: ButtonFactory,
+    componentFactory: ComponentFactory,
+    private contentFactory: ContentFactory,
+    private linkFactory: LinkFactory,
+    private linkRewriter: LinkRewriter,
+    private metaFactory: MetaCollectionFactory,
+    private cmsEventBus: CmsEventBus,
+    private apiOptions: ApiOptions,
+    pageEventBus?: PageEventBus,
+    private logger?: Logger,
   ) {
     pageEventBus?.on('page.update', this.onPageUpdate.bind(this));
 

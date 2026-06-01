@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-import { inject, injectable, optional } from 'inversify';
 import { Logger } from '../logger';
-import { CmsEventBus, CmsEventBusService, CmsUpdateEvent } from './cms-events';
-import { RpcClientService, RpcServerService, Procedures, RpcClient, RpcServer } from './rpc';
+import { CmsEventBus, CmsUpdateEvent } from './cms-events';
+import { Procedures, RpcClient, RpcServer } from './rpc';
 
 export const CmsService = Symbol.for('CmsService');
 
@@ -56,15 +55,14 @@ interface SpaEvents {
   ready: never;
 }
 
-@injectable()
 export class CmsImpl implements Cms {
   private window?: Window;
 
   constructor(
-    @inject(RpcClientService) protected rpcClient: RpcClient<CmsProcedures, CmsEvents>,
-    @inject(RpcServerService) protected rpcServer: RpcServer<SpaProcedures, SpaEvents>,
-    @inject(CmsEventBusService) @optional() protected cmsEventBus?: CmsEventBus,
-    @inject(Logger) @optional() private logger?: Logger,
+    protected rpcClient: RpcClient<CmsProcedures, CmsEvents>,
+    protected rpcServer: RpcServer<SpaProcedures, SpaEvents>,
+    protected cmsEventBus?: CmsEventBus,
+    private logger?: Logger,
   ) {
     this.onStateChange = this.onStateChange.bind(this);
     this.cmsEventBus?.on('page.ready', this.onPageReady.bind(this));

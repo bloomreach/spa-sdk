@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import { injectable, inject } from 'inversify';
 import { Builder } from './factory';
 import { LinkFactory } from './link-factory';
 import { Link } from './link';
@@ -82,11 +81,10 @@ export interface Image {
 
 export type ImageFactory = Builder<[ImageModel], Image>;
 
-@injectable()
 export class ImageImpl implements Image {
   constructor(
-    @inject(ImageModelToken) protected model: ImageModel,
-    @inject(LinkFactory) private linkFactory: LinkFactory,
+    protected model: ImageModel,
+    private linkFactory: LinkFactory,
   ) {}
 
   getDisplayName(): string {

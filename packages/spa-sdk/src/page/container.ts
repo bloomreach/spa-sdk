@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import { injectable } from 'inversify';
 import { ComponentImpl, ComponentModel, Component, TYPE_COMPONENT_CONTAINER } from './component';
 import { ContainerItem } from './container-item';
 
@@ -80,7 +79,6 @@ export interface Container extends Component {
   getChildren(): ContainerItem[];
 }
 
-@injectable()
 export class ContainerImpl extends ComponentImpl implements Container {
   protected model!: ContainerModel;
 

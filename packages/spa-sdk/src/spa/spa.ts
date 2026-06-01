@@ -14,18 +14,16 @@
  * limitations under the License.
  */
 
-import { inject, injectable, optional } from 'inversify';
-import { CmsEventBus, CmsEventBusService, CmsUpdateEvent } from '../cms';
+import { CmsEventBus, CmsUpdateEvent } from '../cms';
 import { Logger } from '../logger';
-import { EventBus, Page, PageEventBusService, PageFactory, PageModel } from '../page';
-import { Api, ApiService } from './api';
+import { EventBus, Page, PageFactory, PageModel } from '../page';
+import { Api } from './api';
 
 export const SpaService = Symbol.for('SpaService');
 
 /**
  * SPA entry point interacting with the Channel Manager and the Page Model API.
  */
-@injectable()
 export class Spa {
   private page?: Page;
 
@@ -35,11 +33,11 @@ export class Spa {
    * @param pageFactory Factory to produce page instances.
    */
   constructor(
-    @inject(ApiService) private api: Api,
-    @inject(PageFactory) private pageFactory: PageFactory,
-    @inject(CmsEventBusService) @optional() private cmsEventBus?: CmsEventBus,
-    @inject(PageEventBusService) @optional() private pageEventBus?: EventBus,
-    @inject(Logger) @optional() private logger?: Logger,
+    private api: Api,
+    private pageFactory: PageFactory,
+    private cmsEventBus?: CmsEventBus,
+    private pageEventBus?: EventBus,
+    private logger?: Logger,
   ) {
     this.onCmsUpdate = this.onCmsUpdate.bind(this);
   }

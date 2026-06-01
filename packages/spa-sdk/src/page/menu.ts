@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import { injectable, inject } from 'inversify';
 import { MenuItemFactory, MenuItemModel, MenuItem } from './menu-item';
 import { MetaCollectionFactory } from './meta-collection-factory';
 import { MetaCollectionModel, MetaCollection } from './meta-collection';
@@ -71,7 +70,6 @@ export interface Menu {
   getSelected(): MenuItem | undefined;
 }
 
-@injectable()
 export class MenuImpl implements Menu {
   private items: MenuItem[];
 
@@ -80,9 +78,9 @@ export class MenuImpl implements Menu {
   private selected?: MenuItem;
 
   constructor(
-    @inject(MenuModelToken) protected model: MenuModel,
-    @inject(MetaCollectionFactory) metaFactory: MetaCollectionFactory,
-    @inject(MenuItemFactory) menuItemFactory: MenuItemFactory,
+    protected model: MenuModel,
+    metaFactory: MetaCollectionFactory,
+    menuItemFactory: MenuItemFactory,
   ) {
     this.items = model.data.siteMenuItems.map(menuItemFactory);
     this.meta = metaFactory(model.meta);

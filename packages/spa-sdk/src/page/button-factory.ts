@@ -14,16 +14,14 @@
  * limitations under the License.
  */
 
-import { injectable, inject } from 'inversify';
 import { Builder, SimpleFactory } from './factory';
 import { MetaCollectionFactory } from './meta-collection-factory';
 import { MetaCollection, MetaCollectionModel, isMetaCollection } from './meta-collection';
 
 type ButtonBuilder = Builder<any[], MetaCollection | MetaCollectionModel>;
 
-@injectable()
 export class ButtonFactory extends SimpleFactory<string, ButtonBuilder> {
-  constructor(@inject(MetaCollectionFactory) private metaCollectionFactory: MetaCollectionFactory) {
+  constructor(private metaCollectionFactory: MetaCollectionFactory) {
     super();
   }
 

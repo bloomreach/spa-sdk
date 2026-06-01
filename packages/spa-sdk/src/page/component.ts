@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import { inject, injectable } from 'inversify';
 import { LinkFactory } from './link-factory';
 import { Link } from './link';
 import { MetaCollectionFactory } from './meta-collection-factory';
@@ -136,15 +135,14 @@ export interface Component {
   getComponentById<U extends Component>(id: string): U | this | undefined;
 }
 
-@injectable()
 export class ComponentImpl implements Component {
   protected meta: MetaCollection;
 
   constructor(
-    @inject(ComponentModelToken) protected model: ComponentModel,
-    @inject(ComponentChildrenToken) protected children: Component[],
-    @inject(LinkFactory) private linkFactory: LinkFactory,
-    @inject(MetaCollectionFactory) metaFactory: MetaCollectionFactory,
+    protected model: ComponentModel,
+    protected children: Component[],
+    private linkFactory: LinkFactory,
+    metaFactory: MetaCollectionFactory,
   ) {
     this.meta = metaFactory(this.model.meta);
   }

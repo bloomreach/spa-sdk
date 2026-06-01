@@ -14,24 +14,22 @@
  * limitations under the License.
  */
 
-import { inject, injectable, optional } from 'inversify';
 import {
   ComponentImpl,
   ComponentMeta,
   ComponentModel,
-  ComponentModelToken,
   Component,
   TYPE_COMPONENT_CONTAINER_ITEM,
   TYPE_COMPONENT_CONTAINER_ITEM_CONTENT,
 } from './component';
 import { EmitterMixin, Emitter } from '../emitter';
-import { PageEventBusService, PageEventBus, PageUpdateEvent } from './page-events';
+import { PageEventBus, PageUpdateEvent } from './page-events';
 import { LinkFactory } from './link-factory';
 import { Logger } from '../logger';
 import { MetaCollectionFactory } from './meta-collection-factory';
 import { Page, PageModel } from './page';
 import { Reference, resolve } from './reference';
-import { ApiOptions, ApiOptionsToken } from '../spa/api';
+import { ApiOptions } from '../spa/api';
 
 /**
  * A container item without mapping.
@@ -145,17 +143,16 @@ export function getContainerItemContent<T>(component: ContainerItem, page: Page)
   return componentContent.data;
 }
 
-@injectable()
 export class ContainerItemImpl
   extends EmitterMixin<typeof ComponentImpl, ContainerItemEvents>(ComponentImpl)
   implements ContainerItem {
   constructor(
-    @inject(ComponentModelToken) protected model: ContainerItemModel,
-    @inject(LinkFactory) linkFactory: LinkFactory,
-    @inject(MetaCollectionFactory) private metaFactory: MetaCollectionFactory,
-    @inject(ApiOptionsToken) private apiOptions: ApiOptions,
-    @inject(PageEventBusService) @optional() eventBus?: PageEventBus,
-    @inject(Logger) @optional() private logger?: Logger,
+    protected model: ContainerItemModel,
+    linkFactory: LinkFactory,
+    private metaFactory: MetaCollectionFactory,
+    private apiOptions: ApiOptions,
+    eventBus?: PageEventBus,
+    private logger?: Logger,
   ) {
     super(model, [], linkFactory, metaFactory);
 

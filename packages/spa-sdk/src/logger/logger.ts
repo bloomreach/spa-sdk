@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import { injectable } from 'inversify';
 import { Level } from './level';
 
 export interface Logger {
@@ -25,7 +24,6 @@ export interface Logger {
   error(...message: unknown[]): void;
 }
 
-@injectable()
 export abstract class Logger implements Logger {
   level = Level.Error;
 

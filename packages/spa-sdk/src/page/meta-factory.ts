@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import { injectable } from 'inversify';
 import { SimpleFactory } from './factory';
 import { MetaModel, MetaPosition, MetaType, Meta } from './meta';
 
@@ -23,7 +22,6 @@ type MetaBuilder = (model: MetaModel, position: MetaPosition) => Meta;
 /**
  * The factory to produce meta-data collection from the page model meta-data.
  */
-@injectable()
 export class MetaFactory extends SimpleFactory<MetaType, MetaBuilder> {
   create(meta: MetaModel, position: MetaPosition): Meta {
     const builder = this.mapping.get(meta.type);

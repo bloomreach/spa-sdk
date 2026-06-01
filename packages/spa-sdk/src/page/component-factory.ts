@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import { injectable } from 'inversify';
 import { ComponentModel, ComponentType, Component } from './component';
 import { SimpleFactory } from './factory';
 import { PageModel } from './page';
@@ -25,7 +24,6 @@ type ComponentBuilder = (model: ComponentModel, children: Component[]) => Compon
 /**
  * A component factory producing components based on a type.
  */
-@injectable()
 export class ComponentFactory extends SimpleFactory<ComponentType, ComponentBuilder> {
   /**
    * Produces a component based on the page model.

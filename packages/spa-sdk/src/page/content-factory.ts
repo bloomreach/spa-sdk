@@ -14,13 +14,11 @@
  * limitations under the License.
  */
 
-import { injectable } from 'inversify';
 import { Builder, SimpleFactory } from './factory';
 import { ContentModel } from './content';
 
 type ContentBuilder = Builder<[ContentModel], unknown>;
 
-@injectable()
 export class ContentFactory extends SimpleFactory<ContentModel['type'], ContentBuilder> {
   create(model: ContentModel): ContentModel {
     if (!this.mapping.has(model.type)) {

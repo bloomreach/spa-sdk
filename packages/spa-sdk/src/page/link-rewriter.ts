@@ -18,7 +18,6 @@ import render from 'dom-serializer';
 import type { Document } from 'domhandler';
 import { getAttributeValue, getElementsByTagName, hasAttrib } from 'domutils';
 import { parseDocument } from 'htmlparser2';
-import { inject, injectable } from 'inversify';
 import { Link, TYPE_LINK_RESOURCE } from './link';
 import { LinkFactory } from './link-factory';
 
@@ -33,9 +32,8 @@ export interface LinkRewriter {
   rewrite(content: string, type?: string): string;
 }
 
-@injectable()
 export class LinkRewriterImpl implements LinkRewriter {
-  constructor(@inject(LinkFactory) private linkFactory: LinkFactory) {}
+  constructor(private linkFactory: LinkFactory) {}
 
   rewrite(content: string, type = 'text/html'): string {
     const document = parseDocument(content, { xmlMode: type !== 'text/html' });

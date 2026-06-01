@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import { injectable, inject } from 'inversify';
 import { Builder } from './factory';
 import { LinkFactory } from './link-factory';
 import { Link } from './link';
@@ -83,14 +82,13 @@ export interface MenuItem {
 
 export type MenuItemFactory = Builder<[MenuItemModel], MenuItem>;
 
-@injectable()
 export class MenuItemImpl implements MenuItem {
   private children: MenuItem[];
 
   constructor(
-    @inject(MenuItemModelToken) protected model: MenuItemModel,
-    @inject(LinkFactory) private linkFactory: LinkFactory,
-    @inject(MenuItemFactory) menuItemFactory: MenuItemFactory,
+    protected model: MenuItemModel,
+    private linkFactory: LinkFactory,
+    menuItemFactory: MenuItemFactory,
   ) {
     this.children = model.childMenuItems.map(menuItemFactory);
   }

@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import { injectable, inject } from 'inversify';
 import { ImageFactory, ImageModel, Image } from './image';
 
 export const ImageSetModelToken = Symbol.for('ImageSetModelToken');
@@ -95,7 +94,6 @@ export interface ImageSet {
   getVariants(variants?: string[]): Record<string, Image>;
 }
 
-@injectable()
 export class ImageSetImpl implements ImageSet {
   private original?: Image;
 
@@ -104,8 +102,8 @@ export class ImageSetImpl implements ImageSet {
   private variants: Record<string, Image> = {};
 
   constructor(
-    @inject(ImageSetModelToken) protected model: ImageSetModel,
-    @inject(ImageFactory) imageFactory: ImageFactory,
+    protected model: ImageSetModel,
+    imageFactory: ImageFactory,
   ) {
     this.original = model.data.original ? imageFactory(model.data.original) : undefined;
 

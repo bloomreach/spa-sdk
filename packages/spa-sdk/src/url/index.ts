@@ -15,5 +15,4 @@
  */
 
 export { UrlBuilderOptionsToken, UrlBuilderOptions, UrlBuilderService, UrlBuilder } from './builder';
-export { UrlModule } from './module';
 export * from './utils';

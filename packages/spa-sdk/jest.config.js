@@ -29,7 +29,6 @@ module.exports = {
       },
     ],
   ],
-  setupFiles: ['reflect-metadata'],
   testEnvironment: 'jsdom',
   transform: {
     '^.+\\.ts$': 'ts-jest',

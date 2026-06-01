@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import { inject, injectable } from 'inversify';
 import { buildUrl, mergeSearchParams, parseUrl } from './utils';
 
 export const UrlBuilderOptionsToken = Symbol.for('UrlBuilderOptionsToken');
@@ -50,13 +49,12 @@ export interface UrlBuilder {
   getSpaUrl(path: string): string;
 }
 
-@injectable()
 export class UrlBuilderImpl {
   private endpoint: ReturnType<typeof parseUrl>;
 
   private baseUrl: ReturnType<typeof parseUrl>;
 
-  constructor(@inject(UrlBuilderOptionsToken) options: UrlBuilderOptions) {
+  constructor(options: UrlBuilderOptions) {
     this.endpoint = parseUrl(options.endpoint ?? '');
     this.baseUrl = parseUrl(options.baseUrl ?? '');
   }

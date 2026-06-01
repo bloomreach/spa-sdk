@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-import { inject, injectable, optional } from 'inversify';
 import { Logger } from '../logger';
 import { PageModel } from '../page';
-import { UrlBuilderService, UrlBuilder } from '../url';
+import { UrlBuilder } from '../url';
 import { HttpClientConfig, HttpClient, HttpHeaders, HttpRequest } from './http';
 
 const DEFAULT_API_VERSION_HEADER = 'Accept-Version';
@@ -112,7 +111,6 @@ export interface Api {
   getComponent(url: string, payload: Record<string, unknown>): Promise<PageModel>;
 }
 
-@injectable()
 export class ApiImpl implements Api {
   private static getHeaders(options: ApiOptions): HttpHeaders {
     const {
@@ -148,9 +146,9 @@ export class ApiImpl implements Api {
   private httpClient: HttpClient<PageModel>;
 
   constructor(
-    @inject(UrlBuilderService) private urlBuilder: UrlBuilder,
-    @inject(ApiOptionsToken) options: ApiOptions,
-    @inject(Logger) @optional() private logger?: Logger,
+    private urlBuilder: UrlBuilder,
+    options: ApiOptions,
+    private logger?: Logger,
   ) {
     this.headers = ApiImpl.getHeaders(options);
     this.httpClient = options.httpClient;

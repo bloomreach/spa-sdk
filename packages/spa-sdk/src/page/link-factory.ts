@@ -14,13 +14,11 @@
  * limitations under the License.
  */
 
-import { injectable } from 'inversify';
 import { LinkType, Link, TYPE_LINK_INTERNAL, isLink } from './link';
 import { SimpleFactory } from './factory';
 
 type LinkBuilder = (link: string) => string;
 
-@injectable()
 export class LinkFactory extends SimpleFactory<LinkType, LinkBuilder> {
   create(link: Link): string | undefined;
 

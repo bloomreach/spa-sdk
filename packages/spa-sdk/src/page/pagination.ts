@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import { injectable, inject } from 'inversify';
 import { PaginationItemFactory, PaginationItemModel, PaginationItem } from './pagination-item';
 import { Reference } from './reference';
 
@@ -97,7 +96,6 @@ export interface Pagination {
   isEnabled(): boolean;
 }
 
-@injectable()
 export class PaginationImpl implements Pagination {
   private current: PaginationItem;
 
@@ -112,8 +110,8 @@ export class PaginationImpl implements Pagination {
   private previous?: PaginationItem;
 
   constructor(
-    @inject(PaginationModelToken) protected model: PaginationModel,
-    @inject(PaginationItemFactory) paginationItemFactory: PaginationItemFactory,
+    protected model: PaginationModel,
+    paginationItemFactory: PaginationItemFactory,
   ) {
     this.current = paginationItemFactory(model.current);
     this.first = paginationItemFactory(model.first);

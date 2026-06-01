@@ -14,15 +14,13 @@
  * limitations under the License.
  */
 
-import { inject, injectable } from 'inversify';
 import { Level } from './level';
 import { Logger } from './logger';
 
 export const ConsoleToken = Symbol.for('ConsoleToken');
 
-@injectable()
 export class ConsoleLogger extends Logger {
-  constructor(@inject(ConsoleToken) private console: Console) {
+  constructor(private console: Console) {
     super();
   }
 

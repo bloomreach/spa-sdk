@@ -14,17 +14,5 @@
  * limitations under the License.
  */
 
-import { ContainerModule } from 'inversify';
-import { ConsoleLogger, ConsoleToken } from './console';
-import { Logger } from './logger';
-
-export function LoggerModule(): ContainerModule {
-  return new ContainerModule((bind) => {
-    bind(ConsoleToken).toConstantValue(console);
-    bind(ConsoleLogger).toSelf().inSingletonScope();
-    bind(Logger).toService(ConsoleLogger);
-  });
-}
-
 export { Level } from './level';
 export { Logger } from './logger';

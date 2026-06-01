@@ -53,7 +53,6 @@ export { MetaCollection } from './meta-collection';
 export { MetaComment, isMetaComment } from './meta-comment';
 export { Meta, META_POSITION_BEGIN, META_POSITION_END, isMeta } from './meta';
 export { PageFactory } from './page-factory';
-export { PageModule } from './module';
 export { Page, PageModel, isPage } from './page';
 export { PaginationItem } from './pagination-item';
 export { Pagination, isPagination } from './pagination';
