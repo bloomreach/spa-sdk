@@ -17,14 +17,15 @@
 /**
  * Composition root for the spa-sdk.
  *
- * Replaces the former Inversify container with explicit, hand-wired construction.
- * Two layers mirror the previous base/child container split:
+ * SdkRuntime owns the full object graph for one SDK instance. Two layers:
  *
- * - A persistent (process-level) layer — logger, CMS event bus, post-message and
- *   CMS clients — created lazily and reused across every {@link initialize} call.
- *   Reusing these is required so the CMS-to-SPA bridge survives SPA route changes.
- * - A per-page layer — URL builder, API client, factories, page event bus and the
- *   SPA instance — rebuilt on every {@link createScope} call for clean state.
+ * - Persistent: logger, CMS event bus, PostMessage and Cms — created once per
+ *   runtime and reused across route changes so the CMS-to-SPA bridge survives.
+ * - Per-page: URL builder, API, factories, page event bus, Spa — rebuilt fresh
+ *   on every {@link SdkRuntime#createScope} call to prevent state leaking between pages.
+ *
+ * index.ts holds a single SdkRuntime instance. A future SSR wrapper can create
+ * one per request instead, gaining full isolation without any API change.
  */
 
 import { Typed } from 'emittery';
@@ -65,143 +66,125 @@ import { Api, ApiOptions } from './spa/api';
 import { Spa } from './spa/spa';
 import { UrlBuilder, UrlBuilderOptions } from './url/builder';
 
-// --- Persistent (process-level) layer ------------------------------------------------
+export class SdkRuntime {
+  private logger: Logger | undefined;
 
-let logger: Logger | undefined;
-let cmsEventBus: CmsEventBus | undefined;
-let cmsEventBusResolved = false;
-// Default generic arguments are intentionally widened to `any` here: the former
-// Inversify bindings aliased a single PostMessage instance to both the RPC client
-// and server tokens, erasing their distinct procedure/event types at the boundary.
-let postMessage: PostMessage<any, any, any, any> | undefined;
-let cms: Cms | undefined;
-let currentSpa: Spa | undefined;
+  private cmsEventBus: CmsEventBus | undefined;
 
-/**
- * Returns the shared logger, creating it on first use.
- */
-export function getLogger(): Logger {
-  if (!logger) {
-    logger = new ConsoleLogger(console);
+  private cmsEventBusResolved = false;
+
+  // Widened to any: a single PostMessage instance is shared as both RPC client
+  // and server, erasing the distinct procedure/event type parameters.
+  private postMessage: PostMessage<any, any, any, any> | undefined;
+
+  private cms: Cms | undefined;
+
+  private currentSpa: Spa | undefined;
+
+  // --- Persistent layer -----------------------------------------------------------------
+
+  getLogger(): Logger {
+    if (!this.logger) {
+      this.logger = new ConsoleLogger(console);
+    }
+
+    return this.logger;
   }
 
-  return logger;
-}
+  getCmsEventBus(): CmsEventBus | undefined {
+    if (!this.cmsEventBusResolved) {
+      this.cmsEventBus = typeof window !== 'undefined' ? new Typed<CmsEvents>() : undefined;
+      this.cmsEventBusResolved = true;
+    }
 
-/**
- * Returns the shared CMS event bus, or `undefined` outside the browser.
- * The bus is gated on `window` to match the former environment-scoped binding,
- * and resolved once so the same instance bridges every page.
- */
-function getCmsEventBus(): CmsEventBus | undefined {
-  if (!cmsEventBusResolved) {
-    cmsEventBus = typeof window !== 'undefined' ? new Typed<CmsEvents>() : undefined;
-    cmsEventBusResolved = true;
+    return this.cmsEventBus;
   }
 
-  return cmsEventBus;
-}
+  initializePreview(options: PostMessageOptions): void {
+    if (!this.postMessage) {
+      this.postMessage = new PostMessage(this.getLogger());
+    }
 
-/**
- * Initializes the preview-mode CMS integration.
- * The post-message and CMS clients are created lazily on first preview and reused
- * thereafter, matching the former process-singleton lifecycle.
- * @param options The CMS integration options.
- */
-export function initializePreview(options: PostMessageOptions): void {
-  if (!postMessage) {
-    postMessage = new PostMessage(getLogger());
+    if (!this.cms) {
+      this.cms = new Cms(this.postMessage, this.postMessage, this.getCmsEventBus(), this.getLogger());
+    }
+
+    this.postMessage.initialize(options);
+    this.cms.initialize(options);
   }
 
-  if (!cms) {
-    cms = new Cms(postMessage, postMessage, getCmsEventBus(), getLogger());
-  }
+  // --- Per-page layer -------------------------------------------------------------------
 
-  postMessage.initialize(options);
-  cms.initialize(options);
-}
+  createScope(apiOptions: ApiOptions, urlOptions: UrlBuilderOptions): Spa {
+    const log = this.getLogger();
+    const pageEventBus = typeof window !== 'undefined' ? new Typed<PageEvents>() : undefined;
 
-// --- Per-page layer -------------------------------------------------------------------
+    const urlBuilder = new UrlBuilder(urlOptions);
 
-/**
- * Builds the per-page object graph and returns the SPA instance.
- * Any previously created SPA is left untouched; call {@link destroyScope} first to
- * tear it down. Each call produces a fresh graph so no mutable state leaks between pages.
- * @param apiOptions Options for the Page Model API client.
- * @param urlOptions Options for the URL builder.
- */
-export function createScope(apiOptions: ApiOptions, urlOptions: UrlBuilderOptions): Spa {
-  const log = getLogger();
-  const pageEventBus = typeof window !== 'undefined' ? new Typed<PageEvents>() : undefined;
+    const linkFactory = new LinkFactory(new Map([
+      [TYPE_LINK_INTERNAL, urlBuilder.getSpaUrl.bind(urlBuilder)],
+    ]));
 
-  const urlBuilder = new UrlBuilder(urlOptions);
+    const linkRewriter = new LinkRewriter(linkFactory);
 
-  const linkFactory = new LinkFactory(new Map([
-    [TYPE_LINK_INTERNAL, urlBuilder.getSpaUrl.bind(urlBuilder)],
-  ]));
+    const metaFactory = new MetaFactory(new Map([
+      [TYPE_META_COMMENT, (model, position) => new MetaCommentImpl(model, position)],
+    ]));
 
-  const linkRewriter = new LinkRewriter(linkFactory);
+    const buttonBuilders: [string, (...args: any[]) => MetaCollection | MetaCollectionModel][] = [
+      [TYPE_MANAGE_CONTENT_BUTTON, createManageContentButton],
+      [TYPE_MANAGE_MENU_BUTTON, (menu: Menu) => menu.getMeta()],
+    ];
+    const buttonFactory = new ButtonFactory(metaFactory, new Map(buttonBuilders));
 
-  const metaFactory = new MetaFactory(new Map([
-    [TYPE_META_COMMENT, (model, position) => new MetaCommentImpl(model, position)],
-  ]));
+    // The factory builders receive the generic ContentModel; the registered type guarantees
+    // the concrete model shape at runtime, so each is narrowed to the matching model type.
+    const contentBuilders: [string, (model: ContentModel) => unknown][] = [
+      [TYPE_DOCUMENT, (model) => new DocumentImpl(model as DocumentModel, linkFactory, metaFactory)],
+      [TYPE_IMAGE_SET, (model) => new ImageSetImpl(model as ImageSetModel, linkFactory)],
+      [TYPE_MENU, (model) => new MenuImpl(model as MenuModel, metaFactory, linkFactory)],
+      [TYPE_PAGINATION, (model) => new PaginationImpl(model as PaginationModel, linkFactory)],
+    ];
+    const contentFactory = new ContentFactory(new Map(contentBuilders));
 
-  const buttonBuilders: [string, (...args: any[]) => MetaCollection | MetaCollectionModel][] = [
-    [TYPE_MANAGE_CONTENT_BUTTON, createManageContentButton],
-    [TYPE_MANAGE_MENU_BUTTON, (menu: Menu) => menu.getMeta()],
-  ];
-  const buttonFactory = new ButtonFactory(metaFactory, new Map(buttonBuilders));
+    const componentFactory = new ComponentFactory(new Map([
+      [TYPE_COMPONENT, (model, children) => new ComponentImpl(model, children, linkFactory, metaFactory)],
+      [TYPE_COMPONENT_CONTAINER,
+        (model, children) => new ContainerImpl(model, children, linkFactory, metaFactory)],
+      [TYPE_COMPONENT_CONTAINER_ITEM, (model) => new ContainerItemImpl(
+        model as ContainerItemModel,
+        linkFactory,
+        metaFactory,
+        apiOptions,
+        pageEventBus,
+        log,
+      )],
+    ]));
 
-  // The factory builders receive the generic ContentModel; the registered type guarantees
-  // the concrete model shape at runtime, so each is narrowed to the matching model type.
-  const contentBuilders: [string, (model: ContentModel) => unknown][] = [
-    [TYPE_DOCUMENT, (model) => new DocumentImpl(model as DocumentModel, linkFactory, metaFactory)],
-    [TYPE_IMAGE_SET, (model) => new ImageSetImpl(model as ImageSetModel, linkFactory)],
-    [TYPE_MENU, (model) => new MenuImpl(model as MenuModel, metaFactory, linkFactory)],
-    [TYPE_PAGINATION, (model) => new PaginationImpl(model as PaginationModel, linkFactory)],
-  ];
-  const contentFactory = new ContentFactory(new Map(contentBuilders));
-
-  const componentFactory = new ComponentFactory(new Map([
-    [TYPE_COMPONENT, (model, children) => new ComponentImpl(model, children, linkFactory, metaFactory)],
-    [TYPE_COMPONENT_CONTAINER,
-      (model, children) => new ContainerImpl(model, children, linkFactory, metaFactory)],
-    [TYPE_COMPONENT_CONTAINER_ITEM, (model) => new ContainerItemImpl(
-      model as ContainerItemModel,
+    const pageFactory: PageFactory = (model) => new PageImpl(
+      model,
+      buttonFactory,
+      componentFactory,
+      contentFactory,
       linkFactory,
+      linkRewriter,
       metaFactory,
+      this.getCmsEventBus()!,
       apiOptions,
       pageEventBus,
       log,
-    )],
-  ]));
+    );
 
-  const pageFactory: PageFactory = (model) => new PageImpl(
-    model,
-    buttonFactory,
-    componentFactory,
-    contentFactory,
-    linkFactory,
-    linkRewriter,
-    metaFactory,
-    getCmsEventBus()!,
-    apiOptions,
-    pageEventBus,
-    log,
-  );
+    const api = new Api(urlBuilder, apiOptions, log);
+    const spa = new Spa(api, pageFactory, this.getCmsEventBus(), pageEventBus, log);
 
-  const api = new Api(urlBuilder, apiOptions, log);
-  const spa = new Spa(api, pageFactory, getCmsEventBus(), pageEventBus, log);
+    this.currentSpa = spa;
 
-  currentSpa = spa;
+    return spa;
+  }
 
-  return spa;
-}
-
-/**
- * Destroys the current SPA scope, if any. The persistent layer is left intact.
- */
-export function destroyScope(): void {
-  currentSpa?.destroy();
-  currentSpa = undefined;
+  destroyScope(): void {
+    this.currentSpa?.destroy();
+    this.currentSpa = undefined;
+  }
 }

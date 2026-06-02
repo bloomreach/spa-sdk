@@ -19,13 +19,15 @@
  * @module index
  */
 
-import { createScope, destroyScope, getLogger, initializePreview } from './container';
+import { SdkRuntime } from './container';
 import { Configuration } from './configuration';
 import { Level, Logger } from './logger';
 import { isPage, Page, PageModel } from './page';
 import { Campaign } from './services/campaign';
 import { Segmentation } from './services/segmentation';
 import { appendSearchParams, extractSearchParams, parseUrl } from './url';
+
+const runtime = new SdkRuntime();
 
 const DEFAULT_AUTHORIZATION_PARAMETER = 'token';
 const DEFAULT_SERVER_ID_PARAMETER = 'server-id';
@@ -141,7 +143,7 @@ function bootSpa(
   model: PageModel | undefined,
   logger: Logger,
 ): Page | Promise<Page> {
-  const spa = createScope(
+  const spa = runtime.createScope(
     { authorizationToken: parsed.authorizationToken, serverId: parsed.serverId, ...resolved },
     resolved,
   );
@@ -149,7 +151,7 @@ function bootSpa(
   return onReady(spa.initialize(model ?? parsed.path), (page) => {
     if (page.isPreview() && resolved.endpoint) {
       logger.info('Running in preview mode.');
-      initializePreview(resolved);
+      runtime.initializePreview(resolved);
     } else {
       logger.info('Running in live mode.');
     }
@@ -177,9 +179,9 @@ export function initialize(configuration: Configuration, model?: Page | PageMode
     return model;
   }
 
-  destroyScope();
+  runtime.destroyScope();
 
-  const logger = getLogger();
+  const logger = runtime.getLogger();
   logger.level = configuration.debug ? Level.Debug : Level.Error;
   logger.debug('Configuration:', configuration);
   logger.info('Enabled token-based setup.');
@@ -197,7 +199,7 @@ export function initialize(configuration: Configuration, model?: Page | PageMode
  * Destroys the integration with the SPA page.
  */
 export function destroy(): void {
-  destroyScope();
+  runtime.destroyScope();
 }
 
 export { Configuration } from './configuration';
