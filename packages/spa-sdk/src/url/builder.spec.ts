@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import { UrlBuilderImpl } from './builder';
+import { UrlBuilder } from './builder';
 
-describe('UrlBuilderImpl', () => {
+describe('UrlBuilder', () => {
   describe('getApiUrl', () => {
     const options1 = { endpoint: 'http://localhost:8080/site/spa/resourceapi' };
     const options2 = { endpoint: 'http://localhost:8080/site/spa/resourceapi?param=value' };
@@ -41,7 +41,7 @@ describe('UrlBuilderImpl', () => {
       ${options4} | ${'/news/2019/?a=b'}     | ${'http://localhost:8080/site/spa/resourceapi/2019/?a=b'}
       ${options5} | ${'/news/2019/?a=b'}     | ${'http://localhost:8080/site/spa/resourceapi/2019/?a=b'}
     `('should create the Page Model API URL for "$path" using options "$options"', ({ options, path, expected }) => {
-      const builder = new UrlBuilderImpl(options);
+      const builder = new UrlBuilder(options);
 
       expect(builder.getApiUrl(path)).toBe(expected);
     });
@@ -51,7 +51,7 @@ describe('UrlBuilderImpl', () => {
       ${options3} | ${'/'}          | ${'The path "/" does not start with the base path "/news".'}
       ${options5} | ${'/something'} | ${'The path "/something" does not start with the base path "/news".'}
     `('should throw an error for the path "$path" with message "$message"', ({ options, path, message }) => {
-      const builder = new UrlBuilderImpl(options);
+      const builder = new UrlBuilder(options);
 
       expect(() => builder.getApiUrl(path)).toThrow(message);
     });
@@ -76,7 +76,7 @@ describe('UrlBuilderImpl', () => {
       ${options4} | ${'/news?a=b'}   | ${'/something/news?a=b&param=value#header'}
       ${options4} | ${'/news#hash'}  | ${'/something/news?param=value#hash'}
     `('should create an SPA URL for "$path" using options "$options"', ({ options, path, expected }) => {
-      const builder = new UrlBuilderImpl(options);
+      const builder = new UrlBuilder(options);
 
       expect(builder.getSpaUrl(path)).toBe(expected);
     });

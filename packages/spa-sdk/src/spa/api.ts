@@ -23,9 +23,6 @@ const DEFAULT_API_VERSION_HEADER = 'Accept-Version';
 const DEFAULT_AUTHORIZATION_HEADER = 'Authorization';
 const DEFAULT_SERVER_ID_HEADER = 'Server-Id';
 
-export const ApiOptionsToken = Symbol.for('ApiOptionsToken');
-export const ApiService = Symbol.for('ApiService');
-
 export interface ApiOptions {
   /**
    * API version header.
@@ -93,25 +90,7 @@ export interface ApiOptions {
   refPrefix?: string;
 }
 
-export interface Api {
-  /**
-   * @param path Source path to generate the Page Model API URL.
-   * @returns The Page Model.
-   */
-  getPage(path: string): Promise<PageModel>;
-
-  /**
-   * The payload is used to customize the component state with properties from the client.
-   * If the payload is an empty object, the server state is used instead.
-   *
-   * @param url Component Model API URL.
-   * @param payload Payload with the component properties.
-   * @return The Page Model.
-   */
-  getComponent(url: string, payload: Record<string, unknown>): Promise<PageModel>;
-}
-
-export class ApiImpl implements Api {
+export class Api {
   private static getHeaders(options: ApiOptions): HttpHeaders {
     const {
       referer,
@@ -150,7 +129,7 @@ export class ApiImpl implements Api {
     options: ApiOptions,
     private logger?: Logger,
   ) {
-    this.headers = ApiImpl.getHeaders(options);
+    this.headers = Api.getHeaders(options);
     this.httpClient = options.httpClient;
   }
 

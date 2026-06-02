@@ -16,9 +16,6 @@
 
 import { Emitter, EmitterMixin } from '../emitter';
 
-export const RpcClientService = Symbol.for('RpcClientService');
-export const RpcServerService = Symbol.for('RpcServerService');
-
 type Callable<T = any, U extends unknown[] = any[]> = (...args: U) => T;
 
 const TYPE_EVENT = 'brxm:event';

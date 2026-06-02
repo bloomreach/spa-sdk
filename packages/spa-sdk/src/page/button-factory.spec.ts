@@ -26,19 +26,15 @@ beforeEach(() => {
   metaCollectionFactory = jest.fn();
 });
 
-function createButtonFactory() {
-  return new ButtonFactory(metaCollectionFactory);
-}
-
 describe('ButtonFactory', () => {
   let factory: ButtonFactory;
-  let builder1: jest.MockedFunction<Parameters<ButtonFactory['register']>[1]>;
-  let builder2: jest.MockedFunction<Parameters<ButtonFactory['register']>[1]>;
+  let builder1: jest.MockedFunction<((...args: any[]) => MetaCollection)>;
+  let builder2: jest.MockedFunction<((...args: any[]) => MetaCollection)>;
 
   beforeEach(() => {
     builder1 = jest.fn(() => ({} as MetaCollection));
     builder2 = jest.fn(() => ({} as MetaCollection));
-    factory = createButtonFactory().register('type1', builder1).register('type2', builder2);
+    factory = new ButtonFactory(metaCollectionFactory, new Map([['type1', builder1], ['type2', builder2]]));
   });
 
   describe('create', () => {

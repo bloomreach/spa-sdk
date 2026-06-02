@@ -18,8 +18,6 @@ import { Meta, MetaModel, META_POSITION_BEGIN, META_POSITION_END } from './meta'
 import { isMetaComment } from './meta-comment';
 import { MetaFactory } from './meta-factory';
 
-export const MetaCollectionModelToken = Symbol.for('MetaCollectionModelToken');
-
 export interface MetaCollectionModel {
   beginNodeSpan?: MetaModel[];
   endNodeSpan?: MetaModel[];

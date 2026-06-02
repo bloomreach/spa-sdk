@@ -16,7 +16,8 @@
 
 import { Typed } from 'emittery';
 import { CmsEventBus } from '../cms';
-import { Component, EventBus, Page, PageFactory, PageModel, TYPE_COMPONENT } from '../page';
+import { Component, EventBus, Page, PageModel, TYPE_COMPONENT } from '../page';
+import { PageFactory } from '../page/page-factory';
 import { Api } from './api';
 import { Spa } from './spa';
 

@@ -15,12 +15,12 @@
  */
 
 import { Typed } from 'emittery';
-import { CmsImpl } from './cms';
+import { Cms } from './cms';
 import { CmsEventBus, CmsEvents } from './cms-events';
 import { RpcClient, RpcServer } from './rpc';
 
-describe('CmsImpl', () => {
-  let cms: CmsImpl;
+describe('Cms', () => {
+  let cms: Cms;
   let eventBus: CmsEventBus;
   let rpcClient: jest.Mocked<RpcClient<any, any>>;
   let rpcServer: jest.Mocked<RpcServer<any, any>>;
@@ -37,7 +37,7 @@ describe('CmsImpl', () => {
       trigger: jest.fn(),
     };
 
-    cms = new CmsImpl(rpcClient, rpcServer, eventBus);
+    cms = new Cms(rpcClient, rpcServer, eventBus);
   });
 
   describe('initialize', () => {

@@ -29,7 +29,7 @@
 
 import { Typed } from 'emittery';
 
-import { CmsImpl, Cms } from './cms/cms';
+import { Cms } from './cms/cms';
 import { CmsEvents, CmsEventBus } from './cms/cms-events';
 import { PostMessage, PostMessageOptions } from './cms/post-message';
 import { ConsoleLogger } from './logger/console';
@@ -46,16 +46,17 @@ import { ComponentFactory } from './page/component-factory';
 import { ContainerImpl } from './page/container';
 import { ContainerItemImpl, ContainerItemModel } from './page/container-item';
 import { ContentFactory } from './page/content-factory';
+import { ContentModel } from './page/content';
 import { DocumentImpl, DocumentModel, TYPE_DOCUMENT } from './page/document';
 import { ImageImpl, ImageFactory } from './page/image';
 import { ImageSetImpl, ImageSetModel, TYPE_IMAGE_SET } from './page/image-set';
 import { TYPE_LINK_INTERNAL } from './page/link';
 import { LinkFactory } from './page/link-factory';
-import { LinkRewriterImpl } from './page/link-rewriter';
+import { LinkRewriter } from './page/link-rewriter';
 import { MenuImpl, MenuModel, Menu, TYPE_MANAGE_MENU_BUTTON, TYPE_MENU } from './page/menu';
 import { MenuItemImpl, MenuItemFactory } from './page/menu-item';
 import { TYPE_META_COMMENT } from './page/meta';
-import { MetaCollectionImpl } from './page/meta-collection';
+import { MetaCollectionImpl, MetaCollection, MetaCollectionModel } from './page/meta-collection';
 import { MetaCollectionFactory } from './page/meta-collection-factory';
 import { MetaCommentImpl } from './page/meta-comment';
 import { MetaFactory } from './page/meta-factory';
@@ -64,9 +65,9 @@ import { PageEvents } from './page/page-events';
 import { PageFactory } from './page/page-factory';
 import { PaginationImpl, PaginationModel, TYPE_PAGINATION } from './page/pagination';
 import { PaginationItemImpl, PaginationItemFactory } from './page/pagination-item';
-import { ApiImpl, ApiOptions } from './spa/api';
+import { Api, ApiOptions } from './spa/api';
 import { Spa } from './spa/spa';
-import { UrlBuilderImpl, UrlBuilderOptions } from './url/builder';
+import { UrlBuilder, UrlBuilderOptions } from './url/builder';
 
 // --- Persistent (process-level) layer ------------------------------------------------
 
@@ -117,7 +118,7 @@ export function initializePreview(options: PostMessageOptions): void {
   }
 
   if (!cms) {
-    cms = new CmsImpl(postMessage, postMessage, getCmsEventBus(), getLogger());
+    cms = new Cms(postMessage, postMessage, getCmsEventBus(), getLogger());
   }
 
   postMessage.initialize(options);
@@ -137,22 +138,25 @@ export function createScope(apiOptions: ApiOptions, urlOptions: UrlBuilderOption
   const log = getLogger();
   const pageEventBus = typeof window !== 'undefined' ? new Typed<PageEvents>() : undefined;
 
-  const urlBuilder = new UrlBuilderImpl(urlOptions);
+  const urlBuilder = new UrlBuilder(urlOptions);
 
-  const linkFactory = new LinkFactory();
-  linkFactory.register(TYPE_LINK_INTERNAL, urlBuilder.getSpaUrl.bind(urlBuilder));
+  const linkFactory = new LinkFactory(new Map([
+    [TYPE_LINK_INTERNAL, urlBuilder.getSpaUrl.bind(urlBuilder)],
+  ]));
 
-  const linkRewriter = new LinkRewriterImpl(linkFactory);
+  const linkRewriter = new LinkRewriter(linkFactory);
 
-  const metaFactory = new MetaFactory();
-  metaFactory.register(TYPE_META_COMMENT, (model, position) => new MetaCommentImpl(model, position));
+  const metaFactory = new MetaFactory(new Map([
+    [TYPE_META_COMMENT, (model, position) => new MetaCommentImpl(model, position)],
+  ]));
 
   const metaCollectionFactory: MetaCollectionFactory = (model) => new MetaCollectionImpl(model, metaFactory);
 
-  const buttonFactory = new ButtonFactory(metaCollectionFactory);
-  buttonFactory
-    .register(TYPE_MANAGE_CONTENT_BUTTON, createManageContentButton)
-    .register(TYPE_MANAGE_MENU_BUTTON, (menu: Menu) => menu.getMeta());
+  const buttonBuilders: [string, (...args: any[]) => MetaCollection | MetaCollectionModel][] = [
+    [TYPE_MANAGE_CONTENT_BUTTON, createManageContentButton],
+    [TYPE_MANAGE_MENU_BUTTON, (menu: Menu) => menu.getMeta()],
+  ];
+  const buttonFactory = new ButtonFactory(metaCollectionFactory, new Map(buttonBuilders));
 
   const menuItemFactory: MenuItemFactory = (model) => new MenuItemImpl(model, linkFactory, menuItemFactory);
 
@@ -162,34 +166,27 @@ export function createScope(apiOptions: ApiOptions, urlOptions: UrlBuilderOption
 
   // The factory builders receive the generic ContentModel; the registered type guarantees
   // the concrete model shape at runtime, so each is narrowed to the matching model type.
-  const contentFactory = new ContentFactory();
-  contentFactory
-    .register(TYPE_DOCUMENT, (model) => new DocumentImpl(model as DocumentModel, linkFactory, metaCollectionFactory))
-    .register(TYPE_IMAGE_SET, (model) => new ImageSetImpl(model as ImageSetModel, imageFactory))
-    .register(TYPE_MENU, (model) => new MenuImpl(model as MenuModel, metaCollectionFactory, menuItemFactory))
-    .register(TYPE_PAGINATION, (model) => new PaginationImpl(model as PaginationModel, paginationItemFactory));
+  const contentBuilders: [string, (model: ContentModel) => unknown][] = [
+    [TYPE_DOCUMENT, (model) => new DocumentImpl(model as DocumentModel, linkFactory, metaCollectionFactory)],
+    [TYPE_IMAGE_SET, (model) => new ImageSetImpl(model as ImageSetModel, imageFactory)],
+    [TYPE_MENU, (model) => new MenuImpl(model as MenuModel, metaCollectionFactory, menuItemFactory)],
+    [TYPE_PAGINATION, (model) => new PaginationImpl(model as PaginationModel, paginationItemFactory)],
+  ];
+  const contentFactory = new ContentFactory(new Map(contentBuilders));
 
-  const componentFactory = new ComponentFactory();
-  componentFactory
-    .register(
-      TYPE_COMPONENT,
-      (model, children) => new ComponentImpl(model, children, linkFactory, metaCollectionFactory),
-    )
-    .register(
-      TYPE_COMPONENT_CONTAINER,
-      (model, children) => new ContainerImpl(model, children, linkFactory, metaCollectionFactory),
-    )
-    .register(
-      TYPE_COMPONENT_CONTAINER_ITEM,
-      (model) => new ContainerItemImpl(
-        model as ContainerItemModel,
-        linkFactory,
-        metaCollectionFactory,
-        apiOptions,
-        pageEventBus,
-        log,
-      ),
-    );
+  const componentFactory = new ComponentFactory(new Map([
+    [TYPE_COMPONENT, (model, children) => new ComponentImpl(model, children, linkFactory, metaCollectionFactory)],
+    [TYPE_COMPONENT_CONTAINER,
+      (model, children) => new ContainerImpl(model, children, linkFactory, metaCollectionFactory)],
+    [TYPE_COMPONENT_CONTAINER_ITEM, (model) => new ContainerItemImpl(
+      model as ContainerItemModel,
+      linkFactory,
+      metaCollectionFactory,
+      apiOptions,
+      pageEventBus,
+      log,
+    )],
+  ]));
 
   const pageFactory: PageFactory = (model) => new PageImpl(
     model,
@@ -205,7 +202,7 @@ export function createScope(apiOptions: ApiOptions, urlOptions: UrlBuilderOption
     log,
   );
 
-  const api = new ApiImpl(urlBuilder, apiOptions, log);
+  const api = new Api(urlBuilder, apiOptions, log);
   const spa = new Spa(api, pageFactory, getCmsEventBus(), pageEventBus, log);
 
   currentSpa = spa;

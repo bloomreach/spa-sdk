@@ -16,8 +16,6 @@
 
 import { ImageFactory, ImageModel, Image } from './image';
 
-export const ImageSetModelToken = Symbol.for('ImageSetModelToken');
-
 export const TYPE_IMAGE_SET = 'imageset';
 
 interface ImageSetDataModel {

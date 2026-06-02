@@ -16,7 +16,7 @@
 
 import { PageModel } from '../page';
 import { UrlBuilder } from '../url';
-import { ApiImpl } from './api';
+import { Api } from './api';
 
 jest.mock('../url');
 
@@ -41,8 +41,8 @@ const config = {
   },
 };
 
-describe('ApiImpl', () => {
-  let API: ApiImpl;
+describe('Api', () => {
+  let API: Api;
   let urlBuilder: jest.Mocked<UrlBuilder>;
 
   beforeEach(async () => {
@@ -51,7 +51,7 @@ describe('ApiImpl', () => {
       getApiUrl: jest.fn((path: string) => `https://example.com${path}`),
     } as unknown as jest.Mocked<UrlBuilder>;
 
-    API = new ApiImpl(urlBuilder, config);
+    API = new Api(urlBuilder, config);
   });
 
   describe('getPage', () => {
@@ -79,7 +79,7 @@ describe('ApiImpl', () => {
     });
 
     it('should not include x-forwarded-for header when the remote address could not be determined', async () => {
-      const api = new ApiImpl(urlBuilder, { httpClient: config.httpClient });
+      const api = new Api(urlBuilder, { httpClient: config.httpClient });
       await api.getPage(config.path);
 
       expect(config.httpClient).toHaveBeenCalledWith(
@@ -92,7 +92,7 @@ describe('ApiImpl', () => {
     });
 
     it('should not include visitor header when visitor configuration is not defined', async () => {
-      const api = new ApiImpl(urlBuilder, { httpClient: config.httpClient });
+      const api = new Api(urlBuilder, { httpClient: config.httpClient });
       await api.getPage(config.path);
 
       expect(config.httpClient).toHaveBeenCalledWith(
@@ -105,7 +105,7 @@ describe('ApiImpl', () => {
     });
 
     it('should prefer visitor from the common config', async () => {
-      const api = new ApiImpl(urlBuilder, {
+      const api = new Api(urlBuilder, {
         ...config,
         visitor: { header: 'custom-visitor-header', id: 'custom-visitor' },
       });
@@ -121,7 +121,7 @@ describe('ApiImpl', () => {
     });
 
     it('should not include API version header when the API version is not set', async () => {
-      const api = new ApiImpl(urlBuilder, { httpClient: config.httpClient });
+      const api = new Api(urlBuilder, { httpClient: config.httpClient });
       await api.getPage(config.path);
 
       expect(config.httpClient).toHaveBeenCalledWith(
@@ -134,7 +134,7 @@ describe('ApiImpl', () => {
     });
 
     it('should include a custom API version header', async () => {
-      const api = new ApiImpl(urlBuilder, {
+      const api = new Api(urlBuilder, {
         apiVersionHeader: 'X-Version',
         apiVersion: 'version',
         httpClient: config.httpClient,
@@ -151,7 +151,7 @@ describe('ApiImpl', () => {
     });
 
     it('should fall back to the default API version header', async () => {
-      const api = new ApiImpl(urlBuilder, {
+      const api = new Api(urlBuilder, {
         apiVersion: 'version',
         httpClient: config.httpClient,
       });
@@ -167,7 +167,7 @@ describe('ApiImpl', () => {
     });
 
     it('should include a custom authorization header', async () => {
-      const api = new ApiImpl(urlBuilder, {
+      const api = new Api(urlBuilder, {
         authorizationHeader: 'X-Auth',
         authorizationToken: 'token',
         httpClient: config.httpClient,
@@ -184,7 +184,7 @@ describe('ApiImpl', () => {
     });
 
     it('should fall back to the default authorization header', async () => {
-      const api = new ApiImpl(urlBuilder, {
+      const api = new Api(urlBuilder, {
         authorizationToken: 'token',
         httpClient: config.httpClient,
       });
@@ -200,7 +200,7 @@ describe('ApiImpl', () => {
     });
 
     it('should include a custom server-id header', async () => {
-      const api = new ApiImpl(urlBuilder, {
+      const api = new Api(urlBuilder, {
         serverIdHeader: 'X-Custom-Server-Id',
         serverId: 'some',
         httpClient: config.httpClient,
@@ -217,7 +217,7 @@ describe('ApiImpl', () => {
     });
 
     it('should fall back to the default server-id header', async () => {
-      const api = new ApiImpl(urlBuilder, {
+      const api = new Api(urlBuilder, {
         serverId: 'some',
         httpClient: config.httpClient,
       });

@@ -18,9 +18,6 @@ import { Builder } from './factory';
 import { LinkFactory } from './link-factory';
 import { Link } from './link';
 
-export const ImageFactory = Symbol.for('ImageFactory');
-export const ImageModelToken = Symbol.for('ImageModelToken');
-
 type ImageLinks = 'site';
 
 /**

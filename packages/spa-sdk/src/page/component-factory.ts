@@ -15,7 +15,6 @@
  */
 
 import { ComponentModel, ComponentType, Component } from './component';
-import { SimpleFactory } from './factory';
 import { PageModel } from './page';
 import { resolve } from './reference';
 
@@ -24,7 +23,9 @@ type ComponentBuilder = (model: ComponentModel, children: Component[]) => Compon
 /**
  * A component factory producing components based on a type.
  */
-export class ComponentFactory extends SimpleFactory<ComponentType, ComponentBuilder> {
+export class ComponentFactory {
+  constructor(private builders: Map<ComponentType, ComponentBuilder> = new Map()) {}
+
   /**
    * Produces a component based on the page model.
    * @param page The page model.
@@ -52,7 +53,7 @@ export class ComponentFactory extends SimpleFactory<ComponentType, ComponentBuil
   }
 
   private buildComponent(model: ComponentModel, children: Component[]): Component {
-    const builder = this.mapping.get(model.type);
+    const builder = this.builders.get(model.type);
     if (!builder) {
       throw new Error(`Unsupported component type: '${model.type}'.`);
     }

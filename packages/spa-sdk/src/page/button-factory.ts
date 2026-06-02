@@ -14,23 +14,24 @@
  * limitations under the License.
  */
 
-import { Builder, SimpleFactory } from './factory';
+import { Builder } from './factory';
 import { MetaCollectionFactory } from './meta-collection-factory';
 import { MetaCollection, MetaCollectionModel, isMetaCollection } from './meta-collection';
 
 type ButtonBuilder = Builder<any[], MetaCollection | MetaCollectionModel>;
 
-export class ButtonFactory extends SimpleFactory<string, ButtonBuilder> {
-  constructor(private metaCollectionFactory: MetaCollectionFactory) {
-    super();
-  }
+export class ButtonFactory {
+  constructor(
+    private metaCollectionFactory: MetaCollectionFactory,
+    private builders: Map<string, ButtonBuilder> = new Map(),
+  ) {}
 
   create(type: string, ...params: unknown[]): MetaCollection {
-    if (!this.mapping.has(type)) {
+    if (!this.builders.has(type)) {
       throw new Error(`Unsupported button type: '${type}'.`);
     }
 
-    const meta = this.mapping.get(type)!(...params);
+    const meta = this.builders.get(type)!(...params);
 
     return isMetaCollection(meta) ? meta : this.metaCollectionFactory(meta);
   }

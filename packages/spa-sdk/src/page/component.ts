@@ -20,9 +20,6 @@ import { MetaCollectionFactory } from './meta-collection-factory';
 import { MetaCollectionModel, MetaCollection } from './meta-collection';
 import { Reference } from './reference';
 
-export const ComponentChildrenToken = Symbol.for('ComponentChildrenToken');
-export const ComponentModelToken = Symbol.for('ComponentModelToken');
-
 /**
  * Generic component type.
  */

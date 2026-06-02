@@ -19,8 +19,6 @@ import { Link } from './link';
 import { MetaCollectionFactory } from './meta-collection-factory';
 import { MetaCollectionModel, MetaCollection } from './meta-collection';
 
-export const DocumentModelToken = Symbol.for('DocumentModelToken');
-
 export const TYPE_DOCUMENT = 'document';
 
 type DocumentLinks = 'site';

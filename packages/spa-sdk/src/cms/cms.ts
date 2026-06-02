@@ -18,8 +18,6 @@ import { Logger } from '../logger';
 import { CmsEventBus, CmsUpdateEvent } from './cms-events';
 import { Procedures, RpcClient, RpcServer } from './rpc';
 
-export const CmsService = Symbol.for('CmsService');
-
 const GLOBAL_WINDOW = typeof window === 'undefined' ? undefined : window;
 
 export interface CmsOptions {
@@ -28,17 +26,6 @@ export interface CmsOptions {
    * By default the global window object will be used.
    */
   window?: Window;
-}
-
-/**
- * CMS integration layer.
- */
-export interface Cms {
-  /**
-   * Initializes integration with the CMS.
-   * @param options The CMS integration options.
-   */
-  initialize(options: CmsOptions): void;
 }
 
 interface CmsProcedures extends Procedures {
@@ -55,7 +42,7 @@ interface SpaEvents {
   ready: never;
 }
 
-export class CmsImpl implements Cms {
+export class Cms {
   private window?: Window;
 
   constructor(

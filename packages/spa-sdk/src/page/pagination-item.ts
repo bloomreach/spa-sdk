@@ -18,9 +18,6 @@ import { Builder } from './factory';
 import { LinkFactory } from './link-factory';
 import { Link } from './link';
 
-export const PaginationItemFactory = Symbol.for('PaginationItemFactory');
-export const PaginationItemModelToken = Symbol.for('PaginationItemModelToken');
-
 type PaginationItemLinks = 'self' | 'site';
 
 export interface PaginationItemModel {

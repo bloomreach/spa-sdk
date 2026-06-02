@@ -28,9 +28,9 @@ describe('ComponentFactory', () => {
     it('should call a registered builder', () => {
       const builder1 = jest.fn();
       const builder2 = jest.fn();
-      const factory = new ComponentFactory()
-        .register(TYPE_COMPONENT, builder1)
-        .register(TYPE_COMPONENT_CONTAINER, builder2);
+      const factory = new ComponentFactory(
+        new Map([[TYPE_COMPONENT, builder1], [TYPE_COMPONENT_CONTAINER, builder2]]),
+      );
 
       factory.create(model({ root: { id: 'id1', name: 'Component 1', type: TYPE_COMPONENT } }));
       factory.create(model({ root: { id: 'id2', name: 'Component 2', type: TYPE_COMPONENT_CONTAINER } }));
@@ -47,7 +47,7 @@ describe('ComponentFactory', () => {
     });
 
     it('should throw an exception on unknown component type', () => {
-      const factory = new ComponentFactory().register(TYPE_COMPONENT_CONTAINER_ITEM, jest.fn());
+      const factory = new ComponentFactory(new Map([[TYPE_COMPONENT_CONTAINER_ITEM, jest.fn()]]));
 
       expect(() => factory.create(
         model({
@@ -62,7 +62,7 @@ describe('ComponentFactory', () => {
 
     it('should produce a tree structure', () => {
       const builder = jest.fn(({ id }) => id);
-      const factory = new ComponentFactory().register(TYPE_COMPONENT, builder);
+      const factory = new ComponentFactory(new Map([[TYPE_COMPONENT, builder]]));
 
       const root = factory.create(
         model({

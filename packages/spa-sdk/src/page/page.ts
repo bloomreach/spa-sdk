@@ -37,8 +37,6 @@ import { isReference, Reference, resolve } from './reference';
 import { Visit, Visitor } from './relevance';
 import { ApiOptions } from '../spa/api';
 
-export const PageModelToken = Symbol.for('PageModelToken');
-
 type ChannelParameters = Record<string, any>;
 type PageLinks = 'self' | 'site';
 

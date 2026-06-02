@@ -16,10 +16,9 @@
 
 import { CmsEventBus, CmsUpdateEvent } from '../cms';
 import { Logger } from '../logger';
-import { EventBus, Page, PageFactory, PageModel } from '../page';
+import { EventBus, Page, PageModel } from '../page';
+import { PageFactory } from '../page/page-factory';
 import { Api } from './api';
-
-export const SpaService = Symbol.for('SpaService');
 
 /**
  * SPA entry point interacting with the Channel Manager and the Page Model API.

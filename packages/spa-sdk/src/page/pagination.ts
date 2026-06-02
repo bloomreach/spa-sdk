@@ -17,8 +17,6 @@
 import { PaginationItemFactory, PaginationItemModel, PaginationItem } from './pagination-item';
 import { Reference } from './reference';
 
-export const PaginationModelToken = Symbol.for('PaginationModelToken');
-
 export const TYPE_PAGINATION = 'pagination';
 
 /**

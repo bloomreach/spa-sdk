@@ -16,16 +16,16 @@
 
 import { TYPE_LINK_INTERNAL, TYPE_LINK_RESOURCE } from './link';
 import { LinkFactory } from './link-factory';
-import { LinkRewriter, LinkRewriterImpl } from './link-rewriter';
+import { LinkRewriter } from './link-rewriter';
 
-describe('LinkRewriterImpl', () => {
+describe('LinkRewriter', () => {
   let linkFactory: jest.Mocked<LinkFactory>;
   let linkRewriter: LinkRewriter;
 
   beforeEach(() => {
     linkFactory = { create: jest.fn() } as unknown as typeof linkFactory;
 
-    linkRewriter = new LinkRewriterImpl(linkFactory);
+    linkRewriter = new LinkRewriter(linkFactory);
   });
 
   describe('rewrite', () => {

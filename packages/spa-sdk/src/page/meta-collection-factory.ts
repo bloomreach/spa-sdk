@@ -17,6 +17,4 @@
 import { Builder } from './factory';
 import { MetaCollectionModel, MetaCollection } from './meta-collection';
 
-export const MetaCollectionFactory = Symbol.for('MetaCollectionFactory');
-
 export type MetaCollectionFactory = Builder<[MetaCollectionModel], MetaCollection>;

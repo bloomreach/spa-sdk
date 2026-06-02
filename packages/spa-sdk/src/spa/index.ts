@@ -14,5 +14,5 @@
  * limitations under the License.
  */
 
-export { ApiOptionsToken, ApiOptions, ApiService, Api } from './api';
-export { SpaService, Spa } from './spa';
+export { ApiOptions, Api } from './api';
+export { Spa } from './spa';

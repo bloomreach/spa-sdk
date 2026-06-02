@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2026 Bloomreach
+ * Copyright 2020-2026 Bloomreach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import { SimpleFactory } from './factory';
 import { MetaModel, MetaPosition, MetaType, Meta } from './meta';
 
 type MetaBuilder = (model: MetaModel, position: MetaPosition) => Meta;
@@ -22,9 +21,11 @@ type MetaBuilder = (model: MetaModel, position: MetaPosition) => Meta;
 /**
  * The factory to produce meta-data collection from the page model meta-data.
  */
-export class MetaFactory extends SimpleFactory<MetaType, MetaBuilder> {
+export class MetaFactory {
+  constructor(private builders: Map<MetaType, MetaBuilder> = new Map()) {}
+
   create(meta: MetaModel, position: MetaPosition): Meta {
-    const builder = this.mapping.get(meta.type);
+    const builder = this.builders.get(meta.type);
     if (!builder) {
       throw new Error(`Unsupported meta type: '${meta.type}'.`);
     }

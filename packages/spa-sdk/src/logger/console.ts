@@ -17,8 +17,6 @@
 import { Level } from './level';
 import { Logger } from './logger';
 
-export const ConsoleToken = Symbol.for('ConsoleToken');
-
 export class ConsoleLogger extends Logger {
   constructor(private console: Console) {
     super();

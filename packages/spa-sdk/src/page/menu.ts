@@ -18,8 +18,6 @@ import { MenuItemFactory, MenuItemModel, MenuItem } from './menu-item';
 import { MetaCollectionFactory } from './meta-collection-factory';
 import { MetaCollectionModel, MetaCollection } from './meta-collection';
 
-export const MenuModelToken = Symbol.for('MenuModelToken');
-
 /**
  * A manage menu button.
  */

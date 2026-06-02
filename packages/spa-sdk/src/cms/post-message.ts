@@ -18,8 +18,6 @@ import { isMatched } from '../url';
 import { Events, Message, Procedures, Rpc } from './rpc';
 import { Logger } from '../logger';
 
-export const PostMessageService = Symbol.for('PostMessageService');
-
 const GLOBAL_WINDOW = typeof window === 'undefined' ? undefined : window;
 
 export interface PostMessageOptions {

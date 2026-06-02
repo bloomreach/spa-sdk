@@ -14,17 +14,19 @@
  * limitations under the License.
  */
 
-import { Builder, SimpleFactory } from './factory';
+import { Builder } from './factory';
 import { ContentModel } from './content';
 
 type ContentBuilder = Builder<[ContentModel], unknown>;
 
-export class ContentFactory extends SimpleFactory<ContentModel['type'], ContentBuilder> {
+export class ContentFactory {
+  constructor(private builders: Map<ContentModel['type'], ContentBuilder> = new Map()) {}
+
   create(model: ContentModel): ContentModel {
-    if (!this.mapping.has(model.type)) {
+    if (!this.builders.has(model.type)) {
       return model;
     }
 
-    return this.mapping.get(model.type)!(model) as ContentModel;
+    return this.builders.get(model.type)!(model) as ContentModel;
   }
 }

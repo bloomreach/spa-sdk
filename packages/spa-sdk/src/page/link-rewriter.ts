@@ -21,18 +21,7 @@ import { parseDocument } from 'htmlparser2';
 import { Link, TYPE_LINK_RESOURCE } from './link';
 import { LinkFactory } from './link-factory';
 
-export const LinkRewriterService = Symbol.for('LinkRewriterService');
-
-export interface LinkRewriter {
-  /**
-   * Rewrite links to pages and resources in the HTML content.
-   * @param content The HTML content to rewrite links.
-   * @param type The content type.
-   */
-  rewrite(content: string, type?: string): string;
-}
-
-export class LinkRewriterImpl implements LinkRewriter {
+export class LinkRewriter {
   constructor(private linkFactory: LinkFactory) {}
 
   rewrite(content: string, type = 'text/html'): string {

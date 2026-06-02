@@ -18,9 +18,6 @@ import { Builder } from './factory';
 import { LinkFactory } from './link-factory';
 import { Link } from './link';
 
-export const MenuItemFactory = Symbol.for('MenuItemFactory');
-export const MenuItemModelToken = Symbol.for('MenuItemModelToken');
-
 type MenuItemLinks = 'site';
 export interface MenuItemModel {
   childMenuItems: MenuItemModel[];
