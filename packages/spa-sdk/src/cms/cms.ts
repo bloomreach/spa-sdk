@@ -45,6 +45,12 @@ interface SpaEvents {
 export class Cms {
   private window?: Window;
 
+  /**
+   * @param rpcClient RPC client used to call CMS procedures and receive CMS events.
+   * @param rpcServer RPC server used to expose SPA procedures to the CMS (e.g. `inject`).
+   * @param cmsEventBus Event bus for relaying CMS updates to the SPA (preview mode only).
+   * @param logger Optional logger for debug output.
+   */
   constructor(
     protected rpcClient: RpcClient<CmsProcedures, CmsEvents>,
     protected rpcServer: RpcServer<SpaProcedures, SpaEvents>,

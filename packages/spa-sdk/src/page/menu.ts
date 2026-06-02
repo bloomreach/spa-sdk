@@ -63,8 +63,9 @@ export interface Menu {
   getName(): string;
 
   /**
-   * @deprecated
-   * @return The current menu item.
+   * @deprecated The `selectSiteMenuItem` field was removed in Experience Manager 14.2.
+   *   Use {@link getItems} and check {@link MenuItem#isSelected} on each item instead.
+   * @return The selected menu item, or `undefined` if none is selected or the field is absent.
    */
   getSelected(): MenuItem | undefined;
 }

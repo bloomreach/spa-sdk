@@ -27,8 +27,11 @@ export class ComponentFactory {
   constructor(private builders: Map<ComponentType, ComponentBuilder> = new Map()) {}
 
   /**
-   * Produces a component based on the page model.
-   * @param page The page model.
+   * Builds the full component tree from the page model using a bottom-up traversal.
+   * @param page The page model containing the component hierarchy.
+   * @param refPrefix Optional prefix used to resolve JSON Pointer `$ref` values.
+   *   Defaults to `/page/` when not set by the CMS.
+   * @return The root component, or `undefined` if the page model has no root reference.
    */
   create(page: PageModel, refPrefix?: string): Component | undefined {
     const heap = [page.root];

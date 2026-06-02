@@ -27,9 +27,11 @@ export class Spa {
   private page?: Page;
 
   /**
-   * @param pageEventBus Event bus to exchange data between submodules.
-   * @param api Api client.
-   * @param pageFactory Factory to produce page instances.
+   * @param api API client for fetching page and component models.
+   * @param pageFactory Factory to hydrate a {@link PageModel} into a {@link Page}.
+   * @param cmsEventBus Event bus for CMS-to-SPA communication (preview mode only).
+   * @param pageEventBus Event bus for internal page-update events.
+   * @param logger Optional logger for debug output.
    */
   constructor(
     private api: Api,

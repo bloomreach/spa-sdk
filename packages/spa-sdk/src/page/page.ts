@@ -249,6 +249,19 @@ export class PageImpl implements Page {
 
   protected root?: Component;
 
+  /**
+   * @param model The raw page model from the Page Model API.
+   * @param buttonFactory Factory for generating Experience Manager button meta-data.
+   * @param componentFactory Factory for building the component tree from the model.
+   * @param contentFactory Factory for hydrating content references (documents, menus, etc.).
+   * @param linkFactory Factory for generating SPA and resource URLs.
+   * @param linkRewriter Rewrites internal links in HTML content to SPA URLs.
+   * @param metaFactory Factory for constructing meta-data collections.
+   * @param cmsEventBus Event bus for CMS-to-SPA communication (preview mode only).
+   * @param apiOptions API options used for content reference resolution.
+   * @param pageEventBus Optional event bus; when provided, content updates are propagated.
+   * @param logger Optional logger for debug output.
+   */
   constructor(
     protected model: PageModel,
     private buttonFactory: ButtonFactory,

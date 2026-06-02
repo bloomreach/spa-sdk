@@ -79,6 +79,11 @@ export interface Document {
 export class DocumentImpl implements Document {
   protected meta: MetaCollection;
 
+  /**
+   * @param model The document model from the page.
+   * @param linkFactory Factory for generating document URLs.
+   * @param metaFactory Factory for constructing meta-data collections.
+   */
   constructor(
     protected model: DocumentModel,
     private linkFactory: LinkFactory,

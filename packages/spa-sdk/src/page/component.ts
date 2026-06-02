@@ -119,15 +119,22 @@ export interface Component {
   getChildren(): Component[];
 
   /**
-   * Looks up for a nested component.
-   * @param componentNames A lookup path.
+   * Looks up a nested component by a sequence of names (e.g. `getComponent('main', 'banner')`).
+   * @param componentNames Names of the component and its ancestors, from outermost to innermost.
+   * @return The matching component, or `undefined` if not found.
    */
   getComponent<U extends Component>(...componentNames: string[]): U | undefined;
+
+  /**
+   * Returns the component itself when called with no arguments.
+   */
   getComponent(): this;
 
   /**
-   * Looks up for a nested component by its id.
-   * @param id A component id.
+   * Looks up a nested component by its id, searching the full subtree.
+   * @param id The component id to find.
+   * @return The matching component (typed as `U`), this component if the id matches, or
+   *   `undefined` if not found.
    */
   getComponentById<U extends Component>(id: string): U | this | undefined;
 }

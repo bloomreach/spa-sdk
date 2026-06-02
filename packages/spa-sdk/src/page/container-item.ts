@@ -147,6 +147,14 @@ export function getContainerItemContent<T>(component: ContainerItem, page: Page)
 export class ContainerItemImpl
   extends EmitterMixin<typeof ComponentImpl, ContainerItemEvents>(ComponentImpl)
   implements ContainerItem {
+  /**
+   * @param model The container item model.
+   * @param linkFactory Factory for generating component and resource URLs.
+   * @param metaFactory Factory for constructing meta-data collections.
+   * @param apiOptions API options used to resolve content references.
+   * @param eventBus Optional event bus; when provided, the item re-renders on `page.update`.
+   * @param logger Optional logger for debug output.
+   */
   constructor(
     protected model: ContainerItemModel,
     linkFactory: LinkFactory,

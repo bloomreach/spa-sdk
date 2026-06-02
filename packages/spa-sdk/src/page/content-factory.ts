@@ -22,6 +22,12 @@ type ContentBuilder = Builder<[ContentModel], unknown>;
 export class ContentFactory {
   constructor(private builders: Map<ContentModel['type'], ContentBuilder> = new Map()) {}
 
+  /**
+   * Creates a typed content object from a model.
+   * @param model The raw content model from the page.
+   * @return The result of the registered builder for the model's type, or the
+   *   model itself unchanged if no builder is registered for that type.
+   */
   create(model: ContentModel): ContentModel {
     if (!this.builders.has(model.type)) {
       return model;
