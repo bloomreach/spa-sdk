@@ -17,12 +17,10 @@
 import { DocumentImpl, DocumentModel, TYPE_DOCUMENT, isDocument } from './document';
 import { LinkFactory } from './link-factory';
 import { MetaCollectionImpl, MetaCollection } from './meta-collection';
-import { MetaFactory } from './meta-factory';
 
 jest.mock('./meta-collection');
 
 let linkFactory: jest.Mocked<LinkFactory>;
-let metaFactory: MetaFactory;
 
 const model = {
   links: { site: { href: 'url' } },
@@ -34,13 +32,11 @@ const model = {
 } as DocumentModel;
 
 function createDocument(contentModel = model) {
-  return new DocumentImpl(contentModel, linkFactory, metaFactory);
+  return new DocumentImpl(contentModel, linkFactory);
 }
 
 beforeEach(() => {
   linkFactory = { create: jest.fn() } as unknown as typeof linkFactory;
-  metaFactory = new MetaFactory();
-  jest.mocked(MetaCollectionImpl).mockClear();
 });
 
 describe('DocumentImpl', () => {
@@ -74,14 +70,14 @@ describe('DocumentImpl', () => {
 
       const document = createDocument({ ...model, meta: metaModel });
 
-      expect(MetaCollectionImpl).toHaveBeenCalledWith(metaModel, metaFactory);
+      expect(MetaCollectionImpl).toHaveBeenCalledWith(metaModel);
       expect(document.getMeta()).toEqual(meta);
     });
 
     it('should pass an empty object if there is no meta-data', () => {
       createDocument();
 
-      expect(MetaCollectionImpl).toHaveBeenCalledWith({}, metaFactory);
+      expect(MetaCollectionImpl).toHaveBeenCalledWith({});
     });
   });
 

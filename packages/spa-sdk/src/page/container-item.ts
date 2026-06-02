@@ -28,7 +28,6 @@ import { PageEventBus, PageUpdateEvent } from './page-events';
 import { LinkFactory } from './link-factory';
 import { Logger } from '../logger';
 import { MetaCollectionImpl } from './meta-collection';
-import { MetaFactory } from './meta-factory';
 import { Page, PageModel } from './page';
 import { Reference, resolve } from './reference';
 import { ApiOptions } from '../spa/api';
@@ -154,7 +153,6 @@ export class ContainerItemImpl extends ComponentImpl implements ContainerItem {
   /**
    * @param model The container item model.
    * @param linkFactory Factory for generating component and resource URLs.
-   * @param metaFactory Factory for constructing meta-data collections.
    * @param apiOptions API options used to resolve content references.
    * @param eventBus Optional event bus; when provided, the item re-renders on `page.update`.
    * @param logger Optional logger for debug output.
@@ -162,12 +160,11 @@ export class ContainerItemImpl extends ComponentImpl implements ContainerItem {
   constructor(
     protected model: ContainerItemModel,
     linkFactory: LinkFactory,
-    private metaFactory: MetaFactory,
     private apiOptions: ApiOptions,
     eventBus?: PageEventBus,
     private logger?: Logger,
   ) {
-    super(model, [], linkFactory, metaFactory);
+    super(model, [], linkFactory);
 
     eventBus?.on('page.update', this.onPageUpdate.bind(this));
   }
@@ -183,7 +180,7 @@ export class ContainerItemImpl extends ComponentImpl implements ContainerItem {
     this.logger?.debug('Event:', event);
 
     this.model = model;
-    this.meta = new MetaCollectionImpl(model.meta, this.metaFactory);
+    this.meta = new MetaCollectionImpl(model.meta);
     this.events.emit('update', {});
   }
 

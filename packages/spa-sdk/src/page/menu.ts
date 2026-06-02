@@ -16,7 +16,6 @@
 
 import { MenuItemImpl, MenuItemModel, MenuItem } from './menu-item';
 import { MetaCollectionImpl, MetaCollectionModel, MetaCollection } from './meta-collection';
-import { MetaFactory } from './meta-factory';
 import { LinkFactory } from './link-factory';
 
 /**
@@ -79,11 +78,10 @@ export class MenuImpl implements Menu {
 
   constructor(
     protected model: MenuModel,
-    metaFactory: MetaFactory,
     private linkFactory: LinkFactory,
   ) {
     this.items = model.data.siteMenuItems.map((item) => new MenuItemImpl(item, linkFactory));
-    this.meta = new MetaCollectionImpl(model.meta, metaFactory);
+    this.meta = new MetaCollectionImpl(model.meta);
     this.selected = model.data.selectSiteMenuItem
       ? new MenuItemImpl(model.data.selectSiteMenuItem, linkFactory)
       : undefined;

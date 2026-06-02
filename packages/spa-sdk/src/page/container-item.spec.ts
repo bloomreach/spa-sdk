@@ -27,7 +27,6 @@ import {
 import { PageEventBus, PageEvents } from './page-events';
 import { LinkFactory } from './link-factory';
 import { MetaCollectionImpl, MetaCollection } from './meta-collection';
-import { MetaFactory } from './meta-factory';
 import { Page, PageModel } from './page';
 import { ApiOptions } from '../spa';
 
@@ -35,7 +34,6 @@ jest.mock('./meta-collection');
 
 let eventBus: PageEventBus;
 let linkFactory: jest.Mocked<LinkFactory>;
-let metaFactory: MetaFactory;
 let apiOptions: ApiOptions = {} as ApiOptions;
 
 const model = {
@@ -45,14 +43,12 @@ const model = {
 } as ContainerItemModel;
 
 function createContainerItem(containerItemModel = model) {
-  return new ContainerItemImpl(containerItemModel, linkFactory, metaFactory, apiOptions, eventBus);
+  return new ContainerItemImpl(containerItemModel, linkFactory, apiOptions, eventBus);
 }
 
 beforeEach(() => {
   eventBus = new Typed<PageEvents>();
   linkFactory = { create: jest.fn() } as unknown as typeof linkFactory;
-  metaFactory = new MetaFactory();
-  jest.mocked(MetaCollectionImpl).mockClear();
   apiOptions = {} as ApiOptions;
 });
 
@@ -180,7 +176,7 @@ describe('ContainerItemImpl', () => {
         } as unknown as PageModel,
       });
 
-      expect(MetaCollectionImpl).toHaveBeenCalledWith(metaModel, metaFactory);
+      expect(MetaCollectionImpl).toHaveBeenCalledWith(metaModel);
       expect(containerItem.getMeta()).toBe(meta);
     });
 
@@ -272,7 +268,7 @@ describe('isContainerItem', () => {
   });
 
   it('should return false', () => {
-    const component = new ComponentImpl(model, [], linkFactory, metaFactory);
+    const component = new ComponentImpl(model, [], linkFactory);
 
     expect(isContainerItem(undefined)).toBe(false);
     expect(isContainerItem(component)).toBe(false);

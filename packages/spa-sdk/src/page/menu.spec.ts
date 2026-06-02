@@ -17,14 +17,12 @@
 import { MenuImpl, MenuModel, TYPE_MENU, isMenu } from './menu';
 import { MenuItemImpl, MenuItemModel } from './menu-item';
 import { MetaCollectionImpl, MetaCollection } from './meta-collection';
-import { MetaFactory } from './meta-factory';
 import { LinkFactory } from './link-factory';
 
 jest.mock('./meta-collection');
 jest.mock('./menu-item');
 
 let linkFactory: jest.Mocked<LinkFactory>;
-let metaFactory: MetaFactory;
 
 const itemModel = {} as MenuItemModel;
 const metaModel = {};
@@ -39,13 +37,11 @@ const model = {
 } as MenuModel;
 
 function createMenu(menuModel = model) {
-  return new MenuImpl(menuModel, metaFactory, linkFactory);
+  return new MenuImpl(menuModel, linkFactory);
 }
 
 beforeEach(() => {
   linkFactory = { create: jest.fn() } as unknown as typeof linkFactory;
-  metaFactory = new MetaFactory();
-  jest.mocked(MetaCollectionImpl).mockClear();
   jest.mocked(MenuItemImpl).mockClear();
 });
 
@@ -69,7 +65,7 @@ describe('MenuImpl', () => {
 
       const menu = createMenu({ ...model, meta: metaModel });
 
-      expect(MetaCollectionImpl).toHaveBeenCalledWith(metaModel, metaFactory);
+      expect(MetaCollectionImpl).toHaveBeenCalledWith(metaModel);
       expect(menu.getMeta()).toEqual(meta);
     });
   });

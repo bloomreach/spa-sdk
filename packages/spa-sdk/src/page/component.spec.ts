@@ -17,12 +17,10 @@
 import { ComponentImpl, ComponentModel, Component, TYPE_COMPONENT, isComponent } from './component';
 import { LinkFactory } from './link-factory';
 import { MetaCollectionImpl, MetaCollection } from './meta-collection';
-import { MetaFactory } from './meta-factory';
 
 jest.mock('./meta-collection');
 
 let linkFactory: jest.Mocked<LinkFactory>;
-let metaFactory: MetaFactory;
 
 const model = {
   links: { self: { href: 'url' } },
@@ -32,13 +30,11 @@ const model = {
 } as ComponentModel;
 
 function createComponent(componentModel = model, children: Component[] = []) {
-  return new ComponentImpl(componentModel, children, linkFactory, metaFactory);
+  return new ComponentImpl(componentModel, children, linkFactory);
 }
 
 beforeEach(() => {
   linkFactory = { create: jest.fn() } as unknown as typeof linkFactory;
-  metaFactory = new MetaFactory();
-  jest.mocked(MetaCollectionImpl).mockClear();
 });
 
 describe('ComponentImpl', () => {
@@ -57,7 +53,7 @@ describe('ComponentImpl', () => {
       jest.mocked(MetaCollectionImpl).mockReturnValueOnce(meta as unknown as MetaCollectionImpl);
       const component = createComponent();
 
-      expect(MetaCollectionImpl).toHaveBeenCalledWith(model.meta, metaFactory);
+      expect(MetaCollectionImpl).toHaveBeenCalledWith(model.meta);
       expect(component.getMeta()).toEqual(meta);
     });
   });

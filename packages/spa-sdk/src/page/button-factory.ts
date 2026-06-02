@@ -16,15 +16,11 @@
 
 import { Builder } from './factory';
 import { MetaCollectionImpl, MetaCollection, MetaCollectionModel, isMetaCollection } from './meta-collection';
-import { MetaFactory } from './meta-factory';
 
 type ButtonBuilder = Builder<any[], MetaCollection | MetaCollectionModel>;
 
 export class ButtonFactory {
-  constructor(
-    private metaFactory: MetaFactory,
-    private builders: Map<string, ButtonBuilder> = new Map(),
-  ) {}
+  constructor(private builders: Map<string, ButtonBuilder> = new Map()) {}
 
   create(type: string, ...params: unknown[]): MetaCollection {
     if (!this.builders.has(type)) {
@@ -33,6 +29,6 @@ export class ButtonFactory {
 
     const meta = this.builders.get(type)!(...params);
 
-    return isMetaCollection(meta) ? meta : new MetaCollectionImpl(meta, this.metaFactory);
+    return isMetaCollection(meta) ? meta : new MetaCollectionImpl(meta);
   }
 }
