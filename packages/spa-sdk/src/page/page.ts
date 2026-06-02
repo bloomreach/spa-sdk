@@ -83,13 +83,13 @@ interface PageMeta {
 
   /**
    * Meta-data about the current visitor. Available when the Relevance Module is enabled.
-   * @see https://documentation.bloomreach.com/library/enterprise/enterprise-features/targeting/targeting.html
+   * @see https://xmdocumentation.bloomreach.com/library/enterprise/enterprise-features/targeting/targeting.html
    */
   visitor?: Visitor;
 
   /**
    * Meta-data about the current visit. Available when the Relevance Module is enabled.
-   * @see https://documentation.bloomreach.com/library/enterprise/enterprise-features/targeting/targeting.html
+   * @see https://xmdocumentation.bloomreach.com/library/enterprise/enterprise-features/targeting/targeting.html
    */
   visit?: Visit;
 

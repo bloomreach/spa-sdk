@@ -44,7 +44,7 @@ export const TYPE_CONTAINER_NO_MARKUP = 'hst.nomarkup';
 
 /**
  * Container Type.
- * @see https://documentation.bloomreach.com/library/concepts/template-composer/channel-editor-containers.html
+ * @see https://xmdocumentation.bloomreach.com/library/concepts/template-composer/channel-editor-containers.html
  */
 export type ContainerType =
   | typeof TYPE_CONTAINER_BOX
@@ -68,7 +68,7 @@ export interface Container extends Component {
   /**
    * Returns the type of a container.
    *
-   * @see https://documentation.bloomreach.com/library/concepts/template-composer/channel-editor-containers.html
+   * @see https://xmdocumentation.bloomreach.com/library/concepts/template-composer/channel-editor-containers.html
    * @return The type of a container (e.g. `TYPE_CONTAINER_BOX`).
    */
   getType(): ContainerType | undefined;
