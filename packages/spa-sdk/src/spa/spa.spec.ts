@@ -16,7 +16,8 @@
 
 import { Typed } from 'emittery';
 import { CmsEventBus } from '../cms';
-import { Component, EventBus, Page, PageModel, TYPE_COMPONENT } from '../page';
+import { Component, Page, PageModel, TYPE_COMPONENT } from '../page';
+import { PageEventBus } from '../page/page-events';
 import { PageFactory } from '../page/page-factory';
 import { Api } from './api';
 import { Spa } from './spa';
@@ -44,7 +45,7 @@ const config = {
 describe('Spa', () => {
   let api: jest.Mocked<Api>;
   let cmsEventBus: CmsEventBus;
-  let eventBus: EventBus;
+  let eventBus: PageEventBus;
   let page: jest.Mocked<Page>;
   let pageFactory: jest.MockedFunction<PageFactory>;
   let spa: Spa;

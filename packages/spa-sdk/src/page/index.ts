@@ -14,10 +14,7 @@
  * limitations under the License.
  */
 
-import { Typed } from 'emittery';
-import { PageModel } from './page';
-
-export type EventBus = Typed<{ 'page.update': { page: PageModel } }>;
+export { PageEventBus } from './page-events';
 
 export {
   Component,

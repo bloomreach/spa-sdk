@@ -16,7 +16,8 @@
 
 import { CmsEventBus, CmsUpdateEvent } from '../cms';
 import { Logger } from '../logger';
-import { EventBus, Page, PageModel } from '../page';
+import { Page, PageModel } from '../page';
+import { PageEventBus } from '../page/page-events';
 import { PageFactory } from '../page/page-factory';
 import { Api } from './api';
 
@@ -37,7 +38,7 @@ export class Spa {
     private api: Api,
     private pageFactory: PageFactory,
     private cmsEventBus?: CmsEventBus,
-    private pageEventBus?: EventBus,
+    private pageEventBus?: PageEventBus,
     private logger?: Logger,
   ) {
     this.onCmsUpdate = this.onCmsUpdate.bind(this);
