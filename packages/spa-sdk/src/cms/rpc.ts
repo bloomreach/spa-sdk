@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import { Emitter, EmitterMixin } from '../emitter';
+import { Typed } from 'emittery';
+import { Emitter } from '../emitter';
 
 type Callable<T = any, U extends unknown[] = any[]> = (...args: U) => T;
 
@@ -63,15 +64,13 @@ export interface RpcServer<TProcedures extends Procedures, TEvents extends Event
   trigger<K extends keyof TEvents>(event: K, payload: TEvents[K]): void;
 }
 
-class Dummy {}
-
 export abstract class Rpc<
   TRemoteProcedures extends Procedures,
   TRemoteEvents extends Events,
   TProcedures extends Procedures,
   TEvents extends Events,
 >
-  extends EmitterMixin<typeof Dummy, Events>(Dummy)
+  extends Typed<TRemoteEvents>
   implements RpcClient<TRemoteProcedures, TRemoteEvents>, RpcServer<TProcedures, TEvents> {
   private calls = new Map<string, [Callable, Callable]>();
 
@@ -125,7 +124,10 @@ export abstract class Rpc<
   }
 
   private processEvent(event: Event): void {
-    this.emit(event.event, event.payload);
+    // event.event is a dynamic wire-protocol string that cannot be statically
+    // verified as a key of TRemoteEvents, but is guaranteed correct at runtime.
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (this as any).emit(event.event, event.payload);
   }
 
   private processResponse(response: Response): void {
@@ -138,6 +140,7 @@ export abstract class Rpc<
 
     if (response.state === STATE_REJECTED) {
       reject(response.result);
+      return;
     }
 
     resolve(response.result);

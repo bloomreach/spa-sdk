@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import { Typed } from 'emittery';
 import {
   ComponentImpl,
   ComponentMeta,
@@ -22,7 +23,7 @@ import {
   TYPE_COMPONENT_CONTAINER_ITEM,
   TYPE_COMPONENT_CONTAINER_ITEM_CONTENT,
 } from './component';
-import { EmitterMixin, Emitter } from '../emitter';
+import { Emitter } from '../emitter';
 import { PageEventBus, PageUpdateEvent } from './page-events';
 import { LinkFactory } from './link-factory';
 import { Logger } from '../logger';
@@ -144,9 +145,12 @@ export function getContainerItemContent<T>(component: ContainerItem, page: Page)
   return componentContent.data;
 }
 
-export class ContainerItemImpl
-  extends EmitterMixin<typeof ComponentImpl, ContainerItemEvents>(ComponentImpl)
-  implements ContainerItem {
+export class ContainerItemImpl extends ComponentImpl implements ContainerItem {
+  private events = new Typed<ContainerItemEvents>();
+
+  on = this.events.on.bind(this.events);
+
+  off = this.events.off.bind(this.events);
   /**
    * @param model The container item model.
    * @param linkFactory Factory for generating component and resource URLs.
@@ -180,7 +184,7 @@ export class ContainerItemImpl
 
     this.model = model;
     this.meta = new MetaCollectionImpl(model.meta, this.metaFactory);
-    this.emit('update', {});
+    this.events.emit('update', {});
   }
 
   getLabel(): string | undefined {
