@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import { Builder } from './factory';
 import { LinkFactory } from './link-factory';
 import { Link } from './link';
 
@@ -36,8 +35,6 @@ export interface PaginationItem {
    */
   getUrl(): string | undefined;
 }
-
-export type PaginationItemFactory = Builder<[PaginationItemModel], PaginationItem>;
 
 export class PaginationItemImpl implements PaginationItem {
   constructor(

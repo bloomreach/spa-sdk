@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import { PaginationItemFactory, PaginationItemModel, PaginationItem } from './pagination-item';
+import { LinkFactory } from './link-factory';
+import { PaginationItemImpl, PaginationItemModel, PaginationItem } from './pagination-item';
 import { Reference } from './reference';
 
 export const TYPE_PAGINATION = 'pagination';
@@ -109,14 +110,14 @@ export class PaginationImpl implements Pagination {
 
   constructor(
     protected model: PaginationModel,
-    paginationItemFactory: PaginationItemFactory,
+    private linkFactory: LinkFactory,
   ) {
-    this.current = paginationItemFactory(model.current);
-    this.first = paginationItemFactory(model.first);
-    this.last = paginationItemFactory(model.last);
-    this.next = model.next ? paginationItemFactory(model.next) : undefined;
-    this.previous = model.previous ? paginationItemFactory(model.previous) : undefined;
-    this.pages = model.pages.map(paginationItemFactory);
+    this.current = new PaginationItemImpl(model.current, linkFactory);
+    this.first = new PaginationItemImpl(model.first, linkFactory);
+    this.last = new PaginationItemImpl(model.last, linkFactory);
+    this.next = model.next ? new PaginationItemImpl(model.next, linkFactory) : undefined;
+    this.previous = model.previous ? new PaginationItemImpl(model.previous, linkFactory) : undefined;
+    this.pages = model.pages.map((page) => new PaginationItemImpl(page, linkFactory));
   }
 
   getCurrent(): PaginationItem {

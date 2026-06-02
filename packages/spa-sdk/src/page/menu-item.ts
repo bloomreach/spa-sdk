@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import { Builder } from './factory';
 import { LinkFactory } from './link-factory';
 import { Link } from './link';
 
@@ -77,17 +76,14 @@ export interface MenuItem {
   isSelected(): boolean;
 }
 
-export type MenuItemFactory = Builder<[MenuItemModel], MenuItem>;
-
 export class MenuItemImpl implements MenuItem {
   private children: MenuItem[];
 
   constructor(
     protected model: MenuItemModel,
     private linkFactory: LinkFactory,
-    menuItemFactory: MenuItemFactory,
   ) {
-    this.children = model.childMenuItems.map(menuItemFactory);
+    this.children = model.childMenuItems.map((child) => new MenuItemImpl(child, linkFactory));
   }
 
   getChildren(): MenuItem[] {

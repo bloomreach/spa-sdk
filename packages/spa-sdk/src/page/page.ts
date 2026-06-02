@@ -30,8 +30,8 @@ import { isLink, Link } from './link';
 import { LinkFactory } from './link-factory';
 import { LinkRewriter } from './link-rewriter';
 import { Menu, TYPE_MANAGE_MENU_BUTTON } from './menu';
-import { MetaCollection, MetaCollectionModel } from './meta-collection';
-import { MetaCollectionFactory } from './meta-collection-factory';
+import { MetaCollectionImpl, MetaCollection, MetaCollectionModel } from './meta-collection';
+import { MetaFactory } from './meta-factory';
 import { PageEventBus, PageUpdateEvent } from './page-events';
 import { isReference, Reference, resolve } from './reference';
 import { Visit, Visitor } from './relevance';
@@ -256,7 +256,7 @@ export class PageImpl implements Page {
     private contentFactory: ContentFactory,
     private linkFactory: LinkFactory,
     private linkRewriter: LinkRewriter,
-    private metaFactory: MetaCollectionFactory,
+    private metaFactory: MetaFactory,
     private cmsEventBus: CmsEventBus,
     private apiOptions: ApiOptions,
     pageEventBus?: PageEventBus,
@@ -317,7 +317,7 @@ export class PageImpl implements Page {
   }
 
   getMeta(meta: MetaCollectionModel): MetaCollection {
-    return this.metaFactory(meta);
+    return new MetaCollectionImpl(meta, this.metaFactory);
   }
 
   getTitle(): string | undefined {

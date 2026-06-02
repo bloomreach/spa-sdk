@@ -16,8 +16,8 @@
 
 import { LinkFactory } from './link-factory';
 import { Link } from './link';
-import { MetaCollectionFactory } from './meta-collection-factory';
-import { MetaCollectionModel, MetaCollection } from './meta-collection';
+import { MetaCollectionImpl, MetaCollectionModel, MetaCollection } from './meta-collection';
+import { MetaFactory } from './meta-factory';
 
 export const TYPE_DOCUMENT = 'document';
 
@@ -82,9 +82,9 @@ export class DocumentImpl implements Document {
   constructor(
     protected model: DocumentModel,
     private linkFactory: LinkFactory,
-    metaFactory: MetaCollectionFactory,
+    metaFactory: MetaFactory,
   ) {
-    this.meta = metaFactory(this.model.meta ?? {});
+    this.meta = new MetaCollectionImpl(this.model.meta ?? {}, metaFactory);
   }
 
   getId(): string {

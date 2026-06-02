@@ -15,9 +15,12 @@
  */
 
 import { ImageSetImpl, ImageSetModel, ImageSet, TYPE_IMAGE_SET, isImageSet } from './image-set';
-import { ImageFactory, ImageModel, Image } from './image';
+import { ImageImpl, ImageModel, Image } from './image';
+import { LinkFactory } from './link-factory';
 
-let imageFactory: jest.MockedFunction<ImageFactory>;
+jest.mock('./image');
+
+let linkFactory: jest.Mocked<LinkFactory>;
 
 const model = {
   data: {
@@ -34,11 +37,12 @@ const model = {
 } as ImageSetModel;
 
 function createImageSet(imageSetModel = model) {
-  return new ImageSetImpl(imageSetModel, imageFactory);
+  return new ImageSetImpl(imageSetModel, linkFactory);
 }
 
 beforeEach(() => {
-  imageFactory = jest.fn();
+  linkFactory = { create: jest.fn() } as unknown as typeof linkFactory;
+  jest.mocked(ImageImpl).mockClear();
 });
 
 describe('ImageSetImpl', () => {
@@ -106,11 +110,12 @@ describe('ImageSetImpl', () => {
     it('should return an original image', () => {
       const imageModel = {} as ImageModel;
       const image = {} as Image;
-      imageFactory.mockReturnValueOnce(image);
+      jest.mocked(ImageImpl).mockReturnValueOnce(image as unknown as ImageImpl);
 
       const menu = createImageSet({ ...model, data: { ...model.data, original: imageModel } });
 
       expect(menu.getOriginal()).toBe(image);
+      expect(ImageImpl).toHaveBeenCalledWith(imageModel, linkFactory);
     });
   });
 
@@ -124,7 +129,7 @@ describe('ImageSetImpl', () => {
     it('should return a thumbnail', () => {
       const imageModel = {} as ImageModel;
       const image = {} as Image;
-      imageFactory.mockReturnValueOnce(image);
+      jest.mocked(ImageImpl).mockReturnValueOnce(image as unknown as ImageImpl);
 
       const menu = createImageSet({ ...model, data: { ...model.data, thumbnail: imageModel } });
 
@@ -158,7 +163,7 @@ describe('ImageSetImpl', () => {
     it('should return an image variant when it exists', () => {
       const imageModel = {} as ImageModel;
       const image = {} as Image;
-      imageFactory.mockReturnValueOnce(image);
+      jest.mocked(ImageImpl).mockReturnValueOnce(image as unknown as ImageImpl);
 
       const imageSetWithVariant = createImageSet({
         ...model,
@@ -166,7 +171,7 @@ describe('ImageSetImpl', () => {
       });
 
       expect(imageSetWithVariant.getVariant('small')).toBe(image);
-      expect(imageFactory).toHaveBeenCalledWith(imageModel);
+      expect(ImageImpl).toHaveBeenCalledWith(imageModel, linkFactory);
     });
   });
 
@@ -183,12 +188,12 @@ describe('ImageSetImpl', () => {
       const largeImage = {} as Image;
 
       // eslint-disable-next-line @typescript-eslint/no-shadow
-      imageFactory.mockImplementation((model: ImageModel) => {
-        if (model === originalImageModel) { return originalImage; }
-        if (model === thumbnailImageModel) { return thumbnailImage; }
-        if (model === smallImageModel) { return smallImage; }
-        if (model === largeImageModel) { return largeImage; }
-        return {} as Image;
+      jest.mocked(ImageImpl).mockImplementation((model: ImageModel) => {
+        if (model === originalImageModel) { return originalImage as unknown as ImageImpl; }
+        if (model === thumbnailImageModel) { return thumbnailImage as unknown as ImageImpl; }
+        if (model === smallImageModel) { return smallImage as unknown as ImageImpl; }
+        if (model === largeImageModel) { return largeImage as unknown as ImageImpl; }
+        return {} as ImageImpl;
       });
 
       const imageSetWithVariants = createImageSet({
@@ -214,7 +219,7 @@ describe('ImageSetImpl', () => {
     it('should exclude known non-image properties when returning all variants', () => {
       const imageModel = {} as ImageModel;
       const image = {} as Image;
-      imageFactory.mockReturnValueOnce(image);
+      jest.mocked(ImageImpl).mockReturnValueOnce(image as unknown as ImageImpl);
 
       const imageSetWithVariant = createImageSet({
         ...model,
@@ -240,10 +245,10 @@ describe('ImageSetImpl', () => {
       const largeImage = {} as Image;
       const mediumImage = {} as Image;
 
-      imageFactory
-        .mockReturnValueOnce(smallImage)
-        .mockReturnValueOnce(largeImage)
-        .mockReturnValueOnce(mediumImage);
+      jest.mocked(ImageImpl)
+        .mockReturnValueOnce(smallImage as unknown as ImageImpl)
+        .mockReturnValueOnce(largeImage as unknown as ImageImpl)
+        .mockReturnValueOnce(mediumImage as unknown as ImageImpl);
 
       const imageSetWithVariants = createImageSet({
         ...model,
@@ -266,7 +271,7 @@ describe('ImageSetImpl', () => {
     it('should exclude non-existent variants when specific variants requested', () => {
       const smallImageModel = {} as ImageModel;
       const smallImage = {} as Image;
-      imageFactory.mockReturnValueOnce(smallImage);
+      jest.mocked(ImageImpl).mockReturnValueOnce(smallImage as unknown as ImageImpl);
 
       const imageSetWithVariant = createImageSet({
         ...model,
@@ -284,7 +289,7 @@ describe('ImageSetImpl', () => {
     it('should exclude null and non-object variants', () => {
       const validImageModel = {} as ImageModel;
       const validImage = {} as Image;
-      imageFactory.mockReturnValueOnce(validImage);
+      jest.mocked(ImageImpl).mockReturnValueOnce(validImage as unknown as ImageImpl);
 
       const imageSetWithMixedVariants = createImageSet({
         ...model,

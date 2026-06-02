@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import { ImageFactory, ImageModel, Image } from './image';
+import { ImageImpl, ImageModel, Image } from './image';
+import { LinkFactory } from './link-factory';
 
 export const TYPE_IMAGE_SET = 'imageset';
 
@@ -101,13 +102,11 @@ export class ImageSetImpl implements ImageSet {
 
   constructor(
     protected model: ImageSetModel,
-    imageFactory: ImageFactory,
+    private linkFactory: LinkFactory,
   ) {
-    this.original = model.data.original ? imageFactory(model.data.original) : undefined;
-
-    this.thumbnail = model.data.thumbnail ? imageFactory(model.data.thumbnail) : undefined;
-
-    this.loadVariants(imageFactory);
+    this.original = model.data.original ? new ImageImpl(model.data.original, linkFactory) : undefined;
+    this.thumbnail = model.data.thumbnail ? new ImageImpl(model.data.thumbnail, linkFactory) : undefined;
+    this.loadVariants();
   }
 
   getDescription(): string | undefined {
@@ -148,7 +147,6 @@ export class ImageSetImpl implements ImageSet {
 
   getVariants(variants?: string[]): Record<string, Image> {
     if (variants) {
-      // Return only the requested variants
       return variants.reduce((acc, variant) => {
         const variantImage = this.variants[variant];
         if (variantImage) {
@@ -158,11 +156,10 @@ export class ImageSetImpl implements ImageSet {
       }, {} as Record<string, Image>);
     }
 
-    // Return a copy of all variants
     return { ...this.variants };
   }
 
-  private loadVariants(imageFactory: ImageFactory): void {
+  private loadVariants(): void {
     this.variants = {};
     const knownImageSetProperties = [
       'name',
@@ -179,7 +176,7 @@ export class ImageSetImpl implements ImageSet {
       .forEach((variant) => {
         const variantData = this.model.data[variant];
         if (variantData != null && typeof variantData === 'object') {
-          this.variants[variant] = imageFactory(variantData as ImageModel);
+          this.variants[variant] = new ImageImpl(variantData as ImageModel, this.linkFactory);
         }
       });
   }

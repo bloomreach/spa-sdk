@@ -15,15 +15,18 @@
  */
 
 import { ButtonFactory } from './button-factory';
-import { MetaCollectionFactory } from './meta-collection-factory';
-import { MetaCollection, isMetaCollection } from './meta-collection';
+import { MetaCollectionImpl, MetaCollection, isMetaCollection } from './meta-collection';
+import { MetaFactory } from './meta-factory';
 
 jest.mock('./meta-collection');
 
-let metaCollectionFactory: jest.MockedFunction<MetaCollectionFactory>;
+jest.mock('./meta-collection');
+
+let metaFactory: MetaFactory;
 
 beforeEach(() => {
-  metaCollectionFactory = jest.fn();
+  metaFactory = new MetaFactory();
+  jest.mocked(MetaCollectionImpl).mockClear();
 });
 
 describe('ButtonFactory', () => {
@@ -34,7 +37,7 @@ describe('ButtonFactory', () => {
   beforeEach(() => {
     builder1 = jest.fn(() => ({} as MetaCollection));
     builder2 = jest.fn(() => ({} as MetaCollection));
-    factory = new ButtonFactory(metaCollectionFactory, new Map([['type1', builder1], ['type2', builder2]]));
+    factory = new ButtonFactory(metaFactory, new Map([['type1', builder1], ['type2', builder2]]));
   });
 
   describe('create', () => {
@@ -54,11 +57,11 @@ describe('ButtonFactory', () => {
       const button = {} as MetaCollection;
 
       jest.mocked(isMetaCollection).mockReturnValueOnce(false);
-      metaCollectionFactory.mockReturnValueOnce(button);
+      jest.mocked(MetaCollectionImpl).mockReturnValueOnce(button as unknown as MetaCollectionImpl);
 
       factory.create('type1', { id: 'id1' });
 
-      expect(metaCollectionFactory).toHaveBeenCalledWith(button);
+      expect(MetaCollectionImpl).toHaveBeenCalledWith(button, metaFactory);
     });
 
     it('should create a meta-collection instance', () => {

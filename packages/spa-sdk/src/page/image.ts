@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import { Builder } from './factory';
 import { LinkFactory } from './link-factory';
 import { Link } from './link';
 
@@ -75,8 +74,6 @@ export interface Image {
    */
   getWidth(): number;
 }
-
-export type ImageFactory = Builder<[ImageModel], Image>;
 
 export class ImageImpl implements Image {
   constructor(

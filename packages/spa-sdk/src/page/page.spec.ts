@@ -24,10 +24,13 @@ import { ContentFactory } from './content-factory';
 import { isLink, Link, TYPE_LINK_EXTERNAL, TYPE_LINK_INTERNAL } from './link';
 import { LinkFactory } from './link-factory';
 import { LinkRewriter } from './link-rewriter';
-import { MetaCollectionFactory } from './meta-collection-factory';
+import { MetaCollectionImpl } from './meta-collection';
+import { MetaFactory } from './meta-factory';
 import { isPage, Page, PageImpl, PageModel } from './page';
 import { PageEventBus } from './page-events';
 import { ApiOptions } from '../spa';
+
+jest.mock('./meta-collection');
 
 let buttonFactory: jest.Mocked<ButtonFactory>;
 let componentFactory: jest.Mocked<ComponentFactory>;
@@ -38,7 +41,7 @@ let eventBus: PageEventBus;
 let apiOptions: ApiOptions = {} as ApiOptions;
 let linkFactory: jest.Mocked<LinkFactory>;
 let linkRewriter: jest.Mocked<LinkRewriter>;
-let metaFactory: jest.MockedFunction<MetaCollectionFactory>;
+let metaFactory: MetaFactory;
 let root: Component;
 
 const model = {
@@ -83,7 +86,8 @@ beforeEach(() => {
   apiOptions = {} as ApiOptions;
   linkFactory = { create: jest.fn() } as unknown as typeof linkFactory;
   linkRewriter = { rewrite: jest.fn() } as unknown as jest.Mocked<LinkRewriter>;
-  metaFactory = jest.fn();
+  metaFactory = new MetaFactory();
+  jest.mocked(MetaCollectionImpl).mockClear();
   root = { getComponent: jest.fn() } as unknown as jest.Mocked<Component>;
 });
 
@@ -170,7 +174,7 @@ describe('PageImpl', () => {
 
       page.getMeta(testModel);
 
-      expect(metaFactory).toHaveBeenCalledWith(testModel);
+      expect(MetaCollectionImpl).toHaveBeenCalledWith(testModel, metaFactory);
     });
   });
 

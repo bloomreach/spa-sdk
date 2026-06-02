@@ -15,14 +15,14 @@
  */
 
 import { Builder } from './factory';
-import { MetaCollectionFactory } from './meta-collection-factory';
-import { MetaCollection, MetaCollectionModel, isMetaCollection } from './meta-collection';
+import { MetaCollectionImpl, MetaCollection, MetaCollectionModel, isMetaCollection } from './meta-collection';
+import { MetaFactory } from './meta-factory';
 
 type ButtonBuilder = Builder<any[], MetaCollection | MetaCollectionModel>;
 
 export class ButtonFactory {
   constructor(
-    private metaCollectionFactory: MetaCollectionFactory,
+    private metaFactory: MetaFactory,
     private builders: Map<string, ButtonBuilder> = new Map(),
   ) {}
 
@@ -33,6 +33,6 @@ export class ButtonFactory {
 
     const meta = this.builders.get(type)!(...params);
 
-    return isMetaCollection(meta) ? meta : this.metaCollectionFactory(meta);
+    return isMetaCollection(meta) ? meta : new MetaCollectionImpl(meta, this.metaFactory);
   }
 }

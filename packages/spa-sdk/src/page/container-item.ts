@@ -26,7 +26,8 @@ import { EmitterMixin, Emitter } from '../emitter';
 import { PageEventBus, PageUpdateEvent } from './page-events';
 import { LinkFactory } from './link-factory';
 import { Logger } from '../logger';
-import { MetaCollectionFactory } from './meta-collection-factory';
+import { MetaCollectionImpl } from './meta-collection';
+import { MetaFactory } from './meta-factory';
 import { Page, PageModel } from './page';
 import { Reference, resolve } from './reference';
 import { ApiOptions } from '../spa/api';
@@ -149,7 +150,7 @@ export class ContainerItemImpl
   constructor(
     protected model: ContainerItemModel,
     linkFactory: LinkFactory,
-    private metaFactory: MetaCollectionFactory,
+    private metaFactory: MetaFactory,
     private apiOptions: ApiOptions,
     eventBus?: PageEventBus,
     private logger?: Logger,
@@ -170,7 +171,7 @@ export class ContainerItemImpl
     this.logger?.debug('Event:', event);
 
     this.model = model;
-    this.meta = this.metaFactory(model.meta);
+    this.meta = new MetaCollectionImpl(model.meta, this.metaFactory);
     this.emit('update', {});
   }
 

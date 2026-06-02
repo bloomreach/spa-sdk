@@ -15,9 +15,15 @@
  */
 
 import { PaginationImpl, PaginationModel, Pagination, TYPE_PAGINATION, isPagination } from './pagination';
-import { PaginationItemFactory, PaginationItemModel } from './pagination-item';
+import { PaginationItemModel } from './pagination-item';
+import { LinkFactory } from './link-factory';
 
-let paginationItemFactory: jest.MockedFunction<PaginationItemFactory>;
+// Make PaginationItemImpl pass through the model so all toBe(model.xxx) assertions hold.
+jest.mock('./pagination-item', () => ({
+  PaginationItemImpl: jest.fn().mockImplementation((item) => item),
+}));
+
+let linkFactory: jest.Mocked<LinkFactory>;
 
 const model = {
   current: {},
@@ -33,11 +39,11 @@ const model = {
 } as PaginationModel;
 
 function createPagination(paginationModel = model) {
-  return new PaginationImpl(paginationModel, paginationItemFactory);
+  return new PaginationImpl(paginationModel, linkFactory);
 }
 
 beforeEach(() => {
-  paginationItemFactory = jest.fn((item) => item) as unknown as typeof paginationItemFactory;
+  linkFactory = { create: jest.fn() } as unknown as typeof linkFactory;
 });
 
 describe('PaginationImpl', () => {
@@ -50,14 +56,12 @@ describe('PaginationImpl', () => {
   describe('getCurrent', () => {
     it('should return the current page', () => {
       expect(pagination.getCurrent()).toBe(model.current);
-      expect(paginationItemFactory).toHaveBeenCalledWith(model.current);
     });
   });
 
   describe('getFirst', () => {
     it('should return the first page', () => {
       expect(pagination.getFirst()).toBe(model.first);
-      expect(paginationItemFactory).toHaveBeenCalledWith(model.first);
     });
   });
 
@@ -70,7 +74,6 @@ describe('PaginationImpl', () => {
   describe('getLast', () => {
     it('should return the last page', () => {
       expect(pagination.getLast()).toBe(model.last);
-      expect(paginationItemFactory).toHaveBeenCalledWith(model.last);
     });
   });
 
@@ -84,7 +87,6 @@ describe('PaginationImpl', () => {
       const paginationWithNext = createPagination({ ...model, next });
 
       expect(paginationWithNext.getNext()).toBe(next);
-      expect(paginationItemFactory).toHaveBeenCalledWith(next);
     });
   });
 
@@ -97,8 +99,6 @@ describe('PaginationImpl', () => {
   describe('getPages', () => {
     it('should return currently listed pages', () => {
       expect(pagination.getPages()).toEqual(model.pages);
-      expect(paginationItemFactory).toHaveBeenCalledWith(model.pages[0]);
-      expect(paginationItemFactory).toHaveBeenCalledWith(model.pages[1]);
     });
   });
 
@@ -112,7 +112,6 @@ describe('PaginationImpl', () => {
       const paginationWithPrevius = createPagination({ ...model, previous });
 
       expect(paginationWithPrevius.getPrevious()).toBe(previous);
-      expect(paginationItemFactory).toHaveBeenCalledWith(previous);
     });
   });
 

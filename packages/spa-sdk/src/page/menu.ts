@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-import { MenuItemFactory, MenuItemModel, MenuItem } from './menu-item';
-import { MetaCollectionFactory } from './meta-collection-factory';
-import { MetaCollectionModel, MetaCollection } from './meta-collection';
+import { MenuItemImpl, MenuItemModel, MenuItem } from './menu-item';
+import { MetaCollectionImpl, MetaCollectionModel, MetaCollection } from './meta-collection';
+import { MetaFactory } from './meta-factory';
+import { LinkFactory } from './link-factory';
 
 /**
  * A manage menu button.
@@ -77,12 +78,14 @@ export class MenuImpl implements Menu {
 
   constructor(
     protected model: MenuModel,
-    metaFactory: MetaCollectionFactory,
-    menuItemFactory: MenuItemFactory,
+    metaFactory: MetaFactory,
+    private linkFactory: LinkFactory,
   ) {
-    this.items = model.data.siteMenuItems.map(menuItemFactory);
-    this.meta = metaFactory(model.meta);
-    this.selected = model.data.selectSiteMenuItem ? menuItemFactory(model.data.selectSiteMenuItem) : undefined;
+    this.items = model.data.siteMenuItems.map((item) => new MenuItemImpl(item, linkFactory));
+    this.meta = new MetaCollectionImpl(model.meta, metaFactory);
+    this.selected = model.data.selectSiteMenuItem
+      ? new MenuItemImpl(model.data.selectSiteMenuItem, linkFactory)
+      : undefined;
   }
 
   getItems(): MenuItem[] {

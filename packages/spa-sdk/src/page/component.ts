@@ -16,8 +16,8 @@
 
 import { LinkFactory } from './link-factory';
 import { Link } from './link';
-import { MetaCollectionFactory } from './meta-collection-factory';
-import { MetaCollectionModel, MetaCollection } from './meta-collection';
+import { MetaCollectionImpl, MetaCollectionModel, MetaCollection } from './meta-collection';
+import { MetaFactory } from './meta-factory';
 import { Reference } from './reference';
 
 /**
@@ -139,9 +139,9 @@ export class ComponentImpl implements Component {
     protected model: ComponentModel,
     protected children: Component[],
     private linkFactory: LinkFactory,
-    metaFactory: MetaCollectionFactory,
+    metaFactory: MetaFactory,
   ) {
-    this.meta = metaFactory(this.model.meta);
+    this.meta = new MetaCollectionImpl(this.model.meta, metaFactory);
   }
 
   getId(): string {

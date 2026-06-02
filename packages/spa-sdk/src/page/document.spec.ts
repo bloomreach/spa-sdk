@@ -16,11 +16,13 @@
 
 import { DocumentImpl, DocumentModel, TYPE_DOCUMENT, isDocument } from './document';
 import { LinkFactory } from './link-factory';
-import { MetaCollectionFactory } from './meta-collection-factory';
-import { MetaCollection } from './meta-collection';
+import { MetaCollectionImpl, MetaCollection } from './meta-collection';
+import { MetaFactory } from './meta-factory';
+
+jest.mock('./meta-collection');
 
 let linkFactory: jest.Mocked<LinkFactory>;
-let metaFactory: jest.MockedFunction<MetaCollectionFactory>;
+let metaFactory: MetaFactory;
 
 const model = {
   links: { site: { href: 'url' } },
@@ -37,7 +39,8 @@ function createDocument(contentModel = model) {
 
 beforeEach(() => {
   linkFactory = { create: jest.fn() } as unknown as typeof linkFactory;
-  metaFactory = jest.fn();
+  metaFactory = new MetaFactory();
+  jest.mocked(MetaCollectionImpl).mockClear();
 });
 
 describe('DocumentImpl', () => {
@@ -67,18 +70,18 @@ describe('DocumentImpl', () => {
     it('should return a meta-data array', () => {
       const metaModel = {};
       const meta = {} as MetaCollection;
-      metaFactory.mockReturnValueOnce(meta);
+      jest.mocked(MetaCollectionImpl).mockReturnValueOnce(meta as unknown as MetaCollectionImpl);
 
       const document = createDocument({ ...model, meta: metaModel });
 
-      expect(metaFactory).toHaveBeenCalledWith(metaModel);
+      expect(MetaCollectionImpl).toHaveBeenCalledWith(metaModel, metaFactory);
       expect(document.getMeta()).toEqual(meta);
     });
 
     it('should pass an empty object if there is no meta-data', () => {
       createDocument();
 
-      expect(metaFactory).toHaveBeenCalledWith({});
+      expect(MetaCollectionImpl).toHaveBeenCalledWith({}, metaFactory);
     });
   });
 
