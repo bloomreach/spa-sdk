@@ -15,7 +15,7 @@
  */
 
 import { Document } from './document';
-import { MetaCollection } from './meta-collection';
+import { MetaCollectionImpl, MetaCollection } from './meta-collection';
 import { META_POSITION_BEGIN } from './meta';
 import { TYPE_MANAGE_CONTENT_BUTTON, createManageContentButton } from './button-manage-content';
 
@@ -37,8 +37,10 @@ describe('createManageContentButton', () => {
     expect(createManageContentButton({ content })).toBe(meta);
   });
 
-  it('should return an empty meta-data model if there is no meta-data', () => {
-    expect(createManageContentButton({})).toEqual({});
+  it('should return an empty meta-collection if there is no meta-data', () => {
+    const result = createManageContentButton({});
+    expect(result).toBeInstanceOf(MetaCollectionImpl);
+    expect(result).toHaveLength(0);
   });
 
   it('should generate add content button when there are no content parameters', () => {

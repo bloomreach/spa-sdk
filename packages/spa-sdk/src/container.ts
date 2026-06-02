@@ -53,7 +53,7 @@ import { TYPE_LINK_INTERNAL } from './page/link';
 import { LinkFactory } from './page/link-factory';
 import { LinkRewriter } from './page/link-rewriter';
 import { MenuImpl, MenuModel, Menu, TYPE_MANAGE_MENU_BUTTON, TYPE_MENU } from './page/menu';
-import { MetaCollection, MetaCollectionModel } from './page/meta-collection';
+import { MetaCollection } from './page/meta-collection';
 import { PageImpl, PageFactories, PageContext } from './page/page';
 import { PageEvents } from './page/page-events';
 import { PageFactory } from './page/page-factory';
@@ -124,7 +124,7 @@ export class SdkRuntime {
 
     const linkRewriter = new LinkRewriter(linkFactory);
 
-    const buttonBuilders: [string, (...args: any[]) => MetaCollection | MetaCollectionModel][] = [
+    const buttonBuilders: [string, (...args: any[]) => MetaCollection][] = [
       [TYPE_MANAGE_CONTENT_BUTTON, createManageContentButton],
       [TYPE_MANAGE_MENU_BUTTON, (menu: Menu) => menu.getMeta()],
     ];

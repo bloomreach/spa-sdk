@@ -15,9 +15,9 @@
  */
 
 import { Builder } from './factory';
-import { MetaCollectionImpl, MetaCollection, MetaCollectionModel, isMetaCollection } from './meta-collection';
+import { MetaCollection } from './meta-collection';
 
-type ButtonBuilder = Builder<any[], MetaCollection | MetaCollectionModel>;
+type ButtonBuilder = Builder<any[], MetaCollection>;
 
 export class ButtonFactory {
   constructor(private builders: Map<string, ButtonBuilder> = new Map()) {}
@@ -27,8 +27,6 @@ export class ButtonFactory {
       throw new Error(`Unsupported button type: '${type}'.`);
     }
 
-    const meta = this.builders.get(type)!(...params);
-
-    return isMetaCollection(meta) ? meta : new MetaCollectionImpl(meta);
+    return this.builders.get(type)!(...params);
   }
 }

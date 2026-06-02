@@ -15,9 +15,7 @@
  */
 
 import { ButtonFactory } from './button-factory';
-import { MetaCollectionImpl, MetaCollection, isMetaCollection } from './meta-collection';
-
-jest.mock('./meta-collection');
+import { MetaCollection } from './meta-collection';
 
 describe('ButtonFactory', () => {
   let factory: ButtonFactory;
@@ -31,36 +29,20 @@ describe('ButtonFactory', () => {
   });
 
   describe('create', () => {
-    it('should call a registered builder', () => {
-      factory.create('type1', { id: 'id1' });
-      factory.create('type2', { id: 'id2' });
+    it('should call a registered builder and return its result', () => {
+      const result1 = {} as MetaCollection;
+      const result2 = {} as MetaCollection;
+      builder1.mockReturnValueOnce(result1);
+      builder2.mockReturnValueOnce(result2);
 
+      expect(factory.create('type1', { id: 'id1' })).toBe(result1);
+      expect(factory.create('type2', { id: 'id2' })).toBe(result2);
       expect(builder1).toHaveBeenCalledWith({ id: 'id1' });
       expect(builder2).toHaveBeenCalledWith({ id: 'id2' });
     });
 
     it('should throw an error on unknown button type', () => {
       expect(() => factory.create('type3')).toThrow();
-    });
-
-    it('should create a meta-collection instance', () => {
-      const button = {} as MetaCollection;
-
-      jest.mocked(isMetaCollection).mockReturnValueOnce(false);
-      jest.mocked(MetaCollectionImpl).mockReturnValueOnce(button as unknown as MetaCollectionImpl);
-
-      factory.create('type1', { id: 'id1' });
-
-      expect(MetaCollectionImpl).toHaveBeenCalledWith(button);
-    });
-
-    it('should create a meta-collection instance', () => {
-      const button = {} as MetaCollection;
-
-      jest.mocked(isMetaCollection).mockReturnValueOnce(true);
-      builder1.mockReturnValueOnce(button);
-
-      expect(factory.create('type1', { id: 'id1' })).toBe(button);
     });
   });
 });
