@@ -30,8 +30,7 @@ import { isLink, Link } from './link';
 import { LinkFactory } from './link-factory';
 import { LinkRewriter } from './link-rewriter';
 import { Menu, TYPE_MANAGE_MENU_BUTTON } from './menu';
-import { MetaCollectionImpl, MetaCollection, MetaCollectionModel } from './meta-collection';
-import { MetaFactory } from './meta-factory';
+import { MetaCollection } from './meta-collection';
 import { PageEventBus, PageUpdateEvent } from './page-events';
 import { isReference, Reference, resolve } from './reference';
 import { Visit, Visitor } from './relevance';
@@ -175,13 +174,6 @@ export interface Page {
   getLocale(): string;
 
   /**
-   * Generates a meta-data collection from the provided meta-data model.
-   * @param meta The meta-data collection model as returned by the page-model-api.
-   * @deprecated Use `getButton` method to create buttons.
-   */
-  getMeta(meta: MetaCollectionModel): MetaCollection;
-
-  /**
    * @return The title of the page, or `undefined` if not configured.
    */
   getTitle(): string | undefined;
@@ -254,7 +246,6 @@ export interface PageFactories {
   contentFactory: ContentFactory;
   linkFactory: LinkFactory;
   linkRewriter: LinkRewriter;
-  metaFactory: MetaFactory;
 }
 
 /**
@@ -280,8 +271,6 @@ export class PageImpl implements Page {
 
   private linkRewriter: LinkRewriter;
 
-  private metaFactory: MetaFactory;
-
   private cmsEventBus: CmsEventBus | undefined;
 
   private apiOptions: ApiOptions;
@@ -302,7 +291,6 @@ export class PageImpl implements Page {
     this.contentFactory = factories.contentFactory;
     this.linkFactory = factories.linkFactory;
     this.linkRewriter = factories.linkRewriter;
-    this.metaFactory = factories.metaFactory;
     this.cmsEventBus = context.cmsEventBus;
     this.apiOptions = context.apiOptions;
     this.logger = context.logger;
@@ -359,10 +347,6 @@ export class PageImpl implements Page {
 
   getLocale(): string {
     return this.model.meta.locale || 'en_US';
-  }
-
-  getMeta(meta: MetaCollectionModel): MetaCollection {
-    return new MetaCollectionImpl(meta, this.metaFactory);
   }
 
   getTitle(): string | undefined {

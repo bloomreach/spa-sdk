@@ -167,7 +167,6 @@ export class SdkRuntime {
       contentFactory,
       linkFactory,
       linkRewriter,
-      metaFactory,
     };
     const pageContext: PageContext = {
       apiOptions: config,
