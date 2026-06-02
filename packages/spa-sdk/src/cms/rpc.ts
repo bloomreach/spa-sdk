@@ -49,14 +49,20 @@ export type Message = Event | Request | Response;
 export type Procedures = Record<string, Callable>;
 export type Events = Record<string, any>;
 
-export interface RpcClient<TProcedures extends Procedures, TEvents extends Events> extends Emitter<TEvents> {
-  call<K extends keyof TProcedures & string>(
+/**
+ * A bidirectional RPC channel: call procedures and listen to events on the remote
+ * side, while registering handlers and triggering events for the local side.
+ */
+export interface RpcChannel<
+  TRemoteProcedures extends Procedures,
+  TRemoteEvents extends Events,
+  TProcedures extends Procedures,
+  TEvents extends Events,
+> extends Emitter<TRemoteEvents> {
+  call<K extends keyof TRemoteProcedures & string>(
     command: K,
-    ...params: Parameters<TProcedures[K]>
-  ): Promise<ReturnType<TProcedures[K]>>;
-}
-
-export interface RpcServer<TProcedures extends Procedures, TEvents extends Events> {
+    ...params: Parameters<TRemoteProcedures[K]>
+  ): Promise<ReturnType<TRemoteProcedures[K]>>;
   register<K extends keyof TProcedures & string>(
     command: K,
     callback: Callable<Promise<ReturnType<TProcedures[K]>>, Parameters<TProcedures[K]>>,
@@ -71,7 +77,7 @@ export abstract class Rpc<
   TEvents extends Events,
 >
   extends Typed<TRemoteEvents>
-  implements RpcClient<TRemoteProcedures, TRemoteEvents>, RpcServer<TProcedures, TEvents> {
+  implements RpcChannel<TRemoteProcedures, TRemoteEvents, TProcedures, TEvents> {
   private calls = new Map<string, [Callable, Callable]>();
 
   private callbacks = new Map<keyof TProcedures, Callable<Promise<any>, any>>();

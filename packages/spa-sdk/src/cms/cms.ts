@@ -17,7 +17,7 @@
 import { Logger } from '../logger';
 import { CmsEventBus, CmsUpdateEvent } from './cms-events';
 import { PostMessageOptions } from './post-message';
-import { Procedures, RpcClient, RpcServer } from './rpc';
+import { Procedures, RpcChannel } from './rpc';
 
 const GLOBAL_WINDOW = typeof window === 'undefined' ? undefined : window;
 
@@ -39,21 +39,19 @@ export class Cms {
   private window?: Window;
 
   /**
-   * @param rpcClient RPC client used to call CMS procedures and receive CMS events.
-   * @param rpcServer RPC server used to expose SPA procedures to the CMS (e.g. `inject`).
+   * @param channel Bidirectional RPC channel to the CMS (always a PostMessage instance).
    * @param cmsEventBus Event bus for relaying CMS updates to the SPA (preview mode only).
    * @param logger Optional logger for debug output.
    */
   constructor(
-    protected rpcClient: RpcClient<CmsProcedures, CmsEvents>,
-    protected rpcServer: RpcServer<SpaProcedures, SpaEvents>,
+    protected channel: RpcChannel<CmsProcedures, CmsEvents, SpaProcedures, SpaEvents>,
     protected cmsEventBus?: CmsEventBus,
     private logger?: Logger,
   ) {
     this.onStateChange = this.onStateChange.bind(this);
     this.cmsEventBus?.on('page.ready', this.onPageReady.bind(this));
-    this.rpcClient.on('update', this.onUpdate.bind(this));
-    this.rpcServer.register('inject', this.inject.bind(this));
+    this.channel.on('update', this.onUpdate.bind(this));
+    this.channel.register('inject', this.inject.bind(this));
   }
 
   initialize({ window = GLOBAL_WINDOW }: PostMessageOptions): void {
@@ -75,7 +73,7 @@ export class Cms {
   private onInitialize(): void {
     this.logger?.debug('The page is ready to accept incoming messages.');
 
-    this.rpcServer.trigger('ready', undefined as never);
+    this.channel.trigger('ready', undefined as never);
   }
 
   private onStateChange(): void {
@@ -90,7 +88,7 @@ export class Cms {
   protected onPageReady(): void {
     this.logger?.debug('Synchronizing the page.');
 
-    this.rpcClient.call('sync');
+    this.channel.call('sync');
   }
 
   protected onUpdate(event: CmsUpdateEvent): void {

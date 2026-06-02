@@ -17,4 +17,4 @@
 export { Cms } from './cms';
 export { CmsUpdateEvent, CmsEventBus } from './cms-events';
 export { PostMessageOptions, PostMessage } from './post-message';
-export { RpcClient, RpcServer } from './rpc';
+export { RpcChannel } from './rpc';

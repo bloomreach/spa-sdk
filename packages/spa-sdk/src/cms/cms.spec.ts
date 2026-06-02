@@ -17,27 +17,24 @@
 import { Typed } from 'emittery';
 import { Cms } from './cms';
 import { CmsEventBus, CmsEvents } from './cms-events';
-import { RpcClient, RpcServer } from './rpc';
+import { RpcChannel } from './rpc';
 
 describe('Cms', () => {
   let cms: Cms;
   let eventBus: CmsEventBus;
-  let rpcClient: jest.Mocked<RpcClient<any, any>>;
-  let rpcServer: jest.Mocked<RpcServer<any, any>>;
+  let channel: jest.Mocked<RpcChannel<any, any, any, any>>;
 
   beforeEach(() => {
     eventBus = new Typed<CmsEvents>();
-    rpcClient = {
+    channel = {
       call: jest.fn(),
       on: jest.fn(),
       off: jest.fn(),
-    };
-    rpcServer = {
       register: jest.fn(),
       trigger: jest.fn(),
     };
 
-    cms = new Cms(rpcClient, rpcServer, eventBus);
+    cms = new Cms(channel, eventBus);
   });
 
   describe('initialize', () => {
@@ -53,7 +50,7 @@ describe('Cms', () => {
       getReadyState.mockReturnValueOnce('interactive');
       cms.initialize({ window });
 
-      expect(rpcServer.trigger).toHaveBeenCalledWith('ready', undefined);
+      expect(channel.trigger).toHaveBeenCalledWith('ready', undefined);
     });
 
     it('should trigger ready event only once per window', () => {
@@ -61,7 +58,7 @@ describe('Cms', () => {
       cms.initialize({ window });
       cms.initialize({ window });
 
-      expect(rpcServer.trigger).toHaveBeenCalledTimes(1);
+      expect(channel.trigger).toHaveBeenCalledTimes(1);
     });
 
     it('should not trigger ready event on state change if the state is still loading', async () => {
@@ -72,7 +69,7 @@ describe('Cms', () => {
       document.dispatchEvent(new ProgressEvent('readystatechange'));
       await new Promise((resolve) => { setTimeout(resolve, 0); });
 
-      expect(rpcServer.trigger).not.toHaveBeenCalled();
+      expect(channel.trigger).not.toHaveBeenCalled();
     });
 
     it('should trigger ready event on state change', async () => {
@@ -83,13 +80,13 @@ describe('Cms', () => {
       document.dispatchEvent(new ProgressEvent('readystatechange'));
       await new Promise((resolve) => { setTimeout(resolve, 0); });
 
-      expect(rpcServer.trigger).toHaveBeenCalledWith('ready', undefined);
+      expect(channel.trigger).toHaveBeenCalledWith('ready', undefined);
     });
 
     it('should register inject procedure', async () => {
       cms.initialize({ window });
 
-      expect(rpcServer.register).toHaveBeenCalledWith('inject', expect.any(Function));
+      expect(channel.register).toHaveBeenCalledWith('inject', expect.any(Function));
     });
   });
 
@@ -98,7 +95,7 @@ describe('Cms', () => {
       cms.initialize({ window });
       await eventBus.emit('page.ready', {});
 
-      expect(rpcClient.call).toHaveBeenCalledWith('sync');
+      expect(channel.call).toHaveBeenCalledWith('sync');
     });
   });
 
@@ -106,9 +103,9 @@ describe('Cms', () => {
     it('should process postponed events on initialization', async () => {
       cms.initialize({ window });
 
-      expect(rpcClient.on).toHaveBeenCalledWith('update', expect.any(Function));
+      expect(channel.on).toHaveBeenCalledWith('update', expect.any(Function));
 
-      const [, onUpdate] = rpcClient.on.mock.calls.pop()!;
+      const [, onUpdate] = channel.on.mock.calls.pop()!;
       const event = { id: 'id', properties: { a: 'b' } };
       const emitSpy = jest.spyOn(eventBus, 'emit');
       onUpdate(event);
@@ -126,7 +123,7 @@ describe('Cms', () => {
       testDocument = document;
       windowLike = Object.create(window) as Window & typeof globalThis;
       Object.defineProperty(windowLike, 'document', { get: () => testDocument, configurable: true });
-      [[, inject]] = rpcServer.register.mock.calls;
+      [[, inject]] = channel.register.mock.calls;
       cms.initialize({ window: windowLike });
     });
 

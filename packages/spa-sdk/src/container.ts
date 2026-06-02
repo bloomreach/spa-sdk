@@ -103,7 +103,7 @@ export class SdkRuntime {
     }
 
     if (!this.cms) {
-      this.cms = new Cms(this.postMessage, this.postMessage, this.getCmsEventBus(), this.getLogger());
+      this.cms = new Cms(this.postMessage, this.getCmsEventBus(), this.getLogger());
     }
 
     this.postMessage.initialize(options);
