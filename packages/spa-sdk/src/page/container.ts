@@ -80,9 +80,9 @@ export interface Container extends Component {
 }
 
 export class ContainerImpl extends ComponentImpl implements Container {
-  protected model!: ContainerModel;
+  declare protected model: ContainerModel;
 
-  protected children!: ContainerItem[];
+  declare protected children: ContainerItem[];
 
   getChildren(): ContainerItem[] {
     return this.children;
