@@ -14,43 +14,42 @@
  * limitations under the License.
  */
 
-import { Campaign } from './campaign';
+import { getCampaignVariantId, CAMPAIGN_PARAMETER, SEGMENT_PARAMETER } from './campaign';
 
 describe('campaign', () => {
   afterEach(() => {
-    document.cookie = `${Campaign.CAMPAIGN_PARAMETER}=; Max-Age=0;`;
-    document.cookie = `${Campaign.SEGMENT_PARAMETER}=; Max-Age=0;`;
-    document.cookie = `${Campaign.TTL_PARAMETER}=; Max-Age=0;`;
+    document.cookie = `${CAMPAIGN_PARAMETER}=; Max-Age=0;`;
+    document.cookie = `${SEGMENT_PARAMETER}=; Max-Age=0;`;
   });
 
   it('should return an empty string', () => {
-    expect(Campaign.GET_VARIANT_ID()).toBe('');
-    expect(Campaign.GET_VARIANT_ID('001')).toBe('');
-    expect(Campaign.GET_VARIANT_ID(undefined, 'gold')).toBe('');
-    expect(Campaign.GET_VARIANT_ID('001', 'gold', '0')).toBe('');
+    expect(getCampaignVariantId()).toBe('');
+    expect(getCampaignVariantId('001')).toBe('');
+    expect(getCampaignVariantId(undefined, 'gold')).toBe('');
+    expect(getCampaignVariantId('001', 'gold', '0')).toBe('');
   });
 
   it('should return CSR cookie', () => {
-    document.cookie = `${Campaign.CAMPAIGN_PARAMETER}=12345`;
-    document.cookie = `${Campaign.SEGMENT_PARAMETER}=gold`;
+    document.cookie = `${CAMPAIGN_PARAMETER}=12345`;
+    document.cookie = `${SEGMENT_PARAMETER}=gold`;
 
-    expect(Campaign.GET_VARIANT_ID()).toBe('12345:gold');
+    expect(getCampaignVariantId()).toBe('12345:gold');
   });
 
   it('should return SSR cookie', () => {
     const request = {
       headers: {
-        cookie: `${Campaign.CAMPAIGN_PARAMETER}=12345; ${Campaign.SEGMENT_PARAMETER}=silver`,
+        cookie: `${CAMPAIGN_PARAMETER}=12345; ${SEGMENT_PARAMETER}=silver`,
       },
     };
 
-    expect(Campaign.GET_VARIANT_ID(undefined, undefined, undefined, request)).toBe('12345:silver');
+    expect(getCampaignVariantId(undefined, undefined, undefined, request)).toBe('12345:silver');
   });
 
-  it('should return empty varian id if ttl is equal zero', () => {
-    document.cookie = `${Campaign.CAMPAIGN_PARAMETER}=12345`;
-    document.cookie = `${Campaign.SEGMENT_PARAMETER}=gold`;
+  it('should return empty variant id if ttl is equal zero', () => {
+    document.cookie = `${CAMPAIGN_PARAMETER}=12345`;
+    document.cookie = `${SEGMENT_PARAMETER}=gold`;
 
-    expect(Campaign.GET_VARIANT_ID(undefined, undefined, '0')).toBe('');
+    expect(getCampaignVariantId(undefined, undefined, '0')).toBe('');
   });
 });

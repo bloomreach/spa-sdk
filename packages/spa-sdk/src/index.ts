@@ -23,8 +23,8 @@ import { SdkRuntime } from './container';
 import { Configuration } from './configuration';
 import { Level, Logger } from './logger';
 import { isPage, Page, PageModel } from './page';
-import { Campaign } from './services/campaign';
-import { Segmentation } from './services/segmentation';
+import { getCampaignVariantId } from './services/campaign';
+import { getSegmentIds } from './services/segmentation';
 import { appendSearchParams, extractSearchParams, parseUrl } from './url';
 
 const runtime = new SdkRuntime();
@@ -97,8 +97,8 @@ function parseRequest(configuration: Configuration): ParsedRequest {
     campaignId,
     segmentId,
     ttl,
-    campaignVariantId: Campaign.GET_VARIANT_ID(campaignId, segmentId, ttl, configuration.request),
-    segmentIds: Segmentation.GET_SEGMENT_IDS(configuration.request),
+    campaignVariantId: getCampaignVariantId(campaignId, segmentId, ttl, configuration.request),
+    segmentIds: getSegmentIds(configuration.request),
   };
 }
 

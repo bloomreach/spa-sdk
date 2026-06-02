@@ -15,18 +15,15 @@
  */
 
 import { HttpRequest } from '../spa/http';
-import { Cookie } from './cookie';
+import { getCookie, getCookieFromRequest } from './cookie';
 
-export class Segmentation {
-  static readonly SEGMENT_IDS_PARAMETER = '__br__segment_ids';
+export const SEGMENT_IDS_PARAMETER = '__br__segment_ids';
 
-  /**
-   * Get the segmentIds from cookie
-   * @return string
-   */
-  public static GET_SEGMENT_IDS(request?: HttpRequest): string {
-    const cookie = request?.headers ? Cookie.GET_COOKIE_FROM_REQUEST(request) : Cookie.GET_COOKIE();
-
-    return cookie[this.SEGMENT_IDS_PARAMETER] ?? '';
-  }
+/**
+ * Get the segment ids from cookie.
+ * @param request Current user's request.
+ */
+export function getSegmentIds(request?: HttpRequest): string {
+  const cookies = request?.headers ? getCookieFromRequest(request) : getCookie();
+  return cookies[SEGMENT_IDS_PARAMETER] ?? '';
 }
