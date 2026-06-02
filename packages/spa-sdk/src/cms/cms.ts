@@ -16,17 +16,10 @@
 
 import { Logger } from '../logger';
 import { CmsEventBus, CmsUpdateEvent } from './cms-events';
+import { PostMessageOptions } from './post-message';
 import { Procedures, RpcClient, RpcServer } from './rpc';
 
 const GLOBAL_WINDOW = typeof window === 'undefined' ? undefined : window;
-
-export interface CmsOptions {
-  /**
-   * The window reference for the CMS integration.
-   * By default the global window object will be used.
-   */
-  window?: Window;
-}
 
 interface CmsProcedures extends Procedures {
   sync(): void;
@@ -63,7 +56,7 @@ export class Cms {
     this.rpcServer.register('inject', this.inject.bind(this));
   }
 
-  initialize({ window = GLOBAL_WINDOW }: CmsOptions): void {
+  initialize({ window = GLOBAL_WINDOW }: PostMessageOptions): void {
     if (this.window === window) {
       return;
     }

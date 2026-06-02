@@ -15,7 +15,7 @@
  */
 
 import { ApiOptions } from './spa';
-import { CmsOptions, PostMessageOptions } from './cms';
+import { PostMessageOptions } from './cms';
 import { UrlBuilderOptions } from './url';
 
 /**
@@ -33,7 +33,7 @@ export interface SDKOptions {
 /**
  * Configuration of the SPA SDK.
  */
-export interface Configuration extends ApiOptions, CmsOptions, PostMessageOptions, SDKOptions, UrlBuilderOptions {
+export interface Configuration extends ApiOptions, PostMessageOptions, SDKOptions, UrlBuilderOptions {
   /**
    * The query string parameter used to pass authorization header value.
    * By default, `token` parameter is used.

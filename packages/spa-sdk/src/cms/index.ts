@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-export { CmsOptions, Cms } from './cms';
+export { Cms } from './cms';
 export { CmsUpdateEvent, CmsEventBus } from './cms-events';
 export { PostMessageOptions, PostMessage } from './post-message';
 export { RpcClient, RpcServer } from './rpc';

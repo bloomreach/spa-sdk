@@ -62,9 +62,10 @@ import { PageImpl, PageFactories, PageContext } from './page/page';
 import { PageEvents } from './page/page-events';
 import { PageFactory } from './page/page-factory';
 import { PaginationImpl, PaginationModel, TYPE_PAGINATION } from './page/pagination';
-import { Api, ApiOptions } from './spa/api';
+import { Api } from './spa/api';
+import { Configuration } from './configuration';
 import { Spa } from './spa/spa';
-import { UrlBuilder, UrlBuilderOptions } from './url/builder';
+import { UrlBuilder } from './url/builder';
 
 export class SdkRuntime {
   private logger: Logger | undefined;
@@ -115,11 +116,11 @@ export class SdkRuntime {
 
   // --- Per-page layer -------------------------------------------------------------------
 
-  createScope(apiOptions: ApiOptions, urlOptions: UrlBuilderOptions): Spa {
+  createScope(config: Configuration): Spa {
     const log = this.getLogger();
     const pageEventBus = typeof window !== 'undefined' ? new Typed<PageEvents>() : undefined;
 
-    const urlBuilder = new UrlBuilder(urlOptions);
+    const urlBuilder = new UrlBuilder({ endpoint: config.endpoint, baseUrl: config.baseUrl });
 
     const linkFactory = new LinkFactory(new Map([
       [TYPE_LINK_INTERNAL, urlBuilder.getSpaUrl.bind(urlBuilder)],
@@ -155,7 +156,7 @@ export class SdkRuntime {
         model as ContainerItemModel,
         linkFactory,
         metaFactory,
-        apiOptions,
+        config,
         pageEventBus,
         log,
       )],
@@ -170,14 +171,14 @@ export class SdkRuntime {
       metaFactory,
     };
     const pageContext: PageContext = {
-      apiOptions,
+      apiOptions: config,
       cmsEventBus: this.getCmsEventBus(),
       pageEventBus,
       logger: log,
     };
     const pageFactory: PageFactory = (model) => new PageImpl(model, pageFactories, pageContext);
 
-    const api = new Api(urlBuilder, apiOptions, log);
+    const api = new Api(urlBuilder, config, log);
     const spa = new Spa(api, pageFactory, this.getCmsEventBus(), pageEventBus, log);
 
     this.currentSpa = spa;
