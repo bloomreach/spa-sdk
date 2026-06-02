@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-import { getCampaignVariantId, CAMPAIGN_PARAMETER, SEGMENT_PARAMETER } from './campaign';
+import { getCampaignVariantId, CAMPAIGN_ID_COOKIE_KEY, SEGMENT_COOKIE_KEY } from './campaign';
 
 describe('campaign', () => {
   afterEach(() => {
-    document.cookie = `${CAMPAIGN_PARAMETER}=; Max-Age=0;`;
-    document.cookie = `${SEGMENT_PARAMETER}=; Max-Age=0;`;
+    document.cookie = `${CAMPAIGN_ID_COOKIE_KEY}=; Max-Age=0;`;
+    document.cookie = `${SEGMENT_COOKIE_KEY}=; Max-Age=0;`;
   });
 
   it('should return an empty string', () => {
@@ -30,8 +30,8 @@ describe('campaign', () => {
   });
 
   it('should return CSR cookie', () => {
-    document.cookie = `${CAMPAIGN_PARAMETER}=12345`;
-    document.cookie = `${SEGMENT_PARAMETER}=gold`;
+    document.cookie = `${CAMPAIGN_ID_COOKIE_KEY}=12345`;
+    document.cookie = `${SEGMENT_COOKIE_KEY}=gold`;
 
     expect(getCampaignVariantId()).toBe('12345:gold');
   });
@@ -39,7 +39,7 @@ describe('campaign', () => {
   it('should return SSR cookie', () => {
     const request = {
       headers: {
-        cookie: `${CAMPAIGN_PARAMETER}=12345; ${SEGMENT_PARAMETER}=silver`,
+        cookie: `${CAMPAIGN_ID_COOKIE_KEY}=12345; ${SEGMENT_COOKIE_KEY}=silver`,
       },
     };
 
@@ -47,8 +47,8 @@ describe('campaign', () => {
   });
 
   it('should return empty variant id if ttl is equal zero', () => {
-    document.cookie = `${CAMPAIGN_PARAMETER}=12345`;
-    document.cookie = `${SEGMENT_PARAMETER}=gold`;
+    document.cookie = `${CAMPAIGN_ID_COOKIE_KEY}=12345`;
+    document.cookie = `${SEGMENT_COOKIE_KEY}=gold`;
 
     expect(getCampaignVariantId(undefined, undefined, '0')).toBe('');
   });

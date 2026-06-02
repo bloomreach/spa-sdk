@@ -17,9 +17,9 @@
 import { getCookie, getCookieFromRequest } from './cookie';
 import { HttpRequest } from '../spa/http';
 
-export const CAMPAIGN_PARAMETER = '__br__campaign_id';
-export const SEGMENT_PARAMETER = '__br__segment';
-export const TTL_PARAMETER = '__br__ttl';
+export const CAMPAIGN_ID_COOKIE_KEY = '__br__campaign_id';
+export const SEGMENT_COOKIE_KEY = '__br__segment';
+export const TTL_COOKIE_KEY = '__br__ttl';
 
 const DEFAULT_TTL_DAYS = 7;
 
@@ -50,7 +50,7 @@ export function getCampaignVariantId(
   }
 
   const cookies = request?.headers ? getCookieFromRequest(request) : getCookie();
-  const { [CAMPAIGN_PARAMETER]: _campaignId, [SEGMENT_PARAMETER]: _segmentId } = cookies;
+  const { [CAMPAIGN_ID_COOKIE_KEY]: _campaignId, [SEGMENT_COOKIE_KEY]: _segmentId } = cookies;
 
   if (_campaignId && _segmentId) {
     return `${_campaignId}:${_segmentId}`;

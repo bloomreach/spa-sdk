@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-import { getSegmentIds, SEGMENT_IDS_PARAMETER } from './segmentation';
+import { getSegmentIds, SEGMENT_IDS_COOKIE_KEY } from './segmentation';
 
 describe('segmentation', () => {
   afterEach(() => {
-    document.cookie = `${SEGMENT_IDS_PARAMETER}=;`;
+    document.cookie = `${SEGMENT_IDS_COOKIE_KEY}=;`;
   });
 
   it('should return an empty string', () => {
@@ -26,7 +26,7 @@ describe('segmentation', () => {
   });
 
   it('should return CSR cookie', () => {
-    document.cookie = `${SEGMENT_IDS_PARAMETER}=12345`;
+    document.cookie = `${SEGMENT_IDS_COOKIE_KEY}=12345`;
 
     expect(getSegmentIds()).toBe('12345');
   });
@@ -34,7 +34,7 @@ describe('segmentation', () => {
   it('should return SSR cookie', () => {
     const request = {
       headers: {
-        cookie: `${SEGMENT_IDS_PARAMETER}=12345`,
+        cookie: `${SEGMENT_IDS_COOKIE_KEY}=12345`,
       },
     };
 

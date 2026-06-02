@@ -17,7 +17,7 @@
 import { HttpRequest } from '../spa/http';
 import { getCookie, getCookieFromRequest } from './cookie';
 
-export const SEGMENT_IDS_PARAMETER = '__br__segment_ids';
+export const SEGMENT_IDS_COOKIE_KEY = '__br__segment_ids';
 
 /**
  * Get the segment ids from cookie.
@@ -25,5 +25,5 @@ export const SEGMENT_IDS_PARAMETER = '__br__segment_ids';
  */
 export function getSegmentIds(request?: HttpRequest): string {
   const cookies = request?.headers ? getCookieFromRequest(request) : getCookie();
-  return cookies[SEGMENT_IDS_PARAMETER] ?? '';
+  return cookies[SEGMENT_IDS_COOKIE_KEY] ?? '';
 }
