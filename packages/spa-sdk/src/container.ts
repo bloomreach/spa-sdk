@@ -33,7 +33,6 @@ import { Typed } from 'emittery';
 import { Cms } from './cms/cms';
 import { CmsEvents, CmsEventBus } from './cms/cms-events';
 import { PostMessage, PostMessageOptions } from './cms/post-message';
-import { ConsoleLogger } from './logger/console';
 import { Logger } from './logger/logger';
 import { ButtonFactory } from './page/button-factory';
 import { createManageContentButton, TYPE_MANAGE_CONTENT_BUTTON } from './page/button-manage-content';
@@ -86,7 +85,7 @@ export class SdkRuntime {
 
   getLogger(): Logger {
     if (!this.logger) {
-      this.logger = new ConsoleLogger(console);
+      this.logger = new Logger(console);
     }
 
     return this.logger;

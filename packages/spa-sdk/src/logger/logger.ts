@@ -16,22 +16,25 @@
 
 import { Level } from './level';
 
-export interface Logger {
-  level: Level;
-  debug(...message: unknown[]): void;
-  info(...message: unknown[]): void;
-  warn(...message: unknown[]): void;
-  error(...message: unknown[]): void;
-}
-
-export abstract class Logger implements Logger {
+export class Logger {
   level = Level.Error;
 
-  constructor() {
-    this.debug = this.log.bind(this, Level.Debug);
-    this.info = this.log.bind(this, Level.Info);
-    this.warn = this.log.bind(this, Level.Warn);
-    this.error = this.log.bind(this, Level.Error);
+  constructor(private console: Console) {}
+
+  debug(...message: unknown[]): void {
+    this.log(Level.Debug, ...message);
+  }
+
+  info(...message: unknown[]): void {
+    this.log(Level.Info, ...message);
+  }
+
+  warn(...message: unknown[]): void {
+    this.log(Level.Warn, ...message);
+  }
+
+  error(...message: unknown[]): void {
+    this.log(Level.Error, ...message);
   }
 
   private log(level: Level, ...message: unknown[]): void {
@@ -40,8 +43,6 @@ export abstract class Logger implements Logger {
       return;
     }
 
-    this.write(level, '[SPA]', `[${level.toUpperCase()}]`, ...message);
+    this.console[level]('[SPA]', `[${level.toUpperCase()}]`, ...message);
   }
-
-  protected abstract write(level: Level, ...message: unknown[]): void;
 }
