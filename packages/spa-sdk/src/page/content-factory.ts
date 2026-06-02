@@ -26,13 +26,14 @@ export class ContentFactory {
    * Creates a typed content object from a model.
    * @param model The raw content model from the page.
    * @return The result of the registered builder for the model's type, or the
-   *   model itself unchanged if no builder is registered for that type.
+   *   raw model unchanged if no builder is registered for that type. Callers
+   *   should narrow the return value to the expected type.
    */
-  create(model: ContentModel): ContentModel {
+  create(model: ContentModel): unknown {
     if (!this.builders.has(model.type)) {
       return model;
     }
 
-    return this.builders.get(model.type)!(model) as ContentModel;
+    return this.builders.get(model.type)!(model);
   }
 }
