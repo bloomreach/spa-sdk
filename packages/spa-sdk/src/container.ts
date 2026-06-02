@@ -58,7 +58,7 @@ import { TYPE_META_COMMENT } from './page/meta';
 import { MetaCollection, MetaCollectionModel } from './page/meta-collection';
 import { MetaCommentImpl } from './page/meta-comment';
 import { MetaFactory } from './page/meta-factory';
-import { PageImpl } from './page/page';
+import { PageImpl, PageFactories, PageContext } from './page/page';
 import { PageEvents } from './page/page-events';
 import { PageFactory } from './page/page-factory';
 import { PaginationImpl, PaginationModel, TYPE_PAGINATION } from './page/pagination';
@@ -161,19 +161,21 @@ export class SdkRuntime {
       )],
     ]));
 
-    const pageFactory: PageFactory = (model) => new PageImpl(
-      model,
+    const pageFactories: PageFactories = {
       buttonFactory,
       componentFactory,
       contentFactory,
       linkFactory,
       linkRewriter,
       metaFactory,
-      this.getCmsEventBus()!,
+    };
+    const pageContext: PageContext = {
       apiOptions,
+      cmsEventBus: this.getCmsEventBus(),
       pageEventBus,
-      log,
-    );
+      logger: log,
+    };
+    const pageFactory: PageFactory = (model) => new PageImpl(model, pageFactories, pageContext);
 
     const api = new Api(urlBuilder, apiOptions, log);
     const spa = new Spa(api, pageFactory, this.getCmsEventBus(), pageEventBus, log);

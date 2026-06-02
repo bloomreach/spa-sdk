@@ -244,40 +244,72 @@ export interface Page {
   toJSON(): any;
 }
 
+/**
+ * Build-time dependencies for {@link PageImpl}: the factories used to construct
+ * and render page content.
+ */
+export interface PageFactories {
+  buttonFactory: ButtonFactory;
+  componentFactory: ComponentFactory;
+  contentFactory: ContentFactory;
+  linkFactory: LinkFactory;
+  linkRewriter: LinkRewriter;
+  metaFactory: MetaFactory;
+}
+
+/**
+ * Runtime context for {@link PageImpl}: API configuration, event buses and logging.
+ */
+export interface PageContext {
+  apiOptions: ApiOptions;
+  cmsEventBus?: CmsEventBus;
+  pageEventBus?: PageEventBus;
+  logger?: Logger;
+}
+
 export class PageImpl implements Page {
   protected content = new WeakMap<Record<string, any>, unknown>();
 
   protected root?: Component;
 
+  private buttonFactory: ButtonFactory;
+
+  private contentFactory: ContentFactory;
+
+  private linkFactory: LinkFactory;
+
+  private linkRewriter: LinkRewriter;
+
+  private metaFactory: MetaFactory;
+
+  private cmsEventBus: CmsEventBus | undefined;
+
+  private apiOptions: ApiOptions;
+
+  private logger: Logger | undefined;
+
   /**
    * @param model The raw page model from the Page Model API.
-   * @param buttonFactory Factory for generating Experience Manager button meta-data.
-   * @param componentFactory Factory for building the component tree from the model.
-   * @param contentFactory Factory for hydrating content references (documents, menus, etc.).
-   * @param linkFactory Factory for generating SPA and resource URLs.
-   * @param linkRewriter Rewrites internal links in HTML content to SPA URLs.
-   * @param metaFactory Factory for constructing meta-data collections.
-   * @param cmsEventBus Event bus for CMS-to-SPA communication (preview mode only).
-   * @param apiOptions API options used for content reference resolution.
-   * @param pageEventBus Optional event bus; when provided, content updates are propagated.
-   * @param logger Optional logger for debug output.
+   * @param factories Build-time factories for constructing and rendering page content.
+   * @param context Runtime API configuration, event buses and logger.
    */
   constructor(
     protected model: PageModel,
-    private buttonFactory: ButtonFactory,
-    componentFactory: ComponentFactory,
-    private contentFactory: ContentFactory,
-    private linkFactory: LinkFactory,
-    private linkRewriter: LinkRewriter,
-    private metaFactory: MetaFactory,
-    private cmsEventBus: CmsEventBus,
-    private apiOptions: ApiOptions,
-    pageEventBus?: PageEventBus,
-    private logger?: Logger,
+    factories: PageFactories,
+    context: PageContext,
   ) {
-    pageEventBus?.on('page.update', this.onPageUpdate.bind(this));
+    this.buttonFactory = factories.buttonFactory;
+    this.contentFactory = factories.contentFactory;
+    this.linkFactory = factories.linkFactory;
+    this.linkRewriter = factories.linkRewriter;
+    this.metaFactory = factories.metaFactory;
+    this.cmsEventBus = context.cmsEventBus;
+    this.apiOptions = context.apiOptions;
+    this.logger = context.logger;
 
-    this.root = componentFactory.create(model, this.apiOptions.refPrefix);
+    context.pageEventBus?.on('page.update', this.onPageUpdate.bind(this));
+
+    this.root = factories.componentFactory.create(model, this.apiOptions.refPrefix);
   }
 
   protected onPageUpdate(event: PageUpdateEvent): void {

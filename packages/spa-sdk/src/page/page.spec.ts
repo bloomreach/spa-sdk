@@ -26,7 +26,7 @@ import { LinkFactory } from './link-factory';
 import { LinkRewriter } from './link-rewriter';
 import { MetaCollectionImpl } from './meta-collection';
 import { MetaFactory } from './meta-factory';
-import { isPage, Page, PageImpl, PageModel } from './page';
+import { isPage, Page, PageImpl, PageModel, PageFactories, PageContext } from './page';
 import { PageEventBus } from './page-events';
 import { ApiOptions } from '../spa';
 
@@ -62,18 +62,21 @@ const model = {
 } as PageModel;
 
 function createPage(pageModel = model) {
-  return new PageImpl(
-    pageModel,
+  const factories: PageFactories = {
     buttonFactory,
     componentFactory,
     contentFactory,
     linkFactory,
     linkRewriter,
     metaFactory,
-    cmsEventBus,
+  };
+  const context: PageContext = {
     apiOptions,
-    eventBus,
-  );
+    cmsEventBus,
+    pageEventBus: eventBus,
+  };
+
+  return new PageImpl(pageModel, factories, context);
 }
 
 beforeEach(() => {
