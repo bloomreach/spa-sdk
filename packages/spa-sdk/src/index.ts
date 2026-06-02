@@ -102,6 +102,31 @@ function parseRequest(configuration: Configuration): ParsedRequest {
   };
 }
 
+function resolveConfig(configuration: Configuration, parsed: ParsedRequest): ResolvedConfig {
+  const apiParams = new URLSearchParams();
+  if (parsed.campaignVariantId) {
+    apiParams.append(DEFAULT_CAMPAIGN_VARIANT_PARAMETER_API, parsed.campaignVariantId);
+  }
+  if (parsed.segmentIds) {
+    apiParams.append(DEFAULT_SEGMENT_IDS_PARAMETER_API, parsed.segmentIds);
+  }
+  if (configuration.refPrefix) {
+    apiParams.append('refPrefix', configuration.refPrefix);
+  }
+
+  // Merge in query-string extracted tokens; user-provided config values take precedence
+  // because ...configuration spreads after the parsed defaults.
+  return {
+    authorizationToken: parsed.authorizationToken,
+    serverId: parsed.serverId,
+    ...configuration,
+    endpoint: appendSearchParams(configuration.endpoint ?? '', apiParams),
+    baseUrl: appendSearchParams(configuration.baseUrl ?? '', parsed.searchParams),
+    origin: configuration.origin ?? parseUrl(configuration.endpoint ?? '').origin,
+    NBRMode: configuration.NBRMode || false,
+  };
+}
+
 function logBootInfo(logger: Logger, parsed: ParsedRequest, resolved: ResolvedConfig): void {
   const debugFields: Array<[string, string | undefined]> = [
     ['Token', parsed.authorizationToken],
@@ -166,30 +191,7 @@ export function initialize(configuration: Configuration, model?: Page | PageMode
   logger.info('Enabled token-based setup.');
 
   const parsed = parseRequest(configuration);
-
-  const apiParams = new URLSearchParams();
-  if (parsed.campaignVariantId) {
-    apiParams.append(DEFAULT_CAMPAIGN_VARIANT_PARAMETER_API, parsed.campaignVariantId);
-  }
-  if (parsed.segmentIds) {
-    apiParams.append(DEFAULT_SEGMENT_IDS_PARAMETER_API, parsed.segmentIds);
-  }
-  if (configuration.refPrefix) {
-    apiParams.append('refPrefix', configuration.refPrefix);
-  }
-
-  // Merge in query-string extracted tokens; user-provided config values take precedence
-  // because ...configuration spreads after the parsed defaults.
-  const resolved: ResolvedConfig = {
-    authorizationToken: parsed.authorizationToken,
-    serverId: parsed.serverId,
-    ...configuration,
-    endpoint: appendSearchParams(configuration.endpoint ?? '', apiParams),
-    baseUrl: appendSearchParams(configuration.baseUrl ?? '', parsed.searchParams),
-    origin: configuration.origin ?? parseUrl(configuration.endpoint ?? '').origin,
-    NBRMode: configuration.NBRMode || false,
-  };
-
+  const resolved = resolveConfig(configuration, parsed);
   logBootInfo(logger, parsed, resolved);
 
   return onReady(bootSpa(parsed, resolved, model, logger), (page) => {
