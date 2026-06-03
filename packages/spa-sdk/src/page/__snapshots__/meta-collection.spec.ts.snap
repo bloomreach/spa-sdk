@@ -8,11 +8,19 @@ exports[`MetaCollectionImpl clear should remove rendered comments 1`] = `
 
 exports[`MetaCollectionImpl constructor should hold meta-data items 1`] = `
 [
-  {
-    "data": "meta1",
+  MetaCommentImpl {
+    "model": {
+      "data": "<!--meta1-->",
+      "type": "comment",
+    },
+    "position": "begin",
   },
-  {
-    "data": "meta2",
+  MetaCommentImpl {
+    "model": {
+      "data": "<!--meta2-->",
+      "type": "comment",
+    },
+    "position": "end",
   },
 ]
 `;
