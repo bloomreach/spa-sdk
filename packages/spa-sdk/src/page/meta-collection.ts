@@ -14,12 +14,8 @@
  * limitations under the License.
  */
 
-import { inject, injectable } from 'inversify';
 import { Meta, MetaModel, META_POSITION_BEGIN, META_POSITION_END } from './meta';
-import { isMetaComment } from './meta-comment';
-import { MetaFactory } from './meta-factory';
-
-export const MetaCollectionModelToken = Symbol.for('MetaCollectionModelToken');
+import { MetaCommentImpl, isMetaComment } from './meta-comment';
 
 export interface MetaCollectionModel {
   beginNodeSpan?: MetaModel[];
@@ -46,17 +42,13 @@ export interface MetaCollection extends Array<Meta> {
   render(head: Node, tail: Node): () => void;
 }
 
-@injectable()
 export class MetaCollectionImpl extends Array<Meta> implements MetaCollection {
   private comments: Comment[] = [];
 
-  constructor(
-    @inject(MetaCollectionModelToken) model: MetaCollectionModel,
-    @inject(MetaFactory) metaFactory: MetaFactory,
-  ) {
+  constructor(model: MetaCollectionModel) {
     super(
-      ...(model.beginNodeSpan || []).map((beginModel) => metaFactory.create(beginModel, META_POSITION_BEGIN)),
-      ...(model.endNodeSpan || []).map((endModel) => metaFactory.create(endModel, META_POSITION_END)),
+      ...(model.beginNodeSpan || []).map((beginModel) => new MetaCommentImpl(beginModel, META_POSITION_BEGIN)),
+      ...(model.endNodeSpan || []).map((endModel) => new MetaCommentImpl(endModel, META_POSITION_END)),
     );
 
     const prototype = Object.create(MetaCollectionImpl.prototype);

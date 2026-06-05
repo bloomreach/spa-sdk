@@ -24,8 +24,7 @@ import { ContentFactory } from './content-factory';
 import { isLink, Link, TYPE_LINK_EXTERNAL, TYPE_LINK_INTERNAL } from './link';
 import { LinkFactory } from './link-factory';
 import { LinkRewriter } from './link-rewriter';
-import { MetaCollectionFactory } from './meta-collection-factory';
-import { isPage, Page, PageImpl, PageModel } from './page';
+import { isPage, Page, PageImpl, PageModel, PageFactories, PageContext } from './page';
 import { PageEventBus } from './page-events';
 import { ApiOptions } from '../spa';
 
@@ -38,7 +37,6 @@ let eventBus: PageEventBus;
 let apiOptions: ApiOptions = {} as ApiOptions;
 let linkFactory: jest.Mocked<LinkFactory>;
 let linkRewriter: jest.Mocked<LinkRewriter>;
-let metaFactory: jest.MockedFunction<MetaCollectionFactory>;
 let root: Component;
 
 const model = {
@@ -59,18 +57,20 @@ const model = {
 } as PageModel;
 
 function createPage(pageModel = model) {
-  return new PageImpl(
-    pageModel,
+  const factories: PageFactories = {
     buttonFactory,
     componentFactory,
     contentFactory,
     linkFactory,
     linkRewriter,
-    metaFactory,
-    cmsEventBus,
+  };
+  const context: PageContext = {
     apiOptions,
-    eventBus,
-  );
+    cmsEventBus,
+    pageEventBus: eventBus,
+  };
+
+  return new PageImpl(pageModel, factories, context);
 }
 
 beforeEach(() => {
@@ -83,7 +83,6 @@ beforeEach(() => {
   apiOptions = {} as ApiOptions;
   linkFactory = { create: jest.fn() } as unknown as typeof linkFactory;
   linkRewriter = { rewrite: jest.fn() } as unknown as jest.Mocked<LinkRewriter>;
-  metaFactory = jest.fn();
   root = { getComponent: jest.fn() } as unknown as jest.Mocked<Component>;
 });
 
@@ -160,17 +159,6 @@ describe('PageImpl', () => {
       const page = createPage();
 
       expect(page.getDocument()).toBeUndefined();
-    });
-  });
-
-  describe('getMeta', () => {
-    it('should delegate to the MetaFactory to create new meta', () => {
-      const page = createPage();
-      const testModel = {};
-
-      page.getMeta(testModel);
-
-      expect(metaFactory).toHaveBeenCalledWith(testModel);
     });
   });
 

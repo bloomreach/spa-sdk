@@ -1,60 +1,61 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`createManageContentButton should generate add content button when there are no content parameters 1`] = `
-{
-  "beginNodeSpan": [
-    {
+[
+  MetaCommentImpl {
+    "model": {
       "data": "{"HST-Type":"MANAGE_CONTENT_LINK","documentTemplateQuery":"new-content-document","folderTemplateQuery":"new-content-folder","rootPath":"content"}",
       "type": "comment",
     },
-  ],
-}
+    "position": "begin",
+  },
+]
 `;
 
 exports[`createManageContentButton should merge custom parameters 1`] = `
-{
-  "beginNodeSpan": [
-    {
+[
+  MetaCommentImpl {
+    "model": {
       "data": "{"HST-Type":"MANAGE_CONTENT_LINK","uuid":"id","defaultPath":"2020/11","documentTemplateQuery":"new-news-document","folderTemplateQuery":"new-news-folder","rootPath":"news","parameterName":"document"}",
       "type": "comment",
     },
-  ],
-  "endNodeSpan": [],
-}
+    "position": "begin",
+  },
+]
 `;
 
 exports[`createManageContentButton should not set relative parameter flag 1`] = `
-{
-  "beginNodeSpan": [
-    {
+[
+  MetaCommentImpl {
+    "model": {
       "data": "{"HST-Type":"MANAGE_CONTENT_LINK","uuid":"id","defaultPath":"content"}",
       "type": "comment",
     },
-  ],
-  "endNodeSpan": [],
-}
+    "position": "begin",
+  },
+]
 `;
 
 exports[`createManageContentButton should not set relative parameter flag 2`] = `
-{
-  "beginNodeSpan": [
-    {
+[
+  MetaCommentImpl {
+    "model": {
       "data": "{"HST-Type":"MANAGE_CONTENT_LINK","uuid":"id","defaultPath":"content"}",
       "type": "comment",
     },
-  ],
-  "endNodeSpan": [],
-}
+    "position": "begin",
+  },
+]
 `;
 
 exports[`createManageContentButton should set relative parameter flag 1`] = `
-{
-  "beginNodeSpan": [
-    {
+[
+  MetaCommentImpl {
+    "model": {
       "data": "{"HST-Type":"MANAGE_CONTENT_LINK","uuid":"id","parameterValueIsRelativePath":"true"}",
       "type": "comment",
     },
-  ],
-  "endNodeSpan": [],
-}
+    "position": "begin",
+  },
+]
 `;

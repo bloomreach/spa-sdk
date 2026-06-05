@@ -26,14 +26,14 @@ import {
 } from './container-item';
 import { PageEventBus, PageEvents } from './page-events';
 import { LinkFactory } from './link-factory';
-import { MetaCollectionFactory } from './meta-collection-factory';
-import { MetaCollection } from './meta-collection';
+import { MetaCollectionImpl, MetaCollection } from './meta-collection';
 import { Page, PageModel } from './page';
 import { ApiOptions } from '../spa';
 
+jest.mock('./meta-collection');
+
 let eventBus: PageEventBus;
 let linkFactory: jest.Mocked<LinkFactory>;
-let metaFactory: jest.MockedFunction<MetaCollectionFactory>;
 let apiOptions: ApiOptions = {} as ApiOptions;
 
 const model = {
@@ -43,13 +43,12 @@ const model = {
 } as ContainerItemModel;
 
 function createContainerItem(containerItemModel = model) {
-  return new ContainerItemImpl(containerItemModel, linkFactory, metaFactory, apiOptions, eventBus);
+  return new ContainerItemImpl(containerItemModel, linkFactory, apiOptions, eventBus);
 }
 
 beforeEach(() => {
   eventBus = new Typed<PageEvents>();
   linkFactory = { create: jest.fn() } as unknown as typeof linkFactory;
-  metaFactory = jest.fn();
   apiOptions = {} as ApiOptions;
 });
 
@@ -151,7 +150,7 @@ describe('ContainerItemImpl', () => {
 
     beforeEach(() => {
       containerItem = createContainerItem({ ...model, id: 'id1', label: 'a' });
-      metaFactory.mockClear();
+      jest.mocked(MetaCollectionImpl).mockClear();
     });
 
     it('should not update a container item if it is not the same container item', async () => {
@@ -162,14 +161,14 @@ describe('ContainerItemImpl', () => {
         } as unknown as PageModel,
       });
 
-      expect(metaFactory).not.toHaveBeenCalled();
+      expect(MetaCollectionImpl).not.toHaveBeenCalled();
       expect(containerItem.getType()).toBe('a');
     });
 
     it('should update a meta-data on page.update event', async () => {
       const metaModel = {};
       const meta = {} as MetaCollection;
-      metaFactory.mockReturnValueOnce(meta);
+      jest.mocked(MetaCollectionImpl).mockReturnValueOnce(meta as unknown as MetaCollectionImpl);
       await eventBus.emitSerial('page.update', {
         page: {
           page: { root: { ...model, id: 'id1', meta: metaModel } },
@@ -177,7 +176,7 @@ describe('ContainerItemImpl', () => {
         } as unknown as PageModel,
       });
 
-      expect(metaFactory).toHaveBeenCalledWith(metaModel);
+      expect(MetaCollectionImpl).toHaveBeenCalledWith(metaModel);
       expect(containerItem.getMeta()).toBe(meta);
     });
 
@@ -269,7 +268,7 @@ describe('isContainerItem', () => {
   });
 
   it('should return false', () => {
-    const component = new ComponentImpl(model, [], linkFactory, metaFactory);
+    const component = new ComponentImpl(model, [], linkFactory);
 
     expect(isContainerItem(undefined)).toBe(false);
     expect(isContainerItem(component)).toBe(false);

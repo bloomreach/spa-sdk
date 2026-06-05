@@ -14,15 +14,10 @@
  * limitations under the License.
  */
 
-import { inject, injectable } from 'inversify';
 import { LinkFactory } from './link-factory';
 import { Link } from './link';
-import { MetaCollectionFactory } from './meta-collection-factory';
-import { MetaCollectionModel, MetaCollection } from './meta-collection';
+import { MetaCollectionImpl, MetaCollectionModel, MetaCollection } from './meta-collection';
 import { Reference } from './reference';
-
-export const ComponentChildrenToken = Symbol.for('ComponentChildrenToken');
-export const ComponentModelToken = Symbol.for('ComponentModelToken');
 
 /**
  * Generic component type.
@@ -123,30 +118,35 @@ export interface Component {
   getChildren(): Component[];
 
   /**
-   * Looks up for a nested component.
-   * @param componentNames A lookup path.
+   * Looks up a nested component by a sequence of names (e.g. `getComponent('main', 'banner')`).
+   * @param componentNames Names of the component and its ancestors, from outermost to innermost.
+   * @return The matching component, or `undefined` if not found.
    */
   getComponent<U extends Component>(...componentNames: string[]): U | undefined;
+
+  /**
+   * Returns the component itself when called with no arguments.
+   */
   getComponent(): this;
 
   /**
-   * Looks up for a nested component by its id.
-   * @param id A component id.
+   * Looks up a nested component by its id, searching the full subtree.
+   * @param id The component id to find.
+   * @return The matching component (typed as `U`), this component if the id matches, or
+   *   `undefined` if not found.
    */
   getComponentById<U extends Component>(id: string): U | this | undefined;
 }
 
-@injectable()
 export class ComponentImpl implements Component {
   protected meta: MetaCollection;
 
   constructor(
-    @inject(ComponentModelToken) protected model: ComponentModel,
-    @inject(ComponentChildrenToken) protected children: Component[],
-    @inject(LinkFactory) private linkFactory: LinkFactory,
-    @inject(MetaCollectionFactory) metaFactory: MetaCollectionFactory,
+    protected model: ComponentModel,
+    protected children: Component[],
+    private linkFactory: LinkFactory,
   ) {
-    this.meta = metaFactory(this.model.meta);
+    this.meta = new MetaCollectionImpl(this.model.meta);
   }
 
   getId(): string {

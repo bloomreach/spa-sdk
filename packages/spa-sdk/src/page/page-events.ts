@@ -17,8 +17,6 @@
 import { Typed } from 'emittery';
 import { PageModel } from './page';
 
-export const PageEventBusService = Symbol('PageEventBusService');
-
 /**
  * Page model update event.
  */

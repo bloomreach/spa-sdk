@@ -14,36 +14,36 @@
  * limitations under the License.
  */
 
-import { Segmentation } from './segmentation';
+import { getSegmentIds, SEGMENT_IDS_COOKIE_KEY } from './segmentation';
 
-describe('campaign', () => {
+describe('segmentation', () => {
   afterEach(() => {
-    document.cookie = `${Segmentation.SEGMENT_IDS_PARAMETER}=;`;
+    document.cookie = `${SEGMENT_IDS_COOKIE_KEY}=;`;
   });
 
   it('should return an empty string', () => {
-    expect(Segmentation.GET_SEGMENT_IDS()).toBe('');
+    expect(getSegmentIds()).toBe('');
   });
 
   it('should return CSR cookie', () => {
-    document.cookie = `${Segmentation.SEGMENT_IDS_PARAMETER}=12345`;
+    document.cookie = `${SEGMENT_IDS_COOKIE_KEY}=12345`;
 
-    expect(Segmentation.GET_SEGMENT_IDS()).toBe('12345');
+    expect(getSegmentIds()).toBe('12345');
   });
 
   it('should return SSR cookie', () => {
     const request = {
       headers: {
-        cookie: `${Segmentation.SEGMENT_IDS_PARAMETER}=12345`,
+        cookie: `${SEGMENT_IDS_COOKIE_KEY}=12345`,
       },
     };
 
-    expect(Segmentation.GET_SEGMENT_IDS(request)).toBe('12345');
+    expect(getSegmentIds(request)).toBe('12345');
   });
 
   it('should return empty string if SSR cookie is absent', () => {
     const request = {};
 
-    expect(Segmentation.GET_SEGMENT_IDS(request)).toBe('');
+    expect(getSegmentIds(request)).toBe('');
   });
 });

@@ -14,32 +14,32 @@
  * limitations under the License.
  */
 
-import { inject, injectable, optional } from 'inversify';
-import { CmsEventBus, CmsEventBusService, CmsUpdateEvent } from '../cms';
+import { CmsEventBus, CmsUpdateEvent } from '../cms';
 import { Logger } from '../logger';
-import { EventBus, Page, PageEventBusService, PageFactory, PageModel } from '../page';
-import { Api, ApiService } from './api';
-
-export const SpaService = Symbol.for('SpaService');
+import { Page, PageModel } from '../page';
+import { PageEventBus } from '../page/page-events';
+import { PageFactory } from '../page/page-factory';
+import { Api } from './api';
 
 /**
  * SPA entry point interacting with the Channel Manager and the Page Model API.
  */
-@injectable()
 export class Spa {
   private page?: Page;
 
   /**
-   * @param pageEventBus Event bus to exchange data between submodules.
-   * @param api Api client.
-   * @param pageFactory Factory to produce page instances.
+   * @param api API client for fetching page and component models.
+   * @param pageFactory Factory to hydrate a {@link PageModel} into a {@link Page}.
+   * @param cmsEventBus Event bus for CMS-to-SPA communication (preview mode only).
+   * @param pageEventBus Event bus for internal page-update events.
+   * @param logger Optional logger for debug output.
    */
   constructor(
-    @inject(ApiService) private api: Api,
-    @inject(PageFactory) private pageFactory: PageFactory,
-    @inject(CmsEventBusService) @optional() private cmsEventBus?: CmsEventBus,
-    @inject(PageEventBusService) @optional() private pageEventBus?: EventBus,
-    @inject(Logger) @optional() private logger?: Logger,
+    private api: Api,
+    private pageFactory: PageFactory,
+    private cmsEventBus?: CmsEventBus,
+    private pageEventBus?: PageEventBus,
+    private logger?: Logger,
   ) {
     this.onCmsUpdate = this.onCmsUpdate.bind(this);
   }

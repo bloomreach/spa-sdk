@@ -14,27 +14,7 @@
  * limitations under the License.
  */
 
-import { ContainerModule } from 'inversify';
-import { Typed } from 'emittery';
-import { CmsImpl, CmsService } from './cms';
-import { CmsEventBusService } from './cms-events';
-import { PostMessageService, PostMessage } from './post-message';
-import { RpcClientService, RpcServerService } from './rpc';
-
-export function CmsModule(): ContainerModule {
-  return new ContainerModule((bind) => {
-    bind(CmsEventBusService)
-      .toDynamicValue(() => new Typed())
-      .inSingletonScope()
-      .when(() => typeof window !== 'undefined');
-    bind(PostMessageService).to(PostMessage).inSingletonScope();
-    bind(RpcClientService).toService(PostMessageService);
-    bind(RpcServerService).toService(PostMessageService);
-    bind(CmsService).to(CmsImpl).inSingletonScope();
-  });
-}
-
-export { CmsOptions, CmsService, Cms } from './cms';
-export { CmsUpdateEvent, CmsEventBusService, CmsEventBus } from './cms-events';
-export { PostMessageOptions, PostMessageService, PostMessage } from './post-message';
-export { RpcClientService, RpcClient, RpcServerService, RpcServer } from './rpc';
+export { Cms } from './cms';
+export { CmsUpdateEvent, CmsEventBus } from './cms-events';
+export { PostMessageOptions, PostMessage } from './post-message';
+export { RpcChannel } from './rpc';

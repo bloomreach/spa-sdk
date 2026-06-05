@@ -14,33 +14,12 @@
  * limitations under the License.
  */
 
-import { inject, injectable, optional } from 'inversify';
 import { Logger } from '../logger';
-import { CmsEventBus, CmsEventBusService, CmsUpdateEvent } from './cms-events';
-import { RpcClientService, RpcServerService, Procedures, RpcClient, RpcServer } from './rpc';
-
-export const CmsService = Symbol.for('CmsService');
+import { CmsEventBus, CmsUpdateEvent } from './cms-events';
+import { PostMessageOptions } from './post-message';
+import { Procedures, RpcChannel } from './rpc';
 
 const GLOBAL_WINDOW = typeof window === 'undefined' ? undefined : window;
-
-export interface CmsOptions {
-  /**
-   * The window reference for the CMS integration.
-   * By default the global window object will be used.
-   */
-  window?: Window;
-}
-
-/**
- * CMS integration layer.
- */
-export interface Cms {
-  /**
-   * Initializes integration with the CMS.
-   * @param options The CMS integration options.
-   */
-  initialize(options: CmsOptions): void;
-}
 
 interface CmsProcedures extends Procedures {
   sync(): void;
@@ -56,23 +35,26 @@ interface SpaEvents {
   ready: never;
 }
 
-@injectable()
-export class CmsImpl implements Cms {
+export class Cms {
   private window?: Window;
 
+  /**
+   * @param channel Bidirectional RPC channel to the CMS (always a PostMessage instance).
+   * @param cmsEventBus Event bus for relaying CMS updates to the SPA (preview mode only).
+   * @param logger Optional logger for debug output.
+   */
   constructor(
-    @inject(RpcClientService) protected rpcClient: RpcClient<CmsProcedures, CmsEvents>,
-    @inject(RpcServerService) protected rpcServer: RpcServer<SpaProcedures, SpaEvents>,
-    @inject(CmsEventBusService) @optional() protected cmsEventBus?: CmsEventBus,
-    @inject(Logger) @optional() private logger?: Logger,
+    protected channel: RpcChannel<CmsProcedures, CmsEvents, SpaProcedures, SpaEvents>,
+    protected cmsEventBus?: CmsEventBus,
+    private logger?: Logger,
   ) {
     this.onStateChange = this.onStateChange.bind(this);
     this.cmsEventBus?.on('page.ready', this.onPageReady.bind(this));
-    this.rpcClient.on('update', this.onUpdate.bind(this));
-    this.rpcServer.register('inject', this.inject.bind(this));
+    this.channel.on('update', this.onUpdate.bind(this));
+    this.channel.register('inject', this.inject.bind(this));
   }
 
-  initialize({ window = GLOBAL_WINDOW }: CmsOptions): void {
+  initialize({ window = GLOBAL_WINDOW }: PostMessageOptions): void {
     if (this.window === window) {
       return;
     }
@@ -91,7 +73,7 @@ export class CmsImpl implements Cms {
   private onInitialize(): void {
     this.logger?.debug('The page is ready to accept incoming messages.');
 
-    this.rpcServer.trigger('ready', undefined as never);
+    this.channel.trigger('ready', undefined as never);
   }
 
   private onStateChange(): void {
@@ -106,7 +88,7 @@ export class CmsImpl implements Cms {
   protected onPageReady(): void {
     this.logger?.debug('Synchronizing the page.');
 
-    this.rpcClient.call('sync');
+    this.channel.call('sync');
   }
 
   protected onUpdate(event: CmsUpdateEvent): void {

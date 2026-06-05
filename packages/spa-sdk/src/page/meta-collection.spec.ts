@@ -15,18 +15,11 @@
  */
 
 import { isMetaCollection, MetaCollectionImpl, MetaCollectionModel } from './meta-collection';
-import { MetaFactory } from './meta-factory';
-import { MetaType, Meta, META_POSITION_BEGIN, META_POSITION_END, TYPE_META_COMMENT } from './meta';
+import { META_POSITION_BEGIN, META_POSITION_END, TYPE_META_COMMENT } from './meta';
 import { MetaCommentImpl } from './meta-comment';
 
-let factory: jest.Mocked<MetaFactory>;
-
-beforeEach(() => {
-  factory = { create: jest.fn() } as unknown as jest.Mocked<MetaFactory>;
-});
-
 function createMetaCollection(model = {} as MetaCollectionModel) {
-  return new MetaCollectionImpl(model, factory);
+  return new MetaCollectionImpl(model);
 }
 
 describe('MetaCollectionImpl', () => {
@@ -37,38 +30,35 @@ describe('MetaCollectionImpl', () => {
       expect(collection).toBeInstanceOf(Array);
     });
 
-    it('should call a factory to build meta-data', () => {
-      createMetaCollection({
+    it('should build MetaCommentImpl for each span item', () => {
+      const collection = createMetaCollection({
         beginNodeSpan: [
-          { data: 'meta1', type: 'type1' as MetaType },
-          { data: 'meta2', type: 'type2' as MetaType },
+          { data: '<!--meta1-->', type: TYPE_META_COMMENT },
+          { data: '<!--meta2-->', type: TYPE_META_COMMENT },
         ],
+        endNodeSpan: [{ data: '<!--meta3-->', type: TYPE_META_COMMENT }],
       });
 
-      expect(factory.create).toHaveBeenCalledWith({ data: 'meta1', type: 'type1' }, expect.anything());
-      expect(factory.create).toHaveBeenCalledWith({ data: 'meta2', type: 'type2' }, expect.anything());
+      expect(collection).toHaveLength(3);
+      expect(collection[0]).toBeInstanceOf(MetaCommentImpl);
+      expect(collection[1]).toBeInstanceOf(MetaCommentImpl);
+      expect(collection[2]).toBeInstanceOf(MetaCommentImpl);
     });
 
-    it('should pass a position of the meta', () => {
-      createMetaCollection({
-        beginNodeSpan: [{ data: 'meta1', type: 'type1' as MetaType }],
-        endNodeSpan: [{ data: 'meta2', type: 'type2' as MetaType }],
+    it('should assign correct positions', () => {
+      const collection = createMetaCollection({
+        beginNodeSpan: [{ data: '<!--begin-->', type: TYPE_META_COMMENT }],
+        endNodeSpan: [{ data: '<!--end-->', type: TYPE_META_COMMENT }],
       });
 
-      expect(factory.create).toHaveBeenCalledWith({ data: 'meta1', type: 'type1' }, META_POSITION_BEGIN);
-      expect(factory.create).toHaveBeenCalledWith({ data: 'meta2', type: 'type2' }, META_POSITION_END);
+      expect(collection[0].getPosition()).toBe(META_POSITION_BEGIN);
+      expect(collection[1].getPosition()).toBe(META_POSITION_END);
     });
 
     it('should hold meta-data items', () => {
-      const meta1 = { data: 'meta1' } as unknown as Meta;
-      const meta2 = { data: 'meta2' } as unknown as Meta;
-
-      factory.create.mockReturnValueOnce(meta1);
-      factory.create.mockReturnValueOnce(meta2);
-
       const collection = createMetaCollection({
-        beginNodeSpan: [{ data: 'meta1', type: 'type1' as MetaType }],
-        endNodeSpan: [{ data: 'meta2', type: 'type2' as MetaType }],
+        beginNodeSpan: [{ data: '<!--meta1-->', type: TYPE_META_COMMENT }],
+        endNodeSpan: [{ data: '<!--meta2-->', type: TYPE_META_COMMENT }],
       });
 
       expect(collection).toMatchSnapshot();
@@ -85,7 +75,6 @@ describe('MetaCollectionImpl', () => {
           beginNodeSpan: [{ data: 'meta1', type: TYPE_META_COMMENT }],
           endNodeSpan: [{ data: 'meta2', type: TYPE_META_COMMENT }],
         },
-        new MetaFactory().register(TYPE_META_COMMENT, (model, position) => new MetaCommentImpl(model, position)),
       );
 
       a = document.createElement('a');
@@ -122,7 +111,6 @@ describe('MetaCollectionImpl', () => {
             { data: 'meta4', type: TYPE_META_COMMENT },
           ],
         },
-        new MetaFactory().register(TYPE_META_COMMENT, (model, position) => new MetaCommentImpl(model, position)),
       );
 
       a = document.createElement('a');

@@ -19,16 +19,15 @@
  * @module index
  */
 
-import { Container } from 'inversify';
-import 'reflect-metadata';
-import { Cms, CmsModule, CmsService, PostMessage, PostMessageService } from './cms';
+import { SdkRuntime } from './container';
 import { Configuration } from './configuration';
-import { Level, Logger, LoggerModule } from './logger';
-import { isPage, Page, PageModel, PageModule } from './page';
-import { Campaign } from './services/campaign';
-import { Segmentation } from './services/segmentation';
-import { ApiOptionsToken, Spa, SpaModule, SpaService } from './spa';
-import { appendSearchParams, extractSearchParams, parseUrl, UrlBuilderOptionsToken, UrlModule } from './url';
+import { Level, Logger } from './logger';
+import { isPage, Page, PageModel } from './page';
+import { getCampaignVariantId } from './services/campaign';
+import { getSegmentIds } from './services/segmentation';
+import { appendSearchParams, extractSearchParams, parseUrl } from './url';
+
+const runtime = new SdkRuntime();
 
 const DEFAULT_AUTHORIZATION_PARAMETER = 'token';
 const DEFAULT_SERVER_ID_PARAMETER = 'server-id';
@@ -41,21 +40,6 @@ const DEFAULT_TTL_PARAMETER_URL = `${BTM_PREFIX}ttl`;
 const BR_PREFIX = '__br__';
 const DEFAULT_CAMPAIGN_VARIANT_PARAMETER_API = `${BR_PREFIX}campaignVariant`;
 const DEFAULT_SEGMENT_IDS_PARAMETER_API = `${BR_PREFIX}segmentIds`;
-
-const baseContainer = new Container({ skipBaseClassChecks: true });
-baseContainer.load(CmsModule(), LoggerModule());
-
-let container = baseContainer.createChild();
-
-function cleanupModules(): void {
-  if (container.isBound(SpaService)) {
-    const spa = container.get<Spa>(SpaService);
-    spa.destroy();
-  }
-
-  // Create a new child container from the base to ensure clean state
-  container = baseContainer.createChild();
-}
 
 function onReady<T>(value: T | Promise<T>, callback: (cbValue: T) => unknown): T | Promise<T> {
   // eslint-disable-next-line no-sequences
@@ -81,6 +65,9 @@ type ResolvedConfig = Configuration & {
   baseUrl: string;
   origin: string;
   NBRMode: boolean;
+  // Query-string extracted values; user-provided config values take precedence.
+  authorizationToken?: string;
+  serverId?: string;
 };
 
 function parseRequest(configuration: Configuration): ParsedRequest {
@@ -110,8 +97,8 @@ function parseRequest(configuration: Configuration): ParsedRequest {
     campaignId,
     segmentId,
     ttl,
-    campaignVariantId: Campaign.GET_VARIANT_ID(campaignId, segmentId, ttl, configuration.request),
-    segmentIds: Segmentation.GET_SEGMENT_IDS(configuration.request),
+    campaignVariantId: getCampaignVariantId(campaignId, segmentId, ttl, configuration.request),
+    segmentIds: getSegmentIds(configuration.request),
   };
 }
 
@@ -127,7 +114,11 @@ function resolveConfig(configuration: Configuration, parsed: ParsedRequest): Res
     apiParams.append('refPrefix', configuration.refPrefix);
   }
 
+  // Merge in query-string extracted tokens; user-provided config values take precedence
+  // because ...configuration spreads after the parsed defaults.
   return {
+    authorizationToken: parsed.authorizationToken,
+    serverId: parsed.serverId,
     ...configuration,
     endpoint: appendSearchParams(configuration.endpoint ?? '', apiParams),
     baseUrl: appendSearchParams(configuration.baseUrl ?? '', parsed.searchParams),
@@ -159,17 +150,12 @@ function bootSpa(
   model: PageModel | undefined,
   logger: Logger,
 ): Page | Promise<Page> {
-  container.load(PageModule(), SpaModule(), UrlModule());
-  container
-    .bind(ApiOptionsToken)
-    .toConstantValue({ authorizationToken: parsed.authorizationToken, serverId: parsed.serverId, ...resolved });
-  container.bind(UrlBuilderOptionsToken).toConstantValue(resolved);
+  const spa = runtime.createScope(resolved);
 
-  return onReady(container.get<Spa>(SpaService).initialize(model ?? parsed.path), (page) => {
+  return onReady(spa.initialize(model ?? parsed.path), (page) => {
     if (page.isPreview() && resolved.endpoint) {
       logger.info('Running in preview mode.');
-      container.get<PostMessage>(PostMessageService).initialize(resolved);
-      container.get<Cms>(CmsService).initialize(resolved);
+      runtime.initializePreview(resolved);
     } else {
       logger.info('Running in live mode.');
     }
@@ -197,9 +183,9 @@ export function initialize(configuration: Configuration, model?: Page | PageMode
     return model;
   }
 
-  cleanupModules();
+  runtime.destroyScope();
 
-  const logger = container.get(Logger);
+  const logger = runtime.getLogger();
   logger.level = configuration.debug ? Level.Debug : Level.Error;
   logger.debug('Configuration:', configuration);
   logger.info('Enabled token-based setup.');
@@ -217,7 +203,7 @@ export function initialize(configuration: Configuration, model?: Page | PageMode
  * Destroys the integration with the SPA page.
  */
 export function destroy(): void {
-  cleanupModules();
+  runtime.destroyScope();
 }
 
 export { Configuration } from './configuration';

@@ -17,6 +17,4 @@
 import { Builder } from './factory';
 import { PageModel, Page } from './page';
 
-export const PageFactory = Symbol.for('PageFactory');
-
 export type PageFactory = Builder<[PageModel], Page>;

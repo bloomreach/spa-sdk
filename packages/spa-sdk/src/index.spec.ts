@@ -66,6 +66,30 @@ describe('initialize', () => {
     expect(root!.getParameters()).toEqual({});
   });
 
+  it('should build an isolated page graph for each initialize call', async () => {
+    const config = {
+      httpClient,
+      window,
+      baseUrl: '//example-domain.com',
+      endpoint: 'http://localhost:8080/site/my-spa/resourceapi',
+      path: '/?token=something',
+      request: { emit },
+    };
+
+    const page1 = await initialize(config);
+    const page2 = await initialize(config);
+
+    // Each call must produce a fresh object graph: distinct page and component instances.
+    expect(page2).not.toBe(page1);
+    expect(page2.getComponent()).not.toBe(page1.getComponent());
+    expect(page2.getComponent('main')).not.toBe(page1.getComponent('main'));
+
+    // The earlier page remains independently usable after a later page is built,
+    // proving no per-page state leaks through the shared composition root.
+    expect(page1.getTitle()).toBe('Homepage');
+    expect(page2.getTitle()).toBe('Homepage');
+  });
+
   it('should contain page meta-data', () => {
     const [meta1, meta2] = defaultPage.getComponent()!.getMeta();
 

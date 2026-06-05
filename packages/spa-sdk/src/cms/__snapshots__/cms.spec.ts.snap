@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`CmsImpl inject should put a script element 1`] = `
+exports[`Cms inject should put a script element 1`] = `
 <script
   src="url1"
   type="text/javascript"

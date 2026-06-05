@@ -14,19 +14,26 @@
  * limitations under the License.
  */
 
-import { injectable } from 'inversify';
-import { Builder, SimpleFactory } from './factory';
+import { Builder } from './factory';
 import { ContentModel } from './content';
 
 type ContentBuilder = Builder<[ContentModel], unknown>;
 
-@injectable()
-export class ContentFactory extends SimpleFactory<ContentModel['type'], ContentBuilder> {
-  create(model: ContentModel): ContentModel {
-    if (!this.mapping.has(model.type)) {
+export class ContentFactory {
+  constructor(private builders: Map<ContentModel['type'], ContentBuilder> = new Map()) {}
+
+  /**
+   * Creates a typed content object from a model.
+   * @param model The raw content model from the page.
+   * @return The result of the registered builder for the model's type, or the
+   *   raw model unchanged if no builder is registered for that type. Callers
+   *   should narrow the return value to the expected type.
+   */
+  create(model: ContentModel): unknown {
+    if (!this.builders.has(model.type)) {
       return model;
     }
 
-    return this.mapping.get(model.type)!(model) as ContentModel;
+    return this.builders.get(model.type)!(model);
   }
 }

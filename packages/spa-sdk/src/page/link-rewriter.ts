@@ -18,24 +18,11 @@ import render from 'dom-serializer';
 import type { Document } from 'domhandler';
 import { getAttributeValue, getElementsByTagName, hasAttrib } from 'domutils';
 import { parseDocument } from 'htmlparser2';
-import { inject, injectable } from 'inversify';
 import { Link, TYPE_LINK_RESOURCE } from './link';
 import { LinkFactory } from './link-factory';
 
-export const LinkRewriterService = Symbol.for('LinkRewriterService');
-
-export interface LinkRewriter {
-  /**
-   * Rewrite links to pages and resources in the HTML content.
-   * @param content The HTML content to rewrite links.
-   * @param type The content type.
-   */
-  rewrite(content: string, type?: string): string;
-}
-
-@injectable()
-export class LinkRewriterImpl implements LinkRewriter {
-  constructor(@inject(LinkFactory) private linkFactory: LinkFactory) {}
+export class LinkRewriter {
+  constructor(private linkFactory: LinkFactory) {}
 
   rewrite(content: string, type = 'text/html'): string {
     const document = parseDocument(content, { xmlMode: type !== 'text/html' });

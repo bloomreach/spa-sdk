@@ -14,6 +14,5 @@
  * limitations under the License.
  */
 
-export { UrlBuilderOptionsToken, UrlBuilderOptions, UrlBuilderService, UrlBuilder } from './builder';
-export { UrlModule } from './module';
+export { UrlBuilderOptions, UrlBuilder } from './builder';
 export * from './utils';

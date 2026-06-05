@@ -14,10 +14,7 @@
  * limitations under the License.
  */
 
-import { Typed } from 'emittery';
-import { PageModel } from './page';
-
-export type EventBus = Typed<{ 'page.update': { page: PageModel } }>;
+export { PageEventBus } from './page-events';
 
 export {
   Component,
@@ -42,7 +39,6 @@ export {
   TYPE_CONTAINER_ITEM_UNDEFINED,
 } from './container-item';
 export { Document, TYPE_DOCUMENT, isDocument } from './document';
-export { PageEventBusService } from './page-events';
 export { ImageSet, TYPE_IMAGE_SET, isImageSet } from './image-set';
 export { Image } from './image';
 export { Link, TYPE_LINK_EXTERNAL, TYPE_LINK_INTERNAL, TYPE_LINK_RESOURCE, isLink } from './link';
@@ -52,8 +48,6 @@ export { TYPE_MANAGE_MENU_BUTTON, TYPE_MENU, isMenu, Menu } from './menu';
 export { MetaCollection } from './meta-collection';
 export { MetaComment, isMetaComment } from './meta-comment';
 export { Meta, META_POSITION_BEGIN, META_POSITION_END, isMeta } from './meta';
-export { PageFactory } from './page-factory';
-export { PageModule } from './module';
 export { Page, PageModel, isPage } from './page';
 export { PaginationItem } from './pagination-item';
 export { Pagination, isPagination } from './pagination';

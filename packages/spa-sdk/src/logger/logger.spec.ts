@@ -18,14 +18,18 @@ import { Level } from './level';
 import { Logger } from './logger';
 
 describe('Logger', () => {
-  const logger = new (class extends Logger {
-    level = Level.Warn;
-
-    write = jest.fn();
-  })();
+  let mockConsole: jest.Mocked<Console>;
+  let logger: Logger;
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    mockConsole = {
+      debug: jest.fn(),
+      info: jest.fn(),
+      warn: jest.fn(),
+      error: jest.fn(),
+    } as unknown as jest.Mocked<Console>;
+    logger = new Logger(mockConsole);
+    logger.level = Level.Warn;
   });
 
   describe('log', () => {
@@ -33,20 +37,28 @@ describe('Logger', () => {
       logger.debug('something');
       logger.info('something');
 
-      expect(logger.write).not.toHaveBeenCalled();
+      expect(mockConsole.debug).not.toHaveBeenCalled();
+      expect(mockConsole.info).not.toHaveBeenCalled();
     });
 
     it('should log messages above log level', () => {
       logger.warn('something');
       logger.error('something');
 
-      expect(logger.write).toHaveBeenCalledTimes(2);
+      expect(mockConsole.warn).toHaveBeenCalledTimes(1);
+      expect(mockConsole.error).toHaveBeenCalledTimes(1);
     });
 
-    it('should log a message', () => {
+    it('should log a message with prefix and level tag', () => {
       logger.warn('a', 'b');
 
-      expect(logger.write).toHaveBeenCalledWith('warn', expect.any(String), '[WARN]', 'a', 'b');
+      expect(mockConsole.warn).toHaveBeenCalledWith('[SPA]', '[WARN]', 'a', 'b');
+    });
+
+    it('should delegate to the console method for the level', () => {
+      logger.error('something');
+
+      expect(mockConsole.error).toHaveBeenCalledWith(expect.any(String), expect.any(String), 'something');
     });
   });
 });

@@ -14,8 +14,7 @@
  * limitations under the License.
  */
 
-import { inject, injectable, optional } from 'inversify';
-import { CmsEventBus, CmsEventBusService } from '../cms';
+import { CmsEventBus } from '../cms';
 import { Logger } from '../logger';
 import { isAbsoluteUrl, resolveUrl } from '../url';
 import { ButtonFactory } from './button-factory';
@@ -29,16 +28,13 @@ import { ContentFactory } from './content-factory';
 import { Document } from './document';
 import { isLink, Link } from './link';
 import { LinkFactory } from './link-factory';
-import { LinkRewriter, LinkRewriterService } from './link-rewriter';
+import { LinkRewriter } from './link-rewriter';
 import { Menu, TYPE_MANAGE_MENU_BUTTON } from './menu';
-import { MetaCollection, MetaCollectionModel } from './meta-collection';
-import { MetaCollectionFactory } from './meta-collection-factory';
-import { PageEventBus, PageEventBusService, PageUpdateEvent } from './page-events';
+import { MetaCollection } from './meta-collection';
+import { PageEventBus, PageUpdateEvent } from './page-events';
 import { isReference, Reference, resolve } from './reference';
 import { Visit, Visitor } from './relevance';
-import { ApiOptions, ApiOptionsToken } from '../spa/api';
-
-export const PageModelToken = Symbol.for('PageModelToken');
+import { ApiOptions } from '../spa/api';
 
 type ChannelParameters = Record<string, any>;
 type PageLinks = 'self' | 'site';
@@ -87,13 +83,13 @@ interface PageMeta {
 
   /**
    * Meta-data about the current visitor. Available when the Relevance Module is enabled.
-   * @see https://documentation.bloomreach.com/library/enterprise/enterprise-features/targeting/targeting.html
+   * @see https://xmdocumentation.bloomreach.com/library/enterprise/enterprise-features/targeting/targeting.html
    */
   visitor?: Visitor;
 
   /**
    * Meta-data about the current visit. Available when the Relevance Module is enabled.
-   * @see https://documentation.bloomreach.com/library/enterprise/enterprise-features/targeting/targeting.html
+   * @see https://xmdocumentation.bloomreach.com/library/enterprise/enterprise-features/targeting/targeting.html
    */
   visit?: Visit;
 
@@ -178,13 +174,6 @@ export interface Page {
   getLocale(): string;
 
   /**
-   * Generates a meta-data collection from the provided meta-data model.
-   * @param meta The meta-data collection model as returned by the page-model-api.
-   * @deprecated Use `getButton` method to create buttons.
-   */
-  getMeta(meta: MetaCollectionModel): MetaCollection;
-
-  /**
    * @return The title of the page, or `undefined` if not configured.
    */
   getTitle(): string | undefined;
@@ -247,28 +236,68 @@ export interface Page {
   toJSON(): any;
 }
 
-@injectable()
+/**
+ * Build-time dependencies for {@link PageImpl}: the factories used to construct
+ * and render page content.
+ */
+export interface PageFactories {
+  buttonFactory: ButtonFactory;
+  componentFactory: ComponentFactory;
+  contentFactory: ContentFactory;
+  linkFactory: LinkFactory;
+  linkRewriter: LinkRewriter;
+}
+
+/**
+ * Runtime context for {@link PageImpl}: API configuration, event buses and logging.
+ */
+export interface PageContext {
+  apiOptions: ApiOptions;
+  cmsEventBus?: CmsEventBus;
+  pageEventBus?: PageEventBus;
+  logger?: Logger;
+}
+
 export class PageImpl implements Page {
   protected content = new WeakMap<Record<string, any>, unknown>();
 
   protected root?: Component;
 
-  constructor(
-    @inject(PageModelToken) protected model: PageModel,
-    @inject(ButtonFactory) private buttonFactory: ButtonFactory,
-    @inject(ComponentFactory) componentFactory: ComponentFactory,
-    @inject(ContentFactory) private contentFactory: ContentFactory,
-    @inject(LinkFactory) private linkFactory: LinkFactory,
-    @inject(LinkRewriterService) private linkRewriter: LinkRewriter,
-    @inject(MetaCollectionFactory) private metaFactory: MetaCollectionFactory,
-    @inject(CmsEventBusService) @optional() private cmsEventBus: CmsEventBus,
-    @inject(ApiOptionsToken) private apiOptions: ApiOptions,
-    @inject(PageEventBusService) @optional() pageEventBus?: PageEventBus,
-    @inject(Logger) @optional() private logger?: Logger,
-  ) {
-    pageEventBus?.on('page.update', this.onPageUpdate.bind(this));
+  private buttonFactory: ButtonFactory;
 
-    this.root = componentFactory.create(model, this.apiOptions.refPrefix);
+  private contentFactory: ContentFactory;
+
+  private linkFactory: LinkFactory;
+
+  private linkRewriter: LinkRewriter;
+
+  private cmsEventBus: CmsEventBus | undefined;
+
+  private apiOptions: ApiOptions;
+
+  private logger: Logger | undefined;
+
+  /**
+   * @param model The raw page model from the Page Model API.
+   * @param factories Build-time factories for constructing and rendering page content.
+   * @param context Runtime API configuration, event buses and logger.
+   */
+  constructor(
+    protected model: PageModel,
+    factories: PageFactories,
+    context: PageContext,
+  ) {
+    this.buttonFactory = factories.buttonFactory;
+    this.contentFactory = factories.contentFactory;
+    this.linkFactory = factories.linkFactory;
+    this.linkRewriter = factories.linkRewriter;
+    this.cmsEventBus = context.cmsEventBus;
+    this.apiOptions = context.apiOptions;
+    this.logger = context.logger;
+
+    context.pageEventBus?.on('page.update', this.onPageUpdate.bind(this));
+
+    this.root = factories.componentFactory.create(model, this.apiOptions.refPrefix);
   }
 
   protected onPageUpdate(event: PageUpdateEvent): void {
@@ -318,10 +347,6 @@ export class PageImpl implements Page {
 
   getLocale(): string {
     return this.model.meta.locale || 'en_US';
-  }
-
-  getMeta(meta: MetaCollectionModel): MetaCollection {
-    return this.metaFactory(meta);
   }
 
   getTitle(): string | undefined {

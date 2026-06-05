@@ -14,10 +14,8 @@
  * limitations under the License.
  */
 
-import { Emitter, EmitterMixin } from '../emitter';
-
-export const RpcClientService = Symbol.for('RpcClientService');
-export const RpcServerService = Symbol.for('RpcServerService');
+import { Typed } from 'emittery';
+import { Emitter } from '../emitter';
 
 type Callable<T = any, U extends unknown[] = any[]> = (...args: U) => T;
 
@@ -51,14 +49,20 @@ export type Message = Event | Request | Response;
 export type Procedures = Record<string, Callable>;
 export type Events = Record<string, any>;
 
-export interface RpcClient<TProcedures extends Procedures, TEvents extends Events> extends Emitter<TEvents> {
-  call<K extends keyof TProcedures & string>(
+/**
+ * A bidirectional RPC channel: call procedures and listen to events on the remote
+ * side, while registering handlers and triggering events for the local side.
+ */
+export interface RpcChannel<
+  TRemoteProcedures extends Procedures,
+  TRemoteEvents extends Events,
+  TProcedures extends Procedures,
+  TEvents extends Events,
+> extends Emitter<TRemoteEvents> {
+  call<K extends keyof TRemoteProcedures & string>(
     command: K,
-    ...params: Parameters<TProcedures[K]>
-  ): Promise<ReturnType<TProcedures[K]>>;
-}
-
-export interface RpcServer<TProcedures extends Procedures, TEvents extends Events> {
+    ...params: Parameters<TRemoteProcedures[K]>
+  ): Promise<ReturnType<TRemoteProcedures[K]>>;
   register<K extends keyof TProcedures & string>(
     command: K,
     callback: Callable<Promise<ReturnType<TProcedures[K]>>, Parameters<TProcedures[K]>>,
@@ -66,16 +70,14 @@ export interface RpcServer<TProcedures extends Procedures, TEvents extends Event
   trigger<K extends keyof TEvents>(event: K, payload: TEvents[K]): void;
 }
 
-class Dummy {}
-
 export abstract class Rpc<
   TRemoteProcedures extends Procedures,
   TRemoteEvents extends Events,
   TProcedures extends Procedures,
   TEvents extends Events,
 >
-  extends EmitterMixin<typeof Dummy, Events>(Dummy)
-  implements RpcClient<TRemoteProcedures, TRemoteEvents>, RpcServer<TProcedures, TEvents> {
+  extends Typed<TRemoteEvents>
+  implements RpcChannel<TRemoteProcedures, TRemoteEvents, TProcedures, TEvents> {
   private calls = new Map<string, [Callable, Callable]>();
 
   private callbacks = new Map<keyof TProcedures, Callable<Promise<any>, any>>();
@@ -128,7 +130,10 @@ export abstract class Rpc<
   }
 
   private processEvent(event: Event): void {
-    this.emit(event.event, event.payload);
+    // event.event is a dynamic wire-protocol string that cannot be statically
+    // verified as a key of TRemoteEvents, but is guaranteed correct at runtime.
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (this as any).emit(event.event, event.payload);
   }
 
   private processResponse(response: Response): void {
@@ -141,6 +146,7 @@ export abstract class Rpc<
 
     if (response.state === STATE_REJECTED) {
       reject(response.result);
+      return;
     }
 
     resolve(response.result);

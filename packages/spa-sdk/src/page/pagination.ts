@@ -14,11 +14,9 @@
  * limitations under the License.
  */
 
-import { injectable, inject } from 'inversify';
-import { PaginationItemFactory, PaginationItemModel, PaginationItem } from './pagination-item';
+import { LinkFactory } from './link-factory';
+import { PaginationItemImpl, PaginationItemModel, PaginationItem } from './pagination-item';
 import { Reference } from './reference';
-
-export const PaginationModelToken = Symbol.for('PaginationModelToken');
 
 export const TYPE_PAGINATION = 'pagination';
 
@@ -97,7 +95,6 @@ export interface Pagination {
   isEnabled(): boolean;
 }
 
-@injectable()
 export class PaginationImpl implements Pagination {
   private current: PaginationItem;
 
@@ -112,15 +109,15 @@ export class PaginationImpl implements Pagination {
   private previous?: PaginationItem;
 
   constructor(
-    @inject(PaginationModelToken) protected model: PaginationModel,
-    @inject(PaginationItemFactory) paginationItemFactory: PaginationItemFactory,
+    protected model: PaginationModel,
+    private linkFactory: LinkFactory,
   ) {
-    this.current = paginationItemFactory(model.current);
-    this.first = paginationItemFactory(model.first);
-    this.last = paginationItemFactory(model.last);
-    this.next = model.next ? paginationItemFactory(model.next) : undefined;
-    this.previous = model.previous ? paginationItemFactory(model.previous) : undefined;
-    this.pages = model.pages.map(paginationItemFactory);
+    this.current = new PaginationItemImpl(model.current, linkFactory);
+    this.first = new PaginationItemImpl(model.first, linkFactory);
+    this.last = new PaginationItemImpl(model.last, linkFactory);
+    this.next = model.next ? new PaginationItemImpl(model.next, linkFactory) : undefined;
+    this.previous = model.previous ? new PaginationItemImpl(model.previous, linkFactory) : undefined;
+    this.pages = model.pages.map((page) => new PaginationItemImpl(page, linkFactory));
   }
 
   getCurrent(): PaginationItem {

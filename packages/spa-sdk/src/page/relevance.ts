@@ -17,7 +17,7 @@
 /* eslint-disable max-len */
 /**
  * Meta-data of a visitor.
- * @see https://documentation.bloomreach.com/library/enterprise/enterprise-features/targeting/visitors-visits-and-cookies.html
+ * @see https://xmdocumentation.bloomreach.com/library/enterprise/enterprise-features/targeting/visitors-visits-and-cookies.html
  */
 /* eslint-enable max-len */
 export interface Visitor {
@@ -40,7 +40,7 @@ export interface Visitor {
 /* eslint-disable max-len */
 /**
  * Meta-data of a current visit.
- * @see https://documentation.bloomreach.com/library/enterprise/enterprise-features/targeting/visitors-visits-and-cookies.html
+ * @see https://xmdocumentation.bloomreach.com/library/enterprise/enterprise-features/targeting/visitors-visits-and-cookies.html
  */
 /* eslint-enable max-len */
 export interface Visit {

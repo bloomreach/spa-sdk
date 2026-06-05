@@ -23,7 +23,7 @@ export type MetaComment = Meta;
 /**
  * Meta information stored in HST-comments.
  */
-export class MetaCommentImpl extends MetaImpl implements MetaComment {
+export class MetaCommentImpl extends MetaImpl {
   getData(): string {
     const data = super.getData();
     const [, payload = data] = data.match(HTML_COMMENT) || [];

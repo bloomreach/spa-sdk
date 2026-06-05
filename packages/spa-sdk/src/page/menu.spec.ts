@@ -15,12 +15,14 @@
  */
 
 import { MenuImpl, MenuModel, TYPE_MENU, isMenu } from './menu';
-import { MenuItemFactory, MenuItemModel, MenuItem } from './menu-item';
-import { MetaCollectionFactory } from './meta-collection-factory';
-import { MetaCollection } from './meta-collection';
+import { MenuItemImpl, MenuItemModel } from './menu-item';
+import { MetaCollectionImpl, MetaCollection } from './meta-collection';
+import { LinkFactory } from './link-factory';
 
-let menuItemFactory: jest.MockedFunction<MenuItemFactory>;
-let metaFactory: jest.MockedFunction<MetaCollectionFactory>;
+jest.mock('./meta-collection');
+jest.mock('./menu-item');
+
+let linkFactory: jest.Mocked<LinkFactory>;
 
 const itemModel = {} as MenuItemModel;
 const metaModel = {};
@@ -35,34 +37,35 @@ const model = {
 } as MenuModel;
 
 function createMenu(menuModel = model) {
-  return new MenuImpl(menuModel, metaFactory, menuItemFactory);
+  return new MenuImpl(menuModel, linkFactory);
 }
 
 beforeEach(() => {
-  menuItemFactory = jest.fn();
-  metaFactory = jest.fn();
+  linkFactory = { create: jest.fn() } as unknown as typeof linkFactory;
+  jest.mocked(MenuItemImpl).mockClear();
 });
 
 describe('MenuImpl', () => {
   describe('getItems', () => {
-    it('should return menu items', () => {
-      const item = {} as MenuItem;
-      menuItemFactory.mockReturnValueOnce(item);
+    it('should return menu items as MenuItemImpl instances', () => {
+      const item = {} as MenuItemImpl;
+      jest.mocked(MenuItemImpl).mockReturnValueOnce(item as unknown as MenuItemImpl);
 
       const menu = createMenu({ ...model, data: { ...model.data, siteMenuItems: [itemModel] } });
 
       expect(menu.getItems()).toEqual([item]);
+      expect(MenuItemImpl).toHaveBeenCalledWith(itemModel, linkFactory);
     });
   });
 
   describe('getMeta', () => {
     it('should return a meta-data array', () => {
       const meta = {} as MetaCollection;
-      metaFactory.mockReturnValueOnce(meta);
+      jest.mocked(MetaCollectionImpl).mockReturnValueOnce(meta as unknown as MetaCollectionImpl);
 
       const menu = createMenu({ ...model, meta: metaModel });
 
-      expect(metaFactory).toHaveBeenCalledWith(metaModel);
+      expect(MetaCollectionImpl).toHaveBeenCalledWith(metaModel);
       expect(menu.getMeta()).toEqual(meta);
     });
   });
@@ -83,8 +86,8 @@ describe('MenuImpl', () => {
     });
 
     it('should return a selected item', () => {
-      const item = {} as MenuItem;
-      menuItemFactory.mockReturnValueOnce(item);
+      const item = {} as MenuItemImpl;
+      jest.mocked(MenuItemImpl).mockReturnValueOnce(item as unknown as MenuItemImpl);
 
       const menu = createMenu({ ...model, data: { ...model.data, selectSiteMenuItem: itemModel } });
 
