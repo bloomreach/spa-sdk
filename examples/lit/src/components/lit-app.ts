@@ -1,8 +1,9 @@
-import { LitElement, html } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { LitElement, html, type PropertyValues } from 'lit';
+import { customElement, state } from 'lit/decorators.js';
 import { consume } from '@lit/context';
 import { type Configuration, type Page, extractSearchParams } from '@bloomreach/spa-sdk';
 import { brPageContext } from '@bloomreach/lit-sdk';
+import { getPath, handleInternalContentLinkClick, handleInternalLinkClick, subscribe } from '../utils/navigation.js';
 
 // Import mapped components (registers custom elements)
 import './lit-banner.js';
@@ -22,14 +23,39 @@ export class LitApp extends LitElement {
   @consume({ context: brPageContext, subscribe: true })
   private _page?: Page;
 
+  @state()
+  private _path = getPath();
+
+  private _configuration?: Configuration;
+  private _unsubscribeNavigation?: () => void;
+
   // Light DOM so Bootstrap CSS applies and EM meta comments work
   createRenderRoot() {
     return this;
   }
 
-  private get _configuration(): Configuration {
+  connectedCallback() {
+    super.connectedCallback();
+    this._unsubscribeNavigation = subscribe((path) => {
+      this._path = path;
+    });
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this._unsubscribeNavigation?.();
+    this._unsubscribeNavigation = undefined;
+  }
+
+  protected willUpdate(changed: PropertyValues) {
+    if (changed.has('_path') || !this._configuration) {
+      this._configuration = this._buildConfiguration(this._path);
+    }
+  }
+
+  private _buildConfiguration(path: string): Configuration {
     let configuration: Configuration = {
-      path: `${window.location.pathname}${window.location.search}`,
+      path,
       endpoint: import.meta.env.VITE_BRXM_ENDPOINT,
       httpClient: async (config: any) => {
         const response = await fetch(config.url, {
@@ -44,7 +70,7 @@ export class LitApp extends LitElement {
       },
     };
 
-    if (!import.meta.env.VITE_BRXM_ENDPOINT && import.meta.env.VITE_BR_MULTI_TENANT_SUPPORT) {
+    if (!import.meta.env.VITE_BRXM_ENDPOINT && import.meta.env.LIT_BR_MULTI_TENANT_SUPPORT) {
       const endpointQueryParameter = 'endpoint';
       const { searchParams } = extractSearchParams(configuration.path!, [endpointQueryParameter].filter(Boolean));
       const endpoint = searchParams.get(endpointQueryParameter);
@@ -67,7 +93,11 @@ export class LitApp extends LitElement {
         <header>
           <nav class="navbar navbar-expand-sm navbar-dark sticky-top bg-dark" role="navigation">
             <div class="container">
-              <a href=${this._page?.getUrl('/')} class="navbar-brand">
+              <a
+                href=${this._page?.getUrl('/') || '/'}
+                class="navbar-brand"
+                @click=${handleInternalLinkClick}
+              >
                 ${this._page?.getTitle() || 'brXM + Lit = \u2764\uFE0F'}
               </a>
               <div class="collapse navbar-collapse">
@@ -76,7 +106,7 @@ export class LitApp extends LitElement {
             </div>
           </nav>
         </header>
-        <section class="container flex-fill pt-3">
+        <section class="container flex-fill pt-3" @click=${handleInternalContentLinkClick}>
           <br-component name="main"></br-component>
         </section>
         <footer class="bg-dark text-light py-3">

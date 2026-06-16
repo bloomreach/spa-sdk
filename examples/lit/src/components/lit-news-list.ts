@@ -1,6 +1,7 @@
 import { LitElement, html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { type ContainerItem, type Page, type Document } from '@bloomreach/spa-sdk';
+import { handleInternalLinkClick } from '../utils/navigation.js';
 import '@bloomreach/lit-sdk';
 
 @customElement('lit-news-list-item')
@@ -23,7 +24,7 @@ export class LitNewsListItem extends LitElement {
         <div class="card-body">
           ${title ? html`
             <h2 class="card-title">
-              <a href=${this.document.getUrl() || ''}>${title}</a>
+              <a href=${this.document.getUrl() || ''} @click=${handleInternalLinkClick}>${title}</a>
             </h2>` : nothing}
           ${author ? html`<div class="card-subtitle mb-3 text-muted">${author}</div>` : nothing}
           ${date ? html`<div class="card-subtitle mb-3 small text-muted">${new Date(date).toDateString()}</div>` : nothing}
@@ -53,7 +54,12 @@ export class LitNewsListPagination extends LitElement {
         <ul class="pagination">
           <li class="page-item ${previous ? '' : 'disabled'}">
             ${previous
-              ? html`<a href=${this.page.getUrl(`?page=${previousPage}`)} class="page-link" aria-label="Previous">
+              ? html`<a
+                  href=${this.page.getUrl(`?page=${previousPage}`)}
+                  class="page-link"
+                  aria-label="Previous"
+                  @click=${handleInternalLinkClick}
+                >
                   <span aria-hidden="true">&laquo;</span><span class="sr-only">Previous</span>
                 </a>`
               : html`<span class="page-link" aria-disabled="true" tabindex="-1">
@@ -62,12 +68,21 @@ export class LitNewsListPagination extends LitElement {
           </li>
           ${pageNumbersArray.map((pageNumber) => html`
             <li class="page-item ${pageNumber === currentPage ? 'active' : ''}">
-              <a href=${this.page!.getUrl(`?page=${pageNumber}`)} class="page-link">${pageNumber}</a>
+              <a
+                href=${this.page!.getUrl(`?page=${pageNumber}`)}
+                class="page-link"
+                @click=${handleInternalLinkClick}
+              >${pageNumber}</a>
             </li>
           `)}
           <li class="page-item ${next ? '' : 'disabled'}">
             ${next
-              ? html`<a href=${this.page.getUrl(`?page=${nextPage}`)} class="page-link" aria-label="Next">
+              ? html`<a
+                  href=${this.page.getUrl(`?page=${nextPage}`)}
+                  class="page-link"
+                  aria-label="Next"
+                  @click=${handleInternalLinkClick}
+                >
                   <span aria-hidden="true">&raquo;</span><span class="sr-only">Next</span>
                 </a>`
               : html`<span class="page-link" aria-disabled="true" tabindex="-1">
