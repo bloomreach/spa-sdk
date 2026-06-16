@@ -219,6 +219,47 @@ describe('br-page', () => {
     });
   });
 
+  describe('configuration changes', () => {
+    it('keeps the current page visible while fetching a new one', async () => {
+      let resolveSecondInit: (page: ReturnType<typeof createMockPage>) => void;
+      const secondInit = new Promise<ReturnType<typeof createMockPage>>((resolve) => {
+        resolveSecondInit = resolve;
+      });
+
+      const firstPage = createMockPage();
+      const firstRoot = createMockComponent();
+      firstPage.getComponent.mockReturnValue(firstRoot);
+
+      const secondPage = createMockPage();
+      const secondRoot = createMockComponent();
+      secondPage.getComponent.mockReturnValue(secondRoot);
+
+      vi.mocked(initialize)
+        .mockResolvedValueOnce(firstPage as any)
+        .mockImplementationOnce(() => secondInit as any);
+
+      await createBrPage();
+
+      const shadow = el.shadowRoot!;
+      expect(shadow.querySelector('slot')).not.toBeNull();
+      expect((el as any)._page).toBe(firstPage);
+
+      const newConfig = { ...mockConfig, request: { path: '/news' } };
+      el.configuration = newConfig as any;
+      await el.updateComplete;
+
+      // Still showing the first page while the second initialize() is in flight
+      expect((el as any)._page).toBe(firstPage);
+      expect(shadow.querySelector('slot')).not.toBeNull();
+
+      resolveSecondInit!(secondPage);
+      await el.updateComplete;
+
+      expect((el as any)._page).toBe(secondPage);
+      expect(initialize).toHaveBeenLastCalledWith(newConfig);
+    });
+  });
+
   describe('live mode', () => {
     it('does NOT call sync()', async () => {
       const mockPage = createMockPage({ isPreview: vi.fn(() => false) });

@@ -188,7 +188,13 @@ export class BrPage extends LitElement {
   }
 
   private _reinitialize() {
-    // Clean up previous page state before re-initializing
+    // Keep the current page visible while fetching the next one (same as Vue/React
+    // br-page). Clearing _page here caused the slotted app shell to blink blank.
+    this._cleanupPreviewIntegration();
+    this._initialize();
+  }
+
+  private _cleanupPreviewIntegration() {
     this._clearPageMeta?.();
     this._clearPageMeta = undefined;
     if (this._page?.isPreview()) {
@@ -199,10 +205,6 @@ export class BrPage extends LitElement {
     this._scriptLoadCleanup?.();
     this._scriptLoadCleanup = undefined;
     this._scriptObserver?.disconnect();
-    destroy();
-    this._page = undefined;
-    this._rootComponent = undefined;
-    this._initialize();
   }
 
   private async _initialize() {

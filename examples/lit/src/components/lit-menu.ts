@@ -3,6 +3,7 @@ import { customElement } from 'lit/decorators.js';
 import { consume } from '@lit/context';
 import { type Page, type Menu, type MenuItem, TYPE_LINK_EXTERNAL, isMenu } from '@bloomreach/spa-sdk';
 import { brPageContext } from '@bloomreach/lit-sdk';
+import { handleInternalLinkClick } from '../utils/navigation.js';
 import '@bloomreach/lit-sdk';
 
 @customElement('lit-menu')
@@ -40,7 +41,7 @@ export class LitMenu extends LitElement {
       return html`<a class="nav-link text-capitalize" href=${url}>${item.getName()}</a>`;
     }
 
-    return html`<a href=${url} class="nav-link text-capitalize">${item.getName()}</a>`;
+    return html`<a href=${url} class="nav-link text-capitalize" @click=${handleInternalLinkClick}>${item.getName()}</a>`;
   }
 
   render() {
