@@ -1,9 +1,7 @@
 {
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
-    "emitDecoratorMetadata": true,
     "esModuleInterop": true,
-    "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
     "lib": [
       "es2020",
@@ -16,7 +14,6 @@
     "sourceMap": true,
     "strict": true,
     "target": "es6",
-    "useDefineForClassFields": false,
     "skipLibCheck": true
   },
   "typedocOptions": {

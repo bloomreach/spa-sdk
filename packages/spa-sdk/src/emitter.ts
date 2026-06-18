@@ -14,18 +14,8 @@
  * limitations under the License.
  */
 
-import { Events, Typed } from 'emittery';
-
-type Constructor = new (...args: any[]) => any;
-
-/**
- * Event listener.
- */
 type Listener<T, U extends Extract<keyof T, string>> = (eventData: T[U]) => any;
 
-/**
- * Function to unsubscribe a listener from an event.
- */
 type UnsubscribeFn = () => void;
 
 /**
@@ -46,26 +36,4 @@ export interface Emitter<T> {
    * @param listener The event listener.
    */
   off<U extends Extract<keyof T, string>>(eventName: U, listener: Listener<T, U>): void;
-}
-
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export function EmitterMixin<T extends Constructor, U extends Events>(Super: T) {
-  // eslint-disable-next-line @typescript-eslint/no-shadow
-  return class EmitterMixin extends Super implements Emitter<U> {
-    /**
-     * @todo should be private
-     * @see https://github.com/Microsoft/TypeScript/issues/17293
-     */
-    /* private */ emitter = new Typed<U>();
-
-    on = this.emitter.on.bind(this.emitter);
-
-    off = this.emitter.off.bind(this.emitter);
-
-    /**
-     * @todo should be private
-     * @see https://github.com/Microsoft/TypeScript/issues/17293
-     */
-    /* protected */ emit = this.emitter.emit.bind(this.emitter);
-  };
 }

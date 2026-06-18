@@ -28,15 +28,15 @@ describe('ComponentFactory', () => {
     it('should call a registered builder', () => {
       const builder1 = jest.fn();
       const builder2 = jest.fn();
-      const factory = new ComponentFactory()
-        .register(TYPE_COMPONENT, builder1)
-        .register(TYPE_COMPONENT_CONTAINER, builder2);
+      const factory = new ComponentFactory(
+        new Map([[TYPE_COMPONENT, builder1], [TYPE_COMPONENT_CONTAINER, builder2]]),
+      );
 
       factory.create(model({ root: { id: 'id1', name: 'Component 1', type: TYPE_COMPONENT } }));
       factory.create(model({ root: { id: 'id2', name: 'Component 2', type: TYPE_COMPONENT_CONTAINER } }));
 
-      expect(builder1).toBeCalledWith(expect.objectContaining({ id: 'id1', name: 'Component 1' }), []);
-      expect(builder2).toBeCalledWith(
+      expect(builder1).toHaveBeenCalledWith(expect.objectContaining({ id: 'id1', name: 'Component 1' }), []);
+      expect(builder2).toHaveBeenCalledWith(
         expect.objectContaining({
           id: 'id2',
           type: TYPE_COMPONENT_CONTAINER,
@@ -47,7 +47,7 @@ describe('ComponentFactory', () => {
     });
 
     it('should throw an exception on unknown component type', () => {
-      const factory = new ComponentFactory().register(TYPE_COMPONENT_CONTAINER_ITEM, jest.fn());
+      const factory = new ComponentFactory(new Map([[TYPE_COMPONENT_CONTAINER_ITEM, jest.fn()]]));
 
       expect(() => factory.create(
         model({
@@ -57,12 +57,12 @@ describe('ComponentFactory', () => {
             type: TYPE_COMPONENT_CONTAINER,
           },
         }),
-      )).toThrowError();
+      )).toThrow();
     });
 
     it('should produce a tree structure', () => {
       const builder = jest.fn(({ id }) => id);
-      const factory = new ComponentFactory().register(TYPE_COMPONENT, builder);
+      const factory = new ComponentFactory(new Map([[TYPE_COMPONENT, builder]]));
 
       const root = factory.create(
         model({
@@ -82,12 +82,12 @@ describe('ComponentFactory', () => {
         }),
       );
 
-      expect(builder).toBeCalledTimes(5);
-      expect(builder).nthCalledWith(1, expect.objectContaining({ id: 'd' }), []);
-      expect(builder).nthCalledWith(2, expect.objectContaining({ id: 'c' }), []);
-      expect(builder).nthCalledWith(3, expect.objectContaining({ id: 'b' }), ['c', 'd']);
-      expect(builder).nthCalledWith(4, expect.objectContaining({ id: 'a' }), []);
-      expect(builder).nthCalledWith(5, expect.objectContaining({ id: 'root' }), ['a', 'b']);
+      expect(builder).toHaveBeenCalledTimes(5);
+      expect(builder).toHaveBeenNthCalledWith(1, expect.objectContaining({ id: 'd' }), []);
+      expect(builder).toHaveBeenNthCalledWith(2, expect.objectContaining({ id: 'c' }), []);
+      expect(builder).toHaveBeenNthCalledWith(3, expect.objectContaining({ id: 'b' }), ['c', 'd']);
+      expect(builder).toHaveBeenNthCalledWith(4, expect.objectContaining({ id: 'a' }), []);
+      expect(builder).toHaveBeenNthCalledWith(5, expect.objectContaining({ id: 'root' }), ['a', 'b']);
       expect(root).toBe('root');
     });
   });

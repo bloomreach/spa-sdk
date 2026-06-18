@@ -2,18 +2,18 @@
 
 exports[`BrNodeContainerItem > render > should override undefined container item 1`] = `
 "<br-meta-stub>
-  <some-container-item-stub component=\\"[object Object]\\" page=\\"[object Object]\\"></some-container-item-stub>
+  <some-container-item-stub component="[object Object]" page="[object Object]"></some-container-item-stub>
 </br-meta-stub>"
 `;
 
 exports[`BrNodeContainerItem > render > should render a mapped container item 1`] = `
 "<br-meta-stub>
-  <some-container-item-stub component=\\"[object Object]\\" page=\\"[object Object]\\"></some-container-item-stub>
+  <some-container-item-stub component="[object Object]" page="[object Object]"></some-container-item-stub>
 </br-meta-stub>"
 `;
 
 exports[`BrNodeContainerItem > render > should render an undefined container item 1`] = `
 "<br-meta-stub>
-  <br-container-item-undefined-stub component=\\"[object Object]\\"></br-container-item-undefined-stub>
+  <br-container-item-undefined-stub component="[object Object]"></br-container-item-undefined-stub>
 </br-meta-stub>"
 `;

@@ -21,7 +21,7 @@ describe('LinkFactory', () => {
   describe('create', () => {
     const builder1 = jest.fn();
     const builder2 = jest.fn();
-    const factory = new LinkFactory().register(TYPE_LINK_EXTERNAL, builder1).register(TYPE_LINK_INTERNAL, builder2);
+    const factory = new LinkFactory(new Map([[TYPE_LINK_EXTERNAL, builder1], [TYPE_LINK_INTERNAL, builder2]]));
 
     beforeEach(() => {
       builder1.mockClear();
@@ -32,8 +32,8 @@ describe('LinkFactory', () => {
       factory.create({ href: 'link1', type: TYPE_LINK_EXTERNAL });
       factory.create({ href: 'link2', type: TYPE_LINK_INTERNAL });
 
-      expect(builder1).toBeCalledWith('link1');
-      expect(builder2).toBeCalledWith('link2');
+      expect(builder1).toHaveBeenCalledWith('link1');
+      expect(builder2).toHaveBeenCalledWith('link2');
     });
 
     it('should return link as-is on the unregistered link type', () => {
@@ -46,14 +46,14 @@ describe('LinkFactory', () => {
 
     it('should return link as-is when there is no type specified', () => {
       expect(factory.create({ href: 'link' })).toBe('link');
-      expect(builder1).not.toBeCalled();
-      expect(builder2).not.toBeCalled();
+      expect(builder1).not.toHaveBeenCalled();
+      expect(builder2).not.toHaveBeenCalled();
     });
 
     it('should fallback to internal link type for path', () => {
       factory.create('link');
 
-      expect(builder2).toBeCalledWith('link');
+      expect(builder2).toHaveBeenCalledWith('link');
     });
   });
 });

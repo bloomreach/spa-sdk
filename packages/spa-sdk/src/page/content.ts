@@ -14,6 +14,11 @@
  * limitations under the License.
  */
 
+/**
+ * Polymorphic discriminator used by `ContentFactory` to dispatch a content
+ * model to its concrete builder (e.g. `Document`, `ImageSet`, `Menu`,
+ * `Pagination`).
+ */
 export interface ContentModel {
   type: string;
 }

@@ -25,7 +25,7 @@ describe('PostMessage', () => {
 
   beforeAll(() => {
     postMessage = new PostMessage();
-    processSpy = jest.spyOn(postMessage, 'process');
+    processSpy = jest.spyOn(postMessage as any, 'process');
   });
 
   afterEach(() => {

@@ -59,7 +59,7 @@ describe('BrNodeContainerItem', () => {
         />,
       );
 
-      expect(mockComponent.on).toBeCalledWith('update', expect.any(Function));
+      expect(mockComponent.on).toHaveBeenCalledWith('update', expect.any(Function));
     });
 
     it('should resubscribe on component update', () => {
@@ -81,8 +81,8 @@ describe('BrNodeContainerItem', () => {
         />,
       );
 
-      expect(mockComponent.off).toBeCalledWith('update', expect.any(Function));
-      expect(newComponent.on).toBeCalledWith('update', expect.any(Function));
+      expect(mockComponent.off).toHaveBeenCalledWith('update', expect.any(Function));
+      expect(newComponent.on).toHaveBeenCalledWith('update', expect.any(Function));
     });
 
     it('should unsubscribe from update event on unmount', () => {
@@ -96,7 +96,7 @@ describe('BrNodeContainerItem', () => {
 
       element.unmount();
 
-      expect(mockComponent.off).toBeCalledWith('update', mockComponent.on.mock.calls[0][1]);
+      expect(mockComponent.off).toHaveBeenCalledWith('update', mockComponent.on.mock.calls[0][1]);
     });
 
     it('should trigger sync on update event', async () => {
@@ -110,7 +110,7 @@ describe('BrNodeContainerItem', () => {
 
       await act(() => mockComponent.on.mock.calls[0][1]({}));
 
-      expect(mockPage.sync).toBeCalled();
+      expect(mockPage.sync).toHaveBeenCalled();
     });
   });
 
@@ -125,7 +125,7 @@ describe('BrNodeContainerItem', () => {
         />,
       );
 
-      expect(mockComponent.getType).toBeCalled();
+      expect(mockComponent.getType).toHaveBeenCalled();
     });
 
     it('should render undefined container item', () => {

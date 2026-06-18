@@ -24,8 +24,7 @@ import { ContentFactory } from './content-factory';
 import { isLink, Link, TYPE_LINK_EXTERNAL, TYPE_LINK_INTERNAL } from './link';
 import { LinkFactory } from './link-factory';
 import { LinkRewriter } from './link-rewriter';
-import { MetaCollectionFactory } from './meta-collection-factory';
-import { isPage, Page, PageImpl, PageModel } from './page';
+import { isPage, Page, PageImpl, PageModel, PageFactories, PageContext } from './page';
 import { PageEventBus } from './page-events';
 import { ApiOptions } from '../spa';
 
@@ -38,7 +37,6 @@ let eventBus: PageEventBus;
 let apiOptions: ApiOptions = {} as ApiOptions;
 let linkFactory: jest.Mocked<LinkFactory>;
 let linkRewriter: jest.Mocked<LinkRewriter>;
-let metaFactory: jest.MockedFunction<MetaCollectionFactory>;
 let root: Component;
 
 const model = {
@@ -59,18 +57,20 @@ const model = {
 } as PageModel;
 
 function createPage(pageModel = model) {
-  return new PageImpl(
-    pageModel,
+  const factories: PageFactories = {
     buttonFactory,
     componentFactory,
     contentFactory,
     linkFactory,
     linkRewriter,
-    metaFactory,
-    cmsEventBus,
+  };
+  const context: PageContext = {
     apiOptions,
-    eventBus,
-  );
+    cmsEventBus,
+    pageEventBus: eventBus,
+  };
+
+  return new PageImpl(pageModel, factories, context);
 }
 
 beforeEach(() => {
@@ -83,7 +83,6 @@ beforeEach(() => {
   apiOptions = {} as ApiOptions;
   linkFactory = { create: jest.fn() } as unknown as typeof linkFactory;
   linkRewriter = { rewrite: jest.fn() } as unknown as jest.Mocked<LinkRewriter>;
-  metaFactory = jest.fn();
   root = { getComponent: jest.fn() } as unknown as jest.Mocked<Component>;
 });
 
@@ -112,7 +111,7 @@ describe('PageImpl', () => {
       const page = createPage();
       page.getComponent('a', 'b');
 
-      expect(root.getComponent).toBeCalledWith('a', 'b');
+      expect(root.getComponent).toHaveBeenCalledWith('a', 'b');
     });
   });
 
@@ -133,7 +132,7 @@ describe('PageImpl', () => {
     it('should return a content item', () => {
       expect(page.getContent('content1')).toBe(content);
       expect(page.getContent('content1')).toBe(content);
-      expect(contentFactory.create).toBeCalledTimes(1);
+      expect(contentFactory.create).toHaveBeenCalledTimes(1);
       expect(contentFactory.create).toHaveBeenCalledWith({ id: 'id1', type: 'document' });
     });
 
@@ -163,17 +162,6 @@ describe('PageImpl', () => {
     });
   });
 
-  describe('getMeta', () => {
-    it('should delegate to the MetaFactory to create new meta', () => {
-      const page = createPage();
-      const testModel = {};
-
-      page.getMeta(testModel);
-
-      expect(metaFactory).toHaveBeenCalledWith(testModel);
-    });
-  });
-
   describe('getTitle', () => {
     it('should return a page title', () => {
       const page = createPage({
@@ -200,7 +188,7 @@ describe('PageImpl', () => {
       linkFactory.create.mockReturnValueOnce('url');
 
       expect(page.getUrl(link)).toBe('url');
-      expect(linkFactory.create).toBeCalledWith(link);
+      expect(linkFactory.create).toHaveBeenCalledWith(link);
     });
 
     it('should pass the current page link', () => {
@@ -208,7 +196,7 @@ describe('PageImpl', () => {
       linkFactory.create.mockReturnValueOnce('url');
 
       expect(page.getUrl()).toBe('url');
-      expect(linkFactory.create).toBeCalledWith({ href: 'site-url', type: TYPE_LINK_INTERNAL });
+      expect(linkFactory.create).toHaveBeenCalledWith({ href: 'site-url', type: TYPE_LINK_INTERNAL });
     });
 
     it.each`
@@ -346,7 +334,7 @@ describe('PageImpl', () => {
       });
 
       expect(page.getContent('content')).toBe(content);
-      expect(contentFactory.create).toBeCalledWith({ id: 'id', type: 'document' });
+      expect(contentFactory.create).toHaveBeenCalledWith({ id: 'id', type: 'document' });
     });
   });
 
@@ -357,7 +345,7 @@ describe('PageImpl', () => {
       const page = createPage();
 
       expect(page.rewriteLinks('something', 'text/html')).toBe('rewritten');
-      expect(linkRewriter.rewrite).toBeCalledWith('something', 'text/html');
+      expect(linkRewriter.rewrite).toHaveBeenCalledWith('something', 'text/html');
     });
   });
 
@@ -368,7 +356,7 @@ describe('PageImpl', () => {
       const page = createPage();
       page.sync();
 
-      expect(cmsEventBus.emit).toBeCalledWith('page.ready', {});
+      expect(cmsEventBus.emit).toHaveBeenCalledWith('page.ready', {});
     });
   });
 

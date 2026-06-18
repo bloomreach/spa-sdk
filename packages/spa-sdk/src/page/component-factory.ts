@@ -14,9 +14,7 @@
  * limitations under the License.
  */
 
-import { injectable } from 'inversify';
 import { ComponentModel, ComponentType, Component } from './component';
-import { SimpleFactory } from './factory';
 import { PageModel } from './page';
 import { resolve } from './reference';
 
@@ -25,11 +23,15 @@ type ComponentBuilder = (model: ComponentModel, children: Component[]) => Compon
 /**
  * A component factory producing components based on a type.
  */
-@injectable()
-export class ComponentFactory extends SimpleFactory<ComponentType, ComponentBuilder> {
+export class ComponentFactory {
+  constructor(private builders: Map<ComponentType, ComponentBuilder> = new Map()) {}
+
   /**
-   * Produces a component based on the page model.
-   * @param page The page model.
+   * Builds the full component tree from the page model using a bottom-up traversal.
+   * @param page The page model containing the component hierarchy.
+   * @param refPrefix Optional prefix used to resolve JSON Pointer `$ref` values.
+   *   Defaults to `/page/` when not set by the CMS.
+   * @return The root component, or `undefined` if the page model has no root reference.
    */
   create(page: PageModel, refPrefix?: string): Component | undefined {
     const heap = [page.root];
@@ -54,7 +56,7 @@ export class ComponentFactory extends SimpleFactory<ComponentType, ComponentBuil
   }
 
   private buildComponent(model: ComponentModel, children: Component[]): Component {
-    const builder = this.mapping.get(model.type);
+    const builder = this.builders.get(model.type);
     if (!builder) {
       throw new Error(`Unsupported component type: '${model.type}'.`);
     }

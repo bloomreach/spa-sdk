@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`BrNodeContainerItem Container item mapping should override undefined container item when mapping provided 1`] = `
 <DocumentFragment>

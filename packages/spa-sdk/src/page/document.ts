@@ -14,13 +14,9 @@
  * limitations under the License.
  */
 
-import { inject, injectable } from 'inversify';
 import { LinkFactory } from './link-factory';
 import { Link } from './link';
-import { MetaCollectionFactory } from './meta-collection-factory';
-import { MetaCollectionModel, MetaCollection } from './meta-collection';
-
-export const DocumentModelToken = Symbol.for('DocumentModelToken');
+import { MetaCollectionImpl, MetaCollectionModel, MetaCollection } from './meta-collection';
 
 export const TYPE_DOCUMENT = 'document';
 
@@ -79,16 +75,18 @@ export interface Document {
   getUrl(): string | undefined;
 }
 
-@injectable()
 export class DocumentImpl implements Document {
   protected meta: MetaCollection;
 
+  /**
+   * @param model The document model from the page.
+   * @param linkFactory Factory for generating document URLs.
+   */
   constructor(
-    @inject(DocumentModelToken) protected model: DocumentModel,
-    @inject(LinkFactory) private linkFactory: LinkFactory,
-    @inject(MetaCollectionFactory) metaFactory: MetaCollectionFactory,
+    protected model: DocumentModel,
+    private linkFactory: LinkFactory,
   ) {
-    this.meta = metaFactory(this.model.meta ?? {});
+    this.meta = new MetaCollectionImpl(this.model.meta ?? {});
   }
 
   getId(): string {

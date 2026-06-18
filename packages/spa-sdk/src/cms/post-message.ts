@@ -14,12 +14,9 @@
  * limitations under the License.
  */
 
-import { injectable, inject, optional } from 'inversify';
 import { isMatched } from '../url';
 import { Events, Message, Procedures, Rpc } from './rpc';
 import { Logger } from '../logger';
-
-export const PostMessageService = Symbol.for('PostMessageService');
 
 const GLOBAL_WINDOW = typeof window === 'undefined' ? undefined : window;
 
@@ -27,7 +24,7 @@ export interface PostMessageOptions {
   /**
    * The brXM origin to verify an integration with the Experience Manager.
    * This option should be used when the brXM is accessible from a host other than the Page Model API.
-   * By default, the origin from the `apiBaseUrl` or `endpoint` parameters is used.
+   * By default, the origin from the `endpoint` parameter is used.
    */
   origin?: string;
 
@@ -38,7 +35,6 @@ export interface PostMessageOptions {
   window?: Window;
 }
 
-@injectable()
 export class PostMessage<
   TRemoteProcedures extends Procedures = Procedures,
   TRemoteEvents extends Events = Events,
@@ -49,7 +45,7 @@ export class PostMessage<
 
   private window?: Window;
 
-  constructor(@inject(Logger) @optional() private logger?: Logger) {
+  constructor(private logger?: Logger) {
     super();
     this.onMessage = this.onMessage.bind(this);
   }

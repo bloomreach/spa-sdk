@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-import { Content } from './content09';
 import { Document } from './document';
 import { Meta, MetaModel, META_POSITION_BEGIN, META_POSITION_END, TYPE_META_COMMENT } from './meta';
-import { MetaCollectionModel, MetaCollection } from './meta-collection';
+import { MetaCollectionImpl, MetaCollection } from './meta-collection';
 
 /**
  * A manage content button.
@@ -28,7 +27,7 @@ export interface ManageContentButton {
   /**
    * The content entity to open for editing.
    */
-  content?: Content | Document;
+  content?: Document;
 
   /**
    * Template query to use for creating new documents.
@@ -94,7 +93,7 @@ export interface ManageContentButton {
   pickerSelectableNodeTypes?: string;
 }
 
-export function createManageContentButton(params: ManageContentButton): MetaCollection | MetaCollectionModel {
+export function createManageContentButton(params: ManageContentButton): MetaCollection {
   const meta = params.content?.getMeta();
   const entries = [
     ['defaultPath', params.path],
@@ -112,20 +111,20 @@ export function createManageContentButton(params: ManageContentButton): MetaColl
   ].filter(([, value]) => !!value);
 
   if (!entries.length) {
-    return meta ?? {};
+    return meta ?? new MetaCollectionImpl({});
   }
 
   const model = Object.fromEntries(entries);
 
   if (!meta) {
-    return {
+    return new MetaCollectionImpl({
       beginNodeSpan: [
         {
           type: TYPE_META_COMMENT,
           data: JSON.stringify({ 'HST-Type': TYPE_MANAGE_CONTENT_BUTTON, ...model }),
         },
       ],
-    };
+    });
   }
 
   const merge = (item: Meta): MetaModel => ({
@@ -133,8 +132,8 @@ export function createManageContentButton(params: ManageContentButton): MetaColl
     data: JSON.stringify(Object.assign(JSON.parse(item.getData()), model)),
   } as MetaModel);
 
-  return {
+  return new MetaCollectionImpl({
     beginNodeSpan: meta.filter((item) => item.getPosition() === META_POSITION_BEGIN).map(merge),
     endNodeSpan: meta.filter((item) => item.getPosition() === META_POSITION_END).map(merge),
-  };
+  });
 }

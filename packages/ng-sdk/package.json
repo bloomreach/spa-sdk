@@ -1,6 +1,6 @@
 {
   "name": "@bloomreach/ng-sdk",
-  "version": "27.3.1",
+  "version": "28.0.0",
   "description": "Bloomreach SPA SDK for Angular",
   "keywords": [
     "bloomreach",
@@ -44,7 +44,7 @@
     }
   },
   "dependencies": {
-    "@bloomreach/spa-sdk": "27.3.1",
+    "@bloomreach/spa-sdk": "28.0.0",
     "tslib": "^2.6.2"
   },
   "peerDependencies": {
@@ -73,11 +73,11 @@
     "eslint": "9.17.0",
     "eslint-plugin-import": "2.31.0",
     "eslint-plugin-import-newlines": "1.4.0",
-    "jest": "30.2.0",
-    "jest-environment-jsdom": "30.2.0",
+    "jest": "30.4.2",
+    "jest-environment-jsdom": "30.4.1",
     "jest-junit": "16.0.0",
     "jest-preset-angular": "16.0.0",
-    "jest-util": "30.2.0",
+    "jest-util": "30.4.1",
     "ng-packagr": "21.1.0",
     "rxjs": "7.8.1",
     "typescript": "5.9.3",

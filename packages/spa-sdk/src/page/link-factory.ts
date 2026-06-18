@@ -14,14 +14,13 @@
  * limitations under the License.
  */
 
-import { injectable } from 'inversify';
 import { LinkType, Link, TYPE_LINK_INTERNAL, isLink } from './link';
-import { SimpleFactory } from './factory';
 
 type LinkBuilder = (link: string) => string;
 
-@injectable()
-export class LinkFactory extends SimpleFactory<LinkType, LinkBuilder> {
+export class LinkFactory {
+  constructor(private builders: Map<LinkType, LinkBuilder> = new Map()) {}
+
   create(link: Link): string | undefined;
 
   create(path: string): string;
@@ -35,13 +34,11 @@ export class LinkFactory extends SimpleFactory<LinkType, LinkBuilder> {
   }
 
   private createLink(link: Link): string | undefined {
-    if (!link.type || typeof link.href === 'undefined' || !this.mapping.has(link.type)) {
+    if (!link.type || typeof link.href === 'undefined' || !this.builders.has(link.type)) {
       return link.href;
     }
 
-    const builder = this.mapping.get(link.type)!;
-
-    return builder(link.href);
+    return this.builders.get(link.type)!(link.href);
   }
 
   private createPath(path: string): string | undefined {

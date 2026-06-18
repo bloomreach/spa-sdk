@@ -14,24 +14,23 @@
  * limitations under the License.
  */
 
-import { inject, injectable, optional } from 'inversify';
+import { Typed } from 'emittery';
 import {
   ComponentImpl,
   ComponentMeta,
   ComponentModel,
-  ComponentModelToken,
   Component,
   TYPE_COMPONENT_CONTAINER_ITEM,
   TYPE_COMPONENT_CONTAINER_ITEM_CONTENT,
 } from './component';
-import { EmitterMixin, Emitter } from '../emitter';
-import { PageEventBusService, PageEventBus, PageUpdateEvent } from './page-events';
+import { Emitter } from '../emitter';
+import { PageEventBus, PageUpdateEvent } from './page-events';
 import { LinkFactory } from './link-factory';
 import { Logger } from '../logger';
-import { MetaCollectionFactory } from './meta-collection-factory';
+import { MetaCollectionImpl } from './meta-collection';
 import { Page, PageModel } from './page';
 import { Reference, resolve } from './reference';
-import { ApiOptions, ApiOptionsToken } from '../spa/api';
+import { ApiOptions } from '../spa/api';
 
 /**
  * A container item without mapping.
@@ -145,19 +144,27 @@ export function getContainerItemContent<T>(component: ContainerItem, page: Page)
   return componentContent.data;
 }
 
-@injectable()
-export class ContainerItemImpl
-  extends EmitterMixin<typeof ComponentImpl, ContainerItemEvents>(ComponentImpl)
-  implements ContainerItem {
+export class ContainerItemImpl extends ComponentImpl implements ContainerItem {
+  private events = new Typed<ContainerItemEvents>();
+
+  on = this.events.on.bind(this.events);
+
+  off = this.events.off.bind(this.events);
+  /**
+   * @param model The container item model.
+   * @param linkFactory Factory for generating component and resource URLs.
+   * @param apiOptions API options used to resolve content references.
+   * @param eventBus Optional event bus; when provided, the item re-renders on `page.update`.
+   * @param logger Optional logger for debug output.
+   */
   constructor(
-    @inject(ComponentModelToken) protected model: ContainerItemModel,
-    @inject(LinkFactory) linkFactory: LinkFactory,
-    @inject(MetaCollectionFactory) private metaFactory: MetaCollectionFactory,
-    @inject(ApiOptionsToken) private apiOptions: ApiOptions,
-    @inject(PageEventBusService) @optional() eventBus?: PageEventBus,
-    @inject(Logger) @optional() private logger?: Logger,
+    protected model: ContainerItemModel,
+    linkFactory: LinkFactory,
+    private apiOptions: ApiOptions,
+    eventBus?: PageEventBus,
+    private logger?: Logger,
   ) {
-    super(model, [], linkFactory, metaFactory);
+    super(model, [], linkFactory);
 
     eventBus?.on('page.update', this.onPageUpdate.bind(this));
   }
@@ -173,8 +180,8 @@ export class ContainerItemImpl
     this.logger?.debug('Event:', event);
 
     this.model = model;
-    this.meta = this.metaFactory(model.meta);
-    this.emit('update', {});
+    this.meta = new MetaCollectionImpl(model.meta);
+    this.events.emit('update', {});
   }
 
   getLabel(): string | undefined {

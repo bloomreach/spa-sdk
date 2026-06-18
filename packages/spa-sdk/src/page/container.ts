@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import { injectable } from 'inversify';
 import { ComponentImpl, ComponentModel, Component, TYPE_COMPONENT_CONTAINER } from './component';
 import { ContainerItem } from './container-item';
 
@@ -45,7 +44,7 @@ export const TYPE_CONTAINER_NO_MARKUP = 'hst.nomarkup';
 
 /**
  * Container Type.
- * @see https://documentation.bloomreach.com/library/concepts/template-composer/channel-editor-containers.html
+ * @see https://xmdocumentation.bloomreach.com/library/concepts/template-composer/channel-editor-containers.html
  */
 export type ContainerType =
   | typeof TYPE_CONTAINER_BOX
@@ -69,7 +68,7 @@ export interface Container extends Component {
   /**
    * Returns the type of a container.
    *
-   * @see https://documentation.bloomreach.com/library/concepts/template-composer/channel-editor-containers.html
+   * @see https://xmdocumentation.bloomreach.com/library/concepts/template-composer/channel-editor-containers.html
    * @return The type of a container (e.g. `TYPE_CONTAINER_BOX`).
    */
   getType(): ContainerType | undefined;
@@ -80,11 +79,10 @@ export interface Container extends Component {
   getChildren(): ContainerItem[];
 }
 
-@injectable()
 export class ContainerImpl extends ComponentImpl implements Container {
-  protected model!: ContainerModel;
+  declare protected model: ContainerModel;
 
-  protected children!: ContainerItem[];
+  declare protected children: ContainerItem[];
 
   getChildren(): ContainerItem[] {
     return this.children;

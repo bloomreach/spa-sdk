@@ -1,8 +1,9 @@
 import { LitElement, html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
-import { type ContainerItem, type Page, type Content, type Document, type ImageSet } from '@bloomreach/spa-sdk';
+import { type ContainerItem, type Page, type Document, type ImageSet } from '@bloomreach/spa-sdk';
 import '@bloomreach/lit-sdk';
+import { handleInternalLinkClick } from '../utils/navigation.js';
 import { sanitize } from '../utils/sanitize.js';
 
 @customElement('lit-banner')
@@ -39,7 +40,7 @@ export class LitBanner extends LitElement {
       `;
     }
 
-    const { content, image: imageRef, link: linkRef, title } = (document as Content).getData<DocumentData>();
+    const { content, image: imageRef, link: linkRef, title } = (document as Document).getData<DocumentData>();
     const imageVariant = this.component.getParameters<BannerParameters>().imageVariant;
     const imageSet = imageRef && this.page.getContent<ImageSet>(imageRef);
     const image = imageSet && (imageVariant ? imageSet.getVariant(imageVariant) : imageSet.getOriginal());
@@ -65,7 +66,12 @@ export class LitBanner extends LitElement {
         ${link
           ? html`
             <p class="lead">
-              <a href=${(link as any).getUrl()} class="btn btn-primary btn-lg" role="button">Learn more</a>
+              <a
+                href=${(link as any).getUrl()}
+                class="btn btn-primary btn-lg"
+                role="button"
+                @click=${handleInternalLinkClick}
+              >Learn more</a>
             </p>`
           : nothing}
       </div>

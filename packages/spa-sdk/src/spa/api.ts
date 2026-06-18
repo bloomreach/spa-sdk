@@ -14,19 +14,14 @@
  * limitations under the License.
  */
 
-import { inject, injectable, optional } from 'inversify';
-import { isConfigurationWithProxy } from '../configuration';
 import { Logger } from '../logger';
 import { PageModel } from '../page';
-import { UrlBuilderService, UrlBuilder } from '../url';
+import { UrlBuilder } from '../url';
 import { HttpClientConfig, HttpClient, HttpHeaders, HttpRequest } from './http';
 
 const DEFAULT_API_VERSION_HEADER = 'Accept-Version';
 const DEFAULT_AUTHORIZATION_HEADER = 'Authorization';
 const DEFAULT_SERVER_ID_HEADER = 'Server-Id';
-
-export const ApiOptionsToken = Symbol.for('ApiOptionsToken');
-export const ApiService = Symbol.for('ApiService');
 
 export interface ApiOptions {
   /**
@@ -56,6 +51,8 @@ export interface ApiOptions {
 
   /**
    * HTTP client that will be used to fetch the page model.
+   * Axios satisfies this type directly. For the native `fetch` API, a wrapper
+   * is required — see {@link HttpClient} for examples.
    */
   httpClient: HttpClient<PageModel>;
 
@@ -93,30 +90,9 @@ export interface ApiOptions {
   refPrefix?: string;
 }
 
-export interface Api {
-  /**
-   * @param path Source path to generate the Page Model API URL.
-   * @returns The Page Model.
-   */
-  getPage(path: string): Promise<PageModel>;
-
-  /**
-   * The payload is used to customize the component state with properties from the client.
-   * If the payload is an empty object, the server state is used instead.
-   *
-   * @param url Component Model API URL.
-   * @param payload Payload with the component properties.
-   * @return The Page Model.
-   */
-  getComponent(url: string, payload: Record<string, unknown>): Promise<PageModel>;
-}
-
-@injectable()
-export class ApiImpl implements Api {
+export class Api {
   private static getHeaders(options: ApiOptions): HttpHeaders {
     const {
-      /** @deprecated The cookie header should be ignored when the proxy-based setup is removed. */
-      cookie,
       referer,
       'x-forwarded-for': ip = options.request?.connection?.remoteAddress,
       'user-agent': userAgent,
@@ -135,7 +111,6 @@ export class ApiImpl implements Api {
       ...(ip && { 'X-Forwarded-For': ip }),
       ...(apiVersion && { [apiVersionHeader]: apiVersion }),
       ...(authorizationToken && { [authorizationHeader]: `Bearer ${authorizationToken}` }),
-      ...(isConfigurationWithProxy(options) && cookie && { Cookie: cookie }),
       ...(referer && { Referer: referer }),
       ...(serverId && { [serverIdHeader]: serverId }),
       ...(userAgent && { 'User-Agent': userAgent }),
@@ -150,11 +125,11 @@ export class ApiImpl implements Api {
   private httpClient: HttpClient<PageModel>;
 
   constructor(
-    @inject(UrlBuilderService) private urlBuilder: UrlBuilder,
-    @inject(ApiOptionsToken) options: ApiOptions,
-    @inject(Logger) @optional() private logger?: Logger,
+    private urlBuilder: UrlBuilder,
+    options: ApiOptions,
+    private logger?: Logger,
   ) {
-    this.headers = ApiImpl.getHeaders(options);
+    this.headers = Api.getHeaders(options);
     this.httpClient = options.httpClient;
   }
 

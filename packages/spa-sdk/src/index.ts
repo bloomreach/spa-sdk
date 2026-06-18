@@ -19,31 +19,15 @@
  * @module index
  */
 
-import { Container } from 'inversify';
-import 'reflect-metadata';
-import { Cms, CmsModule, CmsService, PostMessage, PostMessageService } from './cms';
-import {
-  Configuration,
-  ConfigurationWithJwt09,
-  ConfigurationWithJwt10,
-  ConfigurationWithProxy,
-  isConfigurationWithJwt09,
-  isConfigurationWithProxy,
-} from './configuration';
-import { Level, Logger, LoggerModule } from './logger';
-import { isPage, Page, PageModel, PageModule, PageModule09 } from './page';
-import { Campaign } from './services/campaign';
-import { Segmentation } from './services/segmentation';
-import { ApiOptionsToken, Spa, SpaModule, SpaService } from './spa';
-import {
-  appendSearchParams,
-  extractSearchParams,
-  isMatched,
-  parseUrl,
-  UrlBuilderOptionsToken,
-  UrlModule,
-  UrlModule09,
-} from './url';
+import { SdkRuntime } from './container';
+import { Configuration } from './configuration';
+import { Level, Logger } from './logger';
+import { isPage, Page, PageModel } from './page';
+import { getCampaignVariantId } from './services/campaign';
+import { getSegmentIds } from './services/segmentation';
+import { appendSearchParams, extractSearchParams, parseUrl } from './url';
+
+const runtime = new SdkRuntime();
 
 const DEFAULT_AUTHORIZATION_PARAMETER = 'token';
 const DEFAULT_SERVER_ID_PARAMETER = 'server-id';
@@ -57,21 +41,6 @@ const BR_PREFIX = '__br__';
 const DEFAULT_CAMPAIGN_VARIANT_PARAMETER_API = `${BR_PREFIX}campaignVariant`;
 const DEFAULT_SEGMENT_IDS_PARAMETER_API = `${BR_PREFIX}segmentIds`;
 
-const baseContainer = new Container({ skipBaseClassChecks: true });
-baseContainer.load(CmsModule(), LoggerModule());
-
-let container = baseContainer.createChild();
-
-function cleanupModules(): void {
-  if (container.isBound(SpaService)) {
-    const spa = container.get<Spa>(SpaService);
-    spa.destroy();
-  }
-
-  // Create a new child container from the base to ensure clean state
-  container = baseContainer.createChild();
-}
-
 function onReady<T>(value: T | Promise<T>, callback: (cbValue: T) => unknown): T | Promise<T> {
   // eslint-disable-next-line no-sequences
   const wrapper = (result: T): T => (callback(result), result);
@@ -79,182 +48,114 @@ function onReady<T>(value: T | Promise<T>, callback: (cbValue: T) => unknown): T
   return value instanceof Promise ? value.then(wrapper) : wrapper(value);
 }
 
-function initializeWithProxy(
-  configuration: ConfigurationWithProxy,
-  model?: PageModel,
-): Page | Promise<Page> {
-  const logger = container.get(Logger);
-
-  logger.info('Enabled reverse-proxy based setup.');
-  logger.warn('This setup is deprecated and will not work in the next major release.');
-  logger.debug('Path:', configuration.path ?? configuration.request?.path ?? '/');
-  logger.debug('Base URL:', configuration.options.preview.spaBaseUrl);
-
-  const options = isMatched(
-    configuration.path ?? configuration.request?.path ?? '/',
-    configuration.options.preview.spaBaseUrl,
-  )
-    ? configuration.options.preview
-    : configuration.options.live;
-
-  logger.info(`Using ${options === configuration.options.preview ? 'preview' : 'live'} configuration.`);
-
-  const config = {
-    ...configuration,
-    NBRMode: configuration.NBRMode || false,
-  };
-
-  container.load(PageModule09(), SpaModule(), UrlModule09());
-  container.bind(ApiOptionsToken).toConstantValue(config);
-  container.bind(UrlBuilderOptionsToken).toConstantValue(options);
-  container.getNamed<Cms>(CmsService, 'cms14').initialize(configuration);
-
-  return container.get<Spa>(SpaService).initialize(model ?? configuration.path ?? configuration.request?.path ?? '/');
+interface ParsedRequest {
+  path: string;
+  searchParams: URLSearchParams;
+  authorizationToken?: string;
+  serverId?: string;
+  campaignId?: string;
+  segmentId?: string;
+  ttl?: string;
+  campaignVariantId?: string;
+  segmentIds?: string;
 }
 
-function initializeWithJwt09(
-  configuration: ConfigurationWithJwt09,
-  model?: PageModel,
-): Page | Promise<Page> {
-  const logger = container.get(Logger);
+type ResolvedConfig = Configuration & {
+  endpoint: string;
+  baseUrl: string;
+  origin: string;
+  NBRMode: boolean;
+  // Query-string extracted values; user-provided config values take precedence.
+  authorizationToken?: string;
+  serverId?: string;
+};
 
-  logger.info('Enabled token-based setup.');
-  logger.info('Using Page Model API 0.9.');
-  logger.warn('This version of the Page Model API is deprecated and will be removed in the next major release.');
-
+function parseRequest(configuration: Configuration): ParsedRequest {
   const authorizationParameter = configuration.authorizationQueryParameter ?? DEFAULT_AUTHORIZATION_PARAMETER;
   const serverIdParameter = configuration.serverIdQueryParameter ?? DEFAULT_SERVER_ID_PARAMETER;
-  const { url: path, searchParams } = extractSearchParams(
-    configuration.path ?? configuration.request?.path ?? '/',
-    [authorizationParameter, serverIdParameter].filter(Boolean),
-  );
-  const authorizationToken = searchParams.get(authorizationParameter) ?? undefined;
-  const serverId = searchParams.get(serverIdParameter) ?? undefined;
-  const config = {
-    ...configuration,
-    origin: configuration.origin ?? parseUrl(configuration.apiBaseUrl ?? configuration.cmsBaseUrl ?? '').origin,
-    spaBaseUrl: appendSearchParams(configuration.spaBaseUrl ?? '', searchParams),
-    NBRMode: configuration.NBRMode || false,
-  };
-
-  if (authorizationToken) {
-    logger.debug('Token:', authorizationToken);
-  }
-
-  if (serverId) {
-    logger.debug('Server Id:', serverId);
-  }
-
-  logger.debug('Origin:', config.origin);
-  logger.debug('Path:', path);
-  logger.debug('Base URL:', config.spaBaseUrl);
-
-  container.load(PageModule09(), SpaModule(), UrlModule09());
-  container.bind(ApiOptionsToken).toConstantValue({ authorizationToken, serverId, ...config });
-  container.bind(UrlBuilderOptionsToken).toConstantValue(config);
-
-  return onReady(container.get<Spa>(SpaService).initialize(model ?? path), (page) => {
-    if (page.isPreview() && config.cmsBaseUrl) {
-      logger.info('Running in preview mode.');
-      container.get<PostMessage>(PostMessageService).initialize(config);
-      container.get<Cms>(CmsService).initialize(config);
-    } else {
-      logger.info('Running in live mode.');
-    }
-  });
-}
-
-function initializeWithJwt10(
-  configuration: ConfigurationWithJwt10,
-  model?: PageModel,
-): Page | Promise<Page> {
-  const logger = container.get(Logger);
-
-  logger.info('Enabled token-based setup.');
-  logger.info('Using Page Model API 1.0.');
-
-  const authorizationParameter = configuration.authorizationQueryParameter ?? DEFAULT_AUTHORIZATION_PARAMETER;
-  const serverIdParameter = configuration.serverIdQueryParameter ?? DEFAULT_SERVER_ID_PARAMETER;
-  const campaignParameter = DEFAULT_CAMPAIGN_VARIANT_PARAMETER_URL;
-  const segmentParameter = DEFAULT_SEGMENT_PARAMETER_URL;
-  const ttlParameter = DEFAULT_TTL_PARAMETER_URL;
-  const refPrefix = configuration.refPrefix ?? '';
 
   const { url: path, searchParams } = extractSearchParams(
     configuration.path ?? configuration.request?.path ?? '/',
-    [authorizationParameter, serverIdParameter, campaignParameter, segmentParameter, ttlParameter].filter(Boolean),
+    [
+      authorizationParameter,
+      serverIdParameter,
+      DEFAULT_CAMPAIGN_VARIANT_PARAMETER_URL,
+      DEFAULT_SEGMENT_PARAMETER_URL,
+      DEFAULT_TTL_PARAMETER_URL,
+    ].filter(Boolean),
   );
 
-  const authorizationToken = searchParams.get(authorizationParameter) ?? undefined;
-  const serverId = searchParams.get(serverIdParameter) ?? undefined;
-  const campaignId = searchParams.get(campaignParameter) ?? undefined;
-  const segmentId = searchParams.get(segmentParameter) ?? undefined;
-  const ttl = searchParams.get(ttlParameter) ?? undefined;
+  const campaignId = searchParams.get(DEFAULT_CAMPAIGN_VARIANT_PARAMETER_URL) ?? undefined;
+  const segmentId = searchParams.get(DEFAULT_SEGMENT_PARAMETER_URL) ?? undefined;
+  const ttl = searchParams.get(DEFAULT_TTL_PARAMETER_URL) ?? undefined;
 
-  let endpointUrl = configuration.endpoint;
+  return {
+    path,
+    searchParams,
+    authorizationToken: searchParams.get(authorizationParameter) ?? undefined,
+    serverId: searchParams.get(serverIdParameter) ?? undefined,
+    campaignId,
+    segmentId,
+    ttl,
+    campaignVariantId: getCampaignVariantId(campaignId, segmentId, ttl, configuration.request),
+    segmentIds: getSegmentIds(configuration.request),
+  };
+}
 
-  const campaignVariantId = Campaign.GET_VARIANT_ID(campaignId, segmentId, ttl, configuration.request);
-  const segmentIds = Segmentation.GET_SEGMENT_IDS(configuration.request);
-
-  const params = new URLSearchParams();
-
-  if (campaignVariantId) {
-    params.append(DEFAULT_CAMPAIGN_VARIANT_PARAMETER_API, campaignVariantId);
+function resolveConfig(configuration: Configuration, parsed: ParsedRequest): ResolvedConfig {
+  const apiParams = new URLSearchParams();
+  if (parsed.campaignVariantId) {
+    apiParams.append(DEFAULT_CAMPAIGN_VARIANT_PARAMETER_API, parsed.campaignVariantId);
   }
-  if (segmentIds) {
-    params.append(DEFAULT_SEGMENT_IDS_PARAMETER_API, segmentIds);
+  if (parsed.segmentIds) {
+    apiParams.append(DEFAULT_SEGMENT_IDS_PARAMETER_API, parsed.segmentIds);
   }
-  if (refPrefix) {
-    params.append('refPrefix', refPrefix);
+  if (configuration.refPrefix) {
+    apiParams.append('refPrefix', configuration.refPrefix);
   }
-  endpointUrl = appendSearchParams(endpointUrl ?? '', params);
 
-  const config = {
+  // Merge in query-string extracted tokens; user-provided config values take precedence
+  // because ...configuration spreads after the parsed defaults.
+  return {
+    authorizationToken: parsed.authorizationToken,
+    serverId: parsed.serverId,
     ...configuration,
-    endpoint: endpointUrl,
-    baseUrl: appendSearchParams(configuration.baseUrl ?? '', searchParams),
+    endpoint: appendSearchParams(configuration.endpoint ?? '', apiParams),
+    baseUrl: appendSearchParams(configuration.baseUrl ?? '', parsed.searchParams),
     origin: configuration.origin ?? parseUrl(configuration.endpoint ?? '').origin,
     NBRMode: configuration.NBRMode || false,
   };
+}
 
-  if (authorizationToken) {
-    logger.debug('Token:', authorizationToken);
-  }
+function logBootInfo(logger: Logger, parsed: ParsedRequest, resolved: ResolvedConfig): void {
+  const debugFields: Array<[string, string | undefined]> = [
+    ['Token', parsed.authorizationToken],
+    ['Server Id', parsed.serverId],
+    ['Campaign Id', parsed.campaignId],
+    ['Segment Id', parsed.segmentId],
+    ['TTL', parsed.ttl],
+    ['Campaign variant Id', parsed.campaignVariantId],
+  ];
+  debugFields.forEach(([label, value]) => value && logger.debug(`${label}:`, value));
 
-  if (serverId) {
-    logger.debug('Server Id:', serverId);
-  }
+  logger.debug('Endpoint:', resolved.endpoint);
+  logger.debug('Origin:', resolved.origin);
+  logger.debug('Path:', parsed.path);
+  logger.debug('Base URL:', resolved.baseUrl);
+}
 
-  if (campaignId) {
-    logger.debug('Campaign Id:', campaignId);
-  }
+function bootSpa(
+  parsed: ParsedRequest,
+  resolved: ResolvedConfig,
+  model: PageModel | undefined,
+  logger: Logger,
+): Page | Promise<Page> {
+  const spa = runtime.createScope(resolved);
 
-  if (segmentId) {
-    logger.debug('Segment Id:', segmentId);
-  }
-
-  if (ttl) {
-    logger.debug('TTL:', ttl);
-  }
-
-  if (campaignVariantId) {
-    logger.debug('Campaign variant Id:', campaignVariantId);
-  }
-
-  logger.debug('Endpoint:', config.endpoint);
-  logger.debug('Origin:', config.origin);
-  logger.debug('Path:', path);
-  logger.debug('Base URL:', config.baseUrl);
-
-  container.load(PageModule(), SpaModule(), UrlModule());
-  container.bind(ApiOptionsToken).toConstantValue({ authorizationToken, serverId, ...config });
-  container.bind(UrlBuilderOptionsToken).toConstantValue(config);
-
-  return onReady(container.get<Spa>(SpaService).initialize(model ?? path), (page) => {
-    if (page.isPreview() && config.endpoint) {
+  return onReady(spa.initialize(model ?? parsed.path), (page) => {
+    if (page.isPreview() && resolved.endpoint) {
       logger.info('Running in preview mode.');
-      container.get<PostMessage>(PostMessageService).initialize(config);
-      container.get<Cms>(CmsService).initialize(config);
+      runtime.initializePreview(resolved);
     } else {
       logger.info('Running in live mode.');
     }
@@ -282,38 +183,35 @@ export function initialize(configuration: Configuration, model?: Page | PageMode
     return model;
   }
 
-  cleanupModules();
+  runtime.destroyScope();
 
-  const logger = container.get(Logger);
+  const logger = runtime.getLogger();
   logger.level = configuration.debug ? Level.Debug : Level.Error;
   logger.debug('Configuration:', configuration);
+  logger.info('Enabled token-based setup.');
 
-  return onReady(
-    // eslint-disable-next-line no-nested-ternary
-    isConfigurationWithProxy(configuration)
-      ? initializeWithProxy(configuration, model)
-      : isConfigurationWithJwt09(configuration)
-        ? initializeWithJwt09(configuration, model)
-        : initializeWithJwt10(configuration, model),
-    (page) => {
-      configuration.request?.emit?.('br:spa:initialized', page);
-    },
-  );
+  const parsed = parseRequest(configuration);
+  const resolved = resolveConfig(configuration, parsed);
+  logBootInfo(logger, parsed, resolved);
+
+  return onReady(bootSpa(parsed, resolved, model, logger), (page) => {
+    configuration.request?.emit?.('br:spa:initialized', page);
+  });
 }
 
 /**
  * Destroys the integration with the SPA page.
  */
 export function destroy(): void {
-  cleanupModules();
+  runtime.destroyScope();
 }
 
 export { Configuration } from './configuration';
+export type { HttpClient, HttpClientConfig, HttpResponse, HttpHeaders } from './spa/http';
 export {
   Component,
   ContainerItem,
   Container,
-  Content,
   Document,
   ImageSet,
   Image,
@@ -321,7 +219,6 @@ export {
   ManageContentButton,
   MenuItem,
   Menu,
-  Menu10,
   MetaCollection,
   MetaComment,
   Meta,
@@ -334,7 +231,6 @@ export {
   isComponent,
   isContainerItem,
   isContainer,
-  isContent,
   isDocument,
   isImageSet,
   isLink,

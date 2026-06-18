@@ -14,55 +14,47 @@
  * limitations under the License.
  */
 
-import { Cookie } from './cookie';
+import { getCookie, getCookieFromRequest } from './cookie';
 import { HttpRequest } from '../spa/http';
 
-export class Campaign {
-  static readonly CAMPAIGN_PARAMETER = '__br__campaign_id';
+export const CAMPAIGN_ID_COOKIE_KEY = '__br__campaign_id';
+export const SEGMENT_COOKIE_KEY = '__br__segment';
+export const TTL_COOKIE_KEY = '__br__ttl';
 
-  static readonly SEGMENT_PARAMETER = '__br__segment';
+const DEFAULT_TTL_DAYS = 7;
 
-  static readonly TTL_PARAMETER = '__br__ttl';
+function getCookieTTL(ttl: string | undefined): number {
+  const days = Number(ttl);
+  return Number.isNaN(days) ? DEFAULT_TTL_DAYS : days;
+}
 
-  static readonly DEFAULT_TTL_DAYS = 7;
-
-  /**
-   * Get the campaign variant from URL or cookie
-   * @param campaignId Campaign id from URL
-   * @param segmentId Segment id from URL
-   * @param ttl TTL param in days from URL
-   * @param request Current user's request
-   * @return string
-   */
-  public static GET_VARIANT_ID(campaignId?: string, segmentId?: string, ttl?: string, request?: HttpRequest): string {
-    const TTL = this.getCookieTTL(ttl);
-
-    if (TTL === 0) {
-      return '';
-    }
-
-    if (campaignId && segmentId) {
-      return `${campaignId}:${segmentId}`;
-    }
-
-    const { [this.CAMPAIGN_PARAMETER]: _campaignId, [this.SEGMENT_PARAMETER]: _segmentId } = request?.headers
-      ? Cookie.GET_COOKIE_FROM_REQUEST(request)
-      : Cookie.GET_COOKIE();
-
-    if (_campaignId && _segmentId) {
-      return `${_campaignId}:${_segmentId}`;
-    }
-
+/**
+ * Get the campaign variant id from URL parameters or cookie.
+ * @param campaignId Campaign id from URL.
+ * @param segmentId Segment id from URL.
+ * @param ttl TTL parameter in days from URL.
+ * @param request Current user's request.
+ */
+export function getCampaignVariantId(
+  campaignId?: string,
+  segmentId?: string,
+  ttl?: string,
+  request?: HttpRequest,
+): string {
+  if (getCookieTTL(ttl) === 0) {
     return '';
   }
 
-  /**
-   * Get cookie TTL value
-   * @param ttl TTL param in days
-   * @return number
-   */
-  private static getCookieTTL(ttl: string | undefined): number {
-    const TTL = Number(ttl);
-    return Number.isNaN(TTL) ? this.DEFAULT_TTL_DAYS : TTL;
+  if (campaignId && segmentId) {
+    return `${campaignId}:${segmentId}`;
   }
+
+  const cookies = request?.headers ? getCookieFromRequest(request) : getCookie();
+  const { [CAMPAIGN_ID_COOKIE_KEY]: _campaignId, [SEGMENT_COOKIE_KEY]: _segmentId } = cookies;
+
+  if (_campaignId && _segmentId) {
+    return `${_campaignId}:${_segmentId}`;
+  }
+
+  return '';
 }

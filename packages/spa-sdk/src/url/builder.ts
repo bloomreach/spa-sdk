@@ -14,11 +14,7 @@
  * limitations under the License.
  */
 
-import { inject, injectable } from 'inversify';
 import { buildUrl, mergeSearchParams, parseUrl } from './utils';
-
-export const UrlBuilderOptionsToken = Symbol.for('UrlBuilderOptionsToken');
-export const UrlBuilderService = Symbol.for('UrlBuilderService');
 
 /**
  * Mapping of the incoming HTTP request path to the URL of the page model API.
@@ -36,27 +32,12 @@ export interface UrlBuilderOptions {
   baseUrl?: string;
 }
 
-export interface UrlBuilder {
-  /**
-   * @param path Source path to generate the Page Model API URL.
-   * @returns The Page Model API URL.
-   */
-  getApiUrl(path: string): string;
-
-  /**
-   * @param path Source path to generate an SPA URL.
-   * @return The SPA URL for the channel path from the source path.
-   */
-  getSpaUrl(path: string): string;
-}
-
-@injectable()
-export class UrlBuilderImpl {
+export class UrlBuilder {
   private endpoint: ReturnType<typeof parseUrl>;
 
   private baseUrl: ReturnType<typeof parseUrl>;
 
-  constructor(@inject(UrlBuilderOptionsToken) options: UrlBuilderOptions) {
+  constructor(options: UrlBuilderOptions) {
     this.endpoint = parseUrl(options.endpoint ?? '');
     this.baseUrl = parseUrl(options.baseUrl ?? '');
   }

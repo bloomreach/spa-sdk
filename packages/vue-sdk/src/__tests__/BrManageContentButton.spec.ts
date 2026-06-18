@@ -16,7 +16,7 @@
 
 import BrManageContentButton from '@/BrManageContentButton.vue';
 import BrMeta from '@/BrMeta.vue';
-import type { Content, MetaCollection, Page } from '@bloomreach/spa-sdk';
+import type { Document, MetaCollection, Page } from '@bloomreach/spa-sdk';
 import { shallowMount } from '@vue/test-utils';
 import type { GlobalMountOptions } from '@vue/test-utils/dist/types';
 import type { Mocked } from 'vitest';
@@ -51,7 +51,7 @@ describe('BrManageContentButton', () => {
 
     it('should render a content button meta', () => {
       page.isPreview.mockReturnValue(true);
-      const content = {} as Content;
+      const content = {} as Document;
       const wrapper = shallowMount(BrManageContentButton, { global, props: { content, path: 'content' } });
       const props = wrapper.findComponent(BrMeta).props();
 

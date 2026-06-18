@@ -14,13 +14,8 @@
  * limitations under the License.
  */
 
-import { injectable, inject } from 'inversify';
-import { Builder } from './factory';
 import { LinkFactory } from './link-factory';
 import { Link } from './link';
-
-export const MenuItemFactory = Symbol.for('MenuItemFactory');
-export const MenuItemModelToken = Symbol.for('MenuItemModelToken');
 
 type MenuItemLinks = 'site';
 export interface MenuItemModel {
@@ -81,18 +76,14 @@ export interface MenuItem {
   isSelected(): boolean;
 }
 
-export type MenuItemFactory = Builder<[MenuItemModel], MenuItem>;
-
-@injectable()
 export class MenuItemImpl implements MenuItem {
   private children: MenuItem[];
 
   constructor(
-    @inject(MenuItemModelToken) protected model: MenuItemModel,
-    @inject(LinkFactory) private linkFactory: LinkFactory,
-    @inject(MenuItemFactory) menuItemFactory: MenuItemFactory,
+    protected model: MenuItemModel,
+    private linkFactory: LinkFactory,
   ) {
-    this.children = model.childMenuItems.map(menuItemFactory);
+    this.children = model.childMenuItems.map((child) => new MenuItemImpl(child, linkFactory));
   }
 
   getChildren(): MenuItem[] {

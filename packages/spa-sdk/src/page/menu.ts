@@ -14,12 +14,9 @@
  * limitations under the License.
  */
 
-import { injectable, inject } from 'inversify';
-import { MenuItemFactory, MenuItemModel, MenuItem } from './menu-item';
-import { MetaCollectionFactory } from './meta-collection-factory';
-import { MetaCollectionModel, MetaCollection } from './meta-collection';
-
-export const MenuModelToken = Symbol.for('MenuModelToken');
+import { MenuItemImpl, MenuItemModel, MenuItem } from './menu-item';
+import { MetaCollectionImpl, MetaCollectionModel, MetaCollection } from './meta-collection';
+import { LinkFactory } from './link-factory';
 
 /**
  * A manage menu button.
@@ -65,13 +62,13 @@ export interface Menu {
   getName(): string;
 
   /**
-   * @deprecated
-   * @return The current menu item.
+   * @deprecated The `selectSiteMenuItem` field was removed in Experience Manager 14.2.
+   *   Use {@link getItems} and check {@link MenuItem#isSelected} on each item instead.
+   * @return The selected menu item, or `undefined` if none is selected or the field is absent.
    */
   getSelected(): MenuItem | undefined;
 }
 
-@injectable()
 export class MenuImpl implements Menu {
   private items: MenuItem[];
 
@@ -80,13 +77,14 @@ export class MenuImpl implements Menu {
   private selected?: MenuItem;
 
   constructor(
-    @inject(MenuModelToken) protected model: MenuModel,
-    @inject(MetaCollectionFactory) metaFactory: MetaCollectionFactory,
-    @inject(MenuItemFactory) menuItemFactory: MenuItemFactory,
+    protected model: MenuModel,
+    private linkFactory: LinkFactory,
   ) {
-    this.items = model.data.siteMenuItems.map(menuItemFactory);
-    this.meta = metaFactory(model.meta);
-    this.selected = model.data.selectSiteMenuItem ? menuItemFactory(model.data.selectSiteMenuItem) : undefined;
+    this.items = model.data.siteMenuItems.map((item) => new MenuItemImpl(item, linkFactory));
+    this.meta = new MetaCollectionImpl(model.meta);
+    this.selected = model.data.selectSiteMenuItem
+      ? new MenuItemImpl(model.data.selectSiteMenuItem, linkFactory)
+      : undefined;
   }
 
   getItems(): MenuItem[] {

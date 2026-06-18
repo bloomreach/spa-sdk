@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`MetaCollectionImpl clear should remove rendered comments 1`] = `
 <body>
@@ -7,12 +7,20 @@ exports[`MetaCollectionImpl clear should remove rendered comments 1`] = `
 `;
 
 exports[`MetaCollectionImpl constructor should hold meta-data items 1`] = `
-Array [
-  Object {
-    "data": "meta1",
+[
+  MetaCommentImpl {
+    "model": {
+      "data": "<!--meta1-->",
+      "type": "comment",
+    },
+    "position": "begin",
   },
-  Object {
-    "data": "meta2",
+  MetaCommentImpl {
+    "model": {
+      "data": "<!--meta2-->",
+      "type": "comment",
+    },
+    "position": "end",
   },
 ]
 `;

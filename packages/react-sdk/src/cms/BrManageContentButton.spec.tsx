@@ -15,7 +15,7 @@
  */
 
 import React from 'react';
-import { Content, MetaCollection, Page } from '@bloomreach/spa-sdk';
+import { Document, MetaCollection, Page } from '@bloomreach/spa-sdk';
 import { render } from '@testing-library/react';
 import { BrManageContentButton } from './BrManageContentButton';
 
@@ -38,12 +38,12 @@ describe('BrManageContentButton', () => {
 
   it('should render manage-content-button meta-data', () => {
     const meta = {} as MetaCollection;
-    const content = {} as Content;
+    const content = {} as Document;
 
     mockPage.isPreview.mockReturnValueOnce(true);
     mockPage.getButton.mockReturnValueOnce(meta);
     render(<BrManageContentButton page={mockPage} content={content} root="content" />);
 
-    expect(mockPage.getButton).toBeCalledWith(expect.any(String), { content, root: 'content' });
+    expect(mockPage.getButton).toHaveBeenCalledWith(expect.any(String), { content, root: 'content' });
   });
 });

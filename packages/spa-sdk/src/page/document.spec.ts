@@ -16,11 +16,11 @@
 
 import { DocumentImpl, DocumentModel, TYPE_DOCUMENT, isDocument } from './document';
 import { LinkFactory } from './link-factory';
-import { MetaCollectionFactory } from './meta-collection-factory';
-import { MetaCollection } from './meta-collection';
+import { MetaCollectionImpl, MetaCollection } from './meta-collection';
+
+jest.mock('./meta-collection');
 
 let linkFactory: jest.Mocked<LinkFactory>;
-let metaFactory: jest.MockedFunction<MetaCollectionFactory>;
 
 const model = {
   links: { site: { href: 'url' } },
@@ -32,12 +32,11 @@ const model = {
 } as DocumentModel;
 
 function createDocument(contentModel = model) {
-  return new DocumentImpl(contentModel, linkFactory, metaFactory);
+  return new DocumentImpl(contentModel, linkFactory);
 }
 
 beforeEach(() => {
   linkFactory = { create: jest.fn() } as unknown as typeof linkFactory;
-  metaFactory = jest.fn();
 });
 
 describe('DocumentImpl', () => {
@@ -67,18 +66,18 @@ describe('DocumentImpl', () => {
     it('should return a meta-data array', () => {
       const metaModel = {};
       const meta = {} as MetaCollection;
-      metaFactory.mockReturnValueOnce(meta);
+      jest.mocked(MetaCollectionImpl).mockReturnValueOnce(meta as unknown as MetaCollectionImpl);
 
       const document = createDocument({ ...model, meta: metaModel });
 
-      expect(metaFactory).toBeCalledWith(metaModel);
+      expect(MetaCollectionImpl).toHaveBeenCalledWith(metaModel);
       expect(document.getMeta()).toEqual(meta);
     });
 
     it('should pass an empty object if there is no meta-data', () => {
       createDocument();
 
-      expect(metaFactory).toBeCalledWith({});
+      expect(MetaCollectionImpl).toHaveBeenCalledWith({});
     });
   });
 
@@ -104,7 +103,7 @@ describe('DocumentImpl', () => {
       linkFactory.create.mockReturnValueOnce('url');
 
       expect(document.getUrl()).toBe('url');
-      expect(linkFactory.create).toBeCalledWith({ href: 'url' });
+      expect(linkFactory.create).toHaveBeenCalledWith({ href: 'url' });
     });
   });
 });

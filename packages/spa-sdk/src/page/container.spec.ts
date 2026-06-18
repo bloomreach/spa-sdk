@@ -18,10 +18,10 @@ import { ComponentImpl, TYPE_COMPONENT_CONTAINER } from './component';
 import { ContainerImpl, ContainerModel, isContainer, TYPE_CONTAINER_BOX } from './container';
 import { ContainerItem } from './container-item';
 import { LinkFactory } from './link-factory';
-import { MetaCollectionFactory } from './meta-collection-factory';
+
+jest.mock('./meta-collection');
 
 let linkFactory: jest.Mocked<LinkFactory>;
-let metaFactory: jest.MockedFunction<MetaCollectionFactory>;
 
 const model = {
   meta: {},
@@ -30,12 +30,11 @@ const model = {
 } as ContainerModel;
 
 function createContainer(containerModel = model, children: ContainerItem[] = []) {
-  return new ContainerImpl(containerModel, children, linkFactory, metaFactory);
+  return new ContainerImpl(containerModel, children, linkFactory);
 }
 
 beforeEach(() => {
   linkFactory = { create: jest.fn() } as unknown as typeof linkFactory;
-  metaFactory = jest.fn();
 });
 
 describe('ContainerImpl', () => {
@@ -79,7 +78,7 @@ describe('isContainer', () => {
   });
 
   it('should return false', () => {
-    const component = new ComponentImpl(model, [], linkFactory, metaFactory);
+    const component = new ComponentImpl(model, [], linkFactory);
 
     expect(isContainer(undefined)).toBe(false);
     expect(isContainer(component)).toBe(false);

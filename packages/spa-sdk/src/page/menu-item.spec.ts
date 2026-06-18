@@ -14,12 +14,11 @@
  * limitations under the License.
  */
 
-import { MenuItemFactory, MenuItemImpl, MenuItemModel, MenuItem } from './menu-item';
+import { MenuItemImpl, MenuItemModel, MenuItem } from './menu-item';
 import { LinkFactory } from './link-factory';
 import { TYPE_LINK_INTERNAL } from './link';
 
 let linkFactory: jest.Mocked<LinkFactory>;
-let menuItemFactory: jest.MockedFunction<MenuItemFactory>;
 
 const model = {
   childMenuItems: [],
@@ -33,12 +32,11 @@ const model = {
 } as MenuItemModel;
 
 function createMenuItem(menuItemModel = model) {
-  return new MenuItemImpl(menuItemModel, linkFactory, menuItemFactory);
+  return new MenuItemImpl(menuItemModel, linkFactory);
 }
 
 beforeEach(() => {
   linkFactory = { create: jest.fn() } as unknown as typeof linkFactory;
-  menuItemFactory = jest.fn();
 });
 
 describe('MenuItemImpl', () => {
@@ -49,11 +47,13 @@ describe('MenuItemImpl', () => {
   });
 
   describe('getChildren', () => {
-    it('should return child items', () => {
-      menuItemFactory.mockReturnValueOnce(item);
+    it('should return child items as MenuItemImpl instances', () => {
       const parent = createMenuItem({ ...model, childMenuItems: [model] });
+      const children = parent.getChildren();
 
-      expect(parent.getChildren()).toEqual([item]);
+      expect(children).toHaveLength(1);
+      expect(children[0]).toBeInstanceOf(MenuItemImpl);
+      expect(children[0].getName()).toBe(model.name);
     });
   });
 
@@ -86,7 +86,7 @@ describe('MenuItemImpl', () => {
       linkFactory.create.mockReturnValueOnce('url');
 
       expect(item.getUrl()).toBe('url');
-      expect(linkFactory.create).toBeCalledWith({ href: 'url', type: TYPE_LINK_INTERNAL });
+      expect(linkFactory.create).toHaveBeenCalledWith({ href: 'url', type: TYPE_LINK_INTERNAL });
     });
   });
 

@@ -14,8 +14,7 @@
  * limitations under the License.
  */
 
-import { inject, injectable, optional } from 'inversify';
-import { CmsEventBus, CmsEventBusService } from '../cms';
+import { CmsEventBus } from '../cms';
 import { Logger } from '../logger';
 import { isAbsoluteUrl, resolveUrl } from '../url';
 import { ButtonFactory } from './button-factory';
@@ -26,19 +25,16 @@ import { ContainerModel } from './container';
 import { ContainerItemModel } from './container-item';
 import { ContentModel } from './content';
 import { ContentFactory } from './content-factory';
-import { Content } from './content09';
+import { Document } from './document';
 import { isLink, Link } from './link';
 import { LinkFactory } from './link-factory';
-import { LinkRewriter, LinkRewriterService } from './link-rewriter';
+import { LinkRewriter } from './link-rewriter';
 import { Menu, TYPE_MANAGE_MENU_BUTTON } from './menu';
-import { MetaCollection, MetaCollectionModel } from './meta-collection';
-import { MetaCollectionFactory } from './meta-collection-factory';
-import { PageEventBus, PageEventBusService, PageUpdateEvent } from './page-events';
+import { MetaCollection } from './meta-collection';
+import { PageEventBus, PageUpdateEvent } from './page-events';
 import { isReference, Reference, resolve } from './reference';
 import { Visit, Visitor } from './relevance';
-import { ApiOptions, ApiOptionsToken } from '../spa/api';
-
-export const PageModelToken = Symbol.for('PageModelToken');
+import { ApiOptions } from '../spa/api';
 
 type ChannelParameters = Record<string, any>;
 type PageLinks = 'self' | 'site';
@@ -87,13 +83,13 @@ interface PageMeta {
 
   /**
    * Meta-data about the current visitor. Available when the Relevance Module is enabled.
-   * @see https://documentation.bloomreach.com/library/enterprise/enterprise-features/targeting/targeting.html
+   * @see https://xmdocumentation.bloomreach.com/library/enterprise/enterprise-features/targeting/targeting.html
    */
   visitor?: Visitor;
 
   /**
    * Meta-data about the current visit. Available when the Relevance Module is enabled.
-   * @see https://documentation.bloomreach.com/library/enterprise/enterprise-features/targeting/targeting.html
+   * @see https://xmdocumentation.bloomreach.com/library/enterprise/enterprise-features/targeting/targeting.html
    */
   visit?: Visit;
 
@@ -158,17 +154,13 @@ export interface Page {
 
   /**
    * Gets a content item used on the page.
+   * @typeParam T The expected content type. Defaults to {@link Document}.
+   * Pass an explicit type for non-document content — e.g. {@link ImageSet},
+   * {@link Menu}, or {@link Pagination} — to get a correctly typed result.
    * @param reference The reference to the content. It can be an object containing
    * an [RFC-6901](https://tools.ietf.org/html/rfc6901) JSON Pointer.
    */
-  getContent(reference: Reference | string): Content | undefined;
-
-  /**
-   * Gets a custom content item used on the page.
-   * @param reference The reference to the content. It can be an object containing
-   * an [RFC-6901](https://tools.ietf.org/html/rfc6901) JSON Pointer.
-   */
-  getContent<T>(reference: Reference | string): T | undefined;
+  getContent<T = Document>(reference: Reference | string): T | undefined;
 
   /**
    * Gets the page root document.
@@ -182,24 +174,13 @@ export interface Page {
   getLocale(): string;
 
   /**
-   * Generates a meta-data collection from the provided meta-data model.
-   * @param meta The meta-data collection model as returned by the page-model-api.
-   * @deprecated Use `getButton` method to create buttons.
-   */
-  getMeta(meta: MetaCollectionModel): MetaCollection;
-
-  /**
    * @return The title of the page, or `undefined` if not configured.
    */
   getTitle(): string | undefined;
 
   /**
    * Generates a URL for a link object.
-   * - If the link object type is internal, then it will prepend `spaBaseUrl` or `baseUrl`.
-   *   In case when the link starts with the same path as in `cmsBaseUrl`, this part will be removed.
-   *   For example, for link `/site/_cmsinternal/spa/about` with configuration options
-   *   `cmsBaseUrl = "http://localhost:8080/site/_cmsinternal/spa"` and `spaBaseUrl = "http://example.com"`
-   *   it will generate `http://example.com/about`.
+   * - If the link object type is internal, then it will prepend `baseUrl`.
    * - If the link object type is unknown, then it will return `undefined`.
    * - If the link parameter is omitted, then the link to the current page will be returned.
    * - In other cases, the link will be returned as-is.
@@ -209,13 +190,8 @@ export interface Page {
 
   /**
    * Generates an SPA URL for the path.
-   * - If it is a relative path and `cmsBaseUrl` is present, then it will prepend `spaBaseUrl`.
-   * - If it is an absolute path and `cmsBaseUrl` is present,
-   *   then the behavior will be similar to internal link generation.
-   * - If it is a relative path and `endpoint` is present,
-   *   then it will resolve this link relative to the current page URL.
-   * - If it is an absolute path and `endpoint` is present,
-   *   then it will resolve this link relative to the `baseUrl` option.
+   * - If it is a relative path, it will resolve relative to the current page URL.
+   * - If it is an absolute path, it will resolve relative to the `baseUrl` option.
    * @param path The path to generate URL.
    */
   getUrl(path: string): string;
@@ -260,28 +236,68 @@ export interface Page {
   toJSON(): any;
 }
 
-@injectable()
+/**
+ * Build-time dependencies for {@link PageImpl}: the factories used to construct
+ * and render page content.
+ */
+export interface PageFactories {
+  buttonFactory: ButtonFactory;
+  componentFactory: ComponentFactory;
+  contentFactory: ContentFactory;
+  linkFactory: LinkFactory;
+  linkRewriter: LinkRewriter;
+}
+
+/**
+ * Runtime context for {@link PageImpl}: API configuration, event buses and logging.
+ */
+export interface PageContext {
+  apiOptions: ApiOptions;
+  cmsEventBus?: CmsEventBus;
+  pageEventBus?: PageEventBus;
+  logger?: Logger;
+}
+
 export class PageImpl implements Page {
   protected content = new WeakMap<Record<string, any>, unknown>();
 
   protected root?: Component;
 
-  constructor(
-    @inject(PageModelToken) protected model: PageModel,
-    @inject(ButtonFactory) private buttonFactory: ButtonFactory,
-    @inject(ComponentFactory) componentFactory: ComponentFactory,
-    @inject(ContentFactory) private contentFactory: ContentFactory,
-    @inject(LinkFactory) private linkFactory: LinkFactory,
-    @inject(LinkRewriterService) private linkRewriter: LinkRewriter,
-    @inject(MetaCollectionFactory) private metaFactory: MetaCollectionFactory,
-    @inject(CmsEventBusService) @optional() private cmsEventBus: CmsEventBus,
-    @inject(ApiOptionsToken) private apiOptions: ApiOptions,
-    @inject(PageEventBusService) @optional() pageEventBus?: PageEventBus,
-    @inject(Logger) @optional() private logger?: Logger,
-  ) {
-    pageEventBus?.on('page.update', this.onPageUpdate.bind(this));
+  private buttonFactory: ButtonFactory;
 
-    this.root = componentFactory.create(model, this.apiOptions.refPrefix);
+  private contentFactory: ContentFactory;
+
+  private linkFactory: LinkFactory;
+
+  private linkRewriter: LinkRewriter;
+
+  private cmsEventBus: CmsEventBus | undefined;
+
+  private apiOptions: ApiOptions;
+
+  private logger: Logger | undefined;
+
+  /**
+   * @param model The raw page model from the Page Model API.
+   * @param factories Build-time factories for constructing and rendering page content.
+   * @param context Runtime API configuration, event buses and logger.
+   */
+  constructor(
+    protected model: PageModel,
+    factories: PageFactories,
+    context: PageContext,
+  ) {
+    this.buttonFactory = factories.buttonFactory;
+    this.contentFactory = factories.contentFactory;
+    this.linkFactory = factories.linkFactory;
+    this.linkRewriter = factories.linkRewriter;
+    this.cmsEventBus = context.cmsEventBus;
+    this.apiOptions = context.apiOptions;
+    this.logger = context.logger;
+
+    context.pageEventBus?.on('page.update', this.onPageUpdate.bind(this));
+
+    this.root = factories.componentFactory.create(model, this.apiOptions.refPrefix);
   }
 
   protected onPageUpdate(event: PageUpdateEvent): void {
@@ -331,10 +347,6 @@ export class PageImpl implements Page {
 
   getLocale(): string {
     return this.model.meta.locale || 'en_US';
-  }
-
-  getMeta(meta: MetaCollectionModel): MetaCollection {
-    return this.metaFactory(meta);
   }
 
   getTitle(): string | undefined {

@@ -14,26 +14,19 @@
  * limitations under the License.
  */
 
-import { injectable, inject } from 'inversify';
-import { Builder, SimpleFactory } from './factory';
-import { MetaCollectionFactory } from './meta-collection-factory';
-import { MetaCollection, MetaCollectionModel, isMetaCollection } from './meta-collection';
+import { Builder } from './factory';
+import { MetaCollection } from './meta-collection';
 
-type ButtonBuilder = Builder<any[], MetaCollection | MetaCollectionModel>;
+type ButtonBuilder = Builder<any[], MetaCollection>;
 
-@injectable()
-export class ButtonFactory extends SimpleFactory<string, ButtonBuilder> {
-  constructor(@inject(MetaCollectionFactory) private metaCollectionFactory: MetaCollectionFactory) {
-    super();
-  }
+export class ButtonFactory {
+  constructor(private builders: Map<string, ButtonBuilder> = new Map()) {}
 
   create(type: string, ...params: unknown[]): MetaCollection {
-    if (!this.mapping.has(type)) {
+    if (!this.builders.has(type)) {
       throw new Error(`Unsupported button type: '${type}'.`);
     }
 
-    const meta = this.mapping.get(type)!(...params);
-
-    return isMetaCollection(meta) ? meta : this.metaCollectionFactory(meta);
+    return this.builders.get(type)!(...params);
   }
 }

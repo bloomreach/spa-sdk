@@ -15,28 +15,3 @@
  */
 
 export type Builder<T extends any[], U> = (...args: T) => U;
-
-export interface Factory<T extends any[], U> {
-  /**
-   * Creates an instance from the given arguments.
-   */
-  create(...args: T): U;
-}
-
-export abstract class SimpleFactory<T, U extends Builder<any, any>> implements Factory<any, any> {
-  protected mapping = new Map<T, U>();
-
-  /**
-   * Registers a builder for the specified type.
-   * @param type The entity type.
-   * @param builder The entity builder.
-   */
-  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-  register(type: T, builder: U) {
-    this.mapping.set(type, builder);
-
-    return this;
-  }
-
-  abstract create(...args: any[]): any;
-}

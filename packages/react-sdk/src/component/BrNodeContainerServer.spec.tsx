@@ -63,7 +63,7 @@ describe('BrNodeContainerServer', () => {
         />,
       );
 
-      expect(mockComponent.getType).toBeCalled();
+      expect(mockComponent.getType).toHaveBeenCalled();
     });
 
     it('should render a mapped container', () => {

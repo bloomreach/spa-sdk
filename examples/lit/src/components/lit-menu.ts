@@ -1,8 +1,9 @@
 import { LitElement, html, nothing } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { consume } from '@lit/context';
-import { type Page, type Menu, type Menu10, type MenuItem, TYPE_LINK_EXTERNAL, isMenu } from '@bloomreach/spa-sdk';
+import { type Page, type Menu, type MenuItem, TYPE_LINK_EXTERNAL, isMenu } from '@bloomreach/spa-sdk';
 import { brPageContext } from '@bloomreach/lit-sdk';
+import { handleInternalLinkClick } from '../utils/navigation.js';
 import '@bloomreach/lit-sdk';
 
 @customElement('lit-menu')
@@ -15,7 +16,7 @@ export class LitMenu extends LitElement {
     return this;
   }
 
-  private _getMenu(): Menu10 | undefined {
+  private _getMenu(): Menu | undefined {
     if (!this._page) return undefined;
 
     // Try getting menu from the "menu" named component
@@ -26,7 +27,7 @@ export class LitMenu extends LitElement {
     if (!menuRef) return undefined;
 
     const menu = this._page.getContent<Menu>(menuRef);
-    return isMenu(menu) ? (menu as Menu10) : undefined;
+    return isMenu(menu) ? menu : undefined;
   }
 
   private _renderItem(item: MenuItem) {
@@ -40,7 +41,7 @@ export class LitMenu extends LitElement {
       return html`<a class="nav-link text-capitalize" href=${url}>${item.getName()}</a>`;
     }
 
-    return html`<a href=${url} class="nav-link text-capitalize">${item.getName()}</a>`;
+    return html`<a href=${url} class="nav-link text-capitalize" @click=${handleInternalLinkClick}>${item.getName()}</a>`;
   }
 
   render() {

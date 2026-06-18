@@ -17,62 +17,52 @@
 import cookie from 'cookie';
 import { HttpRequest } from '../spa/http';
 
-export class Cookie {
-  static readonly MAX_TTL_DAYS = 28;
+const MAX_TTL_DAYS = 28;
 
-  /**
-   * Set cookie in the document
-   * @param name Cookie name
-   * @param value Cookie value
-   * @param ttl  Sets the cookie max-age in days
-   */
-  public static SET_COOKIE(name: string, value: string, ttl: number): void {
-    if (this.isWindowDocumentAvailable() && name && value) {
-      const maxAge = ttl > this.MAX_TTL_DAYS ? this.getSeconds(this.MAX_TTL_DAYS) : this.getSeconds(ttl);
-      document.cookie = cookie.serialize(name, value, { maxAge });
-    }
+function getSeconds(days: number): number {
+  return days * 24 * 60 * 60;
+}
+
+export function isWindowDocumentAvailable(): boolean {
+  return typeof window !== 'undefined' && typeof window.document !== 'undefined';
+}
+
+/**
+ * Set cookie in the document.
+ * @param name Cookie name.
+ * @param value Cookie value.
+ * @param ttl Sets the cookie max-age in days.
+ */
+export function setCookie(name: string, value: string, ttl: number): void {
+  if (isWindowDocumentAvailable() && name && value) {
+    const maxAge = ttl > MAX_TTL_DAYS ? getSeconds(MAX_TTL_DAYS) : getSeconds(ttl);
+    document.cookie = cookie.serialize(name, value, { maxAge });
   }
+}
 
-  /**
-   * Retrieve data from cookies
-   * @return Cookie object.
-   */
-  public static GET_COOKIE(): Record<string, string> {
-    return this.isWindowDocumentAvailable() ? cookie.parse(document.cookie ?? '') : {};
-  }
+/**
+ * Retrieve data from document cookies.
+ * @return Cookie object.
+ */
+export function getCookie(): Record<string, string> {
+  return isWindowDocumentAvailable() ? cookie.parse(document.cookie ?? '') : {};
+}
 
-  /**
-   * Retrieve data from request cookies
-   * @param request Current user's request.
-   * @return Cookie object.
-   */
-  public static GET_COOKIE_FROM_REQUEST(request: HttpRequest): Record<string, string> {
-    return cookie.parse((request.headers?.cookie as string) ?? '');
-  }
+/**
+ * Retrieve data from request cookies.
+ * @param request Current user's request.
+ * @return Cookie object.
+ */
+export function getCookieFromRequest(request: HttpRequest): Record<string, string> {
+  return cookie.parse((request.headers?.cookie as string) ?? '');
+}
 
-  /**
-   * Erase cookie in the document
-   * @param name Cookie name
-   */
-  public static ERASE_COOKIE(name: string): void {
-    if (this.isWindowDocumentAvailable()) {
-      document.cookie = cookie.serialize(name, '', { maxAge: 0 });
-    }
-  }
-
-  /**
-   * Check if Window Document is available
-   */
-  private static isWindowDocumentAvailable(): boolean {
-    return typeof window !== 'undefined' && typeof window.document !== 'undefined';
-  }
-
-  /**
-   * Convert days to seconds
-   * @param days Time in days
-   * @return number
-   */
-  private static getSeconds(days: number): number {
-    return days * 24 * 60 * 60;
+/**
+ * Erase cookie in the document.
+ * @param name Cookie name.
+ */
+export function eraseCookie(name: string): void {
+  if (isWindowDocumentAvailable()) {
+    document.cookie = cookie.serialize(name, '', { maxAge: 0 });
   }
 }
