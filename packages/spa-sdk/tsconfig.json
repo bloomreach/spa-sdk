@@ -15,17 +15,5 @@
     "strict": true,
     "target": "es6",
     "skipLibCheck": true
-  },
-  "typedocOptions": {
-    "disableSources": true,
-    "excludePrivate": true,
-    "excludeProtected": true,
-    "excludeExternals": true,
-    "hideGenerator": true,
-    "includeVersion": true,
-    "internalModule": "Internals",
-    "entryPoints": ["src/index.ts", "src/express/index.ts"],
-    "plugin": ["typedoc-plugin-missing-exports"],
-    "cleanOutputDir": true
   }
 }
