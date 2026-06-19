@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "lib": ["es2020", "dom", "dom.iterable"],
+    "module": "es2020",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "strict": true,
+    "target": "es6",
+    "skipLibCheck": true,
+    "types": ["node"]
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["src/**/*.spec.ts", "src/**/__snapshots__/**"],
+  "typedocOptions": {
+    "disableSources": true,
+    "excludePrivate": true,
+    "excludeProtected": true,
+    "excludeExternals": true,
+    "hideGenerator": true,
+    "includeVersion": true,
+    "internalModule": "Internals",
+    "entryPoints": ["src/index.ts", "src/express/index.ts"],
+    "plugin": ["typedoc-plugin-missing-exports"],
+    "cleanOutputDir": true
+  }
+}
