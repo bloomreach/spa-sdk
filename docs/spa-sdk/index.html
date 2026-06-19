@@ -50,6 +50,29 @@ and exposes a simplified and framework-agnostic interface over the page model.</
 <span class="line"><span style="color:#E1E4E8">}</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#B392F0">showPage</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">`${</span><span style="color:#E1E4E8">window</span><span style="color:#9ECBFF">.</span><span style="color:#E1E4E8">location</span><span style="color:#9ECBFF">.</span><span style="color:#E1E4E8">pathname</span><span style="color:#9ECBFF">}${</span><span style="color:#E1E4E8">window</span><span style="color:#9ECBFF">.</span><span style="color:#E1E4E8">location</span><span style="color:#9ECBFF">.</span><span style="color:#E1E4E8">search</span><span style="color:#9ECBFF">}`</span><span style="color:#E1E4E8">);</span></span></code></pre>
+<p>Alternatively, using the native <code>fetch</code> API (a wrapper is needed since <code>fetch</code> is not directly compatible with the <code>HttpClient</code> signature):</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { initialize } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "@bloomreach/spa-sdk"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#B392F0"> httpClient</span><span style="color:#F97583"> =</span><span style="color:#F97583"> async</span><span style="color:#E1E4E8"> ({ </span><span style="color:#FFAB70">method</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">url</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">headers</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">data</span><span style="color:#E1E4E8"> }) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> response</span><span style="color:#F97583"> =</span><span style="color:#F97583"> await</span><span style="color:#B392F0"> fetch</span><span style="color:#E1E4E8">(url, {</span></span>
+<span class="line"><span style="color:#E1E4E8">    method,</span></span>
+<span class="line"><span style="color:#E1E4E8">    headers: headers,</span></span>
+<span class="line"><span style="color:#E1E4E8">    body: data </span><span style="color:#F97583">!==</span><span style="color:#79B8FF"> undefined</span><span style="color:#F97583"> ?</span><span style="color:#79B8FF"> JSON</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">stringify</span><span style="color:#E1E4E8">(data) </span><span style="color:#F97583">:</span><span style="color:#79B8FF"> undefined</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">  });</span></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#E1E4E8"> { data: </span><span style="color:#F97583">await</span><span style="color:#E1E4E8"> response.</span><span style="color:#B392F0">json</span><span style="color:#E1E4E8">() };</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">async</span><span style="color:#F97583"> function</span><span style="color:#B392F0"> showPage</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">path</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> page</span><span style="color:#F97583"> =</span><span style="color:#F97583"> await</span><span style="color:#B392F0"> initialize</span><span style="color:#E1E4E8">({</span></span>
+<span class="line"><span style="color:#E1E4E8">    path,</span></span>
+<span class="line"><span style="color:#E1E4E8">    endpoint: </span><span style="color:#9ECBFF">"http://localhost:8080/delivery/site/v1/channels/brxsaas/pages"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    httpClient,</span></span>
+<span class="line"><span style="color:#E1E4E8">  });</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">  document.</span><span style="color:#B392F0">querySelector</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"#title"</span><span style="color:#E1E4E8">).innerText </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> page.</span><span style="color:#B392F0">getTitle</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">showPage</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">`${</span><span style="color:#E1E4E8">window</span><span style="color:#9ECBFF">.</span><span style="color:#E1E4E8">location</span><span style="color:#9ECBFF">.</span><span style="color:#E1E4E8">pathname</span><span style="color:#9ECBFF">}${</span><span style="color:#E1E4E8">window</span><span style="color:#9ECBFF">.</span><span style="color:#E1E4E8">location</span><span style="color:#9ECBFF">.</span><span style="color:#E1E4E8">search</span><span style="color:#9ECBFF">}`</span><span style="color:#E1E4E8">);</span></span></code></pre>
 <h3 id="relevance-integration">Relevance Integration</h3>
 <p>(not applicable to Content SaaS)</p>
 <p>The SDK provides basic <a href="https://expressjs.com/en/guide/using-middleware.html">Express
@@ -145,6 +168,49 @@ save preview related data to the cookies by yourself.</li>
 <span class="line"><span style="color:#F97583">  return</span><span style="color:#E1E4E8"> configuration;</span></span>
 <span class="line"><span style="color:#E1E4E8">};</span></span>
 <span class="line"></span></code></pre>
+<p>Alternatively, using the native <code>fetch</code> API:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> cookie </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> 'cookie'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { Configuration, HttpClient } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> '@bloomreach/spa-sdk'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#B392F0"> httpClient</span><span style="color:#F97583">:</span><span style="color:#B392F0"> HttpClient</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#79B8FF">any</span><span style="color:#E1E4E8">> </span><span style="color:#F97583">=</span><span style="color:#F97583"> async</span><span style="color:#E1E4E8"> ({ </span><span style="color:#FFAB70">method</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">url</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">headers</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">data</span><span style="color:#E1E4E8"> }) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> response</span><span style="color:#F97583"> =</span><span style="color:#F97583"> await</span><span style="color:#B392F0"> fetch</span><span style="color:#E1E4E8">(url, {</span></span>
+<span class="line"><span style="color:#E1E4E8">    method,</span></span>
+<span class="line"><span style="color:#E1E4E8">    headers: headers </span><span style="color:#F97583">as</span><span style="color:#B392F0"> Record</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#79B8FF">string</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">string</span><span style="color:#E1E4E8">>,</span></span>
+<span class="line"><span style="color:#E1E4E8">    body: data </span><span style="color:#F97583">!==</span><span style="color:#79B8FF"> undefined</span><span style="color:#F97583"> ?</span><span style="color:#79B8FF"> JSON</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">stringify</span><span style="color:#E1E4E8">(data) </span><span style="color:#F97583">:</span><span style="color:#79B8FF"> undefined</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">  });</span></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#E1E4E8"> { data: </span><span style="color:#F97583">await</span><span style="color:#E1E4E8"> response.</span><span style="color:#B392F0">json</span><span style="color:#E1E4E8">() };</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> default</span><span style="color:#F97583"> function</span><span style="color:#B392F0"> buildConfiguration</span><span style="color:#E1E4E8">()</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Configuration</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> PREVIEW_TOKEN_KEY</span><span style="color:#F97583"> =</span><span style="color:#9ECBFF"> 'token'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> PREVIEW_SERVER_ID_KEY</span><span style="color:#F97583"> =</span><span style="color:#9ECBFF"> 'server-id'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> searchParams</span><span style="color:#F97583"> =</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> URLSearchParams</span><span style="color:#E1E4E8">(window.location.search);</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> queryToken</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> searchParams.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">PREVIEW_TOKEN_KEY</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> queryServerId</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> searchParams.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">PREVIEW_SERVER_ID_KEY</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> cookies</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> cookie.</span><span style="color:#B392F0">parse</span><span style="color:#E1E4E8">(document.cookie);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> authorizationToken</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> queryToken </span><span style="color:#F97583">??</span><span style="color:#E1E4E8"> cookies[</span><span style="color:#79B8FF">PREVIEW_TOKEN_KEY</span><span style="color:#E1E4E8">];</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> serverId</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> queryServerId </span><span style="color:#F97583">??</span><span style="color:#E1E4E8"> cookies[</span><span style="color:#79B8FF">PREVIEW_SERVER_ID_KEY</span><span style="color:#E1E4E8">];</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (queryToken) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    document.cookie </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> cookie.</span><span style="color:#B392F0">serialize</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">PREVIEW_TOKEN_KEY</span><span style="color:#E1E4E8">, queryToken);</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (queryServerId) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    document.cookie </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> cookie.</span><span style="color:#B392F0">serialize</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">PREVIEW_SERVER_ID_KEY</span><span style="color:#E1E4E8">, queryServerId);</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> configuration</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    endpoint: </span><span style="color:#9ECBFF">'your-pda-endpoint'</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    httpClient,</span></span>
+<span class="line"><span style="color:#E1E4E8">    path: </span><span style="color:#9ECBFF">`${</span><span style="color:#E1E4E8">location</span><span style="color:#9ECBFF">.</span><span style="color:#E1E4E8">pathname</span><span style="color:#9ECBFF">}${</span><span style="color:#E1E4E8">location</span><span style="color:#9ECBFF">.</span><span style="color:#E1E4E8">search</span><span style="color:#9ECBFF">}`</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#F97583">    ...</span><span style="color:#E1E4E8">(authorizationToken </span><span style="color:#F97583">?</span><span style="color:#E1E4E8"> { authorizationToken } </span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> {}),</span></span>
+<span class="line"><span style="color:#F97583">    ...</span><span style="color:#E1E4E8">(serverId </span><span style="color:#F97583">?</span><span style="color:#E1E4E8"> { serverId } </span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> {}),</span></span>
+<span class="line"><span style="color:#E1E4E8">  };</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#E1E4E8"> configuration;</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span></code></pre>
 <h2 id="license">License</h2>
 <p>Published under <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</a> license.</p>
 <h2 id="reference">Reference</h2>
