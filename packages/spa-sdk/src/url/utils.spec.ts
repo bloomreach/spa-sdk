@@ -144,8 +144,11 @@ describe('parseUrl', () => {
     ${'http://example-domain.com/'}              | ${''}      | ${'http://example-domain.com'} | ${'/'}                | ${'/'}     | ${''}       | ${new URLSearchParams()}
     ${'http://example-domain.com/path'}          | ${''}      | ${'http://example-domain.com'} | ${'/path'}            | ${'/path'} | ${''}       | ${new URLSearchParams()}
     ${'http://example-domain.com:80/path'}       | ${''}      | ${'http://example-domain.com'} | ${'/path'}            | ${'/path'} | ${''}       | ${new URLSearchParams()}
+    ${'http://example-domain.com:80/'}           | ${''}      | ${'http://example-domain.com'} | ${'/'}                | ${'/'}     | ${''}       | ${new URLSearchParams()}
     ${'https://example-domain.com:443/path'}     | ${''}      | ${'https://example-domain.com'} | ${'/path'}           | ${'/path'} | ${''}       | ${new URLSearchParams()}
+    ${'https://example-domain.com:443/'}         | ${''}      | ${'https://example-domain.com'} | ${'/'}               | ${'/'}     | ${''}       | ${new URLSearchParams()}
     ${'https://example-domain.com:443?a=b#hash'} | ${'#hash'} | ${'https://example-domain.com'} | ${'?a=b#hash'}       | ${''}      | ${'?a=b'}   | ${new URLSearchParams('a=b')}
+    ${'https://example-domain.com:443/?a=b#hash'} | ${'#hash'} | ${'https://example-domain.com'} | ${'/?a=b#hash'}     | ${'/'}     | ${'?a=b'}   | ${new URLSearchParams('a=b')}
     ${'https://example-domain.com:80/path'}      | ${''}      | ${'https://example-domain.com:80'} | ${'/path'}        | ${'/path'} | ${''}       | ${new URLSearchParams()}
     ${'http://example-domain.com:443/path'}      | ${''}      | ${'http://example-domain.com:443'} | ${'/path'}        | ${'/path'} | ${''}       | ${new URLSearchParams()}
     ${'http://example-domain.com/#hash'}         | ${'#hash'} | ${'http://example-domain.com'} | ${'/#hash'}           | ${'/'}     | ${''}       | ${new URLSearchParams()}
@@ -153,6 +156,7 @@ describe('parseUrl', () => {
     ${"http://example-domain.com/path?a='#hash"} | ${'#hash'} | ${'http://example-domain.com'} | ${'/path?a=%27#hash'} | ${'/path'} | ${'?a=%27'} | ${new URLSearchParams("a='")}
     ${'//example-domain.com?a=b#hash'}           | ${'#hash'} | ${'//example-domain.com'}      | ${'?a=b#hash'}        | ${''}      | ${'?a=b'}   | ${new URLSearchParams('a=b')}
     ${'//example-domain.com/path'}                | ${''}      | ${'//example-domain.com'}      | ${'/path'}            | ${'/path'} | ${''}       | ${new URLSearchParams()}
+    ${'//example-domain.com:80/'}                  | ${''}      | ${'//example-domain.com'}      | ${'/'}                | ${'/'}     | ${''}       | ${new URLSearchParams()}
   `('should parse "$url"', ({ url, searchParams, ...parts }) => {
     const { searchParams: parsedSearchParams, ...parsedParts } = parseUrl(url);
 
