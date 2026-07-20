@@ -43,8 +43,15 @@ export function parseUrl(url: string): Url {
     origin = origin.replace(parsedUrl.protocol, '');
   }
 
-  // For urls like `//example.com?query#hash` pathname should be empty string ''.
-  if (url.startsWith(origin) && !url.replace(origin, '').startsWith('/') && pathname.startsWith('/')) {
+  // Preserve whether the caller supplied a pathname: keep explicit absolute and protocol-relative
+  // paths, but remove the parser-added leading slash from origin-only and relative inputs
+  // (for example, `//example.com?query` has no path, while `//example.com/path` does).
+  const shouldRemoveLeadingSlash = pathname.startsWith('/')
+    && (origin
+      ? pathname === '/' && url.startsWith(origin) && !url.substring(origin.length).startsWith('/')
+      : !url.startsWith('/'));
+
+  if (shouldRemoveLeadingSlash) {
     pathname = pathname.substring(1);
   }
 
