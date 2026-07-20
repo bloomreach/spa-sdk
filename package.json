@@ -62,7 +62,10 @@
   "packageManager": "pnpm@8.15.8",
   "pnpm": {
     "overrides": {
-      "eslint-plugin-react": "7.34.2"
+      "eslint-plugin-react": "7.34.2",
+      "brace-expansion@1": "1.1.16",
+      "brace-expansion@2": "2.1.2",
+      "brace-expansion@5": "5.0.7"
     }
   }
 }
