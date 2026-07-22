@@ -43,8 +43,14 @@ export function parseUrl(url: string): Url {
     origin = origin.replace(parsedUrl.protocol, '');
   }
 
-  // For urls like `//example.com?query#hash` pathname should be empty string ''.
-  if (url.startsWith(origin) && !url.replace(origin, '').startsWith('/') && pathname.startsWith('/')) {
+  // Preserve an explicit root path: `//example.com/` must stay `/`, while
+  // `//example.com?query` has no path and should remain empty.
+  const shouldRemoveLeadingSlash = pathname.startsWith('/')
+    && (origin
+      ? pathname === '/' && !url.split(/[?#]/, 1)[0].endsWith('/')
+      : !url.startsWith('/'));
+
+  if (shouldRemoveLeadingSlash) {
     pathname = pathname.substring(1);
   }
 
