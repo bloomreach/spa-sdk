@@ -25,7 +25,7 @@ import type { BrProps } from './BrProps';
 export function BrNodeComponent<T extends Component>(
   props: React.PropsWithChildren<BrProps<T>>,
 ): React.ReactElement {
-  const { component, mapping, children } = props;
+  const { component, mapping, children, page } = props;
 
   const componentName = component?.getName();
   const resolvedMapping = component && componentName && (mapping[componentName] as React.ComponentType<BrProps>);
@@ -35,5 +35,5 @@ export function BrNodeComponent<T extends Component>(
     ? React.createElement(resolvedMapping, { ...props, isClientComponent: true })
     : children;
 
-  return React.createElement(BrMeta, { meta }, content);
+  return React.createElement(BrMeta, { meta, page }, content);
 }

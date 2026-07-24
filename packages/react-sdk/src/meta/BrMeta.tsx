@@ -15,13 +15,14 @@
  */
 
 import React, { useEffect, useRef } from 'react';
-import { MetaCollection } from '@bloomreach/spa-sdk';
+import { MetaCollection, Page } from '@bloomreach/spa-sdk';
 
 interface BrMetaProps {
   meta?: MetaCollection;
+  page?: Page;
 }
 
-export function BrMeta({ children, meta }: React.PropsWithChildren<BrMetaProps>): React.ReactElement {
+export function BrMeta({ children, meta, page }: React.PropsWithChildren<BrMetaProps>): React.ReactElement {
   const head = useRef<HTMLSpanElement>(null);
   const tail = useRef<HTMLSpanElement>(null);
 
@@ -30,9 +31,18 @@ export function BrMeta({ children, meta }: React.PropsWithChildren<BrMetaProps>)
       return undefined;
     }
 
-    return meta?.render(head.current.nextSibling, tail.current);
+    const clear = meta?.render(head.current.nextSibling, tail.current);
+    if (!clear) {
+      return undefined;
+    }
+
+    page?.sync();
+    return () => {
+      clear();
+      page?.sync();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [meta, head.current?.nextSibling, tail.current]);
+  }, [meta, page, head.current?.nextSibling, tail.current]);
 
   return (
     <>

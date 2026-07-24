@@ -118,7 +118,10 @@ export class BrComponentNode extends LitElement {
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    this._clearMeta?.();
+    if (this._clearMeta) {
+      this._clearMeta();
+      this._page?.sync(); 
+    }
     this._clearMeta = undefined;
   }
 
@@ -128,12 +131,17 @@ export class BrComponentNode extends LitElement {
 
   updated() {
     // Inject meta comments for Experience Manager
-    this._clearMeta?.();
+    const clear = this._clearMeta;
+    if (clear) { 
+      clear();
+      this._page?.sync(); 
+    }
     this._clearMeta = undefined;
     if (this.component && this._page?.isPreview()) {
       const meta = this.component.getMeta();
       if (meta.length > 0) {
         this._clearMeta = meta.render(this, this);
+        this._page.sync();
       }
     }
   }

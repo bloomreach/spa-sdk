@@ -168,28 +168,18 @@ describe('br-page', () => {
       expect(meta.render).toHaveBeenCalledWith(el, el);
     });
 
-    it('calls page.sync() after render via _scheduleSync', async () => {
+    it('calls page.sync() after metadata renders', async () => {
       await createBrPage();
-
-      // sync is called via requestAnimationFrame; simulate it
-      await new Promise((r) => requestAnimationFrame(r));
 
       expect(mockPage.sync).toHaveBeenCalled();
     });
 
-    it('listens for br-request-sync events', async () => {
+    it('calls page.sync() when root metadata is empty', async () => {
+      mockRoot.getMeta.mockReturnValue(createMockMeta(0));
+
       await createBrPage();
 
-      // Reset sync call count
-      mockPage.sync.mockClear();
-
-      // Dispatch a sync request from a child
-      el.dispatchEvent(new Event('br-request-sync', { bubbles: true }));
-
-      // Wait for the scheduled sync (may go through cooldown timeout path)
-      await vi.waitFor(() => {
-        expect(mockPage.sync).toHaveBeenCalled();
-      });
+      expect(mockPage.sync).toHaveBeenCalled();
     });
 
     it('cleans up meta on disconnect', async () => {
@@ -203,19 +193,6 @@ describe('br-page', () => {
       el.remove();
 
       expect(clearFn).toHaveBeenCalled();
-    });
-
-    it('removes br-request-sync listener on disconnect', async () => {
-      await createBrPage();
-      const removeListenerSpy = vi.spyOn(el, 'removeEventListener');
-
-      el.remove();
-
-      expect(removeListenerSpy).toHaveBeenCalledWith(
-        'br-request-sync',
-        expect.any(Function),
-      );
-      removeListenerSpy.mockRestore();
     });
   });
 

@@ -75,5 +75,5 @@ export function BrNodeContainerItem(
   const meta = component?.getMeta();
   const content = React.createElement(containerItemMapping, { ...props, isClientComponent: true });
 
-  return React.createElement(BrMeta, { meta }, content);
+  return React.createElement(BrMeta, { meta, page }, content);
 }

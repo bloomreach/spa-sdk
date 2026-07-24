@@ -37,6 +37,7 @@ interface SpaEvents {
 
 export class Cms {
   private window?: Window;
+  private syncFrame?: number;
 
   /**
    * @param channel Bidirectional RPC channel to the CMS (always a PostMessage instance).
@@ -59,6 +60,10 @@ export class Cms {
       return;
     }
 
+    if (this.syncFrame !== undefined) {
+      this.window?.cancelAnimationFrame(this.syncFrame);
+      this.syncFrame = undefined;
+    }
     this.window = window;
 
     if (this.window?.document?.readyState !== 'loading') {
@@ -86,9 +91,15 @@ export class Cms {
   }
 
   protected onPageReady(): void {
-    this.logger?.debug('Synchronizing the page.');
+    if (!this.window || this.syncFrame !== undefined) {
+      return;
+    }
 
-    this.channel.call('sync');
+    this.logger?.debug('Synchronizing the page.');
+    this.syncFrame = this.window.requestAnimationFrame(() => {
+      this.syncFrame = undefined;
+      this.channel.call('sync');
+    });
   }
 
   protected onUpdate(event: CmsUpdateEvent): void {

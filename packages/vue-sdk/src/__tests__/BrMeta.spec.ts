@@ -20,6 +20,7 @@ import { shallowMount } from '@vue/test-utils';
 import type { Mocked } from 'vitest';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { nextTick } from 'vue';
+import { page$ } from '../providerKeys';
 
 describe('BrMeta', () => {
   let meta: Mocked<MetaCollection>;
@@ -66,6 +67,20 @@ describe('BrMeta', () => {
       expect(meta.render).toBeCalled();
       expect(clear).toBeCalled();
     });
+  });
+
+  it('synchronizes after rendering and clearing metadata', async () => {
+    const clear = vi.fn();
+    const page = { sync: vi.fn() };
+    meta.render.mockReturnValueOnce(clear);
+    const wrapper = shallowMount(BrMeta, {
+      props: { meta },
+      global: { provide: { [page$ as symbol]: { value: page } } },
+    });
+    await nextTick();
+    wrapper.unmount();
+
+    expect(page.sync).toHaveBeenCalledTimes(2);
   });
 
   describe('updated', () => {

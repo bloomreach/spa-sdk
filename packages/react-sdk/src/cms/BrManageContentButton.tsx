@@ -33,5 +33,7 @@ interface BrManageContentButtonProps extends ManageContentButton {
 export function BrManageContentButton(props: BrManageContentButtonProps): React.ReactElement {
   const { page, ...buttonProps } = props;
 
-  return page.isPreview() ? <BrMeta meta={page.getButton(TYPE_MANAGE_CONTENT_BUTTON, buttonProps)} /> : <></>;
+  return page.isPreview()
+    ? <BrMeta meta={page.getButton(TYPE_MANAGE_CONTENT_BUTTON, buttonProps)} page={page} />
+    : <></>;
 }

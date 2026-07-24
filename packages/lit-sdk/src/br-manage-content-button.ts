@@ -87,7 +87,10 @@ export class BrManageContentButton extends LitElement {
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    this._clearMeta?.();
+    if (this._clearMeta) { 
+      this._clearMeta();
+      this._page?.sync(); 
+    }
     this._clearMeta = undefined;
   }
 
@@ -96,7 +99,11 @@ export class BrManageContentButton extends LitElement {
   }
 
   updated() {
-    this._clearMeta?.();
+    const clear = this._clearMeta;
+    if (clear) { 
+      clear();
+      this._page?.sync(); 
+    }
     this._clearMeta = undefined;
 
     if (!this._page?.isPreview()) { return; }
@@ -121,6 +128,7 @@ export class BrManageContentButton extends LitElement {
       // Otherwise inject around this element itself.
       const target = this.renderTarget ?? this;
       this._clearMeta = meta.render(target, target);
+      this._page.sync();
     }
   }
 

@@ -36,5 +36,5 @@ interface BrManageMenuButtonProps {
  * The button component that opens a menu editor.
  */
 export function BrManageMenuButton({ page, menu }: BrManageMenuButtonProps): React.ReactElement {
-  return page.isPreview() ? <BrMeta meta={page.getButton(TYPE_MANAGE_MENU_BUTTON, menu)} /> : <></>;
+  return page.isPreview() ? <BrMeta meta={page.getButton(TYPE_MANAGE_MENU_BUTTON, menu)} page={page} /> : <></>;
 }
