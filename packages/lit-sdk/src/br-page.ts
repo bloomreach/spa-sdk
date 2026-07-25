@@ -61,9 +61,9 @@ export class BrPage extends LitElement {
     super.disconnectedCallback();
     this._isConnected = false;
     const clear = this._clearPageMeta;
-    if (clear) { 
+    if (clear) {
       clear();
-      this._page?.sync(); 
+      this._page?.sync();
     }
     this._scriptLoadCleanup?.();
     this._scriptLoadCleanup = undefined;
@@ -88,9 +88,9 @@ export class BrPage extends LitElement {
     // meta.render(this, this), which uses parentNode.insertBefore().
     // The EM needs these comments to show Page/Channel toolbar buttons.
     const clear = this._clearPageMeta;
-    if (clear) { 
+    if (clear) {
       clear();
-      this._page?.sync(); 
+      this._page?.sync();
     }
     this._clearPageMeta = undefined;
     if (this._rootComponent) {
@@ -141,9 +141,9 @@ export class BrPage extends LitElement {
 
   private _cleanupPreviewIntegration() {
     const clear = this._clearPageMeta;
-    if (clear) { 
+    if (clear) {
       clear();
-      this._page?.sync(); 
+      this._page?.sync();
     }
     this._clearPageMeta = undefined;
     this._scriptLoadCleanup?.();

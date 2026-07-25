@@ -91,9 +91,9 @@ export class BrContainerItem extends LitElement {
     // places them in the wrapper div, matching the Angular SDK's DOM structure
     // and enabling EM drag-and-drop reordering.
     const clear = this._clearMeta;
-    if (clear) { 
+    if (clear) {
       clear();
-      this._page?.sync(); 
+      this._page?.sync();
     }
     this._clearMeta = undefined;
     if (this.component && this._page?.isPreview()) {

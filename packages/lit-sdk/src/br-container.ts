@@ -54,9 +54,9 @@ export class BrContainer extends LitElement {
   updated() {
     // Inject container-level meta comments (for "Add component" button in EM)
     const clear = this._clearMeta;
-    if (clear) { 
+    if (clear) {
       clear();
-      this._page?.sync(); 
+      this._page?.sync();
     }
     this._clearMeta = undefined;
     if (this.component && this._page?.isPreview()) {

@@ -120,7 +120,7 @@ export class BrComponentNode extends LitElement {
     super.disconnectedCallback();
     if (this._clearMeta) {
       this._clearMeta();
-      this._page?.sync(); 
+      this._page?.sync();
     }
     this._clearMeta = undefined;
   }
@@ -132,9 +132,9 @@ export class BrComponentNode extends LitElement {
   updated() {
     // Inject meta comments for Experience Manager
     const clear = this._clearMeta;
-    if (clear) { 
+    if (clear) {
       clear();
-      this._page?.sync(); 
+      this._page?.sync();
     }
     this._clearMeta = undefined;
     if (this.component && this._page?.isPreview()) {
