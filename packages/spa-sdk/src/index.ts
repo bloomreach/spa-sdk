@@ -228,6 +228,7 @@ export {
   Pagination,
   Reference,
   getContainerItemContent,
+  getImage,
   isComponent,
   isContainerItem,
   isContainer,

@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-import { ImageSetImpl, ImageSetModel, ImageSet, TYPE_IMAGE_SET, isImageSet } from './image-set';
+import { ImageSetImpl, ImageSetModel, ImageSet, TYPE_IMAGE_SET, getImage, isImageSet } from './image-set';
 import { ImageImpl, ImageModel, Image } from './image';
 import { LinkFactory } from './link-factory';
+import { Page } from './page';
 
 jest.mock('./image');
 
@@ -337,5 +338,54 @@ describe('isImageSet', () => {
   it('should return false', () => {
     expect(isImageSet(undefined)).toBe(false);
     expect(isImageSet({})).toBe(false);
+  });
+});
+
+describe('getImage', () => {
+  let page: jest.Mocked<Page>;
+  let resolvedImageSet: jest.Mocked<ImageSet>;
+  let original: Image;
+  let variant: Image;
+
+  beforeEach(() => {
+    original = {} as Image;
+    variant = {} as Image;
+    resolvedImageSet = {
+      getOriginal: jest.fn().mockReturnValue(original),
+      getVariant: jest.fn().mockReturnValue(variant),
+    } as unknown as jest.Mocked<ImageSet>;
+    page = { getContent: jest.fn().mockReturnValue(resolvedImageSet) } as unknown as jest.Mocked<Page>;
+  });
+
+  it('should return undefined when the reference is undefined', () => {
+    expect(getImage(page, undefined)).toBeUndefined();
+    expect(page.getContent).not.toHaveBeenCalled();
+  });
+
+  it('should return undefined when the reference cannot be resolved', () => {
+    page.getContent.mockReturnValue(undefined);
+
+    expect(getImage(page, { $ref: '/page/image' })).toBeUndefined();
+  });
+
+  it('should return the original image when no variant is requested', () => {
+    const reference = { $ref: '/page/image' };
+
+    expect(getImage(page, reference)).toBe(original);
+    expect(page.getContent).toHaveBeenCalledWith(reference);
+    expect(resolvedImageSet.getVariant).not.toHaveBeenCalled();
+  });
+
+  it('should return the requested variant when a variant is given', () => {
+    const reference = { $ref: '/page/image' };
+
+    expect(getImage(page, reference, 'small')).toBe(variant);
+    expect(resolvedImageSet.getVariant).toHaveBeenCalledWith('small');
+    expect(resolvedImageSet.getOriginal).not.toHaveBeenCalled();
+  });
+
+  it('should accept a string reference', () => {
+    expect(getImage(page, 'image')).toBe(original);
+    expect(page.getContent).toHaveBeenCalledWith('image');
   });
 });

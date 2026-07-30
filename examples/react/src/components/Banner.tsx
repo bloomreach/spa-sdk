@@ -15,7 +15,7 @@
  */
 
 import { BrManageContentButton, BrProps } from '@bloomreach/react-sdk';
-import { Document, ImageSet } from '@bloomreach/spa-sdk';
+import { Document, getImage } from '@bloomreach/spa-sdk';
 import React, { JSX } from 'react';
 import { Link } from 'react-router-dom';
 import { sanitize } from '../utils/sanitize';
@@ -30,8 +30,7 @@ export function Banner({ component, page }: BrProps): JSX.Element | null {
   }
 
   const { content, image: imageRef, link: linkRef, title } = document.getData<DocumentData>();
-  const imageSet = imageRef && page.getContent<ImageSet>(imageRef);
-  const image = imageSet && (imageVariant ? imageSet.getVariant(imageVariant) : imageSet.getOriginal());
+  const image = getImage(page, imageRef, imageVariant);
   const link = linkRef && page.getContent<Document>(linkRef);
 
   return (
