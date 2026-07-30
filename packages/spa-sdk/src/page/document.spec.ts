@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-import { DocumentImpl, DocumentModel, TYPE_DOCUMENT, isDocument } from './document';
+import { DocumentImpl, DocumentModel, TYPE_DOCUMENT, getDocuments, isDocument } from './document';
 import { LinkFactory } from './link-factory';
 import { MetaCollectionImpl, MetaCollection } from './meta-collection';
+import { Page } from './page';
 
 jest.mock('./meta-collection');
 
@@ -118,5 +119,55 @@ describe('isDocument', () => {
   it('should return false', () => {
     expect(isDocument(undefined)).toBe(false);
     expect(isDocument({})).toBe(false);
+  });
+});
+
+describe('getDocuments', () => {
+  let page: jest.Mocked<Page>;
+
+  beforeEach(() => {
+    page = { getContent: jest.fn() } as unknown as jest.Mocked<Page>;
+  });
+
+  it('should return an empty array when given no references', () => {
+    expect(getDocuments(page, [])).toEqual([]);
+    expect(page.getContent).not.toHaveBeenCalled();
+  });
+
+  it('should resolve each reference to a document', () => {
+    const first = createDocument({ ...model, data: { ...model.data, id: 'first' } });
+    const second = createDocument({ ...model, data: { ...model.data, id: 'second' } });
+    page.getContent.mockReturnValueOnce(first).mockReturnValueOnce(second);
+
+    const documents = getDocuments(page, [{ $ref: '/page/first' }, { $ref: '/page/second' }]);
+
+    expect(documents).toEqual([first, second]);
+    expect(page.getContent).toHaveBeenNthCalledWith(1, { $ref: '/page/first' });
+    expect(page.getContent).toHaveBeenNthCalledWith(2, { $ref: '/page/second' });
+  });
+
+  it('should omit references that cannot be resolved to a document', () => {
+    const resolved = createDocument();
+    page.getContent.mockReturnValueOnce(undefined).mockReturnValueOnce(resolved);
+
+    const documents = getDocuments(page, [{ $ref: '/page/missing' }, { $ref: '/page/present' }]);
+
+    expect(documents).toEqual([resolved]);
+  });
+
+  it('should omit resolved content that is not a document', () => {
+    page.getContent.mockReturnValueOnce({ notADocument: true } as any);
+
+    const documents = getDocuments(page, [{ $ref: '/page/wrong-type' }]);
+
+    expect(documents).toEqual([]);
+  });
+
+  it('should accept string references', () => {
+    const resolved = createDocument();
+    page.getContent.mockReturnValueOnce(resolved);
+
+    expect(getDocuments(page, ['some-ref'])).toEqual([resolved]);
+    expect(page.getContent).toHaveBeenCalledWith('some-ref');
   });
 });
