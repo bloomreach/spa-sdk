@@ -207,7 +207,7 @@ export function getImage(page: Page, reference: Reference | string | undefined, 
   }
 
   const imageSet = page.getContent<ImageSet>(reference);
-  if (!imageSet) {
+  if (!isImageSet(imageSet)) {
     return undefined;
   }
 

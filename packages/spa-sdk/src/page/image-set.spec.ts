@@ -350,10 +350,10 @@ describe('getImage', () => {
   beforeEach(() => {
     original = {} as Image;
     variant = {} as Image;
-    resolvedImageSet = {
+    resolvedImageSet = Object.assign(Object.create(ImageSetImpl.prototype), {
       getOriginal: jest.fn().mockReturnValue(original),
       getVariant: jest.fn().mockReturnValue(variant),
-    } as unknown as jest.Mocked<ImageSet>;
+    }) as jest.Mocked<ImageSet>;
     page = { getContent: jest.fn().mockReturnValue(resolvedImageSet) } as unknown as jest.Mocked<Page>;
   });
 
@@ -364,6 +364,12 @@ describe('getImage', () => {
 
   it('should return undefined when the reference cannot be resolved', () => {
     page.getContent.mockReturnValue(undefined);
+
+    expect(getImage(page, { $ref: '/page/image' })).toBeUndefined();
+  });
+
+  it('should return undefined when the reference resolves to a non-ImageSet value', () => {
+    page.getContent.mockReturnValue({ getId: jest.fn() });
 
     expect(getImage(page, { $ref: '/page/image' })).toBeUndefined();
   });
