@@ -16,9 +16,7 @@ import './br-component.js';
  * the Page, root Component, and component mapping to all descendants
  * via Lit Context.
  *
- * Handles all page.sync() calls centrally with a cooldown to prevent
- * sync loops between the SPA and Experience Manager. Child components
- * request a sync by dispatching a 'br-request-sync' DOM event.
+ * Renders page metadata and relies on the core SDK to batch preview syncs.
  */
 @customElement('br-page')
 export class BrPage extends LitElement {
@@ -47,18 +45,10 @@ export class BrPage extends LitElement {
   // Without these, the Page/Channel toolbar buttons won't appear.
   private _clearPageMeta?: () => void;
 
-  // ── Sync scheduling ──
-  // All sync calls go through _scheduleSync() which enforces a minimum
-  // cooldown between consecutive sync() calls. This prevents the loop:
-  //   sync → EM repositions → update event → re-render → sync → ...
-  private _lastSyncTime = 0;
-  private _syncRAF?: number;
-  private _syncTimeout?: number;
   private _scriptObserver?: MutationObserver;
   private _scriptLoadCleanup?: () => void;
   private _initGeneration = 0;
 
-  private static SYNC_COOLDOWN_MS = 300;
   private _isConnected = false;
 
   async connectedCallback() {
@@ -70,12 +60,11 @@ export class BrPage extends LitElement {
   disconnectedCallback() {
     super.disconnectedCallback();
     this._isConnected = false;
-    this._clearPageMeta?.();
-    if (this._page?.isPreview()) {
-      this.removeEventListener('br-request-sync', this._onSyncRequested);
+    const clear = this._clearPageMeta;
+    if (clear) {
+      clear();
+      this._page?.sync();
     }
-    if (this._syncRAF) { cancelAnimationFrame(this._syncRAF); }
-    if (this._syncTimeout) { clearTimeout(this._syncTimeout); }
     this._scriptLoadCleanup?.();
     this._scriptLoadCleanup = undefined;
     this._scriptObserver?.disconnect();
@@ -98,7 +87,11 @@ export class BrPage extends LitElement {
     // These are inserted into br-page's PARENT (light DOM) via
     // meta.render(this, this), which uses parentNode.insertBefore().
     // The EM needs these comments to show Page/Channel toolbar buttons.
-    this._clearPageMeta?.();
+    const clear = this._clearPageMeta;
+    if (clear) {
+      clear();
+      this._page?.sync();
+    }
     this._clearPageMeta = undefined;
     if (this._rootComponent) {
       const meta = this._rootComponent.getMeta();
@@ -106,55 +99,7 @@ export class BrPage extends LitElement {
         this._clearPageMeta = meta.render(this, this);
       }
     }
-
-    // Schedule a sync after br-page re-renders.
-    this._scheduleSync();
-  }
-
-  private _onSyncRequested = () => {
-    this._scheduleSync();
-  };
-
-  /**
-   * Schedule a page.sync() call with cooldown protection.
-   * Coalesces multiple rapid sync requests into one.
-   */
-  private _scheduleSync() {
-    if (!this._page) { return; }
-
-    // Clear any pending scheduled sync
-    if (this._syncRAF) {
-      cancelAnimationFrame(this._syncRAF);
-      this._syncRAF = undefined;
-    }
-    if (this._syncTimeout) {
-      clearTimeout(this._syncTimeout);
-      this._syncTimeout = undefined;
-    }
-
-    const now = Date.now();
-    const elapsed = now - this._lastSyncTime;
-    const cooldown = BrPage.SYNC_COOLDOWN_MS;
-
-    if (elapsed >= cooldown) {
-      // Enough time since last sync — fire on next animation frame
-      // (gives Lit time to finish rendering the full subtree)
-      this._syncRAF = requestAnimationFrame(() => {
-        this._syncRAF = undefined;
-        this._doSync();
-      });
-    } else {
-      // Too soon — defer until cooldown expires
-      this._syncTimeout = window.setTimeout(() => {
-        this._syncTimeout = undefined;
-        this._doSync();
-      }, cooldown - elapsed);
-    }
-  }
-
-  private _doSync() {
-    this._lastSyncTime = Date.now();
-    this._page?.sync();
+    this._page.sync();
   }
 
   /**
@@ -175,7 +120,7 @@ export class BrPage extends LitElement {
             this._scriptObserver = undefined;
             const handler = () => {
               this._scriptLoadCleanup = undefined;
-              this._scheduleSync();
+              this._page?.sync();
             };
             node.addEventListener('load', handler, { once: true });
             this._scriptLoadCleanup = () => node.removeEventListener('load', handler);
@@ -195,13 +140,12 @@ export class BrPage extends LitElement {
   }
 
   private _cleanupPreviewIntegration() {
-    this._clearPageMeta?.();
-    this._clearPageMeta = undefined;
-    if (this._page?.isPreview()) {
-      this.removeEventListener('br-request-sync', this._onSyncRequested);
+    const clear = this._clearPageMeta;
+    if (clear) {
+      clear();
+      this._page?.sync();
     }
-    if (this._syncRAF) { cancelAnimationFrame(this._syncRAF); }
-    if (this._syncTimeout) { clearTimeout(this._syncTimeout); }
+    this._clearPageMeta = undefined;
     this._scriptLoadCleanup?.();
     this._scriptLoadCleanup = undefined;
     this._scriptObserver?.disconnect();
@@ -226,9 +170,8 @@ export class BrPage extends LitElement {
       this._page = page;
       this._rootComponent = this._page.getComponent();
 
-      // Preview mode: set up EM integration (sync scheduling, inject script detection)
+      // Preview mode: detect the injected EM script.
       if (this._page.isPreview()) {
-        this.addEventListener('br-request-sync', this._onSyncRequested);
         this._watchForInjectScript();
       }
     } catch (e) {

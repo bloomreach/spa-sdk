@@ -24,6 +24,7 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import { MetaCollection } from '@bloomreach/spa-sdk';
+import { BrPageService } from './br-page/br-page.service';
 
 @Directive({
   standalone: false,
@@ -35,19 +36,39 @@ export abstract class BrMetaDirective implements OnChanges, OnDestroy {
 
   private container = inject(ViewContainerRef);
   private template = inject(TemplateRef<never>, { optional: true });
+  private pageService = inject(BrPageService, { optional: true });
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   ngOnChanges(changes: SimpleChanges): void {
-    this.clear?.();
+    this.clearMeta();
     this.container.clear();
 
     const { head, tail } = this.render();
     this.clear = head && tail && this.meta?.render(head, tail);
+    if (this.clear) {
+      this.sync();
+    }
   }
 
   ngOnDestroy(): void {
-    this.clear?.();
+    this.clearMeta();
     this.container.clear();
+  }
+
+  private clearMeta(): void {
+    if (!this.clear) {
+      return;
+    }
+    this.clear();
+    this.clear = undefined;
+    this.sync();
+  }
+
+  private sync(): void {
+    const page = this.pageService?.state.getValue();
+    if (page?.isPreview?.()) {
+      page.sync();
+    }
   }
 
   private render(): { head: any; tail: any } {

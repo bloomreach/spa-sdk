@@ -161,7 +161,7 @@ describe('br-container-item', () => {
       expect(item.off).toHaveBeenCalledWith('update', expect.any(Function));
     });
 
-    it('dispatches br-request-sync on update event in preview mode', async () => {
+    it('calls page.sync on update event in preview mode', async () => {
       const item = createMockContainerItem({ getType: vi.fn(() => 'Banner') });
       const page = createMockPage({ isPreview: vi.fn(() => true) });
 
@@ -172,16 +172,13 @@ describe('br-container-item', () => {
       document.body.appendChild(el);
       await el.updateComplete;
 
-      const syncHandler = vi.fn();
-      el.addEventListener('br-request-sync', syncHandler);
-
       // Trigger update event
       item._emit('update');
 
-      expect(syncHandler).toHaveBeenCalled();
+      expect(page.sync).toHaveBeenCalled();
     });
 
-    it('does not dispatch br-request-sync in live mode', async () => {
+    it('does not call page.sync on update event in live mode', async () => {
       const item = createMockContainerItem({ getType: vi.fn(() => 'Banner') });
       const page = createMockPage({ isPreview: vi.fn(() => false) });
 
@@ -192,13 +189,10 @@ describe('br-container-item', () => {
       document.body.appendChild(el);
       await el.updateComplete;
 
-      const syncHandler = vi.fn();
-      el.addEventListener('br-request-sync', syncHandler);
-
       // Trigger update event
       item._emit('update');
 
-      expect(syncHandler).not.toHaveBeenCalled();
+      expect(page.sync).not.toHaveBeenCalled();
     });
 
     it('forces child element requestUpdate() on update event', async () => {

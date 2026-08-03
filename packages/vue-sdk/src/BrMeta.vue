@@ -22,26 +22,36 @@
 
 <script setup lang="ts">
 import type { MetaCollection } from '@bloomreach/spa-sdk';
-import { getCurrentInstance, onBeforeUnmount, onBeforeUpdate, onMounted, onUpdated, ref, toRef, watch } from 'vue';
+import { getCurrentInstance, inject, onBeforeUnmount, onBeforeUpdate, onMounted, onUpdated, ref, toRef, watch } from 'vue';
+import { page$ } from '@/providerKeys';
 
 const props = defineProps<{ meta?: MetaCollection }>();
 const meta = toRef(() => props.meta);
 let clear: ReturnType<MetaCollection['render']> | undefined;
+const page = inject(page$, undefined);
 
 const head = ref<HTMLSpanElement>();
 const tail = ref<HTMLSpanElement>();
 
-const inject = () => {
+const injectMeta = () => {
   if (!head.value?.nextSibling || !tail.value) {
     return;
   }
 
   clear = meta.value?.render(head.value.nextSibling, tail.value);
+  if (clear) page?.value?.sync();
+};
+
+const clearMeta = () => {
+  if (!clear) return;
+  clear();
+  clear = undefined;
+  page?.value?.sync();
 };
 
 watch(meta, () => getCurrentInstance()?.proxy?.$forceUpdate(), { deep: false });
-onMounted(() => inject());
-onUpdated(() => inject());
-onBeforeUnmount(() => clear?.());
-onBeforeUpdate(() => clear?.());
+onMounted(injectMeta);
+onUpdated(injectMeta);
+onBeforeUnmount(clearMeta);
+onBeforeUpdate(clearMeta);
 </script>

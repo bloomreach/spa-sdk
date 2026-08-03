@@ -244,6 +244,7 @@ describe('initialize', () => {
   it('should use an origin from the endpoint', async () => {
     const postMessageSpy = jest.spyOn(window.parent, 'postMessage');
     await defaultPage.sync();
+    await new Promise(requestAnimationFrame);
 
     expect(postMessageSpy).toHaveBeenCalledWith(expect.anything(), 'http://localhost:8080');
   });
@@ -258,6 +259,7 @@ describe('initialize', () => {
     });
     const postMessageSpy = jest.spyOn(window.parent, 'postMessage');
     await page.sync();
+    await new Promise(requestAnimationFrame);
     destroy();
 
     expect(postMessageSpy).toHaveBeenCalledWith(expect.anything(), 'http://localhost:12345');

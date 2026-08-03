@@ -46,12 +46,15 @@ export class BrNodeComponentDirective implements OnChanges, OnDestroy {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   ngOnChanges(changes: SimpleChanges): void {
-    this.clear?.();
+    this.clearMeta();
     this.container.clear();
 
     const { head, tail } = this.render();
 
     this.clear = head && tail && this.component?.getMeta()?.render(head, tail);
+    if (this.clear) {
+      this.sync();
+    }
   }
 
   protected getMapping(): Type<BrProps> | undefined {
@@ -115,7 +118,23 @@ export class BrNodeComponentDirective implements OnChanges, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.clear?.();
+    this.clearMeta();
     this.container.clear();
+  }
+
+  private clearMeta(): void {
+    if (!this.clear) {
+      return;
+    }
+    this.clear();
+    this.clear = undefined;
+    this.sync();
+  }
+
+  private sync(): void {
+    const page = this.page.state.getValue();
+    if (page?.isPreview?.()) {
+      page.sync();
+    }
   }
 }
