@@ -16,7 +16,7 @@
 
 <template>
   <div v-if="pageable">
-    <br-news-list-item v-for="(item, key) in pageable.items" :key="key" :document="page.getContent(item)" :page="page"/>
+    <br-news-list-item v-for="(item, key) in documents" :key="key" :document="item" :page="page"/>
     <div v-if="page.isPreview()" class="has-edit-button float-right">
       <br-manage-content-button
         document-template-query="new-news-document"
@@ -30,6 +30,7 @@
 
 <script setup lang="ts">
 import type { Component, Page } from '@bloomreach/spa-sdk';
+import { getDocuments } from '@bloomreach/spa-sdk';
 import { computed, toRefs } from 'vue';
 import BrNewsListItem from './BrNewsListItem.vue';
 import BrNewsListPagination from './BrNewsListPagination.vue';
@@ -40,4 +41,5 @@ const props = defineProps<{
 }>();
 const { page } = toRefs(props);
 const pageable = computed(() => props.component.getModels<PageableModels>().pageable);
+const documents = computed(() => (pageable.value ? getDocuments(page.value, pageable.value.items) : []));
 </script>

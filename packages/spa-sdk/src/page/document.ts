@@ -17,6 +17,8 @@
 import { LinkFactory } from './link-factory';
 import { Link } from './link';
 import { MetaCollectionImpl, MetaCollectionModel, MetaCollection } from './meta-collection';
+import { Page } from './page';
+import { Reference } from './reference';
 
 export const TYPE_DOCUMENT = 'document';
 
@@ -120,4 +122,20 @@ export class DocumentImpl implements Document {
  */
 export function isDocument(value: any): value is Document {
   return value instanceof DocumentImpl;
+}
+
+/**
+ * Resolves an array of references (e.g. a pagination item list) to documents
+ * in one call, instead of requiring the caller to map over the references
+ * and resolve/guard each one individually. References that cannot be
+ * resolved to a document are omitted from the result.
+ *
+ * @param page The page that contains the documents.
+ * @param references The document references to resolve.
+ * @return The resolved documents, in the same order as the references.
+ */
+export function getDocuments(page: Page, references: (Reference | string)[]): Document[] {
+  return references
+    .map((reference) => page.getContent<Document>(reference))
+    .filter(isDocument);
 }

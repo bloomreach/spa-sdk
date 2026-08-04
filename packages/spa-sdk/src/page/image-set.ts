@@ -16,6 +16,8 @@
 
 import { ImageImpl, ImageModel, Image } from './image';
 import { LinkFactory } from './link-factory';
+import { Page } from './page';
+import { Reference } from './reference';
 
 export const TYPE_IMAGE_SET = 'imageset';
 
@@ -188,4 +190,26 @@ export class ImageSetImpl implements ImageSet {
  */
 export function isImageSet(value: unknown): value is ImageSet {
   return value instanceof ImageSetImpl;
+}
+
+/**
+ * Resolves an image reference to a concrete image in one call, instead of
+ * requiring the caller to look up the image set and then pick a variant.
+ *
+ * @param page The page that contains the image.
+ * @param reference A reference to the image set, or undefined if the field is not set.
+ * @param variant The variant name. When omitted, the original image is returned.
+ * @return The resolved image, or undefined if the reference is missing or cannot be resolved.
+ */
+export function getImage(page: Page, reference: Reference | string | undefined, variant?: string): Image | undefined {
+  if (!reference) {
+    return undefined;
+  }
+
+  const imageSet = page.getContent<ImageSet>(reference);
+  if (!isImageSet(imageSet)) {
+    return undefined;
+  }
+
+  return variant ? imageSet.getVariant(variant) : imageSet.getOriginal();
 }
