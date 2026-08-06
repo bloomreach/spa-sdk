@@ -15,7 +15,7 @@
  */
 
 import React, { PropsWithChildren } from 'react';
-import { Component, isContainer, isContainerItem, Page } from '@bloomreach/spa-sdk';
+import { Component, isContainer, isContainerItem } from '@bloomreach/spa-sdk';
 import { BrMeta } from '../meta';
 import { BrNodeContainer } from './BrNodeContainer';
 import { BrNodeContainerItem } from './BrNodeContainerItem';
@@ -41,7 +41,7 @@ export function BrNode({
 }: BrNodeProps): React.ReactElement {
   if (React.Children.count(children)) {
     return (
-      <BrMeta meta={component.getMeta()}>
+      <BrMeta meta={component.getMeta()} page={page}>
         {children}
       </BrMeta>
     );

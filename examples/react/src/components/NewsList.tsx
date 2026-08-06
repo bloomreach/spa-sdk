@@ -16,7 +16,7 @@
 
 import React, { JSX } from 'react';
 import { Link } from 'react-router-dom';
-import { Document, Page } from '@bloomreach/spa-sdk';
+import { Document, Page, getDocuments } from '@bloomreach/spa-sdk';
 import { BrManageContentButton, BrProps } from '@bloomreach/react-sdk';
 
 interface NewsListItemProps {
@@ -102,9 +102,9 @@ export function NewsList({ component, page }: BrProps): JSX.Element | null {
 
   return (
     <div>
-      {pageable.items.map((reference, key) => (
+      {getDocuments(page, pageable.items).map((item, key) => (
         // eslint-disable-next-line react/no-array-index-key
-        <NewsListItem key={key} item={page.getContent<Document>(reference) as Document} page={page} />
+        <NewsListItem key={key} item={item} page={page} />
       ))}
       {page.isPreview() && (
         <div className="has-edit-button float-right">

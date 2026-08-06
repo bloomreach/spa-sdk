@@ -91,11 +91,57 @@ describe('Cms', () => {
   });
 
   describe('onPageReady', () => {
-    it('should process postponed events on initialization', async () => {
-      cms.initialize({ window });
+    let callback: FrameRequestCallback;
+    let windowLike: Window;
+
+    beforeEach(() => {
+      windowLike = Object.create(window) as Window;
+      windowLike.requestAnimationFrame = jest.fn((next) => {
+        callback = next;
+        return 1;
+      });
+      windowLike.cancelAnimationFrame = jest.fn();
+      cms.initialize({ window: windowLike });
+    });
+
+    it('synchronizes on the next animation frame', async () => {
       await eventBus.emit('page.ready', {});
 
+      expect(channel.call).not.toHaveBeenCalled();
+      callback(0);
       expect(channel.call).toHaveBeenCalledWith('sync');
+    });
+
+    it('coalesces requests in one animation frame', async () => {
+      await eventBus.emit('page.ready', {});
+      await eventBus.emit('page.ready', {});
+
+      expect(windowLike.requestAnimationFrame).toHaveBeenCalledTimes(1);
+      callback(0);
+      expect(channel.call).toHaveBeenCalledTimes(1);
+    });
+
+    it('schedules another sync after a completed frame', async () => {
+      await eventBus.emit('page.ready', {});
+      callback(0);
+      await eventBus.emit('page.ready', {});
+
+      expect(windowLike.requestAnimationFrame).toHaveBeenCalledTimes(2);
+    });
+
+    it('cancels a pending sync when the window changes', async () => {
+      await eventBus.emit('page.ready', {});
+      cms.initialize({ window: Object.create(window) as Window });
+
+      expect(windowLike.cancelAnimationFrame).toHaveBeenCalledWith(1);
+    });
+
+    it('does not schedule before browser initialization', async () => {
+      const uninitialized = new Cms(channel, eventBus);
+      await eventBus.emit('page.ready', {});
+
+      expect(channel.call).not.toHaveBeenCalled();
+      expect(uninitialized).toBeDefined();
     });
   });
 

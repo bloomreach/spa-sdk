@@ -19,8 +19,7 @@ import { brPageContext, brMappingContext } from './context.js';
  * - Listens for `update` events for live editing
  * - Skips rendering if the component is hidden (Relevance)
  *
- * On SDK update events, dispatches a 'br-request-sync' event that bubbles
- * up to br-page, which handles sync scheduling with loop protection.
+ * On SDK update events, requests a core-batched preview sync.
  * Also forces the mapped child element to re-render, since the SDK mutates
  * the ContainerItem in place (same object reference → Lit won't detect a change).
  */
@@ -53,6 +52,7 @@ export class BrContainerItem extends LitElement {
   disconnectedCallback() {
     super.disconnectedCallback();
     this._clearMeta?.();
+    if (this._clearMeta) { this._page?.sync(); }
     this._clearMeta = undefined;
     this._unsubscribeFromComponent();
   }
@@ -71,7 +71,7 @@ export class BrContainerItem extends LitElement {
       if (!this._page?.isPreview()) { return; }
       this._pendingComponentUpdate = true;
       this.requestUpdate();
-      this.dispatchEvent(new Event('br-request-sync', { bubbles: true, composed: true }));
+      this._page.sync();
     };
     this.component.on('update', this._updateHandler);
   }
@@ -90,12 +90,17 @@ export class BrContainerItem extends LitElement {
     // head and end comments after tail in head.parentNode — so using `this`
     // places them in the wrapper div, matching the Angular SDK's DOM structure
     // and enabling EM drag-and-drop reordering.
-    this._clearMeta?.();
+    const clear = this._clearMeta;
+    if (clear) {
+      clear();
+      this._page?.sync();
+    }
     this._clearMeta = undefined;
     if (this.component && this._page?.isPreview()) {
       const meta = this.component.getMeta();
       if (meta.length > 0) {
         this._clearMeta = meta.render(this, this);
+        this._page.sync();
       }
     }
 

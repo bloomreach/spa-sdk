@@ -15,7 +15,7 @@
  */
 
 import React from 'react';
-import { MetaCollection } from '@bloomreach/spa-sdk';
+import { MetaCollection, Page } from '@bloomreach/spa-sdk';
 import { render } from '@testing-library/react';
 import { BrMeta } from './BrMeta';
 
@@ -80,6 +80,17 @@ describe('BrMeta', () => {
     element.unmount();
 
     expect(clear).toHaveBeenCalled();
+  });
+
+  it('synchronizes after rendering and clearing metadata', () => {
+    const clear = jest.fn();
+    const page = { sync: jest.fn() } as unknown as Page;
+    meta.render.mockReturnValueOnce(clear);
+
+    const element = render(<BrMeta meta={meta} page={page} />);
+    element.unmount();
+
+    expect(page.sync).toHaveBeenCalledTimes(2);
   });
 
   it('should render only children if there is no meta', () => {

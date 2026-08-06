@@ -56,7 +56,10 @@ export class BrManageMenuButton extends LitElement {
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    this._clearMeta?.();
+    if (this._clearMeta) {
+      this._clearMeta();
+      this._page?.sync();
+    }
     this._clearMeta = undefined;
   }
 
@@ -65,7 +68,11 @@ export class BrManageMenuButton extends LitElement {
   }
 
   updated() {
-    this._clearMeta?.();
+    const clear = this._clearMeta;
+    if (clear) {
+      clear();
+      this._page?.sync();
+    }
     this._clearMeta = undefined;
 
     if (!this._page?.isPreview() || !this.menu) { return; }
@@ -74,6 +81,7 @@ export class BrManageMenuButton extends LitElement {
     if (meta && meta.length > 0) {
       const target = this.renderTarget ?? this;
       this._clearMeta = meta.render(target, target);
+      this._page.sync();
     }
   }
 

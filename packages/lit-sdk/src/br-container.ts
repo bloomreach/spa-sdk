@@ -47,12 +47,17 @@ export class BrContainer extends LitElement {
   disconnectedCallback() {
     super.disconnectedCallback();
     this._clearMeta?.();
+    if (this._clearMeta) { this._page?.sync(); }
     this._clearMeta = undefined;
   }
 
   updated() {
     // Inject container-level meta comments (for "Add component" button in EM)
-    this._clearMeta?.();
+    const clear = this._clearMeta;
+    if (clear) {
+      clear();
+      this._page?.sync();
+    }
     this._clearMeta = undefined;
     if (this.component && this._page?.isPreview()) {
       const meta = this.component.getMeta();
@@ -61,6 +66,7 @@ export class BrContainer extends LitElement {
         const wrapper = this.firstElementChild as HTMLElement;
         const target = wrapper || this;
         this._clearMeta = meta.render(target, target);
+        this._page.sync();
       }
     }
   }

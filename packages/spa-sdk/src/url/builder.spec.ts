@@ -23,6 +23,8 @@ describe('UrlBuilder', () => {
     const options3 = { ...options1, baseUrl: '/news' };
     const options4 = { ...options1, baseUrl: '//example-domain.com/news' };
     const options5 = { ...options1, baseUrl: 'https://example-domain.com/news' };
+    const options6 = { endpoint: 'https://example-domain.com:443/site/spa/resourceapi' };
+    const options7 = { endpoint: 'http://example-domain.com:80/site/spa/resourceapi' };
 
     it.each`
       options     | path                     | expected
@@ -40,6 +42,8 @@ describe('UrlBuilder', () => {
       ${options3} | ${'/news/2019/?a=b'}     | ${'http://localhost:8080/site/spa/resourceapi/2019/?a=b'}
       ${options4} | ${'/news/2019/?a=b'}     | ${'http://localhost:8080/site/spa/resourceapi/2019/?a=b'}
       ${options5} | ${'/news/2019/?a=b'}     | ${'http://localhost:8080/site/spa/resourceapi/2019/?a=b'}
+      ${options6} | ${'/news'}               | ${'https://example-domain.com/site/spa/resourceapi/news'}
+      ${options7} | ${'/news'}               | ${'http://example-domain.com/site/spa/resourceapi/news'}
     `('should create the Page Model API URL for "$path" using options "$options"', ({ options, path, expected }) => {
       const builder = new UrlBuilder(options);
 

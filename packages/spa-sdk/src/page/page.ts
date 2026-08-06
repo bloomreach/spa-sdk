@@ -226,7 +226,8 @@ export interface Page {
   rewriteLinks(content: string, type?: string): string;
 
   /**
-   * Synchronizes the CMS integration state.
+   * Synchronizes the CMS integration state on the next animation frame.
+   * Calls made in the same frame are coalesced.
    */
   sync(): void;
 

@@ -15,7 +15,7 @@
  */
 
 import { BrManageContentButton, BrProps } from '@bloomreach/react-sdk';
-import { Document, ImageSet } from '@bloomreach/spa-sdk';
+import { Document, getImage } from '@bloomreach/spa-sdk';
 import React, { JSX } from 'react';
 import { sanitize } from '../utils/sanitize';
 
@@ -35,12 +35,12 @@ export function Content({ component, page }: BrProps): JSX.Element | null {
     image: imageRef,
     title,
   } = document.getData<DocumentData>();
-  const image = imageRef && page.getContent<ImageSet>(imageRef);
+  const image = getImage(page, imageRef);
 
   return (
     <div className={page.isPreview() ? 'has-edit-button' : ''}>
       <BrManageContentButton content={document} page={page} />
-      {image && <img className="img-fluid mb-3" src={image.getOriginal()?.getUrl()} alt={title} />}
+      {image && <img className="img-fluid mb-3" src={image.getUrl()} alt={title} />}
       {title && <h1>{title}</h1>}
       {author && <p className="mb-3 text-muted">{author}</p>}
       {date && <p className="mb-3 small text-muted">{new Date(date).toDateString()}</p>}
