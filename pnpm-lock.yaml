@@ -130,10 +130,10 @@ importers:
         specifier: 21.1.0
         version: 21.1.0(@angular/common@21.1.0)(@angular/core@21.1.0)(@angular/platform-server@21.1.0)(@angular/router@21.1.0)
       '@bloomreach/ng-sdk':
-        specifier: 28.0.0
+        specifier: 28.1.0
         version: link:../../packages/ng-sdk
       '@bloomreach/spa-sdk':
-        specifier: 28.0.0
+        specifier: 28.1.0
         version: link:../../packages/spa-sdk
       dotenv:
         specifier: 16.4.5
@@ -206,10 +206,10 @@ importers:
   examples/lit:
     dependencies:
       '@bloomreach/lit-sdk':
-        specifier: 28.0.0
+        specifier: 28.1.0
         version: link:../../packages/lit-sdk
       '@bloomreach/spa-sdk':
-        specifier: 28.0.0
+        specifier: 28.1.0
         version: link:../../packages/spa-sdk
       '@lit/context':
         specifier: ^1.1.0
@@ -240,10 +240,10 @@ importers:
   examples/next:
     dependencies:
       '@bloomreach/react-sdk':
-        specifier: 28.0.0
+        specifier: 28.1.0
         version: link:../../packages/react-sdk
       '@bloomreach/spa-sdk':
-        specifier: 28.0.0
+        specifier: 28.1.0
         version: link:../../packages/spa-sdk
       axios:
         specifier: 1.8.4
@@ -295,10 +295,10 @@ importers:
   examples/nuxt:
     dependencies:
       '@bloomreach/spa-sdk':
-        specifier: 28.0.0
+        specifier: 28.1.0
         version: link:../../packages/spa-sdk
       '@bloomreach/vue-sdk':
-        specifier: 28.0.0
+        specifier: 28.1.0
         version: link:../../packages/vue-sdk
       axios:
         specifier: 1.7.9
@@ -323,10 +323,10 @@ importers:
   examples/react:
     dependencies:
       '@bloomreach/react-sdk':
-        specifier: 28.0.0
+        specifier: 28.1.0
         version: link:../../packages/react-sdk
       '@bloomreach/spa-sdk':
-        specifier: 28.0.0
+        specifier: 28.1.0
         version: link:../../packages/spa-sdk
       axios:
         specifier: 1.8.4
@@ -384,10 +384,10 @@ importers:
   examples/vue:
     dependencies:
       '@bloomreach/spa-sdk':
-        specifier: 28.0.0
+        specifier: 28.1.0
         version: link:../../packages/spa-sdk
       '@bloomreach/vue-sdk':
-        specifier: 28.0.0
+        specifier: 28.1.0
         version: link:../../packages/vue-sdk
       axios:
         specifier: 1.7.9
@@ -436,7 +436,7 @@ importers:
   packages/lit-sdk:
     dependencies:
       '@bloomreach/spa-sdk':
-        specifier: 28.0.0
+        specifier: 28.1.0
         version: link:../spa-sdk
     devDependencies:
       '@eslint/js':
@@ -479,7 +479,7 @@ importers:
   packages/ng-sdk:
     dependencies:
       '@bloomreach/spa-sdk':
-        specifier: 28.0.0
+        specifier: 28.1.0
         version: link:../spa-sdk
       tslib:
         specifier: ^2.6.2
@@ -579,7 +579,7 @@ importers:
   packages/react-sdk:
     dependencies:
       '@bloomreach/spa-sdk':
-        specifier: 28.0.0
+        specifier: 28.1.0
         version: link:../spa-sdk
     devDependencies:
       '@babel/core':
@@ -770,7 +770,7 @@ importers:
   packages/vue-sdk:
     dependencies:
       '@bloomreach/spa-sdk':
-        specifier: 28.0.0
+        specifier: 28.1.0
         version: link:../spa-sdk
     devDependencies:
       '@types/jsdom':
@@ -5741,7 +5741,7 @@ packages:
       webpack: ^5.0.0
     dependencies:
       '@dotenv-run/core': 1.3.8
-      webpack: 5.104.1
+      webpack: 5.104.1(esbuild@0.27.2)
     dev: true
     optional: true
 
@@ -31318,31 +31318,6 @@ packages:
       webpack: 5.104.1(esbuild@0.27.2)
     dev: true
 
-  /terser-webpack-plugin@5.3.16(webpack@5.104.1):
-    resolution: {integrity: sha512-h9oBFCWrq78NyWWVcSwZarJkZ01c2AyGrzs1crmHZO3QUg9D61Wu4NPjBy69n7JqylFF5y+CsUZYmYEIZ3mR+Q==}
-    engines: {node: '>= 10.13.0'}
-    peerDependencies:
-      '@swc/core': '*'
-      esbuild: '*'
-      uglify-js: '*'
-      webpack: ^5.1.0
-    peerDependenciesMeta:
-      '@swc/core':
-        optional: true
-      esbuild:
-        optional: true
-      uglify-js:
-        optional: true
-    dependencies:
-      '@jridgewell/trace-mapping': 0.3.29
-      jest-worker: 27.5.1
-      schema-utils: 4.3.3
-      serialize-javascript: 6.0.2
-      terser: 5.44.1
-      webpack: 5.104.1
-    dev: true
-    optional: true
-
   /terser@5.31.0:
     resolution: {integrity: sha512-Q1JFAoUKE5IMfI4Z/lkE/E6+SwgzO+x4tq4v1AyBLRj8VSYvRO6A/rQrPg1yud4g0En9EKI1TvFRF2tQFcoUkg==}
     engines: {node: '>=10'}
@@ -33897,48 +33872,6 @@ packages:
   /webpack-virtual-modules@0.6.2:
     resolution: {integrity: sha512-66/V2i5hQanC51vBQKPH4aI8NMAcBW59FVBs+rC7eGHupMyfn34q7rZIE+ETlJ+XTevqfUhVVBgSUNSW2flEUQ==}
     dev: false
-
-  /webpack@5.104.1:
-    resolution: {integrity: sha512-Qphch25abbMNtekmEGJmeRUhLDbe+QfiWTiqpKYkpCOWY64v9eyl+KRRLmqOFA2AvKPpc9DC6+u2n76tQLBoaA==}
-    engines: {node: '>=10.13.0'}
-    hasBin: true
-    peerDependencies:
-      webpack-cli: '*'
-    peerDependenciesMeta:
-      webpack-cli:
-        optional: true
-    dependencies:
-      '@types/eslint-scope': 3.7.7
-      '@types/estree': 1.0.8
-      '@types/json-schema': 7.0.15
-      '@webassemblyjs/ast': 1.14.1
-      '@webassemblyjs/wasm-edit': 1.14.1
-      '@webassemblyjs/wasm-parser': 1.14.1
-      acorn: 8.15.0
-      acorn-import-phases: 1.0.4(acorn@8.15.0)
-      browserslist: 4.28.1
-      chrome-trace-event: 1.0.4
-      enhanced-resolve: 5.18.4
-      es-module-lexer: 2.0.0
-      eslint-scope: 5.1.1
-      events: 3.3.0
-      glob-to-regexp: 0.4.1
-      graceful-fs: 4.2.11
-      json-parse-even-better-errors: 2.3.1
-      loader-runner: 4.3.1
-      mime-types: 2.1.35
-      neo-async: 2.6.2
-      schema-utils: 4.3.3
-      tapable: 2.3.0
-      terser-webpack-plugin: 5.3.16(webpack@5.104.1)
-      watchpack: 2.5.0
-      webpack-sources: 3.3.3
-    transitivePeerDependencies:
-      - '@swc/core'
-      - esbuild
-      - uglify-js
-    dev: true
-    optional: true
 
   /webpack@5.104.1(esbuild@0.27.2):
     resolution: {integrity: sha512-Qphch25abbMNtekmEGJmeRUhLDbe+QfiWTiqpKYkpCOWY64v9eyl+KRRLmqOFA2AvKPpc9DC6+u2n76tQLBoaA==}

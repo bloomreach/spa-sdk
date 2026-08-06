@@ -1,6 +1,6 @@
 {
   "name": "@bloomreach/lit-sdk",
-  "version": "28.0.0",
+  "version": "28.1.0",
   "description": "Bloomreach SPA SDK for Lit web components",
   "keywords": [
     "bloomreach",
@@ -50,7 +50,7 @@
     "@lit/context": "^1.1.0"
   },
   "dependencies": {
-    "@bloomreach/spa-sdk": "28.0.0"
+    "@bloomreach/spa-sdk": "28.1.0"
   },
   "devDependencies": {
     "@eslint/js": "9.17.0",
