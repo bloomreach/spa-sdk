@@ -16,7 +16,7 @@
 
 import babel from '@rollup/plugin-babel';
 import dts from 'rollup-plugin-dts';
-import { terser } from 'rollup-plugin-terser';
+import terser from '@rollup/plugin-terser';
 import typescript from 'rollup-plugin-typescript2';
 import pkg from './package.json';
 import terserOptions from './terser.json';
