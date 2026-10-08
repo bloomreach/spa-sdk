@@ -23,7 +23,7 @@ import {
   TYPE_CONTAINER_UNORDERED_LIST,
 } from '@bloomreach/spa-sdk';
 import { shallowMount } from '@vue/test-utils';
-import type { GlobalMountOptions } from '@vue/test-utils/dist/types';
+import type { MountingOptions } from '@vue/test-utils';
 import type { Mocked } from 'vitest';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { defineComponent, nextTick, ref } from 'vue';
@@ -36,7 +36,7 @@ describe('BrNodeContainer', () => {
   let component: Mocked<Container>;
   let mapping: BrMapping;
   let page: Mocked<Page>;
-  let global: GlobalMountOptions;
+  let global: MountingOptions<unknown>['global'];
 
   const SomeContainer = defineComponent({
     name: 'some-container',
