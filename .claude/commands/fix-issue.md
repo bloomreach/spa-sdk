@@ -940,9 +940,14 @@ CI for this repo is **Jenkins**, not GitLab CI — `glab ci view` / `glab ci sta
    ```bash
    PROJECT_PATH=$(git remote get-url origin | sed 's|.*[:/]\(engineering/.*\)\.git|\1|' | sed 's|/|%2F|g')
    SHA=$(git rev-parse HEAD)
-   glab api "projects/${PROJECT_PATH}/repository/commits/${SHA}/statuses" \
+   BRANCH=$(git rev-parse --abbrev-ref HEAD)
+   glab api "projects/${PROJECT_PATH}/repository/commits/${SHA}/statuses?ref=${BRANCH}" \
      | jq -r '[.[] | select(.name=="jenkins")] | sort_by(.created_at) | last | "\(.status) \(.target_url)"'
    ```
+
+   > **Always pass `ref`.** Without it, GitLab only returns statuses recorded for the default branch, so a feature-branch commit always looks like it has no status and the gate would poll until it times out.
+
+   The same commit also carries a `CodeRabbit` status; ignore it here — only `jenkins` gates the hand-off.
 
    Only these count as **terminal**:
    - ✅ `success`
