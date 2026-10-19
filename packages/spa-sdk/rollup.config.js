@@ -21,6 +21,9 @@ import typescript from 'rollup-plugin-typescript2';
 import pkg from './package.json';
 import terserOptions from './terser.json';
 
+// rollup-plugin-typescript2 defaults to the extglob `**/*.ts+(|x)`, which picomatch 2.3.2+ no longer matches.
+const include = ['*.ts', '**/*.ts', '*.tsx', '**/*.tsx'];
+
 export default [
   {
     input: 'src/index.ts',
@@ -46,7 +49,7 @@ export default [
     ],
     external: [...Object.keys(pkg.dependencies || {}), ...Object.keys(pkg.peerDependencies || {})],
     plugins: [
-      typescript({ clean: true }),
+      typescript({ clean: true, include }),
       babel({ babelHelpers: 'bundled', extensions: ['.ts'] }),
       terser(terserOptions),
     ],
@@ -63,7 +66,7 @@ export default [
       },
     ],
     external: [...Object.keys(pkg.dependencies || {}), ...Object.keys(pkg.peerDependencies || {})],
-    plugins: [typescript({ clean: true }), terser(terserOptions)],
+    plugins: [typescript({ clean: true, include }), terser(terserOptions)],
   },
 
   {
@@ -100,6 +103,7 @@ export default [
     plugins: [
       typescript({
         clean: true,
+        include,
         tsconfigOverride: {
           include: ['src/express/**/*'],
           compilerOptions: {
