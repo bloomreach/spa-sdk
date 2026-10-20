@@ -1,8 +1,12 @@
 {
-  "extends": "@vue/tsconfig/tsconfig.node.json",
+  "extends": "@vue/tsconfig/tsconfig.json",
   "include": ["vite.config.*", "vitest.config.*", "cypress.config.*", "playwright.config.*"],
   "compilerOptions": {
     "composite": true,
+    "noEmit": false,
+    "emitDeclarationOnly": true,
+    "outDir": "./node_modules/.tmp/tsconfig.config",
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.config.tsbuildinfo",
     "types": ["node"]
   }
 }

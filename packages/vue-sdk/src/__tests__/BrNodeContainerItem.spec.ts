@@ -17,7 +17,7 @@
 import type { Component, ContainerItem, Page } from '@bloomreach/spa-sdk';
 import { TYPE_CONTAINER_ITEM_UNDEFINED } from '@bloomreach/spa-sdk';
 import { shallowMount } from '@vue/test-utils';
-import type { GlobalMountOptions } from '@vue/test-utils/dist/types';
+import type { MountingOptions } from '@vue/test-utils';
 import type { Mocked } from 'vitest';
 import { beforeAll, describe, expect, it, vi } from 'vitest';
 import type { PropType, Ref } from 'vue';
@@ -32,7 +32,7 @@ describe('BrNodeContainerItem', () => {
   let mapping: BrMapping;
   let page: Mocked<Page>;
 
-  let global: GlobalMountOptions;
+  let global: MountingOptions<unknown>['global'];
 
   const SomeContainerItem = defineComponent({
     name: 'some-container-item',

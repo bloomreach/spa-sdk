@@ -17,7 +17,7 @@
 import type { Component, MetaCollection, Page } from '@bloomreach/spa-sdk';
 import { isContainer, isContainerItem } from '@bloomreach/spa-sdk';
 import { shallowMount } from '@vue/test-utils';
-import type { GlobalMountOptions } from '@vue/test-utils/dist/types';
+import type { MountingOptions } from '@vue/test-utils';
 import type { Mocked } from 'vitest';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { defineComponent, nextTick, ref } from 'vue';
@@ -33,7 +33,7 @@ describe('BrNodeComponent', () => {
   let component: Mocked<Component>;
   let mapping: Ref<BrMapping>;
   let page: Mocked<Page>;
-  let global: GlobalMountOptions;
+  let global: MountingOptions<unknown>['global'];
 
   const someComponentName = 'something';
   const SomeComponent = defineComponent({

@@ -18,7 +18,7 @@ import BrManageMenuButton from '@/BrManageMenuButton.vue';
 import BrMeta from '@/BrMeta.vue';
 import type { Menu, MetaCollection, Page } from '@bloomreach/spa-sdk';
 import { shallowMount } from '@vue/test-utils';
-import type { GlobalMountOptions } from '@vue/test-utils/dist/types';
+import type { MountingOptions } from '@vue/test-utils';
 import type { Mocked } from 'vitest';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { ref } from 'vue';
@@ -29,7 +29,7 @@ vi.mock('@bloomreach/spa-sdk');
 describe('BrManageMenuButton', () => {
   const meta = {} as MetaCollection;
   let page: Mocked<Page>;
-  let global: GlobalMountOptions;
+  let global: MountingOptions<unknown>['global'];
 
   beforeEach(() => {
     page = {
