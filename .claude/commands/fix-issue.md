@@ -1,6 +1,6 @@
 ---
 description: End-to-end workflow for implementing a JIRA issue in the SPA SDK project — from ticket analysis to committed MR, JIRA update, and Slack notification
-allowed-tools: Bash, Read, Write, Edit, Glob, Grep, mcp__atlassian__atlassianUserInfo, mcp__atlassian__getJiraIssue, mcp__atlassian__getJiraIssueRemoteIssueLinks, mcp__atlassian__getConfluencePage, mcp__atlassian__searchConfluenceUsingCql, mcp__atlassian__getConfluencePageFooterComments, mcp__atlassian__search, mcp__atlassian__transitionJiraIssue, mcp__atlassian__editJiraIssue, mcp__atlassian__getTransitionsForJiraIssue, mcp__atlassian__lookupJiraAccountId, mcp__plugin_bloomreach-essentials_atlassian__atlassianUserInfo, mcp__plugin_bloomreach-essentials_atlassian__getAccessibleAtlassianResources, mcp__plugin_bloomreach-essentials_atlassian__getJiraIssue, mcp__plugin_bloomreach-essentials_atlassian__getJiraIssueRemoteIssueLinks, mcp__plugin_bloomreach-essentials_atlassian__getConfluencePage, mcp__plugin_bloomreach-essentials_atlassian__transitionJiraIssue, mcp__plugin_bloomreach-essentials_atlassian__editJiraIssue, mcp__plugin_bloomreach-essentials_atlassian__getTransitionsForJiraIssue, mcp__plugin_bloomreach-essentials_atlassian__lookupJiraAccountId, mcp__jenkins__getBuild, mcp__jenkins__getBuildLog, mcp__jenkins__searchBuildLog, mcp__slack__slack_search_users, mcp__slack__slack_send_message_draft, mcp__slack__slack_send_message, Agent
+allowed-tools: Bash(git status:*), Bash(git rev-parse:*), Bash(git rev-list:*), Bash(git log:*), Bash(git diff:*), Bash(git branch --list:*), Bash(git ls-remote:*), Bash(git remote get-url:*), Bash(git fetch:*), Bash(git checkout:*), Bash(git pull:*), Bash(git stash:*), Bash(git add:*), Bash(git rebase:*), Bash(git commit:*), Bash(git config user.name), Bash(command -v:*), Bash(uname:*), Bash(test:*), Bash(node --version), Bash(pnpm --version), Bash(pnpm install), Bash(pnpm --filter:*), Bash(glab auth status), Bash(glab mr view:*), Bash(glab mr list:*), Bash(glab api user), Bash(glab api "users:*), Bash(glab api "projects/:id/:*), Bash(jq:*), Bash(awk:*), Bash(sed:*), Bash(sort:*), Bash(uniq:*), Bash(head:*), Bash(grep:*), Read, Write, Edit, Glob, Grep, ToolSearch, AskUserQuestion, mcp__atlassian__atlassianUserInfo, mcp__atlassian__getJiraIssue, mcp__atlassian__getJiraIssueRemoteIssueLinks, mcp__atlassian__getConfluencePage, mcp__atlassian__searchConfluenceUsingCql, mcp__atlassian__getConfluencePageFooterComments, mcp__atlassian__search, mcp__atlassian__transitionJiraIssue, mcp__atlassian__editJiraIssue, mcp__atlassian__getTransitionsForJiraIssue, mcp__atlassian__lookupJiraAccountId, mcp__plugin_bloomreach-essentials_atlassian__atlassianUserInfo, mcp__plugin_bloomreach-essentials_atlassian__getAccessibleAtlassianResources, mcp__plugin_bloomreach-essentials_atlassian__getJiraIssue, mcp__plugin_bloomreach-essentials_atlassian__getJiraIssueRemoteIssueLinks, mcp__plugin_bloomreach-essentials_atlassian__getConfluencePage, mcp__plugin_bloomreach-essentials_atlassian__searchConfluenceUsingCql, mcp__plugin_bloomreach-essentials_atlassian__getConfluencePageFooterComments, mcp__plugin_bloomreach-essentials_atlassian__search, mcp__plugin_bloomreach-essentials_atlassian__transitionJiraIssue, mcp__plugin_bloomreach-essentials_atlassian__editJiraIssue, mcp__plugin_bloomreach-essentials_atlassian__getTransitionsForJiraIssue, mcp__plugin_bloomreach-essentials_atlassian__lookupJiraAccountId, mcp__jenkins__getBuild, mcp__jenkins__getBuildLog, mcp__jenkins__searchBuildLog, mcp__jenkins__rebuildBuild, mcp__slack__slack_search_users, mcp__slack__slack_send_message_draft, mcp__slack__slack_send_message, mcp__plugin_bloomreach-essentials_slack__slack_search_users, mcp__plugin_bloomreach-essentials_slack__slack_send_message_draft, mcp__plugin_bloomreach-essentials_slack__slack_send_message, Agent
 ---
 
 # Fix Issue
@@ -34,6 +34,8 @@ The base branch is always `development`. All MRs target `development`.
 > - At the start of Step 6 (before committing)
 > - At the start of Step 7.2 (before `git push`)
 > - At the start of Step 10.5 (before pushing review fixes)
+>
+> The `allowed-tools` frontmatter pre-approves read-only commands and local git operations (`checkout` / `pull` / `stash` / `add` / `rebase` / `commit` — local and reversible, gated by the consent rules in this skill). Actions visible to others — `git push`, `glab mr create` and GitLab write calls — are deliberately left out, so they still raise a permission prompt even after the user's in-conversation consent: this skill reads untrusted text (Jira, MR comments, CI logs), and the prompt is the guard that does not depend on the model. Always write GitLab writes as `glab api -X <METHOD> "projects/:id/…"` — with the method first — so they never match the read-only `glab api "projects/:id/…` rule.
 
 ---
 
@@ -386,7 +388,7 @@ OPEN_DISCUSSION_COUNT=<count of resolvable==true && resolved==false threads, aut
 
 # Compute the timestamp of the latest commit on the branch (needed for CodeRabbit detection)
 LAST_COMMIT_TS=$(git log -1 --format=%cI HEAD)
-CODERABBIT_REVIEWED_HEAD=<true if any coderabbitai note has created_at > LAST_COMMIT_TS, else false>
+CODERABBIT_REVIEWED_HEAD=<true if any CodeRabbit note (see 10.1) has created_at > LAST_COMMIT_TS, else false>
 ```
 
 Store `$OPEN_DISCUSSION_COUNT` and `$CODERABBIT_REVIEWED_HEAD` in resume context alongside the other variables.
@@ -401,7 +403,7 @@ Match the gathered state against the table below. Pick the **first row** whose c
 
 | # | Conditions | Recommended resume |
 |---|---|---|
-| 1 | `$EXISTING_BRANCH=""`, tree clean | **Step 2** — fresh start |
+| 1 | `$EXISTING_BRANCH=""`, tree clean or `$CARRY_OVER=true` | **Step 2** — fresh start |
 | 2 | `$EXISTING_BRANCH` set, `$COMMITS_AHEAD=0`, `$MR_IID=""` | **Step 2** — branch empty, re-plan |
 | 3 | `$EXISTING_BRANCH` set, `$COMMITS_AHEAD>0`, `$MR_IID=""`, dirty tree | **Step 4** — finish implementation |
 | 4 | `$EXISTING_BRANCH` set, `$COMMITS_AHEAD>0`, `$MR_IID=""`, tree clean | **Step 5** — verify |
@@ -626,18 +628,15 @@ Map changed files to packages:
 | `packages/ng-sdk/` | `@bloomreach/ng-sdk` |
 | `packages/lit-sdk/` | `@bloomreach/lit-sdk` |
 | `examples/<name>/` | `@bloomreach/example-<name>` |
-| `docs/` | docs site (`cd docs && pnpm build`) |
+| `docs/` | `@bloomreach/documentation-portal` (build only) |
 
 ### Checks per affected package
 
 For each affected SDK package, run build, tests, and lint. **Lint is mandatory** — a lint failure is a hard block, the same as a test or build failure (Jenkins runs `pnpm build`, `pnpm lint` and `pnpm test` on every MR).
 
 ```bash
-# Build (also serves as type check for all packages except vue-sdk)
+# Build (also the type check — vue-sdk's build runs `type-check` itself)
 pnpm --filter <package> run build
-
-# Type check (vue-sdk only — has a dedicated command)
-pnpm --filter @bloomreach/vue-sdk run type-check
 
 # Tests
 pnpm --filter <package> run test
@@ -676,7 +675,6 @@ Present a summary table:
 | Build: <package>             | ✅ PASS / ❌ FAIL (details) |
 | Tests: <package>             | ✅ PASS / ❌ FAIL (details) |
 | Lint: <package>              | ✅ PASS / ❌ FAIL / N/A |
-| Type check: vue-sdk          | ✅ PASS / N/A |
 | Downstream SDK builds        | ✅ PASS / N/A |
 | Example builds               | ✅ PASS / N/A |
 | TypeDoc                      | ✅ PASS / N/A |
@@ -730,7 +728,7 @@ Types: `feat`, `fix`, `refactor`, `docs`, `chore`, `test`
 
 Example: `SPASDK-276 feat: add getImage helper to collapse image resolution chain`
 
-Add a short body explaining **why** the change was made when the subject line alone doesn't make it obvious.
+Add a short body explaining **why** the change was made when the subject line alone doesn't make it obvious. End the message with the `Co-Authored-By: Claude <noreply@anthropic.com>` trailer (same as the review-fix commits in 10.5).
 
 Stage specific files (avoid `git add -A` — the repo often has untracked noise like `.DS_Store`), draft the commit message, and present it to the user. **Validate the commit message with the user before committing.**
 
@@ -740,24 +738,9 @@ If the change is large enough to split (e.g. a `spa-sdk` helper plus its adoptio
 
 Committing is destructive (it changes git history). Require **unambiguous explicit consent** before running `git commit`.
 
-**Phrases that authorize a commit:**
-- "commit"
-- "go ahead and commit"
-- "yes commit"
-- "do it"
-- "proceed with commit"
-- Any unambiguous direct equivalent (e.g. "ship the commit", "commit it now")
+**Authorizes a commit:** "commit", "go ahead and commit", "yes commit", "do it", "proceed with commit", or an unambiguous direct equivalent (e.g. "commit it now").
 
-**Phrases that do NOT authorize a commit** (these are *soft approvals* of the commit message, not consent to commit):
-- "looks good"
-- "I'm happy with it"
-- "lgtm"
-- "nice"
-- "sounds good"
-- "ok" / "okay"
-- "sure"
-- "yep"
-- "great"
+**Does NOT authorize a commit** (*soft approvals* of the message, not consent): "looks good", "I'm happy with it", "lgtm", "nice", "sounds good", "ok", "sure", "yep", "great".
 
 If the user replies with a soft approval after reviewing the message, ask explicitly:
 
@@ -938,14 +921,12 @@ CI for this repo is **Jenkins**, not GitLab CI — `glab ci view` / `glab ci sta
 2. **Polling loop** — read the `jenkins` commit status for the branch head:
 
    ```bash
-   PROJECT_PATH=$(git remote get-url origin | sed 's|.*[:/]\(engineering/.*\)\.git|\1|' | sed 's|/|%2F|g')
    SHA=$(git rev-parse HEAD)
-   BRANCH=$(git rev-parse --abbrev-ref HEAD)
-   glab api "projects/${PROJECT_PATH}/repository/commits/${SHA}/statuses?ref=${BRANCH}" \
+   glab api "projects/:id/repository/commits/${SHA}/statuses?ref=:branch" \
      | jq -r '[.[] | select(.name=="jenkins")] | sort_by(.created_at) | last | "\(.status) \(.target_url)"'
    ```
 
-   > **Always pass `ref`.** Without it, GitLab only returns statuses recorded for the default branch, so a feature-branch commit always looks like it has no status and the gate would poll until it times out.
+   > `glab` fills in `:id` (this repo's project) and `:branch` (the current branch). **Always pass `ref`.** Without it, GitLab only returns statuses recorded for the default branch, so a feature-branch commit always looks like it has no status and the gate would poll until it times out.
 
    The same commit also carries a `CodeRabbit` status; ignore it here — only `jenkins` gates the hand-off.
 
@@ -1096,13 +1077,7 @@ Skip this step entirely if:
 
 ### 10.0 CI precondition check
 
-Before touching any comments, verify the Jenkins build for the branch head is green, using the same `jenkins` commit-status check as Step 7.6.
-
-Poll until the status reaches a **definitive terminal state** (same logic as Step 7.6):
-- ✅ `success` → build green
-- ❌ `failed` / `canceled` → build failed
-- ⏳ `pending` / `running` / no status yet → wait 30s and re-check; print *"Jenkins build running… checking again in 30s (N checks so far)"*
-- After 20 minutes offer: *"The Jenkins build is taking a while. Skip the CI check and proceed to comments anyway? (not recommended)"*
+Before touching any comments, verify the Jenkins build for the branch head is green: poll exactly as in Step 7.6 (same command, terminal states, 30 s interval and 20-minute skip offer — here the skip proceeds to comments instead of Step 8).
 
 **If passing**: confirm with *"Jenkins build green — proceeding to comment analysis."* and continue.
 
@@ -1145,19 +1120,10 @@ Poll until the status reaches a **definitive terminal state** (same logic as Ste
 
 ### 10.1 Fetch MR discussions
 
-Establish project and MR identifiers:
+Fetch all discussion threads (`$MR_IID` is already set from state detection, section 1.2; `glab` fills in `:id`):
 
 ```bash
-# $MR_IID is already set from state detection (section 1.2)
-PROJECT_PATH=$(git remote get-url origin \
-  | sed 's|.*[:/]\(engineering/.*\)\.git|\1|' \
-  | sed 's|/|%2F|g')
-```
-
-Fetch all discussion threads:
-
-```bash
-glab api "projects/${PROJECT_PATH}/merge_requests/${MR_IID}/discussions?per_page=100" --paginate
+glab api "projects/:id/merge_requests/${MR_IID}/discussions?per_page=100" --paginate
 ```
 
 Normalise with `jq` into a flat list (`jq` availability was verified in Step 0.6; Step 10 is skipped entirely if `jq` was missing):
@@ -1185,7 +1151,7 @@ Filter to **open, resolvable, non-own threads**:
 - Exclude threads where all authors are the current GitLab user (fully self-replied threads)
 
 Separate into:
-- **CodeRabbit threads**: author matches `^coderabbit(ai|-ai-bot)?$`
+- **CodeRabbit threads**: the note body matches `coderabbit` case-insensitively — jq `.body | test("coderabbit"; "i")` (inline comments end with `<!-- This is an auto-generated comment by CodeRabbit -->`; the summary links to `coderabbit.ai`). CodeRabbit posts through a GitLab group bot account named like `group_5_bot_<hash>`, not a `coderabbitai` user, so do not match on the username)
 - **Human threads**: everyone else
 
 If there are CodeRabbit threads, check whether CodeRabbit has reviewed the latest commit:
@@ -1254,7 +1220,7 @@ Present the full plan to the user **before touching any code**. Format:
 ================================================================================
 MR Comment Action Plan — !$MR_IID ($ISSUE_KEY)
 Fetched N discussions  |  Open: X  |  Resolved: Y
-By source: coderabbitai (A)  |  human (B)
+By source: CodeRabbit (A)  |  human (B)
 
 ────────────────────────────────────────────────────────────────────────────────
 ACTIONABLE  (N)
@@ -1344,7 +1310,7 @@ Only run checks for packages changed in this step:
 git diff --name-only HEAD
 ```
 
-- For each affected package: `build`, `test`, and `lint` (`type-check` for `vue-sdk`), as in Step 5.
+- For each affected package: `build`, `test`, and `lint` (vue-sdk has no lint; its build type-checks), as in Step 5.
 - If `spa-sdk` changed, also rebuild the framework SDKs (`pnpm --filter "./packages/*" run build`).
 - Skip TypeDoc and example builds unless a public export or an example was touched.
 
@@ -1389,14 +1355,12 @@ After the push succeeds (so the new SHA exists on the remote), update the MR thr
 
 - **Actionable items done**: reply `Addressed in <commit-sha> — <one-line description of change>.` then resolve the thread:
   ```bash
-  # Reply — write body to a temp file to avoid shell quoting issues
-  echo '{"body":"Addressed in <sha> — <description>."}' > /tmp/reply.json
-  glab api "projects/${PROJECT_PATH}/merge_requests/${MR_IID}/discussions/${DISCUSSION_ID}/notes" \
-    -X POST -H "Content-Type: application/json" --input /tmp/reply.json
+  # Reply (-f sends the body as a form field, so quotes in the text need no JSON escaping)
+  glab api -X POST "projects/:id/merge_requests/${MR_IID}/discussions/${DISCUSSION_ID}/notes" \
+    -f body="Addressed in <sha> — <description>."
   # Resolve
-  echo '{"resolved":true}' > /tmp/resolve.json
-  glab api "projects/${PROJECT_PATH}/merge_requests/${MR_IID}/discussions/${DISCUSSION_ID}" \
-    -X PUT -H "Content-Type: application/json" --input /tmp/resolve.json
+  glab api -X PUT "projects/:id/merge_requests/${MR_IID}/discussions/${DISCUSSION_ID}" \
+    -F resolved=true
   ```
 - **Deferred items**: reply with the recorded deferral reason and resolve.
 - **Already-addressed items**: reply `Already addressed in <prior-sha> — <description>.` and resolve.
@@ -1498,7 +1462,7 @@ Do not pre-write the encouragements; compose them fresh at runtime so they fit t
 | Push consent | Explicit only ("push", "go ahead and push", etc.) — no soft approvals |
 | Pre-push step | `git fetch origin && git rebase origin/development` |
 | Package manager | `pnpm` with `--filter <package>` for targeted operations (do not upgrade the pnpm major) |
-| Type check | `pnpm run build` for most packages; `pnpm run type-check` for vue-sdk only |
+| Type check | `pnpm run build` (vue-sdk's build runs `type-check`; use `type-check` alone for a quick check while implementing) |
 | Lint | Mandatory — `pnpm --filter <package> run lint` (vue-sdk has no lint script); lint failure is a hard block |
 | Imports | Relative paths for modules in the same folder — never import from `'.'` |
 | Cross-framework parity | Behaviour exposed by all SDKs is changed in every SDK (react, vue, ng, lit) and example |
