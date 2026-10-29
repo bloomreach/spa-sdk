@@ -2,13 +2,39 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### ["28.1.0"](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-28.0.0..."28.1.0")
+#### ["28.2.0"](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-28.1.0..."28.2.0")
+
+- SPASDK-278 Port the brxm /fix-issue Claude Code command to spa-sdk [`#257`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/257)
+- SPASDK-277 Fix moderate+ dependency vulnerabilities in tooling, examples and docs [`#258`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/258)
+- SPASDK-278 fix: address review findings in /fix-issue command [`#SPASDK-278`](https://bloomreach.atlassian.net/browse/SPASDK-278)
+- SPASDK-277 chore: drop picomatch 2.3.1 pin with explicit TypeScript include [`#SPASDK-277`](https://bloomreach.atlassian.net/browse/SPASDK-277)
+- SPASDK-277 chore: refresh vulnerable transitive dependencies and pin same-major fixes [`#SPASDK-277`](https://bloomreach.atlassian.net/browse/SPASDK-277)
+- SPASDK-277 chore: update docs site to Astro 5.18 and astro-icon 1.2 [`#SPASDK-277`](https://bloomreach.atlassian.net/browse/SPASDK-277)
+- SPASDK-277 chore: pin rollup 4 to 4.59.0 [`#SPASDK-277`](https://bloomreach.atlassian.net/browse/SPASDK-277)
+- SPASDK-277 chore: update Lit example dependencies and pin vite [`#SPASDK-277`](https://bloomreach.atlassian.net/browse/SPASDK-277)
+- SPASDK-277 chore: update Vue example to Vite 6 and Vue 3.5 [`#SPASDK-277`](https://bloomreach.atlassian.net/browse/SPASDK-277)
+- SPASDK-277 chore: update React example dependencies [`#SPASDK-277`](https://bloomreach.atlassian.net/browse/SPASDK-277)
+- SPASDK-277 chore: update Nuxt example to 4.6.0 [`#SPASDK-277`](https://bloomreach.atlassian.net/browse/SPASDK-277)
+- SPASDK-277 chore: update Next.js example to 15.5.27 [`#SPASDK-277`](https://bloomreach.atlassian.net/browse/SPASDK-277)
+- SPASDK-277 chore: update Angular to 21.2 in ng-sdk and examples/angular [`#SPASDK-277`](https://bloomreach.atlassian.net/browse/SPASDK-277)
+- SPASDK-277 test: fix vue-sdk spec type errors for the required httpClient option [`#SPASDK-277`](https://bloomreach.atlassian.net/browse/SPASDK-277)
+- SPASDK-277 chore: update vue-sdk and lit-sdk to vite 6.4.4 and vitest 4 [`#SPASDK-277`](https://bloomreach.atlassian.net/browse/SPASDK-277)
+- SPASDK-277 chore: update SDK build tooling (rollup, terser plugin, jest-junit, js-beautify) [`#SPASDK-277`](https://bloomreach.atlassian.net/browse/SPASDK-277)
+- SPASDK-277 chore: raise stale overrides and pin fixed transitive versions [`#SPASDK-277`](https://bloomreach.atlassian.net/browse/SPASDK-277)
+- SPASDK-278 fix: pass the branch ref when reading the Jenkins commit status [`#SPASDK-278`](https://bloomreach.atlassian.net/browse/SPASDK-278)
+- SPASDK-278 chore: port the brxm /fix-issue command to spa-sdk [`#SPASDK-278`](https://bloomreach.atlassian.net/browse/SPASDK-278)
+- TRIVIAL: add lit packages to changeset fixed group [`3af71c2`](https://github.com/bloomreach/spa-sdk/commit/3af71c28a14cf7846275f184bcedad506d35d2d6)
+
+#### [spa-sdk-28.1.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-28.0.0...spa-sdk-28.1.0)
+
+> 6 August 2026
 
 - SPASDK-276 spa-sdk: add getImage/getDocuments helpers to collapse chained content-resolution calls [`#255`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/255)
 - SPASDK-275: Coalesce preview sync calls into core SDK [`#254`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/254)
 - SPASDK-273: Preserve paths for default-port endpoints [`#253`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/253)
 - SPASDK-274 [CVE-2026-13149] brace-expansion ≤5.0.6 in spa-sdk (ReDoS) [`#252`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/252)
 - SPASDK-271 Restore spa-sdk typedoc CI after Jest 30 upgrade [`#250`](https://code.bloomreach.com/engineering/xm/spa-sdk/-/merge_requests/250)
+- SPASDK-276 Bumping versions to 28.1.0 [`#SPASDK-276`](https://bloomreach.atlassian.net/browse/SPASDK-276)
 - SPASDK-276 fix: validate resolved reference is an ImageSet in getImage [`#SPASDK-276`](https://bloomreach.atlassian.net/browse/SPASDK-276)
 - SPASDK-276 feat: add getDocuments helper and fix duplicated image chain in Content.tsx [`#SPASDK-276`](https://bloomreach.atlassian.net/browse/SPASDK-276)
 - SPASDK-276 feat: add getImage helper to collapse image resolution chain [`#SPASDK-276`](https://bloomreach.atlassian.net/browse/SPASDK-276)
@@ -125,17 +151,17 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-234: Bumping versions to 27.2.0 [`#SPASDK-234`](https://bloomreach.atlassian.net/browse/SPASDK-234)
 - SPASDK-234: Enhance Banner component to support image variants across Angular, React, Vue, and Nuxt examples. [`#SPASDK-234`](https://bloomreach.atlassian.net/browse/SPASDK-234)
 - SPASDK-234: Add `getVariant()` and `getVariants()` methods to ImageSet [`#SPASDK-234`](https://bloomreach.atlassian.net/browse/SPASDK-234)
-- TRIVIAL: Add browserslist configuration to package.json for improved compatibility [`f9953fe`](https://github.com/bloomreach/spa-sdk/commit/f9953fe7bf35b18106bc6abccd54c26d79a94952)
-- TRIVIAL Test new Jenkins push webhook [`3db28f9`](https://github.com/bloomreach/spa-sdk/commit/3db28f98bac79402d3ec13f9ac730b9483dd3f9a)
-- TRIVIAL Add Kubernetes containers for the new Jenkins [`bd965c4`](https://github.com/bloomreach/spa-sdk/commit/bd965c482ef58d5920edb6bc47e6eb7173be6d87)
-- TRIVIAL Edit CLAUDE.md [`112073c`](https://github.com/bloomreach/spa-sdk/commit/112073c92bb2dc557ad4666216101ce4dc67932e)
-- TRIVIAL Merge branch 'test' into 'development' [`122647d`](https://github.com/bloomreach/spa-sdk/commit/122647d20538c309d50656ab18319b0c77d9635e)
-- TRIVIAL Remove the part for folder cleanup [`78db4d2`](https://github.com/bloomreach/spa-sdk/commit/78db4d2fe5d82a61068fa5046413a123c3f7aa4c)
-- TRIVIAL Edit CLAUDE.md [`43cd4d7`](https://github.com/bloomreach/spa-sdk/commit/43cd4d785fe4c6f23aa77dbeb4862a8577c8dede)
-- TRIVIAL Merge branch 'jenkins-change' into 'development' [`3ad5ac3`](https://github.com/bloomreach/spa-sdk/commit/3ad5ac3c94922a331a7d401a07d5eb1463305188)
 - TRIVIAL Use the correct label for Jenkins [`046d5ae`](https://github.com/bloomreach/spa-sdk/commit/046d5aec2c19accbbe9d1ce1bdc4f020ab2ec892)
 - TRIVIAL Modify file to fit the new Jenkins [`bdb77c8`](https://github.com/bloomreach/spa-sdk/commit/bdb77c8ebb99d2739de896ec3c1f7eb1323893a0)
+- TRIVIAL Add Kubernetes containers for the new Jenkins [`bd965c4`](https://github.com/bloomreach/spa-sdk/commit/bd965c482ef58d5920edb6bc47e6eb7173be6d87)
+- TRIVIAL Remove the part for folder cleanup [`78db4d2`](https://github.com/bloomreach/spa-sdk/commit/78db4d2fe5d82a61068fa5046413a123c3f7aa4c)
+- TRIVIAL: Add browserslist configuration to package.json for improved compatibility [`f9953fe`](https://github.com/bloomreach/spa-sdk/commit/f9953fe7bf35b18106bc6abccd54c26d79a94952)
+- TRIVIAL Edit CLAUDE.md [`112073c`](https://github.com/bloomreach/spa-sdk/commit/112073c92bb2dc557ad4666216101ce4dc67932e)
+- TRIVIAL Edit CLAUDE.md [`43cd4d7`](https://github.com/bloomreach/spa-sdk/commit/43cd4d785fe4c6f23aa77dbeb4862a8577c8dede)
 - TRIVIAL Modify Jenkins file for the new Jenkins [`e47ae78`](https://github.com/bloomreach/spa-sdk/commit/e47ae7895867ff71ba7b287f103778451187b6ff)
+- TRIVIAL Test new Jenkins push webhook [`3db28f9`](https://github.com/bloomreach/spa-sdk/commit/3db28f98bac79402d3ec13f9ac730b9483dd3f9a)
+- TRIVIAL Merge branch 'test' into 'development' [`122647d`](https://github.com/bloomreach/spa-sdk/commit/122647d20538c309d50656ab18319b0c77d9635e)
+- TRIVIAL Merge branch 'jenkins-change' into 'development' [`3ad5ac3`](https://github.com/bloomreach/spa-sdk/commit/3ad5ac3c94922a331a7d401a07d5eb1463305188)
 
 #### [spa-sdk-27.1.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-27.0.0...spa-sdk-27.1.0)
 
@@ -407,10 +433,10 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-220 Update README.md [`#SPASDK-220`](https://bloomreach.atlassian.net/browse/SPASDK-220)
 - SPASDK-220 Update release and heroku-postbuild commands [`#SPASDK-220`](https://bloomreach.atlassian.net/browse/SPASDK-220)
 - SPASDK-220 Add bump command using changeset [`#SPASDK-220`](https://bloomreach.atlassian.net/browse/SPASDK-220)
-- TRIVIAL Merge branch 'pnpm' into 'development' [`3df9ce7`](https://github.com/bloomreach/spa-sdk/commit/3df9ce71d7f572e98ac0f348fae5872b4c7f1453)
 - TRIVIAL Move workspace to pnpm [`4e80e3c`](https://github.com/bloomreach/spa-sdk/commit/4e80e3c07a2eedc10ce5378460cbe246698ba48c)
 - TRIVIAL Adjust dependencies versions after rebase [`e58299e`](https://github.com/bloomreach/spa-sdk/commit/e58299efb6cd3aa177eddae44f18685d793e1ba0)
 - TRIVIAL Fix vue ssr app on start command [`39027e2`](https://github.com/bloomreach/spa-sdk/commit/39027e2fb82eedf43ee09fe1ca500937e91d9fea)
+- TRIVIAL Merge branch 'pnpm' into 'development' [`3df9ce7`](https://github.com/bloomreach/spa-sdk/commit/3df9ce71d7f572e98ac0f348fae5872b4c7f1453)
 
 #### [spa-sdk-23.3.2](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-23.3.1...spa-sdk-23.3.2)
 
@@ -660,7 +686,7 @@ All notable changes to this project will be documented in this file. Dates are d
 - TRIVIAL Merge branch 'development' into 'main' [`3013749`](https://github.com/bloomreach/spa-sdk/commit/30137498740623a2bae135e7adb72b597b5fec8c)
 - TRIVIAL Merge branch 'development' into 'main' [`ab29770`](https://github.com/bloomreach/spa-sdk/commit/ab29770b6ee908838c7d97de6b989496eeae10bc)
 
-#### [spa-sdk-21.0.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-21.0.0-alpha.0...spa-sdk-21.0.0)
+### [spa-sdk-21.0.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-21.0.0-alpha.0...spa-sdk-21.0.0)
 
 > 26 April 2023
 
@@ -868,9 +894,9 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-144 Bumping versions to 17.1.1 [`#SPASDK-144`](https://bloomreach.atlassian.net/browse/SPASDK-144)
 - SPASDK-144 Bump @xmldom/xmldom to patched 0.7.9 [`#SPASDK-144`](https://bloomreach.atlassian.net/browse/SPASDK-144)
 - SPASDK-138 Upgrade next, react examples to react 18 [`#SPASDK-138`](https://bloomreach.atlassian.net/browse/SPASDK-138)
-- TRIVIAL Merge branch 'TRIVIAL/heroku-cleanup-scrip' into 'development' [`1ecf2e0`](https://github.com/bloomreach/spa-sdk/commit/1ecf2e0d78069f3634a8a5cf1f169012f820c52d)
 - TRIVIAL add heroku app cleanup script [`a9f66b3`](https://github.com/bloomreach/spa-sdk/commit/a9f66b356c83f8865dbbc7127c17a471ab8676f0)
 - TRIVIAL Update the description for the cleanup utility [`8131694`](https://github.com/bloomreach/spa-sdk/commit/81316945f49fe34336a5330e09c46b755be31f3d)
+- TRIVIAL Merge branch 'TRIVIAL/heroku-cleanup-scrip' into 'development' [`1ecf2e0`](https://github.com/bloomreach/spa-sdk/commit/1ecf2e0d78069f3634a8a5cf1f169012f820c52d)
 
 #### [spa-sdk-17.1.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-17.0.1...spa-sdk-17.1.0)
 
@@ -1000,8 +1026,8 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-107 Update template query names to correct ones in vue sdk doc [`#SPASDK-107`](https://bloomreach.atlassian.net/browse/SPASDK-107)
 - SPASDK-107 Describe template query formats in readme doc files [`#SPASDK-107`](https://bloomreach.atlassian.net/browse/SPASDK-107)
 - TRIVIAL Bumping versions to 15.4.4 [`2deeb62`](https://github.com/bloomreach/spa-sdk/commit/2deeb623dfb9c666035342a75d9ac7e96461050b)
-- TRIVIAL Merge branch 'fetch-tags-during-release-pipeline' into 'development' [`4048f73`](https://github.com/bloomreach/spa-sdk/commit/4048f73dce43c1d3f99a6b28533779c52a8839ca)
 - TRIVIAL Fetch all tags before mirroring to the github [`c7373de`](https://github.com/bloomreach/spa-sdk/commit/c7373de3213bf3a396d74efc74e0ad6ed11a07bd)
+- TRIVIAL Merge branch 'fetch-tags-during-release-pipeline' into 'development' [`4048f73`](https://github.com/bloomreach/spa-sdk/commit/4048f73dce43c1d3f99a6b28533779c52a8839ca)
 
 #### [spa-sdk-15.4.3](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.4.2...spa-sdk-15.4.3)
 
@@ -1044,11 +1070,11 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-75 Update file header to replace Hippo with Bloomreach [`#SPASDK-75`](https://bloomreach.atlassian.net/browse/SPASDK-75)
 - SPASDK-75 Update file header to replace Hippo with Bloomreach [`#SPASDK-75`](https://bloomreach.atlassian.net/browse/SPASDK-75)
 - TRIVIAL Bumping version to 15.4.2 [`9e6391a`](https://github.com/bloomreach/spa-sdk/commit/9e6391a5cb8381da2a41d6746b892fc18cb44d13)
-- TRIVIAL Merge branch 'trivial/enhance-release-script' into 'development' [`0a0df95`](https://github.com/bloomreach/spa-sdk/commit/0a0df958ff9274fdb366d8ebfc09952803c2a882)
+- TRIVIAL Add lint, test and build steps at the beginning of the script [`60dd968`](https://github.com/bloomreach/spa-sdk/commit/60dd9681110ab611e4efa62e3e4f859513a549d2)
 - TRIVIAL Stop execution of release in case build, lint or test has been finished with non zero result [`35393c8`](https://github.com/bloomreach/spa-sdk/commit/35393c8b4046c91bf1ce5b12170c86eb17a39b75)
 - TRIVIAL Add reminder to post release actions about check typedoc [`49e01ce`](https://github.com/bloomreach/spa-sdk/commit/49e01ce7df91a18a631744f1ad74bb435dddf326)
+- TRIVIAL Merge branch 'trivial/enhance-release-script' into 'development' [`0a0df95`](https://github.com/bloomreach/spa-sdk/commit/0a0df958ff9274fdb366d8ebfc09952803c2a882)
 - TRIVIAL Merge branch 'enhance-release-script' into development [`f45e24c`](https://github.com/bloomreach/spa-sdk/commit/f45e24c9c12201d0fce6b3c8ed51f0b7461d717f)
-- TRIVIAL Add lint, test and build steps at the beginning of the script [`60dd968`](https://github.com/bloomreach/spa-sdk/commit/60dd9681110ab611e4efa62e3e4f859513a549d2)
 
 #### [spa-sdk-15.4.1](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.4.0...spa-sdk-15.4.1)
 
@@ -1250,7 +1276,7 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-33 Update git command to publish to github [`#SPASDK-33`](https://bloomreach.atlassian.net/browse/SPASDK-33)
 - SPASDK-22 Update xmldom to the latest version to fix security issue [`#SPASDK-22`](https://bloomreach.atlassian.net/browse/SPASDK-22)
 
-#### [spa-sdk-15.0.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.0.0-2...spa-sdk-15.0.0)
+### [spa-sdk-15.0.0](https://github.com/bloomreach/spa-sdk/compare/spa-sdk-15.0.0-2...spa-sdk-15.0.0)
 
 > 9 August 2021
 
@@ -1341,5 +1367,6 @@ All notable changes to this project will be documented in this file. Dates are d
 - SPASDK-2 Add exported function "getContainerItemContent" [`#SPASDK-2`](https://bloomreach.atlassian.net/browse/SPASDK-2)
 - SPASDK-1 Bump to use node 14 [`#SPASDK-1`](https://bloomreach.atlassian.net/browse/SPASDK-1)
 - SPASDK-1 Remove maven files and update Jenkinsfile [`#SPASDK-1`](https://bloomreach.atlassian.net/browse/SPASDK-1)
+- SPASDK-1 Initial move from brxm monorepo [`#SPASDK-1`](https://bloomreach.atlassian.net/browse/SPASDK-1)
 - TRIVIAL Set branch name to 'main' in changesetBaseRefs [`4dacdcd`](https://github.com/bloomreach/spa-sdk/commit/4dacdcd2fdb0712e40dcb33b9809ae12786f9ab1)
 - TRIVIAL Skip telemetry check on nuxt startup [`15deb25`](https://github.com/bloomreach/spa-sdk/commit/15deb25b1edde3af3296d4dc34dba1483fe278f2)
