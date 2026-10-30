@@ -1,7 +1,7 @@
 {
   "name": "@bloomreach/example-nuxt",
   "description": "Example Nuxt SPA for Bloomreach Experience",
-  "version": "28.1.0",
+  "version": "28.2.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -13,13 +13,13 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@bloomreach/spa-sdk": "28.1.0",
-    "@bloomreach/vue-sdk": "28.1.0",
-    "axios": "1.7.9",
-    "nuxt": "4.2.2",
-    "sanitize-html": "2.17.4",
-    "vue": "3.5.13",
-    "vue-router": "4.5.0"
+    "@bloomreach/spa-sdk": "28.2.0",
+    "@bloomreach/vue-sdk": "28.2.0",
+    "axios": "1.20.0",
+    "nuxt": "4.6.0",
+    "sanitize-html": "2.18.0",
+    "vue": "3.5.43",
+    "vue-router": "4.6.4"
   },
   "devDependencies": {
     "@types/node": "20"

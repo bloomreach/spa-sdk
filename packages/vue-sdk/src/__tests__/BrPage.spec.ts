@@ -137,7 +137,7 @@ describe('BrPage', () => {
       const wrapper = shallowMount(BrPage, { props: { configuration, mapping: {} as BrMapping } });
       await new Promise(process.nextTick);
 
-      await wrapper.setProps({ configuration: { request: { path: 'b' } }, mapping: {} as BrMapping });
+      await wrapper.setProps({ configuration: { request: { path: 'b' } } as Configuration, mapping: {} as BrMapping });
       await new Promise(process.nextTick);
 
       expect(initialize).toBeCalledWith({ request: { path: 'b' } });
@@ -163,7 +163,7 @@ describe('BrPage', () => {
       await new Promise(process.nextTick);
 
       vi.mocked(initialize).mockResolvedValue(page);
-      await wrapper.setProps({ configuration: {} });
+      await wrapper.setProps({ configuration: {} as Configuration });
       await new Promise(process.nextTick);
 
       expect(page.sync).toBeCalled();

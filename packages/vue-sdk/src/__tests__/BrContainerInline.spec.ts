@@ -17,7 +17,7 @@
 import BrContainerInline from '@/BrContainerInline.vue';
 import type { Page } from '@bloomreach/spa-sdk';
 import { mount } from '@vue/test-utils';
-import type { GlobalMountOptions } from '@vue/test-utils/dist/types';
+import type { MountingOptions } from '@vue/test-utils';
 import type { Mocked } from 'vitest';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { ref } from 'vue';
@@ -25,7 +25,7 @@ import { page$ } from '../providerKeys';
 
 describe('BrContainerInline', () => {
   let page: Mocked<Page>;
-  let global: GlobalMountOptions;
+  let global: MountingOptions<unknown>['global'];
 
   beforeEach(() => {
     page = { isPreview: vi.fn() } as unknown as typeof page;

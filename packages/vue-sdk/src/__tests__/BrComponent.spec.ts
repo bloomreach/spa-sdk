@@ -19,7 +19,7 @@ import BrNodeComponent from '@/BrNodeComponent.vue';
 import type { Component, Page } from '@bloomreach/spa-sdk';
 import { isComponent } from '@bloomreach/spa-sdk';
 import { shallowMount } from '@vue/test-utils';
-import type { GlobalMountOptions } from '@vue/test-utils/dist/types';
+import type { MountingOptions } from '@vue/test-utils';
 import type { Mocked } from 'vitest';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { ref } from 'vue';
@@ -30,7 +30,7 @@ vi.mock('@bloomreach/spa-sdk');
 describe('BrComponent', () => {
   let parent: Mocked<Component>;
   let page: Mocked<Page>;
-  let global: GlobalMountOptions;
+  let global: MountingOptions<unknown>['global'];
 
   beforeEach(() => {
     parent = {

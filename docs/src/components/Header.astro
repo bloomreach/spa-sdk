@@ -3,7 +3,7 @@ import MainMenu from './MainMenu.astro';
 import Logo from './Logo.astro';
 import ThemeToggle from './ThemeToggle.astro';
 import Search from 'astro-pagefind/components/Search';
-import { Icon } from 'astro-icon';
+import { Icon } from 'astro-icon/components';
 
 type Props = {
   currentPage: string;
@@ -34,7 +34,7 @@ const { currentPage } = Astro.props;
     <div class="navbar-center"></div>
     <div class="navbar-end">
       <button class="btn btn-ghost btn-circle" id="searchModalTrigger">
-        <Icon pack="mdi" name="magnify" size="24" />
+        <Icon name="mdi:magnify" size={24} />
       </button>
       <ThemeToggle />
     </div>
@@ -44,7 +44,7 @@ const { currentPage } = Astro.props;
 <dialog id="searchModal" class="modal">
   <form method="dialog" class="modal-box p-10">
     <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-      <Icon pack="mdi" name="close" size="24" />
+      <Icon name="mdi:close" size={24} />
     </button>
     <div class="search mt-5">
       <Search />
